@@ -73,9 +73,13 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
-    /*HILT*/
+    // Dependency injection with Hilt - https://developer.android.com/training/dependency-injection/hilt-android#setup
     implementation("com.google.dagger:hilt-android:2.47")
     kapt("com.google.dagger:hilt-android-compiler:2.47")
+
+
+    // Preferences DataStore - https://developer.android.com/topic/libraries/architecture/datastore#preferences-datastore-dependencies
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
 }
 
 // Allow references to generated code
