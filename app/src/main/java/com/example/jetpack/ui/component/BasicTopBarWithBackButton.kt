@@ -23,6 +23,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.jetpack.R
 import com.example.jetpack.ui.theme.Background
+import com.example.jetpack.ui.theme.OppositePrimaryColor
 import com.example.jetpack.ui.theme.PrimaryColor
 import com.example.jetpack.ui.theme.medium18
 
@@ -32,7 +33,6 @@ fun BasicTopBarWithBackButton(
     rightContent: @Composable () -> Unit = {},
     onBackClick: () -> Unit = {},
 ) {
-
 
     Box(
         modifier = Modifier
@@ -61,7 +61,7 @@ fun BasicTopBarWithBackButton(
             Icon(
                 imageVector = Icons.Rounded.ArrowBack,
                 contentDescription = null,
-                tint = Color.White,
+                tint = OppositePrimaryColor,
             )
         }
 

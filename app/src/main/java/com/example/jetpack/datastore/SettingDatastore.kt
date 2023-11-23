@@ -23,11 +23,13 @@ constructor(app: JetpackComposeApplication) {
     private val Context.datastore: DataStore<Preferences> by preferencesDataStore(name = Constant.SETTING_DATASTORE)
     private val datastore = app.datastore
 
+
     // keys of datastore
     private val languageKey = stringPreferencesKey("languageKey")
     private val enableIntroKey = booleanPreferencesKey("enableIntroKey")
 
 
+    // Enable Intro
     var enableIntro: Boolean
         get() = runBlocking { datastore.data.first()[enableIntroKey] ?: false }
         set(value) = runBlocking { datastore.edit { pref -> pref[enableIntroKey] = value } }

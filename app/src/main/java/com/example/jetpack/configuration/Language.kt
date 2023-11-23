@@ -5,7 +5,7 @@ import com.example.jetpack.R
 import java.util.Locale
 
 enum class Language
-constructor(
+    (
     val code: String,
     val displayName: String,
     @DrawableRes
