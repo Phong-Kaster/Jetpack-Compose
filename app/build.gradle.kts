@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     kotlin("kapt")
     id("com.google.dagger.hilt.android")
+    id("androidx.navigation.safeargs")
 }
 
 android {
@@ -74,12 +75,19 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
     // Dependency injection with Hilt - https://developer.android.com/training/dependency-injection/hilt-android#setup
-    implementation("com.google.dagger:hilt-android:2.47")
+    implementation("com.google.dagger:hilt-android:2.48")
     kapt("com.google.dagger:hilt-android-compiler:2.47")
 
 
     // Preferences DataStore - https://developer.android.com/topic/libraries/architecture/datastore#preferences-datastore-dependencies
     implementation("androidx.datastore:datastore-preferences:1.0.0")
+
+
+    // Get started with the Navigation component - https://developer.android.com/guide/navigation/get-started#Set-up
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.5")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.5")
+    implementation("androidx.navigation:navigation-compose:2.7.5")
+
 }
 
 // Allow references to generated code

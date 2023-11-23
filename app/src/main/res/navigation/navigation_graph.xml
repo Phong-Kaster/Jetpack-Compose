@@ -2,10 +2,24 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/languageFragment">
+
+    <fragment
+        android:id="@+id/introFragment"
+        android:name="com.example.jetpack.ui.fragment.intro.IntroFragment" />
+
+    <fragment
+        android:id="@+id/languageFragment"
+        android:name="com.example.jetpack.ui.fragment.language.LanguageFragment" />
 
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.jetpack.ui.fragment.HomeFragment" />
 
+    <action
+        android:id="@+id/toHome"
+        app:destination="@id/homeFragment"
+        app:enterAnim="@anim/enter_slide_in_right_fade_in"
+        app:exitAnim="@anim/exit_none"
+        app:popExitAnim="@anim/exit_slide_out_right" />
 </navigation>
