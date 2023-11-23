@@ -1,7 +1,6 @@
-package com.example.myapplication.core
+package com.example.jetpack.core
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +12,7 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
-import com.example.myapplication.ui.theme.JetpackComposeTheme
+import com.example.jetpack.ui.theme.JetpackComposeTheme
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Locale
 

@@ -1,4 +1,4 @@
-package com.example.myapplication.core
+package com.example.jetpack.core
 
 
 import android.os.Bundle

@@ -1,4 +1,4 @@
-package com.example.myapplication.datastore
+package com.example.jetpack.datastore
 
 import android.content.Context
 import androidx.datastore.core.DataStore
@@ -7,8 +7,8 @@ import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
-import com.example.myapplication.JetpackComposeApplication
-import com.example.myapplication.core.Constant
+import com.example.jetpack.JetpackComposeApplication
+import com.example.jetpack.core.Constant
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
@@ -24,7 +24,7 @@ constructor(app: JetpackComposeApplication) {
     private val datastore = app.datastore
 
     // keys of datastore
-    private val languageCodeKey = stringPreferencesKey("languageCode")
+    private val languageKey = stringPreferencesKey("languageKey")
     private val enableIntroKey = booleanPreferencesKey("enableIntroKey")
 
 

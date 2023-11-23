@@ -1,12 +1,9 @@
-package com.example.myapplication
+package com.example.jetpack
 
 import android.os.Bundle
-import androidx.core.view.WindowCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.WindowInsetsControllerCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import com.example.myapplication.core.CoreActivity
+import com.example.jetpack.core.CoreActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 

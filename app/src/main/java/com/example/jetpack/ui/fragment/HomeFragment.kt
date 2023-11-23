@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.fragment
+package com.example.jetpack.ui.fragment
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -8,7 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.myapplication.core.CoreFragment
+import com.example.jetpack.core.CoreFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 
