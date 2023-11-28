@@ -1,4 +1,4 @@
-package com.example.jetpack.ui.fragment
+package com.example.jetpack.ui.fragment.home
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column

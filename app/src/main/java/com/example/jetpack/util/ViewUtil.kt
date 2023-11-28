@@ -1,6 +1,8 @@
 package com.example.jetpack.util
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxSize
@@ -34,5 +36,10 @@ object ViewUtil {
         ) {
             content()
         }
+    }
+
+    @Composable
+    inline fun CenterBox(modifier: Modifier = Modifier, content: @Composable BoxScope.() -> Unit) {
+        Box(modifier = modifier, contentAlignment = Alignment.Center) { content() }
     }
 }

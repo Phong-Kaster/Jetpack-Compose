@@ -93,19 +93,19 @@ fun IntroLayout(
                         0 -> IntroContent(
                             titleId = R.string.fake_title,
                             contentId = R.string.fake_message,
-                            imageId = R.drawable.ic_launcher_foreground
+                            imageId = R.drawable.ic_nazi_eagle
                         )
 
                         1 -> IntroContent(
                             titleId = R.string.fake_title,
                             contentId = R.string.fake_message,
-                            imageId = R.drawable.ic_launcher_foreground
+                            imageId = R.drawable.ic_nazi_eagle
                         )
 
                         2 -> IntroContent(
                             titleId = R.string.fake_title,
                             contentId = R.string.fake_message,
-                            imageId = R.drawable.ic_launcher_foreground
+                            imageId = R.drawable.ic_nazi_eagle
                         )
                     }
                 }

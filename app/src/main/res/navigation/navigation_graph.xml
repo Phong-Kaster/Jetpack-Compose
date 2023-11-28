@@ -2,7 +2,52 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/languageFragment">
+    app:startDestination="@id/splashFragment">
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.example.jetpack.ui.fragment.splash.SplashFragment">
+        <action
+            android:id="@+id/fromSplashToHome"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/fromSplashToIntro"
+            app:destination="@id/introGraph"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+
+    <navigation
+        android:id="@+id/introGraph"
+        app:startDestination="@id/introLanguageFragment">
+
+        <fragment
+            android:id="@+id/introLanguageFragment"
+            android:name="com.example.jetpack.ui.fragment.intro.IntroLanguageFragment">
+            <action
+                android:id="@+id/fromIntroLanguageToIntro"
+                app:destination="@id/introFragment"
+                app:enterAnim="@anim/enter_slide_in_right_fade_in"
+                app:exitAnim="@anim/exit_none"
+                app:popExitAnim="@anim/exit_slide_out_right" />
+        </fragment>
+
+        <fragment
+            android:id="@+id/introFragment"
+            android:name="com.example.jetpack.ui.fragment.intro.IntroLanguageFragment">
+            <action
+                android:id="@+id/fromIntroToHome"
+                app:destination="@id/homeFragment"
+                app:enterAnim="@anim/enter_slide_in_right_fade_in"
+                app:exitAnim="@anim/exit_none"
+                app:popExitAnim="@anim/exit_slide_out_right"
+                app:popUpTo="@id/introGraph"
+                app:popUpToInclusive="true" />
+        </fragment>
+    </navigation>
 
     <fragment
         android:id="@+id/introFragment"
@@ -10,11 +55,11 @@
 
     <fragment
         android:id="@+id/languageFragment"
-        android:name="com.example.jetpack.ui.fragment.language.LanguageFragment" />
+        android:name="com.example.jetpack.ui.fragment.intro.IntroLanguageFragment" />
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.jetpack.ui.fragment.HomeFragment" />
+        android:name="com.example.jetpack.ui.fragment.home.HomeFragment" />
 
     <action
         android:id="@+id/toHome"
@@ -22,4 +67,5 @@
         app:enterAnim="@anim/enter_slide_in_right_fade_in"
         app:exitAnim="@anim/exit_none"
         app:popExitAnim="@anim/exit_slide_out_right" />
+
 </navigation>

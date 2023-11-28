@@ -17,7 +17,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -31,7 +30,7 @@ import com.example.jetpack.ui.theme.medium18
 fun BasicTopBarWithBackButton(
     title: String,
     rightContent: @Composable () -> Unit = {},
-    onBackClick: () -> Unit = {},
+    onBack: () -> Unit = {},
 ) {
 
     Box(
@@ -51,7 +50,7 @@ fun BasicTopBarWithBackButton(
 
         IconButton(
             onClick = {
-                onBackClick()
+                onBack()
             },
             modifier = Modifier
                 .clip(shape = CircleShape)
@@ -76,7 +75,7 @@ fun BasicTopBarWithBackButton(
 fun PreviewBasicTopBarWithBackButton() {
     BasicTopBarWithBackButton(
         title = stringResource(id = R.string.fake_title),
-        onBackClick = {},
+        onBack = {},
         rightContent = {
             Icon(
                 imageVector = Icons.Rounded.Check,

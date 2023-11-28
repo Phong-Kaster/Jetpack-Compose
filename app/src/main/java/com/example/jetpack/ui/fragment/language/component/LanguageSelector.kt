@@ -40,7 +40,7 @@ import com.example.jetpack.util.ViewUtil
 fun LanguageSelector(
     languages: List<Language>,
     selectedLanguage: Language,
-    onSelectLanguage: (Language) -> Unit,
+    onSelectLanguage: (Language) -> Unit = {},
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues()
 ) {
