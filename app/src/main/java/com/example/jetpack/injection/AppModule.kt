@@ -1,4 +1,4 @@
-package com.example.jetpack.datainjection
+package com.example.jetpack.injection
 
 import android.content.Context
 import com.example.jetpack.JetpackComposeApplication

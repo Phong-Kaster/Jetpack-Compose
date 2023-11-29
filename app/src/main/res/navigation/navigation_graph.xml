@@ -52,7 +52,6 @@
     </navigation>
 
 
-
     <fragment
         android:id="@+id/languageFragment"
         android:name="com.example.jetpack.ui.fragment.intro.IntroLanguageFragment" />
@@ -61,11 +60,48 @@
         android:id="@+id/homeFragment"
         android:name="com.example.jetpack.ui.fragment.home.HomeFragment" />
 
+    <fragment
+        android:id="@+id/settingFragment"
+        android:name="com.example.jetpack.ui.fragment.setting.SettingFragment" />
+
+    <fragment
+        android:id="@+id/insightFragment"
+        android:name="com.example.jetpack.ui.fragment.insight.InsightFragment" />
+
+    <fragment
+        android:id="@+id/articleFragment"
+        android:name="com.example.jetpack.ui.fragment.article.ArticleFragment" />
+
     <action
         android:id="@+id/toHome"
         app:destination="@id/homeFragment"
-        app:enterAnim="@anim/enter_slide_in_right_fade_in"
-        app:exitAnim="@anim/exit_none"
-        app:popExitAnim="@anim/exit_slide_out_right" />
+        app:enterAnim="@anim/enter_fade_in"
+        app:exitAnim="@anim/exit_fade_out"
+        app:launchSingleTop="true"
+        app:popUpTo="@id/navigation_graph" />
+
+    <action
+        android:id="@+id/toSetting"
+        app:destination="@id/settingFragment"
+        app:enterAnim="@anim/enter_fade_in"
+        app:exitAnim="@anim/exit_fade_out"
+        app:launchSingleTop="true"
+        app:popUpTo="@id/homeFragment" />
+
+    <action
+        android:id="@+id/toInsight"
+        app:destination="@id/insightFragment"
+        app:enterAnim="@anim/enter_fade_in"
+        app:exitAnim="@anim/exit_fade_out"
+        app:launchSingleTop="true"
+        app:popUpTo="@id/homeFragment" />
+
+    <action
+        android:id="@+id/toArticle"
+        app:destination="@id/articleFragment"
+        app:enterAnim="@anim/enter_fade_in"
+        app:exitAnim="@anim/exit_fade_out"
+        app:launchSingleTop="true"
+        app:popUpTo="@id/homeFragment" />
 
 </navigation>

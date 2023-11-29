@@ -7,9 +7,9 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@drawable/ic_nazi_eagle"
+        android:icon="@drawable/img_german"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/ic_nazi_eagle"
+        android:roundIcon="@drawable/img_german"
         android:supportsRtl="true"
         android:theme="@style/Theme.JetpackCompose"
         tools:targetApi="31">

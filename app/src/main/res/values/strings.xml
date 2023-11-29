@@ -6,4 +6,9 @@
         Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
         \n\n
         Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec qu</string>
+
+    <string name="home">Home</string>
+    <string name="chart">Chart</string>
+    <string name="article">Article</string>
+    <string name="setting">Setting</string>
 </resources>

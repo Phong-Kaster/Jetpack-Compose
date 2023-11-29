@@ -2,11 +2,6 @@ package com.example.jetpack.ui.fragment.intro
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Check
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -24,7 +19,6 @@ import com.example.jetpack.core.CoreLayout
 import com.example.jetpack.ui.component.BasicTopBarWithBackButton
 import com.example.jetpack.ui.fragment.language.component.LanguageSelector
 import com.example.jetpack.ui.theme.Background
-import com.example.jetpack.ui.theme.PrimaryColor
 import com.example.jetpack.util.NavigationUtil.safeNavigate
 import com.example.jetpack.util.ViewUtil
 import dagger.hilt.android.AndroidEntryPoint
@@ -65,19 +59,8 @@ fun LanguageLayout(
         topBar = {
             BasicTopBarWithBackButton(
                 title = stringResource(R.string.fake_title),
-                onBack = onBack,
-                rightContent = {
-                    IconButton(
-                        onClick = onConfirm,
-                        modifier = Modifier.size(24.dp)
-                    ) {
-                        Icon(
-                            imageVector = Icons.Rounded.Check,
-                            contentDescription = stringResource(id = R.string.fake_title),
-                            tint = PrimaryColor,
-                        )
-                    }
-                }
+                onClickLeft = onBack,
+                onClickRight = onConfirm
             )
         },
         backgroundColor = Background,

@@ -61,7 +61,7 @@ fun SplashLayout() {
             .fillMaxSize()
             .background(color = Background)) {
             Image(
-                painter = painterResource(R.drawable.ic_launcher_foreground),
+                painter = painterResource(R.drawable.ic_nazi_eagle),
                 contentDescription = null,
                 modifier = Modifier
                     .size(160.dp)

@@ -11,6 +11,7 @@ val PurpleGrey40 = Color(0xFF625b71)
 val Pink40 = Color(0xFF7D5260)
 
 val PrimaryColor = Color(0xFFFFCC00)
+val IconColor = Color(0xFF8C8C8C)
 val OppositePrimaryColor = Color.Black
 val Background = Color(0xFF121212)
 val OppositeBackground = Color.White

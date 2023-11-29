@@ -1,4 +1,4 @@
-package com.example.jetpack.ui.fragment.home
+package com.example.jetpack.ui.fragment.article
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -21,22 +21,19 @@ import com.example.jetpack.ui.component.HomeTopBar
 import com.example.jetpack.ui.theme.Background
 import dagger.hilt.android.AndroidEntryPoint
 
-
 @AndroidEntryPoint
-class HomeFragment : CoreFragment() {
-
+class ArticleFragment : CoreFragment() {
     @Composable
     override fun ComposeView() {
         super.ComposeView()
-        HomeLayout()
+        ArticleLayout()
     }
 }
 
-
 @Composable
-fun HomeLayout() {
+fun ArticleLayout() {
     CoreLayout(
-        topBar = { HomeTopBar(name = stringResource(id = Menu.Home.nameId)) },
+        topBar = { HomeTopBar(name = stringResource(id = Menu.Article.nameId)) },
         bottomBar = { BottomBar() },
         backgroundColor = Background
     ) {
@@ -46,7 +43,7 @@ fun HomeLayout() {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
-                painter = painterResource(id = R.drawable.ic_bottom_home),
+                painter = painterResource(id = R.drawable.ic_bottom_article),
                 contentDescription = null,
                 modifier = Modifier.size(100.dp)
             )
@@ -56,6 +53,6 @@ fun HomeLayout() {
 
 @Preview
 @Composable
-fun PreviewHome() {
-    HomeLayout()
+fun PreviewArticleLayout() {
+    ArticleLayout()
 }
