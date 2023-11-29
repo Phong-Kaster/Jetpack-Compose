@@ -32,12 +32,14 @@
                 app:destination="@id/introFragment"
                 app:enterAnim="@anim/enter_slide_in_right_fade_in"
                 app:exitAnim="@anim/exit_none"
-                app:popExitAnim="@anim/exit_slide_out_right" />
+                app:popExitAnim="@anim/exit_slide_out_right"
+                app:popUpTo="@id/introGraph"
+                app:popUpToInclusive="true" />
         </fragment>
 
         <fragment
             android:id="@+id/introFragment"
-            android:name="com.example.jetpack.ui.fragment.intro.IntroLanguageFragment">
+            android:name="com.example.jetpack.ui.fragment.intro.IntroFragment">
             <action
                 android:id="@+id/fromIntroToHome"
                 app:destination="@id/homeFragment"
@@ -49,9 +51,7 @@
         </fragment>
     </navigation>
 
-    <fragment
-        android:id="@+id/introFragment"
-        android:name="com.example.jetpack.ui.fragment.intro.IntroFragment" />
+
 
     <fragment
         android:id="@+id/languageFragment"

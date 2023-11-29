@@ -11,10 +11,26 @@ class SettingRepository
 constructor(
     private val settingDatastore: SettingDatastore,
 ) {
+    // ENABLE INTRO
     fun enableIntro(): Boolean {
         return settingDatastore.enableIntro
     }
 
+    fun setEnableIntro(boolean: Boolean) {
+        settingDatastore.enableIntro = boolean
+    }
+
+    // ENABLE LANGUAGE INTRO
+    fun enableLanguageIntro(): Boolean {
+        return settingDatastore.enableLanguageIntro
+    }
+
+    fun setEnableLanguageIntro(boolean: Boolean) {
+        settingDatastore.enableLanguageIntro = boolean
+    }
+
+
+    // LANGUAGE
     fun getLanguage(): Language {
         return settingDatastore.language
     }

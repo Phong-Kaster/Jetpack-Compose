@@ -20,6 +20,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import com.example.jetpack.R
 import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
@@ -28,7 +29,6 @@ import com.example.jetpack.ui.fragment.intro.component.IntroIndicator
 import com.example.jetpack.ui.theme.Background
 import com.example.jetpack.ui.theme.PrimaryColor
 import com.example.jetpack.ui.theme.customizedTextStyle
-import com.example.jetpack.util.NavigationUtil
 import com.example.jetpack.util.NavigationUtil.safeNavigate
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
@@ -36,12 +36,19 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class IntroFragment : CoreFragment() {
+    // this view model survives only in the lifecycle of Intro Graph. If this graph is killed,
+    // this view is also killed
+    private val viewModel by hiltNavGraphViewModels<IntroViewModel>(R.id.introGraph)
+
+
     @Composable
     override fun ComposeView() {
         super.ComposeView()
         IntroLayout(
             onStart = {
-                val destination = IntroFragmentDirections.toHome()
+                viewModel.setEnableIntro(enable = false)
+
+                val destination = IntroFragmentDirections.fromIntroToHome()
                 safeNavigate(destination = destination)
             }
         )

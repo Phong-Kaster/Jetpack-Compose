@@ -16,13 +16,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.fragment.app.viewModels
+import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import com.example.jetpack.R
 import com.example.jetpack.configuration.Language
 import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
 import com.example.jetpack.ui.component.BasicTopBarWithBackButton
-import com.example.jetpack.ui.fragment.language.LanguageViewModel
 import com.example.jetpack.ui.fragment.language.component.LanguageSelector
 import com.example.jetpack.ui.theme.Background
 import com.example.jetpack.ui.theme.PrimaryColor
@@ -33,8 +32,10 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class IntroLanguageFragment : CoreFragment() {
+    // this view model survives only in the lifecycle of Intro Graph. If this graph is killed,
+    // this view is also killed
+    private val viewModel by hiltNavGraphViewModels<IntroViewModel>(R.id.introGraph)
 
-    private val viewModel: IntroViewModel by viewModels()
 
     @Composable
     override fun ComposeView() {
@@ -46,7 +47,7 @@ class IntroLanguageFragment : CoreFragment() {
             onConfirm = {
                 viewModel.setLanguage(chosenLanguage)
 
-                val destination = IntroLanguageFragmentDirections.toIntro()
+                val destination = R.id.fromIntroLanguageToIntro
                 safeNavigate(destination)
             }
         )

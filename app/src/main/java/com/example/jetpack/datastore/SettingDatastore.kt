@@ -30,12 +30,17 @@ constructor(app: JetpackComposeApplication) {
     // keys of datastore
     private val languageKey = stringPreferencesKey("languageKey")
     private val enableIntroKey = booleanPreferencesKey("enableIntroKey")
-
+    private val enableLanguageIntroKey = booleanPreferencesKey("enableLanguageIntroKey")
 
     // Enable Intro
     var enableIntro: Boolean
-        get() = runBlocking { datastore.data.first()[enableIntroKey] ?: false }
+        get() = runBlocking { datastore.data.first()[enableIntroKey] ?: true }
         set(value) = runBlocking { datastore.edit { pref -> pref[enableIntroKey] = value } }
+
+    // Enable Language Intro
+    var enableLanguageIntro: Boolean
+        get() = runBlocking { datastore.data.first()[enableLanguageIntroKey] ?: true }
+        set(value) = runBlocking { datastore.edit { pref -> pref[enableLanguageIntroKey] = value } }
 
     // Language
     var language: Language

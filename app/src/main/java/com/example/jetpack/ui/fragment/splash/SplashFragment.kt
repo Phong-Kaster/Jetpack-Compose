@@ -1,10 +1,7 @@
 package com.example.jetpack.ui.fragment.splash
 
-import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.view.View
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -12,7 +9,6 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -21,10 +17,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.example.jetpack.R
 import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
+import com.example.jetpack.ui.theme.Background
 import com.example.jetpack.ui.theme.PrimaryColor
 import com.example.jetpack.ui.theme.body14
 import com.example.jetpack.util.NavigationUtil.safeNavigate
@@ -42,14 +38,18 @@ class SplashFragment : CoreFragment() {
     override fun ComposeView() {
         super.ComposeView()
 
-        LaunchedEffect(Unit){
-            while (true){
+        LaunchedEffect(Unit) {
+            while (true) {
                 delay(2000)
-
-                val destination = viewModel.enableIntro.value
+                val enableIntro = viewModel.enableIntro.value
+                val destination = if (enableIntro) {
+                    SplashFragmentDirections.fromSplashToIntro()
+                } else {
+                    SplashFragmentDirections.fromSplashToHome()
+                }
+                safeNavigate(destination)
             }
         }
-
         SplashLayout()
     }
 }
@@ -57,7 +57,9 @@ class SplashFragment : CoreFragment() {
 @Composable
 fun SplashLayout() {
     CoreLayout {
-        CenterBox(modifier = Modifier.fillMaxSize()) {
+        CenterBox(modifier = Modifier
+            .fillMaxSize()
+            .background(color = Background)) {
             Image(
                 painter = painterResource(R.drawable.ic_launcher_foreground),
                 contentDescription = null,

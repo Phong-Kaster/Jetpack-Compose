@@ -40,4 +40,14 @@ constructor(
             }
         }
     }
+
+    fun setEnableIntro(enable: Boolean){
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                settingRepository.setEnableIntro(enable)
+            } catch (ex: Exception) {
+                ex.printStackTrace()
+            }
+        }
+    }
 }
