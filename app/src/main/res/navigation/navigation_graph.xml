@@ -72,6 +72,10 @@
         android:id="@+id/articleFragment"
         android:name="com.example.jetpack.ui.fragment.article.ArticleFragment" />
 
+    <fragment
+        android:id="@+id/disclaimerFragment"
+        android:name="com.example.jetpack.ui.fragment.setting.DisclaimerFragment" />
+
     <action
         android:id="@+id/toHome"
         app:destination="@id/homeFragment"
@@ -103,5 +107,14 @@
         app:exitAnim="@anim/exit_fade_out"
         app:launchSingleTop="true"
         app:popUpTo="@id/homeFragment" />
+
+
+    <action
+        android:id="@+id/toDisclaimer"
+        app:destination="@id/disclaimerFragment"
+        app:enterAnim="@anim/enter_fade_in"
+        app:exitAnim="@anim/exit_fade_out"
+        app:popUpToInclusive="true"/>
+
 
 </navigation>

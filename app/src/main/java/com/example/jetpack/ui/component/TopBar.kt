@@ -29,10 +29,10 @@ import com.example.jetpack.ui.theme.medium18
 
 @Composable
 fun BasicTopBarWithBackButton(
-    title: String = stringResource(id = R.string.fake_title),
-    @DrawableRes leftIcon: Int = R.drawable.ic_back,
+    title: String? = null,
+    @DrawableRes leftIcon: Int? = null,
     @ColorRes leftBackground: Color = OppositePrimaryColor,
-    @DrawableRes rightIcon: Int = R.drawable.ic_forward,
+    @DrawableRes rightIcon: Int? = null,
     @ColorRes rightBackground: Color = OppositePrimaryColor,
     onClickLeft: () -> Unit = {},
     onClickRight: () -> Unit = {},
@@ -45,47 +45,55 @@ fun BasicTopBarWithBackButton(
             .statusBarsPadding()
             .padding(16.dp),
     ) {
-        Text(
-            text = title,
-            style = medium18,
-            color = PrimaryColor,
-            modifier = Modifier
-                .align(Alignment.Center)
-        )
-
-        IconButton(
-            onClick = {
-                onClickLeft()
-            },
-            modifier = Modifier
-                .clip(shape = CircleShape)
-                .background(color = PrimaryColor)
-                .size(24.dp)
-        ) {
-            Icon(
-                painter = painterResource(id = leftIcon),
-                contentDescription = null,
-                tint = leftBackground,
-                modifier = Modifier.size(15.dp)
+        if (title != null) {
+            Text(
+                text = title,
+                style = medium18,
+                color = PrimaryColor,
+                modifier = Modifier
+                    .align(Alignment.Center)
             )
         }
 
-        IconButton(
-            onClick = {
-                onClickRight()
-            },
-            modifier = Modifier
-                .clip(shape = CircleShape)
-                .background(color = PrimaryColor)
-                .size(24.dp)
-                .align(Alignment.CenterEnd)
-        ) {
-            Icon(
-                painter = painterResource(id = rightIcon),
-                contentDescription = null,
-                tint = rightBackground,
-                modifier = Modifier.size(15.dp)
-            )
+
+        if (leftIcon != null) {
+            IconButton(
+                onClick = {
+                    onClickLeft()
+                },
+                modifier = Modifier
+                    .clip(shape = CircleShape)
+                    .background(color = PrimaryColor)
+                    .size(24.dp)
+            ) {
+                Icon(
+                    painter = painterResource(id = leftIcon),
+                    contentDescription = null,
+                    tint = leftBackground,
+                    modifier = Modifier.size(15.dp)
+                )
+            }
+        }
+
+
+        if (rightIcon != null) {
+            IconButton(
+                onClick = {
+                    onClickRight()
+                },
+                modifier = Modifier
+                    .clip(shape = CircleShape)
+                    .background(color = PrimaryColor)
+                    .size(24.dp)
+                    .align(Alignment.CenterEnd)
+            ) {
+                Icon(
+                    painter = painterResource(id = rightIcon),
+                    contentDescription = null,
+                    tint = rightBackground,
+                    modifier = Modifier.size(15.dp)
+                )
+            }
         }
     }
 }
@@ -93,5 +101,9 @@ fun BasicTopBarWithBackButton(
 @Preview
 @Composable
 fun PreviewBasicTopBarWithBackButton() {
-    BasicTopBarWithBackButton()
+    BasicTopBarWithBackButton(
+        title = stringResource(id = R.string.fake_title),
+        leftIcon = R.drawable.ic_back,
+        rightIcon = R.drawable.ic_forward
+    )
 }

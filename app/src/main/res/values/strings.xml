@@ -11,4 +11,8 @@
     <string name="chart">Chart</string>
     <string name="article">Article</string>
     <string name="setting">Setting</string>
+    <string name="disclaimer">Disclaimer</string>
+    <string name="term_of_service">Term of service</string>
+    <string name="private_policy">Private policy</string>
+    <string name="language">Language</string>
 </resources>

@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -57,12 +58,15 @@ class SplashFragment : CoreFragment() {
 @Composable
 fun SplashLayout() {
     CoreLayout {
-        CenterBox(modifier = Modifier
-            .fillMaxSize()
-            .background(color = Background)) {
-            Image(
+        CenterBox(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(color = Background)
+        ) {
+            Icon(
                 painter = painterResource(R.drawable.ic_nazi_eagle),
                 contentDescription = null,
+                tint = PrimaryColor,
                 modifier = Modifier
                     .size(160.dp)
                     .clip(RoundedCornerShape(40))
