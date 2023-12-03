@@ -31,3 +31,8 @@ val TextColor2 = Color(0xFF909090)
 val TextColor3 = Color(0xFF686868)
 val TextColor4 = Color(0xFF4B4B4B)
 val TextColor5 = Color(0xFF333333)
+
+// CHART COLOR
+val ChartColor1 = Color(0xFFF93800)
+val ChartColor2 = Color(0xFF283350)
+val ChartColor3 = Color(0xFFFFB500)
