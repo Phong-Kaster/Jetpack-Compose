@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Jetpack Compose</string>
+    <string name="fake_title">Lorem Ipsum</string>
+    <string name="fake_message">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.</string>
+    <string name="fake_content">
+    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
+    \n\n
+    Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec qu</string>
+
+    <string name="home">홈</string>
+    <string name="chart">차트</string>
+    <string name="article">기사</string>
+    <string name="setting">설정</string>
+    <string name="disclaimer">면책 조항</string>
+    <string name="term_of_service">서비스 약관</string>
+    <string name="private_policy">개인정보 보호 정책</string>
+    <string name="language">언어</string>
+    <string name="english">영어</string>
+    <string name="vietnamese">베트남어</string>
+    <string name="german">독일어</string>
+    <string name="french">프랑스어</string>
+    <string name="hindi">힌디어</string>
+    <string name="japanese">일본어</string>
+    <string name="korean">한국어</string>
+    <string name="save">저장</string>
+</resources>

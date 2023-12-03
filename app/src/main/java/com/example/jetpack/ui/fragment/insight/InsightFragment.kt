@@ -1,23 +1,19 @@
 package com.example.jetpack.ui.fragment.insight
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.jetpack.R
 import com.example.jetpack.configuration.Menu
 import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
-import com.example.jetpack.ui.component.BottomBar
-import com.example.jetpack.ui.component.HomeTopBar
+import com.example.jetpack.ui.component.CoreBottomBar
+import com.example.jetpack.ui.fragment.home.component.HomeTopBar
+import com.example.jetpack.ui.fragment.insight.component.PieChart
 import com.example.jetpack.ui.theme.Background
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -35,19 +31,15 @@ class InsightFragment : CoreFragment() {
 fun InsightLayout() {
     CoreLayout(
         topBar = { HomeTopBar(name = stringResource(id = Menu.Insight.nameId)) },
-        bottomBar = { BottomBar() },
+        bottomBar = { CoreBottomBar() },
         backgroundColor = Background
     ) {
         Column(
-            modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 16.dp, vertical = 16.dp),
         ) {
-            Image(
-                painter = painterResource(id = R.drawable.ic_bottom_insight),
-                contentDescription = null,
-                modifier = Modifier.size(100.dp)
-            )
+            PieChart(centerColor = Background)
         }
     }
 }

@@ -16,8 +16,8 @@ import com.example.jetpack.R
 import com.example.jetpack.configuration.Menu
 import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
-import com.example.jetpack.ui.component.BottomBar
-import com.example.jetpack.ui.component.HomeTopBar
+import com.example.jetpack.ui.component.CoreBottomBar
+import com.example.jetpack.ui.fragment.home.component.HomeTopBar
 import com.example.jetpack.ui.theme.Background
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -34,7 +34,7 @@ class ArticleFragment : CoreFragment() {
 fun ArticleLayout() {
     CoreLayout(
         topBar = { HomeTopBar(name = stringResource(id = Menu.Article.nameId)) },
-        bottomBar = { BottomBar() },
+        bottomBar = { CoreBottomBar() },
         backgroundColor = Background
     ) {
         Column(

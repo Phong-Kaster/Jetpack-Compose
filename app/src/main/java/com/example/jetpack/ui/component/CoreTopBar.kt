@@ -28,7 +28,7 @@ import com.example.jetpack.ui.theme.PrimaryColor
 import com.example.jetpack.ui.theme.medium18
 
 @Composable
-fun BasicTopBarWithBackButton(
+fun CoreTopBar(
     title: String? = null,
     @DrawableRes leftIcon: Int? = null,
     @ColorRes leftBackground: Color = OppositePrimaryColor,
@@ -101,7 +101,7 @@ fun BasicTopBarWithBackButton(
 @Preview
 @Composable
 fun PreviewBasicTopBarWithBackButton() {
-    BasicTopBarWithBackButton(
+    CoreTopBar(
         title = stringResource(id = R.string.fake_title),
         leftIcon = R.drawable.ic_back,
         rightIcon = R.drawable.ic_forward

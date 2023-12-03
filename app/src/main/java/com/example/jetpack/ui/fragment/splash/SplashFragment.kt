@@ -41,7 +41,7 @@ class SplashFragment : CoreFragment() {
 
         LaunchedEffect(Unit) {
             while (true) {
-                delay(2000)
+                delay(500)
                 val enableIntro = viewModel.enableIntro.value
                 val destination = if (enableIntro) {
                     SplashFragmentDirections.fromSplashToIntro()

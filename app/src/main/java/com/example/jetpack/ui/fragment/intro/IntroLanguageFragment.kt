@@ -16,8 +16,8 @@ import com.example.jetpack.R
 import com.example.jetpack.configuration.Language
 import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
-import com.example.jetpack.ui.component.BasicTopBarWithBackButton
-import com.example.jetpack.ui.fragment.language.component.LanguageSelector
+import com.example.jetpack.ui.component.CoreTopBar
+import com.example.jetpack.ui.fragment.language.component.LanguageList
 import com.example.jetpack.ui.theme.Background
 import com.example.jetpack.util.NavigationUtil.safeNavigate
 import com.example.jetpack.util.ViewUtil
@@ -57,7 +57,7 @@ fun LanguageLayout(
 ) {
     CoreLayout(
         topBar = {
-            BasicTopBarWithBackButton(
+            CoreTopBar(
                 title = stringResource(R.string.fake_title),
                 onClickLeft = onBack,
                 onClickRight = onConfirm
@@ -65,10 +65,10 @@ fun LanguageLayout(
         },
         backgroundColor = Background,
     ) {
-        LanguageSelector(
-            languages = Language.getSortedList(),
-            selectedLanguage = chosenLanguage,
-            onSelectLanguage = onChangeChosenLanguage,
+        LanguageList(
+            list = Language.getSortedList(),
+            chosenLanguage = chosenLanguage,
+            onClick = onChangeChosenLanguage,
             modifier = Modifier
                 .fillMaxSize()
                 .padding(vertical = 16.dp, horizontal = 16.dp)

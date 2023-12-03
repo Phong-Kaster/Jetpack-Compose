@@ -54,7 +54,7 @@
 
     <fragment
         android:id="@+id/languageFragment"
-        android:name="com.example.jetpack.ui.fragment.intro.IntroLanguageFragment" />
+        android:name="com.example.jetpack.ui.fragment.language.LanguageFragment" />
 
     <fragment
         android:id="@+id/homeFragment"
@@ -75,6 +75,8 @@
     <fragment
         android:id="@+id/disclaimerFragment"
         android:name="com.example.jetpack.ui.fragment.setting.DisclaimerFragment" />
+
+
 
     <action
         android:id="@+id/toHome"
@@ -116,5 +118,11 @@
         app:exitAnim="@anim/exit_fade_out"
         app:popUpToInclusive="true"/>
 
+    <action
+        android:id="@+id/toLanguage"
+        app:destination="@id/languageFragment"
+        app:enterAnim="@anim/enter_fade_in"
+        app:exitAnim="@anim/exit_fade_out"
+        app:popUpToInclusive="true"/>
 
 </navigation>

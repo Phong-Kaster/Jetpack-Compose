@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Jetpack Compose</string>
+    <string name="fake_title">Lorem Ipsum</string>
+    <string name="fake_message">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.</string>
+    <string name="fake_content">
+    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
+    \n\n
+    Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec qu</string>
+
+    <string name="home">Accueil</string>
+    <string name="chart">Graphique</string>
+    <string name="article">Article</string>
+    <string name="setting">Paramètres</string>
+    <string name="disclaimer">Clause de non-responsabilité</string>
+    <string name="term_of_service">Conditions d\'utilisation</string>
+    <string name="private_policy">Politique de confidentialité</string>
+    <string name="language">Langue</string>
+    <string name="english">Anglais</string>
+    <string name="vietnamese">Vietnamien</string>
+    <string name="german">Allemand</string>
+    <string name="french">Français</string>
+    <string name="hindi">Hindi</string>
+    <string name="japanese">Japonais</string>
+    <string name="korean">Coréen</string>
+    <string name="save">Enregistrer</string>
+</resources>

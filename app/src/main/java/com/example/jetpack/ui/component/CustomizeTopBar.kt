@@ -23,7 +23,7 @@ import com.example.jetpack.ui.theme.medium18
 import com.example.jetpack.util.ViewUtil
 
 @Composable
-fun BasicTopBar(
+fun CustomizeTopBar(
     title: String,
     leftContent: @Composable () -> Unit = {},
     rightContent: @Composable () -> Unit = {},
@@ -58,7 +58,7 @@ fun BasicTopBar(
 @Composable
 fun PreviewBasicTopBar() {
     ViewUtil.PreviewContent {
-        BasicTopBar(
+        CustomizeTopBar(
             title = stringResource(id = R.string.fake_title),
             leftContent = {
                 Icon(

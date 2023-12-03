@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Jetpack Compose</string>
+    <string name="fake_title">Lorem Ipsum</string>
+    <string name="fake_message">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.</string>
+    <string name="fake_content">
+        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
+        \n\n
+        Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec qu</string>
+
+    <string name="home">Trang chủ</string>
+    <string name="chart">Biểu đồ</string>
+    <string name="article">Thông tin</string>
+    <string name="setting">Cài đặt</string>
+    <string name="disclaimer">Miễn trừ trách nghiệm</string>
+    <string name="term_of_service">Điều khoản dịch vụ</string>
+    <string name="private_policy">Chính sách riêng tư</string>
+    <string name="language">Ngôn ngữ</string>
+    <string name="english">Tiếng Anh</string>
+    <string name="vietnamese">Tiếng Việt</string>
+    <string name="german">Tiếng Đức</string>
+    <string name="french">Tiếng Pháp</string>
+    <string name="hindi">Tiếng Hindi</string>
+    <string name="japanese">Tiếng Nhật</string>
+    <string name="korean">Tiếng Hàn</string>
+    <string name="save">Lưu</string>
+</resources>

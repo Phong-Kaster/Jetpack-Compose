@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ProvidedValue
@@ -11,13 +12,9 @@ import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
-import androidx.navigation.NavDestination
-import androidx.navigation.NavDirections
-import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.example.jetpack.ui.theme.JetpackComposeTheme
-import com.example.jetpack.util.NavigationUtil
-import com.example.jetpack.util.NavigationUtil.safeNavigate
+import com.example.jetpack.util.AppUtil
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Locale
 
@@ -26,7 +23,8 @@ val LocalLocale = staticCompositionLocalOf { Locale.getDefault() }
 val LocalNavController = staticCompositionLocalOf<NavController?> { null }
 
 @AndroidEntryPoint
-open class CoreFragment : Fragment() {
+open class CoreFragment : Fragment(), CoreBehavior {
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -55,4 +53,20 @@ open class CoreFragment : Fragment() {
 
     @Composable
     open fun ComposeView() {}
+
+    override fun showToast(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun isInternetConnected(): Boolean {
+        return AppUtil.isInternetConnected(context = requireContext())
+    }
+
+    override fun hideNavigationBar() {
+        AppUtil.hideNavigationBar(window = requireActivity().window)
+    }
+
+    override fun trackEvent(name: String) {}
+
+    override fun showLoading() {}
 }

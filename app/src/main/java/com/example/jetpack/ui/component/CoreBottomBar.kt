@@ -17,15 +17,12 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.ripple.rememberRipple
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
-import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -39,8 +36,10 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.jetpack.R
 import com.example.jetpack.configuration.Menu
 import com.example.jetpack.core.LocalNavController
+import com.example.jetpack.ui.fragment.home.component.HomeBottomSheet
 import com.example.jetpack.ui.theme.Background
 import com.example.jetpack.ui.theme.IconColor
 import com.example.jetpack.ui.theme.PrimaryColor
@@ -49,16 +48,13 @@ import com.example.jetpack.ui.theme.medium13
 import com.example.jetpack.util.ViewUtil
 import com.example.jetpack.util.ViewUtil.CenterColumn
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun BottomBar() {
-    val coroutineScope = rememberCoroutineScope()
+fun CoreBottomBar() {
     val navController = LocalNavController.current ?: rememberNavController()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
 
-    var showAddBottomSheet by remember { mutableStateOf(false) }
-    val addBottomSheetState = rememberModalBottomSheetState()
+    var showBottomSheet by remember { mutableStateOf(false) }
 
     Row(
         modifier = Modifier
@@ -90,7 +86,7 @@ fun BottomBar() {
                 .clip(shape = CircleShape)
                 .background(PrimaryColor)
                 .clickable {
-                    showAddBottomSheet = true
+                    showBottomSheet = !showBottomSheet
                 },
             contentAlignment = Alignment.Center,
         ) {
@@ -116,38 +112,19 @@ fun BottomBar() {
         }
     }
 
-    /*AddBottomSheet(
-        showBottomSheet = showAddBottomSheet,
-        onDismissRequest = {
-            coroutineScope.launch {
-                addBottomSheetState.hide()
-                showAddBottomSheet = false
-            }
-        },
-        sheetState = addBottomSheetState,
-        onTrackBloodSugarClick = {
-            coroutineScope.launch {
-                addBottomSheetState.hide()
-                showAddBottomSheet = false
-            }
-            navController.safeNavigate(AppGraphDirections.actionAddGlucose())
-        },
-        onTrackBloodPressureClick = {
 
-            coroutineScope.launch {
-                addBottomSheetState.hide()
-                showAddBottomSheet = false
-            }
-            navController.safeNavigate(AppGraphDirections.toBloodPressureCreate(bloodPressureId = Constants.BLOOD_PRESSURE_ID_FOR_ADDING))
+    HomeBottomSheet(
+        enable = showBottomSheet,
+        onDismissRequest = { showBottomSheet = false },
+        openLanguage = {
+            val destination = R.id.toLanguage
+            navController.navigate(destination)
         },
-        onConvertClick = {
-            coroutineScope.launch {
-                addBottomSheetState.hide()
-                showAddBottomSheet = false
-            }
-            navController.safeNavigate(AppGraphDirections.actionBloodSugarConvert())
+        openDisclaimer = {
+            val destination = R.id.toDisclaimer
+            navController.navigate(destination)
         }
-    )*/
+    )
 }
 
 @Composable
@@ -189,6 +166,6 @@ private fun BottomBarItem(
 @Composable
 fun PreviewBottomBar() {
     ViewUtil.PreviewContent {
-        BottomBar()
+        CoreBottomBar()
     }
 }

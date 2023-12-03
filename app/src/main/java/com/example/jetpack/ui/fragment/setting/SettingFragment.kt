@@ -7,16 +7,19 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.fragment.app.viewModels
 import com.example.jetpack.R
+import com.example.jetpack.configuration.Language
 import com.example.jetpack.configuration.Menu
 import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
-import com.example.jetpack.ui.component.BottomBar
-import com.example.jetpack.ui.component.HomeTopBar
+import com.example.jetpack.ui.component.CoreBottomBar
+import com.example.jetpack.ui.fragment.home.component.HomeTopBar
 import com.example.jetpack.ui.fragment.setting.component.SettingItem
 import com.example.jetpack.ui.theme.Background
 import com.example.jetpack.util.AppUtil
@@ -26,12 +29,16 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class SettingFragment : CoreFragment() {
 
+    private val viewModel: SettingViewModel by viewModels()
+
     @Composable
     override fun ComposeView() {
         super.ComposeView()
         SettingLayout(
+            languageFromCache = viewModel.chosenLanguage.collectAsState().value,
             onOpenLanguage = {
-
+                val destination = SettingFragmentDirections.toLanguage()
+                safeNavigate(destination)
             },
             onOpenPrivatePolicy = {
                 AppUtil.openWebsite(context = requireContext(), "https://www.youtube.com/")
@@ -49,6 +56,7 @@ class SettingFragment : CoreFragment() {
 
 @Composable
 fun SettingLayout(
+    languageFromCache: Language,
     onOpenLanguage: () -> Unit = {},
     onOpenDisclaimer: () -> Unit = {},
     onOpenTermOfService: () -> Unit = {},
@@ -56,7 +64,7 @@ fun SettingLayout(
 ) {
     CoreLayout(
         topBar = { HomeTopBar(name = stringResource(id = Menu.Setting.nameId)) },
-        bottomBar = { BottomBar() },
+        bottomBar = { CoreBottomBar() },
         backgroundColor = Background
     ) {
         Column(
@@ -69,7 +77,7 @@ fun SettingLayout(
             SettingItem(
                 icon = R.drawable.ic_language,
                 title = stringResource(id = R.string.language),
-                subtitle = stringResource(id = R.string.fake_title),
+                subtitle = stringResource(id = languageFromCache.text),
                 onClick = onOpenLanguage
             )
 
@@ -100,5 +108,5 @@ fun SettingLayout(
 @Preview
 @Composable
 fun PreviewSettingLayout() {
-    SettingLayout()
+    SettingLayout(languageFromCache = Language.English)
 }

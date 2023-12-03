@@ -1,24 +1,24 @@
 package com.example.jetpack.configuration
 
 import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import com.example.jetpack.R
 import java.util.Locale
 
 enum class Language
     (
     val code: String,
-    val displayName: String,
-    @DrawableRes
-    val drawableId: Int,
+    @StringRes val text: Int,
+    @DrawableRes val drawable: Int,
 ) {
-    English(code = "en", displayName = "English", drawableId = R.drawable.ic_language_english),
-    Hindi(code = "hi", displayName = "Hindi", drawableId = R.drawable.ic_language_hindi),
-    Japanese(code = "ja", displayName = "Japanese", drawableId = R.drawable.ic_language_japanese),
-    Korean(code = "ko", displayName = "Korean", drawableId = R.drawable.ic_language_korean),
-    French(code = "fr", displayName = "French", drawableId = R.drawable.ic_language_french),
-    German(code = "de", displayName = "German", drawableId = R.drawable.ic_language_german),
-    Portuguese(code = "pt", displayName = "Portuguese", drawableId = R.drawable.ic_language_portuguese),
-    Spanish(code = "es", displayName = "Spanish", drawableId = R.drawable.ic_language_spanish);
+    English(code = "en", text = R.string.english, drawable = R.drawable.ic_language_english),
+    German(code = "de", text = R.string.german, drawable = R.drawable.ic_language_german),
+    French(code = "fr", text = R.string.french, drawable = R.drawable.ic_language_french),
+    Hindi(code = "hi", text = R.string.hindi, drawable = R.drawable.ic_language_hindi),
+    Japanese(code = "ja", text = R.string.japanese, drawable = R.drawable.ic_language_japanese),
+    Korean(code = "ko", text = R.string.korean, drawable = R.drawable.ic_language_korean),
+    Vietnam(code = "vi", text = R.string.vietnamese, drawable = R.drawable.ic_language_vietnamese),
+    ;
 
     companion object {
         fun default(): Language = English

@@ -15,4 +15,12 @@
     <string name="term_of_service">Term of service</string>
     <string name="private_policy">Private policy</string>
     <string name="language">Language</string>
+    <string name="english">English</string>
+    <string name="vietnamese">Vietnamese</string>
+    <string name="german">German</string>
+    <string name="french">French</string>
+    <string name="hindi">Hindi</string>
+    <string name="japanese">Japanese</string>
+    <string name="korean">Korean</string>
+    <string name="save">Save</string>
 </resources>
