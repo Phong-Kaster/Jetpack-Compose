@@ -60,6 +60,9 @@ fun LanguageLayout(
             CoreTopBar(
                 title = stringResource(R.string.fake_title),
                 onClickLeft = onBack,
+                rightIcon = R.drawable.ic_forward,
+                leftIcon = R.drawable.ic_back,
+
                 onClickRight = onConfirm
             )
         },
