@@ -1,4 +1,4 @@
-package com.example.jetpack.ui.fragment.insight
+package com.example.jetpack.ui.fragment.chart
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,7 +13,7 @@ import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
 import com.example.jetpack.ui.component.CoreBottomBar
 import com.example.jetpack.ui.fragment.home.component.HomeTopBar
-import com.example.jetpack.ui.fragment.insight.component.PieChart
+import com.example.jetpack.ui.fragment.chart.component.PieChart
 import com.example.jetpack.ui.theme.Background
 import dagger.hilt.android.AndroidEntryPoint
 

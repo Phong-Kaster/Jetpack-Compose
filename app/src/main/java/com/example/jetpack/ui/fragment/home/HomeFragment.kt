@@ -1,11 +1,17 @@
 package com.example.jetpack.ui.fragment.home
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Warning
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -17,6 +23,7 @@ import com.example.jetpack.configuration.Menu
 import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
 import com.example.jetpack.ui.component.CoreBottomBar
+import com.example.jetpack.ui.component.CoreAlertDialog
 import com.example.jetpack.ui.fragment.home.component.HomeTopBar
 import com.example.jetpack.ui.theme.Background
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,21 +32,45 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class HomeFragment : CoreFragment() {
 
+    private var showDialog by mutableStateOf(false)
+
     @Composable
     override fun ComposeView() {
         super.ComposeView()
-        HomeLayout()
+        CoreAlertDialog(
+            enable = showDialog,
+            onDismissRequest = {  },
+            onConfirmation = {  },
+            dialogTitle =  stringResource(id = R.string.fake_title),
+            dialogContent = stringResource(id = R.string.fake_content),
+            textButtonConfirm = "OK",
+            textButtonCancel = "Cancel",
+            icon = R.drawable.ic_nazi_eagle
+        )
+
+        HomeLayout(
+            onOpenConfirmDialog = {
+                showDialog = !showDialog
+            }
+        )
     }
 }
 
 
 @Composable
-fun HomeLayout() {
+fun HomeLayout(
+    onOpenConfirmDialog: () -> Unit = {}
+) {
     CoreLayout(
         topBar = { HomeTopBar(name = stringResource(id = Menu.Home.nameId)) },
         bottomBar = { CoreBottomBar() },
         backgroundColor = Background
     ) {
+        BackHandler(
+            enabled = true,
+            onBack = onOpenConfirmDialog
+        )
+
         Column(
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.Center,
