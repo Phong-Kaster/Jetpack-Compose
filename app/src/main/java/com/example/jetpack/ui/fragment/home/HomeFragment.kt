@@ -6,8 +6,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Warning
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -23,8 +21,8 @@ import com.example.jetpack.configuration.Menu
 import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
 import com.example.jetpack.ui.component.CoreBottomBar
-import com.example.jetpack.ui.component.CoreAlertDialog
 import com.example.jetpack.ui.component.CoreDialog
+import com.example.jetpack.ui.fragment.home.component.HomeDialog
 import com.example.jetpack.ui.fragment.home.component.HomeTopBar
 import com.example.jetpack.ui.theme.Background
 import dagger.hilt.android.AndroidEntryPoint
@@ -48,6 +46,13 @@ class HomeFragment : CoreFragment() {
             textButtonCancel = "Cancel",
             icon = R.drawable.ic_nazi_eagle
         )*/
+
+        HomeDialog(
+            enable = showDialog,
+            onDismissRequest = { showDialog = false },
+            onConfirm = {},
+            onCancel = {}
+        )
 
         CoreDialog(
             enable = showDialog,

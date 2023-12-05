@@ -1,7 +1,10 @@
 package com.example.jetpack.ui.component
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -21,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.example.jetpack.R
 import com.example.jetpack.ui.theme.Background
+import com.example.jetpack.ui.theme.OppositePrimaryColor
 import com.example.jetpack.ui.theme.PrimaryColor
 import com.example.jetpack.ui.theme.body12
 import com.example.jetpack.ui.theme.body18
@@ -30,61 +34,12 @@ import com.example.jetpack.util.ViewUtil
 fun CoreDialog(
     enable: Boolean,
     onDismissRequest: () -> Unit = {},
-    onConfirm: () -> Unit = {},
-    onCancel: () -> Unit = {},
     content: @Composable () -> Unit = {}
 ) {
     if (enable) {
         Dialog(
             onDismissRequest = onDismissRequest,
-            content = {
-                CoreDialogLayout()
-            }
+            content = content
         )
-    }
-}
-
-@Composable
-fun CoreDialogLayout(
-    title: String = stringResource(R.string.are_you_sure_to_exit),
-    content: String? = null,
-    onConfirm: () -> Unit = {},
-    onDismissRequest: () -> Unit = {},
-    onCancel: () -> Unit = {},
-) {
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(200.dp)
-            .background(color = Background, shape = RoundedCornerShape(15.dp))
-            .padding(16.dp)
-    ) {
-        Icon(
-            imageVector = Icons.Rounded.Warning, contentDescription = null, tint = PrimaryColor,
-            modifier = Modifier.padding(vertical = 8.dp)
-        )
-        Text(
-            text = title,
-            color = PrimaryColor,
-            style = body18
-        )
-        if(content != null){
-            Spacer(modifier = Modifier.height(10.dp))
-            Text(
-                text = stringResource(id = R.string.fake_message),
-                color = PrimaryColor, style = body12,
-                textAlign = TextAlign.Center
-            )
-        }
-
-    }
-}
-
-@Preview
-@Composable
-fun PrevCoreDialogLayout() {
-    ViewUtil.PreviewContent {
-        CoreDialogLayout()
     }
 }
