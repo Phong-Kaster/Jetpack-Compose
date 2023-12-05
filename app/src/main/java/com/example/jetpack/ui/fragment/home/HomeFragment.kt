@@ -24,6 +24,7 @@ import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
 import com.example.jetpack.ui.component.CoreBottomBar
 import com.example.jetpack.ui.component.CoreAlertDialog
+import com.example.jetpack.ui.component.CoreDialog
 import com.example.jetpack.ui.fragment.home.component.HomeTopBar
 import com.example.jetpack.ui.theme.Background
 import dagger.hilt.android.AndroidEntryPoint
@@ -37,7 +38,7 @@ class HomeFragment : CoreFragment() {
     @Composable
     override fun ComposeView() {
         super.ComposeView()
-        CoreAlertDialog(
+        /*CoreAlertDialog(
             enable = showDialog,
             onDismissRequest = {  },
             onConfirmation = {  },
@@ -46,6 +47,11 @@ class HomeFragment : CoreFragment() {
             textButtonConfirm = "OK",
             textButtonCancel = "Cancel",
             icon = R.drawable.ic_nazi_eagle
+        )*/
+
+        CoreDialog(
+            enable = showDialog,
+            onDismissRequest = { showDialog = false }
         )
 
         HomeLayout(

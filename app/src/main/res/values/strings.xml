@@ -23,4 +23,6 @@
     <string name="japanese">Japanese</string>
     <string name="korean">Korean</string>
     <string name="save">Save</string>
+    <string name="are_you_sure_to_exit">Are you sure to exit?</string>
+
 </resources>
