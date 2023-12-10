@@ -61,3 +61,61 @@ val ChartColor20 = Color(0xFFA1A127)
 val ChartColor21 = Color(0xFFC9A30D)
 
 val ChartColor22 = Color(0xFFBC5918)
+
+/********************************************
+ * AIR QUALITY COLOUR SET
+ ********************************************/
+val ColorAirQualityGood = Color(0xFF357A35)
+val ColorAirQualitySatisfactory = Color(0xFF4D9900)
+val ColorAirQualityModerate = Color(0xFFD1A600)
+val ColorAirQualityPoor = Color(0xFFD38919)
+val ColorAirQualitySevere = Color(0xFFA83636)
+val ColorAirQualityHazardous = Color(0xFF895959)
+
+/********************************************
+ * UV INDEX COLOUR SET
+ ********************************************/
+val ColorUVIndexLow = Color(0xFF357A35)
+val ColorUVIndexModerate = Color(0xFF4D9900)
+val ColorUVIndexHigh = Color(0xFFD1A600)
+val ColorUVIndexVeryHigh = Color(0xFFD38919)
+val ColorUVIndexExtremeHigh = Color(0xFFA83636)
+
+/********************************************
+ * PRESSURE COLOUR SET
+ ********************************************/
+val ColorPressureLow = Color(0xFF006693)
+val ColorPressureModerate = Color(0xFF168692)
+val ColorPressureHigh = Color(0xFF4F9B99)
+val ColorPressureVeryHigh = Color(0xFFA47A4D)
+val ColorPressureExtremeHigh = Color(0xFF9F512C)
+
+/********************************************
+ * PRESSURE COLOUR SET
+ ********************************************/
+val ColorHumidityTooDry = Color(0xFFDA4D5B)
+val ColorHumidityOptimal = Color(0xFF007293)
+val ColorHumidityTooHumid = Color(0xFF4E69D8)
+
+/********************************************
+ * VISIBILITY COLOUR SET
+ ********************************************/
+val ColorVisibilityTooMist = Color(0xFF895959)
+val ColorVisibilityFog = Color(0xFF2A6A7D)
+val ColorVisibilityGood = Color(0xFF357A35)
+
+/********************************************
+ * WIND SPEED COLOUR SET
+ ********************************************/
+val ColorWindSpeedCalm = Color(0xFF7A857A)
+val ColorWindSpeedLightAir = Color(0xFF599494)
+val ColorWindSpeedLight = Color(0xFF6FA882)
+val ColorWindSpeedGentle = Color(0xFF46915F)
+val ColorWindSpeedModerate = Color(0xFF39A55D)
+val ColorWindSpeedFresh = Color(0xFF03BC41)
+val ColorWindSpeedStrong = Color(0xFF7F9933)
+val ColorWindSpeedNearGale = Color(0xFFA1A127)
+val ColorWindSpeedGale = Color(0xFFC9A30D)
+val ColorWindSpeedStrongGale = Color(0xFFD38919)
+val ColorWindSpeedStorm = Color(0xFFBC5918)
+val ColorWindSpeedHurricaneForce = Color(0xFFA83636)

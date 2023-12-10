@@ -143,7 +143,6 @@ fun OutlineButton(
     textColor: Color = OppositePrimaryColor,
     textStyle: TextStyle = body14,
     // For border
-    // For border
     shape: Shape = RoundedCornerShape(15.dp),
     borderStroke: BorderStroke? = BorderStroke(width = 1.dp, color = Color.Yellow),
     // For padding & margin

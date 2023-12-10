@@ -96,11 +96,11 @@ val InterTypography = Typography(
 
 fun customizedTextStyle(
     fontSize: Int = 14,
-    weight: Int = 400,
+    fontWeight: Int = 400,
     lineHeight: Int = (fontSize * 1.5f).toInt()): TextStyle = TextStyle(
     fontFamily = InterFontFamily,
     fontSize = fontSize.sp,
-    fontWeight = FontWeight(weight),
+    fontWeight = FontWeight(fontWeight),
     lineHeight = lineHeight.sp,
     color = TextColor3,
 )

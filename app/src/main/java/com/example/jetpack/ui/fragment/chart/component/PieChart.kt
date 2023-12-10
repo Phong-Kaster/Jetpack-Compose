@@ -6,11 +6,15 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
@@ -25,6 +29,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.example.jetpack.model.ChartElement
 import com.example.jetpack.ui.theme.ChartColor1
 import com.example.jetpack.ui.theme.ChartColor10
 import com.example.jetpack.ui.theme.ChartColor2
@@ -35,7 +40,10 @@ import com.example.jetpack.ui.theme.ChartColor6
 import com.example.jetpack.ui.theme.ChartColor7
 import com.example.jetpack.ui.theme.ChartColor8
 import com.example.jetpack.ui.theme.ChartColor9
+import com.example.jetpack.ui.theme.TextColor1
 import com.example.jetpack.ui.theme.animationSpecFloat
+import com.example.jetpack.ui.theme.customizedTextStyle
+import com.example.jetpack.util.NumberUtil.toPercentage
 import com.example.jetpack.util.ViewUtil
 
 private val chartSize: Dp = 150.dp
@@ -69,7 +77,12 @@ private val colors = listOf<Color>(
 @Composable
 fun PieChart(
     centerColor: Color = Color.DarkGray,
-    data: List<Float> = listOf(35.15F, 15.23F, 50.32F, 12.32F, 48.69F, 90F)
+    data: List<ChartElement> = listOf(
+        ChartElement(name = "A", value = 12F),
+        ChartElement(name = "B", value = 25F),
+        ChartElement(name = "C", value = 50F),
+        ChartElement(name = "D", value = 75F),
+    )
 ) {
     /**
      * Note:
@@ -77,16 +90,18 @@ fun PieChart(
      * */
 
 
-
-
     // Total is the sum of entire data
-    val total: Float by remember(data){ derivedStateOf { data.sum() } }
+    val total: Float by remember(data) {
+        derivedStateOf {
+            data.map { it -> it.value }.sum()
+        }
+    }
 
     // Percent List is a list that contains percent(%) for every single element in data
-    val percentList by remember(data){
+    val percentList by remember(data) {
         derivedStateOf {
             data.map {
-                it/total
+                it.value / total
             }
         }
     }
@@ -108,7 +123,7 @@ fun PieChart(
 
     // Set value in order to enable animation
     LaunchedEffect(key1 = data) {
-        for (index in percentTargetValues.indices){
+        for (index in percentTargetValues.indices) {
             percentTargetValues[index] = percentList[index]
         }
     }
@@ -148,6 +163,22 @@ fun PieChart(
             )
         }
 
+        Column(
+            verticalArrangement = Arrangement.Center,
+            modifier = Modifier
+                .fillMaxWidth()
+                .fillMaxHeight()
+                .padding(horizontal = 5.dp)
+        ) {
+            data.forEachIndexed { index, element ->
+                Row(modifier = Modifier.fillMaxWidth()) {
+                    Text(
+                        text = "${element.name} (${percentTargetValues[index].toPercentage()} %)",
+                        color = TextColor1,
+                        style = customizedTextStyle(fontSize = 12, fontWeight = 400))
+                }
+            }
+        }
     }
 }
 
