@@ -30,17 +30,18 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.jetpack.model.ChartElement
-import com.example.jetpack.ui.theme.ChartColor1
-import com.example.jetpack.ui.theme.ChartColor10
-import com.example.jetpack.ui.theme.ChartColor2
-import com.example.jetpack.ui.theme.ChartColor3
-import com.example.jetpack.ui.theme.ChartColor4
-import com.example.jetpack.ui.theme.ChartColor5
-import com.example.jetpack.ui.theme.ChartColor6
-import com.example.jetpack.ui.theme.ChartColor7
-import com.example.jetpack.ui.theme.ChartColor8
-import com.example.jetpack.ui.theme.ChartColor9
-import com.example.jetpack.ui.theme.TextColor1
+import com.example.jetpack.ui.theme.ColorWindSpeedCalm
+import com.example.jetpack.ui.theme.ColorWindSpeedFresh
+import com.example.jetpack.ui.theme.ColorWindSpeedGale
+import com.example.jetpack.ui.theme.ColorWindSpeedGentle
+import com.example.jetpack.ui.theme.ColorWindSpeedHurricaneForce
+import com.example.jetpack.ui.theme.ColorWindSpeedLight
+import com.example.jetpack.ui.theme.ColorWindSpeedLightAir
+import com.example.jetpack.ui.theme.ColorWindSpeedModerate
+import com.example.jetpack.ui.theme.ColorWindSpeedNearGale
+import com.example.jetpack.ui.theme.ColorWindSpeedStorm
+import com.example.jetpack.ui.theme.ColorWindSpeedStrong
+import com.example.jetpack.ui.theme.ColorWindSpeedStrongGale
 import com.example.jetpack.ui.theme.animationSpecFloat
 import com.example.jetpack.ui.theme.customizedTextStyle
 import com.example.jetpack.util.NumberUtil.toPercentage
@@ -50,16 +51,18 @@ private val chartSize: Dp = 150.dp
 private val innerChartSize: Dp = chartSize * 0.67F
 private const val filledAngle = 360F // A filled angle is an angle equal to 360° (entire circle)
 private val colors = listOf<Color>(
-    ChartColor1,
-    ChartColor2,
-    ChartColor3,
-    ChartColor4,
-    ChartColor5,
-    ChartColor6,
-    ChartColor7,
-    ChartColor8,
-    ChartColor9,
-    ChartColor10,
+    ColorWindSpeedCalm,
+    ColorWindSpeedLightAir,
+    ColorWindSpeedLight,
+    ColorWindSpeedGentle,
+    ColorWindSpeedModerate,
+    ColorWindSpeedFresh,
+    ColorWindSpeedStrong,
+    ColorWindSpeedNearGale,
+    ColorWindSpeedGale,
+    ColorWindSpeedStrongGale,
+    ColorWindSpeedStorm,
+    ColorWindSpeedHurricaneForce,
 )
 
 /**
@@ -76,13 +79,9 @@ private val colors = listOf<Color>(
  */
 @Composable
 fun PieChart(
+    modifier: Modifier = Modifier,
     centerColor: Color = Color.DarkGray,
-    data: List<ChartElement> = listOf(
-        ChartElement(name = "A", value = 12F),
-        ChartElement(name = "B", value = 25F),
-        ChartElement(name = "C", value = 50F),
-        ChartElement(name = "D", value = 75F),
-    )
+    data: List<ChartElement>,
 ) {
     /**
      * Note:
@@ -130,7 +129,7 @@ fun PieChart(
 
 
     Row(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .height(chartSize),
         horizontalArrangement = Arrangement.spacedBy(16.dp)
@@ -174,8 +173,9 @@ fun PieChart(
                 Row(modifier = Modifier.fillMaxWidth()) {
                     Text(
                         text = "${element.name} (${percentTargetValues[index].toPercentage()} %)",
-                        color = TextColor1,
-                        style = customizedTextStyle(fontSize = 12, fontWeight = 400))
+                        color = colors[index % colors.size],
+                        style = customizedTextStyle(fontSize = 12, fontWeight = 400)
+                    )
                 }
             }
         }
@@ -186,6 +186,6 @@ fun PieChart(
 @Composable
 fun PreviewPieChart() {
     ViewUtil.PreviewContent {
-        PieChart()
+        PieChart( data = ChartElement.getFakeData())
     }
 }

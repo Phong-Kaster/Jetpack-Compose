@@ -3,7 +3,9 @@ package com.example.jetpack.ui.fragment.chart
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Divider
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -11,10 +13,13 @@ import androidx.compose.ui.unit.dp
 import com.example.jetpack.configuration.Menu
 import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
+import com.example.jetpack.model.ChartElement
 import com.example.jetpack.ui.component.CoreBottomBar
+import com.example.jetpack.ui.fragment.chart.component.LineChart
 import com.example.jetpack.ui.fragment.home.component.HomeTopBar
 import com.example.jetpack.ui.fragment.chart.component.PieChart
 import com.example.jetpack.ui.theme.Background
+import com.example.jetpack.ui.theme.PrimaryColor
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -26,7 +31,6 @@ class InsightFragment : CoreFragment() {
     }
 }
 
-@Preview
 @Composable
 fun InsightLayout() {
     CoreLayout(
@@ -35,11 +39,14 @@ fun InsightLayout() {
         backgroundColor = Background
     ) {
         Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
                 .fillMaxSize()
                 .padding(horizontal = 16.dp, vertical = 16.dp),
         ) {
-            PieChart(centerColor = Background)
+            PieChart(centerColor = Background, data = ChartElement.getFakeData())
+            Divider(modifier = Modifier.padding(vertical = 16.dp), color = PrimaryColor)
+            LineChart(data = ChartElement.getFakeData())
         }
     }
 }
