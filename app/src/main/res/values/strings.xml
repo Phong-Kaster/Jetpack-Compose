@@ -27,4 +27,12 @@
     <string name="are_you_sure_to_exit">Are you sure to exit?</string>
     <string name="cancel">Cancel</string>
     <string name="ok">OK</string>
+    <string name="rate">Rate</string>
+    <string name="how_s_your_experience_so_far">How’s your\nexperience so far?</string>
+    <string name="we_d_love_to_know">We’d love to know!</string>
+    <string name="hint_feedback">Please leave feedback to help us improve product</string>
+    <string name="submit">Submit</string>
+    <string name="not_now">Not now</string>
+    <string name="thanks_for_your_feedback">Thanks for your feedback !</string>
+    <string name="blood_sugar_feedback">[Blood Sugar] Feedback</string>
 </resources>

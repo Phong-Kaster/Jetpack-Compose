@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -46,11 +47,10 @@ fun SettingItem(
         modifier = Modifier
             .outerShadow(4.dp, 1.dp, ShadowColor, RoundedCornerShape(15.dp))
             .fillMaxWidth()
-            .heightIn(64.dp)
             .clip(shape = RoundedCornerShape(15.dp))
-            .border(width = 0.5.dp, color = PrimaryColor, shape = RoundedCornerShape(15.dp))
             .clickable { onClick() }
-            .padding(vertical = 8.dp)
+            .border(width = 0.5.dp, color = PrimaryColor, shape = RoundedCornerShape(15.dp))
+            .heightIn(64.dp)
             .background(color = Background)
             .padding(horizontal = 16.dp),
         horizontalArrangement = Arrangement.Start,
@@ -90,7 +90,7 @@ fun PreviewSettingItem() {
             subtitle = stringResource(id = R.string.fake_title),
             onClick = {}
         )
-
+        Spacer(modifier = Modifier.height(18.dp))
         SettingItem(
             title = stringResource(id = R.string.fake_title),
             subtitle = null,

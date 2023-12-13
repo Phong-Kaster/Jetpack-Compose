@@ -1,4 +1,4 @@
-package com.example.jetpack.model
+package com.example.jetpack.database.model
 
 import javax.annotation.concurrent.Immutable
 

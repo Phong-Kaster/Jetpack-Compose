@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.dp
 import com.example.jetpack.configuration.Menu
 import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
-import com.example.jetpack.model.ChartElement
+import com.example.jetpack.database.model.ChartElement
 import com.example.jetpack.ui.component.CoreBottomBar
 import com.example.jetpack.ui.fragment.chart.component.LineChart
 import com.example.jetpack.ui.fragment.home.component.HomeTopBar

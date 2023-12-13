@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat.startActivity
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
+import com.example.jetpack.R
 
 
 object AppUtil {
@@ -44,5 +45,18 @@ object AppUtil {
             isAppearanceLightNavigationBars = false
             hide(WindowInsetsCompat.Type.navigationBars())
         }
+    }
+
+    fun composeEmail(context: Context, star: Int, feedback: String): Intent {
+        val subject = context.getString(R.string.blood_sugar_feedback)
+        val body =
+            "• Application Name: ${context.getString(R.string.app_name)}" + "\n\n• Rate star: $star star / 5 star" + "\n\n• Customer feedback: ${feedback.trim()}"
+        val intent = Intent(Intent.ACTION_SENDTO)
+        intent.data = Uri.parse("mailto:")
+        intent.putExtra(Intent.EXTRA_EMAIL, arrayOf("n18dccn147@student.ptithcm.edu.vn"))
+        intent.putExtra(Intent.EXTRA_SUBJECT, subject)
+        intent.putExtra(Intent.EXTRA_TEXT, body)
+
+        return intent
     }
 }

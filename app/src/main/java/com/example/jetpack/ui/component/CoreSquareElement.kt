@@ -23,6 +23,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -52,14 +53,16 @@ fun SquareElement(
                 }
             }*/
             .clip(shape = RoundedCornerShape(20.dp))
-            .background(color = Color.Black.copy(alpha = 0.1F))
-            .clickable { onClick(language) }
-            .aspectRatio(1F)
             .border(
                 width = 0.2.dp,
                 color = Color.White.copy(alpha = 0.5F),
                 shape = RoundedCornerShape(20.dp)
             )
+            .background(color = Color.Black.copy(alpha = 0.1F))
+            .padding(horizontal = 16.dp, vertical = 16.dp)
+            .clickable { onClick(language) }
+            .aspectRatio(1F)
+
     ) {
 
         Image(
@@ -72,18 +75,24 @@ fun SquareElement(
 
         Text(
             text = stringResource(id = language.text),
-            style = customizedTextStyle(fontWeight = 400, fontSize = 18)
+            style = customizedTextStyle(fontWeight = 400, fontSize = 18),
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis
         )
 
         Text(
             text = language.name,
-            style = customizedTextStyle(fontWeight = 400, fontSize = 28)
+            style = customizedTextStyle(fontWeight = 400, fontSize = 28),
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis
         )
 
 
         Text(
             text = language.code,
             style = customizedTextStyle(fontWeight = 300, fontSize = 16),
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis
         )
 
         Row(modifier = Modifier
