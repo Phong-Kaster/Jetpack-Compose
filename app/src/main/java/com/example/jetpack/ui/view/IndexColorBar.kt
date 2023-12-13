@@ -3,7 +3,6 @@ package com.example.jetpack.ui.view
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -25,7 +24,7 @@ import com.example.jetpack.ui.theme.body14
 import com.example.jetpack.util.ViewUtil
 
 @Composable
-fun ColorBar(
+fun IndexColorBar(
     color1: Color = ChartColor4,
     color2: Color = ChartColor5,
     color3: Color = ChartColor6,
@@ -78,9 +77,9 @@ fun ColorBar(
 
 @Preview
 @Composable
-fun PreviewColorBar() {
+fun PreviewIndexColorBar() {
     ViewUtil.PreviewContent {
-        ColorBar(
+        IndexColorBar(
             color1 = ChartColor1,
             color2 = ChartColor2,
             color3 = ChartColor3
