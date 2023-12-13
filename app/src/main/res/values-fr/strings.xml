@@ -28,7 +28,7 @@
     <string name="cancel">Annuler</string>
     <string name="ok">OK</string>
     <string name="rate">Évaluer</string>
-    <string name="how_s_your_experience_so_far">Comment se passe\nvotre expérience jusqu'à présent ?</string>
+    <string name="how_s_your_experience_so_far">Comment se passe\nvotre expérience jusqu\'à présent ?</string>
     <string name="we_d_love_to_know">Nous aimerions le savoir !</string>
     <string name="hint_feedback">Veuillez laisser un commentaire pour nous aider à améliorer le produit</string>
     <string name="submit">Soumettre</string>
