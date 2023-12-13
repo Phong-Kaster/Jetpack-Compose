@@ -65,7 +65,7 @@ class SettingFragment : CoreFragment() {
             }.addOnFailureListener {
                 AppUtil.logcat(message = "addOnFailureListener")
             }.addOnSuccessListener {
-                AppUtil.logcat(message=  "addOnSuccessListener")
+                AppUtil.logcat(message = "addOnSuccessListener")
             }
         } else {
             try {

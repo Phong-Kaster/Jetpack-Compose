@@ -24,4 +24,14 @@
     <string name="japanese">Japanisch</string>
     <string name="korean">Koreanisch</string>
     <string name="save">Speichern</string>
+    <string name="are_you_sure_to_exit">Sind Sie sicher, dass Sie beenden möchten?</string>
+    <string name="cancel">Abbrechen</string>
+    <string name="ok">OK</string>
+    <string name="rate">Bewerten</string>
+    <string name="how_s_your_experience_so_far">Wie ist Ihre\nErfahrung bisher?</string>
+    <string name="we_d_love_to_know">Wir würden gerne wissen!</string>
+    <string name="hint_feedback">Bitte hinterlassen Sie ein Feedback, um uns bei der Verbesserung des Produkts zu helfen</string>
+    <string name="submit">Einreichen</string>
+    <string name="not_now">Nicht jetzt</string>
+    <string name="thanks_for_your_feedback">Danke für Ihr Feedback!</string>
 </resources>

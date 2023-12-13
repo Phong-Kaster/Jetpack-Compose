@@ -24,4 +24,14 @@
     <string name="japanese">일본어</string>
     <string name="korean">한국어</string>
     <string name="save">저장</string>
+    <string name="are_you_sure_to_exit">종료하시겠습니까?</string>
+    <string name="cancel">취소</string>
+    <string name="ok">확인</string>
+    <string name="rate">평가하기</string>
+    <string name="how_s_your_experience_so_far">지금까지의 경험은 어땠나요?</string>
+    <string name="we_d_love_to_know">알고 싶어요!</string>
+    <string name="hint_feedback">제품 개선을 위해 피드백을 남겨주세요</string>
+    <string name="submit">제출</string>
+    <string name="not_now">지금은 아니요</string>
+    <string name="thanks_for_your_feedback">피드백 감사합니다!</string>
 </resources>
