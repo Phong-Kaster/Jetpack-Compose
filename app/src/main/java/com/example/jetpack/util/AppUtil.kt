@@ -15,20 +15,21 @@ import com.example.jetpack.R
 
 
 object AppUtil {
-    fun logcat(tag: String = "Jetpack Compose", message: String){
+    fun logcat(message: String, tag: String = "Jetpack Compose") {
         Log.d(tag, "----------------------------")
         Log.d(tag, "-> message: $message")
     }
 
-    fun openWebsite(context: Context, url: String){
+    fun openWebsite(context: Context, url: String) {
         val uri = Uri.parse(url)
         val intent = Intent(Intent.ACTION_VIEW)
         intent.setData(uri)
         context.startActivity(intent)
     }
 
-    fun isInternetConnected(context: Context): Boolean{
-        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    fun isInternetConnected(context: Context): Boolean {
+        val connectivityManager =
+            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val networkCapabilities = connectivityManager.activeNetwork ?: return false
         val actNw = connectivityManager.getNetworkCapabilities(networkCapabilities) ?: return false
         return when {
@@ -38,7 +39,8 @@ object AppUtil {
             else -> false
         }
     }
-    fun hideNavigationBar(window: Window){
+
+    fun hideNavigationBar(window: Window) {
         WindowCompat.setDecorFitsSystemWindows(window, false)
         WindowCompat.getInsetsController(window, window.decorView).apply {
             systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE

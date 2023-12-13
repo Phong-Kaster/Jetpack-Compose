@@ -93,6 +93,10 @@ dependencies {
     // In-app Review - https://developer.android.com/guide/playcore/in-app-review/kotlin-java#setup
     implementation("com.google.android.play:review:2.0.1")
     implementation("com.google.android.play:review-ktx:2.0.1")
+
+
+    // ConstraintLayout in Compose - https://developer.android.com/jetpack/compose/layouts/constraintlayout#get-started
+    implementation("androidx.constraintlayout:constraintlayout-compose:1.0.1")
 }
 
 // Allow references to generated code

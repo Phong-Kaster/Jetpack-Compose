@@ -25,6 +25,7 @@ import com.example.jetpack.ui.component.CoreDialog
 import com.example.jetpack.ui.fragment.home.component.HomeDialog
 import com.example.jetpack.ui.fragment.home.component.HomeTopBar
 import com.example.jetpack.ui.theme.Background
+import com.example.jetpack.ui.tutorial.TutorialBottomNavigation
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -94,6 +95,8 @@ fun HomeLayout(
             )
         }
     }
+
+    TutorialBottomNavigation()
 }
 
 @Preview

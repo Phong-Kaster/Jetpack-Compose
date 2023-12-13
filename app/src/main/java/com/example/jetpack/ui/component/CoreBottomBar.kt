@@ -28,6 +28,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.boundsInRoot
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
@@ -45,16 +47,21 @@ import com.example.jetpack.ui.theme.IconColor
 import com.example.jetpack.ui.theme.PrimaryColor
 import com.example.jetpack.ui.theme.body13
 import com.example.jetpack.ui.theme.medium13
+import com.example.jetpack.ui.tutorial.LocalTutorialBottomNavigationState
 import com.example.jetpack.util.ViewUtil
 import com.example.jetpack.util.ViewUtil.CenterColumn
 
 @Composable
 fun CoreBottomBar() {
+    // For navigating to other destinations
     val navController = LocalNavController.current ?: rememberNavController()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
 
     var showBottomSheet by remember { mutableStateOf(false) }
+
+    // For storing size of button that has tutorials
+    val tutorial = LocalTutorialBottomNavigationState.current
 
     Row(
         modifier = Modifier
@@ -80,15 +87,16 @@ fun CoreBottomBar() {
         }
 
         Box(
+            contentAlignment = Alignment.Center,
             modifier = Modifier
                 .padding(horizontal = 12.dp)
                 .size(48.dp)
                 .clip(shape = CircleShape)
                 .background(PrimaryColor)
-                .clickable {
-                    showBottomSheet = !showBottomSheet
-                },
-            contentAlignment = Alignment.Center,
+                .onGloballyPositioned {
+                    tutorial.addButtonSize = it.boundsInRoot()
+                }
+                .clickable { showBottomSheet = !showBottomSheet },
         ) {
             Icon(
                 Icons.Rounded.Add,
