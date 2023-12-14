@@ -13,7 +13,6 @@ fun HomeDialog(
     enable: Boolean,
     onDismissRequest: () -> Unit = {},
     onConfirm: () -> Unit = {},
-    onCancel: () -> Unit = {},
 ) {
     CoreDialog(
         enable = enable,
@@ -27,10 +26,7 @@ fun HomeDialog(
                 onDismissRequest()
                 onConfirm()
             },
-            onCancel =  {
-                onDismissRequest()
-                onCancel()
-            }
+            onCancel =  { onDismissRequest() }
         )
     }
 }

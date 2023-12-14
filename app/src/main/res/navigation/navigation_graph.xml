@@ -76,7 +76,9 @@
         android:id="@+id/disclaimerFragment"
         android:name="com.example.jetpack.ui.fragment.setting.DisclaimerFragment" />
 
-
+    <fragment
+        android:id="@+id/tutorialFragment"
+        android:name="com.example.jetpack.ui.fragment.tutorial.TutorialFragment" />
 
     <action
         android:id="@+id/toHome"
@@ -121,6 +123,13 @@
     <action
         android:id="@+id/toLanguage"
         app:destination="@id/languageFragment"
+        app:enterAnim="@anim/enter_fade_in"
+        app:exitAnim="@anim/exit_fade_out"
+        app:popUpToInclusive="true"/>
+
+    <action
+        android:id="@+id/toTutorial"
+        app:destination="@id/tutorialFragment"
         app:enterAnim="@anim/enter_fade_in"
         app:exitAnim="@anim/exit_fade_out"
         app:popUpToInclusive="true"/>

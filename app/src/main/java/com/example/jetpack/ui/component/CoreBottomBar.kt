@@ -47,7 +47,7 @@ import com.example.jetpack.ui.theme.IconColor
 import com.example.jetpack.ui.theme.PrimaryColor
 import com.example.jetpack.ui.theme.body13
 import com.example.jetpack.ui.theme.medium13
-import com.example.jetpack.ui.tutorial.LocalTutorialBottomNavigationState
+import com.example.jetpack.ui.fragment.tutorial.component.LocalTutorial
 import com.example.jetpack.util.ViewUtil
 import com.example.jetpack.util.ViewUtil.CenterColumn
 
@@ -61,7 +61,7 @@ fun CoreBottomBar() {
     var showBottomSheet by remember { mutableStateOf(false) }
 
     // For storing size of button that has tutorials
-    val tutorial = LocalTutorialBottomNavigationState.current
+    val tutorial = LocalTutorial.current
 
     Row(
         modifier = Modifier
