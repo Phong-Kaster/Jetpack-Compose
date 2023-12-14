@@ -50,7 +50,7 @@ import com.example.jetpack.util.ViewUtil
 private val chartSize: Dp = 150.dp
 private val innerChartSize: Dp = chartSize * 0.67F
 private const val filledAngle = 360F // A filled angle is an angle equal to 360° (entire circle)
-private val colors = listOf<Color>(
+private val colors = listOf(
     ColorWindSpeedCalm,
     ColorWindSpeedLightAir,
     ColorWindSpeedLight,
