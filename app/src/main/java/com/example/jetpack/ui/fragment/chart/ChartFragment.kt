@@ -17,7 +17,8 @@ import com.example.jetpack.database.model.ChartElement
 import com.example.jetpack.ui.component.CoreBottomBar
 import com.example.jetpack.ui.fragment.chart.component.LineChart
 import com.example.jetpack.ui.fragment.home.component.HomeTopBar
-import com.example.jetpack.ui.fragment.chart.component.PieChart
+import com.example.jetpack.ui.fragment.chart.component.RingChart
+import com.example.jetpack.ui.fragment.chart.component.RingChart2
 import com.example.jetpack.ui.theme.Background
 import com.example.jetpack.ui.theme.PrimaryColor
 import dagger.hilt.android.AndroidEntryPoint
@@ -44,9 +45,11 @@ fun InsightLayout() {
                 .fillMaxSize()
                 .padding(horizontal = 16.dp, vertical = 16.dp),
         ) {
-            PieChart(centerColor = Background, data = ChartElement.getFakeData())
+            RingChart(centerColor = Background, data = ChartElement.getFakeData())
             Divider(modifier = Modifier.padding(vertical = 16.dp), color = PrimaryColor)
             LineChart(data = ChartElement.getFakeData())
+            Divider(modifier = Modifier.padding(vertical = 16.dp), color = PrimaryColor)
+            RingChart2(data = ChartElement.getFakeData())
         }
     }
 }

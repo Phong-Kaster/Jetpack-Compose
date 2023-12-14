@@ -78,7 +78,7 @@ private val colors = listOf(
  *Note: prefer using immutable list
  */
 @Composable
-fun PieChart(
+fun RingChart(
     modifier: Modifier = Modifier,
     centerColor: Color = Color.DarkGray,
     data: List<ChartElement>,
@@ -186,6 +186,6 @@ fun PieChart(
 @Composable
 fun PreviewPieChart() {
     ViewUtil.PreviewContent {
-        PieChart( data = ChartElement.getFakeData())
+        RingChart(data = ChartElement.getFakeData())
     }
 }

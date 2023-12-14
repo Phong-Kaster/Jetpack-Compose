@@ -2,6 +2,7 @@ package com.example.jetpack.ui.fragment.chart.component
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -19,7 +20,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
@@ -59,6 +62,7 @@ fun LineChart(
     // Automatically scroll to the latest item
     LaunchedEffect(key1 = data) { state.animateScrollToItem(index = data.size, scrollOffset = data.size - 3) }
 
+    var chosenElement by remember { mutableStateOf(data[data.size - 1]) }
 
     // Chart
     Row(
@@ -121,9 +125,13 @@ fun LineChart(
                     val nextElement = data.getOrNull(index = index + 1)
 
                     LineChartElement(
+                        enable = chosenElement.value == item.value,
                         maximum = maximum,
                         element = element,
-                        nextElement = nextElement
+                        nextElement = nextElement,
+                        onClick = {
+                            chosenElement = it
+                        }
                     )
                 }
             )
@@ -134,9 +142,11 @@ fun LineChart(
 
 @Composable
 fun LineChartElement(
+    enable: Boolean,
     maximum: Float,
     element: ChartElement,
-    nextElement: ChartElement?
+    nextElement: ChartElement?,
+    onClick: (ChartElement)->Unit = {}
 ) {
     val textMeasurer = rememberTextMeasurer()
     Column(
@@ -148,7 +158,8 @@ fun LineChartElement(
             modifier = Modifier
                 .fillMaxHeight()
                 .width(padding * 2F)
-                .weight(1F),
+                .weight(1F)
+                .clickable { onClick(element) },
             onDraw = {
                 val spacing = size.height / maximum
 
@@ -162,21 +173,18 @@ fun LineChartElement(
                     center = Offset(x = x, y = y)
                 )
 
-                drawText(
-                    textMeasurer = textMeasurer,
-                    text = element.value.toInt().toString(),
-                    style = TextStyle(
-                        fontSize = 12.sp,
-                        color = PrimaryColor,
-                        background = Color.Transparent
-                    ),
-                    topLeft = Offset(
-                        x = center.x - textMeasurer.measure(
-                            text = element.value.toInt().toString()
-                        ).size.width / 2F,
-                        y = y - 55F
+                if(enable){
+                    drawText(
+                        textMeasurer = textMeasurer,
+                        text = element.value.toInt().toString(),
+                        style = TextStyle(fontSize = 12.sp, color = PrimaryColor, background = Color.Transparent),
+                        topLeft = Offset(
+                            x = center.x - textMeasurer.measure(text = element.value.toInt().toString()).size.width / 2F,
+                            y = y - size.height * 0.15F
+                        )
                     )
-                )
+                }
+
 
                 if (nextElement != null) {
                     val yNextElement =
