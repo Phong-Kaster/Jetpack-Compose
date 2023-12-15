@@ -38,5 +38,11 @@
     <string name="good_bye">Good bye !</string>
     <string name="tutorial">Tutorial</string>
     <string name="tap_this_add_button">Tap this <b>Add</b> button</string>
-
+    <string name="ring_chart">Ring Chart</string>
+    <string name="line_chart">Line Chart</string>
+    <string name="bar_chart">Bar Chart</string>
+    <string name="scatter_plot">Scatter Plot</string>
+    <string name="radar_chart">Radar Chart</string>
+    <string name="area_chart">Area Chart</string>
+    <string name="analogue_clock">Analogue Clock</string>
 </resources>

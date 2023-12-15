@@ -1,30 +1,30 @@
 package com.example.jetpack.ui.fragment.chart
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Divider
+import android.os.Build
+import androidx.annotation.RequiresApi
+import androidx.compose.animation.AnimatedContent
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import com.example.jetpack.configuration.Menu
+import com.example.jetpack.R
 import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
-import com.example.jetpack.database.model.ChartElement
+import com.example.jetpack.database.enums.ChartShortcut
 import com.example.jetpack.ui.component.CoreBottomBar
-import com.example.jetpack.ui.fragment.chart.component.LineChart
-import com.example.jetpack.ui.fragment.home.component.HomeTopBar
-import com.example.jetpack.ui.fragment.chart.component.RingChart
-import com.example.jetpack.ui.fragment.chart.component.RingChart2
+import com.example.jetpack.ui.fragment.chart.component.ChartTopBar
+import com.example.jetpack.ui.fragment.chart.component.LineChartScreen
+import com.example.jetpack.ui.fragment.chart.component.RingChartScreen
 import com.example.jetpack.ui.theme.Background
-import com.example.jetpack.ui.theme.PrimaryColor
+import com.example.jetpack.ui.view.AnalogueClock
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class InsightFragment : CoreFragment() {
+    @RequiresApi(Build.VERSION_CODES.O)
     @Composable
     override fun ComposeView() {
         super.ComposeView()
@@ -32,25 +32,34 @@ class InsightFragment : CoreFragment() {
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun InsightLayout() {
+    var chosenChip: ChartShortcut by remember { mutableStateOf(ChartShortcut.AnalogueClock) }
     CoreLayout(
-        topBar = { HomeTopBar(name = stringResource(id = Menu.Insight.nameId)) },
+        topBar = {
+            ChartTopBar(
+                chosenChip = chosenChip,
+                onChange = { chosenChip = it }
+            )
+        },
         bottomBar = { CoreBottomBar() },
         backgroundColor = Background
     ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(horizontal = 16.dp, vertical = 16.dp),
-        ) {
-            RingChart(centerColor = Background, data = ChartElement.getFakeData())
-            Divider(modifier = Modifier.padding(vertical = 16.dp), color = PrimaryColor)
-            LineChart(data = ChartElement.getFakeData())
-            Divider(modifier = Modifier.padding(vertical = 16.dp), color = PrimaryColor)
-            RingChart2(data = ChartElement.getFakeData(), modifier = Modifier)
-        }
+        AnimatedContent(
+            targetState = chosenChip,
+            label = stringResource(id = R.string.fake_title),
+            content = { chosenChip ->
+                when (chosenChip) {
+                    ChartShortcut.AnalogueClock -> AnalogueClock()
+                    ChartShortcut.LineChart -> LineChartScreen()
+                    ChartShortcut.BarChart -> {}
+                    ChartShortcut.AreaChart -> {}
+                    ChartShortcut.RadarChart -> {}
+                    ChartShortcut.RingChart -> RingChartScreen()
+                    ChartShortcut.ScatterPlotChart -> {}
+                }
+            })
     }
 }
 

@@ -1,6 +1,6 @@
 @file:Suppress("AnimateAsStateLabel")
 
-package com.example.jetpack.ui.fragment.chart.component
+package com.example.jetpack.ui.fragment.chart.chartcomponent
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background

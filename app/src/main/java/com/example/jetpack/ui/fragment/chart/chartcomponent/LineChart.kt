@@ -1,8 +1,8 @@
-package com.example.jetpack.ui.fragment.chart.component
+package com.example.jetpack.ui.fragment.chart.chartcomponent
 
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -26,7 +27,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.drawText
@@ -39,7 +39,6 @@ import com.example.jetpack.database.model.ChartElement
 import com.example.jetpack.ui.theme.PrimaryColor
 import com.example.jetpack.ui.theme.customizedTextStyle
 import com.example.jetpack.util.ViewUtil
-import kotlinx.coroutines.CoroutineScope
 import kotlin.math.roundToInt
 
 private val chartHeight = 200.dp
@@ -60,7 +59,12 @@ fun LineChart(
 
 
     // Automatically scroll to the latest item
-    LaunchedEffect(key1 = data) { state.animateScrollToItem(index = data.size, scrollOffset = data.size - 3) }
+    LaunchedEffect(key1 = data) {
+        state.animateScrollToItem(
+            index = data.size,
+            scrollOffset = data.size - 3
+        )
+    }
 
     var chosenElement by remember { mutableStateOf(data[data.size - 1]) }
 
@@ -146,7 +150,7 @@ fun LineChartElement(
     maximum: Float,
     element: ChartElement,
     nextElement: ChartElement?,
-    onClick: (ChartElement)->Unit = {}
+    onClick: (ChartElement) -> Unit = {}
 ) {
     val textMeasurer = rememberTextMeasurer()
     Column(
@@ -159,7 +163,10 @@ fun LineChartElement(
                 .fillMaxHeight()
                 .width(padding * 2F)
                 .weight(1F)
-                .clickable { onClick(element) },
+                .clickable(
+                    indication = rememberRipple(bounded = true, color = Color.Blue),
+                    interactionSource = remember { MutableInteractionSource() },
+                    onClick = { onClick(element) }),
             onDraw = {
                 val spacing = size.height / maximum
 
@@ -173,13 +180,19 @@ fun LineChartElement(
                     center = Offset(x = x, y = y)
                 )
 
-                if(enable){
+                if (enable) {
                     drawText(
                         textMeasurer = textMeasurer,
                         text = element.value.toInt().toString(),
-                        style = TextStyle(fontSize = 12.sp, color = PrimaryColor, background = Color.Transparent),
+                        style = TextStyle(
+                            fontSize = 12.sp,
+                            color = PrimaryColor,
+                            background = Color.Transparent
+                        ),
                         topLeft = Offset(
-                            x = center.x - textMeasurer.measure(text = element.value.toInt().toString()).size.width / 2F,
+                            x = center.x - textMeasurer.measure(
+                                text = element.value.toInt().toString()
+                            ).size.width / 2F,
                             y = y - size.height * 0.15F
                         )
                     )

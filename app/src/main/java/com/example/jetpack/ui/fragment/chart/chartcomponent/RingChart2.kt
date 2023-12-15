@@ -1,8 +1,9 @@
-package com.example.jetpack.ui.fragment.chart.component
+package com.example.jetpack.ui.fragment.chart.chartcomponent
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -17,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.jetpack.database.model.ChartElement
 import com.example.jetpack.ui.theme.Border
@@ -31,13 +33,13 @@ import com.example.jetpack.ui.theme.animationSpecFloat3
 import com.example.jetpack.util.ViewUtil
 
 
-private val ringSize = 110.dp
 private const val startAngle = 90F
 private const val strokeWidth: Float = 8F
 
 @Composable
 fun RingChart2(
     modifier: Modifier = Modifier,
+    ringSize: Dp = 150.dp,
     data: List<ChartElement>,
 ) {
     var sweepAngleGreen by remember { mutableFloatStateOf(0F) }
@@ -59,37 +61,17 @@ fun RingChart2(
         sweepAngleBlue = 240F
     }
 
-    Column(
-        modifier = modifier,
-        horizontalAlignment = Alignment.Start
-    ) {
-        Box(
-            // GREEN - FIRST LAYER
-            contentAlignment = Alignment.Center,
-            modifier = Modifier
-                .size(ringSize)
-                .align(Alignment.CenterHorizontally)
-                .drawBehind {
-                    drawCircle(
-                        color = Border,
-                        radius = size.width / 2,
-                        style = Stroke(width = strokeWidth)
-                    )
-                    drawArc(
-                        color = ColorUVIndexModerate,
-                        startAngle = startAngle,
-                        sweepAngle = animationSweepAngleGreen,
-                        useCenter = false,
-                        style = Stroke(width = strokeWidth)
-                    )
-                },
-
-            ) {
+    Row(modifier = Modifier.fillMaxWidth()){
+        Column(
+            modifier = modifier,
+            horizontalAlignment = Alignment.Start
+        ) {
             Box(
-                // YELLOW - SECOND LAYER
+                // GREEN - FIRST LAYER
                 contentAlignment = Alignment.Center,
                 modifier = Modifier
-                    .size(ringSize * 0.85F)
+                    .size(ringSize)
+                    .align(Alignment.CenterHorizontally)
                     .drawBehind {
                         drawCircle(
                             color = Border,
@@ -97,19 +79,20 @@ fun RingChart2(
                             style = Stroke(width = strokeWidth)
                         )
                         drawArc(
-                            color = PrimaryColor,
+                            color = ColorUVIndexModerate,
                             startAngle = startAngle,
-                            sweepAngle = animationSweepAngleYellow,
+                            sweepAngle = animationSweepAngleGreen,
                             useCenter = false,
-                            style = Stroke(width =  strokeWidth)
+                            style = Stroke(width = strokeWidth)
                         )
                     },
-            ) {
+
+                ) {
                 Box(
-                    // RED - THIRD LAYER
+                    // YELLOW - SECOND LAYER
                     contentAlignment = Alignment.Center,
                     modifier = Modifier
-                        .size(ringSize * 0.70F)
+                        .size(ringSize * 0.85F)
                         .drawBehind {
                             drawCircle(
                                 color = Border,
@@ -117,19 +100,19 @@ fun RingChart2(
                                 style = Stroke(width = strokeWidth)
                             )
                             drawArc(
-                                color = ColorUVIndexExtremeHigh,
+                                color = PrimaryColor,
                                 startAngle = startAngle,
-                                sweepAngle = animationSweepAngleRed,
+                                sweepAngle = animationSweepAngleYellow,
                                 useCenter = false,
-                                style = Stroke(width =  strokeWidth)
+                                style = Stroke(width = strokeWidth)
                             )
                         },
                 ) {
                     Box(
-                        // BLUE - FINAL LAYER
+                        // RED - THIRD LAYER
                         contentAlignment = Alignment.Center,
                         modifier = Modifier
-                            .size(ringSize * 0.55F)
+                            .size(ringSize * 0.70F)
                             .drawBehind {
                                 drawCircle(
                                     color = Border,
@@ -137,15 +120,36 @@ fun RingChart2(
                                     style = Stroke(width = strokeWidth)
                                 )
                                 drawArc(
-                                    color = ColorPressureLow,
+                                    color = ColorUVIndexExtremeHigh,
                                     startAngle = startAngle,
-                                    sweepAngle = animationSweepAngleBlue,
+                                    sweepAngle = animationSweepAngleRed,
                                     useCenter = false,
-                                    style = Stroke(width =strokeWidth)
+                                    style = Stroke(width = strokeWidth)
                                 )
                             },
                     ) {
+                        Box(
+                            // BLUE - FINAL LAYER
+                            contentAlignment = Alignment.Center,
+                            modifier = Modifier
+                                .size(ringSize * 0.55F)
+                                .drawBehind {
+                                    drawCircle(
+                                        color = Border,
+                                        radius = size.width / 2,
+                                        style = Stroke(width = strokeWidth)
+                                    )
+                                    drawArc(
+                                        color = ColorPressureLow,
+                                        startAngle = startAngle,
+                                        sweepAngle = animationSweepAngleBlue,
+                                        useCenter = false,
+                                        style = Stroke(width = strokeWidth)
+                                    )
+                                },
+                        ) {
 
+                        }
                     }
                 }
             }

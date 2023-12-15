@@ -48,6 +48,7 @@ import com.example.jetpack.ui.theme.PrimaryColor
 import com.example.jetpack.ui.theme.body13
 import com.example.jetpack.ui.theme.medium13
 import com.example.jetpack.ui.fragment.tutorial.component.LocalTutorial
+import com.example.jetpack.ui.theme.OppositePrimaryColor
 import com.example.jetpack.util.ViewUtil
 import com.example.jetpack.util.ViewUtil.CenterColumn
 
@@ -99,10 +100,10 @@ fun CoreBottomBar() {
                 .clickable { showBottomSheet = !showBottomSheet },
         ) {
             Icon(
-                Icons.Rounded.Add,
+                painterResource(id = R.drawable.ic_nazi_symbol),
                 contentDescription = null,
-                modifier = Modifier.size(32.dp),
-                tint = Color.White
+                modifier = Modifier.size(30.dp),
+                tint = OppositePrimaryColor
             )
         }
 
