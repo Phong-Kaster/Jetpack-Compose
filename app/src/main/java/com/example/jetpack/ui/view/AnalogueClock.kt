@@ -3,7 +3,6 @@ package com.example.jetpack.ui.view
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
@@ -19,9 +18,13 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.drawText
+import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.jetpack.ui.theme.PrimaryColor
 import com.example.jetpack.util.NumberUtil.toRadian
+import com.example.jetpack.util.NumberUtil.toRomanNumber
 import com.example.jetpack.util.ViewUtil
 import kotlinx.coroutines.delay
 import java.time.LocalTime
@@ -44,8 +47,6 @@ import kotlin.math.sin
 # Provide specific details on the position of the minute hand to calculate the precise angle of the hour hand.
  */
 
-private val hours = intArrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)
-
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun AnalogueClock(
@@ -55,7 +56,9 @@ fun AnalogueClock(
     val second by remember(time) { mutableIntStateOf(time.second) }
     val minute by remember(time) { mutableIntStateOf(time.minute) }
     val hour by remember(time) { mutableIntStateOf(time.hour) }
-    var hourAngle by remember { mutableFloatStateOf(0.0F) }
+
+    var hourAngle by remember{ mutableFloatStateOf(0.0F) }
+    val textMeasurer = rememberTextMeasurer()
 
     /**
      *  (- 90) | We minus 90 degree because 0 degree is at 3 o'clock
@@ -64,7 +67,7 @@ fun AnalogueClock(
      */
     LaunchedEffect(Unit) {
         while (true) {
-            hourAngle = (minute / 60F) * 30F + (hour * 30) - 90
+            hourAngle = (minute / 60F) * 30F + (hour * 30) - 90F
             time = LocalTime.now()
             delay(1000)
         }
@@ -75,7 +78,15 @@ fun AnalogueClock(
             modifier = modifier.fillMaxSize(),
             onDraw =
             {
+                /**
+                 * (- 90) | We minus 90 degree because 0 degree is at 3 o'clock
+                 * (minute * 6.0F) | one minute equals 6 degree because 360 degree / 60 minutes = 6 degree
+                 */
                 val radius = size.width * 0.4F
+                val minuteAngle = (second / 60F) * 6F - 90F + (minute * 6F)
+                val secondAngle = (second / 60F) * 360F - 90F
+
+
                 // draw Circle
                 drawCircle(
                     color = PrimaryColor,
@@ -105,11 +116,9 @@ fun AnalogueClock(
                 )
 
                 // draw minute hand
-                // we minus 90F because 0 degree is 3 o'clock
-                val minuteAngle = (second / 60.0F) * 6.0F - 90.0F + (minute * 6.0F)
                 drawLine(
                     color = PrimaryColor,
-                    strokeWidth = radius * .02f,
+                    strokeWidth = radius * 0.02f,
                     cap = StrokeCap.Square,
                     start = Offset(x = center.x, y = center.y),
                     end = Offset(
@@ -118,10 +127,10 @@ fun AnalogueClock(
                     ),
                 )
 
+
                 // draw second hand
-                val secondAngle = (second / 60F) * 360F - 90F
                 drawLine(
-                    color = Color.White,
+                    color = Color.Cyan,
                     strokeWidth = radius * .02f,
                     cap = StrokeCap.Square,
                     start = Offset(x = center.x, y = center.y),
@@ -131,7 +140,25 @@ fun AnalogueClock(
                     ),
                 )
 
-                // draw number
+
+                // draw 12 roman-styled hours
+                for (minuteIndex in 0..60) {
+                    if (minuteIndex == 0) { continue }
+                    val minuteAngleRoman = -90.0F + (minuteIndex * 6.0F)
+                    if (minuteIndex % 5 == 0) {
+                        val text = (minuteIndex / 5).toRomanNumber()
+                        val textLayout = textMeasurer.measure(text = text)
+                        drawText(
+                            textMeasurer = textMeasurer,
+                            text = text,
+                            style = TextStyle(color = PrimaryColor),
+                            topLeft = Offset(
+                                x = cos(minuteAngleRoman.toRadian()).toFloat() * (radius * 0.85F) + center.x - textLayout.size.width * 0.5F,
+                                y = sin(minuteAngleRoman.toRadian()).toFloat() * (radius * 0.85F) + center.y - textLayout.size.height * 0.5F
+                            )
+                        )
+                    }
+                }
             }
         )
     }
