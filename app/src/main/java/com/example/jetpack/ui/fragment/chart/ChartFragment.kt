@@ -49,7 +49,7 @@ fun InsightLayout() {
             Divider(modifier = Modifier.padding(vertical = 16.dp), color = PrimaryColor)
             LineChart(data = ChartElement.getFakeData())
             Divider(modifier = Modifier.padding(vertical = 16.dp), color = PrimaryColor)
-            RingChart2(data = ChartElement.getFakeData())
+            RingChart2(data = ChartElement.getFakeData(), modifier = Modifier)
         }
     }
 }
