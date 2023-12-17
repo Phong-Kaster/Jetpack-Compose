@@ -63,6 +63,7 @@ fun InsightLayout() {
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Preview
 @Composable
 fun PreviewInsightLayout() {
