@@ -1,6 +1,6 @@
 @file:Suppress("AnimateAsStateLabel")
 
-package com.example.jetpack.ui.fragment.chart.component
+package com.example.jetpack.ui.fragment.chart.chartcomponent
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
@@ -29,7 +29,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.example.jetpack.model.ChartElement
+import com.example.jetpack.database.model.ChartElement
 import com.example.jetpack.ui.theme.ColorWindSpeedCalm
 import com.example.jetpack.ui.theme.ColorWindSpeedFresh
 import com.example.jetpack.ui.theme.ColorWindSpeedGale
@@ -50,7 +50,7 @@ import com.example.jetpack.util.ViewUtil
 private val chartSize: Dp = 150.dp
 private val innerChartSize: Dp = chartSize * 0.67F
 private const val filledAngle = 360F // A filled angle is an angle equal to 360° (entire circle)
-private val colors = listOf<Color>(
+private val colors = listOf(
     ColorWindSpeedCalm,
     ColorWindSpeedLightAir,
     ColorWindSpeedLight,
@@ -78,7 +78,7 @@ private val colors = listOf<Color>(
  *Note: prefer using immutable list
  */
 @Composable
-fun PieChart(
+fun RingChart(
     modifier: Modifier = Modifier,
     centerColor: Color = Color.DarkGray,
     data: List<ChartElement>,
@@ -186,6 +186,6 @@ fun PieChart(
 @Composable
 fun PreviewPieChart() {
     ViewUtil.PreviewContent {
-        PieChart( data = ChartElement.getFakeData())
+        RingChart(data = ChartElement.getFakeData())
     }
 }

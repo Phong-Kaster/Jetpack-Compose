@@ -8,8 +8,10 @@ import android.widget.Toast
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ProvidedValue
+import androidx.compose.runtime.rememberCompositionContext
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.platform.LocalContext
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
@@ -24,7 +26,6 @@ val LocalNavController = staticCompositionLocalOf<NavController?> { null }
 
 @AndroidEntryPoint
 open class CoreFragment : Fragment(), CoreBehavior {
-
 
     override fun onCreateView(
         inflater: LayoutInflater,

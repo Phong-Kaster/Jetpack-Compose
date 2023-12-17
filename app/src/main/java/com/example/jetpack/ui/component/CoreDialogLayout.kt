@@ -60,7 +60,9 @@ fun CoreDialogLayout(
         Text(
             text = title,
             color = PrimaryColor,
-            style = body18
+            style = body18,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.fillMaxWidth()
         )
 
         Spacer(modifier = Modifier.height(10.dp))
@@ -125,7 +127,9 @@ fun CoreDialogLayout(
         Text(
             text = title,
             color = PrimaryColor,
-            style = body18
+            style = body18,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.fillMaxWidth()
         )
 
         Spacer(modifier = Modifier.height(10.dp))

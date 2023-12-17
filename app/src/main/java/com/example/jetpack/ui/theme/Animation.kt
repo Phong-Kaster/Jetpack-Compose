@@ -7,8 +7,12 @@ import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.tween
 import androidx.compose.ui.graphics.Color
 
-val animationSpecFloat = tween<Float>(durationMillis = 1000, easing = FastOutLinearInEasing)
+val animationSpecFloat = tween<Float>(durationMillis = 1000, easing = FastOutLinearInEasing, delayMillis = 0)
+val animationSpecFloat1 = tween<Float>(durationMillis = 1000, easing = FastOutLinearInEasing, delayMillis = 400)
+val animationSpecFloat2 = tween<Float>(durationMillis = 1000, easing = FastOutLinearInEasing, delayMillis = 800)
+val animationSpecFloat3 = tween<Float>(durationMillis = 1000, easing = FastOutLinearInEasing, delayMillis = 1200)
 
 val animationSpecInteger = tween<Int>(durationMillis = 1000, easing = LinearOutSlowInEasing)
 
 val animationInfiniteColor = infiniteRepeatable<Color>(animation = tween(durationMillis = 3000), repeatMode = RepeatMode.Reverse)
+val animationInfiniteFloat = infiniteRepeatable<Float>(animation = tween(durationMillis = 1000), repeatMode = RepeatMode.Reverse)

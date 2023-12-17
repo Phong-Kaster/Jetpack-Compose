@@ -24,5 +24,14 @@
     <string name="japanese">जापानी</string>
     <string name="korean">कोरियाई</string>
     <string name="save">सहेजें</string>
-
+    <string name="are_you_sure_to_exit">क्या आप वाकई बाहर जाना चाहते हैं?</string>
+    <string name="cancel">रद्द करें</string>
+    <string name="ok">ठीक है</string>
+    <string name="rate">रेट करें</string>
+    <string name="how_s_your_experience_so_far">अब तक आपका अनुभव कैसा रहा है?</string>
+    <string name="we_d_love_to_know">हमें जानने की इच्छा है!</string>
+    <string name="hint_feedback">कृपया प्रोडक्ट में सुधार के लिए प्रतिक्रिया दें</string>
+    <string name="submit">जमा करें</string>
+    <string name="not_now">अभी नहीं</string>
+    <string name="thanks_for_your_feedback">आपकी प्रतिक्रिया के लिए धन्यवाद!</string>
 </resources>

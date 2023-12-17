@@ -1,15 +1,12 @@
-package com.example.jetpack.ui.component
+package com.example.jetpack.ui.fragment.home.component
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -26,93 +23,57 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.example.jetpack.R
-import com.example.jetpack.configuration.Language
+import com.example.jetpack.database.enums.HomeShortcut
+import com.example.jetpack.ui.theme.PrimaryColor
 import com.example.jetpack.ui.theme.customizedTextStyle
 import com.example.jetpack.util.ViewUtil
 
 @Composable
-fun SquareElement(
-    language: Language,
-    onClick: (Language) -> Unit = {}
+fun HomeShortcutItem(
+    shortcut: HomeShortcut,
+    onClick: (HomeShortcut) -> Unit = {}
 ) {
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
-            /*.onGloballyPositioned {
-                if (highlight.highlightTag.icon == R.drawable.ic_air_quality) {
-                    IntroOffset.airQuality = try {
-                        highlight.title!!.toInt()
-                    } catch (_: Exception) {
-                        0
-                    }
-                    IntroOffset.offsetHighLightDetail =
-                        it.positionInRoot().y.toInt() - getStatusBarHeight()
-                }
-            }*/
             .clip(shape = RoundedCornerShape(20.dp))
             .border(
-                width = 0.2.dp,
+                width = 0.5.dp,
                 color = Color.White.copy(alpha = 0.5F),
                 shape = RoundedCornerShape(20.dp)
             )
             .background(color = Color.Black.copy(alpha = 0.1F))
             .padding(horizontal = 16.dp, vertical = 16.dp)
-            .clickable { onClick(language) }
+            .clickable { onClick(shortcut) }
             .aspectRatio(1F)
 
     ) {
 
-        Image(
-            painter = painterResource(id = language.drawable),
+        Icon(
+            painter = painterResource(id = shortcut.drawable),
             contentDescription = stringResource(id = R.string.icon),
-            modifier = Modifier.size(25.dp)
+            modifier = Modifier.size(25.dp),
+            tint = PrimaryColor
         )
 
         Spacer(modifier = Modifier.height(10.dp))
 
         Text(
-            text = stringResource(id = language.text),
+            text = stringResource(id = shortcut.text),
+            color = PrimaryColor,
             style = customizedTextStyle(fontWeight = 400, fontSize = 18),
             maxLines = 1,
             overflow = TextOverflow.Ellipsis
         )
-
-        Text(
-            text = language.name,
-            style = customizedTextStyle(fontWeight = 400, fontSize = 28),
-            maxLines = 1,
-            overflow = TextOverflow.Ellipsis
-        )
-
-
-        Text(
-            text = language.code,
-            style = customizedTextStyle(fontWeight = 300, fontSize = 16),
-            maxLines = 1,
-            overflow = TextOverflow.Ellipsis
-        )
-
-        Row(modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 5.dp),
-            horizontalArrangement = Arrangement.End) {
-            Icon(
-                painter = painterResource(id = R.drawable.ic_arrow_forward_circle),
-                contentDescription = stringResource(id = R.string.icon),
-                tint = Color.White,
-                modifier = Modifier
-            )
-        }
     }
 }
 
 @Preview
 @Composable
-fun PreviewSquareElement() {
+fun PreviewHomeShortcutItem() {
     ViewUtil.PreviewContent {
-        SquareElement(language = Language.German)
+        HomeShortcutItem(shortcut = HomeShortcut.Tutorial)
     }
 }

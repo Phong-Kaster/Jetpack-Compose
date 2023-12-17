@@ -1,4 +1,4 @@
-package com.example.jetpack.ui.fragment.chart.component
+package com.example.jetpack.ui.fragment.chart.chartcomponent
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.material3.Text
