@@ -6,7 +6,7 @@ import androidx.compose.animation.AnimatedContent
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -35,7 +35,7 @@ class InsightFragment : CoreFragment() {
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun InsightLayout() {
-    var chosenChip: ChartShortcut by remember { mutableStateOf(ChartShortcut.AnalogueClock) }
+    var chosenChip: ChartShortcut by rememberSaveable { mutableStateOf(ChartShortcut.AnalogueClock) }
     CoreLayout(
         topBar = {
             ChartTopBar(
