@@ -50,43 +50,43 @@ fun TableLayout() {
                 color = TextColor5,
                 style = customizedTextStyle(fontWeight = 600, fontSize = 16),
                 modifier = Modifier
-                .fillMaxHeight()
-                .weight(1F)
-                .padding(vertical = 16.dp), textAlign = TextAlign.Center)
+                    .fillMaxHeight()
+                    .weight(1F)
+                    .padding(vertical = 16.dp), textAlign = TextAlign.Center)
             Spacer(
                 modifier = Modifier
-                .width(0.5.dp)
-                .background(color = Color.White)
-                .fillMaxHeight())
+                    .width(0.5.dp)
+                    .background(color = Color.White)
+                    .fillMaxHeight())
             Text(
                 text = stringResource(id = R.string.fake_title),
                 color = TextColor5,
                 style = customizedTextStyle(fontWeight = 600, fontSize = 16),
                 modifier = Modifier
-                .fillMaxHeight()
-                .weight(1F)
-                .padding(vertical = 16.dp),
+                    .fillMaxHeight()
+                    .weight(1F)
+                    .padding(vertical = 16.dp),
                 textAlign = TextAlign.Center)
             Spacer(
                 modifier = Modifier
-                .width(0.5.dp)
-                .background(color = Color.White)
-                .fillMaxHeight())
+                    .width(0.5.dp)
+                    .background(color = Color.White)
+                    .fillMaxHeight())
             Text(
                 text = stringResource(id = R.string.fake_title),
                 color = TextColor5,
                 style = customizedTextStyle(fontWeight = 600, fontSize = 16),
                 modifier = Modifier
-                .fillMaxHeight()
-                .weight(1F)
-                .padding(vertical = 16.dp), textAlign = TextAlign.Center)
+                    .fillMaxHeight()
+                    .weight(1F)
+                    .padding(vertical = 16.dp), textAlign = TextAlign.Center)
         }
 
-        HighlightRowForTable(leftContent = "<50°F", centerContent = R.string.fake_title, enableBottomRoundedCorner = false, emoji = R.drawable.ic_language_english)
-        HighlightRowForTable(leftContent = "50 - 60°F", centerContent = R.string.fake_title, enableBottomRoundedCorner = false, emoji = R.drawable.ic_language_german)
-        HighlightRowForTable(leftContent = "60 - 65°F", centerContent = R.string.fake_title, enableBottomRoundedCorner = false, emoji = R.drawable.ic_language_french)
-        HighlightRowForTable(leftContent = "65 - 70°F", centerContent = R.string.fake_title, enableBottomRoundedCorner = false, emoji = R.drawable.ic_language_japanese)
-        HighlightRowForTable(leftContent = "70°F+", centerContent = R.string.fake_title, enableBottomRoundedCorner = true, emoji = R.drawable.ic_language_vietnamese)
+        HighlightRowForTable(leftContent = stringResource(id = R.string.fake_title), centerContent = R.string.fake_title, enableBottomRoundedCorner = false, emoji = R.drawable.ic_language_english)
+        HighlightRowForTable(leftContent = stringResource(id = R.string.fake_title), centerContent = R.string.fake_title, enableBottomRoundedCorner = false, emoji = R.drawable.ic_language_german)
+        HighlightRowForTable(leftContent = stringResource(id = R.string.fake_title), centerContent = R.string.fake_title, enableBottomRoundedCorner = false, emoji = R.drawable.ic_language_french)
+        HighlightRowForTable(leftContent = stringResource(id = R.string.fake_title), centerContent = R.string.fake_title, enableBottomRoundedCorner = false, emoji = R.drawable.ic_language_japanese)
+        HighlightRowForTable(leftContent = stringResource(id = R.string.fake_title), centerContent = R.string.fake_title, enableBottomRoundedCorner = true, emoji = R.drawable.ic_language_vietnamese)
 
     }
 }
