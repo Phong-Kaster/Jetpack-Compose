@@ -12,7 +12,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.jetpack"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -66,6 +66,7 @@ dependencies {
     implementation("com.google.android.material:material:1.10.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.navigation:navigation-fragment:2.7.5")
+    implementation("com.google.firebase:firebase-crashlytics-buildtools:2.9.9")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
@@ -75,7 +76,7 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
     // Dependency injection with Hilt - https://developer.android.com/training/dependency-injection/hilt-android#setup
-    implementation("com.google.dagger:hilt-android:2.47")
+    implementation("com.google.dagger:hilt-android:2.48.1")
     kapt("com.google.dagger:hilt-android-compiler:2.47")
     implementation("androidx.hilt:hilt-navigation-fragment:1.1.0")
 
@@ -97,6 +98,16 @@ dependencies {
 
     // ConstraintLayout in Compose - https://developer.android.com/jetpack/compose/layouts/constraintlayout#get-started
     implementation("androidx.constraintlayout:constraintlayout-compose:1.0.1")
+
+
+    // Save data in a local database using Room - https://developer.android.com/training/data-storage/room#setup
+    implementation("androidx.room:room-runtime:2.6.1")
+    implementation("androidx.room:room-ktx:2.6.1")
+    kapt("androidx.room:room-compiler:2.6.1")
+
+
+    // GSON - https://github.com/google/gson
+    implementation("com.google.code.gson:gson:2.10.1")
 }
 
 // Allow references to generated code

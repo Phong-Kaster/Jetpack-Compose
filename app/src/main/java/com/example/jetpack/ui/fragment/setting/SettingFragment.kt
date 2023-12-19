@@ -25,7 +25,7 @@ import com.example.jetpack.configuration.Language
 import com.example.jetpack.configuration.Menu
 import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
-import com.example.jetpack.database.enums.Star
+import com.example.jetpack.data.enums.Star
 import com.example.jetpack.ui.component.CoreBottomBar
 import com.example.jetpack.ui.fragment.home.component.HomeTopBar
 import com.example.jetpack.ui.fragment.setting.component.RateDialog

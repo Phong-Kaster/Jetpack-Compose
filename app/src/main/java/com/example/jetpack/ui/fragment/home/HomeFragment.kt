@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import com.example.jetpack.R
 import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
-import com.example.jetpack.database.enums.HomeShortcut
+import com.example.jetpack.data.enums.HomeShortcut
 import com.example.jetpack.ui.component.CoreBottomBar
 import com.example.jetpack.ui.component.CoreDialog
 import com.example.jetpack.ui.fragment.home.component.HomeDialog
@@ -66,6 +66,7 @@ class HomeFragment : CoreFragment() {
             onOpenShortcut = {
                 when (it) {
                     HomeShortcut.Tutorial -> safeNavigate(R.id.toTutorial)
+                    HomeShortcut.Quote -> safeNavigate(R.id.toQuote)
                     else -> {}
                 }
             }

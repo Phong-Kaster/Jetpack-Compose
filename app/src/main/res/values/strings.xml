@@ -45,4 +45,16 @@
     <string name="radar_chart">Radar Chart</string>
     <string name="area_chart">Area Chart</string>
     <string name="analogue_clock">Analogue Clock</string>
+    <string name="investment_saving">Investment - Saving</string>
+    <string name="fixed_expenses">Fixed Expenses</string>
+    <string name="business">Business</string>
+    <string name="unexpected_expenses">Unexpected Expenses</string>
+    <string name="living_expenses">Living Expenses</string>
+    <string name="events">Events</string>
+    <string name="shopping">Shopping</string>
+    <string name="entertainment">Entertainment</string>
+    <string name="charity">Charity</string>
+    <string name="education">Education</string>
+    <string name="loan_payment">Loan Payment</string>
+    <string name="quote">Quote</string>
 </resources>

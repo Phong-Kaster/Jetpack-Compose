@@ -27,7 +27,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.jetpack.R
-import com.example.jetpack.database.enums.Star
+import com.example.jetpack.data.enums.Star
 import com.example.jetpack.ui.component.CoreDialog
 import com.example.jetpack.ui.component.OutlineButton
 import com.example.jetpack.ui.component.SolidButton
