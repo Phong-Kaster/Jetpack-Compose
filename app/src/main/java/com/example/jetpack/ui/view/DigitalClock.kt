@@ -51,7 +51,7 @@ fun DigitalClock(modifier: Modifier = Modifier) {
 
 @Preview
 @Composable
-fun PreviewDigitalClock() {
+fun PreviewDigitalClock3() {
     ViewUtil.PreviewContent {
         DigitalClock(modifier = Modifier
             .fillMaxWidth()
