@@ -16,7 +16,7 @@ object QuoteMapper {
 
     fun Quote.toEntity(): QuoteEntity{
         return QuoteEntity(
-            uid = this.uid,
+            uid = this.uid ?: 0,
             content = this.content,
             category = this.category,
             createAt = this.createAt,

@@ -23,8 +23,10 @@ import com.example.jetpack.R
 import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
 import com.example.jetpack.data.enums.Category
+import com.example.jetpack.data.model.Quote
 import com.example.jetpack.ui.component.CoreTopBar
 import com.example.jetpack.ui.component.SolidButton
+import com.example.jetpack.ui.fragment.quote.component.CategoriesLayout
 import com.example.jetpack.ui.theme.Background
 import com.example.jetpack.ui.theme.PrimaryColor
 import com.example.jetpack.ui.theme.TextColor1
@@ -40,8 +42,8 @@ class QuoteFragment : CoreFragment() {
         super.ComposeView()
         QuoteLayout(
             onBack = { safeNavigateUp() },
-            onConfirm = {
-
+            onConfirm = { content: String, category: Category? ->
+                val quote = Quote(uid = null, content = content, category = category)
             }
         )
     }
@@ -50,10 +52,10 @@ class QuoteFragment : CoreFragment() {
 @Composable
 fun QuoteLayout(
     onBack: () -> Unit = {},
-    onConfirm: () -> Unit = {}
+    onConfirm: (String, Category?) -> Unit = { content: String, category: Category? -> }
 ) {
     var content by remember { mutableStateOf("") }
-    var category by remember { mutableStateOf<List<Category>>(listOf()) }
+    var category by remember { mutableStateOf(null) }
 
     CoreLayout(
         topBar = {
@@ -71,7 +73,9 @@ fun QuoteLayout(
             ) {
                 SolidButton(
                     modifier = Modifier.fillMaxWidth(),
-                    onClick = onConfirm,
+                    onClick = {
+                        onConfirm(content, category)
+                    },
                     shape = RoundedCornerShape(10.dp),
                 )
             }
@@ -112,7 +116,8 @@ fun QuoteLayout(
                         unfocusedContainerColor = Background
                     )
                 )
-
+                Spacer(modifier = Modifier.height(15.dp))
+                CategoriesLayout()
             }
         }
     )
