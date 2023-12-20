@@ -84,10 +84,13 @@ fun CategoryItem(
 
 
 @Composable
-fun CategoriesLayout(modifier: Modifier = Modifier) {
+fun CategorySelector(
+    modifier: Modifier = Modifier,
+    onClick: (Category?, Category?) -> Unit = { category: Category?, categoryChildren: Category? -> }
+) {
     var expanded by remember { mutableStateOf(false) }
-    var chosenCategory: Category? by remember { mutableStateOf(null) }
-    var chosenCategoryChildren: Category? by remember { mutableStateOf(null) }
+    var category: Category? by remember { mutableStateOf(null) }
+    var categoryChild: Category? by remember { mutableStateOf(null) }
 
     Column(modifier = modifier) {
         Text(
@@ -97,35 +100,41 @@ fun CategoriesLayout(modifier: Modifier = Modifier) {
             style = customizedTextStyle(fontSize = 16, fontWeight = 700),
             modifier = Modifier
                 .fillMaxWidth()
-                .clickable { expanded = !expanded })
+                .clickable { expanded = true }
+        )
 
         Spacer(modifier = Modifier.height(15.dp))
         LazyRow(horizontalArrangement = Arrangement.spacedBy(5.dp)) {
             items(items = Category.entries, itemContent = {
                 if (it.isParent) {
                     CategoryItem(
-                        chosen = chosenCategory == it,
+                        chosen = category == it,
                         category = it,
                         onClick = {
-                            expanded = !expanded
-                            chosenCategory = it
+                            expanded = false
+                            category = it
+                            categoryChild = null
+                            onClick(category, null)
                         })
                 }
             })
         }
         Divider(modifier = Modifier.padding(vertical = 16.dp))
-        if (chosenCategory != null && expanded) {
+        if (category != null && expanded) {
             LazyRow(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(5.dp)
             ) {
                 items(
-                    items = chosenCategory!!.getSubcategories(),
+                    items = category!!.getSubcategories(),
                     itemContent = {
                         CategoryItem(
-                            chosen = chosenCategoryChildren == it,
+                            chosen = categoryChild == it,
                             category = it,
-                            onClick = { chosenCategoryChildren = it })
+                            onClick = {
+                                categoryChild = it
+                                onClick(null, categoryChild)
+                            })
                     }
                 )
             }
@@ -138,6 +147,6 @@ fun CategoriesLayout(modifier: Modifier = Modifier) {
 @Composable
 fun PreviewCategoriesLayout() {
     ViewUtil.PreviewContent {
-        CategoriesLayout(modifier = Modifier)
+        CategorySelector(modifier = Modifier)
     }
 }

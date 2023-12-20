@@ -108,6 +108,10 @@ dependencies {
 
     // GSON - https://github.com/google/gson
     implementation("com.google.code.gson:gson:2.10.1")
+
+    // Immutable Collections Library for Kotlin - https://github.com/Kotlin/kotlinx.collections.immutable,
+    // Kotlin Immutable Collections - https://www.baeldung.com/kotlin/immutable-collections
+    implementation("org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.6")
 }
 
 // Allow references to generated code
