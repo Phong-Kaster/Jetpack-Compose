@@ -22,11 +22,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.jetpack.configuration.Icon
-import com.example.jetpack.configuration.Language
-import com.example.jetpack.ui.fragment.language.component.LanguageItem
+import com.example.jetpack.configuration.Logo
 import com.example.jetpack.ui.theme.Background
 import com.example.jetpack.ui.theme.OppositeBackground
 import com.example.jetpack.ui.theme.OppositePrimaryColor
@@ -36,9 +35,9 @@ import com.example.jetpack.util.ViewUtil
 
 @Composable
 fun SettingIconList(
-    list: List<Language>,
-    chosenLanguage: Language,
-    onClick: (Language) -> Unit = {},
+    list: List<Logo>,
+    chosenLogo: Logo,
+    onClick: (Logo) -> Unit = {},
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues()
 ) {
@@ -47,11 +46,13 @@ fun SettingIconList(
         verticalArrangement = Arrangement.spacedBy(18.dp),
         contentPadding = contentPadding
     ) {
-        items(list, key = { language -> language.code }) { language ->
-            LanguageItem(
-                language = language,
-                selected = language == chosenLanguage,
-                onClick = { onClick(language) },
+        items(
+            items = list,
+            key = { icon -> icon.name }) { icon ->
+            SettingIconItem(
+                logo = icon,
+                selected = icon == chosenLogo,
+                onClick = { onClick(icon) },
             )
         }
     }
@@ -59,7 +60,7 @@ fun SettingIconList(
 
 @Composable
 fun SettingIconItem(
-    icon: Icon,
+    logo: Logo,
     selected: Boolean,
     modifier: Modifier = Modifier,
     onClick: () -> Unit = {},
@@ -75,14 +76,14 @@ fun SettingIconItem(
         verticalAlignment = Alignment.CenterVertically
     ) {
         Image(
-            painterResource(icon.drawable),
+            painterResource(logo.drawable),
             contentDescription = null,
-            modifier = Modifier.size(24.dp),
+            modifier = Modifier.size(50.dp),
             contentScale = ContentScale.Fit,
         )
         Spacer(modifier = Modifier.width(16.dp))
         Text(
-            text = icon.name,
+            text = stringResource(id = logo.text),
             style = h16,
             color = if (selected) OppositePrimaryColor else OppositeBackground
         )
@@ -93,8 +94,8 @@ fun SettingIconItem(
 @Composable
 fun PreviewLanguageItem() {
     ViewUtil.PreviewContent {
-        SettingIconItem(icon = Icon.Bundeswehr, selected = true)
+        SettingIconItem(logo = Logo.Heer, selected = true)
         Spacer(modifier = Modifier.height(16.dp))
-        SettingIconItem(icon = Icon.Bundeswehr, selected = false)
+        SettingIconItem(logo = Logo.Heer, selected = false)
     }
 }

@@ -86,7 +86,7 @@
 
     <fragment
         android:id="@+id/settingIconFragment"
-        android:name="com.example.jetpack.ui.fragment.quote.QuoteFragment" />
+        android:name="com.example.jetpack.ui.fragment.setting.SettingIconFragment" />
 
     <action
         android:id="@+id/toHome"
@@ -151,7 +151,7 @@
 
     <action
         android:id="@+id/toSettingIcon"
-        app:destination="@id/quoteFragment"
+        app:destination="@id/settingIconFragment"
         app:enterAnim="@anim/enter_fade_in"
         app:exitAnim="@anim/exit_fade_out"
         app:popUpToInclusive="true"/>

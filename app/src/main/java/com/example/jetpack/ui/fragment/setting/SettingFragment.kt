@@ -113,23 +113,20 @@ class SettingFragment : CoreFragment() {
 
         SettingLayout(
             languageFromCache = viewModel.chosenLanguage.collectAsState().value,
+            onRate = { showRateDialog = !showRateDialog },
+            onOpenPrivatePolicy = { AppUtil.openWebsite(context = requireContext(), "https://www.youtube.com/") },
+            onOpenTermOfService = { AppUtil.openWebsite(context = requireContext(), "https://www.google.com/") },
             onOpenLanguage = {
                 val destination = SettingFragmentDirections.toLanguage()
                 safeNavigate(destination)
-            },
-            onOpenPrivatePolicy = {
-                AppUtil.openWebsite(context = requireContext(), "https://www.youtube.com/")
-            },
-            onOpenTermOfService = {
-                AppUtil.openWebsite(context = requireContext(), "https://www.google.com/")
             },
             onOpenDisclaimer = {
                 val destination = SettingFragmentDirections.toDisclaimer()
                 safeNavigate(destination)
             },
-            onRate = { showRateDialog = !showRateDialog },
             onOpenIconSetting = {
-
+                val destination = SettingFragmentDirections.toSettingIcon()
+                safeNavigate(destination)
             }
         )
     }
@@ -194,7 +191,7 @@ fun SettingLayout(
 
             SettingItem(
                 icon = R.drawable.ic_icon_setting,
-                title = stringResource(id = R.string.rate),
+                title = stringResource(R.string.icon_setting),
                 subtitle = null,
                 onClick = onOpenIconSetting
             )

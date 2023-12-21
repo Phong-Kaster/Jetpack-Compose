@@ -57,4 +57,9 @@
     <string name="education">Education</string>
     <string name="loan_payment">Loan Payment</string>
     <string name="quote">Quote</string>
+    <string name="icon_setting">Icon setting</string>
+    <string name="origin">Origin</string>
+    <string name="nazi_eagle">Nazi Eagle</string>
+    <string name="nazi_symbol">Nazi Symbol</string>
+    <string name="heer">Heer</string>
 </resources>
