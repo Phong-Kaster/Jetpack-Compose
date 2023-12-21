@@ -55,6 +55,7 @@ class QuoteFragment : CoreFragment() {
             onConfirm = { content: String,
                           category: Category?,
                           categoryChild: Category? ->
+
                 Log.d("WEATHER-2", "---------------------------")
                 Log.d("WEATHER-2", "content: $content")
                 Log.d("WEATHER-2", "category: $category")
@@ -63,7 +64,7 @@ class QuoteFragment : CoreFragment() {
                 val quote = Quote(
                     uid = null,
                     content = content,
-                    category = if(category != null) category else categoryChild,
+                    category = category ?: categoryChild,
                     createAt = Date(),
                     createAtEpochDay = LocalDate.now().toEpochDay()
                 )

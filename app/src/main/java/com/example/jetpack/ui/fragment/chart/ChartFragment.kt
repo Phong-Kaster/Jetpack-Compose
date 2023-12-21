@@ -24,7 +24,6 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class InsightFragment : CoreFragment() {
-    @RequiresApi(Build.VERSION_CODES.O)
     @Composable
     override fun ComposeView() {
         super.ComposeView()
@@ -32,7 +31,6 @@ class InsightFragment : CoreFragment() {
     }
 }
 
-@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun InsightLayout() {
     var chosenChip: ChartShortcut by rememberSaveable { mutableStateOf(ChartShortcut.AnalogueClock) }
