@@ -34,4 +34,26 @@
     <string name="submit">Gửi</string>
     <string name="not_now">Không phải bây giờ</string>
     <string name="thanks_for_your_feedback">Cảm ơn bạn đã phản hồi!</string>
+    <string name="good_bye">Tạm biệt!</string>
+    <string name="tutorial">Hướng dẫn</string>
+    <string name="tap_this_add_button">Nhấn vào nút <b>Thêm</b> này</string>
+    <string name="ring_chart">Biểu đồ hình vòng</string>
+    <string name="line_chart">Biểu đồ đường</string>
+    <string name="bar_chart">Biểu đồ cột</string>
+    <string name="scatter_plot">Biểu đồ phân tán</string>
+    <string name="radar_chart">Biểu đồ ra-đa</string>
+    <string name="area_chart">Biểu đồ khu vực</string>
+    <string name="analogue_clock">Đồng hồ kim</string>
+    <string name="investment_saving">Đầu tư - Tiết kiệm</string>
+    <string name="fixed_expenses">Chi phí cố định</string>
+    <string name="business">Kinh doanh</string>
+    <string name="unexpected_expenses">Chi phí bất ngờ</string>
+    <string name="living_expenses">Chi phí sinh hoạt</string>
+    <string name="events">Sự kiện</string>
+    <string name="shopping">Mua sắm</string>
+    <string name="entertainment">Giải trí</string>
+    <string name="charity">Từ thiện</string>
+    <string name="education">Giáo dục</string>
+    <string name="loan_payment">Thanh toán khoản vay</string>
+    <string name="quote">Trích dẫn</string>
 </resources>

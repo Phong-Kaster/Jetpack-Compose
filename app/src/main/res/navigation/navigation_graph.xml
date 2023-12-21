@@ -84,6 +84,9 @@
         android:id="@+id/quoteFragment"
         android:name="com.example.jetpack.ui.fragment.quote.QuoteFragment" />
 
+    <fragment
+        android:id="@+id/settingIconFragment"
+        android:name="com.example.jetpack.ui.fragment.quote.QuoteFragment" />
 
     <action
         android:id="@+id/toHome"
@@ -141,6 +144,13 @@
 
     <action
         android:id="@+id/toQuote"
+        app:destination="@id/quoteFragment"
+        app:enterAnim="@anim/enter_fade_in"
+        app:exitAnim="@anim/exit_fade_out"
+        app:popUpToInclusive="true"/>
+
+    <action
+        android:id="@+id/toSettingIcon"
         app:destination="@id/quoteFragment"
         app:enterAnim="@anim/enter_fade_in"
         app:exitAnim="@anim/exit_fade_out"

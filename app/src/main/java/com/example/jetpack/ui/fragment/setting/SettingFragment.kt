@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.util.Log
 import android.widget.Toast
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,6 +17,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -51,13 +53,26 @@ class SettingFragment : CoreFragment() {
                     val reviewInfo = request.result
                     val flow = manager.launchReviewFlow(requireActivity(), reviewInfo)
                     flow.addOnCompleteListener {
-                        Toast.makeText(requireContext(), getString(R.string.thanks_for_your_feedback), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            requireContext(),
+                            getString(R.string.thanks_for_your_feedback),
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }.addOnFailureListener {
                         it.printStackTrace()
                     }
                 } else { // open Google Play Store to review
-                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=${requireContext().packageName}")))
-                    Toast.makeText(requireContext(), getString(R.string.thanks_for_your_feedback), Toast.LENGTH_SHORT).show()
+                    startActivity(
+                        Intent(
+                            Intent.ACTION_VIEW,
+                            Uri.parse("market://details?id=${requireContext().packageName}")
+                        )
+                    )
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.thanks_for_your_feedback),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
                 AppUtil.logcat(message = "addOnCompleteListener")
             }.addOnCanceledListener {
@@ -70,7 +85,11 @@ class SettingFragment : CoreFragment() {
         } else {
             try {
                 /*AdsProvider.disableAppResume()*/
-                val intent = AppUtil.composeEmail(context = requireContext(), star =  star.value, feedback = content)
+                val intent = AppUtil.composeEmail(
+                    context = requireContext(),
+                    star = star.value,
+                    feedback = content
+                )
                 requireContext().startActivity(intent)
             } catch (ex: Exception) {
                 AppUtil.logcat(message = "${ex.message}")
@@ -108,7 +127,10 @@ class SettingFragment : CoreFragment() {
                 val destination = SettingFragmentDirections.toDisclaimer()
                 safeNavigate(destination)
             },
-            onRate = { showRateDialog = !showRateDialog }
+            onRate = { showRateDialog = !showRateDialog },
+            onOpenIconSetting = {
+
+            }
         )
     }
 }
@@ -120,7 +142,8 @@ fun SettingLayout(
     onOpenDisclaimer: () -> Unit = {},
     onOpenTermOfService: () -> Unit = {},
     onOpenPrivatePolicy: () -> Unit = {},
-    onRate: () -> Unit = {}
+    onRate: () -> Unit = {},
+    onOpenIconSetting: () -> Unit = {}
 ) {
     CoreLayout(
         topBar = { HomeTopBar(name = stringResource(id = Menu.Setting.nameId)) },
@@ -167,6 +190,13 @@ fun SettingLayout(
                 title = stringResource(id = R.string.rate),
                 subtitle = null,
                 onClick = onRate
+            )
+
+            SettingItem(
+                icon = R.drawable.ic_icon_setting,
+                title = stringResource(id = R.string.rate),
+                subtitle = null,
+                onClick = onOpenIconSetting
             )
         }
     }

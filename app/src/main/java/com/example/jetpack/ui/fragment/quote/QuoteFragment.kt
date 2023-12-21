@@ -15,10 +15,12 @@ import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.viewModels
@@ -30,6 +32,7 @@ import com.example.jetpack.data.model.Quote
 import com.example.jetpack.ui.component.CoreTopBar
 import com.example.jetpack.ui.component.SolidButton
 import com.example.jetpack.ui.fragment.quote.component.CategorySelector
+import com.example.jetpack.ui.fragment.quote.component.QuoteTextField
 import com.example.jetpack.ui.theme.Background
 import com.example.jetpack.ui.theme.PrimaryColor
 import com.example.jetpack.ui.theme.TextColor1
@@ -53,6 +56,7 @@ class QuoteFragment : CoreFragment() {
             records = viewModel.records.collectAsState().value,
             onBack = { safeNavigateUp() },
             onConfirm = { content: String,
+                          value: Float,
                           category: Category?,
                           categoryChild: Category? ->
 
@@ -64,6 +68,7 @@ class QuoteFragment : CoreFragment() {
                 val quote = Quote(
                     uid = null,
                     content = content,
+                    value = value,
                     category = category ?: categoryChild,
                     createAt = Date(),
                     createAtEpochDay = LocalDate.now().toEpochDay()
@@ -80,10 +85,15 @@ class QuoteFragment : CoreFragment() {
 fun QuoteLayout(
     records: ImmutableList<Quote> = persistentListOf(),
     onBack: () -> Unit = {},
-    onConfirm: (String, Category?, Category?) -> Unit = { content: String, category: Category?, categoryChild: Category? -> }
+    onConfirm: (String, Float, Category?, Category?) -> Unit = {
+        content: String,
+        value: Float,
+        category: Category?,
+        categoryChild: Category? -> }
 ) {
 
     var content by remember { mutableStateOf("") }
+    var value by remember { mutableFloatStateOf(0F) }
     var chosenCategory by remember { mutableStateOf<Category?>(null) }
     var chosenCategoryChild by remember { mutableStateOf<Category?>(null) }
 
@@ -104,7 +114,7 @@ fun QuoteLayout(
                 SolidButton(
                     modifier = Modifier.fillMaxWidth(),
                     onClick = {
-                        onConfirm(content, chosenCategory, chosenCategoryChild)
+                        onConfirm(content, value, chosenCategory, chosenCategoryChild)
                     },
                     shape = RoundedCornerShape(10.dp),
                 )
@@ -125,25 +135,21 @@ fun QuoteLayout(
                     style = customizedTextStyle(fontSize = 14)
                 )
                 Spacer(modifier = Modifier.height(15.dp))
-                OutlinedTextField(
-                    value = content,
-                    onValueChange = { content = it },
-                    label = {
-                        Text(
-                            text = "Content",
-                            style = customizedTextStyle(),
-                            color = PrimaryColor
-                        )
-                    },
-                    modifier = Modifier.fillMaxWidth(),
-                    colors = TextFieldDefaults.colors(
-                        focusedContainerColor = Background,
-                        focusedTextColor = TextColor1,
-                        focusedPlaceholderColor = Background,
-                        focusedIndicatorColor = PrimaryColor,
-                        unfocusedIndicatorColor = PrimaryColor,
-                        unfocusedContainerColor = Background
-                    )
+                QuoteTextField(
+                    title = "Content",
+                    onTextChange = { content = it }
+                )
+                Spacer(modifier = Modifier.height(15.dp))
+                QuoteTextField(
+                    title = "Value",
+                    onTextChange = {
+                        value =
+                            try {
+                                it.toFloat()
+                            } catch (ex: Exception) {
+                                0F
+                            }
+                    }
                 )
                 Spacer(modifier = Modifier.height(15.dp))
                 CategorySelector(

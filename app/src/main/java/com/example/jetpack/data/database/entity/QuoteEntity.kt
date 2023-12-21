@@ -11,6 +11,7 @@ import java.util.Date
 class QuoteEntity(
     @PrimaryKey(autoGenerate = true) val uid: Long,
     @ColumnInfo(name = "content") val content: String? = null,
+    @ColumnInfo(name = "value") val value: Float = 0F,
     @ColumnInfo(name = "category") val category: Category? = null,
     @ColumnInfo(name = "createAt") val createAt: Date = Date(),
     @ColumnInfo(name = "createAtEpochDay") val createAtEpochDay: Long = LocalDate.now().toEpochDay()

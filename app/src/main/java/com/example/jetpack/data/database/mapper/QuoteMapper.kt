@@ -1,6 +1,7 @@
 package com.example.jetpack.data.database.mapper
 
 import com.example.jetpack.data.database.entity.QuoteEntity
+import com.example.jetpack.data.database.mapper.QuoteMapper.toModel
 import com.example.jetpack.data.model.Quote
 
 object QuoteMapper {
@@ -8,6 +9,7 @@ object QuoteMapper {
         return Quote(
             uid = this.uid,
             content = this.content,
+            value = this.value,
             category = this.category,
             createAt = this.createAt,
             createAtEpochDay = this.createAtEpochDay
@@ -18,6 +20,7 @@ object QuoteMapper {
         return QuoteEntity(
             uid = this.uid ?: 0,
             content = this.content,
+            value = this.value,
             category = this.category,
             createAt = this.createAt,
             createAtEpochDay = this.createAtEpochDay

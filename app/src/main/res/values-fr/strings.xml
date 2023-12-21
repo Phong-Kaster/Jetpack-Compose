@@ -34,4 +34,26 @@
     <string name="submit">Soumettre</string>
     <string name="not_now">Pas maintenant</string>
     <string name="thanks_for_your_feedback">Merci pour votre retour !</string>
+    <string name="good_bye">Au revoir !</string>
+    <string name="tutorial">Tutoriel</string>
+    <string name="tap_this_add_button">Appuyez sur ce bouton <b>Ajouter</b></string>
+    <string name="ring_chart">Graphique en anneau</string>
+    <string name="line_chart">Graphique linéaire</string>
+    <string name="bar_chart">Graphique à barres</string>
+    <string name="scatter_plot">Nuage de points</string>
+    <string name="radar_chart">Graphique radar</string>
+    <string name="area_chart">Graphique en aires</string>
+    <string name="analogue_clock">Horloge analogique</string>
+    <string name="investment_saving">Investissement - Épargne</string>
+    <string name="fixed_expenses">Dépenses fixes</string>
+    <string name="business">Affaires</string>
+    <string name="unexpected_expenses">Dépenses imprévues</string>
+    <string name="living_expenses">Dépenses de vie</string>
+    <string name="events">Événements</string>
+    <string name="shopping">Shopping</string>
+    <string name="entertainment">Divertissement</string>
+    <string name="charity">Charité</string>
+    <string name="education">Éducation</string>
+    <string name="loan_payment">Paiement de prêt</string>
+    <string name="quote">Citation</string>
 </resources>
