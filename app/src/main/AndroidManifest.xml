@@ -2,10 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
     <!-- FOR USING INTERNET -->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- For firing notification on Android 13 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- For firing notification on Android 13 -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
-    <uses-permission android:name="android.permission.USE_EXACT_ALARM" /> <!-- For showing Lockscreen Activity as device's lockscreen -->
+    <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
+    <!-- For showing Lockscreen Activity as device's lockscreen -->
     <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
 
     <application
@@ -22,29 +24,26 @@
 
         <activity
             android:name=".MainActivity"
-            android:exported="false">
+            android:exported="true">
 
-            <!--
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            -->
         </activity>
 
 
         <activity
+            android:exported="true"
             android:name=".ui.activity.LockscreenActivity"
             android:excludeFromRecents="true"
-            android:exported="true"
             android:launchMode="singleInstance"
             android:noHistory="true"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.Lockscreen">
-            <intent-filter>
+            android:theme="@style/Theme.Lockscreen" >
+            <!--<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>-->
         </activity>
 
 

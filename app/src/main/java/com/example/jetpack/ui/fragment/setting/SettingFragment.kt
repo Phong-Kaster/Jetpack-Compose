@@ -127,6 +127,9 @@ class SettingFragment : CoreFragment() {
             onOpenIconSetting = {
                 val destination = SettingFragmentDirections.toSettingIcon()
                 safeNavigate(destination)
+            },
+            onOpenLockscreen = {
+                safeNavigate(R.id.toLockscreen)
             }
         )
     }
@@ -140,7 +143,8 @@ fun SettingLayout(
     onOpenTermOfService: () -> Unit = {},
     onOpenPrivatePolicy: () -> Unit = {},
     onRate: () -> Unit = {},
-    onOpenIconSetting: () -> Unit = {}
+    onOpenIconSetting: () -> Unit = {},
+    onOpenLockscreen: ()->Unit = {}
 ) {
     CoreLayout(
         topBar = { HomeTopBar(name = stringResource(id = Menu.Setting.nameId)) },
@@ -194,6 +198,13 @@ fun SettingLayout(
                 title = stringResource(R.string.icon_setting),
                 subtitle = null,
                 onClick = onOpenIconSetting
+            )
+
+            SettingItem(
+                icon = R.drawable.ic_icon_setting,
+                title = "lockscreen",
+                subtitle = null,
+                onClick = onOpenLockscreen
             )
         }
     }
