@@ -1,6 +1,19 @@
 package com.example.jetpack.ui.fragment.home
 
+import android.Manifest
+import android.app.AlertDialog
+import android.content.DialogInterface
+import android.content.Intent
+import android.net.Uri
+import android.os.Build
+import android.os.Bundle
+import android.provider.Settings
+import android.view.View
+import android.widget.Toast
 import androidx.activity.compose.BackHandler
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -19,12 +32,14 @@ import com.example.jetpack.R
 import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
 import com.example.jetpack.data.enums.HomeShortcut
+import com.example.jetpack.notification.LockscreenManager
 import com.example.jetpack.ui.component.CoreBottomBar
 import com.example.jetpack.ui.component.CoreDialog
 import com.example.jetpack.ui.fragment.home.component.HomeDialog
 import com.example.jetpack.ui.fragment.home.component.HomeShortcutItem
 import com.example.jetpack.ui.theme.Background
 import com.example.jetpack.ui.view.DigitalClock2
+import com.example.jetpack.util.AppUtil
 import com.example.jetpack.util.NavigationUtil.safeNavigate
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -32,6 +47,113 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class HomeFragment : CoreFragment() {
     private var showDialog by mutableStateOf(false)
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupNotification()
+    }
+
+    /********************ALL FUNCTIONS BELOWS ARE USED FOR SETTING DAILY NOTIFICATIONS */
+    private fun setupNotification() {
+        //1. Request POST NOTIFICATION permission if device has Android OS from 13
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            val isAccessed: Boolean = LockscreenManager.isNotificationEnabled(context = requireContext())
+            if (!isAccessed) {
+                permissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+            }
+        }
+
+        //2. Create notification channel and setup daily notification
+        /*NotificationManager.createNotificationChannel(this)
+        NotificationManager.sendDailyNotification(this)*/
+
+        //3. Create lockscreen-styled notification and send it every day
+        LockscreenManager.createNotificationChannel(context = requireContext())
+        LockscreenManager.setupDailyLockscreenNotification(context = requireContext())
+    }
+
+    /**
+     * request POST NOTIFICATION by using Android Runtime System
+     */
+    @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
+    private val permissionLauncher: ActivityResultLauncher<String> = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isAccessed ->
+        if (isAccessed) {
+            Toast.makeText(requireContext(), "Failed", Toast.LENGTH_SHORT).show()
+            /*NotificationManager.sendDailyNotification(this)*/
+            LockscreenManager.setupDailyLockscreenNotification(requireContext())
+        } else {
+            if (shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS)) {
+                openRationaleDialog()
+            } else {
+                openSettingDialog()
+            }
+        }
+    }
+
+
+    /**
+     * request POST NOTIFICATION by using Android Runtime System part 2
+     */
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
+    private fun openRationaleDialog() {
+        //1. define listener for button positive
+        val listener =
+            DialogInterface.OnClickListener { dialog, which ->
+                dialog.cancel()
+                permissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+            }
+
+
+        //2. show dialog
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle(getString(R.string.fake_title))
+        builder.setMessage(getString(R.string.fake_message))
+        builder.setPositiveButton(R.string.ok, listener)
+        builder.show()
+    }
+
+    /**
+     * guide users open app setting to enable POST NOTIFICATION
+     */
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
+    private fun openSettingDialog() {
+        //1. define listener for button positive
+        val positiveListener =
+            DialogInterface.OnClickListener { dialog: DialogInterface, which: Int ->
+                //1.1 dismiss intro dialog
+                dialog.dismiss()
+
+
+                //1.2 open app setting
+                val intent =
+                    Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                val uri = Uri.fromParts("package", requireContext().packageName, null)
+                intent.setData(uri)
+                settingPermissionLauncher.launch(intent)
+            }
+
+
+        //2. show dialog
+        val builder = AlertDialog.Builder(context)
+        builder.setTitle(getString(R.string.fake_title))
+        builder.setMessage(getString(R.string.fake_message))
+        builder.setPositiveButton(R.string.ok, positiveListener)
+        builder.setNegativeButton(R.string.cancel, null)
+        builder.show()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
+    private val settingPermissionLauncher: ActivityResultLauncher<Intent> =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (LockscreenManager.isNotificationEnabled(requireContext())) {
+                /*LockscreenManager.sendDailyNotification(this)*/
+                LockscreenManager.setupDailyLockscreenNotification(requireContext())
+            } else {
+                AppUtil.logcat("user denied access POST NOTIFICATION !")
+            }
+        }
 
     @Composable
     override fun ComposeView() {

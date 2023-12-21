@@ -40,11 +40,14 @@ fun DigitalClock(modifier: Modifier = Modifier) {
 
     Column(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
         Text(
-            text = clock, style = customizedTextStyle(fontWeight = 400, fontSize = 72)
+            text = clock,
+            style = customizedTextStyle(fontWeight = 400, fontSize = 72),
+            color = Color.White
         )
         Text(
             text = date,
             style = customizedTextStyle(fontWeight = 400, fontSize = 16),
+            color = Color.White
         )
     }
 }
@@ -53,10 +56,11 @@ fun DigitalClock(modifier: Modifier = Modifier) {
 @Composable
 fun PreviewDigitalClock3() {
     ViewUtil.PreviewContent {
-        DigitalClock(modifier = Modifier
-            .fillMaxWidth()
-            .background(color = Color.Black)
-            .padding(horizontal = 16.dp, vertical = 16.dp)
+        DigitalClock(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(color = Color.Black)
+                .padding(horizontal = 16.dp, vertical = 16.dp)
         )
     }
 }

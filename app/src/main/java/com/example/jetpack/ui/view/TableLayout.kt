@@ -27,8 +27,8 @@ import com.example.jetpack.ui.theme.TextColor5
 import com.example.jetpack.ui.theme.customizedTextStyle
 
 @Composable
-fun TableLayout() {
-    Column {
+fun TableLayout(modifier: Modifier = Modifier) {
+    Column(modifier = modifier){
         Row(
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically,
