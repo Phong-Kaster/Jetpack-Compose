@@ -13,7 +13,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.example.jetpack.MainActivity
 import com.example.jetpack.R
-import com.example.jetpack.configuration.Constant.DEFAULT_LOCKSCREEN_ID
+import com.example.jetpack.configuration.Constant.LOCKSCREEN_ID
 import com.example.jetpack.configuration.Constant.LOCKSCREEN_CHANNEL_ID
 import com.example.jetpack.ui.activity.LockscreenActivity
 import com.example.jetpack.util.AppUtil
@@ -23,12 +23,11 @@ class LockscreenReceiver: BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         /*0. Start repeating notification if the device was shut down and then reboot*/
         if (intent.action == "android.intent.action.BOOT_COMPLETED") {
-            LockscreenManager.setupDailyLockscreenNotification(context)
+            LockscreenManager.sendNotification(context)
         }
 
 
         AppUtil.logcat("BroadcastReceiver: Send lockscreen-styled notification !", tag = "Notification")
-
         val powerManager = context.getSystemService(PowerManager::class.java)
         val keyguardManager = context.getSystemService(KeyguardManager::class.java)
 
@@ -42,7 +41,7 @@ class LockscreenReceiver: BroadcastReceiver() {
 
 
         //4. Set again this alarm manager
-        LockscreenManager.setupDailyLockscreenNotification(context)
+        LockscreenManager.sendNotification(context)
     }
 
     /**
@@ -70,8 +69,8 @@ class LockscreenReceiver: BroadcastReceiver() {
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
             return
         }
-        notificationManager.cancel(DEFAULT_LOCKSCREEN_ID)
-        notificationManager.notify(DEFAULT_LOCKSCREEN_ID, builder.build())
+        notificationManager.cancel(LOCKSCREEN_ID)
+        notificationManager.notify(LOCKSCREEN_ID, builder.build())
     }
 
 
@@ -110,6 +109,6 @@ class LockscreenReceiver: BroadcastReceiver() {
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
             return
         }
-        notificationManager.notify(DEFAULT_LOCKSCREEN_ID, builder.build())
+        notificationManager.notify(LOCKSCREEN_ID, builder.build())
     }
 }

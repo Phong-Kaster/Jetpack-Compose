@@ -1,39 +1,39 @@
 package com.example.jetpack.ui.activity
 
-import android.app.KeyguardManager
-import android.content.Context
 import android.os.Build
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.view.WindowManager
-import androidx.activity.compose.setContent
-import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.jetpack.core.CoreActivity
+import com.example.jetpack.core.CoreFragment
+import com.example.jetpack.core.CoreLayout
 import com.example.jetpack.ui.view.DigitalClock
+import com.example.jetpack.ui.view.TableLayout
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class LockscreenActivity : AppCompatActivity() {
+class LockscreenActivity : CoreActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
-        showOnLockscreen()
-        setContent {
-            LockscreenLayout()
-        }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableLockscreen()
     }
 
-    private fun showOnLockscreen() {
+
+    private fun enableLockscreen() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
             setShowWhenLocked(true)
         } else {
@@ -42,31 +42,26 @@ class LockscreenActivity : AppCompatActivity() {
         }
     }
 
-    private fun dismissKeyguard() {
-        with(getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager) {
-            requestDismissKeyguard(this@LockscreenActivity, null)
-        }
-    }
 
-    /*@Composable
+    @Composable
     override fun ComposeView() {
         super.ComposeView()
         LockscreenLayout()
-    }*/
+    }
 }
 
 @Composable
 fun LockscreenLayout() {
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(horizontal = 12.dp)
-            .padding(top = 16.dp, bottom = 10.dp)
-            .navigationBarsPadding(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(8.dp),
+        modifier = Modifier
+            .fillMaxSize()
+            .navigationBarsPadding(),
     ){
-        DigitalClock()
+        DigitalClock(modifier = Modifier.padding(top = 40.dp))
+        Spacer(modifier = Modifier.weight(1F))
+        TableLayout(modifier = Modifier.padding(horizontal = 16.dp, vertical = 16.dp))
     }
 }
 

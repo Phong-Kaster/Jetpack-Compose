@@ -89,7 +89,7 @@
         android:name="com.example.jetpack.ui.fragment.setting.SettingIconFragment" />
 
     <activity
-        android:id="@+id/lockscreen"
+        android:id="@+id/lockscreenActivity"
         android:name="com.example.jetpack.ui.activity.LockscreenActivity" />
 
     <action
@@ -162,7 +162,7 @@
 
     <action
         android:id="@+id/toLockscreen"
-        app:destination="@id/lockscreen"
+        app:destination="@id/lockscreenActivity"
         app:enterAnim="@anim/enter_fade_in"
         app:exitAnim="@anim/exit_fade_out"
         app:popUpToInclusive="true"/>

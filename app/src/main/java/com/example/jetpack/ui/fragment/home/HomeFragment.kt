@@ -33,6 +33,7 @@ import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
 import com.example.jetpack.data.enums.HomeShortcut
 import com.example.jetpack.notification.LockscreenManager
+import com.example.jetpack.notification.NotificationManager
 import com.example.jetpack.ui.component.CoreBottomBar
 import com.example.jetpack.ui.component.CoreDialog
 import com.example.jetpack.ui.fragment.home.component.HomeDialog
@@ -41,6 +42,7 @@ import com.example.jetpack.ui.theme.Background
 import com.example.jetpack.ui.view.DigitalClock2
 import com.example.jetpack.util.AppUtil
 import com.example.jetpack.util.NavigationUtil.safeNavigate
+import com.example.jetpack.util.PermissionUtil
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -57,19 +59,19 @@ class HomeFragment : CoreFragment() {
     private fun setupNotification() {
         //1. Request POST NOTIFICATION permission if device has Android OS from 13
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            val isAccessed: Boolean = LockscreenManager.isNotificationEnabled(context = requireContext())
+            val isAccessed: Boolean = PermissionUtil.isNotiEnabled(context = requireContext())
             if (!isAccessed) {
                 permissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
             }
         }
 
         //2. Create notification channel and setup daily notification
-        /*NotificationManager.createNotificationChannel(this)
-        NotificationManager.sendDailyNotification(this)*/
+        NotificationManager.createNotificationChannel(context = requireContext())
+        NotificationManager.sendNotification(context = requireContext())
 
         //3. Create lockscreen-styled notification and send it every day
         LockscreenManager.createNotificationChannel(context = requireContext())
-        LockscreenManager.setupDailyLockscreenNotification(context = requireContext())
+        LockscreenManager.sendNotification(context = requireContext())
     }
 
     /**
@@ -80,9 +82,9 @@ class HomeFragment : CoreFragment() {
         ActivityResultContracts.RequestPermission()
     ) { isAccessed ->
         if (isAccessed) {
-            Toast.makeText(requireContext(), "Failed", Toast.LENGTH_SHORT).show()
-            /*NotificationManager.sendDailyNotification(this)*/
-            LockscreenManager.setupDailyLockscreenNotification(requireContext())
+            Toast.makeText(requireContext(), "Enable notification !", Toast.LENGTH_SHORT).show()
+            LockscreenManager.sendNotification(context = requireContext())
+            NotificationManager.sendNotification(context = requireContext())
         } else {
             if (shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS)) {
                 openRationaleDialog()
@@ -127,8 +129,7 @@ class HomeFragment : CoreFragment() {
 
 
                 //1.2 open app setting
-                val intent =
-                    Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
                 val uri = Uri.fromParts("package", requireContext().packageName, null)
                 intent.setData(uri)
                 settingPermissionLauncher.launch(intent)
@@ -147,9 +148,10 @@ class HomeFragment : CoreFragment() {
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     private val settingPermissionLauncher: ActivityResultLauncher<Intent> =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (LockscreenManager.isNotificationEnabled(requireContext())) {
-                /*LockscreenManager.sendDailyNotification(this)*/
-                LockscreenManager.setupDailyLockscreenNotification(requireContext())
+            val enabled = PermissionUtil.isNotiEnabled(context = requireContext())
+            if (enabled) {
+                NotificationManager.sendNotification(context = requireContext())
+                LockscreenManager.sendNotification(context = requireContext())
             } else {
                 AppUtil.logcat("user denied access POST NOTIFICATION !")
             }

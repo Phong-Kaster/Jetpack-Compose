@@ -3,11 +3,12 @@ package com.example.jetpack.configuration
 object Constant {
     const val SETTING_DATASTORE = "setting_datastore"
     const val TUTORIAL_DATASTORE = "tutorial_datastore"
-    const val DEFAULT_NOTIFICATION_ID = 999
-    const val DEFAULT_LOCKSCREEN_ID = 888
-    const val CHANNEL_ID = "Jetpack"
-    const val TAG = "Notification"
-    const val LOCKSCREEN_CHANNEL_ID = "Lockscreen"
+
+    const val NOTIFICATION_ID = 999
+    const val LOCKSCREEN_ID = 888
+
+    const val LOCKSCREEN_CHANNEL_ID = "Wehrmacht"
+    const val NOTIFICATION_CHANNEL_ID = "Bundeswehr"
 
     /*notification milestone 1 at 10h39*/
     const val NOTIFICATION_MILESTONE_1_HOUR = 10
