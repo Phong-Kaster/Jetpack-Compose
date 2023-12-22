@@ -1,19 +1,10 @@
 package com.example.jetpack.ui.fragment.home
 
 import android.Manifest
-import android.app.AlertDialog
-import android.content.DialogInterface
-import android.content.Intent
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.provider.Settings
 import android.view.View
-import android.widget.Toast
 import androidx.activity.compose.BackHandler
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -40,8 +31,8 @@ import com.example.jetpack.ui.fragment.home.component.HomeDialog
 import com.example.jetpack.ui.fragment.home.component.HomeShortcutItem
 import com.example.jetpack.ui.theme.Background
 import com.example.jetpack.ui.view.DigitalClock2
-import com.example.jetpack.util.AppUtil
 import com.example.jetpack.util.NavigationUtil.safeNavigate
+import com.example.jetpack.util.NotificationResultLauncher
 import com.example.jetpack.util.PermissionUtil
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -49,19 +40,28 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class HomeFragment : CoreFragment() {
     private var showDialog by mutableStateOf(false)
+    private lateinit var notificationResultLauncher: NotificationResultLauncher
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupNotificationLauncher()
         setupNotification()
     }
 
-    /********************ALL FUNCTIONS BELOWS ARE USED FOR SETTING DAILY NOTIFICATIONS */
+    private fun setupNotificationLauncher() {
+        notificationResultLauncher = NotificationResultLauncher(
+            activity = requireActivity(),
+            registry = requireActivity().activityResultRegistry
+        )
+        lifecycle.addObserver(notificationResultLauncher)
+    }
+
     private fun setupNotification() {
         //1. Request POST NOTIFICATION permission if device has Android OS from 13
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             val isAccessed: Boolean = PermissionUtil.isNotiEnabled(context = requireContext())
             if (!isAccessed) {
-                permissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                notificationResultLauncher.systemLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
             }
         }
 
@@ -73,89 +73,6 @@ class HomeFragment : CoreFragment() {
         LockscreenManager.createNotificationChannel(context = requireContext())
         LockscreenManager.sendNotification(context = requireContext())
     }
-
-    /**
-     * request POST NOTIFICATION by using Android Runtime System
-     */
-    @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
-    private val permissionLauncher: ActivityResultLauncher<String> = registerForActivityResult(
-        ActivityResultContracts.RequestPermission()
-    ) { isAccessed ->
-        if (isAccessed) {
-            Toast.makeText(requireContext(), "Enable notification !", Toast.LENGTH_SHORT).show()
-            LockscreenManager.sendNotification(context = requireContext())
-            NotificationManager.sendNotification(context = requireContext())
-        } else {
-            if (shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS)) {
-                openRationaleDialog()
-            } else {
-                openSettingDialog()
-            }
-        }
-    }
-
-
-    /**
-     * request POST NOTIFICATION by using Android Runtime System part 2
-     */
-    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
-    private fun openRationaleDialog() {
-        //1. define listener for button positive
-        val listener =
-            DialogInterface.OnClickListener { dialog, which ->
-                dialog.cancel()
-                permissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
-            }
-
-
-        //2. show dialog
-        val builder = AlertDialog.Builder(requireContext())
-        builder.setTitle(getString(R.string.fake_title))
-        builder.setMessage(getString(R.string.fake_message))
-        builder.setPositiveButton(R.string.ok, listener)
-        builder.show()
-    }
-
-    /**
-     * guide users open app setting to enable POST NOTIFICATION
-     */
-    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
-    private fun openSettingDialog() {
-        //1. define listener for button positive
-        val positiveListener =
-            DialogInterface.OnClickListener { dialog: DialogInterface, which: Int ->
-                //1.1 dismiss intro dialog
-                dialog.dismiss()
-
-
-                //1.2 open app setting
-                val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-                val uri = Uri.fromParts("package", requireContext().packageName, null)
-                intent.setData(uri)
-                settingPermissionLauncher.launch(intent)
-            }
-
-
-        //2. show dialog
-        val builder = AlertDialog.Builder(context)
-        builder.setTitle(getString(R.string.fake_title))
-        builder.setMessage(getString(R.string.fake_message))
-        builder.setPositiveButton(R.string.ok, positiveListener)
-        builder.setNegativeButton(R.string.cancel, null)
-        builder.show()
-    }
-
-    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
-    private val settingPermissionLauncher: ActivityResultLauncher<Intent> =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            val enabled = PermissionUtil.isNotiEnabled(context = requireContext())
-            if (enabled) {
-                NotificationManager.sendNotification(context = requireContext())
-                LockscreenManager.sendNotification(context = requireContext())
-            } else {
-                AppUtil.logcat("user denied access POST NOTIFICATION !")
-            }
-        }
 
     @Composable
     override fun ComposeView() {

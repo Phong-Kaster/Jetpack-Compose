@@ -7,7 +7,7 @@ import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
-import com.example.jetpack.JetpackComposeApplication
+import com.example.jetpack.JetpackApplication
 import com.example.jetpack.configuration.Constant
 import com.example.jetpack.configuration.Language
 import com.example.jetpack.configuration.Logo
@@ -22,10 +22,10 @@ import javax.inject.Singleton
 @Singleton
 class SettingDatastore
 @Inject
-constructor(app: JetpackComposeApplication) {
+constructor(application: JetpackApplication) {
     // At the top level of your kotlin file:
     private val Context.datastore: DataStore<Preferences> by preferencesDataStore(name = Constant.SETTING_DATASTORE)
-    private val datastore = app.datastore
+    private val datastore = application.datastore
 
 
     // keys of datastore
