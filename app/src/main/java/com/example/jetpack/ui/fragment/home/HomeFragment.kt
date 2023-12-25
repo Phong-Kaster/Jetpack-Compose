@@ -1,6 +1,7 @@
 package com.example.jetpack.ui.fragment.home
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
 import android.view.View
@@ -25,6 +26,7 @@ import com.example.jetpack.core.CoreLayout
 import com.example.jetpack.data.enums.HomeShortcut
 import com.example.jetpack.notification.LockscreenManager
 import com.example.jetpack.notification.NotificationManager
+import com.example.jetpack.repository.WeatherRepositoryImplement
 import com.example.jetpack.ui.component.CoreBottomBar
 import com.example.jetpack.ui.component.CoreDialog
 import com.example.jetpack.ui.fragment.home.component.HomeDialog
@@ -35,6 +37,7 @@ import com.example.jetpack.util.NavigationUtil.safeNavigate
 import com.example.jetpack.util.NotificationResultLauncher
 import com.example.jetpack.util.PermissionUtil
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 
 @AndroidEntryPoint
@@ -42,11 +45,16 @@ class HomeFragment : CoreFragment() {
     private var showDialog by mutableStateOf(false)
     private lateinit var notificationResultLauncher: NotificationResultLauncher
 
+    @Inject
+    lateinit var weatherRepositoryImplement: WeatherRepositoryImplement
+
+    @SuppressLint("UnsafeRepeatOnLifecycleDetector")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupNotificationLauncher()
         setupNotification()
     }
+
 
     private fun setupNotificationLauncher() {
         notificationResultLauncher = NotificationResultLauncher(
@@ -108,6 +116,7 @@ class HomeFragment : CoreFragment() {
                 when (it) {
                     HomeShortcut.Tutorial -> safeNavigate(R.id.toTutorial)
                     HomeShortcut.Quote -> safeNavigate(R.id.toQuote)
+                    HomeShortcut.AccuWeatherLocation -> safeNavigate(R.id.toAccuWeatherLocation)
                     else -> {}
                 }
             }

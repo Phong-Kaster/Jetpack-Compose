@@ -28,4 +28,6 @@ interface QuoteDao {
 
     @Query("SELECT * FROM table_quote WHERE table_quote.uid = :uid")
     fun findWithID(uid: Long): QuoteEntity
+
+
 }

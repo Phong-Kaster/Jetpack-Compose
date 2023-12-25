@@ -15,8 +15,10 @@ import com.example.jetpack.R
 
 
 object AppUtil {
-    fun logcat(message: String, tag: String = "Jetpack Compose") {
-        Log.d(tag, "----------------------------")
+    fun logcat(message: String, tag: String = "Jetpack Compose", enableDivider: Boolean = false) {
+        if(enableDivider){
+            Log.d(tag, "----------------------------")
+        }
         Log.d(tag, "-> message: $message")
     }
 

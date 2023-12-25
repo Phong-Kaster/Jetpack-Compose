@@ -88,6 +88,10 @@
         android:id="@+id/settingIconFragment"
         android:name="com.example.jetpack.ui.fragment.setting.SettingIconFragment" />
 
+    <fragment
+        android:id="@+id/accuWeatherLocation"
+        android:name="com.example.jetpack.ui.fragment.accuweather.AccuWeatherLocationFragment" />
+
     <activity
         android:id="@+id/lockscreenActivity"
         android:name="com.example.jetpack.ui.activity.LockscreenActivity" />
@@ -167,6 +171,11 @@
         app:exitAnim="@anim/exit_fade_out"
         app:popUpToInclusive="true"/>
 
-
+    <action
+        android:id="@+id/toAccuWeatherLocation"
+        app:destination="@id/accuWeatherLocation"
+        app:enterAnim="@anim/enter_fade_in"
+        app:exitAnim="@anim/exit_fade_out"
+        app:popUpToInclusive="true"/>
 
 </navigation>

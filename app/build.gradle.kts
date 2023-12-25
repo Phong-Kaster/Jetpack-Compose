@@ -1,3 +1,6 @@
+import java.text.SimpleDateFormat
+import java.util.Date
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -16,6 +19,9 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
+
+        val timestamp = SimpleDateFormat("MM-dd-yyyy_hh-mm").format(Date())
+        setProperty("archivesBaseName", "Bundeswehr_v${versionName}(${versionCode})_${timestamp}")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -119,6 +125,14 @@ dependencies {
     // Immutable Collections Library for Kotlin - https://github.com/Kotlin/kotlinx.collections.immutable,
     // Kotlin Immutable Collections - https://www.baeldung.com/kotlin/immutable-collections
     implementation("org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.6")
+
+
+    // Retrofit - https://github.com/square/retrofit
+    // Retrofit - A type-safe HTTP client for Android and Java - https://square.github.io/retrofit/
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    //implementation("com.squareup.okhttp3:okhttps:3.4.1")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
 }
 
 // Allow references to generated code

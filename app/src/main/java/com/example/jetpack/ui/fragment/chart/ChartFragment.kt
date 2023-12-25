@@ -33,7 +33,7 @@ class InsightFragment : CoreFragment() {
 
 @Composable
 fun InsightLayout() {
-    var chosenChip: ChartShortcut by rememberSaveable { mutableStateOf(ChartShortcut.AnalogueClock) }
+    var chosenChip: ChartShortcut by rememberSaveable { mutableStateOf(ChartShortcut.RingChart) }
     CoreLayout(
         topBar = {
             ChartTopBar(

@@ -27,15 +27,13 @@ class LockscreenReceiver: BroadcastReceiver() {
         }
 
 
-        AppUtil.logcat("BroadcastReceiver: Send lockscreen-styled notification !", tag = "Notification")
+
         val powerManager = context.getSystemService(PowerManager::class.java)
         val keyguardManager = context.getSystemService(KeyguardManager::class.java)
 
         if (!powerManager.isInteractive || keyguardManager.isKeyguardLocked) {
-            AppUtil.logcat("BroadcastReceiver: popupLockscreenNotification !", tag = "Notification")
             popupLockscreenNotification(context)
         } else {
-            AppUtil.logcat("BroadcastReceiver: popupNormalNotification !", tag = "Notification")
             popupNormalNotification(context)
         }
 

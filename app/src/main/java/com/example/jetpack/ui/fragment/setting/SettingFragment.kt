@@ -92,7 +92,6 @@ class SettingFragment : CoreFragment() {
                 )
                 requireContext().startActivity(intent)
             } catch (ex: Exception) {
-                AppUtil.logcat(message = "${ex.message}")
                 ex.printStackTrace()
             }
         }

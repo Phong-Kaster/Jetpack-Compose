@@ -21,9 +21,10 @@ constructor(
 
         // Get saved language
         val currentLanguage = settingsRepository.getLanguage()
-        AppUtil.logcat(message= "currentLanguage: $currentLanguage")
+
         // Initialize locale
         val locale: Locale = Locale.forLanguageTag(currentLanguage.code)
+
         // Wrap context with new locale
         return withLocale(locale)
     }
