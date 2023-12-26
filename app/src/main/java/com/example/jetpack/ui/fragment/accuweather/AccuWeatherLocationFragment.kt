@@ -20,6 +20,7 @@ import com.example.jetpack.network.dto.LocationAuto
 import com.example.jetpack.ui.fragment.accuweather.component.ManageLocationLayoutForSearch
 import com.example.jetpack.ui.fragment.accuweather.component.SearchBar
 import com.example.jetpack.ui.theme.Background
+import com.example.jetpack.ui.view.LoadingDialog
 import com.example.jetpack.util.AppUtil
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -40,6 +41,8 @@ class AccuWeatherLocationFragment : CoreFragment() {
                 AppUtil.logcat(message = "${it.LocalizedName}")
             }
         )
+
+        LoadingDialog(enable = viewModel.loading.collectAsState().value)
     }
 }
 

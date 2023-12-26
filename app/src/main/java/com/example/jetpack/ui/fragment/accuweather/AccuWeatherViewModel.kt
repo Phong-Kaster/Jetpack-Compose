@@ -22,10 +22,15 @@ constructor(
     val locationAuto = _locationAuto.asStateFlow()
 
 
+    private val _loading = MutableStateFlow(false)
+    val loading = _loading.asStateFlow()
+
     fun searchAutocomplete(keyword: String) {
+        _loading.value = true
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 _locationAuto.value = weatherRepository.searchAutocomplete(keyword = keyword)
+                _loading.value = false
             } catch (ex: Exception) {
                 ex.printStackTrace()
                 _locationAuto.value = emptyList()
