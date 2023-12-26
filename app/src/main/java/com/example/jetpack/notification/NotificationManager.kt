@@ -55,7 +55,7 @@ object NotificationManager {
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val alarmTime = Calendar.getInstance()
         alarmTime.timeInMillis = System.currentTimeMillis()
-        alarmTime[Calendar.HOUR_OF_DAY] = 10
+        alarmTime[Calendar.HOUR_OF_DAY] = 15
         alarmTime[Calendar.MINUTE] = 0
         alarmTime[Calendar.SECOND] = 10
         if (now.after(alarmTime)) {

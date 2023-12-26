@@ -9,8 +9,7 @@ import com.example.jetpack.injection.EntryPointRepository
 import dagger.hilt.android.EntryPointAccessors
 import java.util.Locale
 
-class LanguageUtil
-constructor(
+class LanguageUtil(
     private val context: Context
 ) {
     fun setLanguage(): Context {
