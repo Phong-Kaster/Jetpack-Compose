@@ -1,4 +1,4 @@
-package com.example.jetpack.ui.fragment.accuweather.component
+package com.example.jetpack.ui.fragment.accuweather
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -24,8 +24,12 @@ constructor(
 
     fun searchAutocomplete(keyword: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            _locationAuto.value = weatherRepository.searchAutocomplete(keyword = keyword)
+            try {
+                _locationAuto.value = weatherRepository.searchAutocomplete(keyword = keyword)
+            } catch (ex: Exception) {
+                ex.printStackTrace()
+                _locationAuto.value = emptyList()
+            }
         }
-
     }
 }

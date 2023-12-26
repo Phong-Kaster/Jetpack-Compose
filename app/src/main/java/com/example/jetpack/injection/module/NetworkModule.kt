@@ -8,7 +8,6 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -16,7 +15,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 /**
- * Interceptors in OkHttp - https://www.linkedin.com/pulse/interceptors-okhttp-mohamad-abuzaid/
+ * # Interceptors in OkHttp - https://www.linkedin.com/pulse/interceptors-okhttp-mohamad-abuzaid/
  */
 @Module
 @InstallIn(SingletonComponent::class)
@@ -49,7 +48,7 @@ object NetworkModule {
             .baseUrl(Constant.ACCU_WEATHER_URL)
     }
 
-    /* Step 4 - profile AccuWeather Service */
+    /* Step 4 - profile Accu Weather Service */
     @Singleton
     @Provides
     fun provideAccuWeatherService(retrofitBuilder: Retrofit.Builder): AccuWeatherService{
