@@ -2,6 +2,8 @@ package com.example.jetpack.ui.fragment.setting
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.jetpack.configuration.Language
+import com.example.jetpack.configuration.Logo
 import com.example.jetpack.repository.SettingRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -17,14 +19,21 @@ class SettingViewModel
 constructor(
     private val settingRepository: SettingRepository
 ) : ViewModel() {
-    private val _chosenLanguage = MutableStateFlow(settingRepository.getLanguage())
+    private val _chosenLanguage = MutableStateFlow(Language.English)
     var chosenLanguage = _chosenLanguage.asStateFlow()
+
+    private val _chosenLogo = MutableStateFlow(Logo.Origin)
+    var chosenLogo = _chosenLogo.asStateFlow()
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
             settingRepository.getLanguageFlow().collectLatest {
                 _chosenLanguage.value = it
             }
+        }
+
+        viewModelScope.launch(Dispatchers.IO) {
+            _chosenLogo.value = settingRepository.getLogo()
         }
     }
 }

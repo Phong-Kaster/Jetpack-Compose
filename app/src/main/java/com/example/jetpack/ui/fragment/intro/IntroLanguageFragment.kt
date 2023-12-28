@@ -40,7 +40,7 @@ class IntroLanguageFragment : CoreFragment() {
             onBack = { requireActivity().finish() },
             onConfirm = {
                 viewModel.setLanguage(chosenLanguage)
-
+                requireActivity().recreate()
                 val destination = R.id.fromIntroLanguageToIntro
                 safeNavigate(destination)
             }

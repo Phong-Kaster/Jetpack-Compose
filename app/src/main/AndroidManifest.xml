@@ -2,22 +2,28 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!--FOR USING INTERNET-->
+    <!-- For using internet -->
+    <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
-
+    <!-- For firing notification on Android 13 -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
+    <!-- For showing Lockscreen Activity as device's lockscreen -->
+    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
 
     <application
-        android:name=".JetpackComposeApplication"
+        android:name=".JetpackApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@drawable/img_german"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/img_german"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.JetpackCompose"
         tools:targetApi="31">
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -27,6 +33,94 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".ui.activity.LockscreenActivity"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:launchMode="singleInstance"
+            android:noHistory="true"
+            android:showOnLockScreen="true"
+            android:theme="@style/Theme.Lockscreen" />
+
+        <activity-alias
+            android:name=".LogoHeer"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/ic_heer"
+            android:label="@string/app_name"
+            android:roundIcon="@drawable/ic_heer"
+            android:targetActivity=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+        <activity-alias
+            android:name=".LogoNaziSymbol"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/ic_nazi_symbol"
+            android:label="@string/app_name"
+            android:roundIcon="@drawable/ic_nazi_symbol"
+            android:targetActivity=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+        <activity-alias
+            android:name=".LogoNaziEagle"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/ic_nazi_eagle"
+            android:label="@string/app_name"
+            android:roundIcon="@drawable/ic_nazi_eagle"
+            android:targetActivity=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias> <!-- For change application logo -->
+        <activity-alias
+            android:name=".LogoBundeswehr"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/ic_bundeswehr"
+            android:label="@string/app_name"
+            android:roundIcon="@drawable/ic_bundeswehr"
+            android:targetActivity=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+
+        <!-- For Lockscreen Receiver -->
+        <receiver
+            android:name=".notification.LockscreenReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </receiver>
+
+        <!-- For Notification Receiver -->
+        <receiver
+            android:name=".notification.NotificationReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>

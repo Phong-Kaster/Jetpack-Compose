@@ -15,4 +15,8 @@ val animationSpecFloat3 = tween<Float>(durationMillis = 1000, easing = FastOutLi
 val animationSpecInteger = tween<Int>(durationMillis = 1000, easing = LinearOutSlowInEasing)
 
 val animationInfiniteColor = infiniteRepeatable<Color>(animation = tween(durationMillis = 3000), repeatMode = RepeatMode.Reverse)
-val animationInfiniteFloat = infiniteRepeatable<Float>(animation = tween(durationMillis = 1000), repeatMode = RepeatMode.Reverse)
+
+val animationInfiniteFloat = infiniteRepeatable<Float>(animation = tween(durationMillis = 1000), repeatMode = RepeatMode.Restart)
+val animationInfiniteFloat2 = infiniteRepeatable<Float>(animation = tween(durationMillis = 2000), repeatMode = RepeatMode.Restart)
+val animationInfiniteFloat3 = infiniteRepeatable<Float>(animation = tween(durationMillis = 3000), repeatMode = RepeatMode.Restart)
+val animationInfiniteFloat4 = infiniteRepeatable<Float>(animation = tween(durationMillis = 4000), repeatMode = RepeatMode.Restart)

@@ -1,6 +1,7 @@
 package com.example.jetpack.repository
 
 import com.example.jetpack.configuration.Language
+import com.example.jetpack.configuration.Logo
 import com.example.jetpack.datastore.SettingDatastore
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -40,4 +41,13 @@ constructor(
     }
 
     fun getLanguageFlow() = settingDatastore.languageFlow
+
+    // LOGO
+    fun getLogo(): Logo {
+        return settingDatastore.logo
+    }
+
+    fun setLogo(logo: Logo){
+        settingDatastore.logo = logo
+    }
 }

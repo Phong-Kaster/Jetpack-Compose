@@ -1,18 +1,23 @@
 package com.example.jetpack.ui.fragment.splash
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -22,6 +27,7 @@ import com.example.jetpack.R
 import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
 import com.example.jetpack.ui.theme.Background
+import com.example.jetpack.ui.theme.IconColor
 import com.example.jetpack.ui.theme.PrimaryColor
 import com.example.jetpack.ui.theme.body14
 import com.example.jetpack.util.NavigationUtil.safeNavigate
@@ -29,6 +35,7 @@ import com.example.jetpack.util.ViewUtil
 import com.example.jetpack.util.ViewUtil.CenterBox
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class SplashFragment : CoreFragment() {
@@ -39,9 +46,9 @@ class SplashFragment : CoreFragment() {
     override fun ComposeView() {
         super.ComposeView()
 
-        LaunchedEffect(Unit) {
+        /*LaunchedEffect(Unit) {
             while (true) {
-                delay(500)
+                delay(1000)
                 val enableIntro = viewModel.enableIntro.value
                 val destination = if (enableIntro) {
                     SplashFragmentDirections.fromSplashToIntro()
@@ -50,13 +57,41 @@ class SplashFragment : CoreFragment() {
                 }
                 safeNavigate(destination)
             }
-        }
-        SplashLayout()
+        }*/
+        SplashLayout(
+            goHome = {
+                val enableIntro = viewModel.enableIntro.value
+                val destination = if (enableIntro) {
+                    SplashFragmentDirections.fromSplashToIntro()
+                } else {
+                    SplashFragmentDirections.fromSplashToHome()
+                }
+                safeNavigate(destination)
+            }
+        )
     }
 }
 
 @Composable
-fun SplashLayout() {
+fun SplashLayout(
+    goHome: () -> Unit = {}
+) {
+    var progress by remember { mutableFloatStateOf(0F) }
+    val scope = rememberCoroutineScope()
+
+    LaunchedEffect(Unit) {
+        scope.launch {
+            for (index in 1..100) {
+                if (index == 100) {
+                    goHome()
+                    break
+                }
+                progress = (index.toFloat() / 100)
+                delay(5)
+            }
+        }
+    }
+
     CoreLayout {
         CenterBox(
             modifier = Modifier
@@ -72,12 +107,13 @@ fun SplashLayout() {
                     .clip(RoundedCornerShape(40))
             )
 
-            CircularProgressIndicator(
+            LinearProgressIndicator(
+                progress = progress,
+                trackColor = IconColor,
                 color = PrimaryColor,
-                modifier = Modifier
-                    .size(32.dp)
-                    .align(BiasAlignment(0f, 0.85f))
+                modifier = Modifier.align(BiasAlignment(0f, 0.85f))
             )
+
 
             Text(
                 text = stringResource(R.string.fake_title),
