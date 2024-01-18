@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Jetpack Compose</string>
+    <string name="app_name">Bundeswehr</string>
     <string name="fake_title">Lorem Ipsum</string>
     <string name="fake_message">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.</string>
     <string name="fake_content">
@@ -34,4 +34,26 @@
     <string name="submit">जमा करें</string>
     <string name="not_now">अभी नहीं</string>
     <string name="thanks_for_your_feedback">आपकी प्रतिक्रिया के लिए धन्यवाद!</string>
+    <string name="good_bye">अलविदा!</string>
+    <string name="tutorial">ट्यूटोरियल</string>
+    <string name="tap_this_add_button">इस <b>जोड़ें</b> बटन को दबाएं</string>
+    <string name="ring_chart">रिंग चार्ट</string>
+    <string name="line_chart">लाइन चार्ट</string>
+    <string name="bar_chart">बार चार्ट</string>
+    <string name="scatter_plot">स्कैटर प्लॉट</string>
+    <string name="radar_chart">रडार चार्ट</string>
+    <string name="area_chart">क्षेत्र चार्ट</string>
+    <string name="analogue_clock">एनालॉग घड़ी</string>
+    <string name="investment_saving">निवेश - बचत</string>
+    <string name="fixed_expenses">निश्चित खर्च</string>
+    <string name="business">व्यापार</string>
+    <string name="unexpected_expenses">अप्रत्याशित खर्च</string>
+    <string name="living_expenses">जीवन यापन खर्च</string>
+    <string name="events">घटनाएँ</string>
+    <string name="shopping">खरीदारी</string>
+    <string name="entertainment">मनोरंजन</string>
+    <string name="charity">दान</string>
+    <string name="education">शिक्षा</string>
+    <string name="loan_payment">लोन भुगतान</string>
+    <string name="quote">उद्धरण</string>
 </resources>

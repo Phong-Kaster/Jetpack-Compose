@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingHorizontal="5dp">
+
+    <TextView
+        android:id="@+id/notificationTitle"
+        style="@style/TextAppearance.Compat.Notification.Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter_black"
+        android:text="@string/fake_title"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/notificationContent"
+        style="@style/TextAppearance.Compat.Notification.Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter_black"
+        android:text="@string/fake_message"
+        android:textSize="11sp" />
+
+    <Button
+        android:id="@+id/notificationButton"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginTop="15dp"
+        android:layout_gravity="end"
+        android:background="@drawable/background_notification_button"
+        android:paddingHorizontal="5dp"
+        android:text="@string/fake_title"
+        android:textAllCaps="true"
+        android:textColor="@color/black"
+        android:textSize="12sp" />
+</LinearLayout>

@@ -1,5 +1,10 @@
 package com.example.jetpack.ui.fragment.home
 
+import android.Manifest
+import android.annotation.SuppressLint
+import android.os.Build
+import android.os.Bundle
+import android.view.View
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
@@ -18,7 +23,10 @@ import androidx.compose.ui.unit.dp
 import com.example.jetpack.R
 import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
-import com.example.jetpack.database.enums.HomeShortcut
+import com.example.jetpack.data.enums.HomeShortcut
+import com.example.jetpack.notification.LockscreenManager
+import com.example.jetpack.notification.NotificationManager
+import com.example.jetpack.repository.WeatherRepositoryImplement
 import com.example.jetpack.ui.component.CoreBottomBar
 import com.example.jetpack.ui.component.CoreDialog
 import com.example.jetpack.ui.fragment.home.component.HomeDialog
@@ -26,12 +34,53 @@ import com.example.jetpack.ui.fragment.home.component.HomeShortcutItem
 import com.example.jetpack.ui.theme.Background
 import com.example.jetpack.ui.view.DigitalClock2
 import com.example.jetpack.util.NavigationUtil.safeNavigate
+import com.example.jetpack.util.NotificationResultLauncher
+import com.example.jetpack.util.PermissionUtil
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 
 @AndroidEntryPoint
 class HomeFragment : CoreFragment() {
     private var showDialog by mutableStateOf(false)
+    private lateinit var notificationResultLauncher: NotificationResultLauncher
+
+    @Inject
+    lateinit var weatherRepositoryImplement: WeatherRepositoryImplement
+
+    @SuppressLint("UnsafeRepeatOnLifecycleDetector")
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupNotificationLauncher()
+        setupNotification()
+    }
+
+
+    private fun setupNotificationLauncher() {
+        notificationResultLauncher = NotificationResultLauncher(
+            activity = requireActivity(),
+            registry = requireActivity().activityResultRegistry
+        )
+        lifecycle.addObserver(notificationResultLauncher)
+    }
+
+    private fun setupNotification() {
+        //1. Request POST NOTIFICATION permission if device has Android OS from 13
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            val isAccessed: Boolean = PermissionUtil.isNotiEnabled(context = requireContext())
+            if (!isAccessed) {
+                notificationResultLauncher.systemLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+            }
+        }
+
+        //2. Create notification channel and setup daily notification
+        NotificationManager.createNotificationChannel(context = requireContext())
+        NotificationManager.sendNotification(context = requireContext())
+
+        //3. Create lockscreen-styled notification and send it every day
+        LockscreenManager.createNotificationChannel(context = requireContext())
+        LockscreenManager.sendNotification(context = requireContext())
+    }
 
     @Composable
     override fun ComposeView() {
@@ -66,6 +115,8 @@ class HomeFragment : CoreFragment() {
             onOpenShortcut = {
                 when (it) {
                     HomeShortcut.Tutorial -> safeNavigate(R.id.toTutorial)
+                    HomeShortcut.Quote -> safeNavigate(R.id.toQuote)
+                    HomeShortcut.AccuWeatherLocation -> safeNavigate(R.id.toAccuWeatherLocation)
                     else -> {}
                 }
             }

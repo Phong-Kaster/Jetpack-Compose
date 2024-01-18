@@ -1,7 +1,7 @@
 package com.example.jetpack.injection
 
 import android.content.Context
-import com.example.jetpack.JetpackComposeApplication
+import com.example.jetpack.JetpackApplication
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,7 +14,7 @@ import javax.inject.Singleton
 object AppModule {
     @Provides
     @Singleton
-    fun provideApplication(@ApplicationContext context: Context): JetpackComposeApplication {
-        return context as JetpackComposeApplication
+    fun provideApplication(@ApplicationContext context: Context): JetpackApplication {
+        return context as JetpackApplication
     }
 }

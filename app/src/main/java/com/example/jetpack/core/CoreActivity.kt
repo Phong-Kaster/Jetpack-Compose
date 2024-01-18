@@ -5,15 +5,19 @@ import android.content.Context
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.widget.Toast
+import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.runtime.Composable
 import com.example.jetpack.util.AppUtil
 import com.example.jetpack.util.LanguageUtil
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 
 @AndroidEntryPoint
-abstract class CoreActivity :
-    AppCompatActivity(), CoreBehavior {
+open class CoreActivity
+@Inject
+constructor() : AppCompatActivity(), CoreBehavior {
 
     override fun attachBaseContext(newBase: Context?) {
         // Set locale
@@ -22,9 +26,17 @@ abstract class CoreActivity :
         super.attachBaseContext(context)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
+    @Composable
+    open fun ComposeView() {
+
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         hideNavigationBar()
+        setContent {
+            ComposeView()
+        }
     }
 
     override fun hideNavigationBar() {

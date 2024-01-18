@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Jetpack Compose</string>
+    <string name="app_name">Bundeswehr</string>
     <string name="fake_title">Lorem Ipsum</string>
     <string name="fake_message">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.</string>
     <string name="fake_content">
@@ -34,4 +34,26 @@
     <string name="submit">Einreichen</string>
     <string name="not_now">Nicht jetzt</string>
     <string name="thanks_for_your_feedback">Danke für Ihr Feedback!</string>
+    <string name="good_bye">Auf Wiedersehen!</string>
+    <string name="tutorial">Tutorial</string>
+    <string name="tap_this_add_button">Tippen Sie auf diesen <b>Hinzufügen</b>-Knopf</string>
+    <string name="ring_chart">Ringdiagramm</string>
+    <string name="line_chart">Liniendiagramm</string>
+    <string name="bar_chart">Balkendiagramm</string>
+    <string name="scatter_plot">Streudiagramm</string>
+    <string name="radar_chart">Radardiagramm</string>
+    <string name="area_chart">Flächendiagramm</string>
+    <string name="analogue_clock">Analoguhr</string>
+    <string name="investment_saving">Investition - Sparen</string>
+    <string name="fixed_expenses">Feste Ausgaben</string>
+    <string name="business">Geschäft</string>
+    <string name="unexpected_expenses">Unerwartete Ausgaben</string>
+    <string name="living_expenses">Lebenshaltungskosten</string>
+    <string name="events">Veranstaltungen</string>
+    <string name="shopping">Einkaufen</string>
+    <string name="entertainment">Unterhaltung</string>
+    <string name="charity">Wohltätigkeit</string>
+    <string name="education">Bildung</string>
+    <string name="loan_payment">Kreditzahlung</string>
+    <string name="quote">Zitat</string>
 </resources>

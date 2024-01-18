@@ -9,8 +9,7 @@ import com.example.jetpack.injection.EntryPointRepository
 import dagger.hilt.android.EntryPointAccessors
 import java.util.Locale
 
-class LanguageUtil
-constructor(
+class LanguageUtil(
     private val context: Context
 ) {
     fun setLanguage(): Context {
@@ -21,9 +20,10 @@ constructor(
 
         // Get saved language
         val currentLanguage = settingsRepository.getLanguage()
-        AppUtil.logcat(message= "currentLanguage: $currentLanguage")
+
         // Initialize locale
         val locale: Locale = Locale.forLanguageTag(currentLanguage.code)
+
         // Wrap context with new locale
         return withLocale(locale)
     }

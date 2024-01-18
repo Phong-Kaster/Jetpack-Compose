@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Jetpack Compose</string>
+    <string name="app_name">Bundeswehr</string>
     <string name="fake_title">Lorem Ipsum</string>
     <string name="fake_message">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.</string>
     <string name="fake_content">
@@ -34,4 +34,26 @@
     <string name="submit">送信</string>
     <string name="not_now">今はしない</string>
     <string name="thanks_for_your_feedback">フィードバックありがとうございます！</string>
+    <string name="good_bye">さようなら！</string>
+    <string name="tutorial">チュートリアル</string>
+    <string name="tap_this_add_button">この<b>追加</b>ボタンをタップ</string>
+    <string name="ring_chart">リングチャート</string>
+    <string name="line_chart">ラインチャート</string>
+    <string name="bar_chart">バーチャート</string>
+    <string name="scatter_plot">散布図</string>
+    <string name="radar_chart">レーダーチャート</string>
+    <string name="area_chart">エリアチャート</string>
+    <string name="analogue_clock">アナログ時計</string>
+    <string name="investment_saving">投資 - 貯蓄</string>
+    <string name="fixed_expenses">固定費</string>
+    <string name="business">ビジネス</string>
+    <string name="unexpected_expenses">予期せぬ支出</string>
+    <string name="living_expenses">生活費</string>
+    <string name="events">イベント</string>
+    <string name="shopping">ショッピング</string>
+    <string name="entertainment">エンターテインメント</string>
+    <string name="charity">チャリティ</string>
+    <string name="education">教育</string>
+    <string name="loan_payment">ローン返済</string>
+    <string name="quote">引用</string>
 </resources>

@@ -24,7 +24,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.jetpack.R
-import com.example.jetpack.database.enums.HomeShortcut
+import com.example.jetpack.data.enums.HomeShortcut
 import com.example.jetpack.ui.theme.PrimaryColor
 import com.example.jetpack.ui.theme.customizedTextStyle
 import com.example.jetpack.util.ViewUtil
@@ -39,6 +39,7 @@ fun HomeShortcutItem(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .clip(shape = RoundedCornerShape(20.dp))
+            .clickable { onClick(shortcut) }
             .border(
                 width = 0.5.dp,
                 color = Color.White.copy(alpha = 0.5F),
@@ -46,7 +47,7 @@ fun HomeShortcutItem(
             )
             .background(color = Color.Black.copy(alpha = 0.1F))
             .padding(horizontal = 16.dp, vertical = 16.dp)
-            .clickable { onClick(shortcut) }
+
             .aspectRatio(1F)
 
     ) {
