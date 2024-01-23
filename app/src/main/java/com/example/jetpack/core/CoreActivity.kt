@@ -4,6 +4,7 @@ package com.example.jetpack.core
 import android.content.Context
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
@@ -46,6 +47,14 @@ constructor() : AppCompatActivity(), CoreBehavior {
     override fun trackEvent(name: String) {}
 
     override fun showLoading() {}
+    override fun makeStatusBarTransparent() {
+        with(window) {
+            setFlags(
+                android.view.WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+                android.view.WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+            )
+        }
+    }
 
     override fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()

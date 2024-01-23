@@ -12,6 +12,13 @@
     <!-- For showing Lockscreen Activity as device's lockscreen -->
     <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
 
+    <!-- For permission fragment -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+
+
+
     <application
         android:name=".JetpackApplication"
         android:allowBackup="true"

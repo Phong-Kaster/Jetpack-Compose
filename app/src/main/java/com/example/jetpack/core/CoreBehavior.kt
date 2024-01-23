@@ -11,4 +11,6 @@ interface CoreBehavior {
     fun trackEvent(name: String)
 
     fun showLoading()
+
+    fun makeStatusBarTransparent()
 }

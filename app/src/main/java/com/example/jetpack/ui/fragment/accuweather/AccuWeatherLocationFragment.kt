@@ -11,17 +11,21 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.viewModels
+import com.example.jetpack.R
 import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
 import com.example.jetpack.network.dto.LocationAuto
+import com.example.jetpack.ui.component.CoreTopBar2
 import com.example.jetpack.ui.fragment.accuweather.component.ManageLocationLayoutForSearch
 import com.example.jetpack.ui.fragment.accuweather.component.SearchBar
 import com.example.jetpack.ui.theme.Background
 import com.example.jetpack.ui.view.LoadingDialog
 import com.example.jetpack.util.AppUtil
+import com.example.jetpack.util.NavigationUtil.safeNavigateUp
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -39,7 +43,8 @@ class AccuWeatherLocationFragment : CoreFragment() {
             },
             onClick = {
                 AppUtil.logcat(message = "${it.LocalizedName}")
-            }
+            },
+            onBack = { safeNavigateUp() }
         )
 
         LoadingDialog(enable = viewModel.loading.collectAsState().value)
@@ -50,13 +55,19 @@ class AccuWeatherLocationFragment : CoreFragment() {
 fun LocationLayout(
     locationAuto: List<LocationAuto> = listOf(),
     onSearch: (String) -> Unit = {},
-    onClick: (LocationAuto) -> Unit = {}
+    onClick: (LocationAuto) -> Unit = {},
+    onBack: ()->Unit = {}
 ) {
     var query by remember { mutableStateOf("") }
 
     CoreLayout(
         topBar = {
             Column(modifier = Modifier.background(color = Background)) {
+                CoreTopBar2(
+                    onClick = onBack,
+                    title = stringResource(id = R.string.accu_weather)
+                )
+
                 SearchBar(
                     queryValue = query,
                     onSearch = { onSearch(it) },
