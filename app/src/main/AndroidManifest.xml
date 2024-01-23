@@ -14,9 +14,8 @@
 
     <!-- For permission fragment -->
     <uses-permission android:name="android.permission.RECORD_AUDIO"/>
-    <uses-configuration android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-configuration android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-configuration android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
 
 

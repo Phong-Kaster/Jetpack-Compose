@@ -67,4 +67,5 @@
     <string name="permissions">Permissions</string>
     <string name="request_multiple_permissions">Request Multiple Permissions</string>
     <string name="request_one_permission">Request One Permission</string>
+    <string name="go_to_settings">Go to settings</string>
 </resources>
