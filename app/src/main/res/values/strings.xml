@@ -63,4 +63,8 @@
     <string name="nazi_symbol">Nazi Symbol</string>
     <string name="heer">Heer</string>
     <string name="title_activity_lockscreen2">Lockscreen2</string>
+    <string name="accu_weather">AccuWeather</string>
+    <string name="permissions">Permissions</string>
+    <string name="request_multiple_permissions">Request Multiple Permissions</string>
+    <string name="request_one_permission">Request One Permission</string>
 </resources>

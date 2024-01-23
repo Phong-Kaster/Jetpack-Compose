@@ -1,6 +1,8 @@
 package com.example.jetpack.ui.fragment.home.component
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -29,6 +31,7 @@ import com.example.jetpack.ui.theme.PrimaryColor
 import com.example.jetpack.ui.theme.customizedTextStyle
 import com.example.jetpack.util.ViewUtil
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun HomeShortcutItem(
     shortcut: HomeShortcut,
@@ -66,7 +69,8 @@ fun HomeShortcutItem(
             color = PrimaryColor,
             style = customizedTextStyle(fontWeight = 400, fontSize = 18),
             maxLines = 1,
-            overflow = TextOverflow.Ellipsis
+            overflow = TextOverflow.Ellipsis,
+            modifier = Modifier.basicMarquee(iterations = Int.MAX_VALUE)
         )
     }
 }
