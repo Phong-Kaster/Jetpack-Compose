@@ -18,8 +18,6 @@ import androidx.lifecycle.LifecycleOwner
 import com.example.jetpack.R
 import com.example.jetpack.notification.LockscreenManager
 import com.example.jetpack.notification.NotificationManager
-import com.example.jetpack.util.AppUtil
-import com.example.jetpack.util.PermissionUtil
 import javax.inject.Inject
 
 /**

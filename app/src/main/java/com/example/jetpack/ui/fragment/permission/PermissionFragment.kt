@@ -1,7 +1,10 @@
 package com.example.jetpack.ui.fragment.permission
 
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
+import android.provider.Settings
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -70,6 +73,26 @@ class PermissionFragment : CoreFragment() {
         ActivityCompat.checkSelfPermission(context, it) == PackageManager.PERMISSION_GRANTED
     }
 
+
+    /**
+     * ------------------- OPEN SETTING APPLICATION
+     */
+    private fun openSettingPermission() {
+        try {
+            val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+            val uri = Uri.fromParts("package", requireActivity().packageName, null)
+            intent.setData(uri)
+            settingLauncher.launch(intent)
+        } catch (_: Exception) {
+
+        }
+    }
+
+    private val settingLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+
+        }
+
     @Composable
     override fun ComposeView() {
         super.ComposeView()
@@ -89,7 +112,7 @@ class PermissionFragment : CoreFragment() {
         PermissionPopup(
             enable = showPopup,
             onDismiss = { showPopup = false },
-            goSetting = {},
+            goSetting = { openSettingPermission() },
         )
     }
 }
