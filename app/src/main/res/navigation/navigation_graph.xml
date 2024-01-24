@@ -96,6 +96,10 @@
         android:id="@+id/permissionFragment"
         android:name="com.example.jetpack.ui.fragment.permission.PermissionFragment" />
 
+    <fragment
+        android:id="@+id/motionLayoutFragment"
+        android:name="com.example.jetpack.ui.fragment.motionlayout.MotionLayoutFragment" />
+
     <activity
         android:id="@+id/lockscreenActivity"
         android:name="com.example.jetpack.ui.activity.LockscreenActivity" />
@@ -185,6 +189,14 @@
     <action
         android:id="@+id/toPermission"
         app:destination="@id/permissionFragment"
+        app:enterAnim="@anim/enter_fade_in"
+        app:exitAnim="@anim/exit_fade_out"
+        app:popUpToInclusive="true"/>
+
+
+    <action
+        android:id="@+id/toMotionLayout"
+        app:destination="@id/motionLayoutFragment"
         app:enterAnim="@anim/enter_fade_in"
         app:exitAnim="@anim/exit_fade_out"
         app:popUpToInclusive="true"/>

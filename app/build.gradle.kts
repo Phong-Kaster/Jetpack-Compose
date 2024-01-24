@@ -109,6 +109,8 @@ dependencies {
 
 
     // ConstraintLayout in Compose - https://developer.android.com/jetpack/compose/layouts/constraintlayout#get-started
+    // Motion Layout - https://developer.android.com/develop/ui/views/animations/motionlayout
+    // Motion Layout - https://medium.com/mindful-engineering/after-going-through-this-blog-youll-achieve-this-kind-of-polished-animation-using-motionlayout-6b76ec41c6ab
     implementation("androidx.constraintlayout:constraintlayout-compose:1.0.1")
 
 
@@ -131,7 +133,6 @@ dependencies {
     // Retrofit - A type-safe HTTP client for Android and Java - https://square.github.io/retrofit/
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    //implementation("com.squareup.okhttp3:okhttps:3.4.1")
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
 }
 
