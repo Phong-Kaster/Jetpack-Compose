@@ -1,0 +1,63 @@
+{
+  ConstraintSets: {
+    start: {
+      settingReference: {
+        width: 24,
+        height: 24,
+        start:  ['parent', 'start', 16],
+        top: ['parent', 'top', 16],
+      },
+      searchReference: {
+        width: 24,
+        height: 24,
+        end: ['parent', 'end', 16],
+        top: ['parent', 'top', 16],
+        custom: {
+          color: '#FFFFFF',
+        }
+      },
+      box: {
+        width: 'spread',
+        height: 'spread',
+        start: ['parent', 'start'],
+        end: ['parent', 'end'],
+        top: ['parent', 'top'],
+        bottom: ['parent', 'bottom', -16],
+      }
+    },
+    end: {
+      settingReference: {
+        width: 24,
+        height: 24,
+        start:  ['parent', 'start', 16],
+        top: ['parent', 'top', 16],
+        end: ['searchReference', 'start', 5],
+      },
+      searchReference: {
+        width: 24,
+        height: 24,
+        start: ['settingReference', 'end'],
+        top: ['parent', 'top', 16],
+        custom: {
+          color: '#FFCC00',
+        }
+      }
+    }
+  },
+  Transitions: {
+    default: {
+      from: 'start',
+      to: 'end',
+      pathMotionArc: 'startHorizontal',
+      duration: 2000,
+      onSwipe: {
+        anchor: 'box',
+        maxVelocity: 4.0,
+        maxAccel: 1.2,
+        direction: 'end',
+        side: 'start',
+        mode: 'velocity'
+      }
+    }
+  },
+}

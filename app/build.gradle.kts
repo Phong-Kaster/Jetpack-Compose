@@ -76,6 +76,7 @@ dependencies {
     implementation(platform("androidx.compose:compose-bom:2023.08.00"))
     implementation(platform("androidx.compose:compose-bom:2023.08.00"))
     implementation(platform("androidx.compose:compose-bom:2023.08.00"))
+
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
@@ -111,7 +112,8 @@ dependencies {
     // ConstraintLayout in Compose - https://developer.android.com/jetpack/compose/layouts/constraintlayout#get-started
     // Motion Layout - https://developer.android.com/develop/ui/views/animations/motionlayout
     // Motion Layout - https://medium.com/mindful-engineering/after-going-through-this-blog-youll-achieve-this-kind-of-polished-animation-using-motionlayout-6b76ec41c6ab
-    implementation("androidx.constraintlayout:constraintlayout-compose:1.0.1")
+    //implementation("androidx.constraintlayout:constraintlayout-compose:1.0.1")
+    implementation("androidx.constraintlayout:constraintlayout-compose-android:1.1.0-alpha13")
 
 
     // Save data in a local database using Room - https://developer.android.com/training/data-storage/room#setup

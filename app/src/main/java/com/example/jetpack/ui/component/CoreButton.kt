@@ -62,8 +62,8 @@ fun CoreButton(
         horizontalArrangement = Arrangement.Center,
         modifier = modifier
             .clip(shape = shape)
-            .clickable { onClick() }
             .padding(horizontal = marginHorizontal, vertical = marginVertical)
+            .clickable { onClick() }
             .let { if (borderStroke != null) it.border(borderStroke, shape) else it }
             .background(
                 color = backgroundColor,
