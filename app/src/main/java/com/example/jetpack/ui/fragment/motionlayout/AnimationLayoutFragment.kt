@@ -1,16 +1,9 @@
 package com.example.jetpack.ui.fragment.motionlayout
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.jetpack.R
 import com.example.jetpack.core.CoreFragment
-import com.example.jetpack.core.CoreLayout
-import com.example.jetpack.ui.component.CoreTopBar2
-import com.example.jetpack.ui.fragment.motionlayout.component.AnimationLayout2
-import com.example.jetpack.ui.fragment.motionlayout.component.AnimationLayout3
-import com.example.jetpack.ui.theme.Background
+import com.example.jetpack.ui.fragment.motionlayout.component.AnimationLayout4
 import com.example.jetpack.util.NavigationUtil.safeNavigateUp
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -39,7 +32,7 @@ class AnimationLayoutFragment : CoreFragment() {
 fun AnimationLayout(
     onBack: () -> Unit = {}
 ) {
-    CoreLayout(
+    /*CoreLayout(
         topBar = {
             CoreTopBar2(
                 onClick = onBack,
@@ -49,8 +42,10 @@ fun AnimationLayout(
         backgroundColor = Background,
         modifier = Modifier,
         content = {
-            AnimationLayout3()
-        })
+
+        })*/
+
+    AnimationLayout4()
 }
 
 @Preview
