@@ -83,6 +83,7 @@ private fun rememberToolbarState(toolbarHeightRange: IntRange): ToolbarState {
  * @see [Collapsing Toolbar in Jetpack Compose|‘LazyColumn’ version — Part 1](https://medium.com/kotlin-and-kotlin-for-android/collapsing-toolbar-in-jetpack-compose-lazycolumn-version-f1b0a7924ffe)
  * @see [Collapsing Toolbar in Jetpack Compose|‘LazyColumn’ version — Part 2](https://medium.com/kotlin-and-kotlin-for-android/collapsing-toolbar-in-jetpack-compose-lazycolumn-version-84dff2fdb461)
  */
+
 @Composable
 fun AnimationLayout4() {
     val lazyState: LazyListState = rememberLazyListState()
@@ -95,6 +96,10 @@ fun AnimationLayout4() {
     val nestedScrollConnection = remember {
         object : NestedScrollConnection {
             override fun onPreScroll(available: Offset, source: NestedScrollSource): Offset {
+                Log.d("PHONG", "----------------------------")
+                Log.d("PHONG", "onPreScroll")
+                Log.d("PHONG", "available Y: ${available.y}")
+                Log.d("PHONG", "scrollOffset: ${toolbarState.scrollOffset - available.y}")
                 toolbarState.scrollTopLimitReached =
                     lazyState.firstVisibleItemIndex == 0 || lazyState.firstVisibleItemScrollOffset == 0
                 toolbarState.scrollOffset = toolbarState.scrollOffset - available.y
@@ -117,7 +122,6 @@ fun AnimationLayout4() {
                         }
                     }
                 }
-
                 return super.onPostFling(consumed, available)
             }
         }
@@ -160,7 +164,7 @@ fun LazyItems(
             .padding(innerPadding)
             .background(color = Background)
     ) {
-        items(15) { item ->
+        items(20) { item ->
             Text(
                 text = "${stringResource(id = R.string.fake_title)} $item",
                 style = MaterialTheme.typography.headlineMedium,
@@ -203,10 +207,10 @@ fun CollapsingToolbar(
             CollapsingToolbarLayout(progress = progress) {
                 Icon(
                     painter =
-                        if (progress == 1F) painterResource(id = R.drawable.ic_nazi_eagle)
-                        else painterResource(id = R.drawable.ic_nazi_symbol),
+                    if (progress == 1F) painterResource(id = R.drawable.ic_nazi_eagle)
+                    else painterResource(id = R.drawable.ic_nazi_symbol),
                     contentDescription = null,
-                    tint = if(progress == 1F) PrimaryColor else Color.Black,
+                    tint = if (progress == 1F) PrimaryColor else Color.Black,
                     modifier = Modifier
                         .padding(logoPadding)
                         .height(eagleHeight)
@@ -216,7 +220,7 @@ fun CollapsingToolbar(
                 Text(
                     text = "The Third Reich",
                     style = if (progress == 1F) customizedTextStyle(fontSize = 12, fontWeight = 500)
-                            else customizedTextStyle(fontSize = 16, fontWeight = 600),
+                    else customizedTextStyle(fontSize = 16, fontWeight = 600),
                     color = if (progress == 1F) PrimaryColor else Color.Black,
                     modifier = Modifier
                         .padding(logoPadding)
