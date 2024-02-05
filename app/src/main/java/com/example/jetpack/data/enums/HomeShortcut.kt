@@ -16,6 +16,7 @@ enum class HomeShortcut(
     Quote(drawable = R.drawable.ic_quote, text = R.string.quote),
     AccuWeatherLocation(drawable = R.drawable.ic_weather, text = R.string.accu_weather),
     Permissions(drawable = R.drawable.ic_permission, text = R.string.permissions),
-    MotionLayout(drawable = R.drawable.ic_motion_layout, text = R.string.motion_layout)
+    MotionLayout(drawable = R.drawable.ic_motion_layout, text = R.string.motion_layout),
+    WeatherBackground(drawable = R.drawable.ic_arrow_forward_circle, text = R.string.accu_weather),
     ;
 }
