@@ -51,11 +51,8 @@ fun InsightLayout() {
                 when (chosenChip) {
                     ChartShortcut.AnalogueClock -> AnalogueClock()
                     ChartShortcut.LineChart -> LineChartScreen()
-                    ChartShortcut.BarChart -> {}
-                    ChartShortcut.AreaChart -> {}
-                    ChartShortcut.RadarChart -> {}
                     ChartShortcut.RingChart -> RingChartScreen()
-                    ChartShortcut.ScatterPlotChart -> {}
+                    else -> {}
                 }
             })
     }

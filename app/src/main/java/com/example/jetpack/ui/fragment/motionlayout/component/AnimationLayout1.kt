@@ -29,13 +29,18 @@ import com.example.jetpack.ui.theme.PrimaryColor
  * @see [Motion Layout Button in Android Jetpack Compose](https://www.geeksforgeeks.org/motion-layout-button-in-android-jetpack-compose/)
  * @see [Compose MotionLayout JSON Syntax](https://github.com/androidx/constraintlayout/wiki/Compose-MotionLayout-JSON-Syntax)
  */
-@OptIn(ExperimentalMotionApi::class)
 @Composable
-fun AnimationLayout1() {
+fun AnimationLayout1(
+    onClick: () -> Unit = {}
+) {
     val context = LocalContext.current
     var enableAnimation by remember { mutableStateOf(false) }
     var targetValue by remember(enableAnimation) { mutableFloatStateOf(0F) }
-    val progressAnimation by animateFloatAsState(targetValue = targetValue, animationSpec = tween(1000), label = "buttonAnimationProgress")
+    val progressAnimation by animateFloatAsState(
+        targetValue = targetValue,
+        animationSpec = tween(1000),
+        label = "buttonAnimationProgress"
+    )
     val motionScene = remember {
         context.resources
             .openRawResource(R.raw.motion_scene_animation_layout_1)
@@ -61,14 +66,18 @@ fun AnimationLayout1() {
                 text = stringResource(id = R.string.fake_title),
                 textColor = PrimaryColor,
                 borderStroke = BorderStroke(width = 1.dp, color = PrimaryColor),
-                onClick = { enableAnimation = !enableAnimation },
+                onClick = {
+                    onClick()
+                    enableAnimation = !enableAnimation },
                 modifier = Modifier.layoutId("button_1")
             )
             OutlineButton(
                 text = stringResource(id = R.string.app_name),
                 textColor = PrimaryColor,
                 borderStroke = BorderStroke(width = 1.dp, color = PrimaryColor),
-                onClick = { enableAnimation = !enableAnimation },
+                onClick = {
+                    onClick()
+                    enableAnimation = !enableAnimation },
                 modifier = Modifier.layoutId("button_2")
             )
         })
