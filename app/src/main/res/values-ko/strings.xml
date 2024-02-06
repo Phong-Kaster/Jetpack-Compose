@@ -56,4 +56,17 @@
     <string name="education">교육</string>
     <string name="loan_payment">대출 상환</string>
     <string name="quote">인용문</string>
+    <string name="icon_setting">아이콘 설정</string>
+    <string name="origin">원산지</string>
+    <string name="nazi_eagle">나치 독수리</string>
+    <string name="nazi_symbol">나치 상징</string>
+    <string name="heer">헤어</string>
+    <string name="title_activity_lockscreen2">잠금화면2</string>
+    <string name="accu_weather">AccuWeather</string>
+    <string name="permissions">권한</string>
+    <string name="login">로그인</string>
+    <string name="request_multiple_permissions">여러 권한 요청</string>
+    <string name="request_one_permission">하나의 권한 요청</string>
+    <string name="go_to_settings">설정으로 가기</string>
+    <string name="motion_layout">모션 레이아웃</string>
 </resources>

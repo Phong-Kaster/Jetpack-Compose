@@ -56,4 +56,17 @@
     <string name="education">Giáo dục</string>
     <string name="loan_payment">Thanh toán khoản vay</string>
     <string name="quote">Trích dẫn</string>
+    <string name="icon_setting">Cài đặt biểu tượng</string>
+    <string name="origin">Nguồn gốc</string>
+    <string name="nazi_eagle">Đại bàng Nazi</string>
+    <string name="nazi_symbol">Biểu tượng Nazi</string>
+    <string name="heer">Heer</string>
+    <string name="title_activity_lockscreen2">Màn hình khóa2</string>
+    <string name="accu_weather">AccuWeather</string>
+    <string name="permissions">Quyền</string>
+    <string name="login">Đăng nhập</string>
+    <string name="request_multiple_permissions">Yêu cầu nhiều quyền</string>
+    <string name="request_one_permission">Yêu cầu một quyền</string>
+    <string name="go_to_settings">Đi tới cài đặt</string>
+    <string name="motion_layout">Bố cục chuyển động</string>
 </resources>

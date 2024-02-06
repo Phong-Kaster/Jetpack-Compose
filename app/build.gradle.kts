@@ -137,12 +137,10 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
 
-
-    // Glide-Coil Libraries - https://medium.com/@selinihtiyar/image-loading-with-jetpack-compose-glide-coil-359c8d05c944
-    //implementation("com.github.skydoves:landscapist-glide:2.2.3")
-    implementation("io.coil-kt:coil:2.5.0")
-    implementation("io.coil-kt:coil-gif:2.5.0")
-    implementation("io.coil-kt:coil-compose:2.5.0")
+    // Lottie for Android - https://github.com/airbnb/lottie-android
+    // https://lottiefiles.com/blog/working-with-lottie-animations/getting-started-with-lottie-animations-in-android-app/
+    implementation("com.airbnb.android:lottie:6.3.0")
+    implementation("com.airbnb.android:lottie-compose:6.3.0")
 }
 
 // Allow references to generated code

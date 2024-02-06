@@ -56,4 +56,17 @@
     <string name="education">Bildung</string>
     <string name="loan_payment">Kreditzahlung</string>
     <string name="quote">Zitat</string>
+    <string name="icon_setting">Symboleinstellung</string>
+    <string name="origin">Herkunft</string>
+    <string name="nazi_eagle">Nazi-Adler</string>
+    <string name="nazi_symbol">Nazi-Symbol</string>
+    <string name="heer">Heer</string>
+    <string name="title_activity_lockscreen2">Sperrbildschirm2</string>
+    <string name="accu_weather">AccuWetter</string>
+    <string name="permissions">Berechtigungen</string>
+    <string name="login">Anmelden</string>
+    <string name="request_multiple_permissions">Mehrere Berechtigungen anfordern</string>
+    <string name="request_one_permission">Eine Berechtigung anfordern</string>
+    <string name="go_to_settings">Zu den Einstellungen gehen</string>
+    <string name="motion_layout">Motion-Layout</string>
 </resources>

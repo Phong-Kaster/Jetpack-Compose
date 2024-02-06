@@ -65,6 +65,7 @@
     <string name="title_activity_lockscreen2">Lockscreen2</string>
     <string name="accu_weather">AccuWeather</string>
     <string name="permissions">Permissions</string>
+    <string name="login">Login</string>
     <string name="request_multiple_permissions">Request Multiple Permissions</string>
     <string name="request_one_permission">Request One Permission</string>
     <string name="go_to_settings">Go to settings</string>

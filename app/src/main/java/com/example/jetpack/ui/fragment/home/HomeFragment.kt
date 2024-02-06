@@ -119,7 +119,7 @@ class HomeFragment : CoreFragment() {
                     HomeShortcut.AccuWeatherLocation -> safeNavigate(R.id.toAccuWeatherLocation)
                     HomeShortcut.Permissions ->  safeNavigate(R.id.toPermission)
                     HomeShortcut.MotionLayout ->  safeNavigate(R.id.toMotionLayout)
-                    HomeShortcut.WeatherBackground -> safeNavigate(R.id.toWeatherBackground)
+                    HomeShortcut.Login -> safeNavigate(R.id.toLogin)
                     else -> {}
                 }
             }
