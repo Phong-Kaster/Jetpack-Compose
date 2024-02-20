@@ -69,4 +69,7 @@
     <string name="request_one_permission">Yêu cầu một quyền</string>
     <string name="go_to_settings">Đi tới cài đặt</string>
     <string name="motion_layout">Bố cục chuyển động</string>
+    <string name="multiple_permissions">Nhiều quyền</string>
+    <string name="attention">Chú ý</string>
+    <string name="multiple_permissions_content">Ứng dụng của chúng tôi yêu cầu quyền ACCESS_COARSE_LOCATION và ACCESS_FINE_LOCATION để cung cấp các dịch vụ dựa trên vị trí và nâng cao trải nghiệm người dùng. Những quyền này cho phép chúng tôi cung cấp nội dung và dịch vụ được cá nhân hóa dựa trên vị trí hiện tại của bạn. Quyền RECORD_AUDIO cần thiết cho ứng dụng của chúng tôi để truy cập và quản lý đầu vào âm thanh cho các tính năng như lệnh thoại và ghi âm. Chúng tôi đảm bảo với bạn rằng những quyền này chỉ được yêu cầu để cải thiện chức năng của ứng dụng và cung cấp cho bạn trải nghiệm người dùng tốt nhất có thể. Chúng tôi tôn trọng quyền riêng tư của bạn và tuân thủ các chính sách xử lý dữ liệu nghiêm ngặt.</string>
 </resources>

@@ -69,4 +69,8 @@
     <string name="request_one_permission">Demander une permission</string>
     <string name="go_to_settings">Aller aux paramètres</string>
     <string name="motion_layout">Mise en page de mouvement</string>
+    <string name="multiple_permissions">Plusieurs autorisations</string>
+    <string name="attention">Attention</string>
+    <string name="multiple_permissions_content">Notre application nécessite les autorisations ACCESS_COARSE_LOCATION et ACCESS_FINE_LOCATION pour fournir des services basés sur la localisation et améliorer l\'expérience utilisateur. Ces autorisations nous permettent de fournir un contenu et des services personnalisés en fonction de votre position actuelle. L\'autorisation **RECORD_AUDIO** est nécessaire à notre application pour accéder aux entrées audio et les gérer, par exemple pour les commandes vocales et l\'enregistrement audio. Nous vous assurons que ces autorisations ne sont demandées que pour améliorer la fonctionnalité de notre application et vous offrir la meilleure expérience utilisateur possible. Nous respectons votre vie privée et appliquons des politiques strictes en matière de traitement des données.</string>
+
 </resources>

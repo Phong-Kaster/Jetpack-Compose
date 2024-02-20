@@ -2,6 +2,7 @@ package com.example.jetpack.ui.fragment.permission
 
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.provider.Settings
 import android.util.Log
 import android.widget.Toast
@@ -22,6 +23,8 @@ import androidx.compose.ui.unit.dp
 import com.example.jetpack.R
 import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
+import com.example.jetpack.notification.LockscreenManager
+import com.example.jetpack.notification.NotificationManager
 import com.example.jetpack.ui.component.CoreTopBar2
 import com.example.jetpack.ui.component.SolidButton
 import com.example.jetpack.ui.fragment.permission.component.PermissionPopup
@@ -38,40 +41,82 @@ import dagger.hilt.android.AndroidEntryPoint
 class PermissionFragment : CoreFragment() {
 
     private val TAG = "PermissionFragment"
-    private var showPopup: Boolean by mutableStateOf(false)
 
+
+    /***************************************
+     * for request one permission
+     * */
+    private val notificationLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+            if (isGranted) {
+                showToast("Notification permission is enabled")
+            } else {
+                if (shouldShowRequestPermissionRationale(android.Manifest.permission.POST_NOTIFICATIONS)) {
+
+                } else {
+
+                }
+            }
+        }
+
+    private fun setupNotification() {
+        //1. Request POST NOTIFICATION permission if device has Android OS from 13
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            val isAccessed: Boolean = PermissionUtil.isNotiEnabled(context = requireContext())
+            if (!isAccessed) {
+                notificationLauncher.launch(android.Manifest.permission.POST_NOTIFICATIONS)
+            }
+        }
+
+        //2. Create notification channel and setup daily notification
+        NotificationManager.createNotificationChannel(context = requireContext())
+        NotificationManager.sendNotification(context = requireContext())
+
+        //3. Create lockscreen-styled notification and send it every day
+        LockscreenManager.createNotificationChannel(context = requireContext())
+        LockscreenManager.sendNotification(context = requireContext())
+    }
+
+
+    /***************************************
+     * for request multiple permissions
+     * */
+    private var showPopupMultiplePermissions: Boolean by mutableStateOf(false)
     private val requiredPermissions = arrayOf(
         android.Manifest.permission.ACCESS_COARSE_LOCATION,
         android.Manifest.permission.ACCESS_FINE_LOCATION,
         android.Manifest.permission.RECORD_AUDIO
     )
 
-    private val multipleLauncher = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()){
-        val enableRecordAudio = it[android.Manifest.permission.RECORD_AUDIO]
-        val enableAccessCoarseLocation = it[android.Manifest.permission.ACCESS_COARSE_LOCATION]
-        val enableAccessFineLocation = it[android.Manifest.permission.ACCESS_FINE_LOCATION]
+    private val multiplePermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
+            val enableRecordAudio = it[android.Manifest.permission.RECORD_AUDIO]
+            val enableAccessCoarseLocation = it[android.Manifest.permission.ACCESS_COARSE_LOCATION]
+            val enableAccessFineLocation = it[android.Manifest.permission.ACCESS_FINE_LOCATION]
 
 
-        if(enableRecordAudio == true && enableAccessCoarseLocation == true && enableAccessFineLocation == true){
-            Toast.makeText(requireContext(), "All permissions are enabled !", Toast.LENGTH_SHORT).show()
-        }else{
-            if (shouldShowRequestPermissionRationale(android.Manifest.permission.RECORD_AUDIO)) {
-                Log.d(TAG, "shouldShowRequestPermissionRationale RECORD_AUDIO ")
-            } else if (shouldShowRequestPermissionRationale(android.Manifest.permission.ACCESS_COARSE_LOCATION)) {
-                Log.d(TAG, "shouldShowRequestPermissionRationale ACCESS_COARSE_LOCATION ")
-            } else if (shouldShowRequestPermissionRationale(android.Manifest.permission.ACCESS_FINE_LOCATION)) {
-                Log.d(TAG, "shouldShowRequestPermissionRationale ACCESS_FINE_LOCATION ")
+            if (enableRecordAudio == true && enableAccessCoarseLocation == true && enableAccessFineLocation == true) {
+                Toast.makeText(
+                    requireContext(),
+                    "All permissions are enabled !",
+                    Toast.LENGTH_SHORT
+                ).show()
             } else {
-                showPopup = true
+                if (shouldShowRequestPermissionRationale(android.Manifest.permission.RECORD_AUDIO)) {
+                    Log.d(TAG, "shouldShowRequestPermissionRationale RECORD_AUDIO ")
+                } else if (shouldShowRequestPermissionRationale(android.Manifest.permission.ACCESS_COARSE_LOCATION)) {
+                    Log.d(TAG, "shouldShowRequestPermissionRationale ACCESS_COARSE_LOCATION ")
+                } else if (shouldShowRequestPermissionRationale(android.Manifest.permission.ACCESS_FINE_LOCATION)) {
+                    Log.d(TAG, "shouldShowRequestPermissionRationale ACCESS_FINE_LOCATION ")
+                } else {
+                    showPopupMultiplePermissions = true
+                }
             }
         }
-    }
-
-
 
 
     /**
-     * ------------------- OPEN SETTING APPLICATION
+     * OPEN SETTING APPLICATION
      */
     private fun openSettingPermission() {
         try {
@@ -89,25 +134,32 @@ class PermissionFragment : CoreFragment() {
 
         }
 
+
     @Composable
     override fun ComposeView() {
         super.ComposeView()
         PermissionLayout(
             onBack = { safeNavigateUp() },
-            onRequestOnePermission = {},
+            onOpenAppSetting = { openSettingPermission() },
+            onRequestOnePermission = { setupNotification() },
             onRequestMultiplePermission = {
-                val enableAllPermissions = PermissionUtil.hasPermissions(context = requireContext(), permissions = requiredPermissions)
+                val enableAllPermissions = PermissionUtil.hasPermissions(
+                    context = requireContext(),
+                    permissions = requiredPermissions
+                )
                 if (enableAllPermissions) {
                     showToast("All permissions are enabled !")
                 } else {
-                    multipleLauncher.launch(requiredPermissions)
+                    multiplePermissionLauncher.launch(requiredPermissions)
                 }
             }
         )
 
         PermissionPopup(
-            enable = showPopup,
-            onDismiss = { showPopup = false },
+            enable = showPopupMultiplePermissions,
+            title = R.string.attention,
+            content = R.string.multiple_permissions_content,
+            onDismiss = { showPopupMultiplePermissions = false },
             goSetting = { openSettingPermission() },
         )
     }
@@ -116,14 +168,17 @@ class PermissionFragment : CoreFragment() {
 @Composable
 fun PermissionLayout(
     onBack: () -> Unit = {},
-    onRequestOnePermission: ()->Unit = {},
-    onRequestMultiplePermission: ()->Unit = {},
+    onOpenAppSetting: () -> Unit = {},
+    onRequestOnePermission: () -> Unit = {},
+    onRequestMultiplePermission: () -> Unit = {},
 ) {
     CoreLayout(
         topBar = {
             CoreTopBar2(
-                onClick = onBack,
-                title = stringResource(id = R.string.permissions)
+                onLeftClick = onBack,
+                title = stringResource(id = R.string.permissions),
+                onRightClick = onOpenAppSetting,
+                iconRight = R.drawable.ic_setting
             )
         },
         bottomBar = {

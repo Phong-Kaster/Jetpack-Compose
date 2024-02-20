@@ -70,4 +70,8 @@
     <string name="request_one_permission">Request One Permission</string>
     <string name="go_to_settings">Go to settings</string>
     <string name="motion_layout">Motion layout</string>
+    <string name="multiple_permissions">Multiple permissions</string>
+    <string name="attention">Attention</string>
+    <string name="multiple_permissions_content">Our app requires the <b>ACCESS_COARSE_LOCATION</b> and <b>ACCESS_FINE_LOCATION</b> permissions to provide location-based services and enhance user experience. These permissions allow us to deliver personalized content and services based on your current location. The RECORD_AUDIO permission is necessary for our app to access and manage audio input for features such as voice commands and audio recording. We assure you that these permissions are requested solely to improve the functionality of our app and to provide you with the best possible user experience. We respect your privacy and adhere to strict data handling policies.</string>
+
 </resources>

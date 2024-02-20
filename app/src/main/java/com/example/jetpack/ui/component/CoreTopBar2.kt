@@ -4,13 +4,12 @@ import androidx.annotation.DrawableRes
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.basicMarquee
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -33,9 +32,12 @@ import com.example.jetpack.util.ViewUtil
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun CoreTopBar2(
-    @DrawableRes icon: Int? = null,
+    @DrawableRes iconLeft: Int? = null,
+    @DrawableRes iconRight: Int? = null,
     title: String? = stringResource(id = R.string.fake_title),
-    onClick: () -> Unit = {},
+    titleArrangement: Arrangement.Horizontal = Arrangement.Start,
+    onLeftClick: () -> Unit = {},
+    onRightClick: () -> Unit = {},
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -47,7 +49,7 @@ fun CoreTopBar2(
     ) {
         IconButton(
             onClick = {
-                onClick()
+                onLeftClick()
             },
             modifier = Modifier
                 .clip(shape = CircleShape)
@@ -55,35 +57,91 @@ fun CoreTopBar2(
                 .size(24.dp)
         ) {
             Icon(
-                painter = painterResource(id = icon ?: R.drawable.ic_back),
+                painter = painterResource(id = iconLeft ?: R.drawable.ic_back),
                 contentDescription = null,
                 tint = OppositePrimaryColor,
                 modifier = Modifier.size(15.dp)
             )
         }
 
-        Spacer(modifier = Modifier.width(10.dp))
 
-        Text(
-            text = title ?: "",
-            maxLines = 1,
-            style = customizedTextStyle(
-                fontSize = 16,
-                fontWeight = 700
-            ),
-            color = PrimaryColor,
-            modifier = Modifier.basicMarquee(Int.MAX_VALUE)
+
+        Row(
+            horizontalArrangement = titleArrangement,
+            modifier = Modifier
+                .padding(horizontal = 10.dp)
+                .weight(1F)
+        ) {
+            Text(
+                text = title ?: "",
+                maxLines = 1,
+                style = customizedTextStyle(
+                    fontSize = 16,
+                    fontWeight = 700
+                ),
+                color = PrimaryColor,
+                modifier = Modifier
+                    .basicMarquee(Int.MAX_VALUE)
+
+            )
+        }
+
+
+
+
+        if (iconRight != null) {
+            IconButton(
+                onClick = { onRightClick() },
+                modifier = Modifier
+                    .clip(shape = CircleShape)
+                    .background(color = PrimaryColor)
+                    .size(24.dp)
+            ) {
+                Icon(
+                    painter = painterResource(id = iconRight),
+                    contentDescription = null,
+                    tint = OppositePrimaryColor,
+                    modifier = Modifier.size(15.dp)
+                )
+            }
+        }
+    }
+}
+
+@Preview
+@Composable
+fun PreviewCoreTopBar2ArrangementLeft() {
+    ViewUtil.PreviewContent {
+        CoreTopBar2(
+            iconLeft = R.drawable.ic_back,
+            title = stringResource(id = R.string.fake_title)
         )
     }
 }
 
 @Preview
 @Composable
-fun PreviewCoreTopBar2() {
+fun PreviewCoreTopBar2ArrangementCenter() {
     ViewUtil.PreviewContent {
         CoreTopBar2(
-            icon = R.drawable.ic_back,
-            title = stringResource(id = R.string.fake_title)
+            iconLeft = R.drawable.ic_back,
+            title = stringResource(id = R.string.fake_title),
+            titleArrangement = Arrangement.Center,
+            iconRight = R.drawable.ic_arrow_forward_circle,
+        )
+    }
+}
+
+
+@Preview
+@Composable
+fun PreviewCoreTopBar2ArrangementRight() {
+    ViewUtil.PreviewContent {
+        CoreTopBar2(
+            iconLeft = R.drawable.ic_back,
+            title = stringResource(id = R.string.fake_title),
+            titleArrangement = Arrangement.End,
+            iconRight = R.drawable.ic_arrow_forward_circle,
         )
     }
 }

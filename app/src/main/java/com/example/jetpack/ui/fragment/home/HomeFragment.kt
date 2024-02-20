@@ -51,8 +51,8 @@ class HomeFragment : CoreFragment() {
     @SuppressLint("UnsafeRepeatOnLifecycleDetector")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupNotificationLauncher()
-        setupNotification()
+        //setupNotificationLauncher()
+        //setupNotification()
     }
 
 
@@ -85,17 +85,6 @@ class HomeFragment : CoreFragment() {
     @Composable
     override fun ComposeView() {
         super.ComposeView()
-        /*CoreAlertDialog(
-            enable = showDialog,
-            onDismissRequest = {  },
-            onConfirmation = {  },
-            dialogTitle =  stringResource(id = R.string.fake_title),
-            dialogContent = stringResource(id = R.string.fake_content),
-            textButtonConfirm = "OK",
-            textButtonCancel = "Cancel",
-            icon = R.drawable.ic_nazi_eagle
-        )*/
-
         HomeDialog(
             enable = showDialog,
             onDismissRequest = { showDialog = false },

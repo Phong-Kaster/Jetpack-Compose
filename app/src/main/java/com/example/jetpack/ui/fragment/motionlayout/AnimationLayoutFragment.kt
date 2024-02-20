@@ -9,7 +9,6 @@ import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
 import com.example.jetpack.ui.component.CoreTopBar2
 import com.example.jetpack.ui.fragment.motionlayout.component.AnimationLayout1
-import com.example.jetpack.ui.fragment.motionlayout.component.AnimationLayout4
 import com.example.jetpack.ui.theme.Background
 import com.example.jetpack.util.NavigationUtil.safeNavigate
 import com.example.jetpack.util.NavigationUtil.safeNavigateUp
@@ -48,7 +47,7 @@ fun AnimationLayout(
     CoreLayout(
         topBar = {
             CoreTopBar2(
-                onClick = onBack,
+                onLeftClick = onBack,
                 title = stringResource(id = R.string.motion_layout)
             )
         },

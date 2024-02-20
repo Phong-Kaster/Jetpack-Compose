@@ -69,4 +69,8 @@
     <string name="request_one_permission">Eine Berechtigung anfordern</string>
     <string name="go_to_settings">Zu den Einstellungen gehen</string>
     <string name="motion_layout">Motion-Layout</string>
+    <string name="multiple_permissions">Mehrere Berechtigungen</string>
+    <string name="attention">Achtung</string>
+    <string name="multiple_permissions_content">Unsere App benötigt die Berechtigungen ACCESS_COARSE_LOCATION und ACCESS_FINE_LOCATION, um standortbezogene Dienste bereitzustellen und das Benutzererlebnis zu verbessern. Diese Berechtigungen ermöglichen es uns, basierend auf Ihrem aktuellen Standort personalisierte Inhalte und Dienste bereitzustellen. Die Berechtigung **RECORD_AUDIO** ist notwendig, damit unsere App auf Audioeingaben zugreifen und diese verwalten kann, z. B. für Sprachbefehle und Audioaufnahmen. Wir versichern Ihnen, dass diese Berechtigungen ausschließlich zur Verbesserung der Funktionalität unserer App und zur Bereitstellung des bestmöglichen Benutzererlebnisses angefordert werden. Wir respektieren Ihre Privatsphäre und halten uns an strenge Richtlinien für den Umgang mit Daten.</string>
+
 </resources>

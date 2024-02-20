@@ -43,8 +43,8 @@ fun PermissionPopup(
                     modifier = Modifier
                         .clip(RoundedCornerShape(20.dp))
                         .background(color = Background)
-                        .padding(horizontal = 24.dp, vertical = 24.dp),
-                    itemSpacing = 12.dp
+                        .padding(horizontal = 16.dp, vertical = 24.dp),
+                    itemSpacing = 15.dp
                 ) {
                     Text(
                         text = stringResource(title),
@@ -58,7 +58,7 @@ fun PermissionPopup(
                         text = stringResource(content),
                         color = PrimaryColor,
                         style = customizedTextStyle(14, 500),
-                        textAlign = TextAlign.Center,
+                        textAlign = TextAlign.Start,
                         modifier = Modifier.fillMaxWidth()
                     )
 
@@ -86,4 +86,12 @@ fun PermissionPopup(
 @Composable
 fun PreviewPermissionPopup() {
     PermissionPopup()
+}
+
+@Preview
+@Composable
+fun PreviewPermissionPopup2() {
+    PermissionPopup(
+        content = R.string.multiple_permissions_content
+    )
 }
