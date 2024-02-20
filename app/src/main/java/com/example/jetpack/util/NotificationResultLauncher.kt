@@ -23,7 +23,7 @@ import javax.inject.Inject
 /**
  * this class handles only notification request instead define directly in ACTIVITY/ FRAGMENT
  * [Receive an activity result in a separate class]
- * @see https://developer.android.com/training/basics/intents/result.separate
+ * @see https://developer.android.com/training/basics/intents/result#separate
  */
 class NotificationResultLauncher
 @Inject

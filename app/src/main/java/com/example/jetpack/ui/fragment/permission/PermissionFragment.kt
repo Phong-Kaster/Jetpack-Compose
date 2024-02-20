@@ -1,8 +1,6 @@
 package com.example.jetpack.ui.fragment.permission
 
-import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
 import android.provider.Settings
 import android.util.Log
@@ -21,7 +19,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.core.app.ActivityCompat
 import com.example.jetpack.R
 import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
@@ -33,6 +30,7 @@ import com.example.jetpack.ui.theme.OppositePrimaryColor
 import com.example.jetpack.ui.theme.PrimaryColor
 import com.example.jetpack.ui.theme.customizedTextStyle
 import com.example.jetpack.util.NavigationUtil.safeNavigateUp
+import com.example.jetpack.util.PermissionUtil
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -69,9 +67,7 @@ class PermissionFragment : CoreFragment() {
         }
     }
 
-    private fun hasPermissions(context: Context, vararg permissions: String): Boolean = permissions.all {
-        ActivityCompat.checkSelfPermission(context, it) == PackageManager.PERMISSION_GRANTED
-    }
+
 
 
     /**
@@ -100,7 +96,7 @@ class PermissionFragment : CoreFragment() {
             onBack = { safeNavigateUp() },
             onRequestOnePermission = {},
             onRequestMultiplePermission = {
-                val enableAllPermissions = hasPermissions(requireContext(), *requiredPermissions)
+                val enableAllPermissions = PermissionUtil.hasPermissions(context = requireContext(), permissions = requiredPermissions)
                 if (enableAllPermissions) {
                     showToast("All permissions are enabled !")
                 } else {
