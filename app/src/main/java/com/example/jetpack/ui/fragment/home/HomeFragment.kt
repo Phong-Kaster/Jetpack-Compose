@@ -110,6 +110,7 @@ class HomeFragment : CoreFragment() {
                     HomeShortcut.Permissions2 ->  safeNavigate(R.id.toPermission2)
                     HomeShortcut.MotionLayout ->  safeNavigate(R.id.toMotionLayout)
                     HomeShortcut.Login -> safeNavigate(R.id.toLogin)
+                    HomeShortcut.Bluetooth -> safeNavigate(R.id.toBluetooth)
                     else -> {}
                 }
             }

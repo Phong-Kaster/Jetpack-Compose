@@ -14,12 +14,23 @@
     <!-- For showing Lockscreen Activity as device's lockscreen -->
     <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
 
-    <!-- For permission fragment -->
+    <!-- For request multiple permissions sample -->
     <uses-permission android:name="android.permission.RECORD_AUDIO"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
+    <!-- for using Bluetooth on Android 12 (API level 31) or higher - https://developer.android.com/develop/connectivity/bluetooth/bt-permissions#declare-android12-or-higher-->
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" android:usesPermissionFlags="neverForLocation" tools:targetApi="s" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT"/>
 
+    <!-- for using Bluetooth on Android 11 (API level 30) or lower - https://developer.android.com/develop/connectivity/bluetooth/bt-permissions#declare-android11-or-lower -->
+    <uses-permission android:name="android.permission.BLUETOOTH" android:maxSdkVersion="30" />
+
+    <!-- for using Bluetooth, discover local Bluetooth devices - https://developer.android.com/develop/connectivity/bluetooth/bt-permissions#discover-local-devices -->
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" android:maxSdkVersion="30" />
+
+    <!-- Our app can work without Bluetooth, if set true then this app will be hidden on Google Play Store - https://developer.android.com/develop/connectivity/bluetooth/bt-permissions#features-->
+    <uses-feature android:name="android.hardware.bluetooth" android:required="false"/>
 
     <application
         android:name=".JetpackApplication"

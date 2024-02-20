@@ -104,11 +104,13 @@
         android:id="@+id/animationLayoutFragment"
         android:name="com.example.jetpack.ui.fragment.motionlayout.AnimationLayoutFragment" />
 
-
-
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.jetpack.ui.fragment.login.LoginFragment" />
+
+    <fragment
+        android:id="@+id/bluetoothFragment"
+        android:name="com.example.jetpack.ui.fragment.bluetooth.BluetoothFragment" />
 
     <activity
         android:id="@+id/lockscreenActivity"
@@ -243,6 +245,15 @@
     <action
         android:id="@+id/toPermission2"
         app:destination="@id/permissionFragment2"
+        app:enterAnim="@anim/enter_slide_in_right"
+        app:exitAnim="@anim/exit_slide_out_left"
+        app:popEnterAnim="@anim/enter_slide_in_left"
+        app:popExitAnim="@anim/exit_slide_out_right"
+        app:popUpToInclusive="true"/>
+
+    <action
+        android:id="@+id/toBluetooth"
+        app:destination="@id/bluetoothFragment"
         app:enterAnim="@anim/enter_slide_in_right"
         app:exitAnim="@anim/exit_slide_out_left"
         app:popEnterAnim="@anim/enter_slide_in_left"
