@@ -80,5 +80,6 @@
         \n\n• In the menu, select ‘Settings’.
         \n\n• Look for ‘Notifications’ and toggle the switch to the ‘On’ position.
     </string>
-    <string name="this_screen_s_functionality_mirrors_the_permission_screen_but_the_underlying_logic_is_implemented_in_a_separate_class_and_utilizes_activity_results">This screen\'s functionality mirrors the permission screen, but the underlying logic is implemented in a separate class and utilizes activity results</string>
+    <string name="this_screen_s_functionality_mirrors">This screen\'s functionality mirrors the permission screen, but the underlying logic is implemented in a separate class and utilizes activity results</string>
+    <string name="this_class_makes_the_request"><![CDATA[This class makes the request for notification runtime permission & require definitions directly within an Activity or Fragment.]]></string>
 </resources>

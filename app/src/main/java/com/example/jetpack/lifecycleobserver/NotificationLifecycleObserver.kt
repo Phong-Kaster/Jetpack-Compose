@@ -1,4 +1,4 @@
-package com.example.jetpack.ui.fragment.permission.lifecycleobserver
+package com.example.jetpack.lifecycleobserver
 
 import android.Manifest
 import android.app.Activity

@@ -72,6 +72,7 @@ fun PermissionPopup(
                             .clip(shape = RoundedCornerShape(15.dp))
                             .background(color = PrimaryColor)
                             .clickable {
+                                onDismiss()
                                 goSetting()
                             }
                             .padding(vertical = 10.dp)

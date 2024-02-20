@@ -26,7 +26,8 @@ import com.example.jetpack.core.CoreLayout
 import com.example.jetpack.ui.component.CoreTopBar2
 import com.example.jetpack.ui.component.SolidButton
 import com.example.jetpack.ui.fragment.permission.component.PermissionPopup
-import com.example.jetpack.ui.fragment.permission.lifecycleobserver.NotificationLifecycleObserver2
+import com.example.jetpack.lifecycleobserver.OnePermissionLifecycleObserver
+import com.example.jetpack.lifecycleobserver.MultiplePermissionsLifecycleObserver
 import com.example.jetpack.ui.theme.Background
 import com.example.jetpack.ui.theme.OppositePrimaryColor
 import com.example.jetpack.ui.theme.PrimaryColor
@@ -38,42 +39,73 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class PermissionFragment2 : CoreFragment() {
 
-    private lateinit var notificationObserver: NotificationLifecycleObserver2
+    private lateinit var onePermissionObserver: OnePermissionLifecycleObserver
+    private lateinit var multiplePermissionsObserver: MultiplePermissionsLifecycleObserver
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setupNotificationRequestLauncher()
+        setupObserverOnePermission()
+        setupObserverMultiplePermissions()
     }
 
     /*************************************************
      * for request one permission
      */
     private var showPopupOnePermission: Boolean by mutableStateOf(false)
-
-    private val callback = object : NotificationLifecycleObserver2.Callback{
+    private val callbackOnePermission = object : OnePermissionLifecycleObserver.Callback{
         override fun openRationaleDialog() {
             showPopupOnePermission = true
         }
     }
-    private fun setupNotificationRequestLauncher() {
-        notificationObserver = NotificationLifecycleObserver2(
+
+    private fun setupObserverOnePermission() {
+        onePermissionObserver = OnePermissionLifecycleObserver(
             registry = requireActivity().activityResultRegistry,
             activity = requireActivity(),
-            callback = callback)
-        lifecycle.addObserver(notificationObserver)
+            callback = callbackOnePermission)
+        lifecycle.addObserver(onePermissionObserver)
     }
 
-
-
-    private fun requestNotificationPermission() {
+    private fun requestOnePermission() {
         //1. Request POST NOTIFICATION permission if device has Android OS from 13
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             val isAccessed: Boolean = PermissionUtil.isNotiEnabled(context = requireContext())
             if (!isAccessed) {
-                notificationObserver.launcher.launch(android.Manifest.permission.POST_NOTIFICATIONS)
+                onePermissionObserver.launcher.launch(android.Manifest.permission.POST_NOTIFICATIONS)
             }
         }
     }
+
+    /*************************************************
+     * for request multiple permissions
+     */
+    private var showPopupMultiplePermissions: Boolean by mutableStateOf(false)
+    private val callbackMultiplePermissions = object : MultiplePermissionsLifecycleObserver.Callback{
+        override fun openRationaleDialog() {
+            showPopupMultiplePermissions = true
+        }
+    }
+
+    private fun setupObserverMultiplePermissions() {
+        multiplePermissionsObserver = MultiplePermissionsLifecycleObserver(
+            registry = requireActivity().activityResultRegistry,
+            activity = requireActivity(),
+            callback = callbackMultiplePermissions)
+        lifecycle.addObserver(multiplePermissionsObserver)
+    }
+
+    private fun requestMultiplePermission(){
+        val enableAllPermissions = PermissionUtil.hasPermissions(
+            context = requireContext(),
+            permissions = MultiplePermissionsLifecycleObserver.mandatoryPermissions
+        )
+        if (enableAllPermissions) {
+            showToast("All permissions are enabled !")
+        } else {
+            multiplePermissionsObserver.launcher.launch(MultiplePermissionsLifecycleObserver.mandatoryPermissions)
+        }
+    }
+
 
     /*************************************************
      * open app setting
@@ -98,8 +130,8 @@ class PermissionFragment2 : CoreFragment() {
         PermissionLayout2(
             onBack = { safeNavigateUp() },
             onOpenAppSetting = { openSettingApp() },
-            onRequestOnePermission = { requestNotificationPermission() },
-            onRequestMultiplePermission = {},
+            onRequestOnePermission = { requestOnePermission() },
+            onRequestMultiplePermission = { requestMultiplePermission() },
         )
 
         PermissionPopup(
@@ -107,6 +139,14 @@ class PermissionFragment2 : CoreFragment() {
             title = R.string.attention,
             content = R.string.one_permission_content,
             onDismiss = { showPopupOnePermission = false },
+            goSetting = { openSettingApp() },
+        )
+
+        PermissionPopup(
+            enable = showPopupMultiplePermissions,
+            title = R.string.attention,
+            content = R.string.multiple_permissions_content,
+            onDismiss = { showPopupMultiplePermissions = false },
             goSetting = { openSettingApp() },
         )
     }
@@ -162,7 +202,7 @@ fun PermissionLayout2(
                     .padding(16.dp)
             ) {
                 Text(
-                    text = stringResource(R.string.this_screen_s_functionality_mirrors_the_permission_screen_but_the_underlying_logic_is_implemented_in_a_separate_class_and_utilizes_activity_results),
+                    text = stringResource(R.string.this_screen_s_functionality_mirrors),
                     style = customizedTextStyle(fontSize = 16, fontWeight = 400),
                     color = PrimaryColor,
                     modifier = Modifier

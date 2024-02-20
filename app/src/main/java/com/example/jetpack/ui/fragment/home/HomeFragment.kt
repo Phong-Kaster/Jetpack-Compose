@@ -31,7 +31,7 @@ import com.example.jetpack.ui.component.CoreBottomBar
 import com.example.jetpack.ui.component.CoreDialog
 import com.example.jetpack.ui.fragment.home.component.HomeDialog
 import com.example.jetpack.ui.fragment.home.component.HomeShortcutItem
-import com.example.jetpack.ui.fragment.permission.lifecycleobserver.NotificationLifecycleObserver
+import com.example.jetpack.lifecycleobserver.NotificationLifecycleObserver
 import com.example.jetpack.ui.theme.Background
 import com.example.jetpack.ui.view.DigitalClock2
 import com.example.jetpack.util.NavigationUtil.safeNavigate
@@ -51,8 +51,8 @@ class HomeFragment : CoreFragment() {
     @SuppressLint("UnsafeRepeatOnLifecycleDetector")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //setupNotificationLauncher()
-        //setupNotification()
+        setupNotificationLauncher()
+        setupNotification()
     }
 
 

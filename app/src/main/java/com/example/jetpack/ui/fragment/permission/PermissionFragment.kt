@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -107,11 +108,11 @@ class PermissionFragment : CoreFragment() {
                 ).show()
             } else {
                 if (shouldShowRequestPermissionRationale(android.Manifest.permission.RECORD_AUDIO)) {
-
+                    // TODO: do nothing because Android system will request automatically
                 } else if (shouldShowRequestPermissionRationale(android.Manifest.permission.ACCESS_COARSE_LOCATION)) {
-
+                    // TODO: do nothing because Android system will request automatically
                 } else if (shouldShowRequestPermissionRationale(android.Manifest.permission.ACCESS_FINE_LOCATION)) {
-
+                    // TODO: do nothing because Android system will request automatically
                 } else {
                     showPopupMultiplePermissions = true
                 }
@@ -224,7 +225,12 @@ fun PermissionLayout(
                     .background(color = Background)
                     .padding(16.dp)
             ) {
-
+                Text(
+                    text = stringResource(R.string.this_class_makes_the_request),
+                    style = customizedTextStyle(fontSize = 16, fontWeight = 400),
+                    color = PrimaryColor,
+                    modifier = Modifier
+                )
             }
         }
     )

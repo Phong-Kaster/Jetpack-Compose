@@ -1,23 +1,18 @@
-package com.example.jetpack.ui.fragment.permission.lifecycleobserver
+package com.example.jetpack.lifecycleobserver
 
 import android.app.Activity
 import android.content.Intent
-import android.os.Build
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.ActivityResultRegistry
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
-import com.example.jetpack.notification.LockscreenManager
-import com.example.jetpack.notification.NotificationManager
-import com.example.jetpack.util.AppUtil
-import com.example.jetpack.util.PermissionUtil
-import java.util.concurrent.Callable
 import javax.inject.Inject
 
 /**
+ * @author Phong-Kaster
+ *
  * This class encapsulates the logic for requesting notification runtime permissions.
  * It manages the permission request process and handles the user's response within its own scope,
  * rather than relying on direct definitions within an Activity or Fragment.
@@ -28,7 +23,7 @@ import javax.inject.Inject
  *
  * @see [Receive an activity result in a separate class] https://developer.android.com/training/basics/intents/result#separate
  */
-class NotificationLifecycleObserver2
+class OnePermissionLifecycleObserver
 @Inject
 constructor(
     private val registry: ActivityResultRegistry,
@@ -36,7 +31,7 @@ constructor(
     private val callback: Callback
 ) : DefaultLifecycleObserver {
     lateinit var launcher: ActivityResultLauncher<String>
-    lateinit var settingLauncher: ActivityResultLauncher<Intent>
+    private lateinit var settingLauncher: ActivityResultLauncher<Intent>
 
     private val tag = "NotificationRuntimeLauncher2"
     override fun onCreate(owner: LifecycleOwner) {
@@ -49,13 +44,12 @@ constructor(
     private fun createRuntimeLauncher(owner: LifecycleOwner): ActivityResultLauncher<String> {
         return registry.register("notificationLauncher", owner, ActivityResultContracts.RequestPermission()) { isGranted ->
             if (isGranted) {
-                // TODO: do nothing
+                // TODO: do nothing because everything we need is OK
             } else {
                 if (ActivityCompat.shouldShowRequestPermissionRationale(activity, android.Manifest.permission.POST_NOTIFICATIONS)
                 ) {
-                    // TODO: should Show Request Permission Rationale so that we do not need to do any more
+                    // TODO: do nothing because Android system will request automatically
                 } else {
-                    // TODO: show jetpack compose dialog
                     callback.openRationaleDialog()
                 }
             }
