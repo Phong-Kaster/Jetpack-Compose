@@ -2,6 +2,8 @@ package com.example.jetpack.ui.fragment.permission
 
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
+import android.os.Bundle
 import android.provider.Settings
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
@@ -11,6 +13,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -20,45 +25,93 @@ import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
 import com.example.jetpack.ui.component.CoreTopBar2
 import com.example.jetpack.ui.component.SolidButton
+import com.example.jetpack.ui.fragment.permission.component.PermissionPopup
+import com.example.jetpack.ui.fragment.permission.lifecycleobserver.NotificationLifecycleObserver2
 import com.example.jetpack.ui.theme.Background
 import com.example.jetpack.ui.theme.OppositePrimaryColor
 import com.example.jetpack.ui.theme.PrimaryColor
 import com.example.jetpack.ui.theme.customizedTextStyle
 import com.example.jetpack.util.NavigationUtil.safeNavigateUp
+import com.example.jetpack.util.PermissionUtil
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class PermissionFragment2 : CoreFragment() {
 
-    /**
-     * OPEN SETTING APPLICATION
+    private lateinit var notificationObserver: NotificationLifecycleObserver2
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setupNotificationRequestLauncher()
+    }
+
+    /*************************************************
+     * for request one permission
      */
-    private fun openSettingPermission() {
+    private var showPopupOnePermission: Boolean by mutableStateOf(false)
+
+    private val callback = object : NotificationLifecycleObserver2.Callback{
+        override fun openRationaleDialog() {
+            showPopupOnePermission = true
+        }
+    }
+    private fun setupNotificationRequestLauncher() {
+        notificationObserver = NotificationLifecycleObserver2(
+            registry = requireActivity().activityResultRegistry,
+            activity = requireActivity(),
+            callback = callback)
+        lifecycle.addObserver(notificationObserver)
+    }
+
+
+
+    private fun requestNotificationPermission() {
+        //1. Request POST NOTIFICATION permission if device has Android OS from 13
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            val isAccessed: Boolean = PermissionUtil.isNotiEnabled(context = requireContext())
+            if (!isAccessed) {
+                notificationObserver.launcher.launch(android.Manifest.permission.POST_NOTIFICATIONS)
+            }
+        }
+    }
+
+    /*************************************************
+     * open app setting
+     */
+    private val settingLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {}
+    private fun openSettingApp() {
         try {
             val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
             val uri = Uri.fromParts("package", requireActivity().packageName, null)
             intent.setData(uri)
             settingLauncher.launch(intent)
-        } catch (_: Exception) {
-
+        } catch (ex: Exception) {
+            ex.printStackTrace()
         }
     }
 
-    private val settingLauncher =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
 
-        }
 
     @Composable
     override fun ComposeView() {
         super.ComposeView()
         PermissionLayout2(
             onBack = { safeNavigateUp() },
-            onOpenAppSetting = { openSettingPermission() },
+            onOpenAppSetting = { openSettingApp() },
+            onRequestOnePermission = { requestNotificationPermission() },
             onRequestMultiplePermission = {},
-            onRequestOnePermission = {}
+        )
+
+        PermissionPopup(
+            enable = showPopupOnePermission,
+            title = R.string.attention,
+            content = R.string.one_permission_content,
+            onDismiss = { showPopupOnePermission = false },
+            goSetting = { openSettingApp() },
         )
     }
+
+
 }
 
 @Composable

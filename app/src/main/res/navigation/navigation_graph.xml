@@ -97,6 +97,10 @@
         android:name="com.example.jetpack.ui.fragment.permission.PermissionFragment" />
 
     <fragment
+        android:id="@+id/permissionFragment2"
+        android:name="com.example.jetpack.ui.fragment.permission.PermissionFragment2" />
+
+    <fragment
         android:id="@+id/animationLayoutFragment"
         android:name="com.example.jetpack.ui.fragment.motionlayout.AnimationLayoutFragment" />
 
@@ -230,6 +234,15 @@
     <action
         android:id="@+id/toLogin"
         app:destination="@id/loginFragment"
+        app:enterAnim="@anim/enter_slide_in_right"
+        app:exitAnim="@anim/exit_slide_out_left"
+        app:popEnterAnim="@anim/enter_slide_in_left"
+        app:popExitAnim="@anim/exit_slide_out_right"
+        app:popUpToInclusive="true"/>
+
+    <action
+        android:id="@+id/toPermission2"
+        app:destination="@id/permissionFragment2"
         app:enterAnim="@anim/enter_slide_in_right"
         app:exitAnim="@anim/exit_slide_out_left"
         app:popEnterAnim="@anim/enter_slide_in_left"

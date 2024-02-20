@@ -31,10 +31,10 @@ import com.example.jetpack.ui.component.CoreBottomBar
 import com.example.jetpack.ui.component.CoreDialog
 import com.example.jetpack.ui.fragment.home.component.HomeDialog
 import com.example.jetpack.ui.fragment.home.component.HomeShortcutItem
+import com.example.jetpack.ui.fragment.permission.lifecycleobserver.NotificationLifecycleObserver
 import com.example.jetpack.ui.theme.Background
 import com.example.jetpack.ui.view.DigitalClock2
 import com.example.jetpack.util.NavigationUtil.safeNavigate
-import com.example.jetpack.ui.fragment.permission.lifecycleobserver.NotificationResultLauncher
 import com.example.jetpack.util.PermissionUtil
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -43,7 +43,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class HomeFragment : CoreFragment() {
     private var showDialog by mutableStateOf(false)
-    private lateinit var notificationResultLauncher: NotificationResultLauncher
+    private lateinit var notificationLifecycleObserver: NotificationLifecycleObserver
 
     @Inject
     lateinit var weatherRepositoryImplement: WeatherRepositoryImplement
@@ -57,11 +57,11 @@ class HomeFragment : CoreFragment() {
 
 
     private fun setupNotificationLauncher() {
-        notificationResultLauncher = NotificationResultLauncher(
+        notificationLifecycleObserver = NotificationLifecycleObserver(
             activity = requireActivity(),
             registry = requireActivity().activityResultRegistry
         )
-        lifecycle.addObserver(notificationResultLauncher)
+        lifecycle.addObserver(notificationLifecycleObserver)
     }
 
     private fun setupNotification() {
@@ -69,7 +69,7 @@ class HomeFragment : CoreFragment() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             val isAccessed: Boolean = PermissionUtil.isNotiEnabled(context = requireContext())
             if (!isAccessed) {
-                notificationResultLauncher.systemLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                notificationLifecycleObserver.systemLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
             }
         }
 
@@ -107,6 +107,7 @@ class HomeFragment : CoreFragment() {
                     HomeShortcut.Quote -> safeNavigate(R.id.toQuote)
                     HomeShortcut.AccuWeatherLocation -> safeNavigate(R.id.toAccuWeatherLocation)
                     HomeShortcut.Permissions ->  safeNavigate(R.id.toPermission)
+                    HomeShortcut.Permissions2 ->  safeNavigate(R.id.toPermission2)
                     HomeShortcut.MotionLayout ->  safeNavigate(R.id.toMotionLayout)
                     HomeShortcut.Login -> safeNavigate(R.id.toLogin)
                     else -> {}
