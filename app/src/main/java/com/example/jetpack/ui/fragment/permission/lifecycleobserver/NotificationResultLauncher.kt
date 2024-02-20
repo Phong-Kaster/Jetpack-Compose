@@ -1,4 +1,4 @@
-package com.example.jetpack.util
+package com.example.jetpack.ui.fragment.permission.lifecycleobserver
 
 import android.Manifest
 import android.app.Activity
@@ -18,6 +18,8 @@ import androidx.lifecycle.LifecycleOwner
 import com.example.jetpack.R
 import com.example.jetpack.notification.LockscreenManager
 import com.example.jetpack.notification.NotificationManager
+import com.example.jetpack.util.AppUtil
+import com.example.jetpack.util.PermissionUtil
 import javax.inject.Inject
 
 /**

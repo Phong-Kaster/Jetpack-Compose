@@ -36,7 +36,10 @@ import com.example.jetpack.util.NavigationUtil.safeNavigateUp
 import com.example.jetpack.util.PermissionUtil
 import dagger.hilt.android.AndroidEntryPoint
 
-
+/**
+ * This fragment handles request one permission and multiple permissions.
+ * All logic are placed in this fragment.
+ */
 @AndroidEntryPoint
 class PermissionFragment : CoreFragment() {
 
@@ -46,15 +49,16 @@ class PermissionFragment : CoreFragment() {
     /***************************************
      * for request one permission
      * */
+    private var showPopupOnePermission: Boolean by mutableStateOf(false)
     private val notificationLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
             if (isGranted) {
                 showToast("Notification permission is enabled")
             } else {
                 if (shouldShowRequestPermissionRationale(android.Manifest.permission.POST_NOTIFICATIONS)) {
-
+                    Log.d(TAG, "shouldShowRequestPermissionRationale")
                 } else {
-
+                    showPopupOnePermission = true
                 }
             }
         }
@@ -103,11 +107,11 @@ class PermissionFragment : CoreFragment() {
                 ).show()
             } else {
                 if (shouldShowRequestPermissionRationale(android.Manifest.permission.RECORD_AUDIO)) {
-                    Log.d(TAG, "shouldShowRequestPermissionRationale RECORD_AUDIO ")
+
                 } else if (shouldShowRequestPermissionRationale(android.Manifest.permission.ACCESS_COARSE_LOCATION)) {
-                    Log.d(TAG, "shouldShowRequestPermissionRationale ACCESS_COARSE_LOCATION ")
+
                 } else if (shouldShowRequestPermissionRationale(android.Manifest.permission.ACCESS_FINE_LOCATION)) {
-                    Log.d(TAG, "shouldShowRequestPermissionRationale ACCESS_FINE_LOCATION ")
+
                 } else {
                     showPopupMultiplePermissions = true
                 }
@@ -160,6 +164,14 @@ class PermissionFragment : CoreFragment() {
             title = R.string.attention,
             content = R.string.multiple_permissions_content,
             onDismiss = { showPopupMultiplePermissions = false },
+            goSetting = { openSettingPermission() },
+        )
+
+        PermissionPopup(
+            enable = showPopupOnePermission,
+            title = R.string.attention,
+            content = R.string.one_permission_content,
+            onDismiss = { showPopupOnePermission = false },
             goSetting = { openSettingPermission() },
         )
     }

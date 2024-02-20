@@ -64,6 +64,7 @@
     <string name="title_activity_lockscreen2">Sperrbildschirm2</string>
     <string name="accu_weather">AccuWetter</string>
     <string name="permissions">Berechtigungen</string>
+    <string name="permissions_2">Berechtigungen 2</string>
     <string name="login">Anmelden</string>
     <string name="request_multiple_permissions">Mehrere Berechtigungen anfordern</string>
     <string name="request_one_permission">Eine Berechtigung anfordern</string>

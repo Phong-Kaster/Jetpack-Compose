@@ -34,7 +34,7 @@ import com.example.jetpack.ui.fragment.home.component.HomeShortcutItem
 import com.example.jetpack.ui.theme.Background
 import com.example.jetpack.ui.view.DigitalClock2
 import com.example.jetpack.util.NavigationUtil.safeNavigate
-import com.example.jetpack.util.NotificationResultLauncher
+import com.example.jetpack.ui.fragment.permission.lifecycleobserver.NotificationResultLauncher
 import com.example.jetpack.util.PermissionUtil
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject

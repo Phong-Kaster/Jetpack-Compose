@@ -64,6 +64,7 @@
     <string name="title_activity_lockscreen2">잠금화면2</string>
     <string name="accu_weather">AccuWeather</string>
     <string name="permissions">권한</string>
+    <string name="permissions_2">권한 2</string>
     <string name="login">로그인</string>
     <string name="request_multiple_permissions">여러 권한 요청</string>
     <string name="request_one_permission">하나의 권한 요청</string>

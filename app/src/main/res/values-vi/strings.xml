@@ -64,6 +64,7 @@
     <string name="title_activity_lockscreen2">Màn hình khóa2</string>
     <string name="accu_weather">AccuWeather</string>
     <string name="permissions">Quyền</string>
+    <string name="permissions_2">Quyền 2</string>
     <string name="login">Đăng nhập</string>
     <string name="request_multiple_permissions">Yêu cầu nhiều quyền</string>
     <string name="request_one_permission">Yêu cầu một quyền</string>

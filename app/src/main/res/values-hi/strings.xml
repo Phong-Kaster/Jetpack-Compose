@@ -64,6 +64,7 @@
     <string name="title_activity_lockscreen2">लॉकस्क्रीन2</string>
     <string name="accu_weather">एक्यूवेदर</string>
     <string name="permissions">अनुमतियाँ</string>
+    <string name="permissions_2">अनुमतियाँ 2</string>
     <string name="login">लॉग इन</string>
     <string name="request_multiple_permissions">कई अनुमतियाँ मांगें</string>
     <string name="request_one_permission">एक अनुमति मांगें</string>

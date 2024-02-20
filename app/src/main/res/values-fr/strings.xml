@@ -64,6 +64,7 @@
     <string name="title_activity_lockscreen2">Écran de verrouillage2</string>
     <string name="accu_weather">AccuWeather</string>
     <string name="permissions">Permissions</string>
+    <string name="permissions_2">Permissions 2</string>
     <string name="login">Connexion</string>
     <string name="request_multiple_permissions">Demander plusieurs permissions</string>
     <string name="request_one_permission">Demander une permission</string>
