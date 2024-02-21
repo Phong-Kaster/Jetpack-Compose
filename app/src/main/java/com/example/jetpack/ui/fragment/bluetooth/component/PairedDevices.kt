@@ -57,10 +57,10 @@ fun PairedDevices(
     isDeviceScanning: Boolean,
     bluetoothDevices: Array<BluetoothDevice>,
 ) {
-    Column(modifier = Modifier.padding(16.dp)) {
+    Column(modifier = Modifier) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.fillMaxWidth()){
+            modifier = Modifier.fillMaxWidth().padding(vertical = 16.dp)){
 
             Text(
                 text = "Paired Devices",

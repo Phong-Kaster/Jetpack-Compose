@@ -27,8 +27,6 @@ constructor(val context: JetpackApplication) {
     private var bluetoothManager: BluetoothManager = context.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
     private val discoveredDevices = mutableListOf<BluetoothDevice>()
 
-    /*private val _discoveredDevicesFlow = MutableStateFlow<List<BluetoothDevice>>(listOf())
-    val discoveredDevicesFlow = _discoveredDevicesFlow.asStateFlow()*/
     /**
      * bluetoothAdapter represents the local Bluetooth adapter (Bluetooth radio).
      * The BluetoothAdapter is the entry-point for all Bluetooth interaction.
@@ -74,7 +72,7 @@ constructor(val context: JetpackApplication) {
         override fun onReceive(context: Context, intent: Intent) {
             if (BluetoothDevice.ACTION_FOUND == intent.action) {
                 val device: BluetoothDevice? = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE)
-
+                Log.d(tag, "onReceive - device ${device?.name} with ${device?.address}")
                 if (device != null && device.name != null && !discoveredDevices.contains(device)) {
                     discoveredDevices.add(device)
                 }
@@ -112,6 +110,10 @@ constructor(val context: JetpackApplication) {
 
         bluetoothAdapter?.cancelDiscovery()
         context.unregisterReceiver(receiver)
+    }
+
+    fun resetDiscorverdDevices(){
+        discoveredDevices.clear()
     }
 
     fun getDiscoveredDevices(): List<BluetoothDevice> {

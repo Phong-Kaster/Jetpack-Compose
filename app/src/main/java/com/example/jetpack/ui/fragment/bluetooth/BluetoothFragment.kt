@@ -275,9 +275,8 @@ fun BluetoothLayout(
                         style = customizedTextStyle(fontSize = 22, fontWeight = 500),
                         color = Color.Black,
                         textAlign = TextAlign.Center,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = 16.dp)
+                        modifier = Modifier.fillMaxWidth()
+
                     )
                 }
 

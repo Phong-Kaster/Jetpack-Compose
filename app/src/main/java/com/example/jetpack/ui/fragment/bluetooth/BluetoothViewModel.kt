@@ -50,6 +50,7 @@ constructor(
     }
 
     fun startDiscovery(){
+        bluetoothRepository.resetDiscorverdDevices()
         bluetoothRepository.startDiscovery()
         getDiscoveredDevices()
     }
