@@ -83,10 +83,71 @@ fun PermissionPopup(
     }
 }
 
+@Composable
+fun PermissionPopup(
+    enable: Boolean = true,
+    @StringRes title: Int = R.string.fake_title,
+    content: String? = "",
+    goSetting: () -> Unit = {},
+    onDismiss: () -> Unit = {},
+) {
+
+
+    if (enable) {
+        JetpackComposeTheme {
+            Dialog(
+                onDismissRequest = {
+                    onDismiss()
+                }
+            ) {
+                CenterColumn(
+                    modifier = Modifier
+                        .clip(RoundedCornerShape(20.dp))
+                        .background(color = Background)
+                        .padding(horizontal = 16.dp, vertical = 24.dp),
+                    itemSpacing = 15.dp
+                ) {
+                    Text(
+                        text = stringResource(title),
+                        color = PrimaryColor,
+                        style = customizedTextStyle(16, 700),
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+
+                    Text(
+                        text = content ?: "",
+                        color = PrimaryColor,
+                        style = customizedTextStyle(14, 500),
+                        textAlign = TextAlign.Start,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+
+                    Text(
+                        text = stringResource(R.string.go_to_settings),
+                        style = customizedTextStyle(18, 700),
+                        color = OppositePrimaryColor,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clip(shape = RoundedCornerShape(15.dp))
+                            .background(color = PrimaryColor)
+                            .clickable {
+                                onDismiss()
+                                goSetting()
+                            }
+                            .padding(vertical = 10.dp)
+                    )
+                }
+            }
+        }
+    }
+}
+
 @Preview
 @Composable
 fun PreviewPermissionPopup() {
-    PermissionPopup()
+    PermissionPopup(content = R.string.fake_message)
 }
 
 @Preview

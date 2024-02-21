@@ -71,7 +71,6 @@ fun CoreButton(
             )
             .padding(horizontal = paddingHorizontal, vertical = paddingVertical)
     )
-
     {
         if (leftIcon != null) {
             Icon(
