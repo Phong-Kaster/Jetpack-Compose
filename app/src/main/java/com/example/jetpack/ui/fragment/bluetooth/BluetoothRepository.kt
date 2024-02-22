@@ -67,12 +67,18 @@ constructor(val context: JetpackApplication) {
         }
     }
 
+    /**
+     * To receive information about each device discovered.
+     * The system broadcasts this intent for each device, we can get MAC address which is used to connect
+     * from this device to the target device
+     */
     private val receiver = object : BroadcastReceiver() {
         @SuppressLint("MissingPermission")
         override fun onReceive(context: Context, intent: Intent) {
             if (BluetoothDevice.ACTION_FOUND == intent.action) {
+
                 val device: BluetoothDevice? = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE)
-                Log.d(tag, "onReceive - device ${device?.name} with ${device?.address}")
+
                 if (device != null && device.name != null && !discoveredDevices.contains(device)) {
                     discoveredDevices.add(device)
                 }
@@ -81,6 +87,10 @@ constructor(val context: JetpackApplication) {
     }
 
 
+    /**
+     * Discover devices - The discovery process usually involves an inquiry scan of about 12 seconds,
+     * followed by a page scan of each device found to retrieve its Bluetooth name.
+     */
     fun startDiscovery() {
         Log.d(tag, "BluetoothRepository - startDiscovery")
         val isBluetoothSupported = isBluetoothSupported()

@@ -53,7 +53,6 @@ import com.example.jetpack.util.NavigationUtil.safeNavigateUp
 import com.example.jetpack.util.PermissionUtil
 import dagger.hilt.android.AndroidEntryPoint
 
-
 /**
  * @author Phong-Kaster
  * @see [Bluetooth overview](https://developer.android.com/develop/connectivity/bluetooth)
@@ -63,7 +62,6 @@ class BluetoothFragment : CoreFragment() {
 
     private val viewModel: BluetoothViewModel by viewModels()
     private val tag = "bluetooth"
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -10,17 +10,17 @@ import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
-import com.example.jetpack.lifecycleobserver.MultiplePermissionsLifecycleObserver
 import javax.inject.Inject
 
 /**
  * @author Phong-Kaster
  *
- * This class encapsulates the logic for requesting notification runtime permissions.
+ * <p>This class encapsulates the logic for requesting notification runtime permissions.
  * It manages the permission request process and handles the user's response within its own scope,
  * rather than relying on direct definitions within an Activity or Fragment.
  *
- * This class can request multiple runtime permissions simultaneously, instead of requiring separate requests for each permission.
+ * <p>This class can request multiple runtime permissions simultaneously,
+ * instead of requiring separate requests for each permission.
  */
 class BluetoothLifecycleObserver
 @Inject
