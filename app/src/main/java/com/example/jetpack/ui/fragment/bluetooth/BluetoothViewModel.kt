@@ -1,7 +1,6 @@
 package com.example.jetpack.ui.fragment.bluetooth
 
 import android.bluetooth.BluetoothDevice
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -9,7 +8,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -50,7 +48,7 @@ constructor(
     }
 
     fun startDiscovery(){
-        bluetoothRepository.resetDiscorverdDevices()
+        bluetoothRepository.resetDiscoveredDevices()
         bluetoothRepository.startDiscovery()
         getDiscoveredDevices()
     }
@@ -73,5 +71,9 @@ constructor(
                 delay(1000)
             }
         }
+    }
+
+    fun connectToDevice(device: BluetoothDevice){
+        bluetoothRepository.connectToDevice(device = device)
     }
 }

@@ -56,6 +56,7 @@ fun PairedDevices(
     modifier: Modifier = Modifier,
     isDeviceScanning: Boolean,
     bluetoothDevices: Array<BluetoothDevice>,
+    onConnectDevice: (BluetoothDevice) -> Unit = {}
 ) {
     Column(modifier = Modifier) {
         Row(
@@ -90,7 +91,7 @@ fun PairedDevices(
                 ) {
                     PairdDeviceItem(
                         bluetoothDevice = bluetoothDevices,
-                        onClick = {},
+                        onClick = onConnectDevice,
                     )
                 }
             })

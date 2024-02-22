@@ -126,7 +126,6 @@ class BluetoothFragment : CoreFragment() {
                 val enableBluetoothIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
                 doSomeThing.launch(enableBluetoothIntent)
             } else {
-                showToast("Bluetooth is turned on")
                 viewModel.startDiscovery()
             }
         }
@@ -160,6 +159,7 @@ class BluetoothFragment : CoreFragment() {
             pairedDevices = viewModel.pairedDevices.collectAsState().value,
             onBack = { safeNavigateUp() },
             onTurnOnBluetooth = { turnonBluetooth() },
+            onConnectDevice = { viewModel.connectToDevice(it) }
         )
 
 
@@ -179,6 +179,7 @@ fun BluetoothLayout(
     pairedDevices: Array<BluetoothDevice>,
     onBack: () -> Unit = {},
     onTurnOnBluetooth: () -> Unit = {},
+    onConnectDevice : (BluetoothDevice) -> Unit = {}
 ) {
     CoreLayout(
         backgroundColor = Color(0xFFF5FCFF),
@@ -283,7 +284,9 @@ fun BluetoothLayout(
                  * */
                 PairedDevices(
                     isDeviceScanning = isDeviceScanning,
-                    bluetoothDevices = pairedDevices
+                    bluetoothDevices = pairedDevices,
+                    onConnectDevice = onConnectDevice
+
                 )
             }
         }
