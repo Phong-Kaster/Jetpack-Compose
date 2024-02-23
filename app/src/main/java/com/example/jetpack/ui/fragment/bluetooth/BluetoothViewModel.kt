@@ -3,6 +3,7 @@ package com.example.jetpack.ui.fragment.bluetooth
 import android.bluetooth.BluetoothDevice
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.jetpack.ui.fragment.bluetooth.mechanicsm.BluetoothClassic
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -15,7 +16,7 @@ import javax.inject.Inject
 class BluetoothViewModel
 @Inject
 constructor(
-    private val bluetoothRepository: BluetoothRepository
+    private val bluetoothClassic: BluetoothClassic
 ) : ViewModel() {
     private val _pairedDevices = MutableStateFlow<Array<BluetoothDevice>>(arrayOf())
     val pairedDevices = _pairedDevices.asStateFlow()
@@ -28,32 +29,32 @@ constructor(
     }
 
     fun isBluetoothSupported(): Boolean {
-        return bluetoothRepository.isBluetoothSupported()
+        return bluetoothClassic.isBluetoothSupported()
     }
 
     fun isBluetoothEnabled(): Boolean {
-        return bluetoothRepository.isBluetoothEnabled()
+        return bluetoothClassic.isBluetoothEnabled()
     }
 
     /**
      * get devices that paired with this device in the past in local area
      */
     private fun getPairedDevices() {
-        val isBluetoothEnabled = bluetoothRepository.isBluetoothEnabled()
+        val isBluetoothEnabled = bluetoothClassic.isBluetoothEnabled()
         viewModelScope.launch(Dispatchers.IO) {
             if (isBluetoothEnabled) {
-                _pairedDevices.value = bluetoothRepository.getPairedDevices()?.toTypedArray() ?: arrayOf()
+                _pairedDevices.value = bluetoothClassic.getPairedDevices()?.toTypedArray() ?: arrayOf()
             }
         }
     }
 
     fun startDiscovery(){
-        bluetoothRepository.resetDiscoveredDevices()
-        bluetoothRepository.startDiscovery()
+        bluetoothClassic.resetDiscoveredDevices()
+        bluetoothClassic.startDiscovery()
         getDiscoveredDevices()
     }
 
-    fun stopDiscovery(){ bluetoothRepository.stopDiscovery() }
+    fun stopDiscovery(){ bluetoothClassic.stopDiscovery() }
 
     /**
      * scanning bluetooth-enabled devices in 12 seconds
@@ -67,13 +68,13 @@ constructor(
                     _isDeviceScanning.value = false
                 }
 
-                _pairedDevices.value = bluetoothRepository.getDiscoveredDevices().toTypedArray()
+                _pairedDevices.value = bluetoothClassic.getDiscoveredDevices().toTypedArray()
                 delay(1000)
             }
         }
     }
 
     fun connectToDevice(device: BluetoothDevice){
-        bluetoothRepository.connectToDevice(device = device)
+        bluetoothClassic.connectToDevice(device = device)
     }
 }

@@ -29,6 +29,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -45,13 +46,16 @@ import androidx.fragment.app.viewModels
 import com.example.jetpack.R
 import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
+import com.example.jetpack.ui.fragment.bluetooth.component.BluetoothLifecycleObserver
 import com.example.jetpack.ui.fragment.bluetooth.component.PairedDevices
+import com.example.jetpack.ui.fragment.bluetooth.mechanicsm.BluetoothLowEnergy
 import com.example.jetpack.ui.fragment.permission.component.PermissionPopup
 import com.example.jetpack.ui.theme.customizedTextStyle
 import com.example.jetpack.ui.view.AnimationCircularWave
 import com.example.jetpack.util.NavigationUtil.safeNavigateUp
 import com.example.jetpack.util.PermissionUtil
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 /**
  * @author Phong-Kaster
@@ -60,9 +64,8 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class BluetoothFragment : CoreFragment() {
 
-    private val viewModel: BluetoothViewModel by viewModels()
+    private val viewModel: BluetoothViewModel2  by viewModels()
     private val tag = "bluetooth"
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupBluetoothLifecycleObserver()
@@ -70,7 +73,7 @@ class BluetoothFragment : CoreFragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        viewModel.stopDiscovery()
+        /*viewModel.stopDiscovery()*/
     }
 
 
@@ -101,9 +104,9 @@ class BluetoothFragment : CoreFragment() {
     private val doSomeThing = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
         val isBluetoothEnabled = viewModel.isBluetoothEnabled()
         if (isBluetoothEnabled) {
-            viewModel.startDiscovery()
+            viewModel.scanBLEDevices()
         } else {
-            viewModel.stopDiscovery()
+            /*viewModel.stopDiscovery()*/
         }
     }
 
@@ -126,7 +129,7 @@ class BluetoothFragment : CoreFragment() {
                 val enableBluetoothIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
                 doSomeThing.launch(enableBluetoothIntent)
             } else {
-                viewModel.startDiscovery()
+                viewModel.scanBLEDevices()
             }
         }
     }
@@ -154,12 +157,16 @@ class BluetoothFragment : CoreFragment() {
     override fun ComposeView() {
         super.ComposeView()
 
+        LaunchedEffect(key1 = Unit) {
+            viewModel.scanBLEDevices()
+        }
+
         BluetoothLayout(
-            isDeviceScanning = viewModel.isDeviceScanning.collectAsState().value,
-            pairedDevices = viewModel.pairedDevices.collectAsState().value,
+            isDeviceScanning = viewModel.scanningFlow.collectAsState().value,
+            pairedDevices = viewModel.discoveredDevicesFlow.collectAsState().value,
             onBack = { safeNavigateUp() },
-            onTurnOnBluetooth = { turnonBluetooth() },
-            onConnectDevice = { viewModel.connectToDevice(it) }
+            onTurnOnBluetooth = { /*turnonBluetooth()*/ },
+            onConnectDevice = { /*viewModel.connectToDevice(it)*/ }
         )
 
 
@@ -269,8 +276,15 @@ fun BluetoothLayout(
                         }
                     )
                     Spacer(modifier = Modifier.height(50.dp))
+
+
                     Text(
-                        text = "Searching...",
+                        text =
+                        if (isDeviceScanning) {
+                            "Searching..."
+                        } else {
+                            "Found ${pairedDevices.size} devices"
+                        },
                         style = customizedTextStyle(fontSize = 22, fontWeight = 500),
                         color = Color.Black,
                         textAlign = TextAlign.Center,

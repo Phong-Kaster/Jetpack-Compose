@@ -1,4 +1,4 @@
-package com.example.jetpack.ui.fragment.bluetooth
+package com.example.jetpack.ui.fragment.bluetooth.component
 
 import android.Manifest
 import android.app.Activity
