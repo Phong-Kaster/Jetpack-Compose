@@ -158,14 +158,14 @@ class BluetoothFragment : CoreFragment() {
         super.ComposeView()
 
         LaunchedEffect(key1 = Unit) {
-            viewModel.scanBLEDevices()
+            turnonBluetooth()
         }
 
         BluetoothLayout(
-            isDeviceScanning = viewModel.scanningFlow.collectAsState().value,
-            pairedDevices = viewModel.discoveredDevicesFlow.collectAsState().value,
+            isDeviceScanning = viewModel.bluetoothLowEnergy.scanningFlow.collectAsState().value,
+            pairedDevices = viewModel.bluetoothLowEnergy.discoveredDevicesFlow.collectAsState().value,
             onBack = { safeNavigateUp() },
-            onTurnOnBluetooth = { /*turnonBluetooth()*/ },
+            onTurnOnBluetooth = { turnonBluetooth() },
             onConnectDevice = { /*viewModel.connectToDevice(it)*/ }
         )
 

@@ -60,17 +60,15 @@ constructor(val context: JetpackApplication) {
         bluetoothAdapter = bluetoothManager.adapter
     }
 
-    fun isBluetoothSupported(): Boolean {
-        return bluetoothAdapter != null
-    }
-
-    fun isBluetoothEnabled(): Boolean {
-        return bluetoothAdapter?.isEnabled == true
-    }
+    val isBluetoothSupported: Boolean
+        get() = bluetoothAdapter != null
 
 
-    fun isBluetoothPermissionEnabled(): Boolean {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+    val isBluetoothEnabled: Boolean
+        get() = bluetoothAdapter?.isEnabled == true
+
+    val isBluetoothPermissionEnabled: Boolean
+        get() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             ActivityCompat.checkSelfPermission(
                 context,
                 Manifest.permission.BLUETOOTH_SCAN
@@ -79,23 +77,8 @@ constructor(val context: JetpackApplication) {
             // For versions below Android S, BLUETOOTH_SCAN permission is not required, so we can return true.
             true
         }
-    }
-
-
-    fun getPairedDevices(): Set<BluetoothDevice>? {
-        return if (ActivityCompat.checkSelfPermission(
-                context,
-                Manifest.permission.BLUETOOTH_CONNECT
-            ) == PackageManager.PERMISSION_DENIED
-        ) {
-            return setOf()
-        } else {
-            bluetoothAdapter?.bondedDevices
-        }
-    }
 
     private val bluetoothLeScanner = bluetoothAdapter?.bluetoothLeScanner
-    private var scanning = false
     private val handler = Handler(Looper.getMainLooper())
 
     // Stops scanning after 10 seconds.
@@ -106,6 +89,10 @@ constructor(val context: JetpackApplication) {
      */
     @SuppressLint("MissingPermission")
     fun scanBLEDevices() {
+        discoveredDevices.clear()// reset list of device that we have discovered
+
+        if(!isBluetoothPermissionEnabled) return
+
         if (!_scanningFlow.value) { // Stops scanning after a pre-defined scan period.
             handler.postDelayed({
                 _scanningFlow.value = false
@@ -123,7 +110,6 @@ constructor(val context: JetpackApplication) {
             Log.d(tag, "stop scanning using Bluetooth Low Energy")
         }
     }
-
 
     /**
      * BLE stands for Bluetooth Low Energy
