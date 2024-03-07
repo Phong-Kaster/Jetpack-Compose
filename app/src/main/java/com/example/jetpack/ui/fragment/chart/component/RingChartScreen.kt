@@ -24,9 +24,9 @@ fun RingChartScreen() {
             .fillMaxSize()
             .padding(16.dp),
     ) {
-        RingChart(data = ChartElement.getFakeData(), centerColor = Background)
+        RingChart(data = ChartElement.getFakeElements(), centerColor = Background)
         Divider(modifier = Modifier.padding(vertical = 10.dp))
-        RingChart2(data = ChartElement.getFakeData())
+        RingChart2(data = ChartElement.getFakeElements())
         Divider(modifier = Modifier.padding(vertical = 10.dp))
     }
 }

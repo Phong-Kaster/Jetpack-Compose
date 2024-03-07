@@ -52,7 +52,6 @@ fun InsightLayout() {
                     ChartShortcut.AnalogueClock -> AnalogueClock()
                     ChartShortcut.LineChart -> LineChartScreen()
                     ChartShortcut.RingChart -> RingChartScreen()
-                    else -> {}
                 }
             })
     }
