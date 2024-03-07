@@ -11,9 +11,11 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -125,7 +127,6 @@ class HomeFragment : CoreFragment() {
 }
 
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun HomeLayout(
     onOpenConfirmDialog: () -> Unit = {},
@@ -140,7 +141,7 @@ fun HomeLayout(
                     loading = false
                 }
             },
-            2000
+            500
         )
     }
 
@@ -160,29 +161,12 @@ fun HomeLayout(
             onBack = onOpenConfirmDialog
         )
 
-        LazyVerticalGrid(
-            columns = GridCells.Fixed(2),
-            horizontalArrangement = Arrangement.spacedBy(16.dp),
+        LazyColumn(
             verticalArrangement = Arrangement.spacedBy(16.dp),
             modifier = Modifier
                 .padding(start = 16.dp, end = 16.dp, top = 0.dp, bottom = 32.dp)
                 .fillMaxSize()
         ) {
-            /* item(key = "digitalClock", span = { GridItemSpan(2) }) {
-                 DigitalClock2 ()
-             }*/
-
-
-            /*items(
-                items = HomeShortcut.entries,
-                key = { item: HomeShortcut -> item.name },
-                itemContent = { it ->
-                    HomeShortcutItem(
-                        shortcut = it,
-                        onClick = onOpenShortcut
-                    )
-                })*/
-
             items(
                 items = HomeShortcut.entries,
                 key = { item: HomeShortcut -> item.name },
