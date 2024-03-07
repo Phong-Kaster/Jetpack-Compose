@@ -7,7 +7,11 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat.shouldShowRequestPermissionRationale
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
+import com.example.jetpack.configuration.PermissionName
+import com.example.jetpack.configuration.isEnabled
 import javax.inject.Inject
+
+
 
 /**
  * @author Phong-Kaster
@@ -25,7 +29,7 @@ constructor(
     private val activity: Activity,
     private val callback: Callback
 ) : DefaultLifecycleObserver {
-    lateinit var launcher: ActivityResultLauncher<Array<String>>
+    lateinit var launcher: ActivityResultLauncher<Array<PermissionName>>
 
     companion object {
         val mandatoryPermissions = arrayOf(
@@ -40,8 +44,8 @@ constructor(
         launcher = createRuntimeLauncher(owner)
     }
 
-    private fun createRuntimeLauncher(owner: LifecycleOwner): ActivityResultLauncher<Array<String>> {
-        return registry.register("multiplePermissionLauncher", owner, ActivityResultContracts.RequestMultiplePermissions()) { map: Map <String, Boolean> ->
+    private fun createRuntimeLauncher(owner: LifecycleOwner): ActivityResultLauncher<Array<PermissionName>> {
+        return registry.register("multiplePermissionLauncher", owner, ActivityResultContracts.RequestMultiplePermissions()) { map: Map <PermissionName, isEnabled> ->
             val enableRecordAudio = map[android.Manifest.permission.RECORD_AUDIO]
             val enableAccessCoarseLocation = map[android.Manifest.permission.ACCESS_COARSE_LOCATION]
             val enableAccessFineLocation = map[android.Manifest.permission.ACCESS_FINE_LOCATION]

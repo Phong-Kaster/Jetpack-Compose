@@ -8,7 +8,10 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
+import com.example.jetpack.configuration.PermissionName
 import javax.inject.Inject
+
+
 
 /**
  * @author Phong-Kaster
@@ -30,7 +33,7 @@ constructor(
     private val activity: Activity,
     private val callback: Callback
 ) : DefaultLifecycleObserver {
-    lateinit var launcher: ActivityResultLauncher<String>
+    lateinit var launcher: ActivityResultLauncher<PermissionName>
     private lateinit var settingLauncher: ActivityResultLauncher<Intent>
 
     private val tag = "NotificationRuntimeLauncher2"
@@ -41,7 +44,7 @@ constructor(
 
     /**
      * To request notification runtime permission*/
-    private fun createRuntimeLauncher(owner: LifecycleOwner): ActivityResultLauncher<String> {
+    private fun createRuntimeLauncher(owner: LifecycleOwner): ActivityResultLauncher<PermissionName> {
         return registry.register("notificationLauncher", owner, ActivityResultContracts.RequestPermission()) { isGranted ->
             if (isGranted) {
                 // TODO: do nothing because everything we need is OK
