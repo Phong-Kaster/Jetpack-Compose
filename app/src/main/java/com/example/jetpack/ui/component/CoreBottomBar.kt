@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.Icon
@@ -82,7 +83,7 @@ fun CoreBottomBar() {
                 modifier = Modifier.weight(1f)
             ) {
                 if (currentDestination?.id != item.homeDestinationId) {
-                    navController.navigate(directions = item.directions)
+                    navController.navigate(item.directions)
                 }
             }
         }
@@ -100,7 +101,7 @@ fun CoreBottomBar() {
                 .clickable { showBottomSheet = !showBottomSheet },
         ) {
             Icon(
-                painterResource(id = R.drawable.ic_nazi_symbol),
+                imageVector = Icons.Rounded.Add,
                 contentDescription = null,
                 modifier = Modifier.size(30.dp),
                 tint = OppositePrimaryColor
@@ -115,7 +116,7 @@ fun CoreBottomBar() {
                 modifier = Modifier.weight(1f)
             ) {
                 if (currentDestination?.id != item.homeDestinationId) {
-                    navController.navigate(directions = item.directions)
+                    navController.navigate(item.directions)
                 }
             }
         }

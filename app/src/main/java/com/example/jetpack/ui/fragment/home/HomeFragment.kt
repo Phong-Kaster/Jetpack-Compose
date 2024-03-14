@@ -28,9 +28,9 @@ import com.example.jetpack.data.enums.HomeShortcut
 import com.example.jetpack.lifecycleobserver.NotificationLifecycleObserver
 import com.example.jetpack.notification.LockscreenManager
 import com.example.jetpack.notification.NotificationManager
-import com.example.jetpack.repository.WeatherRepositoryImplement
 import com.example.jetpack.ui.component.CoreBottomBar
 import com.example.jetpack.ui.component.CoreDialog
+import com.example.jetpack.ui.component.CoreFloatingMenu
 import com.example.jetpack.ui.fragment.home.component.HomeDialog
 import com.example.jetpack.ui.fragment.home.component.HomeShortcutItem
 import com.example.jetpack.ui.theme.Background
@@ -41,7 +41,6 @@ import com.example.jetpack.util.PermissionUtil
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Timer
 import java.util.TimerTask
-import javax.inject.Inject
 
 
 @AndroidEntryPoint
@@ -49,8 +48,6 @@ class HomeFragment : CoreFragment() {
     private var showDialog by mutableStateOf(false)
     private lateinit var notificationLifecycleObserver: NotificationLifecycleObserver
 
-    @Inject
-    lateinit var weatherRepositoryImplement: WeatherRepositoryImplement
 
     @SuppressLint("UnsafeRepeatOnLifecycleDetector")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -110,9 +107,9 @@ class HomeFragment : CoreFragment() {
                     HomeShortcut.Tutorial -> safeNavigate(R.id.toTutorial)
                     HomeShortcut.Quote -> safeNavigate(R.id.toQuote)
                     HomeShortcut.AccuWeatherLocation -> safeNavigate(R.id.toAccuWeatherLocation)
-                    HomeShortcut.Permissions ->  safeNavigate(R.id.toPermission)
-                    HomeShortcut.Permissions2 ->  safeNavigate(R.id.toPermission2)
-                    HomeShortcut.MotionLayout ->  safeNavigate(R.id.toMotionLayout)
+                    HomeShortcut.Permissions -> safeNavigate(R.id.toPermission)
+                    HomeShortcut.Permissions2 -> safeNavigate(R.id.toPermission2)
+                    HomeShortcut.MotionLayout -> safeNavigate(R.id.toMotionLayout)
                     HomeShortcut.Login -> safeNavigate(R.id.toLogin)
                     HomeShortcut.Bluetooth -> safeNavigate(R.id.toBluetooth)
                     HomeShortcut.Webview -> safeNavigate(R.id.toWebview)
@@ -131,6 +128,7 @@ fun HomeLayout(
 ) {
     var loading by remember { mutableStateOf(true) }
 
+
     LaunchedEffect(key1 = loading) {
         Timer().schedule(
             object : TimerTask() {
@@ -142,8 +140,13 @@ fun HomeLayout(
         )
     }
 
+    BackHandler(
+        enabled = true,
+        onBack = onOpenConfirmDialog
+    )
+
+
     CoreLayout(
-        bottomBar = { CoreBottomBar() },
         backgroundColor = Background,
         topBar = {
             DigitalClock2(
@@ -152,11 +155,9 @@ fun HomeLayout(
                     .padding(horizontal = 16.dp, vertical = 16.dp)
             )
         },
+        bottomBar = { CoreBottomBar() },
+        floatingActionButton = { CoreFloatingMenu() }
     ) {
-        BackHandler(
-            enabled = true,
-            onBack = onOpenConfirmDialog
-        )
 
         LazyColumn(
             verticalArrangement = Arrangement.spacedBy(16.dp),
