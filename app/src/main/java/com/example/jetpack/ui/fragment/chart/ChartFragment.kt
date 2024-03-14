@@ -1,7 +1,5 @@
 package com.example.jetpack.ui.fragment.chart
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -33,7 +31,7 @@ class InsightFragment : CoreFragment() {
 
 @Composable
 fun InsightLayout() {
-    var chosenChip: ChartShortcut by rememberSaveable { mutableStateOf(ChartShortcut.RingChart) }
+    var chosenChip: ChartShortcut by rememberSaveable { mutableStateOf(ChartShortcut.LineChart) }
     CoreLayout(
         topBar = {
             ChartTopBar(
@@ -57,7 +55,6 @@ fun InsightLayout() {
     }
 }
 
-@RequiresApi(Build.VERSION_CODES.O)
 @Preview
 @Composable
 fun PreviewInsightLayout() {

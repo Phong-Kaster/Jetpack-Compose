@@ -6,15 +6,11 @@ import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.activity.compose.BackHandler
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -119,6 +115,7 @@ class HomeFragment : CoreFragment() {
                     HomeShortcut.MotionLayout ->  safeNavigate(R.id.toMotionLayout)
                     HomeShortcut.Login -> safeNavigate(R.id.toLogin)
                     HomeShortcut.Bluetooth -> safeNavigate(R.id.toBluetooth)
+                    HomeShortcut.Webview -> safeNavigate(R.id.toWebview)
                     else -> {}
                 }
             }

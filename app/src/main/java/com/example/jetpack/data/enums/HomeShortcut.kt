@@ -21,5 +21,7 @@ enum class HomeShortcut(
     MotionLayout(drawable = R.drawable.ic_motion_layout, text = R.string.motion_layout),
     Login(drawable = R.drawable.ic_private_policy, text = R.string.login),
     Bluetooth(drawable = R.drawable.ic_bluetooth, text = R.string.bluetooth),
+    Tooltip(drawable = R.drawable.ic_tooltip, text = R.string.tooltip),
+    Webview(drawable = R.drawable.ic_webview, text = R.string.webview),
     ;
 }

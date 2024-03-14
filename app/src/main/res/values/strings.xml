@@ -83,4 +83,7 @@
     </string>
     <string name="this_screen_s_functionality_mirrors">This screen\'s functionality mirrors the permission screen, but the underlying logic is implemented in a separate class and utilizes activity results</string>
     <string name="this_class_makes_the_request"><![CDATA[This class makes the request for notification runtime permission & require definitions directly within an Activity or Fragment.]]></string>
+    <string name="tooltip">Tooltip</string>
+    <string name="webview">Webview</string>
+    <string name="no_internet_connection">No internet connection</string>
 </resources>
