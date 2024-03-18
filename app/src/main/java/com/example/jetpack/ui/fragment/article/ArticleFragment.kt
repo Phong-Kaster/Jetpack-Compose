@@ -19,6 +19,7 @@ import com.example.jetpack.configuration.Menu
 import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
 import com.example.jetpack.ui.component.CoreBottomBar
+import com.example.jetpack.ui.component.CoreFloatingMenu
 import com.example.jetpack.ui.component.SquareElement
 import com.example.jetpack.ui.fragment.home.component.HomeTopBar
 import com.example.jetpack.ui.theme.Background
@@ -39,6 +40,7 @@ fun ArticleLayout() {
     CoreLayout(
         topBar = { HomeTopBar(name = stringResource(id = Menu.Article.nameId)) },
         bottomBar = { CoreBottomBar() },
+        floatingActionButton = { CoreFloatingMenu() },
         backgroundColor = Background
     ) {
         LazyVerticalGrid(

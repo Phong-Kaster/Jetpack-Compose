@@ -1,5 +1,6 @@
 package com.example.jetpack.ui.fragment.accuweather.component
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -9,10 +10,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
@@ -43,11 +44,12 @@ import com.example.jetpack.ui.theme.PrimaryColor
 
 @Composable
 fun SearchBar(
-    queryValue: String,
-    onTextChangeAutocompleteSearch: (String) -> Unit = {},
-    onSearch: (String) -> Unit = {}
+    onChangeKeyword: (String) -> Unit = {},
+    onSearchKeyword: (String) -> Unit = {},
+    onClearKeyword: () -> Unit = {},
+    @DrawableRes leadingIcon: Int? = R.drawable.ic_search,
 ) {
-    var query by remember { mutableStateOf(queryValue) }
+    var keyword by remember { mutableStateOf("") }
     val focusManager = LocalFocusManager.current
 
 
@@ -55,7 +57,6 @@ fun SearchBar(
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
-            .statusBarsPadding()
             .fillMaxWidth()
             .padding(vertical = 0.dp)
             .height(50.dp)
@@ -68,35 +69,59 @@ fun SearchBar(
                 )
             },
     ) {
-        Icon(
-            painterResource(id = R.drawable.ic_nazi_symbol),
-            contentDescription = null,
-            tint = PrimaryColor,
-            modifier = Modifier.size(20.dp)
-        )
+
 
         TextField(
-            value = query,
+            value = keyword,
             onValueChange = {
-                query = it
-                onTextChangeAutocompleteSearch(it)
+                keyword = it
+                onChangeKeyword(it)
             },
             textStyle = TextStyle(fontSize = 14.sp),
             maxLines = 1,
             singleLine = true,
+            leadingIcon = {
+                if (leadingIcon != null) {
+                    Icon(
+                        painter = painterResource(id = leadingIcon),
+                        contentDescription = null,
+                        tint = PrimaryColor,
+                        modifier = Modifier.size(24.dp)
+                    )
+                }
+            },
+            trailingIcon = {
+                if (keyword.isNotBlank()) {
+                    IconButton(
+                        onClick = {
+                            keyword = ""
+                            onClearKeyword()
+                        },
+                        content = {
+                            Icon(
+                                painter = painterResource(id = R.drawable.ic_close),
+                                contentDescription = null,
+                                tint = PrimaryColor,
+                                modifier = Modifier.size(24.dp)
+                            )
+                        }
+                    )
+                }
+            },
             placeholder = {
                 Text(
-                    text = stringResource(id = R.string.fake_title),
+                    text = stringResource(R.string.search),
                     color = PrimaryColor.copy(alpha = 0.3f),
-                    textAlign = TextAlign.Center,
+                    textAlign = TextAlign.Start,
                     fontFamily = FontFamily(Font(R.font.inter_black)),
                     fontSize = 14.sp,
                     maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier
                 )
             },
             colors = TextFieldDefaults.colors(
-                cursorColor = Color.Red,
+                cursorColor = Color.Cyan,
                 focusedContainerColor = Color.Transparent,
                 focusedIndicatorColor = Color.Transparent,
                 focusedTextColor = Color.White,
@@ -108,9 +133,10 @@ fun SearchBar(
             keyboardActions = KeyboardActions(
                 onDone = {
                     focusManager.clearFocus()
-                    onSearch(query)
+                    onSearchKeyword(keyword)
                 }
             ),
+            modifier = Modifier.fillMaxWidth(),
         )
     }
 }
@@ -125,9 +151,9 @@ fun PreviewSearchBar() {
             .background(color = Color.DarkGray)
     ) {
         SearchBar(
-            onSearch = {},
-            onTextChangeAutocompleteSearch = {},
-            queryValue = ""
+            onSearchKeyword = {},
+            onChangeKeyword = {},
+            leadingIcon = R.drawable.ic_search,
         )
     }
 }

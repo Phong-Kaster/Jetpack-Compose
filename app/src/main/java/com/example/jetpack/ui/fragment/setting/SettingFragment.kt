@@ -29,6 +29,7 @@ import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
 import com.example.jetpack.data.enums.Star
 import com.example.jetpack.ui.component.CoreBottomBar
+import com.example.jetpack.ui.component.CoreFloatingMenu
 import com.example.jetpack.ui.fragment.home.component.HomeTopBar
 import com.example.jetpack.ui.fragment.setting.component.RateDialog
 import com.example.jetpack.ui.fragment.setting.component.SettingItem
@@ -116,11 +117,11 @@ class SettingFragment : CoreFragment() {
             onOpenPrivatePolicy = { AppUtil.openWebsite(context = requireContext(), "https://www.youtube.com/") },
             onOpenTermOfService = { AppUtil.openWebsite(context = requireContext(), "https://www.google.com/") },
             onOpenLanguage = {
-                val destination = SettingFragmentDirections.toLanguage()
+                val destination = R.id.toLanguage
                 safeNavigate(destination)
             },
             onOpenDisclaimer = {
-                val destination = SettingFragmentDirections.toDisclaimer()
+                val destination = R.id.toDisclaimer
                 safeNavigate(destination)
             },
             onOpenIconSetting = {
@@ -143,6 +144,7 @@ fun SettingLayout(
 ) {
     CoreLayout(
         topBar = { HomeTopBar(name = stringResource(id = Menu.Setting.nameId)) },
+        floatingActionButton = { CoreFloatingMenu() },
         bottomBar = { CoreBottomBar() },
         backgroundColor = Background
     ) {

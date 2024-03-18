@@ -3,7 +3,9 @@ package com.example.jetpack.data.enums
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.example.jetpack.R
+import javax.annotation.concurrent.Immutable
 
+@Immutable
 enum class HomeShortcut(
     @DrawableRes val drawable: Int,
     @StringRes val text: Int,

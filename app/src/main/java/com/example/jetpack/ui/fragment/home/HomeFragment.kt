@@ -4,6 +4,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
@@ -14,6 +15,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -21,6 +23,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.fragment.app.viewModels
 import com.example.jetpack.R
 import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
@@ -31,20 +34,25 @@ import com.example.jetpack.notification.NotificationManager
 import com.example.jetpack.ui.component.CoreBottomBar
 import com.example.jetpack.ui.component.CoreDialog
 import com.example.jetpack.ui.component.CoreFloatingMenu
+import com.example.jetpack.ui.fragment.accuweather.component.SearchBar
 import com.example.jetpack.ui.fragment.home.component.HomeDialog
 import com.example.jetpack.ui.fragment.home.component.HomeShortcutItem
 import com.example.jetpack.ui.theme.Background
-import com.example.jetpack.ui.theme.ShimmerListItem
+import com.example.jetpack.ui.theme.ShimmerItem
 import com.example.jetpack.ui.view.DigitalClock2
 import com.example.jetpack.util.NavigationUtil.safeNavigate
 import com.example.jetpack.util.PermissionUtil
+import com.google.firebase.crashlytics.buildtools.reloc.com.google.common.collect.ImmutableList
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.collections.immutable.persistentListOf
+import kotlinx.collections.immutable.toImmutableList
 import java.util.Timer
 import java.util.TimerTask
 
 
 @AndroidEntryPoint
 class HomeFragment : CoreFragment() {
+    private val viewModel: HomeViewModel by viewModels()
     private var showDialog by mutableStateOf(false)
     private lateinit var notificationLifecycleObserver: NotificationLifecycleObserver
 
@@ -52,6 +60,7 @@ class HomeFragment : CoreFragment() {
     @SuppressLint("UnsafeRepeatOnLifecycleDetector")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         setupNotificationLauncher()
         setupNotification()
     }
@@ -101,7 +110,11 @@ class HomeFragment : CoreFragment() {
         )
 
         HomeLayout(
+            shortcuts = viewModel.shortcuts.collectAsState().value,
             onOpenConfirmDialog = { showDialog = !showDialog },
+            onChangeKeyword = { viewModel.searchWithKeyword(it) },
+            onSearchKeyword = { viewModel.searchWithKeyword(it) },
+            onClearKeyword = { viewModel.resetShortcuts() },
             onOpenShortcut = {
                 when (it) {
                     HomeShortcut.Tutorial -> safeNavigate(R.id.toTutorial)
@@ -123,8 +136,12 @@ class HomeFragment : CoreFragment() {
 
 @Composable
 fun HomeLayout(
+    shortcuts: kotlinx.collections.immutable.ImmutableList<HomeShortcut> = persistentListOf(),
     onOpenConfirmDialog: () -> Unit = {},
-    onOpenShortcut: (HomeShortcut) -> Unit = {}
+    onOpenShortcut: (HomeShortcut) -> Unit = {},
+    onChangeKeyword: (String) -> Unit = {},
+    onSearchKeyword: (String) -> Unit = {},
+    onClearKeyword: () -> Unit = {}
 ) {
     var loading by remember { mutableStateOf(true) }
 
@@ -136,7 +153,7 @@ fun HomeLayout(
                     loading = false
                 }
             },
-            500
+            1000
         )
     }
 
@@ -158,22 +175,32 @@ fun HomeLayout(
         bottomBar = { CoreBottomBar() },
         floatingActionButton = { CoreFloatingMenu() }
     ) {
-
         LazyColumn(
+
             verticalArrangement = Arrangement.spacedBy(16.dp),
             modifier = Modifier
                 .padding(start = 16.dp, end = 16.dp, top = 0.dp, bottom = 32.dp)
                 .fillMaxSize()
         ) {
+            item(key = "searchView") {
+                SearchBar(
+                    onChangeKeyword = onChangeKeyword,
+                    onSearchKeyword = onSearchKeyword,
+                    onClearKeyword = onClearKeyword,
+                    leadingIcon = R.drawable.ic_search,
+                )
+            }
+
+
             items(
-                items = HomeShortcut.entries,
+                items = shortcuts,
                 key = { item: HomeShortcut -> item.name },
-                itemContent = { it ->
-                    ShimmerListItem(
+                itemContent = { homeShortcut: HomeShortcut ->
+                    ShimmerItem(
                         loading = loading,
-                        contentAfterLoading = {
+                        content = {
                             HomeShortcutItem(
-                                shortcut = it,
+                                shortcut = homeShortcut,
                                 onClick = onOpenShortcut
                             )
                         })
@@ -187,5 +214,7 @@ fun HomeLayout(
 @Preview
 @Composable
 fun PreviewHome() {
-    HomeLayout()
+    HomeLayout(
+        shortcuts = HomeShortcut.entries.toImmutableList()
+    )
 }
