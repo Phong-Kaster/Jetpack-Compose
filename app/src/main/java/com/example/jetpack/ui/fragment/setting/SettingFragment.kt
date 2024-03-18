@@ -125,7 +125,7 @@ class SettingFragment : CoreFragment() {
                 safeNavigate(destination)
             },
             onOpenIconSetting = {
-                val destination = SettingFragmentDirections.toSettingIcon()
+                val destination = R.id.toSettingIcon
                 safeNavigate(destination)
             },
         )

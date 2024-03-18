@@ -175,7 +175,7 @@ fun HomeLayout(
         floatingActionButton = { CoreFloatingMenu() },
         modifier = Modifier.then(
             if (loading) {
-                Modifier.blur(30.dp)
+                Modifier.blur(10.dp)
             } else {
                 Modifier
             }
