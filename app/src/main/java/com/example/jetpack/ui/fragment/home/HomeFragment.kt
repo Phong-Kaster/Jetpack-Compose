@@ -4,7 +4,6 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
@@ -21,6 +20,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.blur
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.viewModels
@@ -42,7 +42,6 @@ import com.example.jetpack.ui.theme.ShimmerItem
 import com.example.jetpack.ui.view.DigitalClock2
 import com.example.jetpack.util.NavigationUtil.safeNavigate
 import com.example.jetpack.util.PermissionUtil
-import com.google.firebase.crashlytics.buildtools.reloc.com.google.common.collect.ImmutableList
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toImmutableList
@@ -173,16 +172,22 @@ fun HomeLayout(
             )
         },
         bottomBar = { CoreBottomBar() },
-        floatingActionButton = { CoreFloatingMenu() }
+        floatingActionButton = { CoreFloatingMenu() },
+        modifier = Modifier.then(
+            if (loading) {
+                Modifier.blur(30.dp)
+            } else {
+                Modifier
+            }
+        )
     ) {
         LazyColumn(
-
             verticalArrangement = Arrangement.spacedBy(16.dp),
             modifier = Modifier
                 .padding(start = 16.dp, end = 16.dp, top = 0.dp, bottom = 32.dp)
                 .fillMaxSize()
         ) {
-            item(key = "searchView") {
+            item(key = "searchBar") {
                 SearchBar(
                     onChangeKeyword = onChangeKeyword,
                     onSearchKeyword = onSearchKeyword,
