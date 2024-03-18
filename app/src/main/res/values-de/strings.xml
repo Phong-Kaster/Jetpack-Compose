@@ -56,4 +56,22 @@
     <string name="education">Bildung</string>
     <string name="loan_payment">Kreditzahlung</string>
     <string name="quote">Zitat</string>
+    <string name="icon_setting">Symboleinstellung</string>
+    <string name="origin">Herkunft</string>
+    <string name="nazi_eagle">Nazi-Adler</string>
+    <string name="nazi_symbol">Nazi-Symbol</string>
+    <string name="heer">Heer</string>
+    <string name="title_activity_lockscreen2">Sperrbildschirm2</string>
+    <string name="accu_weather">AccuWetter</string>
+    <string name="permissions">Berechtigungen</string>
+    <string name="permissions_2">Berechtigungen 2</string>
+    <string name="login">Anmelden</string>
+    <string name="request_multiple_permissions">Mehrere Berechtigungen anfordern</string>
+    <string name="request_one_permission">Eine Berechtigung anfordern</string>
+    <string name="go_to_settings">Zu den Einstellungen gehen</string>
+    <string name="motion_layout">Motion-Layout</string>
+    <string name="multiple_permissions">Mehrere Berechtigungen</string>
+    <string name="attention">Achtung</string>
+    <string name="multiple_permissions_content">Unsere App benötigt die Berechtigungen ACCESS_COARSE_LOCATION und ACCESS_FINE_LOCATION, um standortbezogene Dienste bereitzustellen und das Benutzererlebnis zu verbessern. Diese Berechtigungen ermöglichen es uns, basierend auf Ihrem aktuellen Standort personalisierte Inhalte und Dienste bereitzustellen. Die Berechtigung **RECORD_AUDIO** ist notwendig, damit unsere App auf Audioeingaben zugreifen und diese verwalten kann, z. B. für Sprachbefehle und Audioaufnahmen. Wir versichern Ihnen, dass diese Berechtigungen ausschließlich zur Verbesserung der Funktionalität unserer App und zur Bereitstellung des bestmöglichen Benutzererlebnisses angefordert werden. Wir respektieren Ihre Privatsphäre und halten uns an strenge Richtlinien für den Umgang mit Daten.</string>
+
 </resources>

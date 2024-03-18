@@ -76,6 +76,7 @@ dependencies {
     implementation(platform("androidx.compose:compose-bom:2023.08.00"))
     implementation(platform("androidx.compose:compose-bom:2023.08.00"))
     implementation(platform("androidx.compose:compose-bom:2023.08.00"))
+
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
@@ -109,7 +110,10 @@ dependencies {
 
 
     // ConstraintLayout in Compose - https://developer.android.com/jetpack/compose/layouts/constraintlayout#get-started
-    implementation("androidx.constraintlayout:constraintlayout-compose:1.0.1")
+    // Motion Layout - https://developer.android.com/develop/ui/views/animations/motionlayout
+    // Motion Layout - https://medium.com/mindful-engineering/after-going-through-this-blog-youll-achieve-this-kind-of-polished-animation-using-motionlayout-6b76ec41c6ab
+    //implementation("androidx.constraintlayout:constraintlayout-compose:1.0.1")
+    implementation("androidx.constraintlayout:constraintlayout-compose-android:1.1.0-alpha13")
 
 
     // Save data in a local database using Room - https://developer.android.com/training/data-storage/room#setup
@@ -131,8 +135,12 @@ dependencies {
     // Retrofit - A type-safe HTTP client for Android and Java - https://square.github.io/retrofit/
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    //implementation("com.squareup.okhttp3:okhttps:3.4.1")
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
+
+    // Lottie for Android - https://github.com/airbnb/lottie-android
+    // https://lottiefiles.com/blog/working-with-lottie-animations/getting-started-with-lottie-animations-in-android-app/
+    implementation("com.airbnb.android:lottie:6.3.0")
+    implementation("com.airbnb.android:lottie-compose:6.3.0")
 }
 
 // Allow references to generated code

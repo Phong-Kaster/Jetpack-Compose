@@ -56,4 +56,22 @@
     <string name="education">शिक्षा</string>
     <string name="loan_payment">लोन भुगतान</string>
     <string name="quote">उद्धरण</string>
+    <string name="icon_setting">आइकन सेटिंग</string>
+    <string name="origin">मूल</string>
+    <string name="nazi_eagle">नाजी ईगल</string>
+    <string name="nazi_symbol">नाजी प्रतीक</string>
+    <string name="heer">हीर</string>
+    <string name="title_activity_lockscreen2">लॉकस्क्रीन2</string>
+    <string name="accu_weather">एक्यूवेदर</string>
+    <string name="permissions">अनुमतियाँ</string>
+    <string name="permissions_2">अनुमतियाँ 2</string>
+    <string name="login">लॉग इन</string>
+    <string name="request_multiple_permissions">कई अनुमतियाँ मांगें</string>
+    <string name="request_one_permission">एक अनुमति मांगें</string>
+    <string name="go_to_settings">सेटिंग्स पर जाएं</string>
+    <string name="motion_layout">मोशन लेआउट</string>
+    <string name="multiple_permissions">कई अनुमतियाँ</string>
+    <string name="attention">चेतावनी</string>
+    <string name="multiple_permissions_content">स्थान-आधारित सेवाएँ प्रदान करने और उपयोगकर्ता अनुभव को बढ़ाने के लिए हमारे ऐप को ACCESS_COARSE_LOCATION और ACCESS_FINE_LOCATION अनुमतियों की आवश्यकता होती है। ये अनुमतियाँ हमें आपके वर्तमान स्थान के आधार पर व्यक्तिगत सामग्री और सेवाएं प्रदान करने देती हैं। **RECORD_AUDIO** अनुमति हमारे ऐप के लिए ध्वनि कमांड और ऑडियो रिकॉर्डिंग जैसी सुविधाओं के लिए ऑडियो इनपुट तक पहुँचने और उसे प्रबंधित करने के लिए आवश्यक है। हम आपको आश्वस्त करते हैं कि इन अनुमतियों का अनुरोध केवल हमारे ऐप की कार्यक्षमता को बेहतर बनाने और आपको सर्वोत्तम संभव उपयोगकर्ता अनुभव प्रदान करने के लिए किया जाता है। हम आपकी गोपनीयता का सम्मान करते हैं और डेटा से निपटने के लिए सख्त नीतियों का पालन करते हैं।</string>
+
 </resources>

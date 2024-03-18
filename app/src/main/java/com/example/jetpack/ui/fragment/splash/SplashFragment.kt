@@ -1,8 +1,12 @@
 package com.example.jetpack.ui.fragment.splash
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
@@ -18,11 +22,16 @@ import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.viewModels
+import com.airbnb.lottie.compose.LottieAnimation
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.LottieConstants
+import com.airbnb.lottie.compose.rememberLottieComposition
 import com.example.jetpack.R
 import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
@@ -79,6 +88,10 @@ fun SplashLayout(
     var progress by remember { mutableFloatStateOf(0F) }
     val scope = rememberCoroutineScope()
 
+    val composition by rememberLottieComposition(
+        spec = LottieCompositionSpec.RawRes(R.raw.lottie_animation_loading)
+    )
+
     LaunchedEffect(Unit) {
         scope.launch {
             for (index in 1..100) {
@@ -107,11 +120,21 @@ fun SplashLayout(
                     .clip(RoundedCornerShape(40))
             )
 
-            LinearProgressIndicator(
+            /*LinearProgressIndicator(
                 progress = progress,
                 trackColor = IconColor,
                 color = PrimaryColor,
                 modifier = Modifier.align(BiasAlignment(0f, 0.85f))
+            )*/
+            LottieAnimation(
+                composition = composition,
+                restartOnPlay = true,
+                iterations = LottieConstants.IterateForever,
+                contentScale = ContentScale.FillBounds,
+                modifier = Modifier
+                    .size(80.dp)
+                    .align(BiasAlignment(0f, 0.85f))
+
             )
 
 

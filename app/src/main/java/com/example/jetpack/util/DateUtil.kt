@@ -26,6 +26,8 @@ object DateUtil {
     const val PATTERN_EEE = "EEE" // Mon
     const val PATTERN_YYYY = "YYYY" // 2024
     const val PATTERN_dd_MMM = "dd MMM" // 14 DEC
+    const val PATTERN_MMM = "MMM" // 14 DEC
+    const val PATTERN_dd = "dd" // 14
     @SuppressLint("SimpleDateFormat")
     fun Date.formatWithPattern(pattern: String, locale: Locale = Locale.getDefault()): String {
         val simpleDateFormat = SimpleDateFormat(pattern, locale)

@@ -51,7 +51,7 @@ fun LineChart(
     data: List<ChartElement>
 ) {
     // define chart
-    val maximumInData by remember(data) { mutableFloatStateOf(data.maxOf { it.value }) }
+    val maximumInData by remember(data) { mutableFloatStateOf(data.maxOf { it.valueMin }) }
     val maximum = maximumInData * 1.2F
     val milestone = listOf(1F, 0.75F, 0.5F, 0.25F, 0F)
     val textMeasurer = rememberTextMeasurer()
@@ -129,7 +129,7 @@ fun LineChart(
                     val nextElement = data.getOrNull(index = index + 1)
 
                     LineChartElement(
-                        enable = chosenElement.value == item.value,
+                        enable = chosenElement.valueMin == item.valueMin,
                         maximum = maximum,
                         element = element,
                         nextElement = nextElement,
@@ -171,7 +171,7 @@ fun LineChartElement(
                 val spacing = size.height / maximum
 
                 val x = size.width * 0.5F
-                val y = (maximum - element.value) * spacing
+                val y = (maximum - element.valueMin) * spacing
 
                 drawCircle(
                     color = PrimaryColor,
@@ -183,7 +183,7 @@ fun LineChartElement(
                 if (enable) {
                     drawText(
                         textMeasurer = textMeasurer,
-                        text = element.value.toInt().toString(),
+                        text = element.valueMin.toInt().toString(),
                         style = TextStyle(
                             fontSize = 12.sp,
                             color = PrimaryColor,
@@ -191,7 +191,7 @@ fun LineChartElement(
                         ),
                         topLeft = Offset(
                             x = center.x - textMeasurer.measure(
-                                text = element.value.toInt().toString()
+                                text = element.valueMin.toInt().toString()
                             ).size.width / 2F,
                             y = y - size.height * 0.15F
                         )
@@ -201,7 +201,7 @@ fun LineChartElement(
 
                 if (nextElement != null) {
                     val yNextElement =
-                        (maximum - nextElement.value) * spacing
+                        (maximum - nextElement.valueMin) * spacing
                     drawLine(
                         color = PrimaryColor,
                         start = Offset(x = size.width * 0.5F, y = y),
@@ -224,6 +224,6 @@ fun LineChartElement(
 @Composable
 fun PreviewLineChart() {
     ViewUtil.PreviewContent {
-        LineChart(data = ChartElement.getFakeData())
+        LineChart(data = ChartElement.getFakeElements())
     }
 }

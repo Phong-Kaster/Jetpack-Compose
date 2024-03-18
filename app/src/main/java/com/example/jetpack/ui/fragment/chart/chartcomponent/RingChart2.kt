@@ -163,7 +163,7 @@ fun PreviewRingChart2() {
     ViewUtil.PreviewContent {
         RingChart2(
             modifier = Modifier.padding(16.dp),
-            data = ChartElement.getFakeData()
+            data = ChartElement.getFakeElements()
         )
     }
 }

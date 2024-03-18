@@ -65,7 +65,25 @@
     <string name="title_activity_lockscreen2">Lockscreen2</string>
     <string name="accu_weather">AccuWeather</string>
     <string name="permissions">Permissions</string>
+    <string name="permissions_2">Permissions 2</string>
+    <string name="login">Login</string>
     <string name="request_multiple_permissions">Request Multiple Permissions</string>
     <string name="request_one_permission">Request One Permission</string>
     <string name="go_to_settings">Go to settings</string>
+    <string name="motion_layout">Motion layout</string>
+    <string name="multiple_permissions">Multiple permissions</string>
+    <string name="attention">Attention</string>
+    <string name="multiple_permissions_content">Our app requires the <b>ACCESS_COARSE_LOCATION</b> and <b>ACCESS_FINE_LOCATION</b> permissions to provide location-based services and enhance user experience. These permissions allow us to deliver personalized content and services based on your current location. The RECORD_AUDIO permission is necessary for our app to access and manage audio input for features such as voice commands and audio recording. We assure you that these permissions are requested solely to improve the functionality of our app and to provide you with the best possible user experience. We respect your privacy and adhere to strict data handling policies.</string>
+    <string name="bluetooth">Bluetooth</string>
+    <string name="one_permission_content">
+        Essential for our app, POST_NOTIFICATIONS permission allows us to send vital updates. Without it, full functionality can’t be guaranteed.
+        \n\n• Open the app and tap on the menu icon (usually represented by three lines or dots) in the top corner of the screen.
+        \n\n• In the menu, select ‘Settings’.
+        \n\n• Look for ‘Notifications’ and toggle the switch to the ‘On’ position.
+    </string>
+    <string name="this_screen_s_functionality_mirrors">This screen\'s functionality mirrors the permission screen, but the underlying logic is implemented in a separate class and utilizes activity results</string>
+    <string name="this_class_makes_the_request"><![CDATA[This class makes the request for notification runtime permission & require definitions directly within an Activity or Fragment.]]></string>
+    <string name="tooltip">Tooltip</string>
+    <string name="webview">Webview</string>
+    <string name="no_internet_connection">No internet connection</string>
 </resources>

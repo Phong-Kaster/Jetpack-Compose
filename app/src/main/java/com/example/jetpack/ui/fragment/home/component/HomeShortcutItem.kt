@@ -7,12 +7,18 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowForward
+import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -37,24 +43,20 @@ fun HomeShortcutItem(
     shortcut: HomeShortcut,
     onClick: (HomeShortcut) -> Unit = {}
 ) {
-    Column(
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally,
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
-            .clip(shape = RoundedCornerShape(20.dp))
+            .fillMaxWidth()
+            .clip(shape = RoundedCornerShape(15.dp))
             .clickable { onClick(shortcut) }
             .border(
                 width = 0.5.dp,
                 color = Color.White.copy(alpha = 0.5F),
-                shape = RoundedCornerShape(20.dp)
+                shape = RoundedCornerShape(15.dp)
             )
-            .background(color = Color.Black.copy(alpha = 0.1F))
-            .padding(horizontal = 16.dp, vertical = 16.dp)
-
-            .aspectRatio(1F)
-
+            /*.background(color = Color.Black.copy(alpha = 0.1F))*/
+            .padding(horizontal = 16.dp, vertical = 20.dp)
     ) {
-
         Icon(
             painter = painterResource(id = shortcut.drawable),
             contentDescription = stringResource(id = R.string.icon),
@@ -62,18 +64,28 @@ fun HomeShortcutItem(
             tint = PrimaryColor
         )
 
-        Spacer(modifier = Modifier.height(10.dp))
+        Spacer(modifier = Modifier.width(10.dp))
 
-        Text(
-            text = stringResource(id = shortcut.text),
-            color = PrimaryColor,
-            style = customizedTextStyle(fontWeight = 400, fontSize = 18),
-            maxLines = 1,
-            overflow = TextOverflow.Ellipsis,
-            modifier = Modifier.basicMarquee(iterations = Int.MAX_VALUE)
+        Column(modifier = Modifier.weight(0.9F)){
+            Text(
+                text = stringResource(id = shortcut.text),
+                color = PrimaryColor,
+                style = customizedTextStyle(fontWeight = 400, fontSize = 18),
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier.basicMarquee(iterations = Int.MAX_VALUE)
+            )
+        }
+
+        Icon(
+            imageVector = Icons.Default.KeyboardArrowRight,
+            tint = PrimaryColor,
+            contentDescription = null
         )
     }
 }
+
+
 
 @Preview
 @Composable

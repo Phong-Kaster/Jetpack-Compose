@@ -64,7 +64,7 @@ fun LocationLayout(
         topBar = {
             Column(modifier = Modifier.background(color = Background)) {
                 CoreTopBar2(
-                    onClick = onBack,
+                    onLeftClick = onBack,
                     title = stringResource(id = R.string.accu_weather)
                 )
 

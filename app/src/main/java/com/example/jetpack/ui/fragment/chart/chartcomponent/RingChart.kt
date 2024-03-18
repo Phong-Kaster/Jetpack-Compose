@@ -92,7 +92,7 @@ fun RingChart(
     // Total is the sum of entire data
     val total: Float by remember(data) {
         derivedStateOf {
-            data.map { it -> it.value }.sum()
+            data.map { it -> it.valueMin }.sum()
         }
     }
 
@@ -100,7 +100,7 @@ fun RingChart(
     val percentList by remember(data) {
         derivedStateOf {
             data.map {
-                it.value / total
+                it.valueMin / total
             }
         }
     }
@@ -186,6 +186,6 @@ fun RingChart(
 @Composable
 fun PreviewPieChart() {
     ViewUtil.PreviewContent {
-        RingChart(data = ChartElement.getFakeData())
+        RingChart(data = ChartElement.getFakeElements())
     }
 }

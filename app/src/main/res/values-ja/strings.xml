@@ -56,4 +56,22 @@
     <string name="education">教育</string>
     <string name="loan_payment">ローン返済</string>
     <string name="quote">引用</string>
+    <string name="icon_setting">アイコン設定</string>
+    <string name="origin">起源</string>
+    <string name="nazi_eagle">ナチスの鷲</string>
+    <string name="nazi_symbol">ナチスの象徴</string>
+    <string name="heer">ヘーア</string>
+    <string name="title_activity_lockscreen2">ロックスクリーン2</string>
+    <string name="accu_weather">アキュウェザー</string>
+    <string name="permissions">権限</string>
+    <string name="permissions_2">権限 2</string>
+    <string name="login">ログイン</string>
+    <string name="request_multiple_permissions">複数の権限を要求する</string>
+    <string name="request_one_permission">一つの権限を要求する</string>
+    <string name="go_to_settings">設定へ行く</string>
+    <string name="motion_layout">モーションレイアウト</string>
+    <string name="multiple_permissions">複数の権限</string>
+    <string name="attention">注意</string>
+    <string name="multiple_permissions_content">当アプリは、位置ベースのサービスを提供し、ユーザーエクスペリエンスを向上させるために、ACCESS_COARSE_LOCATION と ACCESS_FINE_LOCATION の権限を必要とします。これらの権限は、現在の位置に基づいてパーソナライズされたコンテンツとサービスを提供することを可能にします。**RECORD_AUDIO** 権限は、当アプリが音声コマンドや音声録音などの機能のために音声入力にアクセスし、管理するために必要です。これらの権限は、当アプリの機能性を向上させ、可能な限り最高のユーザーエクスペリエンスを提供するためにのみ要求されていることをお約束します。当社は、お客様のプライバシーを尊重し、厳格なデータ処理ポリシーを遵守しています。</string>
+
 </resources>

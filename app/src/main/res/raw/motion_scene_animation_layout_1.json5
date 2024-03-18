@@ -1,0 +1,33 @@
+{
+  ConstraintSets: {
+    start: {
+      button_1: {
+        width: 'spread',
+        height: 120,
+        start: ['parent', 'start', 16],
+        end: ['parent', 'end', 16],
+        top: ['parent', 'top', 0],
+      },
+      button_2: {
+        width: 'spread',
+        height: 120,
+        start: ['parent', 'start', 16],
+        end: ['parent', 'end', 16],
+        top: ['button_1', 'bottom', 16]
+      }
+    },
+    end: {
+      button_1: {
+        width: 150,
+        height: 150,
+        start: ['parent', 'start', 1],
+        end: ['button_2', 'start', 0],
+      },
+      button_2: {
+        height: 150,
+        start: ['button_1', 'end', 5],
+        end: ['parent', 'end', 16],
+      }
+    }
+  },
+}

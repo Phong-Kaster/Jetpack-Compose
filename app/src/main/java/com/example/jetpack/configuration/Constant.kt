@@ -25,4 +25,7 @@ object Constant {
     /* AccuWeather - https://developer.accuweather.com/accuweather-locations-api/apis/get/locations/v1/cities/autocomplete */
     const val ACCU_WEATHER_KEY = "x5ADcexs7Ge2ge8ZlB8T8JnJtWG4AhSJ"
     const val ACCU_WEATHER_URL = "https://dataservice.accuweather.com"
+
+    /* default range */
+    val defaultRange:  Pair<Float, Float> = 0F to 300F
 }

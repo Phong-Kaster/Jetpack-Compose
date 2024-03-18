@@ -10,12 +10,13 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -24,29 +25,29 @@ import com.example.jetpack.R
 import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
 import com.example.jetpack.data.enums.HomeShortcut
+import com.example.jetpack.lifecycleobserver.NotificationLifecycleObserver
 import com.example.jetpack.notification.LockscreenManager
 import com.example.jetpack.notification.NotificationManager
-import com.example.jetpack.repository.WeatherRepositoryImplement
 import com.example.jetpack.ui.component.CoreBottomBar
 import com.example.jetpack.ui.component.CoreDialog
+import com.example.jetpack.ui.component.CoreFloatingMenu
 import com.example.jetpack.ui.fragment.home.component.HomeDialog
 import com.example.jetpack.ui.fragment.home.component.HomeShortcutItem
 import com.example.jetpack.ui.theme.Background
+import com.example.jetpack.ui.theme.ShimmerListItem
 import com.example.jetpack.ui.view.DigitalClock2
 import com.example.jetpack.util.NavigationUtil.safeNavigate
-import com.example.jetpack.util.NotificationResultLauncher
 import com.example.jetpack.util.PermissionUtil
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
+import java.util.Timer
+import java.util.TimerTask
 
 
 @AndroidEntryPoint
 class HomeFragment : CoreFragment() {
     private var showDialog by mutableStateOf(false)
-    private lateinit var notificationResultLauncher: NotificationResultLauncher
+    private lateinit var notificationLifecycleObserver: NotificationLifecycleObserver
 
-    @Inject
-    lateinit var weatherRepositoryImplement: WeatherRepositoryImplement
 
     @SuppressLint("UnsafeRepeatOnLifecycleDetector")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -57,11 +58,11 @@ class HomeFragment : CoreFragment() {
 
 
     private fun setupNotificationLauncher() {
-        notificationResultLauncher = NotificationResultLauncher(
+        notificationLifecycleObserver = NotificationLifecycleObserver(
             activity = requireActivity(),
             registry = requireActivity().activityResultRegistry
         )
-        lifecycle.addObserver(notificationResultLauncher)
+        lifecycle.addObserver(notificationLifecycleObserver)
     }
 
     private fun setupNotification() {
@@ -69,7 +70,7 @@ class HomeFragment : CoreFragment() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             val isAccessed: Boolean = PermissionUtil.isNotiEnabled(context = requireContext())
             if (!isAccessed) {
-                notificationResultLauncher.systemLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                notificationLifecycleObserver.systemLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
             }
         }
 
@@ -85,17 +86,6 @@ class HomeFragment : CoreFragment() {
     @Composable
     override fun ComposeView() {
         super.ComposeView()
-        /*CoreAlertDialog(
-            enable = showDialog,
-            onDismissRequest = {  },
-            onConfirmation = {  },
-            dialogTitle =  stringResource(id = R.string.fake_title),
-            dialogContent = stringResource(id = R.string.fake_content),
-            textButtonConfirm = "OK",
-            textButtonCancel = "Cancel",
-            icon = R.drawable.ic_nazi_eagle
-        )*/
-
         HomeDialog(
             enable = showDialog,
             onDismissRequest = { showDialog = false },
@@ -117,7 +107,12 @@ class HomeFragment : CoreFragment() {
                     HomeShortcut.Tutorial -> safeNavigate(R.id.toTutorial)
                     HomeShortcut.Quote -> safeNavigate(R.id.toQuote)
                     HomeShortcut.AccuWeatherLocation -> safeNavigate(R.id.toAccuWeatherLocation)
-                    HomeShortcut.Permissions -> { safeNavigate(R.id.toPermission) }
+                    HomeShortcut.Permissions -> safeNavigate(R.id.toPermission)
+                    HomeShortcut.Permissions2 -> safeNavigate(R.id.toPermission2)
+                    HomeShortcut.MotionLayout -> safeNavigate(R.id.toMotionLayout)
+                    HomeShortcut.Login -> safeNavigate(R.id.toLogin)
+                    HomeShortcut.Bluetooth -> safeNavigate(R.id.toBluetooth)
+                    HomeShortcut.Webview -> safeNavigate(R.id.toWebview)
                     else -> {}
                 }
             }
@@ -131,8 +126,27 @@ fun HomeLayout(
     onOpenConfirmDialog: () -> Unit = {},
     onOpenShortcut: (HomeShortcut) -> Unit = {}
 ) {
+    var loading by remember { mutableStateOf(true) }
+
+
+    LaunchedEffect(key1 = loading) {
+        Timer().schedule(
+            object : TimerTask() {
+                override fun run() {
+                    loading = false
+                }
+            },
+            500
+        )
+    }
+
+    BackHandler(
+        enabled = true,
+        onBack = onOpenConfirmDialog
+    )
+
+
     CoreLayout(
-        bottomBar = { CoreBottomBar() },
         backgroundColor = Background,
         topBar = {
             DigitalClock2(
@@ -141,32 +155,28 @@ fun HomeLayout(
                     .padding(horizontal = 16.dp, vertical = 16.dp)
             )
         },
+        bottomBar = { CoreBottomBar() },
+        floatingActionButton = { CoreFloatingMenu() }
     ) {
-        BackHandler(
-            enabled = true,
-            onBack = onOpenConfirmDialog
-        )
 
-        LazyVerticalGrid(
-            columns = GridCells.Fixed(2),
-            horizontalArrangement = Arrangement.spacedBy(16.dp),
+        LazyColumn(
             verticalArrangement = Arrangement.spacedBy(16.dp),
             modifier = Modifier
                 .padding(start = 16.dp, end = 16.dp, top = 0.dp, bottom = 32.dp)
                 .fillMaxSize()
         ) {
-            /* item(key = "digitalClock", span = { GridItemSpan(2) }) {
-                 DigitalClock2 ()
-             }*/
-
             items(
                 items = HomeShortcut.entries,
                 key = { item: HomeShortcut -> item.name },
                 itemContent = { it ->
-                    HomeShortcutItem(
-                        shortcut = it,
-                        onClick = onOpenShortcut
-                    )
+                    ShimmerListItem(
+                        loading = loading,
+                        contentAfterLoading = {
+                            HomeShortcutItem(
+                                shortcut = it,
+                                onClick = onOpenShortcut
+                            )
+                        })
                 })
         }
     }

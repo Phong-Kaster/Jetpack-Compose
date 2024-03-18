@@ -1,4 +1,4 @@
-package com.example.jetpack.util
+package com.example.jetpack.lifecycleobserver
 
 import android.Manifest
 import android.app.Activity
@@ -23,11 +23,13 @@ import com.example.jetpack.util.PermissionUtil
 import javax.inject.Inject
 
 /**
- * this class handles only notification request instead define directly in ACTIVITY/ FRAGMENT
- * [Receive an activity result in a separate class]
- * @see https://developer.android.com/training/basics/intents/result.separate
+ * This class encapsulates the logic for requesting notification runtime permissions.
+ * It manages the permission request process and handles the user's response within its own scope,
+ * rather than relying on direct definitions within an Activity or Fragment.
+ *
+ * @see [Receive an activity result in a separate class] https://developer.android.com/training/basics/intents/result#separate
  */
-class NotificationResultLauncher
+class NotificationLifecycleObserver
 @Inject
 constructor(
     private val registry: ActivityResultRegistry,

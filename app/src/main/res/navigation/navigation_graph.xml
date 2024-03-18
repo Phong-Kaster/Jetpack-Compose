@@ -96,10 +96,31 @@
         android:id="@+id/permissionFragment"
         android:name="com.example.jetpack.ui.fragment.permission.PermissionFragment" />
 
+    <fragment
+        android:id="@+id/permissionFragment2"
+        android:name="com.example.jetpack.ui.fragment.permission.PermissionFragment2" />
+
+    <fragment
+        android:id="@+id/animationLayoutFragment"
+        android:name="com.example.jetpack.ui.fragment.motionlayout.AnimationLayoutFragment" />
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.jetpack.ui.fragment.login.LoginFragment" />
+
+    <fragment
+        android:id="@+id/bluetoothFragment"
+        android:name="com.example.jetpack.ui.fragment.bluetooth.BluetoothFragment" />
+
+    <fragment
+        android:id="@+id/webviewFragment"
+        android:name="com.example.jetpack.ui.fragment.webview.WebviewFragment" />
+
     <activity
         android:id="@+id/lockscreenActivity"
         android:name="com.example.jetpack.ui.activity.LockscreenActivity" />
 
+    <!-- FOUR MAIN SCREEN-->
     <action
         android:id="@+id/toHome"
         app:destination="@id/homeFragment"
@@ -107,14 +128,6 @@
         app:exitAnim="@anim/exit_fade_out"
         app:launchSingleTop="true"
         app:popUpTo="@id/navigation_graph" />
-
-    <action
-        android:id="@+id/toSetting"
-        app:destination="@id/settingFragment"
-        app:enterAnim="@anim/enter_fade_in"
-        app:exitAnim="@anim/exit_fade_out"
-        app:launchSingleTop="true"
-        app:popUpTo="@id/homeFragment" />
 
     <action
         android:id="@+id/toInsight"
@@ -132,61 +145,131 @@
         app:launchSingleTop="true"
         app:popUpTo="@id/homeFragment" />
 
+    <action
+        android:id="@+id/toSetting"
+        app:destination="@id/settingFragment"
+        app:enterAnim="@anim/enter_fade_in"
+        app:exitAnim="@anim/exit_fade_out"
+        app:launchSingleTop="true"
+        app:popUpTo="@id/homeFragment" />
 
+    <!--CONTENT FRAGMENTS-->
     <action
         android:id="@+id/toDisclaimer"
         app:destination="@id/disclaimerFragment"
-        app:enterAnim="@anim/enter_fade_in"
-        app:exitAnim="@anim/exit_fade_out"
+        app:enterAnim="@anim/enter_slide_in_right"
+        app:exitAnim="@anim/exit_slide_out_left"
+        app:popEnterAnim="@anim/enter_slide_in_left"
+        app:popExitAnim="@anim/exit_slide_out_right"
         app:popUpToInclusive="true"/>
 
     <action
         android:id="@+id/toLanguage"
         app:destination="@id/languageFragment"
-        app:enterAnim="@anim/enter_fade_in"
-        app:exitAnim="@anim/exit_fade_out"
+        app:enterAnim="@anim/enter_slide_in_right"
+        app:exitAnim="@anim/exit_slide_out_left"
+        app:popEnterAnim="@anim/enter_slide_in_left"
+        app:popExitAnim="@anim/exit_slide_out_right"
         app:popUpToInclusive="true"/>
 
     <action
         android:id="@+id/toTutorial"
         app:destination="@id/tutorialFragment"
-        app:enterAnim="@anim/enter_fade_in"
-        app:exitAnim="@anim/exit_fade_out"
+        app:enterAnim="@anim/enter_slide_in_right"
+        app:exitAnim="@anim/exit_slide_out_left"
+        app:popEnterAnim="@anim/enter_slide_in_left"
+        app:popExitAnim="@anim/exit_slide_out_right"
         app:popUpToInclusive="true"/>
 
     <action
         android:id="@+id/toQuote"
         app:destination="@id/quoteFragment"
-        app:enterAnim="@anim/enter_fade_in"
-        app:exitAnim="@anim/exit_fade_out"
+        app:enterAnim="@anim/enter_slide_in_right"
+        app:exitAnim="@anim/exit_slide_out_left"
+        app:popEnterAnim="@anim/enter_slide_in_left"
+        app:popExitAnim="@anim/exit_slide_out_right"
         app:popUpToInclusive="true"/>
 
     <action
         android:id="@+id/toSettingIcon"
         app:destination="@id/settingIconFragment"
-        app:enterAnim="@anim/enter_fade_in"
-        app:exitAnim="@anim/exit_fade_out"
+        app:enterAnim="@anim/enter_slide_in_right"
+        app:exitAnim="@anim/exit_slide_out_left"
+        app:popEnterAnim="@anim/enter_slide_in_left"
+        app:popExitAnim="@anim/exit_slide_out_right"
         app:popUpToInclusive="true"/>
 
     <action
         android:id="@+id/toLockscreen"
         app:destination="@id/lockscreenActivity"
-        app:enterAnim="@anim/enter_fade_in"
-        app:exitAnim="@anim/exit_fade_out"
+        app:enterAnim="@anim/enter_slide_in_right"
+        app:exitAnim="@anim/exit_slide_out_left"
+        app:popEnterAnim="@anim/enter_slide_in_left"
+        app:popExitAnim="@anim/exit_slide_out_right"
         app:popUpToInclusive="true"/>
 
     <action
         android:id="@+id/toAccuWeatherLocation"
         app:destination="@id/accuWeatherLocation"
-        app:enterAnim="@anim/enter_fade_in"
-        app:exitAnim="@anim/exit_fade_out"
+        app:enterAnim="@anim/enter_slide_in_right"
+        app:exitAnim="@anim/exit_slide_out_left"
+        app:popEnterAnim="@anim/enter_slide_in_left"
+        app:popExitAnim="@anim/exit_slide_out_right"
         app:popUpToInclusive="true"/>
 
     <action
         android:id="@+id/toPermission"
         app:destination="@id/permissionFragment"
-        app:enterAnim="@anim/enter_fade_in"
-        app:exitAnim="@anim/exit_fade_out"
+        app:enterAnim="@anim/enter_slide_in_right"
+        app:exitAnim="@anim/exit_slide_out_left"
+        app:popEnterAnim="@anim/enter_slide_in_left"
+        app:popExitAnim="@anim/exit_slide_out_right"
         app:popUpToInclusive="true"/>
 
+
+    <action
+        android:id="@+id/toMotionLayout"
+        app:destination="@id/animationLayoutFragment"
+        app:enterAnim="@anim/enter_slide_in_right"
+        app:exitAnim="@anim/exit_slide_out_left"
+        app:popEnterAnim="@anim/enter_slide_in_left"
+        app:popExitAnim="@anim/exit_slide_out_right"
+        app:popUpToInclusive="true"/>
+
+
+    <action
+        android:id="@+id/toLogin"
+        app:destination="@id/loginFragment"
+        app:enterAnim="@anim/enter_slide_in_right"
+        app:exitAnim="@anim/exit_slide_out_left"
+        app:popEnterAnim="@anim/enter_slide_in_left"
+        app:popExitAnim="@anim/exit_slide_out_right"
+        app:popUpToInclusive="true"/>
+
+    <action
+        android:id="@+id/toPermission2"
+        app:destination="@id/permissionFragment2"
+        app:enterAnim="@anim/enter_slide_in_right"
+        app:exitAnim="@anim/exit_slide_out_left"
+        app:popEnterAnim="@anim/enter_slide_in_left"
+        app:popExitAnim="@anim/exit_slide_out_right"
+        app:popUpToInclusive="true"/>
+
+    <action
+        android:id="@+id/toBluetooth"
+        app:destination="@id/bluetoothFragment"
+        app:enterAnim="@anim/enter_slide_in_right"
+        app:exitAnim="@anim/exit_slide_out_left"
+        app:popEnterAnim="@anim/enter_slide_in_left"
+        app:popExitAnim="@anim/exit_slide_out_right"
+        app:popUpToInclusive="true"/>
+
+    <action
+        android:id="@+id/toWebview"
+        app:destination="@id/webviewFragment"
+        app:enterAnim="@anim/enter_slide_in_right"
+        app:exitAnim="@anim/exit_slide_out_left"
+        app:popEnterAnim="@anim/enter_slide_in_left"
+        app:popExitAnim="@anim/exit_slide_out_right"
+        app:popUpToInclusive="true"/>
 </navigation>

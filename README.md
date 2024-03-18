@@ -18,13 +18,6 @@
 
 This is my Android sample app that is built with 100 % Kotlin and Jetpack Compose components. I writes this repository because this is my knowledge & experience from realities that i do everyday. In additional, inspired from [**Android Architecture Samples**](https://github.com/android/architecture-samples), this application is a general combination from many application that i have written. They always have splash screen, home screen, setting screen, menu bottom bar, send notifications daily,... and so forth.
 
-<p align="center">
-    <img src="./avatar/Black.jpg" width="640" />
-</p>
-<h3 align="center">
-
-***HEAR ME ROAR - UNBOWED, UNBENT, UNBROKEN***
-</h3>
 
 # [**Sample**](#sample)
 
@@ -43,11 +36,11 @@ In my repository, you will find:
 # [**Packages**](#packages)
 
 <p align="center">
-    <img src="./avatar/Black.jpg" width="640" />
+    <img src="./photo/photo_01.png" width="320" />
 </p>
 <h3 align="center">
 
-***HEAR ME ROAR - UNBOWED, UNBENT, UNBROKEN***
+***PACKAGE STRUCTURE***
 </h3>
 
 There are many packages in my repository (as any casual application ✌️😎). You can see similiar
