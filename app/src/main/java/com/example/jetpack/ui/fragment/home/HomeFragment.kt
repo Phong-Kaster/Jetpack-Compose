@@ -125,6 +125,7 @@ class HomeFragment : CoreFragment() {
                     HomeShortcut.Login -> safeNavigate(R.id.toLogin)
                     HomeShortcut.Bluetooth -> safeNavigate(R.id.toBluetooth)
                     HomeShortcut.Webview -> safeNavigate(R.id.toWebview)
+                    HomeShortcut.ForegroundService -> safeNavigate(R.id.toForegroundService)
                     else -> {}
                 }
             }

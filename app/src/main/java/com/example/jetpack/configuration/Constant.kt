@@ -28,4 +28,12 @@ object Constant {
 
     /* default range */
     val defaultRange:  Pair<Float, Float> = 0F to 300F
+
+    /* FOREGROUND SERVICE */
+    const val FOREGROUND_SERVICE_CHANNEL_ID = "foreground_service_id"
+    const val FOREGROUND_SERVICE_NOTIFICATION_ID = 1
+    const val FOREGROUND_SERVICE_CHANNEL_NAME = "foreground_service"
+    const val FOREGROUND_SERVICE_CHANNEL_DESCRIPTION = "foreground_service_description"
+    const val FOREGROUND_SERVICE_ACTION_START = "foreground_service_action_start"
+    const val FOREGROUND_SERVICE_ACTION_STOP = "foreground_service_action_stop"
 }

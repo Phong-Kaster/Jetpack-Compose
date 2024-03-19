@@ -25,5 +25,6 @@ enum class HomeShortcut(
     Bluetooth(drawable = R.drawable.ic_bluetooth, text = R.string.bluetooth),
     Tooltip(drawable = R.drawable.ic_tooltip, text = R.string.tooltip),
     Webview(drawable = R.drawable.ic_webview, text = R.string.webview),
+    ForegroundService(drawable = R.drawable.ic_service, text = R.string.foreground_service),
     ;
 }

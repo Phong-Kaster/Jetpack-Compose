@@ -73,5 +73,19 @@
     <string name="multiple_permissions">Plusieurs autorisations</string>
     <string name="attention">Attention</string>
     <string name="multiple_permissions_content">Notre application nécessite les autorisations ACCESS_COARSE_LOCATION et ACCESS_FINE_LOCATION pour fournir des services basés sur la localisation et améliorer l\'expérience utilisateur. Ces autorisations nous permettent de fournir un contenu et des services personnalisés en fonction de votre position actuelle. L\'autorisation **RECORD_AUDIO** est nécessaire à notre application pour accéder aux entrées audio et les gérer, par exemple pour les commandes vocales et l\'enregistrement audio. Nous vous assurons que ces autorisations ne sont demandées que pour améliorer la fonctionnalité de notre application et vous offrir la meilleure expérience utilisateur possible. Nous respectons votre vie privée et appliquons des politiques strictes en matière de traitement des données.</string>
+    <string name="bluetooth">Bluetooth</string>
+    <string name="one_permission_content">
+    Essentielle pour notre application, l\'autorisation POST_NOTIFICATIONS nous permet d\'envoyer des mises à jour vitales. Sans elle, la fonctionnalité complète ne peut être garantie.
+    \n\n• Ouvrez l\'application et appuyez sur l\'icône de menu (généralement représentée par trois lignes ou points) dans le coin supérieur de l\'écran.
+    \n\n• Dans le menu, sélectionnez "Paramètres".
+    \n\n• Recherchez "Notifications" et basculez le commutateur sur la position "Activé".
+</string>
+    <string name="this_screen_s_functionality_mirrors">La fonctionnalité de cet écran reflète l\'écran d\'autorisation, mais la logique sous-jacente est implémentée dans une classe séparée et utilise les résultats d\'activité.</string>
+    <string name="this_class_makes_the_request"><![CDATA[Cette classe demande l\'autorisation d\'exécution pour les notifications et nécessite des définitions directement dans une activité ou un fragment.]]></string>
+    <string name="tooltip">Info-bulle</string>
+    <string name="webview">Webview</string>
+    <string name="no_internet_connection">Aucune connexion internet</string>
+    <string name="search">Rechercher...</string>
+    <string name="foreground_service">Service au premier plan</string>
 
 </resources>

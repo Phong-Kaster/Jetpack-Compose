@@ -86,5 +86,7 @@
     <string name="tooltip">Tooltip</string>
     <string name="webview">Webview</string>
     <string name="no_internet_connection">No internet connection</string>
-    <string name="search">Search...</string>
+    <string name="search">Search…</string>
+    <string name="foreground_service">Foreground Service</string>
+    <string name="playing_sundial_dreams">Playing sundial dreams</string>
 </resources>

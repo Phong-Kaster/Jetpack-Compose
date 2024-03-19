@@ -73,5 +73,19 @@
     <string name="multiple_permissions">여러 권한</string>
     <string name="attention">주의</string>
     <string name="multiple_permissions_content">당사 앱은 위치 기반 서비스를 제공하고 사용자 경험을 향상시키기 위해 ACCESS_COARSE_LOCATION 및 ACCESS_FINE_LOCATION 권한이 필요합니다. 이 권한은 현재 위치를 기반으로 개인화된 콘텐츠 및 서비스를 제공할 수 있도록 합니다. **RECORD_AUDIO** 권한은 음성 명령 및 음성 녹음과 같은 기능을 위해 당사 앱이 오디오 입력에 액세스하고 관리하는 데 필요합니다</string>
+    <string name="bluetooth">블루투스</string>
+    <string name="one_permission_content">
+    앱에 필수적인 POST_NOTIFICATIONS 권한은 중요한 업데이트를 보내는 데 필요합니다. 이 권한이 없으면 모든 기능을 보장할 수 없습니다.
+    \n\n• 앱을 열고 화면 상단 모서리에 있는 메뉴 아이콘(일반적으로 세 개의 가로선 또는 점으로 표시됨)을 누릅니다.
+    \n\n• 메뉴에서 "설정"을 선택합니다.
+    \n\n• "알림"을 찾아 토글 스위치를 "चालू( चाल주 )" 위치로 옮깁니다.
+</string>
+    <string name="this_screen_s_functionality_mirrors">이 화면의 기능은 권한 화면과 비슷하지만, 기본 로직은 별도의 클래스에서 구현되며 액티비티 결과를 활용합니다.</string>
+    <string name="this_class_makes_the_request"><![CDATA[이 클래스는 알림 실행 권한을 요청하며 액티비티 또는 프래그먼트 내에서 직접 정의를 요구합니다.]]></string>
+    <string name="tooltip">도움말</string>
+    <string name="webview">웹뷰</string>
+    <string name="no_internet_connection">인터넷 연결 없음</string>
+    <string name="search">검색...</string>
+    <string name="foreground_service">포그라운드 서비스</string>
 
 </resources>
