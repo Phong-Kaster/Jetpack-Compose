@@ -120,7 +120,7 @@ class MediaPlayerService : Service() {
         player?.start()
         _isPlaying.value = true
     }
-    
+
     /**
      * ------------------------------ ONLY FOR NOTIFICATION ------------------------------
      */
