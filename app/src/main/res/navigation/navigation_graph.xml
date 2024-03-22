@@ -120,6 +120,10 @@
         android:id="@+id/foregroundServiceFragment"
         android:name="com.example.jetpack.ui.fragment.backgroundwork.MediaPlayerFragment" />
 
+    <fragment
+        android:id="@+id/basicTextField2Fragment"
+        android:name="com.example.jetpack.ui.fragment.basictextfield2.BasicTextFieldFragment" />
+
     <activity
         android:id="@+id/lockscreenActivity"
         android:name="com.example.jetpack.ui.activity.LockscreenActivity" />
@@ -280,6 +284,15 @@
     <action
         android:id="@+id/toForegroundService"
         app:destination="@id/foregroundServiceFragment"
+        app:enterAnim="@anim/enter_slide_in_right"
+        app:exitAnim="@anim/exit_slide_out_left"
+        app:popEnterAnim="@anim/enter_slide_in_left"
+        app:popExitAnim="@anim/exit_slide_out_right"
+        app:popUpToInclusive="true"/>
+
+    <action
+        android:id="@+id/toBasicTextField2"
+        app:destination="@id/basicTextField2Fragment"
         app:enterAnim="@anim/enter_slide_in_right"
         app:exitAnim="@anim/exit_slide_out_left"
         app:popEnterAnim="@anim/enter_slide_in_left"

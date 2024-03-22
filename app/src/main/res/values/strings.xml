@@ -89,4 +89,10 @@
     <string name="search">Search…</string>
     <string name="foreground_service">Foreground Service</string>
     <string name="playing_sundial_dreams">Playing sundial dreams</string>
+    <string name="basic_text_field_2">Basic Text Field 2</string>
+    <string name="common_usage">Common usage</string>
+    <string name="original">Original</string>
+    <string name="reverted">Reverted</string>
+    <string name="alphabet_ascending">A->Z</string>
+    <string name="alphabet_descending">Z->A</string>
 </resources>

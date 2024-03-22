@@ -44,6 +44,7 @@ import com.example.jetpack.ui.theme.PrimaryColor
 
 @Composable
 fun SearchBar(
+    modifier: Modifier = Modifier,
     onChangeKeyword: (String) -> Unit = {},
     onSearchKeyword: (String) -> Unit = {},
     onClearKeyword: () -> Unit = {},
@@ -56,8 +57,7 @@ fun SearchBar(
     /*SEARCH VIEW*/
     Row(
         verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier
-            .fillMaxWidth()
+        modifier = modifier
             .padding(vertical = 0.dp)
             .height(50.dp)
             .padding(horizontal = 10.dp)
@@ -151,6 +151,7 @@ fun PreviewSearchBar() {
             .background(color = Color.DarkGray)
     ) {
         SearchBar(
+            modifier = Modifier.fillMaxWidth(),
             onSearchKeyword = {},
             onChangeKeyword = {},
             leadingIcon = R.drawable.ic_search,

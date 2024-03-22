@@ -15,6 +15,11 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+/**
+ * this class use Basic Text Field 2
+ *  A TextField of Dreams(Part 1) - https://proandroiddev.com/basictextfield2-a-textfield-of-dreams-1-2-0103fd7cc0ec
+ *  A TextField of Dreams(Part 2) - https://proandroiddev.com/basictextfield2-a-textfield-of-dreams-2-2-fdc7fbbf9ffb
+ */
 @HiltViewModel
 class QuoteViewModel
 @Inject
@@ -24,6 +29,10 @@ constructor(
 
     private val _records = MutableStateFlow<ImmutableList<Quote>>(persistentListOf())
     val records = _records.asStateFlow()
+
+
+
+
 
     init {
         viewModelScope.launch(Dispatchers.IO){

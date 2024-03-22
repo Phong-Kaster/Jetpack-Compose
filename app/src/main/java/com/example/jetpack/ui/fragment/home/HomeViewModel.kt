@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.jetpack.configuration.Menu
 import com.example.jetpack.data.enums.HomeShortcut
+import com.example.jetpack.data.enums.SortOption
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
@@ -24,7 +25,7 @@ constructor() : ViewModel() {
 
     init {
         viewModelScope.launch(Dispatchers.IO){
-            _shortcuts.value = HomeShortcut.entries.toImmutableList()
+            _shortcuts.value = HomeShortcut.entries.sortedBy { it.name }.toImmutableList()
         }
     }
 
@@ -41,6 +42,18 @@ constructor() : ViewModel() {
     fun resetShortcuts(){
         viewModelScope.launch(Dispatchers.IO){
             _shortcuts.value = HomeShortcut.entries.toImmutableList()
+        }
+    }
+
+    fun applySortOption(option: SortOption){
+        viewModelScope.launch(Dispatchers.IO){
+            _shortcuts.value = when(option){
+                SortOption.Original -> HomeShortcut.entries.toImmutableList()
+                SortOption.AlphabetAscending -> HomeShortcut.entries.sortedBy { it.name }.toImmutableList()
+                SortOption.AlphabetDescending -> HomeShortcut.entries.sortedByDescending { it.name }.toImmutableList()
+                SortOption.Inverted -> HomeShortcut.entries.reversed().toImmutableList()
+                else -> HomeShortcut.entries.sortedBy { it.name }.toImmutableList()
+            }
         }
     }
 }
