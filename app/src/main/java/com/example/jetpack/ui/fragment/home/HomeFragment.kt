@@ -218,7 +218,8 @@ fun HomeLayout(
 
                     // Sort Menu
                     IconButton(
-                        onClick = { expandSortMenu = true }, content = {
+                        onClick = { expandSortMenu = true },
+                        content = {
                             Icon(
                                 imageVector = Icons.Default.Menu,
                                 tint = PrimaryColor,
@@ -233,7 +234,9 @@ fun HomeLayout(
                                     DropdownMenuItem(
                                         leadingIcon = { Icon(painter = painterResource(id = option.leadingIcon), tint = PrimaryColor, contentDescription = stringResource(id = R.string.icon)) },
                                         text = { Text(text = stringResource(id = option.text), style = customizedTextStyle(color = PrimaryColor)) },
-                                        onClick = { onApplySortOption(option) }
+                                        onClick = {
+                                            expandSortMenu = false
+                                            onApplySortOption(option) }
                                     )
                                 }
                             }
@@ -245,7 +248,8 @@ fun HomeLayout(
             }
 
 
-            items(items = shortcuts,
+            items(
+                items = shortcuts,
                 key = { item: HomeShortcut -> item.name },
                 itemContent = { homeShortcut: HomeShortcut ->
                     ShimmerItem(loading = loading, content = {
