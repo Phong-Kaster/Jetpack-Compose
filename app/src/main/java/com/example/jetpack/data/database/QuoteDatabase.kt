@@ -11,7 +11,7 @@ import com.example.jetpack.data.database.entity.QuoteEntity
 @Database(
     entities = [QuoteEntity::class],
     version = 1,
-    exportSchema = true
+    exportSchema = true,
 )
 @TypeConverters(DateConverter::class, CategoryConverter::class)
 abstract class QuoteDatabase : RoomDatabase() {
