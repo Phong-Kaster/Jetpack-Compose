@@ -13,6 +13,7 @@ import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
 import com.example.jetpack.data.enums.ChartShortcut
 import com.example.jetpack.ui.component.CoreBottomBar
+import com.example.jetpack.ui.component.CoreFloatingMenu
 import com.example.jetpack.ui.fragment.chart.component.ChartTopBar
 import com.example.jetpack.ui.fragment.chart.component.LineChartScreen
 import com.example.jetpack.ui.fragment.chart.component.RingChartScreen
@@ -40,6 +41,7 @@ fun InsightLayout() {
             )
         },
         bottomBar = { CoreBottomBar() },
+        floatingActionButton = { CoreFloatingMenu() },
         backgroundColor = Background
     ) {
         AnimatedContent(

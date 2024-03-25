@@ -2,22 +2,24 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- For using internet -->
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- INTERNET -->
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
-    <!-- For firing notification on Android 13 -->
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <!-- NOTIFICATION -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" /><!-- Android 13 or higher -->
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
+
 
     <!-- For showing Lockscreen Activity as device's lockscreen -->
     <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
 
-    <!-- For request multiple permissions sample -->
-    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+
+    <!-- LOCATION -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <!-- for using Bluetooth on Android 12 (API level 31) or higher - https://developer.android.com/develop/connectivity/bluetooth/bt-permissions#declare-android12-or-higher-->
     <uses-permission android:name="android.permission.BLUETOOTH_SCAN" android:usesPermissionFlags="neverForLocation" tools:targetApi="s" />
@@ -26,11 +28,18 @@
     <!-- for using Bluetooth on Android 11 (API level 30) or lower - https://developer.android.com/develop/connectivity/bluetooth/bt-permissions#declare-android11-or-lower -->
     <uses-permission android:name="android.permission.BLUETOOTH" android:maxSdkVersion="30" />
 
-    <!-- for using Bluetooth, discover local Bluetooth devices - https://developer.android.com/develop/connectivity/bluetooth/bt-permissions#discover-local-devices -->
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" android:maxSdkVersion="30" />
+    <!-- BLUETOOTH -->
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" android:usesPermissionFlags="neverForLocation" tools:targetApi="s" /><!-- Android 12 (API level 31) or higher - https://developer.android.com/develop/connectivity/bluetooth/bt-permissions#declare-android12-or-higher-->
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+    <uses-permission android:name="android.permission.BLUETOOTH" android:maxSdkVersion="30" /><!-- Android 11 (API level 30) or lower - https://developer.android.com/develop/connectivity/bluetooth/bt-permissions#declare-android11-or-lower -->
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" android:maxSdkVersion="30" /><!-- discover local Bluetooth devices - https://developer.android.com/develop/connectivity/bluetooth/bt-permissions#discover-local-devices -->
+    <uses-feature android:name="android.hardware.bluetooth" android:required="false" /><!-- Our app can NOT work without Bluetooth, if set true then this app will be hidden on Google Play Store - https://developer.android.com/develop/connectivity/bluetooth/bt-permissions#features-->
 
-    <!-- Our app can work without Bluetooth, if set true then this app will be hidden on Google Play Store - https://developer.android.com/develop/connectivity/bluetooth/bt-permissions#features-->
-    <uses-feature android:name="android.hardware.bluetooth" android:required="false"/>
+
+    <!-- FOREGROUND SERVICE -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" /> <!--Android 9 and higher | is the general green light for any foreground service -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" /> <!--Android 14 or higher | only handle media playback - https://developer.android.com/develop/background-work/services/foreground-services#request-foreground-service-permissions-->
+
 
     <application
         android:name=".JetpackApplication"
@@ -121,7 +130,7 @@
         </activity-alias>
 
 
-        <!-- For Lockscreen Receiver -->
+        <!-- LOCKSCREEN RECEIVER -->
         <receiver
             android:name=".notification.LockscreenReceiver"
             android:enabled="true"
@@ -131,7 +140,7 @@
             </intent-filter>
         </receiver>
 
-        <!-- For Notification Receiver -->
+        <!-- NOTIFICATION RECEIVER -->
         <receiver
             android:name=".notification.NotificationReceiver"
             android:enabled="true"
@@ -140,6 +149,12 @@
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </receiver>
+
+        <!-- FOREGROUND SERVICE -->
+        <service
+            android:name=".backgroundwork.MediaPlayerService"
+            android:exported="false"
+            android:foregroundServiceType="mediaPlayback" />
 
     </application>
 

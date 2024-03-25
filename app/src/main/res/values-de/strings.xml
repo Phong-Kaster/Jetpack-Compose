@@ -73,5 +73,19 @@
     <string name="multiple_permissions">Mehrere Berechtigungen</string>
     <string name="attention">Achtung</string>
     <string name="multiple_permissions_content">Unsere App benötigt die Berechtigungen ACCESS_COARSE_LOCATION und ACCESS_FINE_LOCATION, um standortbezogene Dienste bereitzustellen und das Benutzererlebnis zu verbessern. Diese Berechtigungen ermöglichen es uns, basierend auf Ihrem aktuellen Standort personalisierte Inhalte und Dienste bereitzustellen. Die Berechtigung **RECORD_AUDIO** ist notwendig, damit unsere App auf Audioeingaben zugreifen und diese verwalten kann, z. B. für Sprachbefehle und Audioaufnahmen. Wir versichern Ihnen, dass diese Berechtigungen ausschließlich zur Verbesserung der Funktionalität unserer App und zur Bereitstellung des bestmöglichen Benutzererlebnisses angefordert werden. Wir respektieren Ihre Privatsphäre und halten uns an strenge Richtlinien für den Umgang mit Daten.</string>
+    <string name="bluetooth">Bluetooth</string>
+    <string name="one_permission_content">
+    Die Berechtigung POST_NOTIFICATIONS ist für unsere App unerlässlich und ermöglicht es uns, wichtige Updates zu senden. Ohne sie kann die volle Funktionalität nicht garantiert werden.
+    \n\n• Öffnen Sie die App und tippen Sie auf das Menüsymbol (normalerweise durch drei Linien oder Punkte dargestellt) in der oberen Ecke des Bildschirms.
+    \n\n• Wählen Sie im Menü "Einstellungen".
+    \n\n• Suchen Sie nach "Benachrichtigungen" und schalten Sie den Schalter auf "Ein".
+</string>
+    <string name="this_screen_s_functionality_mirrors">Die Funktionalität dieses Bildschirms spiegelt den Berechtigungsbildschirm wider, die zugrundeliegende Logik ist jedoch in einer separaten Klasse implementiert und verwendet Aktivitätsergebnisse.</string>
+    <string name="this_class_makes_the_request"><![CDATA[Diese Klasse fordert die Laufzeitberechtigung für Benachrichtigungen an und benötigt Definitionen direkt innerhalb einer Aktivität oder eines Fragments.]]></string>
+    <string name="tooltip">Tooltip</string>
+    <string name="webview">Webansicht</string>
+    <string name="no_internet_connection">Keine Internetverbindung</string>
+    <string name="search">Suchen…</string>
+    <string name="foreground_service">Vordergrunddienst</string>
 
 </resources>

@@ -28,3 +28,4 @@ class LocationGeo(
     @SerializedName("ParentCity") val ParentCity: ParentCity? = ParentCity(),
 ): Serializable
 
+

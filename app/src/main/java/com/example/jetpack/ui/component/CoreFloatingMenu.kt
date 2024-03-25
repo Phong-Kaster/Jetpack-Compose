@@ -50,15 +50,13 @@ fun CoreFloatingMenu() {
         AnimatedVisibility(
             visible = expand,
             enter = slideInVertically() + fadeIn() + expandVertically(
-                expandFrom = Alignment.Bottom
+                expandFrom = Alignment.Top
             ),
             exit = slideOutVertically() + fadeOut() + shrinkVertically(
                 shrinkTowards = Alignment.Bottom
             ),
             content = {
-                Column(
-                    verticalArrangement = Arrangement.spacedBy(10.dp)
-                ) {
+                Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
                     Menu.entries.forEach {
                         IconButton(
                             onClick = {
@@ -77,6 +75,54 @@ fun CoreFloatingMenu() {
                             )
                         }
                     }
+                    /*IconButton(
+                        onClick = {
+                            navController.navigate(Menu.Home.destinationId)
+                        },
+                        modifier = Modifier
+                            .clip(shape = CircleShape)
+                            .background(color = PrimaryColor)
+                            .size(50.dp)
+                    ) {
+                        Icon(
+                            painter = painterResource(id = Menu.Home.drawableId),
+                            contentDescription = stringResource(id = R.string.icon),
+                            tint = Color.Black,
+                            modifier = Modifier.size(24.dp)
+                        )
+                    }
+                    IconButton(
+                        onClick = {
+                            navController.navigate(Menu.Home.destinationId)
+                        },
+                        modifier = Modifier
+                            .clip(shape = CircleShape)
+                            .background(color = PrimaryColor)
+                            .size(50.dp)
+                    ) {
+                        Icon(
+                            painter = painterResource(id = Menu.Home.drawableId),
+                            contentDescription = stringResource(id = R.string.icon),
+                            tint = Color.Black,
+                            modifier = Modifier.size(24.dp)
+                        )
+                    }
+                    IconButton(
+                        onClick = {
+                            navController.navigate(Menu.Home.destinationId)
+                        },
+                        modifier = Modifier
+                            .clip(shape = CircleShape)
+                            .background(color = PrimaryColor)
+                            .size(50.dp)
+                    ) {
+                        Icon(
+                            painter = painterResource(id = Menu.Home.drawableId),
+                            contentDescription = stringResource(id = R.string.icon),
+                            tint = Color.Black,
+                            modifier = Modifier.size(24.dp)
+                        )
+                    }*/
                 }
             }
         )

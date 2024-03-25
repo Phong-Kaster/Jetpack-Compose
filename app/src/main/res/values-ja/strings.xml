@@ -73,5 +73,19 @@
     <string name="multiple_permissions">複数の権限</string>
     <string name="attention">注意</string>
     <string name="multiple_permissions_content">当アプリは、位置ベースのサービスを提供し、ユーザーエクスペリエンスを向上させるために、ACCESS_COARSE_LOCATION と ACCESS_FINE_LOCATION の権限を必要とします。これらの権限は、現在の位置に基づいてパーソナライズされたコンテンツとサービスを提供することを可能にします。**RECORD_AUDIO** 権限は、当アプリが音声コマンドや音声録音などの機能のために音声入力にアクセスし、管理するために必要です。これらの権限は、当アプリの機能性を向上させ、可能な限り最高のユーザーエクスペリエンスを提供するためにのみ要求されていることをお約束します。当社は、お客様のプライバシーを尊重し、厳格なデータ処理ポリシーを遵守しています。</string>
+    <string name="bluetooth">Bluetooth</string>
+    <string name="one_permission_content">
+    当アプリにとって不可欠な POST_NOTIFICATIONS 権限を許可していただくと、重要なアップデートをお送りできます。許可がない場合、すべての機能が保証されません。
+    \n\n• アプリを開き、画面上部の角にあるメニューアイコン (通常は 3 本の横線または点で示されます) をタップします。
+    \n\n• メニューから「設定」を選択します。
+    \n\n• 「通知」を探し、トグルスイッチを「オン」の位置に切り替えます。
+</string>
+    <string name="this_screen_s_functionality_mirrors">この画面の機能は権限画面と似ていますが、基盤となるロジックは別々のクラスで実装されており、アクティビティの結果を利用しています。</string>
+    <string name="this_class_makes_the_request"><![CDATA[このクラスは、通知実行時パーミッションを要求し、アクティビティまたはフラグメント内で直接定義を必要とします。]]></string>
+    <string name="tooltip">ツールチップ</string>
+    <string name="webview">ウェブビュー</string>
+    <string name="no_internet_connection">インターネット接続がありません</string>
+    <string name="search">検索…</string>
+    <string name="foreground_service">フォアグラウンド サービス</string>
 
 </resources>

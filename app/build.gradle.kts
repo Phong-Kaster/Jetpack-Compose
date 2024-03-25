@@ -31,7 +31,8 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -141,6 +142,9 @@ dependencies {
     // https://lottiefiles.com/blog/working-with-lottie-animations/getting-started-with-lottie-animations-in-android-app/
     implementation("com.airbnb.android:lottie:6.3.0")
     implementation("com.airbnb.android:lottie-compose:6.3.0")
+
+    // https://mvnrepository.com/artifact/androidx.compose.foundation/foundation
+    implementation("androidx.compose.foundation:foundation:1.7.0-alpha04")
 }
 
 // Allow references to generated code

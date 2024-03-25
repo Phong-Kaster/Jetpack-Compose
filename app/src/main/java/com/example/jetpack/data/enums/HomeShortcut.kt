@@ -3,7 +3,9 @@ package com.example.jetpack.data.enums
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.example.jetpack.R
+import javax.annotation.concurrent.Immutable
 
+@Immutable
 enum class HomeShortcut(
     @DrawableRes val drawable: Int,
     @StringRes val text: Int,
@@ -23,5 +25,7 @@ enum class HomeShortcut(
     Bluetooth(drawable = R.drawable.ic_bluetooth, text = R.string.bluetooth),
     Tooltip(drawable = R.drawable.ic_tooltip, text = R.string.tooltip),
     Webview(drawable = R.drawable.ic_webview, text = R.string.webview),
+    ForegroundService(drawable = R.drawable.ic_service, text = R.string.foreground_service),
+    BasicTextField2(drawable = R.drawable.ic_basic_text_field_2, text = R.string.basic_text_field_2),
     ;
 }

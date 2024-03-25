@@ -73,4 +73,18 @@
     <string name="multiple_permissions">Nhiều quyền</string>
     <string name="attention">Chú ý</string>
     <string name="multiple_permissions_content">Ứng dụng của chúng tôi yêu cầu quyền ACCESS_COARSE_LOCATION và ACCESS_FINE_LOCATION để cung cấp các dịch vụ dựa trên vị trí và nâng cao trải nghiệm người dùng. Những quyền này cho phép chúng tôi cung cấp nội dung và dịch vụ được cá nhân hóa dựa trên vị trí hiện tại của bạn. Quyền RECORD_AUDIO cần thiết cho ứng dụng của chúng tôi để truy cập và quản lý đầu vào âm thanh cho các tính năng như lệnh thoại và ghi âm. Chúng tôi đảm bảo với bạn rằng những quyền này chỉ được yêu cầu để cải thiện chức năng của ứng dụng và cung cấp cho bạn trải nghiệm người dùng tốt nhất có thể. Chúng tôi tôn trọng quyền riêng tư của bạn và tuân thủ các chính sách xử lý dữ liệu nghiêm ngặt.</string>
+    <string name="bluetooth">Bluetooth</string>
+    <string name="one_permission_content">
+    Quyền POST_NOTIFICATIONS rất cần thiết cho ứng dụng của chúng tôi, cho phép chúng tôi gửi các bản cập nhật quan trọng. Nếu không có quyền này, chức năng đầy đủ không được đảm bảo.
+    \n\n• Mở ứng dụng và chạm vào biểu tượng menu (thường được biểu thị bằng ba đường kẻ ngang hoặc ba chấm) ở góc trên cùng của màn hình.
+    \n\n• Trong menu, chọn "Cài đặt".
+    \n\n• Tìm "Thông báo" và bật công tắc sang vị trí "Bật".
+</string>
+    <string name="this_screen_s_functionality_mirrors">Chức năng của màn hình này tương tự như màn hình cấp quyền, nhưng logic nền tảng được triển khai trong một lớp riêng biệt và sử dụng kết quả hoạt động.</string>
+    <string name="this_class_makes_the_request"><![CDATA[Lớp này yêu cầu quyền chạy thời gian thực cho thông báo và yêu cầu định nghĩa trực tiếp trong Hoạt động hoặc Phân mảnh.]]></string>
+    <string name="tooltip">Chú thích công cụ</string>
+    <string name="webview">Webview</string>
+    <string name="no_internet_connection">Không có kết nối internet</string>
+    <string name="search">Tìm</string>
+    <string name="foreground_service">Dịch vụ nền trước</string>
 </resources>
