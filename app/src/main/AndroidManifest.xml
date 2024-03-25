@@ -21,6 +21,12 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
+    <!-- for using Bluetooth on Android 12 (API level 31) or higher - https://developer.android.com/develop/connectivity/bluetooth/bt-permissions#declare-android12-or-higher-->
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" android:usesPermissionFlags="neverForLocation" tools:targetApi="s" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT"/>
+
+    <!-- for using Bluetooth on Android 11 (API level 30) or lower - https://developer.android.com/develop/connectivity/bluetooth/bt-permissions#declare-android11-or-lower -->
+    <uses-permission android:name="android.permission.BLUETOOTH" android:maxSdkVersion="30" />
 
     <!-- BLUETOOTH -->
     <uses-permission android:name="android.permission.BLUETOOTH_SCAN" android:usesPermissionFlags="neverForLocation" tools:targetApi="s" /><!-- Android 12 (API level 31) or higher - https://developer.android.com/develop/connectivity/bluetooth/bt-permissions#declare-android12-or-higher-->
