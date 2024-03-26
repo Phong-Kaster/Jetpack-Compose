@@ -168,6 +168,11 @@ dependencies {
 
     // https://mvnrepository.com/artifact/androidx.compose.foundation/foundation
     implementation("androidx.compose.foundation:foundation:1.7.0-alpha04")
+
+
+    // collectAsStateWithLifecycle() collects values from a Flow in a lifecycle-aware manner, allowing your app to conserve app resources
+    // https://developer.android.com/develop/ui/compose/state#use-other-types-of-state-in-jetpack-compose
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.7.0")
 }
 
 // Allow references to generated code

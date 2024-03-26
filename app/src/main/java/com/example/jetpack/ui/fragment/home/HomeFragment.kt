@@ -38,6 +38,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.jetpack.R
 import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
@@ -134,7 +135,7 @@ class HomeFragment : CoreFragment() {
 
         HomeLayout(
             loading = loading,
-            shortcuts = viewModel.shortcuts.collectAsState().value,
+            shortcuts = viewModel.shortcutsWithLifecycle.collectAsStateWithLifecycle().value,
             onOpenConfirmDialog = { showDialog = !showDialog },
             onChangeKeyword = { viewModel.searchWithKeyword(it) },
             onSearchKeyword = { viewModel.searchWithKeyword(it) },

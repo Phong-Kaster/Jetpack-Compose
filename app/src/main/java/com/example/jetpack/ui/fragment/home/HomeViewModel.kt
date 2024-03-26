@@ -2,7 +2,6 @@ package com.example.jetpack.ui.fragment.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.jetpack.configuration.Menu
 import com.example.jetpack.data.enums.HomeShortcut
 import com.example.jetpack.data.enums.SortOption
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -23,9 +22,15 @@ constructor() : ViewModel() {
     private val _shortcuts = MutableStateFlow<ImmutableList<HomeShortcut>>(persistentListOf())
     val shortcuts = _shortcuts.asStateFlow()
 
+    val shortcutsWithLifecycle = MutableStateFlow<ImmutableList<HomeShortcut>>(persistentListOf())
+
     init {
-        viewModelScope.launch(Dispatchers.IO){
+        viewModelScope.launch(Dispatchers.IO) {
             _shortcuts.value = HomeShortcut.entries.sortedBy { it.name }.toImmutableList()
+        }
+
+        viewModelScope.launch(Dispatchers.IO) {
+            shortcutsWithLifecycle.value = HomeShortcut.entries.sortedBy { it.name }.toImmutableList()
         }
     }
 
@@ -36,6 +41,7 @@ constructor() : ViewModel() {
             }
 
             _shortcuts.value = list.toImmutableList()
+            shortcutsWithLifecycle.value = list.toImmutableList()
         }
     }
 

@@ -13,5 +13,5 @@ enum class SortOption(
     Original(text = R.string.original, leadingIcon = R.drawable.ic_sort_original),
     AlphabetAscending(text = R.string.alphabet_ascending, leadingIcon = R.drawable.ic_sort_alphabet_ascending),
     AlphabetDescending(text = R.string.alphabet_descending, leadingIcon = R.drawable.ic_sort_alphabet_descending),
-    Inverted(text = R.string.alphabet_descending, leadingIcon = R.drawable.ic_sort_inverted),
+    Inverted(text = R.string.reverted, leadingIcon = R.drawable.ic_sort_inverted),
 }
