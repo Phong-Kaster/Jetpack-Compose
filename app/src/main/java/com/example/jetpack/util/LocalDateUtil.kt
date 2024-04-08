@@ -36,7 +36,7 @@ object LocalDateUtil {
      * convert from Epoch day to date string
      * for example: LocalDate.now().toEpochDay().toDateString() -> 04/04/2024
      */
-    fun Long.toDateString(pattern: String = "dd/MM/yyyy"): String {
+    fun Long.toDateWithPattern(pattern: String = "dd/MM/yyyy"): String {
         val localDate = LocalDate.ofEpochDay(this)
         val formatter = DateTimeFormatter.ofPattern(pattern)
         val formattedString = localDate.format(formatter)
