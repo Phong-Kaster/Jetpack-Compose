@@ -3,6 +3,7 @@ package com.example.jetpack.util
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 import java.util.Date
 
 
@@ -30,4 +31,17 @@ object LocalDateUtil {
     fun LocalDate.toDate(): Date {
         return Date.from(this.atStartOfDay(ZoneId.systemDefault()).toInstant())
     }
+
+    /**
+     * convert from Epoch day to date string
+     * for example: LocalDate.now().toEpochDay().toDateString() -> 04/04/2024
+     */
+    fun Long.toDateString(pattern: String = "dd/MM/yyyy"): String {
+        val localDate = LocalDate.ofEpochDay(this)
+        val formatter = DateTimeFormatter.ofPattern(pattern)
+        val formattedString = localDate.format(formatter)
+
+        return formattedString
+    }
+
 }
