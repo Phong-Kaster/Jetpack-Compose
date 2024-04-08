@@ -23,4 +23,11 @@ object LocalDateUtil {
     fun LocalDateTime.elapsedSeconds(): Int {
         return this.hour * 60 * 60 + minute * 60 + second
     }
+
+    /**
+     * convert from local date to date
+     */
+    fun LocalDate.toDate(): Date {
+        return Date.from(this.atStartOfDay(ZoneId.systemDefault()).toInstant())
+    }
 }
