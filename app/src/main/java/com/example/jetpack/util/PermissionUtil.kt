@@ -11,7 +11,7 @@ import androidx.core.content.ContextCompat
 object PermissionUtil {
     /**
      * return true if notification has enabled
-     * return false if notifcation has disabled
+     * return false if notification has disabled
      */
     @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
     fun isNotiEnabled(context: Context): Boolean {

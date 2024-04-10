@@ -83,9 +83,9 @@ fun BloodPressureChart2Element(
     onClick: () -> Unit = {},
 ) {
 
-
-
-    Layout(modifier = Modifier, content = {
+    Layout(
+        modifier = Modifier,
+        content = {
         // Column
         Spacer(modifier = Modifier
             .clip(shape = RoundedCornerShape(15.dp))
