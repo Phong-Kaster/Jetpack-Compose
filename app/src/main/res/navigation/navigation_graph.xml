@@ -124,6 +124,10 @@
         android:id="@+id/basicTextField2Fragment"
         android:name="com.example.jetpack.ui.fragment.basictextfield2.BasicTextFieldFragment" />
 
+    <fragment
+        android:id="@+id/collapsibleTopBarFragment"
+        android:name="com.example.jetpack.ui.fragment.collapsibletopbar.CollapsibleTopBarFragment" />
+
     <activity
         android:id="@+id/lockscreenActivity"
         android:name="com.example.jetpack.ui.activity.LockscreenActivity" />
@@ -293,6 +297,15 @@
     <action
         android:id="@+id/toBasicTextField2"
         app:destination="@id/basicTextField2Fragment"
+        app:enterAnim="@anim/enter_slide_in_right"
+        app:exitAnim="@anim/exit_slide_out_left"
+        app:popEnterAnim="@anim/enter_slide_in_left"
+        app:popExitAnim="@anim/exit_slide_out_right"
+        app:popUpToInclusive="true"/>
+
+    <action
+        android:id="@+id/toCollasibleTopbar"
+        app:destination="@id/collapsibleTopBarFragment"
         app:enterAnim="@anim/enter_slide_in_right"
         app:exitAnim="@anim/exit_slide_out_left"
         app:popEnterAnim="@anim/enter_slide_in_left"

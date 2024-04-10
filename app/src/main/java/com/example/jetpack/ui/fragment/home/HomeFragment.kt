@@ -154,6 +154,7 @@ class HomeFragment : CoreFragment() {
                     HomeShortcut.Webview -> safeNavigate(R.id.toWebview)
                     HomeShortcut.ForegroundService -> safeNavigate(R.id.toForegroundService)
                     HomeShortcut.BasicTextField2 -> safeNavigate(R.id.toBasicTextField2)
+                    HomeShortcut.CollapsibleTopBar -> safeNavigate(R.id.toCollasibleTopbar)
                     else -> {}
                 }
             })
