@@ -1,9 +1,11 @@
 package com.example.jetpack.util
 
+import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
+import java.time.temporal.TemporalAdjusters
 import java.util.Date
 
 
@@ -44,4 +46,17 @@ object LocalDateUtil {
         return formattedString
     }
 
+    /**
+     * for instance: today is 12-04-2024 then start day of week is Monday, 08-04-2024
+     */
+    fun LocalDate.startDayOfWeek(): LocalDate {
+        return this.with(TemporalAdjusters.previous(DayOfWeek.MONDAY))
+    }
+
+    /**
+     * for instance: today is 12-04-2024 then last day of week is SUNDAY, 14-04-2024
+     */
+    fun LocalDate.lastDayOfWeek(): LocalDate {
+        return this.with(TemporalAdjusters.previousOrSame(DayOfWeek.SUNDAY))
+    }
 }
