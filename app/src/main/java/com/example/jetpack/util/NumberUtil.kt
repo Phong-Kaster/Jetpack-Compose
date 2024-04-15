@@ -60,4 +60,19 @@ object NumberUtil {
             .append(RomanNumber_I[this % 10])
             .toString()
     }
+
+    /**
+     * 70.35032 -> 70.35
+     * */
+    fun Float.withTwoDigits(): String {
+        return "%.2f".format(this)
+    }
+
+
+    /**
+     * 70.35032 -> 70.3
+     * */
+    fun Float.withOneDigit(): String {
+        return "%.1f".format(this)
+    }
 }

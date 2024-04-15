@@ -38,6 +38,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.jetpack.R
 import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
@@ -134,7 +135,7 @@ class HomeFragment : CoreFragment() {
 
         HomeLayout(
             loading = loading,
-            shortcuts = viewModel.shortcuts.collectAsState().value,
+            shortcuts = viewModel.shortcutsWithLifecycle.collectAsStateWithLifecycle().value,
             onOpenConfirmDialog = { showDialog = !showDialog },
             onChangeKeyword = { viewModel.searchWithKeyword(it) },
             onSearchKeyword = { viewModel.searchWithKeyword(it) },
@@ -153,6 +154,7 @@ class HomeFragment : CoreFragment() {
                     HomeShortcut.Webview -> safeNavigate(R.id.toWebview)
                     HomeShortcut.ForegroundService -> safeNavigate(R.id.toForegroundService)
                     HomeShortcut.BasicTextField2 -> safeNavigate(R.id.toBasicTextField2)
+                    HomeShortcut.CollapsibleTopBar -> safeNavigate(R.id.toCollasibleTopbar)
                     else -> {}
                 }
             })
@@ -218,7 +220,8 @@ fun HomeLayout(
 
                     // Sort Menu
                     IconButton(
-                        onClick = { expandSortMenu = true }, content = {
+                        onClick = { expandSortMenu = true },
+                        content = {
                             Icon(
                                 imageVector = Icons.Default.Menu,
                                 tint = PrimaryColor,
@@ -233,7 +236,9 @@ fun HomeLayout(
                                     DropdownMenuItem(
                                         leadingIcon = { Icon(painter = painterResource(id = option.leadingIcon), tint = PrimaryColor, contentDescription = stringResource(id = R.string.icon)) },
                                         text = { Text(text = stringResource(id = option.text), style = customizedTextStyle(color = PrimaryColor)) },
-                                        onClick = { onApplySortOption(option) }
+                                        onClick = {
+                                            expandSortMenu = false
+                                            onApplySortOption(option) }
                                     )
                                 }
                             }
@@ -245,7 +250,8 @@ fun HomeLayout(
             }
 
 
-            items(items = shortcuts,
+            items(
+                items = shortcuts,
                 key = { item: HomeShortcut -> item.name },
                 itemContent = { homeShortcut: HomeShortcut ->
                     ShimmerItem(loading = loading, content = {

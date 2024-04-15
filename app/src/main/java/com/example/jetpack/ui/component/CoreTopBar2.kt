@@ -29,7 +29,6 @@ import com.example.jetpack.ui.theme.PrimaryColor
 import com.example.jetpack.ui.theme.customizedTextStyle
 import com.example.jetpack.util.ViewUtil
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun CoreTopBar2(
     @DrawableRes iconLeft: Int? = null,

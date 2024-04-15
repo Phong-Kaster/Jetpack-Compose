@@ -64,7 +64,9 @@ fun ChartTopBar(
                             disabledContainerColor = Color.Transparent,
                         ),
                         border = FilterChipDefaults.filterChipBorder(
-                            borderColor = PrimaryColor,
+                            enabled = true,
+                            selected = true,
+                            selectedBorderColor = PrimaryColor,
 
                         ),
                         label = {

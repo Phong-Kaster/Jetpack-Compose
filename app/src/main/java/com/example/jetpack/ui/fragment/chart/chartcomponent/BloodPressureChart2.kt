@@ -116,7 +116,6 @@ fun BloodPressureChart2(
                     onClick = bloodPressureOnLog
                 )*/
             }
-
         } else {
             LazyRow(
                 contentPadding = PaddingValues(start = 0.dp, end = 12.dp),
