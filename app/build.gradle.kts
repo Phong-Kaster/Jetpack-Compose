@@ -120,7 +120,7 @@ dependencies {
 
 
     // Preferences DataStore - https://developer.android.com/topic/libraries/architecture/datastore#preferences-datastore-dependencies
-    implementation("androidx.datastore:datastore-preferences:1.0.0")
+    implementation("androidx.datastore:datastore-preferences:1.1.0")
 
 
     // Get started with the Navigation component - https://developer.android.com/guide/navigation/get-started#Set-up
