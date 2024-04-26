@@ -2,7 +2,7 @@ package com.example.jetpack.data.repository
 
 import com.example.jetpack.configuration.Language
 import com.example.jetpack.configuration.Logo
-import com.example.jetpack.datastore.SettingDatastore
+import com.example.jetpack.data.datastore.SettingDatastore
 import javax.inject.Inject
 import javax.inject.Singleton
 

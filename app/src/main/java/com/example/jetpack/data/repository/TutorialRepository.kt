@@ -1,6 +1,6 @@
 package com.example.jetpack.data.repository
 
-import com.example.jetpack.datastore.TutorialDatastore
+import com.example.jetpack.data.datastore.TutorialDatastore
 import javax.inject.Inject
 import javax.inject.Singleton
 

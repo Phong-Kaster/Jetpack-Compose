@@ -1,4 +1,4 @@
-package com.example.jetpack.datastore
+package com.example.jetpack.data.datastore
 
 import android.content.Context
 import androidx.datastore.core.DataStore
