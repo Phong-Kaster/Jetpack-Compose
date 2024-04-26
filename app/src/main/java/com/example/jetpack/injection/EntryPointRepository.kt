@@ -1,6 +1,6 @@
 package com.example.jetpack.injection
 
-import com.example.jetpack.repository.SettingRepository
+import com.example.jetpack.data.repository.SettingRepository
 import dagger.hilt.EntryPoint
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent

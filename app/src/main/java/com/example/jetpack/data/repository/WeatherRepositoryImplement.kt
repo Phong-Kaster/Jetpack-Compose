@@ -1,4 +1,4 @@
-package com.example.jetpack.repository
+package com.example.jetpack.data.repository
 
 
 import com.example.jetpack.network.adapter.AccuWeatherFactory

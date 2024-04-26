@@ -3,7 +3,7 @@ package com.example.jetpack.injection.module
 import com.example.jetpack.configuration.Constant
 import com.example.jetpack.network.interceptor.AccuWeatherInterceptor
 import com.example.jetpack.network.service.AccuWeatherService
-import com.example.jetpack.repository.SettingRepository
+import com.example.jetpack.data.repository.SettingRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

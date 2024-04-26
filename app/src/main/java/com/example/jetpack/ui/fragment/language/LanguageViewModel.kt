@@ -3,7 +3,7 @@ package com.example.jetpack.ui.fragment.language
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.jetpack.configuration.Language
-import com.example.jetpack.repository.SettingRepository
+import com.example.jetpack.data.repository.SettingRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow

@@ -3,7 +3,7 @@ package com.example.jetpack.ui.fragment.accuweather
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.jetpack.network.dto.LocationAuto
-import com.example.jetpack.repository.WeatherRepositoryImplement
+import com.example.jetpack.data.repository.WeatherRepositoryImplement
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
