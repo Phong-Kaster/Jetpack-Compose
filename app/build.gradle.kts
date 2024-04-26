@@ -81,7 +81,7 @@ android {
 
 dependencies {
 
-    implementation("androidx.core:core-ktx:1.12.0")
+    implementation("androidx.core:core-ktx:1.13.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
     implementation("androidx.activity:activity-compose:1.8.2")
     implementation(platform("androidx.compose:compose-bom:2024.02.02"))
@@ -157,14 +157,16 @@ dependencies {
 
     // Retrofit - https://github.com/square/retrofit
     // Retrofit - A type-safe HTTP client for Android and Java - https://square.github.io/retrofit/
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.retrofit2:retrofit:2.11.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.11.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
+
 
     // Lottie for Android - https://github.com/airbnb/lottie-android
     // https://lottiefiles.com/blog/working-with-lottie-animations/getting-started-with-lottie-animations-in-android-app/
-    implementation("com.airbnb.android:lottie:6.3.0")
-    implementation("com.airbnb.android:lottie-compose:6.3.0")
+    implementation("com.airbnb.android:lottie:6.4.0")
+    implementation("com.airbnb.android:lottie-compose:6.4.0")
+
 
     // https://mvnrepository.com/artifact/androidx.compose.foundation/foundation
     implementation("androidx.compose.foundation:foundation:1.7.0-alpha04")

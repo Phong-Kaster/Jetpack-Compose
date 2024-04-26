@@ -3,7 +3,6 @@ package com.example.jetpack.ui.fragment.basictextfield2
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.foundation.text.input.textAsFlow
-
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
