@@ -91,19 +91,19 @@ class HomeFragment : CoreFragment() {
     }
 
     private fun setupNotification() {
-        //1. Request POST NOTIFICATION permission if device has Android OS from 13
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            val isAccessed: Boolean = PermissionUtil.isNotiEnabled(context = requireContext())
-            if (!isAccessed) {
-                notificationLifecycleObserver.systemLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
-            }
-        }
+        // 1. Request POST NOTIFICATION permission if device has Android OS from 13
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) return
 
-        //2. Create notification channel and setup daily notification
+        val isAccessed: Boolean = PermissionUtil.isNotiEnabled(context = requireContext())
+        if (isAccessed) return
+        notificationLifecycleObserver.systemLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+
+
+        // 2. Create notification channel and setup daily notification
         NotificationManager.createNotificationChannel(context = requireContext())
         NotificationManager.sendNotification(context = requireContext())
 
-        //3. Create lockscreen-styled notification and send it every day
+        // 3. Create lockscreen-styled notification and send it every day
         LockscreenManager.createNotificationChannel(context = requireContext())
         LockscreenManager.sendNotification(context = requireContext())
     }
