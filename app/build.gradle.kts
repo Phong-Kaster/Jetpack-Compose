@@ -169,6 +169,7 @@ dependencies {
 
 
     // https://mvnrepository.com/artifact/androidx.compose.foundation/foundation
+    // If we upgrade version from 1.7.0-alpha04 to 1.7.0-alpha07 - https://developer.android.com/reference/kotlin/androidx/compose/foundation/text/input/TextFieldState
     implementation("androidx.compose.foundation:foundation:1.7.0-alpha04")
 
 

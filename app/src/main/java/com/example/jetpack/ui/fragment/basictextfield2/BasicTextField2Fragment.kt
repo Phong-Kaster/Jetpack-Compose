@@ -24,7 +24,9 @@ import androidx.compose.foundation.text.input.then
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
@@ -45,6 +47,7 @@ import com.example.jetpack.util.NavigationUtil.safeNavigateUp
 import com.example.jetpack.util.inputtransformation.DigitsOnlyTransformation
 import com.example.jetpack.util.inputtransformation.VerificationCodeTransformation
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 
 /**
  * this class use Basic Text Field 2
@@ -215,7 +218,11 @@ fun BasicTextFieldLayout(
                     decorator = { innerTextField -> innerTextField() },
                     modifier = Modifier
                         .fillMaxWidth()
-                        .border(width = 1.dp, color = PrimaryColor, shape = RoundedCornerShape(5.dp))
+                        .border(
+                            width = 1.dp,
+                            color = PrimaryColor,
+                            shape = RoundedCornerShape(5.dp)
+                        )
                         .padding(vertical = 16.dp, horizontal = 16.dp),
                 )
             }

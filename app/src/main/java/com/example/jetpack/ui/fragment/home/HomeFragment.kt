@@ -85,7 +85,8 @@ class HomeFragment : CoreFragment() {
 
     private fun setupNotificationLauncher() {
         notificationLifecycleObserver = NotificationLifecycleObserver(
-            activity = requireActivity(), registry = requireActivity().activityResultRegistry
+            activity = requireActivity(),
+            registry = requireActivity().activityResultRegistry
         )
         lifecycle.addObserver(notificationLifecycleObserver)
     }
