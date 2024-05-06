@@ -233,11 +233,23 @@ fun HomeLayout(
                             ) {
                                 SortOption.entries.forEach { option ->
                                     DropdownMenuItem(
-                                        leadingIcon = { Icon(painter = painterResource(id = option.leadingIcon), tint = PrimaryColor, contentDescription = stringResource(id = R.string.icon)) },
-                                        text = { Text(text = stringResource(id = option.text), style = customizedTextStyle(color = PrimaryColor)) },
+                                        leadingIcon = {
+                                            Icon(
+                                                painter = painterResource(id = option.leadingIcon),
+                                                tint = PrimaryColor,
+                                                contentDescription = stringResource(id = R.string.icon)
+                                            )
+                                        },
+                                        text = {
+                                            Text(
+                                                text = stringResource(id = option.text),
+                                                style = customizedTextStyle(color = PrimaryColor)
+                                            )
+                                        },
                                         onClick = {
                                             expandSortMenu = false
-                                            onApplySortOption(option) }
+                                            onApplySortOption(option)
+                                        }
                                     )
                                 }
                             }
@@ -253,11 +265,10 @@ fun HomeLayout(
                 items = shortcuts,
                 key = { item: HomeShortcut -> item.name },
                 itemContent = { homeShortcut: HomeShortcut ->
-                    ShimmerItem(loading = loading, content = {
-                        HomeShortcutItem(
-                            shortcut = homeShortcut, onClick = onOpenShortcut
-                        )
-                    })
+                    when (homeShortcut) {
+                        HomeShortcut.AccuWeatherLocation -> { ShimmerItem(loading = loading, content = { HomeShortcutItem(shortcut = homeShortcut, onClick = onOpenShortcut) }) }
+                        else -> HomeShortcutItem(shortcut = homeShortcut, onClick = onOpenShortcut)
+                    }
                 })
         }
     }

@@ -26,7 +26,7 @@ enum class HomeShortcut(
     Tooltip(drawable = R.drawable.ic_tooltip, text = R.string.tooltip),
     Webview(drawable = R.drawable.ic_webview, text = R.string.webview),
     ForegroundService(drawable = R.drawable.ic_service, text = R.string.foreground_service),
-    BasicTextField2(drawable = R.drawable.ic_basic_text_field_2, text = R.string.basic_text_field_2),
+    BasicTextField2(drawable = R.drawable.ic_basic_text_field_2, text = R.string.basic_text_field_with_state),
     CollapsibleTopBar(drawable = R.drawable.ic_collapsible_top_bar, text = R.string.collapsible_top_bar),
     SharedElementTransition(drawable = R.drawable.ic_shared_element_transition, text = R.string.shared_element_transition),
     ;

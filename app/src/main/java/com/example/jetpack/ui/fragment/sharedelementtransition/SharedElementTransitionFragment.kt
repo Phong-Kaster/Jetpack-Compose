@@ -15,7 +15,9 @@ import com.example.jetpack.ui.theme.Background
 import com.example.jetpack.util.NavigationUtil.safeNavigateUp
 import dagger.hilt.android.AndroidEntryPoint
 
-
+/**
+ * Shared Element Transition - https://developer.android.com/develop/ui/compose/animation/shared-elements
+ */
 @AndroidEntryPoint
 class SharedElementTransitionFragment : CoreFragment() {
 
@@ -28,11 +30,12 @@ class SharedElementTransitionFragment : CoreFragment() {
     }
 }
 
+
 @Composable
 fun SharedElementTransitionLayout(
     onBack: () -> Unit = {}
 ) {
-    var showDetails by remember { mutableStateOf(false) }
+    var showInfo by remember { mutableStateOf(false) }
 
     CoreLayout(
         backgroundColor = Background,
@@ -44,7 +47,31 @@ fun SharedElementTransitionLayout(
             )
         },
         content = {
+            /*SharedTransitionLayout {
+                AnimatedContent(
+                    targetState = showInfo,
+                    label = "basicTransition",
+                    content =
+                    { targetState ->
+                        when (targetState) {
+                            true -> {
+                                InfoContent(
+                                    onBack = { showInfo = false },
+                                    animatedVisibilityScope = this@AnimatedContent,
+                                    sharedTransitionScope = this@SharedTransitionLayout
+                                )
+                            }
 
+                            false -> {
+                                MainContent(
+                                    onShowDetails = { showInfo = true },
+                                    animatedVisibilityScope = this@AnimatedContent,
+                                    sharedTransitionScope = this@SharedTransitionLayout
+                                )
+                            }
+                        }
+                    })
+            }*/
         }
     )
 }

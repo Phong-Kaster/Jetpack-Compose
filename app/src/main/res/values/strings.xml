@@ -89,7 +89,7 @@
     <string name="search">Search…</string>
     <string name="foreground_service">Foreground Service</string>
     <string name="playing_sundial_dreams">Playing sundial dreams</string>
-    <string name="basic_text_field_2">Basic Text Field 2</string>
+    <string name="basic_text_field_with_state">Basic Text Field With State</string>
     <string name="common_usage">Common usage</string>
     <string name="original">Original</string>
     <string name="reverted">Reverted</string>
