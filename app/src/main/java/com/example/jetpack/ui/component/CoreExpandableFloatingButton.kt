@@ -16,6 +16,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
@@ -59,34 +60,22 @@ fun CoreExpandableFloatingButton(
     val navController = LocalNavController.current ?: rememberNavController()
     var expand by remember { mutableStateOf(false) }
 
-    FloatingActionButton(
-        onClick = { expand = !expand },
-        modifier = modifier
-            .padding(16.dp)
-            .navigationBarsPadding()
-            .height(48.dp)
-            .widthIn(min = 48.dp),
-        containerColor = Color.Red
+    Column(
+        horizontalAlignment = Alignment.End,
+        verticalArrangement = Arrangement.Bottom,
+        modifier = Modifier.fillMaxWidth()
     ) {
         AnimatedVisibility(
             visible = expand,
-            enter = slideInVertically() + fadeIn() + expandVertically(
-                expandFrom = Alignment.Top
-            ),
-            exit = slideOutVertically() + fadeOut() + shrinkVertically(
-                shrinkTowards = Alignment.Bottom
-            ),
+            enter = slideInVertically() + fadeIn() + expandVertically(expandFrom = Alignment.Top),
+            exit = slideOutVertically() + fadeOut() + shrinkVertically(shrinkTowards = Alignment.Bottom),
             content = {
                 Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
                     Menu.entries.forEach {
-                        IconButton(
-                            onClick = {
-                                navController.navigate(it.destinationId)
-                            },
-                            modifier = Modifier
-                                .clip(shape = CircleShape)
-                                .background(color = PrimaryColor)
-                                .size(50.dp)
+                        FloatingActionButton(
+                            containerColor = PrimaryColor,
+                            onClick = { navController.navigate(it.destinationId) },
+                            modifier = Modifier.padding(16.dp).height(48.dp).widthIn(min = 48.dp)
                         ) {
                             Icon(
                                 painter = painterResource(id = it.drawableId),
@@ -100,37 +89,48 @@ fun CoreExpandableFloatingButton(
             }
         )
 
-        CoreExpandableFloatingButtonContent(
-            icon = {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_nazi_symbol),
-                    contentDescription = null,
-                    tint = OppositePrimaryColor,
-                    modifier = Modifier
-                        .size(30.dp)
-                        .drawBehind {
-                            drawCircle(
-                                color = Color.White,
-                                radius = size.width * 0.55F
+        FloatingActionButton(
+            onClick = { expand = !expand },
+            modifier = modifier
+                .padding(16.dp)
+                .navigationBarsPadding()
+                .height(48.dp)
+                .widthIn(min = 48.dp),
+            containerColor = Color.Red
+        ) {
+            CoreExpandableFloatingButtonContent(
+                icon = {
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_nazi_symbol),
+                        contentDescription = null,
+                        tint = OppositePrimaryColor,
+                        modifier = Modifier
+                            .size(30.dp)
+                            .drawBehind {
+                                drawCircle(
+                                    color = Color.White,
+                                    radius = size.width * 0.55F
+                                )
+                            })
+                },
+                text = {
+                    if (extended) {
+                        Text(
+                            text = stringResource(id = R.string.app_name),
+                            style = customizedTextStyle(
+                                fontSize = 14,
+                                fontWeight = 700,
+                                color = Color.White
                             )
-                        })
-            },
-            text = {
-                if (extended) {
-                    Text(
-                        text = stringResource(id = R.string.app_name),
-                        style = customizedTextStyle(
-                            fontSize = 14,
-                            fontWeight = 700,
-                            color = Color.White
                         )
-                    )
-                }
-            },
-            extended = extended
-        )
+                    }
+                },
+                extended = extended
+            )
+        }
     }
 }
+
 
 @Composable
 fun CoreExpandableFloatingButtonContent(

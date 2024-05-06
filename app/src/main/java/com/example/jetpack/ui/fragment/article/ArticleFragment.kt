@@ -76,9 +76,6 @@ fun ArticleLayout(
     onOpenAlertDialog: () -> Unit = {},
     onOpenDialog: () -> Unit = {},
 ) {
-
-    val showAlertDialog by remember { mutableStateOf(false) }
-
     // for lazy grid state
     val state = rememberLazyGridState()
     val extended by remember { derivedStateOf { state.firstVisibleItemIndex > 0 } }

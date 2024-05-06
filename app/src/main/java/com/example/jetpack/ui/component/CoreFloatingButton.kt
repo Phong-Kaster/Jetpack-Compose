@@ -12,9 +12,13 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
@@ -58,14 +62,14 @@ fun CoreFloatingMenu() {
             content = {
                 Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
                     Menu.entries.forEach {
-                        IconButton(
-                            onClick = {
-                                navController.navigate(it.destinationId)
-                            },
+                        FloatingActionButton(
+                            containerColor = PrimaryColor,
+                            onClick = { navController.navigate(it.destinationId) },
                             modifier = Modifier
-                                .clip(shape = CircleShape)
-                                .background(color = PrimaryColor)
-                                .size(50.dp)
+                                .padding(16.dp)
+                                .navigationBarsPadding()
+                                .height(48.dp)
+                                .widthIn(min = 48.dp),
                         ) {
                             Icon(
                                 painter = painterResource(id = it.drawableId),
@@ -80,14 +84,13 @@ fun CoreFloatingMenu() {
         )
 
         Spacer(modifier = Modifier.height(10.dp))
-        IconButton(
-            onClick = {
-                expand = !expand
-            },
+        FloatingActionButton(
+            onClick = { expand = !expand },
             modifier = Modifier
-                .clip(shape = CircleShape)
-                .background(color = Color.Transparent)
-                .size(50.dp)
+                .padding(16.dp)
+                .navigationBarsPadding()
+                .height(48.dp)
+                .widthIn(min = 48.dp),
         ) {
             Icon(
                 painter = painterResource(id = R.drawable.ic_nazi_symbol),
