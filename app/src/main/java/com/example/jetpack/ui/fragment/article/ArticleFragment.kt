@@ -7,8 +7,12 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -19,7 +23,7 @@ import com.example.jetpack.configuration.Menu
 import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
 import com.example.jetpack.ui.component.CoreBottomBar
-import com.example.jetpack.ui.component.CoreFloatingMenu
+import com.example.jetpack.ui.component.CoreExpandableFloatingButton
 import com.example.jetpack.ui.component.SquareElement
 import com.example.jetpack.ui.fragment.home.component.HomeTopBar
 import com.example.jetpack.ui.theme.Background
@@ -35,15 +39,31 @@ class ArticleFragment : CoreFragment() {
     }
 }
 
+/**
+ * For Columm:
+ *     val scrollState = rememberScrollState()
+ *     val fabExtended by remember { derivedStateOf { scrollState.value == 0 } }
+ * For Lazy Column/ Lazy Grid/ Lazy Row
+ *     val state = rememberLazyGridState()
+ *     val fabExtended by remember { derivedStateOf { state.firstVisibleItemIndex == 0 } }
+ */
 @Composable
 fun ArticleLayout() {
+
+    // for lazy grid state
+    val state = rememberLazyGridState()
+    val extended by remember { derivedStateOf { state.firstVisibleItemIndex > 0 } }
+
     CoreLayout(
         topBar = { HomeTopBar(name = stringResource(id = Menu.Article.nameId)) },
         bottomBar = { CoreBottomBar() },
-        floatingActionButton = { CoreFloatingMenu() },
+        floatingActionButton = {
+            CoreExpandableFloatingButton(extended = extended, modifier = Modifier)
+        },
         backgroundColor = Background
     ) {
         LazyVerticalGrid(
+            state = state,
             columns = GridCells.Fixed(2),
             horizontalArrangement = Arrangement.spacedBy(16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp),

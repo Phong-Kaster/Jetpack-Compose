@@ -75,54 +75,6 @@ fun CoreFloatingMenu() {
                             )
                         }
                     }
-                    /*IconButton(
-                        onClick = {
-                            navController.navigate(Menu.Home.destinationId)
-                        },
-                        modifier = Modifier
-                            .clip(shape = CircleShape)
-                            .background(color = PrimaryColor)
-                            .size(50.dp)
-                    ) {
-                        Icon(
-                            painter = painterResource(id = Menu.Home.drawableId),
-                            contentDescription = stringResource(id = R.string.icon),
-                            tint = Color.Black,
-                            modifier = Modifier.size(24.dp)
-                        )
-                    }
-                    IconButton(
-                        onClick = {
-                            navController.navigate(Menu.Home.destinationId)
-                        },
-                        modifier = Modifier
-                            .clip(shape = CircleShape)
-                            .background(color = PrimaryColor)
-                            .size(50.dp)
-                    ) {
-                        Icon(
-                            painter = painterResource(id = Menu.Home.drawableId),
-                            contentDescription = stringResource(id = R.string.icon),
-                            tint = Color.Black,
-                            modifier = Modifier.size(24.dp)
-                        )
-                    }
-                    IconButton(
-                        onClick = {
-                            navController.navigate(Menu.Home.destinationId)
-                        },
-                        modifier = Modifier
-                            .clip(shape = CircleShape)
-                            .background(color = PrimaryColor)
-                            .size(50.dp)
-                    ) {
-                        Icon(
-                            painter = painterResource(id = Menu.Home.drawableId),
-                            contentDescription = stringResource(id = R.string.icon),
-                            tint = Color.Black,
-                            modifier = Modifier.size(24.dp)
-                        )
-                    }*/
                 }
             }
         )
