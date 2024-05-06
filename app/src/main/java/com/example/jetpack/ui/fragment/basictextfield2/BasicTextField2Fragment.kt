@@ -88,7 +88,8 @@ fun BasicTextFieldLayout(
                 leftIcon = R.drawable.ic_back,
                 onClickLeft = onBack
             )
-        }, content = {
+        },
+        content = {
             Column(
                 modifier = Modifier
                     .fillMaxSize()

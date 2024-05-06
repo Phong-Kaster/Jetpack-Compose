@@ -96,4 +96,5 @@
     <string name="alphabet_ascending">A->Z</string>
     <string name="alphabet_descending">Z->A</string>
     <string name="collapsible_top_bar">Collapsible Top Bar</string>
+    <string name="shared_element_transition">Shared Element Transition</string>
 </resources>

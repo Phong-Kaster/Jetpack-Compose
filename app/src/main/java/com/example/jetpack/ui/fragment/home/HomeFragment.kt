@@ -5,7 +5,6 @@ import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -17,7 +16,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material.icons.rounded.List
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
@@ -25,7 +23,6 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -156,6 +153,7 @@ class HomeFragment : CoreFragment() {
                     HomeShortcut.ForegroundService -> safeNavigate(R.id.toForegroundService)
                     HomeShortcut.BasicTextField2 -> safeNavigate(R.id.toBasicTextField2)
                     HomeShortcut.CollapsibleTopBar -> safeNavigate(R.id.toCollasibleTopbar)
+                    HomeShortcut.SharedElementTransition -> safeNavigate(R.id.toSharedElementTransition)
                     else -> {}
                 }
             })
