@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,13 +15,17 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -30,6 +35,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.blur
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -47,6 +54,7 @@ import com.example.jetpack.notification.NotificationManager
 import com.example.jetpack.ui.component.CoreBottomBar
 import com.example.jetpack.ui.component.CoreDialog
 import com.example.jetpack.ui.component.CoreFloatingMenu
+import com.example.jetpack.ui.component.CoreTopBarWithScrollBehavior
 import com.example.jetpack.ui.fragment.accuweather.component.SearchBar
 import com.example.jetpack.ui.fragment.home.component.HomeDialog
 import com.example.jetpack.ui.fragment.home.component.HomeShortcutItem
@@ -55,6 +63,7 @@ import com.example.jetpack.ui.theme.PrimaryColor
 import com.example.jetpack.ui.theme.ShimmerItem
 import com.example.jetpack.ui.theme.customizedTextStyle
 import com.example.jetpack.ui.view.DigitalClock2
+import com.example.jetpack.ui.view.DigitalClock3
 import com.example.jetpack.util.NavigationUtil.safeNavigate
 import com.example.jetpack.util.PermissionUtil
 import dagger.hilt.android.AndroidEntryPoint
@@ -154,6 +163,7 @@ class HomeFragment : CoreFragment() {
                     HomeShortcut.BasicTextField2 -> safeNavigate(R.id.toBasicTextField2)
                     HomeShortcut.CollapsibleTopBar -> safeNavigate(R.id.toCollasibleTopbar)
                     HomeShortcut.SharedElementTransition -> safeNavigate(R.id.toSharedElementTransition)
+                    HomeShortcut.Article -> safeNavigate(R.id.toArticleRead)
                     else -> {}
                 }
             })
@@ -161,6 +171,7 @@ class HomeFragment : CoreFragment() {
 }
 
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeLayout(
     loading: Boolean,
@@ -175,16 +186,29 @@ fun HomeLayout(
 
     var expandSortMenu by remember { mutableStateOf(false) }
 
-    BackHandler(enabled = true, onBack = onOpenConfirmDialog)
+    // for using top bar with scroll behavior
+    val topAppBarState = rememberTopAppBarState()
+    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(topAppBarState)
 
+    BackHandler(enabled = true, onBack = onOpenConfirmDialog)
 
     CoreLayout(
         backgroundColor = Background,
         topBar = {
-            DigitalClock2(
-                modifier = Modifier
-                    .statusBarsPadding()
-                    .padding(horizontal = 16.dp, vertical = 16.dp)
+            CoreTopBarWithScrollBehavior(
+                backgroundColor = PrimaryColor,
+                scrollBehavior = scrollBehavior,
+                navigationIconContent = {},
+                modifier = Modifier.clip(shape = RoundedCornerShape(topStart = 0.dp, topEnd = 0.dp, bottomStart = 5.dp, bottomEnd = 5.dp)),
+                content = {
+                    DigitalClock3(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 16.dp, vertical = 16.dp)
+                            .statusBarsPadding(),
+                        textColor = Background
+                    )
+                }
             )
         },
         bottomBar = { CoreBottomBar() },
@@ -202,12 +226,13 @@ fun HomeLayout(
             modifier = Modifier
                 .padding(start = 16.dp, end = 16.dp, top = 0.dp, bottom = 32.dp)
                 .fillMaxSize()
+                .nestedScroll(scrollBehavior.nestedScrollConnection)
         ) {
             item(key = "searchBarAndSortMenu") {
                 Row(
                     horizontalArrangement = Arrangement.Start,
                     verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth().padding(top = 16.dp)
                 ) {
                     SearchBar(
                         onChangeKeyword = onChangeKeyword,
@@ -266,7 +291,17 @@ fun HomeLayout(
                 key = { item: HomeShortcut -> item.name },
                 itemContent = { homeShortcut: HomeShortcut ->
                     when (homeShortcut) {
-                        HomeShortcut.AccuWeatherLocation -> { ShimmerItem(loading = loading, content = { HomeShortcutItem(shortcut = homeShortcut, onClick = onOpenShortcut) }) }
+                        HomeShortcut.AccuWeatherLocation -> {
+                            ShimmerItem(
+                                loading = loading,
+                                content = {
+                                    HomeShortcutItem(
+                                        shortcut = homeShortcut,
+                                        onClick = onOpenShortcut
+                                    )
+                                })
+                        }
+
                         else -> HomeShortcutItem(shortcut = homeShortcut, onClick = onOpenShortcut)
                     }
                 })

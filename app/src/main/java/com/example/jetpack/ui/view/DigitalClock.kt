@@ -54,7 +54,7 @@ fun DigitalClock(modifier: Modifier = Modifier) {
 
 @Preview
 @Composable
-fun PreviewDigitalClock3() {
+fun PreviewDigitalClock() {
     ViewUtil.PreviewContent {
         DigitalClock(
             modifier = Modifier

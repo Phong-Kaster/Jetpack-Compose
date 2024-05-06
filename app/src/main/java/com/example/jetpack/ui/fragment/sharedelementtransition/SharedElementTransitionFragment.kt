@@ -1,5 +1,6 @@
 package com.example.jetpack.ui.fragment.sharedelementtransition
 
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -12,11 +13,13 @@ import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
 import com.example.jetpack.ui.component.CoreTopBar
 import com.example.jetpack.ui.theme.Background
+import com.example.jetpack.ui.theme.PrimaryColor
 import com.example.jetpack.util.NavigationUtil.safeNavigateUp
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * Shared Element Transition - https://developer.android.com/develop/ui/compose/animation/shared-elements
+ * the library (androidx.compose.animation:1.0.7-alpha08) in gradle conflicts with constraint layout library, we should try later
  */
 @AndroidEntryPoint
 class SharedElementTransitionFragment : CoreFragment() {
@@ -35,8 +38,6 @@ class SharedElementTransitionFragment : CoreFragment() {
 fun SharedElementTransitionLayout(
     onBack: () -> Unit = {}
 ) {
-    var showInfo by remember { mutableStateOf(false) }
-
     CoreLayout(
         backgroundColor = Background,
         topBar = {
@@ -47,6 +48,11 @@ fun SharedElementTransitionLayout(
             )
         },
         content = {
+            Text(
+                text = "the library (androidx.compose.animation:1.0.7-alpha08) in gradle conflicts with constraint layout library, we should try later",
+                color = PrimaryColor
+            )
+
             /*SharedTransitionLayout {
                 AnimatedContent(
                     targetState = showInfo,
