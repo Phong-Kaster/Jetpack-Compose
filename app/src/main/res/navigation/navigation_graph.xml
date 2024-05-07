@@ -133,8 +133,12 @@
         android:name="com.example.jetpack.ui.fragment.sharedelementtransition.SharedElementTransitionFragment" />
 
     <fragment
-        android:id="@+id/articleReadFragment"
-        android:name="com.example.jetpack.ui.fragment.collapsibletopbar.CollapsibleTopBar2Fragment" />
+        android:id="@+id/collapsibleTopBar2Fragment"
+        android:name="com.example.jetpack.ui.fragment.collapsibletopbar.CollapsibleTopbar2Fragment" />
+
+    <fragment
+        android:id="@+id/collapsibleTopBar3Fragment"
+        android:name="com.example.jetpack.ui.fragment.collapsibletopbar.CollapsibleTopbar3Fragment" />
 
     <activity
         android:id="@+id/lockscreenActivity"
@@ -330,8 +334,17 @@
         app:popUpToInclusive="true"/>
 
     <action
-        android:id="@+id/toArticleRead"
-        app:destination="@id/articleReadFragment"
+        android:id="@+id/toCollapsibleTopbar2"
+        app:destination="@id/collapsibleTopBar2Fragment"
+        app:enterAnim="@anim/enter_slide_in_right"
+        app:exitAnim="@anim/exit_slide_out_left"
+        app:popEnterAnim="@anim/enter_slide_in_left"
+        app:popExitAnim="@anim/exit_slide_out_right"
+        app:popUpToInclusive="true"/>
+
+    <action
+        android:id="@+id/toCollapsibleTopbar3"
+        app:destination="@id/collapsibleTopBar3Fragment"
         app:enterAnim="@anim/enter_slide_in_right"
         app:exitAnim="@anim/exit_slide_out_left"
         app:popEnterAnim="@anim/enter_slide_in_left"

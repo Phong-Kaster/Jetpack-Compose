@@ -29,7 +29,7 @@ enum class HomeShortcut(
     BasicTextField2(drawable = R.drawable.ic_basic_text_field_2, text = R.string.basic_text_field_with_state),
     CollapsibleTopBar(drawable = R.drawable.ic_collapsible_top_bar, text = R.string.collapsible_top_bar),
     SharedElementTransition(drawable = R.drawable.ic_shared_element_transition, text = R.string.shared_element_transition),
-    CollapsibleTopBarWithScrollBehavior(drawable = R.drawable.ic_bottom_article, text = R.string.collapsible_top_bar_scroll_behavior),
+    CollapsibleTopBar2(drawable = R.drawable.ic_bottom_article, text = R.string.collapsible_top_bar_scroll_behavior),
     CollapsibleTopBarWithScrollBehavior2(drawable = R.drawable.ic_bottom_article, text = R.string.collapsible_top_bar_scroll_behavior_2),
     ;
 }

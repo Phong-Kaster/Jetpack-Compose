@@ -6,17 +6,17 @@ import com.example.jetpack.core.CoreLayout
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CollapsibleTopBar3Fragment : CoreFragment() {
+class CollapsibleTopbar3Fragment : CoreFragment() {
 
     @Composable
     override fun ComposeView() {
         super.ComposeView()
-        CollapsibleTopBar3Layout()
+        CollapsibleTopbar3Layout()
     }
 }
 
 @Composable
-fun CollapsibleTopBar3Layout() {
+fun CollapsibleTopbar3Layout() {
     CoreLayout(
         content = {}
     )

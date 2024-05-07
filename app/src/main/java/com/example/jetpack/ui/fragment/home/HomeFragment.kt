@@ -146,7 +146,7 @@ class HomeFragment : CoreFragment() {
                     HomeShortcut.BasicTextField2 -> safeNavigate(R.id.toBasicTextField2)
                     HomeShortcut.CollapsibleTopBar -> safeNavigate(R.id.toCollasibleTopbar)
                     HomeShortcut.SharedElementTransition -> safeNavigate(R.id.toSharedElementTransition)
-                    HomeShortcut.CollapsibleTopBarWithScrollBehavior -> safeNavigate(R.id.toArticleRead)
+                    HomeShortcut.CollapsibleTopBar2 -> safeNavigate(R.id.toCollapsibleTopbar2)
                     else -> {}
                 }
             })

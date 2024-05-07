@@ -45,11 +45,11 @@ import com.example.jetpack.util.NavigationUtil.safeNavigateUp
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CollapsibleTopBar2Fragment : CoreFragment() {
+class CollapsibleTopbar2Fragment : CoreFragment() {
     @Composable
     override fun ComposeView() {
         super.ComposeView()
-        CollapsibleTopBar2Layout(
+        CollapsibleTopbar2Layout(
             onBack = { safeNavigateUp() }
         )
     }
@@ -57,7 +57,7 @@ class CollapsibleTopBar2Fragment : CoreFragment() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CollapsibleTopBar2Layout(
+fun CollapsibleTopbar2Layout(
     onBack: () -> Unit = {},
 ) {
     val topAppBarState = rememberTopAppBarState()
@@ -194,5 +194,5 @@ fun CollapsibleTopBar2Layout(
 @Preview
 @Composable
 private fun PreviewArticleReadLayout() {
-    CollapsibleTopBar2Layout()
+    CollapsibleTopbar2Layout()
 }
