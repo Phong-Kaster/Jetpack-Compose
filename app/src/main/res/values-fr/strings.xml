@@ -94,7 +94,7 @@
     <string name="reverted">Rétabli</string>
     <string name="alphabet_ascending">A->Z</string>
     <string name="alphabet_descending">Z->A</string>
-    <string name="collapsible_top_bar">Barre supérieure repliable</string>
+    <string name="collapsible_topbar">Barre supérieure repliable</string>
     <string name="shared_element_transition">Transition d\'élément partagé</string>
     <string name="wikipedia">Wikipédia</string>
     <string name="flag_of_nazi_germany">Drapeau de l\'Allemagne nazie</string>

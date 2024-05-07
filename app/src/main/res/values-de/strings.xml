@@ -94,7 +94,7 @@
     <string name="reverted">Zurückgesetzt</string>
     <string name="alphabet_ascending">A->Z</string>
     <string name="alphabet_descending">Z->A</string>
-    <string name="collapsible_top_bar">Einklappbare obere Leiste</string>
+    <string name="collapsible_topbar">Einklappbare obere Leiste</string>
     <string name="shared_element_transition">Geteilte Elementübergang</string>
     <string name="wikipedia">Wikipedia</string>
     <string name="flag_of_nazi_germany">Flagge des nationalsozialistischen Deutschlands</string>

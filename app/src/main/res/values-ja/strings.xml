@@ -94,7 +94,7 @@
     <string name="reverted">元に戻された</string>
     <string name="alphabet_ascending">A->Z</string>
     <string name="alphabet_descending">Z->A</string>
-    <string name="collapsible_top_bar">折りたたみ可能なトップバー</string>
+    <string name="collapsible_topbar">折りたたみ可能なトップバー</string>
     <string name="shared_element_transition">共有要素の遷移</string>
     <string name="wikipedia">ウィキペディア</string>
     <string name="flag_of_nazi_germany">ナチス・ドイツの旗</string>

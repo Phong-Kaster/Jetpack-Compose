@@ -94,7 +94,7 @@
     <string name="reverted">पलटाया गया</string>
     <string name="alphabet_ascending">A->Z</string>
     <string name="alphabet_descending">Z->A</string>
-    <string name="collapsible_top_bar">संक्षिप्त शीर्ष बार</string>
+    <string name="collapsible_topbar">संक्षिप्त शीर्ष बार</string>
     <string name="shared_element_transition">साझा तत्व संक्रमण</string>
     <string name="wikipedia">विकिपीडिया</string>
     <string name="flag_of_nazi_germany">नाजी जर्मनी का ध्वज</string>

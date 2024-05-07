@@ -95,9 +95,9 @@
     <string name="reverted">Reverted</string>
     <string name="alphabet_ascending">A->Z</string>
     <string name="alphabet_descending">Z->A</string>
-    <string name="collapsible_top_bar">Collapsible Top Bar</string>
-    <string name="collapsible_top_bar_scroll_behavior">Collapsible Top Bar With Scroll Behavior</string>
-    <string name="collapsible_top_bar_scroll_behavior_2">Collapsible Top Bar With Scroll Behavior 2</string>
+    <string name="collapsible_topbar">Collapsible Topbar</string>
+    <string name="collapsible_topbar_2">Collapsible Topbar 2</string>
+    <string name="collapsible_topbar_3">Collapsible Topbar 3</string>
     <string name="shared_element_transition">Shared Element Transition</string>
     <string name="wikipedia">Wikipedia</string>
     <string name="flag_of_nazi_germany">Flag of Nazi Germany</string>
@@ -108,4 +108,5 @@
     <string name="on_15_september_1935_one_year_after_the_death">On 15 September 1935, one year after the death of Reich President Paul von Hindenburg, the Nazi flag became the national flag of Germany. One reason for the change may have been the \"Bremen incident\" of 26 July 1935, in which a group of demonstrators in New York City boarded the ocean liner SS Bremen, tore the Nazi Party flag from the jackstaff, and tossed it into the Hudson River. When the German ambassador protested, US officials responded that the German national flag had not been harmed, only a political party symbol.[3] The new flag law was announced at the annual party rally in Nuremberg in 1935,[4] where Hermann Göring claimed the old black-white-red flag, while honoured, was the symbol of a bygone era and under threat of being used by \"reactionaries\".</string>
     <string name="unbookmark">Unbookmark</string>
     <string name="bookmark">Bookmark</string>
+    <string name="share">Share</string>
 </resources>

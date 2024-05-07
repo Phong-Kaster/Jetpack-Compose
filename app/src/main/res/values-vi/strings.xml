@@ -94,7 +94,7 @@
     <string name="reverted">Đã hoàn nguyên</string>
     <string name="alphabet_ascending">A->Z</string>
     <string name="alphabet_descending">Z->A</string>
-    <string name="collapsible_top_bar">Thanh trên có thể thu gọn</string>
+    <string name="collapsible_topbar">Thanh trên có thể thu gọn</string>
     <string name="shared_element_transition">Chuyển đổi phần tử chia sẻ</string>
     <string name="wikipedia">Wikipedia</string>
     <string name="flag_of_nazi_germany">Cờ của Đức Quốc xã</string>

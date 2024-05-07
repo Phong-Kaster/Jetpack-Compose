@@ -94,7 +94,7 @@
     <string name="reverted">되돌림</string>
     <string name="alphabet_ascending">A->Z</string>
     <string name="alphabet_descending">Z->A</string>
-    <string name="collapsible_top_bar">접을 수 있는 상단 바</string>
+    <string name="collapsible_topbar">접을 수 있는 상단 바</string>
     <string name="shared_element_transition">공유 요소 전환</string>
     <string name="wikipedia">위키백과</string>
     <string name="flag_of_nazi_germany">나치 독일의 깃발</string>
