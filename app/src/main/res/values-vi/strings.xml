@@ -87,4 +87,23 @@
     <string name="no_internet_connection">Không có kết nối internet</string>
     <string name="search">Tìm</string>
     <string name="foreground_service">Dịch vụ nền trước</string>
+    <string name="playing_sundial_dreams">Đang phát Sundial Dreams</string>
+    <string name="basic_text_field_with_state">Trường văn bản cơ bản với trạng thái</string>
+    <string name="common_usage">Sử dụng phổ biến</string>
+    <string name="original">Gốc</string>
+    <string name="reverted">Đã hoàn nguyên</string>
+    <string name="alphabet_ascending">A->Z</string>
+    <string name="alphabet_descending">Z->A</string>
+    <string name="collapsible_top_bar">Thanh trên có thể thu gọn</string>
+    <string name="shared_element_transition">Chuyển đổi phần tử chia sẻ</string>
+    <string name="wikipedia">Wikipedia</string>
+    <string name="flag_of_nazi_germany">Cờ của Đức Quốc xã</string>
+    <string name="the_flag_of_nazi_germany">Cờ của Đức Quốc xã, chính thức là cờ của Đế chế Đức, có nền màu đỏ với hình chữ thập đen trên một đĩa trắng. Cờ này ban đầu được sử dụng như là biểu ngữ của Đảng Quốc xã (NSDAP) sau khi nó được thành lập. Sau khi Adolf Hitler được bổ nhiệm làm Thủ tướng vào năm 1933, cờ này đã được chấp nhận là bắt buộc sử dụng, trong khi cờ quốc gia là cờ ba sọc đen-trắng-đỏ của Đế chế Đức.</string>
+    <string name="after_rejecting_many_suggestions">Sau khi từ chối nhiều đề xuất và màu sắc, quá trình chọn một cờ mới được Hitler mô tả như sau:</string>
+    <string name="i_myself_meanwhile_after_innumerable">"Tôi, trong khi đó, sau vô số lần thử nghiệm, đã đặt ra một hình thức cuối cùng; một cờ với nền màu đỏ, một đĩa trắng, và một hình chữ thập đen ở giữa. Sau nhiều lần thử nghiệm, tôi cũng tìm thấy một tỷ lệ cố định giữa kích thước của cờ và kích thước của đĩa trắng, cũng như hình dạng và độ dày của hình chữ thập."</string>
+    <string name="after_hitler_was_appointed">Sau khi Hitler được bổ nhiệm làm Thủ tướng Đức vào ngày 30 tháng 1 năm 1933, cờ ba sọc đen-đỏ-vàng đã bị loại bỏ; một quyết định vào ngày 12 tháng 3 đã thiết lập hai cờ hợp pháp: cờ quốc gia ba sọc đen-trắng-đỏ của đế chế đã được tái nhập và cờ của Đảng Quốc xã.</string>
+    <string name="on_15_september_1935_one_year_after_the_death">Vào ngày 15 tháng 9 năm 1935, một năm sau cái chết của Tổng thống Reich Paul von Hindenburg, cờ của Đảng Quốc xã trở thành cờ quốc gia của Đức. Một lý do cho sự thay đổi có thể là "sự cố Bremen" vào ngày 26 tháng 7 năm 1935, trong đó một nhóm người biểu tình ở Thành phố New York lên tàu du lịch SS Bremen, xé cờ của Đảng Quốc xã từ cột cờ, và ném nó vào sông Hudson. Khi đại sứ Đức phản đối, các quan chức Mỹ trả lời rằng cờ quốc gia Đức không bị hại, chỉ có biểu tượng của một đảng chính trị bị hại. Luật cờ mới được công bố tại đại hội đảng hàng năm ở Nuremberg vào năm 1935, nơi Hermann Göring tuyên bố cờ đen-trắng-đỏ cũ, mặc dù được tôn vinh, là biểu tượng của một thời đại đã qua và bị đe dọa sử dụng bởi "phản động".</string>
+    <string name="unbookmark">Bỏ dấu trang</string>
+    <string name="bookmark">Đánh dấu trang</string>
+
 </resources>

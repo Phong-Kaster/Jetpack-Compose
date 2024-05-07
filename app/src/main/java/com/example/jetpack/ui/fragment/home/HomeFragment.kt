@@ -14,7 +14,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
@@ -28,6 +30,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -53,6 +56,7 @@ import com.example.jetpack.notification.LockscreenManager
 import com.example.jetpack.notification.NotificationManager
 import com.example.jetpack.ui.component.CoreBottomBar
 import com.example.jetpack.ui.component.CoreDialog
+import com.example.jetpack.ui.component.CoreExpandableFloatingButton
 import com.example.jetpack.ui.component.CoreFloatingMenu
 import com.example.jetpack.ui.component.CoreTopBarWithScrollBehavior
 import com.example.jetpack.ui.fragment.accuweather.component.SearchBar
@@ -125,7 +129,7 @@ class HomeFragment : CoreFragment() {
                     override fun run() {
                         loading = false
                     }
-                }, 1000
+                }, 500
             )
         }
 
@@ -188,6 +192,10 @@ fun HomeLayout(
     val topAppBarState = rememberTopAppBarState()
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(topAppBarState)
 
+    // for expandable floating action button
+    val state = rememberLazyListState()
+    val fabExtended by remember { derivedStateOf { state.firstVisibleItemIndex > 0 } }
+
     BackHandler(enabled = true, onBack = onOpenConfirmDialog)
 
     CoreLayout(
@@ -198,7 +206,14 @@ fun HomeLayout(
                 scrolledContainerColor = PrimaryColor,
                 scrollBehavior = scrollBehavior,
                 navigationIconContent = {},
-                modifier = Modifier.clip(shape = RoundedCornerShape(topStart = 0.dp, topEnd = 0.dp, bottomStart = 5.dp, bottomEnd = 5.dp)),
+                modifier = Modifier.clip(
+                    shape = RoundedCornerShape(
+                        topStart = 0.dp,
+                        topEnd = 0.dp,
+                        bottomStart = 5.dp,
+                        bottomEnd = 5.dp
+                    )
+                ),
                 content = {
                     DigitalClock3(
                         modifier = Modifier
@@ -211,7 +226,7 @@ fun HomeLayout(
             )
         },
         bottomBar = { CoreBottomBar() },
-        floatingActionButton = { CoreFloatingMenu() },
+        floatingActionButton = { CoreExpandableFloatingButton(extended = fabExtended) },
         modifier = Modifier.then(
             if (loading) {
                 Modifier.blur(10.dp)
@@ -221,6 +236,7 @@ fun HomeLayout(
         )
     ) {
         LazyColumn(
+            state = state,
             verticalArrangement = Arrangement.spacedBy(16.dp),
             modifier = Modifier
                 .padding(start = 16.dp, end = 16.dp, top = 0.dp, bottom = 32.dp)
@@ -231,7 +247,9 @@ fun HomeLayout(
                 Row(
                     horizontalArrangement = Arrangement.Start,
                     verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.fillMaxWidth().padding(top = 16.dp)
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 16.dp)
                 ) {
                     SearchBar(
                         onChangeKeyword = onChangeKeyword,
