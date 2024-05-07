@@ -39,6 +39,7 @@ fun CoreTopBarWithScrollBehavior(
     content: @Composable () -> Unit,
     navigationIconContent: @Composable () -> Unit,
     backgroundColor: Color = Color(0xFF000000),
+    scrolledContainerColor: Color = Color(0xFF000000),
     iconColor: Color = Color(0xFFFFCC00),
 ) {
     CenterAlignedTopAppBar(
@@ -47,7 +48,7 @@ fun CoreTopBarWithScrollBehavior(
         scrollBehavior = scrollBehavior,
         colors = TopAppBarColors(
             containerColor = backgroundColor,
-            scrolledContainerColor = backgroundColor,
+            scrolledContainerColor = scrolledContainerColor,
             navigationIconContentColor = iconColor,
             titleContentColor = MaterialTheme.colorScheme.primary,
             actionIconContentColor = PrimaryColor

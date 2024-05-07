@@ -197,6 +197,7 @@ fun HomeLayout(
         topBar = {
             CoreTopBarWithScrollBehavior(
                 backgroundColor = PrimaryColor,
+                scrolledContainerColor = PrimaryColor,
                 scrollBehavior = scrollBehavior,
                 navigationIconContent = {},
                 modifier = Modifier.clip(shape = RoundedCornerShape(topStart = 0.dp, topEnd = 0.dp, bottomStart = 5.dp, bottomEnd = 5.dp)),
