@@ -122,16 +122,7 @@ class HomeFragment : CoreFragment() {
     @Composable
     override fun ComposeView() {
         super.ComposeView()
-        var loading by remember { mutableStateOf(true) }
-        LaunchedEffect(key1 = loading) {
-            Timer().schedule(
-                object : TimerTask() {
-                    override fun run() {
-                        loading = false
-                    }
-                }, 500
-            )
-        }
+
 
         HomeDialog(
             enable = showDialog,
@@ -143,7 +134,6 @@ class HomeFragment : CoreFragment() {
         )
 
         HomeLayout(
-            loading = loading,
             shortcuts = viewModel.shortcutsWithLifecycle.collectAsStateWithLifecycle().value,
             onOpenConfirmDialog = { showDialog = !showDialog },
             onChangeKeyword = { viewModel.searchWithKeyword(it) },
@@ -176,7 +166,6 @@ class HomeFragment : CoreFragment() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeLayout(
-    loading: Boolean,
     shortcuts: kotlinx.collections.immutable.ImmutableList<HomeShortcut> = persistentListOf(),
     onOpenConfirmDialog: () -> Unit = {},
     onOpenShortcut: (HomeShortcut) -> Unit = {},
@@ -227,13 +216,7 @@ fun HomeLayout(
         },
         bottomBar = { CoreBottomBar() },
         floatingActionButton = { CoreExpandableFloatingButton(extended = fabExtended) },
-        modifier = Modifier.then(
-            if (loading) {
-                Modifier.blur(10.dp)
-            } else {
-                Modifier
-            }
-        )
+        modifier = Modifier
     ) {
         LazyColumn(
             state = state,
@@ -310,7 +293,7 @@ fun HomeLayout(
                     when (homeShortcut) {
                         HomeShortcut.AccuWeatherLocation -> {
                             ShimmerItem(
-                                loading = loading,
+                                loading = true,
                                 content = {
                                     HomeShortcutItem(
                                         shortcut = homeShortcut,
@@ -333,7 +316,6 @@ fun HomeLayout(
 fun PreviewHome() {
     HomeLayout(
         shortcuts = HomeShortcut.entries.toImmutableList(),
-        loading = false
     )
 }
 
@@ -342,6 +324,5 @@ fun PreviewHome() {
 fun PreviewHomeWithLoading() {
     HomeLayout(
         shortcuts = HomeShortcut.entries.toImmutableList(),
-        loading = true
     )
 }
