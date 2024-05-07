@@ -138,8 +138,6 @@ class HomeFragment : CoreFragment() {
             },
         )
 
-        CoreDialog(enable = showDialog, onDismissRequest = { showDialog = false })
-
         HomeLayout(
             loading = loading,
             shortcuts = viewModel.shortcutsWithLifecycle.collectAsStateWithLifecycle().value,
