@@ -96,6 +96,8 @@
     <string name="alphabet_ascending">A->Z</string>
     <string name="alphabet_descending">Z->A</string>
     <string name="collapsible_top_bar">Collapsible Top Bar</string>
+    <string name="collapsible_top_bar_scroll_behavior">Collapsible Top Bar With Scroll Behavior</string>
+    <string name="collapsible_top_bar_scroll_behavior_2">Collapsible Top Bar With Scroll Behavior 2</string>
     <string name="shared_element_transition">Shared Element Transition</string>
     <string name="wikipedia">Wikipedia</string>
     <string name="flag_of_nazi_germany">Flag of Nazi Germany</string>

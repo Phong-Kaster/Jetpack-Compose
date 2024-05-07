@@ -7,14 +7,12 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -29,7 +27,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -37,7 +34,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.painterResource
@@ -55,9 +51,7 @@ import com.example.jetpack.lifecycleobserver.NotificationLifecycleObserver
 import com.example.jetpack.notification.LockscreenManager
 import com.example.jetpack.notification.NotificationManager
 import com.example.jetpack.ui.component.CoreBottomBar
-import com.example.jetpack.ui.component.CoreDialog
 import com.example.jetpack.ui.component.CoreExpandableFloatingButton
-import com.example.jetpack.ui.component.CoreFloatingMenu
 import com.example.jetpack.ui.component.CoreTopBarWithScrollBehavior
 import com.example.jetpack.ui.fragment.accuweather.component.SearchBar
 import com.example.jetpack.ui.fragment.home.component.HomeDialog
@@ -66,15 +60,12 @@ import com.example.jetpack.ui.theme.Background
 import com.example.jetpack.ui.theme.PrimaryColor
 import com.example.jetpack.ui.theme.ShimmerItem
 import com.example.jetpack.ui.theme.customizedTextStyle
-import com.example.jetpack.ui.view.DigitalClock2
 import com.example.jetpack.ui.view.DigitalClock3
 import com.example.jetpack.util.NavigationUtil.safeNavigate
 import com.example.jetpack.util.PermissionUtil
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toImmutableList
-import java.util.Timer
-import java.util.TimerTask
 
 
 @AndroidEntryPoint
@@ -155,7 +146,7 @@ class HomeFragment : CoreFragment() {
                     HomeShortcut.BasicTextField2 -> safeNavigate(R.id.toBasicTextField2)
                     HomeShortcut.CollapsibleTopBar -> safeNavigate(R.id.toCollasibleTopbar)
                     HomeShortcut.SharedElementTransition -> safeNavigate(R.id.toSharedElementTransition)
-                    HomeShortcut.Article -> safeNavigate(R.id.toArticleRead)
+                    HomeShortcut.CollapsibleTopBarWithScrollBehavior -> safeNavigate(R.id.toArticleRead)
                     else -> {}
                 }
             })
