@@ -134,7 +134,7 @@
 
     <fragment
         android:id="@+id/articleReadFragment"
-        android:name="com.example.jetpack.ui.fragment.article.ArticleReadFragment" />
+        android:name="com.example.jetpack.ui.fragment.collapsibletopbar.CollapsibleTopBar2Fragment" />
 
     <activity
         android:id="@+id/lockscreenActivity"

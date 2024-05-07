@@ -1,4 +1,4 @@
-package com.example.jetpack.ui.fragment.article
+package com.example.jetpack.ui.fragment.collapsibletopbar
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -45,11 +45,11 @@ import com.example.jetpack.util.NavigationUtil.safeNavigateUp
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ArticleReadFragment : CoreFragment() {
+class CollapsibleTopBar2Fragment : CoreFragment() {
     @Composable
     override fun ComposeView() {
         super.ComposeView()
-        ArticleReadLayout(
+        CollapsibleTopBar2Layout(
             onBack = { safeNavigateUp() }
         )
     }
@@ -57,7 +57,7 @@ class ArticleReadFragment : CoreFragment() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ArticleReadLayout(
+fun CollapsibleTopBar2Layout(
     onBack: () -> Unit = {},
 ) {
     val topAppBarState = rememberTopAppBarState()
@@ -194,5 +194,5 @@ fun ArticleReadLayout(
 @Preview
 @Composable
 private fun PreviewArticleReadLayout() {
-    ArticleReadLayout()
+    CollapsibleTopBar2Layout()
 }

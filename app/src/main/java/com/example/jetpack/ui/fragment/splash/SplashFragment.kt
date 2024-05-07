@@ -16,6 +16,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -107,7 +108,7 @@ fun SplashLayout(
             Icon(
                 painter = painterResource(R.drawable.ic_nazi_eagle),
                 contentDescription = null,
-                tint = PrimaryColor,
+                tint = Color.White,
                 modifier = Modifier
                     .size(160.dp)
                     .clip(RoundedCornerShape(40))
@@ -132,7 +133,7 @@ fun SplashLayout(
 
 
             Text(
-                text = stringResource(R.string.fake_title),
+                text = stringResource(R.string.app_name),
                 style = body14,
                 modifier = Modifier.align(BiasAlignment(0f, 0.95f))
             )
