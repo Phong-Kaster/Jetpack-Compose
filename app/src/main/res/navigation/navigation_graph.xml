@@ -128,6 +128,18 @@
         android:id="@+id/collapsibleTopBarFragment"
         android:name="com.example.jetpack.ui.fragment.collapsibletopbar.CollapsibleTopBarFragment" />
 
+    <fragment
+        android:id="@+id/sharedElementTransition"
+        android:name="com.example.jetpack.ui.fragment.sharedelementtransition.SharedElementTransitionFragment" />
+
+    <fragment
+        android:id="@+id/collapsibleTopBar2Fragment"
+        android:name="com.example.jetpack.ui.fragment.collapsibletopbar.CollapsibleTopbar2Fragment" />
+
+    <fragment
+        android:id="@+id/collapsibleTopBar3Fragment"
+        android:name="com.example.jetpack.ui.fragment.collapsibletopbar.CollapsibleTopbar3Fragment" />
+
     <activity
         android:id="@+id/lockscreenActivity"
         android:name="com.example.jetpack.ui.activity.LockscreenActivity" />
@@ -306,6 +318,33 @@
     <action
         android:id="@+id/toCollasibleTopbar"
         app:destination="@id/collapsibleTopBarFragment"
+        app:enterAnim="@anim/enter_slide_in_right"
+        app:exitAnim="@anim/exit_slide_out_left"
+        app:popEnterAnim="@anim/enter_slide_in_left"
+        app:popExitAnim="@anim/exit_slide_out_right"
+        app:popUpToInclusive="true"/>
+
+    <action
+        android:id="@+id/toSharedElementTransition"
+        app:destination="@id/sharedElementTransition"
+        app:enterAnim="@anim/enter_slide_in_right"
+        app:exitAnim="@anim/exit_slide_out_left"
+        app:popEnterAnim="@anim/enter_slide_in_left"
+        app:popExitAnim="@anim/exit_slide_out_right"
+        app:popUpToInclusive="true"/>
+
+    <action
+        android:id="@+id/toCollapsibleTopbar2"
+        app:destination="@id/collapsibleTopBar2Fragment"
+        app:enterAnim="@anim/enter_slide_in_right"
+        app:exitAnim="@anim/exit_slide_out_left"
+        app:popEnterAnim="@anim/enter_slide_in_left"
+        app:popExitAnim="@anim/exit_slide_out_right"
+        app:popUpToInclusive="true"/>
+
+    <action
+        android:id="@+id/toCollapsibleTopbar3"
+        app:destination="@id/collapsibleTopBar3Fragment"
         app:enterAnim="@anim/enter_slide_in_right"
         app:exitAnim="@anim/exit_slide_out_left"
         app:popEnterAnim="@anim/enter_slide_in_left"

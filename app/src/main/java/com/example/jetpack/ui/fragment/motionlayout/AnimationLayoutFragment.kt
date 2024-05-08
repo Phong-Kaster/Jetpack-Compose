@@ -10,7 +10,6 @@ import com.example.jetpack.core.CoreLayout
 import com.example.jetpack.ui.component.CoreTopBar2
 import com.example.jetpack.ui.fragment.motionlayout.component.AnimationLayout1
 import com.example.jetpack.ui.theme.Background
-import com.example.jetpack.util.NavigationUtil.safeNavigate
 import com.example.jetpack.util.NavigationUtil.safeNavigateUp
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -31,10 +30,7 @@ class AnimationLayoutFragment : CoreFragment() {
         super.ComposeView()
         AnimationLayout(
             onBack = { safeNavigateUp() },
-            onClick = {
-                val destination = AnimationLayoutFragmentDirections.toLanguage()
-                safeNavigate(destination)
-            }
+            onClick = {}
         )
     }
 }

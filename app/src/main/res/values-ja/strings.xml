@@ -75,11 +75,11 @@
     <string name="multiple_permissions_content">当アプリは、位置ベースのサービスを提供し、ユーザーエクスペリエンスを向上させるために、ACCESS_COARSE_LOCATION と ACCESS_FINE_LOCATION の権限を必要とします。これらの権限は、現在の位置に基づいてパーソナライズされたコンテンツとサービスを提供することを可能にします。**RECORD_AUDIO** 権限は、当アプリが音声コマンドや音声録音などの機能のために音声入力にアクセスし、管理するために必要です。これらの権限は、当アプリの機能性を向上させ、可能な限り最高のユーザーエクスペリエンスを提供するためにのみ要求されていることをお約束します。当社は、お客様のプライバシーを尊重し、厳格なデータ処理ポリシーを遵守しています。</string>
     <string name="bluetooth">Bluetooth</string>
     <string name="one_permission_content">
-    当アプリにとって不可欠な POST_NOTIFICATIONS 権限を許可していただくと、重要なアップデートをお送りできます。許可がない場合、すべての機能が保証されません。
-    \n\n• アプリを開き、画面上部の角にあるメニューアイコン (通常は 3 本の横線または点で示されます) をタップします。
-    \n\n• メニューから「設定」を選択します。
-    \n\n• 「通知」を探し、トグルスイッチを「オン」の位置に切り替えます。
-</string>
+        当アプリにとって不可欠な POST_NOTIFICATIONS 権限を許可していただくと、重要なアップデートをお送りできます。許可がない場合、すべての機能が保証されません。
+        \n\n• アプリを開き、画面上部の角にあるメニューアイコン (通常は 3 本の横線または点で示されます) をタップします。
+        \n\n• メニューから「設定」を選択します。
+        \n\n• 「通知」を探し、トグルスイッチを「オン」の位置に切り替えます。
+    </string>
     <string name="this_screen_s_functionality_mirrors">この画面の機能は権限画面と似ていますが、基盤となるロジックは別々のクラスで実装されており、アクティビティの結果を利用しています。</string>
     <string name="this_class_makes_the_request"><![CDATA[このクラスは、通知実行時パーミッションを要求し、アクティビティまたはフラグメント内で直接定義を必要とします。]]></string>
     <string name="tooltip">ツールチップ</string>
@@ -87,5 +87,23 @@
     <string name="no_internet_connection">インターネット接続がありません</string>
     <string name="search">検索…</string>
     <string name="foreground_service">フォアグラウンド サービス</string>
+    <string name="playing_sundial_dreams">サンダイアルの夢を再生</string>
+    <string name="basic_text_field_with_state">基本テキストフィールドと状態</string>
+    <string name="common_usage">一般的な使用法</string>
+    <string name="original">オリジナル</string>
+    <string name="reverted">元に戻された</string>
+    <string name="alphabet_ascending">A->Z</string>
+    <string name="alphabet_descending">Z->A</string>
+    <string name="collapsible_topbar">折りたたみ可能なトップバー</string>
+    <string name="shared_element_transition">共有要素の遷移</string>
+    <string name="wikipedia">ウィキペディア</string>
+    <string name="flag_of_nazi_germany">ナチス・ドイツの旗</string>
+    <string name="the_flag_of_nazi_germany">ナチス・ドイツの旗、正式にはドイツ帝国の旗は、赤地に白い円盤の上に黒いスワスチカが描かれていました。この旗は、ナチ党（NSDAP）の設立後、初めてその旗幟として使用されました。1933年にアドルフ・ヒトラーが首相に任命された後、この旗は使用が義務付けられ、国旗はドイツ帝国の黒・白・赤の三色旗となりました。</string>
+    <string name="after_rejecting_many_suggestions">多くの提案と色を拒否した後、新しい旗を選ぶ過程は、ヒトラーによって次のように説明されました：</string>
+    <string name="i_myself_meanwhile_after_innumerable">「私自身、無数の試みの後、最終的な形を決定しました。赤地に白い円盤、その中に黒いスワスチカの旗。長い試行の後、私は旗の大きさと白い円盤の大きさ、スワスチカの形と厚さの間に確定的な比率を見つけました。」</string>
+    <string name="after_hitler_was_appointed">1933年1月30日にヒトラーがドイツの首相に任命された後、黒・赤・金の三色旗は廃止され、3月12日の決定により、再導入された黒・白・赤の帝国三色旗の国旗と、ナチ党の旗の2つの法的な旗が確立されました。</string>
+    <string name="on_15_september_1935_one_year_after_the_death">1935年9月15日、ライヒ大統領パウル・フォン・ヒンデンブルクの死から1年後、ナチスの旗がドイツの国旗となりました。変更の理由の一つは、1935年7月26日の「ブレーメン事件」かもしれません。この事件では、ニューヨーク市のデモ参加者がオーシャンライナーSSブレーメンに乗り込み、ナチ党の旗をジャックスタッフから引き剥がし、ハドソン川に投げ込みました。ドイツの大使が抗議したとき、米国の当局はドイツの国旗は傷つけられていない、政党のシンボルだけが傷つけられたと応答しました。新しい旗法は、1935年のニュルンベルクでの年次党大会で発表されました。ここでヘルマン・ゲーリングは、古い黒・白・赤の旗は、名誉あるものである一方、過去の時代の象徴であり、「反動派」に使用される可能性があると主張しました。</string>
+    <string name="unbookmark">ブックマークを解除</string>
+    <string name="bookmark">ブックマーク</string>
 
 </resources>

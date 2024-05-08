@@ -87,5 +87,23 @@
     <string name="no_internet_connection">Aucune connexion internet</string>
     <string name="search">Rechercher...</string>
     <string name="foreground_service">Service au premier plan</string>
+    <string name="playing_sundial_dreams">Jouer à Sundial Dreams</string>
+    <string name="basic_text_field_with_state">Champ de texte de base avec état</string>
+    <string name="common_usage">Usage courant</string>
+    <string name="original">Original</string>
+    <string name="reverted">Rétabli</string>
+    <string name="alphabet_ascending">A->Z</string>
+    <string name="alphabet_descending">Z->A</string>
+    <string name="collapsible_topbar">Barre supérieure repliable</string>
+    <string name="shared_element_transition">Transition d\'élément partagé</string>
+    <string name="wikipedia">Wikipédia</string>
+    <string name="flag_of_nazi_germany">Drapeau de l\'Allemagne nazie</string>
+    <string name="the_flag_of_nazi_germany">Le drapeau de l\'Allemagne nazie, officiellement le drapeau du Reich allemand, présentait un fond rouge avec une croix gammée noire sur un disque blanc. Ce drapeau est entré en usage initialement comme la bannière du Parti nazi (NSDAP) après sa fondation. Après la nomination d\'Adolf Hitler comme chancelier en 1933, ce drapeau a été adopté comme obligatoire pour l\'usage, tandis que le national était le tricolore noir-blanc-rouge de l\'Empire allemand.</string>
+    <string name="after_rejecting_many_suggestions">Après avoir rejeté de nombreuses suggestions et couleurs, le processus de choix d\'un nouveau drapeau a été décrit par Hitler comme suit :</string>
+    <string name="i_myself_meanwhile_after_innumerable">"Moi-même, entre-temps, après d\'innombrables tentatives, j\'avais fixé une forme définitive ; un drapeau avec un fond rouge, un disque blanc et une croix gammée noire au milieu. Après de longs essais, j\'ai aussi trouvé une proportion définitive entre la taille du drapeau et la taille du disque blanc, ainsi que la forme et l\'épaisseur de la croix gammée."</string>
+    <string name="after_hitler_was_appointed">Après que Hitler a été nommé chancelier de l\'Allemagne le 30 janvier 1933, le drapeau tricolore noir-rouge-or a été abandonné ; une décision du 12 mars a établi deux drapeaux légaux : le drapeau national tricolore noir-blanc-rouge réintroduit et le drapeau du Parti nazi.</string>
+    <string name="on_15_september_1935_one_year_after_the_death">Le 15 septembre 1935, un an après la mort du président du Reich Paul von Hindenburg, le drapeau nazi est devenu le drapeau national de l\'Allemagne. Une des raisons de ce changement pourrait avoir été l\'"incident de Brême" du 26 juillet 1935, lorsqu\'un groupe de manifestants à New York a embarqué sur le paquebot SS Brême, a arraché le drapeau du Parti nazi du mât et l\'a jeté dans la rivière Hudson. Lorsque l\'ambassadeur allemand a protesté, les responsables américains ont répondu que le drapeau national allemand n\'avait pas été endommagé, seulement un symbole d\'un parti politique.</string>
+    <string name="unbookmark">Supprimer le signet</string>
+    <string name="bookmark">Signet</string>
 
 </resources>

@@ -81,46 +81,41 @@ android {
 
 dependencies {
 
-    implementation("androidx.core:core-ktx:1.12.0")
+    implementation("androidx.core:core-ktx:1.13.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
     implementation("androidx.activity:activity-compose:1.8.2")
-    implementation(platform("androidx.compose:compose-bom:2024.02.02"))
+    implementation(platform("androidx.compose:compose-bom:2024.05.00"))
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
     implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.11.0")
+    implementation("com.google.android.material:material:1.12.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
-    implementation("com.google.firebase:firebase-crashlytics-buildtools:2.9.9")
-    implementation(platform("androidx.compose:compose-bom:2024.02.02"))
-    implementation(platform("androidx.compose:compose-bom:2024.02.02"))
-    implementation(platform("androidx.compose:compose-bom:2024.02.02"))
+    implementation("com.google.firebase:firebase-crashlytics-buildtools:3.0.0")
     implementation("androidx.profileinstaller:profileinstaller:1.3.1")
 
 
-    implementation("androidx.benchmark:benchmark-macro-junit4:1.2.3")
+    implementation("androidx.benchmark:benchmark-macro-junit4:1.2.4")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    androidTestImplementation(platform("androidx.compose:compose-bom:2024.02.02"))
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
-    androidTestImplementation(platform("androidx.compose:compose-bom:2024.02.02"))
-    androidTestImplementation(platform("androidx.compose:compose-bom:2024.02.02"))
-    androidTestImplementation(platform("androidx.compose:compose-bom:2024.02.02"))
+
     "baselineProfile"(project(":baselineprofile"))
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
     // Dependency injection with Hilt - https://developer.android.com/training/dependency-injection/hilt-android#setup
-    implementation("com.google.dagger:hilt-android:2.48.1")
-    kapt("com.google.dagger:hilt-android-compiler:2.47")
+    implementation("com.google.dagger:hilt-android:2.51.1")
+    // Hilt Android Processor - https://mvnrepository.com/artifact/com.google.dagger/hilt-android-compiler
+    kapt("com.google.dagger:hilt-android-compiler:2.51.1")
     implementation("androidx.hilt:hilt-navigation-fragment:1.2.0")
 
 
     // Preferences DataStore - https://developer.android.com/topic/libraries/architecture/datastore#preferences-datastore-dependencies
-    implementation("androidx.datastore:datastore-preferences:1.0.0")
+    implementation("androidx.datastore:datastore-preferences:1.1.1")
 
 
     // Get started with the Navigation component - https://developer.android.com/guide/navigation/get-started#Set-up
@@ -157,24 +152,31 @@ dependencies {
 
     // Retrofit - https://github.com/square/retrofit
     // Retrofit - A type-safe HTTP client for Android and Java - https://square.github.io/retrofit/
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.retrofit2:retrofit:2.11.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.11.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
+
 
     // Lottie for Android - https://github.com/airbnb/lottie-android
     // https://lottiefiles.com/blog/working-with-lottie-animations/getting-started-with-lottie-animations-in-android-app/
-    implementation("com.airbnb.android:lottie:6.3.0")
-    implementation("com.airbnb.android:lottie-compose:6.3.0")
+    implementation("com.airbnb.android:lottie:6.4.0")
+    implementation("com.airbnb.android:lottie-compose:6.4.0")
+
 
     // https://mvnrepository.com/artifact/androidx.compose.foundation/foundation
-    implementation("androidx.compose.foundation:foundation:1.7.0-alpha04")
+    implementation("androidx.compose.foundation:foundation:1.7.0-alpha08")
 
 
     // Consuming flows safely in Jetpack Compose - https://medium.com/androiddevelopers/consuming-flows-safely-in-jetpack-compose-cde014d0d5a3
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.7.0")
+
+
+    // Shared Element Transition - https://developer.android.com/develop/ui/compose/animation/shared-elements
+    // Shared Element Transition In Jetpack Compose: Enriching Android User Experiences - https://getstream.io/blog/shared-element-compose/
+    implementation("androidx.compose.animation:animation:1.6.7")
 }
 
-// Allow references to generated code
+// Dependency injection with Hilt - Allow references to generated code
 kapt {
     correctErrorTypes = true
 }

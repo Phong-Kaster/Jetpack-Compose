@@ -1,7 +1,7 @@
 package com.example.jetpack.network.interceptor
 
 import com.example.jetpack.configuration.Constant
-import com.example.jetpack.repository.SettingRepository
+import com.example.jetpack.data.repository.SettingRepository
 import okhttp3.HttpUrl
 import okhttp3.Interceptor
 import okhttp3.Request

@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.Composable
+import androidx.core.view.WindowCompat
 import com.example.jetpack.util.AppUtil
 import com.example.jetpack.util.LanguageUtil
 import dagger.hilt.android.AndroidEntryPoint
@@ -35,6 +36,7 @@ constructor() : AppCompatActivity(), CoreBehavior {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         hideNavigationBar()
+
         setContent {
             ComposeView()
         }

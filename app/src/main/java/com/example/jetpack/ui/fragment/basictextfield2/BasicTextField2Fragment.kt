@@ -1,9 +1,7 @@
 package com.example.jetpack.ui.fragment.basictextfield2
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
-import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -19,13 +17,19 @@ import androidx.compose.foundation.text.input.InputTransformation
 import androidx.compose.foundation.text.input.TextFieldLineLimits
 import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.foundation.text.input.allCaps
-import androidx.compose.foundation.text.input.maxLengthInChars
+import androidx.compose.foundation.text.input.maxLength
+
 import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.foundation.text.input.then
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
@@ -34,7 +38,6 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.fragment.app.viewModels
 import com.example.jetpack.R
 import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
@@ -46,6 +49,7 @@ import com.example.jetpack.util.NavigationUtil.safeNavigateUp
 import com.example.jetpack.util.inputtransformation.DigitsOnlyTransformation
 import com.example.jetpack.util.inputtransformation.VerificationCodeTransformation
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 
 /**
  * this class use Basic Text Field 2
@@ -54,39 +58,49 @@ import dagger.hilt.android.AndroidEntryPoint
  */
 @AndroidEntryPoint
 class BasicTextFieldFragment : CoreFragment() {
-    private val viewModel: BasicTextField2ViewModel by viewModels()
 
-    @OptIn(ExperimentalFoundationApi::class)
+
     @Composable
     override fun ComposeView() {
         super.ComposeView()
         BasicTextFieldLayout(
-            usernameState = viewModel.username,
-            isUsernameValue = viewModel.isUsernameValid.collectAsState().value,
+            usernameState = TextFieldState(),
             onBack = { safeNavigateUp() }
         )
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun BasicTextFieldLayout(
     usernameState: TextFieldState,
-    isUsernameValue: Boolean,
     onBack: () -> Unit = {}
 ) {
     val digitsOnly = rememberTextFieldState()
     val maxSixCharacters = rememberTextFieldState()
     val visualTransformation = rememberTextFieldState()
 
+    var isUsernameValue by remember { mutableStateOf(true) }
+
+    LaunchedEffect(Unit) {
+        snapshotFlow { usernameState.text }.collectLatest { queryText ->
+            // Start a new search every time the user types something valid. If the previous
+            // search is still being processed when the text is changed, it will be cancelled
+            // and this code will run again with the latest query text.
+            if (usernameState.text.contains("a")) {
+                isUsernameValue = false
+            }
+        }
+    }
+
     CoreLayout(
         topBar = {
             CoreTopBar(
-                title = stringResource(R.string.basic_text_field_2),
+                title = stringResource(R.string.basic_text_field_with_state),
                 leftIcon = R.drawable.ic_back,
                 onClickLeft = onBack
             )
-        }, content = {
+        },
+        content = {
             Column(
                 modifier = Modifier
                     .fillMaxSize()
@@ -177,7 +191,7 @@ fun BasicTextFieldLayout(
                     lineLimits = TextFieldLineLimits.SingleLine,
                     textStyle = customizedTextStyle(color = PrimaryColor),
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-                    inputTransformation = InputTransformation.maxLengthInChars(6)
+                    inputTransformation = InputTransformation.maxLength(6)
                         .then(InputTransformation.allCaps(Locale.current)),
                     decorator = { innerTextField ->
                         if (maxSixCharacters.text.isEmpty()) {
@@ -211,12 +225,16 @@ fun BasicTextFieldLayout(
                     lineLimits = TextFieldLineLimits.SingleLine,
                     textStyle = customizedTextStyle(color = PrimaryColor, fontSize = 14),
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-                    inputTransformation = InputTransformation.maxLengthInChars(6),
+                    inputTransformation = InputTransformation.maxLength(6),
                     outputTransformation = VerificationCodeTransformation,
                     decorator = { innerTextField -> innerTextField() },
                     modifier = Modifier
                         .fillMaxWidth()
-                        .border(width = 1.dp, color = PrimaryColor, shape = RoundedCornerShape(5.dp))
+                        .border(
+                            width = 1.dp,
+                            color = PrimaryColor,
+                            shape = RoundedCornerShape(5.dp)
+                        )
                         .padding(vertical = 16.dp, horizontal = 16.dp),
                 )
             }
@@ -224,13 +242,11 @@ fun BasicTextFieldLayout(
         })
 }
 
-@OptIn(ExperimentalFoundationApi::class)
 @Preview
 @Composable
 private fun PreviewBasicTextField() {
     BasicTextFieldLayout(
         usernameState = TextFieldState(),
-        isUsernameValue = true,
         onBack = {}
     )
 }

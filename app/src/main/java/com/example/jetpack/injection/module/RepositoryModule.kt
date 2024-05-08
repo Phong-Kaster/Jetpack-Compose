@@ -1,6 +1,6 @@
 package com.example.jetpack.injection.module
 
-import com.example.jetpack.repository.SettingRepository
+import com.example.jetpack.data.repository.SettingRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

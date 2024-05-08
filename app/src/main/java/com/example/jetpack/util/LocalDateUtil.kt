@@ -50,13 +50,13 @@ object LocalDateUtil {
      * for instance: today is 12-04-2024 then start day of week is Monday, 08-04-2024
      */
     fun LocalDate.startDayOfWeek(): LocalDate {
-        return this.with(TemporalAdjusters.previous(DayOfWeek.MONDAY))
+        return this.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY))
     }
 
     /**
      * for instance: today is 12-04-2024 then last day of week is SUNDAY, 14-04-2024
      */
     fun LocalDate.lastDayOfWeek(): LocalDate {
-        return this.with(TemporalAdjusters.previousOrSame(DayOfWeek.SUNDAY))
+        return this.with(TemporalAdjusters.nextOrSame(DayOfWeek.SUNDAY))
     }
 }
