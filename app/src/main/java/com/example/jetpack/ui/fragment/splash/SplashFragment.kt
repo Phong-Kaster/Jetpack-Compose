@@ -16,6 +16,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -48,18 +49,6 @@ class SplashFragment : CoreFragment() {
     override fun ComposeView() {
         super.ComposeView()
 
-        /*LaunchedEffect(Unit) {
-            while (true) {
-                delay(1000)
-                val enableIntro = viewModel.enableIntro.value
-                val destination = if (enableIntro) {
-                    SplashFragmentDirections.fromSplashToIntro()
-                } else {
-                    SplashFragmentDirections.fromSplashToHome()
-                }
-                safeNavigate(destination)
-            }
-        }*/
         SplashLayout(
             goHome = {
                 val enableIntro = viewModel.enableIntro.value
