@@ -35,7 +35,7 @@ constructor() : AppCompatActivity(), CoreBehavior {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        hideNavigationBar()
+        //hideNavigationBar()
 
         setContent {
             ComposeView()
@@ -50,12 +50,12 @@ constructor() : AppCompatActivity(), CoreBehavior {
 
     override fun showLoading() {}
     override fun makeStatusBarTransparent() {
-        with(window) {
+        /*with(window) {
             setFlags(
                 android.view.WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
                 android.view.WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
             )
-        }
+        }*/
     }
 
     override fun showToast(message: String) {

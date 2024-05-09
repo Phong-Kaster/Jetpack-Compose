@@ -12,5 +12,8 @@ interface CoreBehavior {
 
     fun showLoading()
 
+    /**
+     * this function draw app's content in full screen that ignore navigation bar & status bar
+     */
     fun makeStatusBarTransparent()
 }
