@@ -28,6 +28,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.jetpack.R
 import com.example.jetpack.ui.theme.OppositePrimaryColor
 import com.example.jetpack.ui.theme.PrimaryColor
@@ -42,7 +43,10 @@ fun CoreButton(
     text: String = stringResource(id = R.string.fake_title),
     backgroundColor: Color = PrimaryColor,
     textColor: Color = OppositePrimaryColor,
-    textStyle: TextStyle = body14,
+    textStyle: TextStyle = TextStyle(
+        fontSize = 14.sp,
+        color = Color.Black
+    ),
     // For icon
     @DrawableRes leftIcon: Int? = null,
     leftIconColor: Color = Color.Black,

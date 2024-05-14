@@ -166,7 +166,7 @@ dependencies {
     implementation("androidx.compose.foundation:foundation:1.7.0-alpha08")
 
 
-    // Consuming flows safely in Jetpack Compose - https://medium.com/androiddevelopers/consuming-flows-safely-in-jetpack-compose-cde014d0d5a3
+    // Consume flows safely in Jetpack Compose - https://medium.com/androiddevelopers/consuming-flows-safely-in-jetpack-compose-cde014d0d5a3
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.7.0")
 
 
