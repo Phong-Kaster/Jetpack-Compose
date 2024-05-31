@@ -23,6 +23,10 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class InsightFragment : CoreFragment() {
+
+    /*************************************************
+     * ComposeView
+     */
     @Composable
     override fun ComposeView() {
         super.ComposeView()

@@ -22,6 +22,9 @@ constructor() : ViewModel() {
     private val _shortcuts = MutableStateFlow<ImmutableList<HomeShortcut>>(persistentListOf())
     val shortcuts = _shortcuts.asStateFlow()
 
+    /*************************************************
+     * shortcutsWithLifecycle
+     */
     val shortcutsWithLifecycle = MutableStateFlow<ImmutableList<HomeShortcut>>(persistentListOf())
 
     init {
@@ -34,6 +37,9 @@ constructor() : ViewModel() {
         }
     }
 
+    /*************************************************
+     * searchWithKeyword
+     */
     fun searchWithKeyword(keyword: String) {
         viewModelScope.launch(Dispatchers.IO) {
             val list = HomeShortcut.entries.filter { homeShortcut: HomeShortcut ->
@@ -45,12 +51,18 @@ constructor() : ViewModel() {
         }
     }
 
+    /*************************************************
+     * resetShortcuts
+     */
     fun resetShortcuts(){
         viewModelScope.launch(Dispatchers.IO){
             _shortcuts.value = HomeShortcut.entries.toImmutableList()
         }
     }
 
+    /*************************************************
+     * applySortOption
+     */
     fun applySortOption(option: SortOption){
         viewModelScope.launch(Dispatchers.IO){
             _shortcuts.value = when(option){

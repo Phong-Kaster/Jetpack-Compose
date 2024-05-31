@@ -45,6 +45,9 @@ class SettingFragment : CoreFragment() {
     private val viewModel: SettingViewModel by viewModels()
     private var showRateDialog by mutableStateOf(false)
 
+    /*************************************************
+     * rate
+     */
     private fun rate(star: Star, content: String) {
         if (star == Star.FOUR || star == Star.FIVE) {
             val manager = ReviewManagerFactory.create(requireContext())

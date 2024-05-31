@@ -68,7 +68,9 @@ class MediaPlayerFragment : CoreFragment() {
         R.raw.through_the_arbor
     )
 
-    /** Defines callbacks for service binding, passed to bindService().  */
+    /*************************************************
+     * Defines callbacks for service binding, passed to bindService().
+     */
     private val connection = object : ServiceConnection {
 
         override fun onServiceConnected(className: ComponentName, service: IBinder) {
@@ -100,6 +102,9 @@ class MediaPlayerFragment : CoreFragment() {
         stopMediaPlayerService()
     }
 
+    /*************************************************
+     * startMediaPlayerService
+     */
     private fun startMediaPlayerService() {
         Log.d(TAG, "MediaPlayerService - start")
         val intent = Intent(requireContext(), MediaPlayerService::class.java)
@@ -107,6 +112,9 @@ class MediaPlayerFragment : CoreFragment() {
         requireContext().startService(intent)
     }
 
+    /*************************************************
+     * stopMediaPlayerService
+     */
     private fun stopMediaPlayerService() {
         Log.d(TAG, "MediaPlayerService - stop")
         requireContext().unbindService(connection)
@@ -149,7 +157,6 @@ class MediaPlayerFragment : CoreFragment() {
 }
 
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun ForegroundServiceLayout(
     isPlaying: Boolean,

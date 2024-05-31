@@ -83,7 +83,9 @@ class HomeFragment : CoreFragment() {
         setupNotification()
     }
 
-
+    /*************************************************
+     * setupNotificationLauncher
+     */
     private fun setupNotificationLauncher() {
         notificationLifecycleObserver = NotificationLifecycleObserver(
             activity = requireActivity(),
@@ -92,6 +94,9 @@ class HomeFragment : CoreFragment() {
         lifecycle.addObserver(notificationLifecycleObserver)
     }
 
+    /*************************************************
+     * setupNotification
+     */
     private fun setupNotification() {
         // 1. Request POST NOTIFICATION permission if device has Android OS from 13
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) return
