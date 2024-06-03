@@ -36,7 +36,7 @@ import com.example.jetpack.ui.theme.Border
 import com.example.jetpack.ui.theme.PrimaryColor
 import com.example.jetpack.ui.theme.TextColor2
 import com.example.jetpack.ui.theme.customizedTextStyle
-import com.example.jetpack.ui.view.RatingBar
+import com.example.jetpack.ui.view.RateBar
 
 @Composable
 fun RateDialog(
@@ -95,7 +95,7 @@ fun RateDialogLayout(
 
 
         // RATING BAR
-        RatingBar(
+        RateBar(
             chosenStar = chosenStar,
             modifier = Modifier
                 .padding(vertical = 5.dp, horizontal = 16.dp)
