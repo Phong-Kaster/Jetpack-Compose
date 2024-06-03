@@ -13,6 +13,7 @@ import android.view.Window
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
+import androidx.test.uiautomator.v18.BuildConfig
 import com.example.jetpack.R
 
 
@@ -70,5 +71,24 @@ object AppUtil {
         val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         val clip = ClipData.newPlainText("Copied Text", text)
         clipboard.setPrimaryClip(clip)
+    }
+
+    fun shareApplication(context: Context){
+        try {
+            var shareMessage = context.getString(R.string.let_me_recommend_you_this_application)
+            shareMessage = (shareMessage + "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID) + "\n\n"
+
+            val shareIntent = Intent(Intent.ACTION_SEND)
+            shareIntent.setType("text/plain")
+            shareIntent.putExtra(Intent.EXTRA_SUBJECT, context.getString(R.string.app_name))
+            shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage)
+
+
+            val chooserIntent = Intent.createChooser(shareIntent, "")
+
+            context.startActivity(chooserIntent)
+        } catch (ex: Exception) {
+            ex.printStackTrace()
+        }
     }
 }
