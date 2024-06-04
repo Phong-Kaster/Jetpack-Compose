@@ -1,7 +1,11 @@
 package com.example.jetpack.ui.fragment.article
 
+import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
@@ -17,6 +21,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.CornerRadius
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -36,6 +45,9 @@ import com.example.jetpack.ui.theme.Background
 import com.example.jetpack.ui.theme.PrimaryColor
 import dagger.hilt.android.AndroidEntryPoint
 
+/**
+ * Animate borders in Jetpack Compose - https://proandroiddev.com/animate-borders-in-jetpack-compose-ca359deed7d5
+ */
 @AndroidEntryPoint
 class ArticleFragment : CoreFragment() {
 
@@ -102,6 +114,42 @@ fun ArticleLayout(
         ) {
             item(key = "key1", span = { GridItemSpan(2) }) {
                 Text(text = stringResource(id = R.string.fake_content), color = PrimaryColor)
+            }
+
+            item {
+                val colorBg = Color(0xFF2C3141)
+                val colors =
+                    listOf(
+                        Color(0xFFFF595A),
+                        Color(0xFFFFC766),
+                        Color(0xFF35A07F),
+                        Color(0xFF35A07F),
+                        Color(0xFFFFC766),
+                        Color(0xFFFF595A)
+                    )
+
+                val brush = Brush.linearGradient(colors)
+
+                Canvas(modifier = Modifier.fillMaxWidth().height(200.dp).background(colorBg)) {
+                    drawRoundRect(
+                        brush = brush,
+                        cornerRadius = CornerRadius(x = 20.dp.toPx(), y = 20.dp.toPx()
+                        )
+                    )
+
+                    drawRoundRect(
+                        color = colorBg,
+                        topLeft = Offset(1.dp.toPx(), 1.dp.toPx()),
+                        size = Size(
+                            width = size.width - 2.dp.toPx(),
+                            height = size.height - 2.dp.toPx()
+                        ),
+                        cornerRadius = CornerRadius(
+                            x = 19.dp.toPx(),
+                            y = 19.dp.toPx()
+                        )
+                    )
+                }
             }
 
             items(
