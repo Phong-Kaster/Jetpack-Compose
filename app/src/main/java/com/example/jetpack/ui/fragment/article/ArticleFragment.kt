@@ -1,31 +1,24 @@
 package com.example.jetpack.ui.fragment.article
 
-import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.background
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.LocalOverscrollConfiguration
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.CornerRadius
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -36,9 +29,9 @@ import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
 import com.example.jetpack.ui.component.CoreAlertDialog
 import com.example.jetpack.ui.component.CoreBottomBar
-import com.example.jetpack.ui.component.CoreDialog
 import com.example.jetpack.ui.component.CoreExpandableFloatingButton
 import com.example.jetpack.ui.component.SquareElement
+import com.example.jetpack.ui.fragment.article.component.AnimatedBorderCard
 import com.example.jetpack.ui.fragment.home.component.HomeDialog
 import com.example.jetpack.ui.fragment.home.component.HomeTopBar
 import com.example.jetpack.ui.theme.Background
@@ -83,6 +76,7 @@ class ArticleFragment : CoreFragment() {
  *     val state = rememberLazyGridState()
  *     val fabExtended by remember { derivedStateOf { state.firstVisibleItemIndex == 0 } }
  */
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ArticleLayout(
     onOpenAlertDialog: () -> Unit = {},
@@ -103,68 +97,42 @@ fun ArticleLayout(
         },
         backgroundColor = Background
     ) {
-        LazyVerticalGrid(
-            state = state,
-            columns = GridCells.Fixed(2),
-            horizontalArrangement = Arrangement.spacedBy(16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp),
-            modifier = Modifier
-                .padding(start = 16.dp, end = 16.dp, top = 0.dp, bottom = 32.dp)
-                .fillMaxSize()
-        ) {
-            item(key = "key1", span = { GridItemSpan(2) }) {
-                Text(text = stringResource(id = R.string.fake_content), color = PrimaryColor)
-            }
-
-            item {
-                val colorBg = Color(0xFF2C3141)
-                val colors =
-                    listOf(
-                        Color(0xFFFF595A),
-                        Color(0xFFFFC766),
-                        Color(0xFF35A07F),
-                        Color(0xFF35A07F),
-                        Color(0xFFFFC766),
-                        Color(0xFFFF595A)
-                    )
-
-                val brush = Brush.linearGradient(colors)
-
-                Canvas(modifier = Modifier.fillMaxWidth().height(200.dp).background(colorBg)) {
-                    drawRoundRect(
-                        brush = brush,
-                        cornerRadius = CornerRadius(x = 20.dp.toPx(), y = 20.dp.toPx()
-                        )
-                    )
-
-                    drawRoundRect(
-                        color = colorBg,
-                        topLeft = Offset(1.dp.toPx(), 1.dp.toPx()),
-                        size = Size(
-                            width = size.width - 2.dp.toPx(),
-                            height = size.height - 2.dp.toPx()
-                        ),
-                        cornerRadius = CornerRadius(
-                            x = 19.dp.toPx(),
-                            y = 19.dp.toPx()
-                        )
-                    )
+        // Remove overscroll effect for lazy grid
+        CompositionLocalProvider(
+            LocalOverscrollConfiguration provides null
+        ){
+            LazyVerticalGrid(
+                state = state,
+                columns = GridCells.Fixed(2),
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
+                verticalArrangement = Arrangement.spacedBy(16.dp),
+                modifier = Modifier
+                    .padding(start = 16.dp, end = 16.dp, top = 0.dp, bottom = 32.dp)
+                    .fillMaxSize()
+            ) {
+                item(key = "key1", span = { GridItemSpan(2) }) {
+                    Text(text = stringResource(id = R.string.fake_content), color = PrimaryColor)
                 }
-            }
 
-            items(
-                items = Language.entries,
-                key = { item: Language -> item.name },
-                itemContent = {language: Language ->
-                    SquareElement(
-                        language = language,
-                        onClick = {
-                            when(language) {
-                                Language.English -> onOpenAlertDialog()
-                                else -> onOpenDialog()
-                            }
-                        })
-                })
+                item(key = "AnimatedBorder", span = { GridItemSpan(2) }) {
+                    AnimatedBorderCard()
+                }
+
+                items(
+                    items = Language.entries,
+                    key = { item: Language -> item.name },
+
+                    itemContent = {language: Language ->
+                        SquareElement(
+                            language = language,
+                            onClick = {
+                                when(language) {
+                                    Language.English -> onOpenAlertDialog()
+                                    else -> onOpenDialog()
+                                }
+                            })
+                    })
+            }
         }
     }
 }
