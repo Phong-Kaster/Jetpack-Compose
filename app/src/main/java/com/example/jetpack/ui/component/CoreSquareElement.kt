@@ -45,14 +45,13 @@ fun SquareElement(
         modifier = Modifier
             .clip(shape = RoundedCornerShape(20.dp))
             .borderWithAnimatedGradient(
-                backgroundColor = Background2,
-                width = 2,
-                durationMillis = 2000
+                width = 3.dp,
+                shape = RoundedCornerShape(25.dp),
+                colors = listOf(Color(0xFF004BDC), Color(0xFF004BDC), Color(0xFF9EFFFF), Color(0xFF9EFFFF), Color(0xFF9EFFFF), Color(0xFF9EFFFF), Color(0xFF004BDC), Color(0xFF004BDC)),
             )
+            .background(color = Background2, shape = RoundedCornerShape(25.dp))
             .clickable { onClick(language) }
             .aspectRatio(1F)
-
-
     ) {
 
         Image(
@@ -85,10 +84,12 @@ fun SquareElement(
             overflow = TextOverflow.Ellipsis
         )
 
-        Row(modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 5.dp),
-            horizontalArrangement = Arrangement.End) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 5.dp),
+            horizontalArrangement = Arrangement.End
+        ) {
             Icon(
                 painter = painterResource(id = R.drawable.ic_arrow_forward_circle),
                 contentDescription = stringResource(id = R.string.icon),

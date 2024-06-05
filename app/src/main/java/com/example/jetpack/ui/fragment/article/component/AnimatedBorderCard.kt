@@ -15,12 +15,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.Red
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.jetpack.R
 import com.example.jetpack.ui.modifier.borderWithAnimatedGradient
+import com.example.jetpack.ui.theme.Background2
 import com.example.jetpack.ui.theme.customizedTextStyle
 import com.example.jetpack.util.ViewUtil
 
@@ -31,14 +33,14 @@ fun AnimatedBorderCard() {
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
             .fillMaxWidth()
-            .clip(shape = RoundedCornerShape(20.dp))
-            .background(color = Color.White)
+            .clip(shape = RoundedCornerShape(25.dp))
             .borderWithAnimatedGradient(
-                durationMillis = 2000,
-                width = 5,
-                backgroundColor = Color(0xFFF3F7FF)
+                width = 5.dp,
+                shape = RoundedCornerShape(25.dp),
+                colors = listOf(Color(0xFF004BDC), Color(0xFF004BDC), Color(0xFF9EFFFF), Color(0xFF9EFFFF), Color(0xFF9EFFFF), Color(0xFF9EFFFF), Color(0xFF004BDC), Color(0xFF004BDC)),
             )
-            .padding(horizontal = 16.dp)
+            .background(color = Red, shape = RoundedCornerShape(25.dp))
+            .padding(horizontal = 16.dp, vertical = 16.dp)
     ) {
         Image(
             painter = painterResource(id = R.drawable.ic_lightbulb),

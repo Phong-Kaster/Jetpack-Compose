@@ -1,5 +1,6 @@
 package com.example.jetpack.ui.modifier
 
+import android.annotation.SuppressLint
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
@@ -29,19 +30,26 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.jetpack.R
 import com.example.jetpack.ui.theme.customizedTextStyle
 
 /**
+ * Animate borders in Jetpack Compose - https://proandroiddev.com/animate-borders-in-jetpack-compose-ca359deed7d5
+ *
  * when we use borderWithAnimatedGradient then we do not use
- * Modifier.padding
+ * Modifier.padding, Modifier.background & Modifier.clip
  */
+@SuppressLint("ModifierFactoryUnreferencedReceiver")
 fun Modifier.borderWithAnimatedGradient(
+    width: Dp = 2.dp,
+    shape: Shape = RoundedCornerShape(20.dp),
     colors: List<Color> = listOf(
         Color(0xFF004BDC),
         Color(0xFF004BDC),
@@ -52,9 +60,6 @@ fun Modifier.borderWithAnimatedGradient(
         Color(0xFF004BDC),
         Color(0xFF004BDC)
     ),
-    durationMillis: Int = 2000,
-    width: Int = 2,
-    backgroundColor: Color = Color.Transparent
 ) = composed {
 
     // Configure brush
@@ -67,73 +72,84 @@ fun Modifier.borderWithAnimatedGradient(
         initialValue = 0f,
         targetValue = 360f,
         animationSpec = infiniteRepeatable(
-            animation = tween(durationMillis, easing = LinearEasing),
+            animation = tween(5000, easing = LinearEasing),
             repeatMode = RepeatMode.Restart
         ),
         label = "angle"
     )
 
-    drawBehind {
-        rotate(degrees = angle) {
-            drawCircle(
-                brush = brushSweep,
-                radius = size.width,
-                blendMode = BlendMode.SrcIn,
+    clip(shape = shape)
+        .padding(width)
+        .drawBehind {
+            rotate(degrees = angle) {
+                drawCircle(
+                    brush = brushSweep,
+                    radius = size.width,
+                    blendMode = BlendMode.SrcIn,
+                )
+            }
+
+            drawRoundRect(
+                color = Color.White,
+                topLeft = Offset(1.dp.toPx(), 1.dp.toPx()),
+                size = Size(
+                    width = size.width - 2.dp.toPx(),
+                    height = size.height - 2.dp.toPx()
+                ),
+                cornerRadius = CornerRadius(
+                    x = 19.dp.toPx(),
+                    y = 19.dp.toPx()
+                )
             )
         }
-
-        // draw solid color
-        drawRoundRect(
-            color = backgroundColor,
-            topLeft = Offset(x = width.dp.toPx(), y = width.dp.toPx()),
-            size = Size(
-                width = size.width - (width * 2).dp.toPx(),
-                height = size.height - (width * 2).dp.toPx()
-            ),
-            cornerRadius = CornerRadius(
-                x = 20.dp.toPx(),
-                y = 20.dp.toPx()
-            )
-        )
-    }
 }
 
 @Preview
 @Composable
 private fun ExampleWithBorderWithAnimatedGradient() {
-    Row(
-        horizontalArrangement = Arrangement.spacedBy(10.dp),
-        verticalAlignment = Alignment.CenterVertically,
+    Column(
         modifier = Modifier
             .fillMaxWidth()
-            .clip(shape = RoundedCornerShape(20.dp))
-            .background(color = Color.White)
-            .borderWithAnimatedGradient(
-                durationMillis = 2000,
-                width = 5,
-                backgroundColor = Color(0xFFF3F7FF)
-            )
-            .padding(horizontal = 16.dp)
+            .background(color = Color.DarkGray)
+            .padding(16.dp)
     ) {
-        Image(
-            painter = painterResource(id = R.drawable.ic_lightbulb),
-            contentDescription = null,
-            modifier = Modifier.size(24.dp)
-        )
 
-        Column(
-            verticalArrangement = Arrangement.spacedBy(10.dp),
-            modifier = Modifier.padding(16.dp)
+
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(10.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier
+                .fillMaxWidth()
+                .clip(shape = RoundedCornerShape(25.dp))
+                .borderWithAnimatedGradient(
+                    width = 5.dp,
+                    shape = RoundedCornerShape(25.dp),
+                    colors = listOf(Color(0xFF004BDC), Color(0xFF004BDC), Color(0xFF9EFFFF), Color(0xFF9EFFFF), Color(0xFF9EFFFF), Color(0xFF9EFFFF), Color(0xFF004BDC), Color(0xFF004BDC)),
+                )
+                .padding(horizontal = 10.dp, vertical = 10.dp)
+                .background(color = Color.White, shape = RoundedCornerShape(25.dp))
+                .padding(horizontal = 16.dp)
         ) {
-            Text(
-                text = stringResource(id = R.string.app_name),
-                style = customizedTextStyle(fontSize = 14, fontWeight = 500, color = Color.Black)
+            Image(
+                painter = painterResource(id = R.drawable.ic_lightbulb),
+                contentDescription = null,
+                modifier = Modifier.size(24.dp)
             )
 
-            Text(
-                text = stringResource(id = R.string.fake_message),
-                style = customizedTextStyle(fontSize = 14, fontWeight = 500, color = Color.Black)
-            )
+            Column(
+                verticalArrangement = Arrangement.spacedBy(10.dp),
+                modifier = Modifier.padding(16.dp)
+            ) {
+                Text(
+                    text = stringResource(id = R.string.app_name),
+                    style = customizedTextStyle(fontSize = 14, fontWeight = 500, color = Color.Black)
+                )
+
+                Text(
+                    text = "borderWithAnimatedGradient",
+                    style = customizedTextStyle(fontSize = 14, fontWeight = 500, color = Color.Black)
+                )
+            }
         }
     }
 }
