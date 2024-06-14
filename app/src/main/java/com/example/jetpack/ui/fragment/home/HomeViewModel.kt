@@ -14,6 +14,9 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+/**
+ * MVVM Architecture - https://github.com/akhilesh0707/Rick-and-Morty
+ */
 @HiltViewModel
 class HomeViewModel
 @Inject

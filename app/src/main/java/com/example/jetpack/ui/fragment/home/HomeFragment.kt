@@ -24,6 +24,7 @@ import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
@@ -68,7 +69,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toImmutableList
 
-
+/**
+ * MVVM Architecture - https://github.com/akhilesh0707/Rick-and-Morty
+ */
 @AndroidEntryPoint
 class HomeFragment : CoreFragment() {
     private val viewModel: HomeViewModel by viewModels()
@@ -250,30 +253,36 @@ fun HomeLayout(
                                 contentDescription = stringResource(id = R.string.icon),
                             )
 
-                            DropdownMenu(
-                                expanded = expandSortMenu,
-                                onDismissRequest = { expandSortMenu = false }
+                            MaterialTheme(
+                                shapes = MaterialTheme.shapes.copy(
+                                    extraSmall = RoundedCornerShape(15.dp),
+                                )
                             ) {
-                                SortOption.entries.forEach { option ->
-                                    DropdownMenuItem(
-                                        leadingIcon = {
-                                            Icon(
-                                                painter = painterResource(id = option.leadingIcon),
-                                                tint = PrimaryColor,
-                                                contentDescription = stringResource(id = R.string.icon)
-                                            )
-                                        },
-                                        text = {
-                                            Text(
-                                                text = stringResource(id = option.text),
-                                                style = customizedTextStyle(color = PrimaryColor)
-                                            )
-                                        },
-                                        onClick = {
-                                            expandSortMenu = false
-                                            onApplySortOption(option)
-                                        }
-                                    )
+                                DropdownMenu(
+                                    expanded = expandSortMenu,
+                                    onDismissRequest = { expandSortMenu = false }
+                                ) {
+                                    SortOption.entries.forEach { option ->
+                                        DropdownMenuItem(
+                                            leadingIcon = {
+                                                Icon(
+                                                    painter = painterResource(id = option.leadingIcon),
+                                                    tint = PrimaryColor,
+                                                    contentDescription = stringResource(id = R.string.icon)
+                                                )
+                                            },
+                                            text = {
+                                                Text(
+                                                    text = stringResource(id = option.text),
+                                                    style = customizedTextStyle(color = PrimaryColor)
+                                                )
+                                            },
+                                            onClick = {
+                                                expandSortMenu = false
+                                                onApplySortOption(option)
+                                            }
+                                        )
+                                    }
                                 }
                             }
                         })
@@ -306,6 +315,7 @@ fun HomeLayout(
                                 )
                             }
                         }
+
                         else -> HomeShortcutItem(shortcut = homeShortcut, onClick = onOpenShortcut)
                     }
                 })
