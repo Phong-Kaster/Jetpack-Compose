@@ -173,6 +173,9 @@ dependencies {
     // Shared Element Transition - https://developer.android.com/develop/ui/compose/animation/shared-elements
     // Shared Element Transition In Jetpack Compose: Enriching Android User Experiences - https://getstream.io/blog/shared-element-compose/
     implementation("androidx.compose.animation:animation:1.6.7")
+
+    // For map manager
+    implementation("com.google.android.gms:play-services-location:21.3.0")
 }
 
 // Dependency injection with Hilt - Allow references to generated code

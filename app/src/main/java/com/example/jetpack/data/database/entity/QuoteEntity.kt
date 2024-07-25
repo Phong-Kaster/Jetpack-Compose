@@ -3,7 +3,7 @@ package com.example.jetpack.data.database.entity
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.jetpack.data.enums.Category
+import com.example.jetpack.domain.enums.Category
 import java.time.LocalDate
 import java.util.Date
 

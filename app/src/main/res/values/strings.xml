@@ -111,4 +111,11 @@
     <string name="collapsible_topbar_2">Collapsible Topbar 2</string>
     <string name="collapsible_topbar_3">Collapsible Topbar 3</string>
     <string name="location_enabled">Location enabled</string>
+    <string name="gps_enabled">GPS enabled</string>
+    <string name="or">or</string>
+    <string name="manual">Manual</string>
+    <string name="allow">Allow</string>
+    <string name="to_receive_personalized">To receive personalized, up-to-the-minute weather forecasts and alerts, please grant access to your location.</string>
+    <string name="location_access">Location access</string>
+    <string name="last_know_location">Last know location</string>
 </resources>

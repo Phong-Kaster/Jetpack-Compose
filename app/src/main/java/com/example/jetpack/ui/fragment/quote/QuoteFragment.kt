@@ -31,8 +31,8 @@ import androidx.fragment.app.viewModels
 import com.example.jetpack.R
 import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
-import com.example.jetpack.data.enums.Category
-import com.example.jetpack.data.model.Quote
+import com.example.jetpack.domain.enums.Category
+import com.example.jetpack.domain.model.Quote
 import com.example.jetpack.ui.component.CoreTopBar
 import com.example.jetpack.ui.component.SolidButton
 import com.example.jetpack.ui.fragment.quote.component.CategorySelector

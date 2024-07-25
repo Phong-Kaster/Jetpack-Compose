@@ -47,8 +47,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.jetpack.R
 import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
-import com.example.jetpack.data.enums.HomeShortcut
-import com.example.jetpack.data.enums.SortOption
+import com.example.jetpack.domain.enums.HomeShortcut
+import com.example.jetpack.domain.enums.SortOption
 import com.example.jetpack.lifecycleobserver.NotificationLifecycleObserver
 import com.example.jetpack.notification.LockscreenManager
 import com.example.jetpack.notification.NotificationManager
@@ -156,7 +156,7 @@ class HomeFragment : CoreFragment() {
                     HomeShortcut.SharedElementTransition -> safeNavigate(R.id.toSharedElementTransition)
                     HomeShortcut.CollapsibleTopbar -> safeNavigate(R.id.toCollasibleTopbar)
                     HomeShortcut.CollapsibleTopbar2 -> safeNavigate(R.id.toCollapsibleTopbar2)
-                    HomeShortcut.CollapsibleTopbar3 -> safeNavigate(R.id.toCollapsibleTopbar3)
+                    HomeShortcut.LastKnownLocation -> safeNavigate(R.id.toLastKnownLocation)
                     else -> {}
                 }
             })

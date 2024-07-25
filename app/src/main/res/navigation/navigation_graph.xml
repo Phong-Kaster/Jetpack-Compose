@@ -140,6 +140,10 @@
         android:id="@+id/collapsibleTopBar3Fragment"
         android:name="com.example.jetpack.ui.fragment.collapsibletopbar.CollapsibleTopbar3Fragment" />
 
+    <fragment
+        android:id="@+id/lastKnownLocationFragment"
+        android:name="com.example.jetpack.ui.fragment.location.LastKnownLocationFragment" />
+
     <activity
         android:id="@+id/lockscreenActivity"
         android:name="com.example.jetpack.ui.activity.LockscreenActivity" />
@@ -345,6 +349,15 @@
     <action
         android:id="@+id/toCollapsibleTopbar3"
         app:destination="@id/collapsibleTopBar3Fragment"
+        app:enterAnim="@anim/enter_slide_in_right"
+        app:exitAnim="@anim/exit_slide_out_left"
+        app:popEnterAnim="@anim/enter_slide_in_left"
+        app:popExitAnim="@anim/exit_slide_out_right"
+        app:popUpToInclusive="true"/>
+
+    <action
+        android:id="@+id/toLastKnownLocation"
+        app:destination="@id/lastKnownLocationFragment"
         app:enterAnim="@anim/enter_slide_in_right"
         app:exitAnim="@anim/exit_slide_out_left"
         app:popEnterAnim="@anim/enter_slide_in_left"

@@ -20,7 +20,7 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.example.jetpack.data.model.ChartElement
+import com.example.jetpack.domain.model.ChartElement
 import com.example.jetpack.ui.theme.Border
 import com.example.jetpack.ui.theme.ColorPressureLow
 import com.example.jetpack.ui.theme.ColorUVIndexExtremeHigh

@@ -2,8 +2,8 @@ package com.example.jetpack.ui.fragment.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.jetpack.data.enums.HomeShortcut
-import com.example.jetpack.data.enums.SortOption
+import com.example.jetpack.domain.enums.HomeShortcut
+import com.example.jetpack.domain.enums.SortOption
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf

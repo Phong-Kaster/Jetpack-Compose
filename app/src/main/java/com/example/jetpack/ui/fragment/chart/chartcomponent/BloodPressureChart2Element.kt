@@ -27,9 +27,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.example.jetpack.data.model.ChartElement
-import com.example.jetpack.data.model.ChartElement.Companion.getMaxValue
-import com.example.jetpack.data.model.ChartElement.Companion.getMinValue
+import com.example.jetpack.domain.model.ChartElement
+import com.example.jetpack.domain.model.ChartElement.Companion.getMaxValue
+import com.example.jetpack.domain.model.ChartElement.Companion.getMinValue
 import com.example.jetpack.ui.theme.ColorWindSpeedCalm
 import com.example.jetpack.ui.theme.ColorWindSpeedFresh
 import com.example.jetpack.ui.theme.ColorWindSpeedGale
@@ -74,7 +74,7 @@ private val colors = listOf(
 fun BloodPressureChart2Element(
     minRange: Float,
     maxRange: Float,
-    chartElement:  ChartElement,
+    chartElement: ChartElement,
     dateHeight: Dp,
     enableInfo: Boolean = false,
     paddingHorizontal: Dp = 32.dp,

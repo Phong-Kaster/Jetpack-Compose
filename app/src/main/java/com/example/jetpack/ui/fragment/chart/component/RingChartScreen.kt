@@ -11,7 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.jetpack.data.model.ChartElement
+import com.example.jetpack.domain.model.ChartElement
 import com.example.jetpack.ui.fragment.chart.chartcomponent.RingChart
 import com.example.jetpack.ui.fragment.chart.chartcomponent.RingChart2
 import com.example.jetpack.ui.theme.Background

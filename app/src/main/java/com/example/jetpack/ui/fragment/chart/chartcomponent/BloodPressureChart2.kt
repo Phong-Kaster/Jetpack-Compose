@@ -29,7 +29,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.jetpack.configuration.Constant
-import com.example.jetpack.data.model.ChartElement
+import com.example.jetpack.domain.model.ChartElement
 import com.example.jetpack.ui.theme.Background
 import com.example.jetpack.ui.theme.PrimaryColor
 import com.example.jetpack.ui.theme.customizedTextStyle
