@@ -10,5 +10,6 @@ class JetpackApplication : Application() {
         super.onCreate()
 
         Log.d("TAG", "onCreate - the A commit")
+        Log.d("TAG", "onCreate - the B commit")
     }
 }
