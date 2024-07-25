@@ -16,10 +16,10 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.jetpack.data.enums.Star
+import com.example.jetpack.domain.enums.Star
 
 @Composable
-fun RatingBar(
+fun RateBar(
     modifier: Modifier = Modifier,
     chosenStar: Star,
     onChangeStar: (Star) -> Unit = {}
@@ -66,10 +66,10 @@ fun StartElement(
 @Composable
 fun PreviewRatingBar() {
     Column {
-        RatingBar(chosenStar = Star.ONE)
-        RatingBar(chosenStar = Star.TWO)
-        RatingBar(chosenStar = Star.THREE)
-        RatingBar(chosenStar = Star.FOUR)
-        RatingBar(chosenStar = Star.FIVE)
+        RateBar(chosenStar = Star.ONE)
+        RateBar(chosenStar = Star.TWO)
+        RateBar(chosenStar = Star.THREE)
+        RateBar(chosenStar = Star.FOUR)
+        RateBar(chosenStar = Star.FIVE)
     }
 }

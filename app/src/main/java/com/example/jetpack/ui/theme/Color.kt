@@ -17,6 +17,7 @@ val OppositePrimaryColor = Color.Black
 
 // BACKGROUND COLOR
 val Background = Color(0xFF121212)
+val Background2 = Color(0xFF2C3141)
 val OppositeBackground = Color.White
 
 val Border = Color(0xFFEEEEEE)

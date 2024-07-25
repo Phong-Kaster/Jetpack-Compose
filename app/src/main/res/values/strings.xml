@@ -96,8 +96,6 @@
     <string name="alphabet_ascending">A->Z</string>
     <string name="alphabet_descending">Z->A</string>
     <string name="collapsible_topbar">Collapsible Topbar</string>
-    <string name="collapsible_topbar_2">Collapsible Topbar 2</string>
-    <string name="collapsible_topbar_3">Collapsible Topbar 3</string>
     <string name="shared_element_transition">Shared Element Transition</string>
     <string name="wikipedia">Wikipedia</string>
     <string name="flag_of_nazi_germany">Flag of Nazi Germany</string>
@@ -109,4 +107,15 @@
     <string name="unbookmark">Unbookmark</string>
     <string name="bookmark">Bookmark</string>
     <string name="share">Share</string>
+    <string name="let_me_recommend_you_this_application">Let me recommend you this application</string>
+    <string name="collapsible_topbar_2">Collapsible Topbar 2</string>
+    <string name="collapsible_topbar_3">Collapsible Topbar 3</string>
+    <string name="location_enabled">Location enabled</string>
+    <string name="gps_enabled">GPS enabled</string>
+    <string name="or">or</string>
+    <string name="manual">Manual</string>
+    <string name="allow">Allow</string>
+    <string name="to_receive_personalized">To receive personalized, up-to-the-minute weather forecasts and alerts, please grant access to your location.</string>
+    <string name="location_access">Location access</string>
+    <string name="last_know_location">Last know location</string>
 </resources>

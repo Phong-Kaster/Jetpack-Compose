@@ -27,7 +27,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.jetpack.R
-import com.example.jetpack.data.enums.Star
+import com.example.jetpack.domain.enums.Star
 import com.example.jetpack.ui.component.CoreDialog
 import com.example.jetpack.ui.component.OutlineButton
 import com.example.jetpack.ui.component.SolidButton
@@ -36,7 +36,7 @@ import com.example.jetpack.ui.theme.Border
 import com.example.jetpack.ui.theme.PrimaryColor
 import com.example.jetpack.ui.theme.TextColor2
 import com.example.jetpack.ui.theme.customizedTextStyle
-import com.example.jetpack.ui.view.RatingBar
+import com.example.jetpack.ui.view.RateBar
 
 @Composable
 fun RateDialog(
@@ -95,7 +95,7 @@ fun RateDialogLayout(
 
 
         // RATING BAR
-        RatingBar(
+        RateBar(
             chosenStar = chosenStar,
             modifier = Modifier
                 .padding(vertical = 5.dp, horizontal = 16.dp)

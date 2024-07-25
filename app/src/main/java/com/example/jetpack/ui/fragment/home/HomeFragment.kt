@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -23,6 +24,7 @@ import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
@@ -45,8 +47,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.jetpack.R
 import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
-import com.example.jetpack.data.enums.HomeShortcut
-import com.example.jetpack.data.enums.SortOption
+import com.example.jetpack.domain.enums.HomeShortcut
+import com.example.jetpack.domain.enums.SortOption
 import com.example.jetpack.lifecycleobserver.NotificationLifecycleObserver
 import com.example.jetpack.notification.LockscreenManager
 import com.example.jetpack.notification.NotificationManager
@@ -58,7 +60,7 @@ import com.example.jetpack.ui.fragment.home.component.HomeDialog
 import com.example.jetpack.ui.fragment.home.component.HomeShortcutItem
 import com.example.jetpack.ui.theme.Background
 import com.example.jetpack.ui.theme.PrimaryColor
-import com.example.jetpack.ui.theme.ShimmerItem
+import com.example.jetpack.ui.view.ShimmerItem
 import com.example.jetpack.ui.theme.customizedTextStyle
 import com.example.jetpack.ui.view.DigitalClock3
 import com.example.jetpack.util.NavigationUtil.safeNavigate
@@ -67,7 +69,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toImmutableList
 
-
+/**
+ * MVVM Architecture - https://github.com/akhilesh0707/Rick-and-Morty
+ */
 @AndroidEntryPoint
 class HomeFragment : CoreFragment() {
     private val viewModel: HomeViewModel by viewModels()
@@ -83,7 +87,9 @@ class HomeFragment : CoreFragment() {
         setupNotification()
     }
 
-
+    /*************************************************
+     * setupNotificationLauncher
+     */
     private fun setupNotificationLauncher() {
         notificationLifecycleObserver = NotificationLifecycleObserver(
             activity = requireActivity(),
@@ -92,6 +98,9 @@ class HomeFragment : CoreFragment() {
         lifecycle.addObserver(notificationLifecycleObserver)
     }
 
+    /*************************************************
+     * setupNotification
+     */
     private fun setupNotification() {
         // 1. Request POST NOTIFICATION permission if device has Android OS from 13
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) return
@@ -147,7 +156,7 @@ class HomeFragment : CoreFragment() {
                     HomeShortcut.SharedElementTransition -> safeNavigate(R.id.toSharedElementTransition)
                     HomeShortcut.CollapsibleTopbar -> safeNavigate(R.id.toCollasibleTopbar)
                     HomeShortcut.CollapsibleTopbar2 -> safeNavigate(R.id.toCollapsibleTopbar2)
-                    HomeShortcut.CollapsibleTopbar3 -> safeNavigate(R.id.toCollapsibleTopbar3)
+                    HomeShortcut.LastKnownLocation -> safeNavigate(R.id.toLastKnownLocation)
                     else -> {}
                 }
             })
@@ -244,30 +253,36 @@ fun HomeLayout(
                                 contentDescription = stringResource(id = R.string.icon),
                             )
 
-                            DropdownMenu(
-                                expanded = expandSortMenu,
-                                onDismissRequest = { expandSortMenu = false }
+                            MaterialTheme(
+                                shapes = MaterialTheme.shapes.copy(
+                                    extraSmall = RoundedCornerShape(15.dp),
+                                )
                             ) {
-                                SortOption.entries.forEach { option ->
-                                    DropdownMenuItem(
-                                        leadingIcon = {
-                                            Icon(
-                                                painter = painterResource(id = option.leadingIcon),
-                                                tint = PrimaryColor,
-                                                contentDescription = stringResource(id = R.string.icon)
-                                            )
-                                        },
-                                        text = {
-                                            Text(
-                                                text = stringResource(id = option.text),
-                                                style = customizedTextStyle(color = PrimaryColor)
-                                            )
-                                        },
-                                        onClick = {
-                                            expandSortMenu = false
-                                            onApplySortOption(option)
-                                        }
-                                    )
+                                DropdownMenu(
+                                    expanded = expandSortMenu,
+                                    onDismissRequest = { expandSortMenu = false }
+                                ) {
+                                    SortOption.entries.forEach { option ->
+                                        DropdownMenuItem(
+                                            leadingIcon = {
+                                                Icon(
+                                                    painter = painterResource(id = option.leadingIcon),
+                                                    tint = PrimaryColor,
+                                                    contentDescription = stringResource(id = R.string.icon)
+                                                )
+                                            },
+                                            text = {
+                                                Text(
+                                                    text = stringResource(id = option.text),
+                                                    style = customizedTextStyle(color = PrimaryColor)
+                                                )
+                                            },
+                                            onClick = {
+                                                expandSortMenu = false
+                                                onApplySortOption(option)
+                                            }
+                                        )
+                                    }
                                 }
                             }
                         })
@@ -284,14 +299,21 @@ fun HomeLayout(
                 itemContent = { homeShortcut: HomeShortcut ->
                     when (homeShortcut) {
                         HomeShortcut.AccuWeatherLocation -> {
-                            ShimmerItem(
-                                loading = true,
-                                content = {
-                                    HomeShortcutItem(
-                                        shortcut = homeShortcut,
-                                        onClick = onOpenShortcut
-                                    )
-                                })
+                            Column(modifier = Modifier) {
+                                ShimmerItem(
+                                    loading = true,
+                                    content = {
+                                        HomeShortcutItem(
+                                            shortcut = homeShortcut,
+                                            onClick = onOpenShortcut
+                                        )
+                                    })
+
+                                HomeShortcutItem(
+                                    shortcut = homeShortcut,
+                                    onClick = onOpenShortcut
+                                )
+                            }
                         }
 
                         else -> HomeShortcutItem(shortcut = homeShortcut, onClick = onOpenShortcut)

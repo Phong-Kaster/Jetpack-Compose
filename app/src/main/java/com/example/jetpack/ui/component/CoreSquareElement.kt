@@ -29,6 +29,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.jetpack.R
 import com.example.jetpack.configuration.Language
+import com.example.jetpack.ui.modifier.borderWithAnimatedGradient
+import com.example.jetpack.ui.theme.Background2
 import com.example.jetpack.ui.theme.customizedTextStyle
 import com.example.jetpack.util.ViewUtil
 
@@ -41,28 +43,15 @@ fun SquareElement(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
-            /*.onGloballyPositioned {
-                if (highlight.highlightTag.icon == R.drawable.ic_air_quality) {
-                    IntroOffset.airQuality = try {
-                        highlight.title!!.toInt()
-                    } catch (_: Exception) {
-                        0
-                    }
-                    IntroOffset.offsetHighLightDetail =
-                        it.positionInRoot().y.toInt() - getStatusBarHeight()
-                }
-            }*/
             .clip(shape = RoundedCornerShape(20.dp))
-            .border(
-                width = 0.2.dp,
-                color = Color.White.copy(alpha = 0.5F),
-                shape = RoundedCornerShape(20.dp)
+            .borderWithAnimatedGradient(
+                width = 3.dp,
+                shape = RoundedCornerShape(25.dp),
+                colors = listOf(Color(0xFF004BDC), Color(0xFF004BDC), Color(0xFF9EFFFF), Color(0xFF9EFFFF), Color(0xFF9EFFFF), Color(0xFF9EFFFF), Color(0xFF004BDC), Color(0xFF004BDC)),
             )
-            .background(color = Color.Black.copy(alpha = 0.1F))
-            .padding(horizontal = 16.dp, vertical = 16.dp)
+            .background(color = Background2, shape = RoundedCornerShape(25.dp))
             .clickable { onClick(language) }
             .aspectRatio(1F)
-
     ) {
 
         Image(
@@ -95,10 +84,12 @@ fun SquareElement(
             overflow = TextOverflow.Ellipsis
         )
 
-        Row(modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 5.dp),
-            horizontalArrangement = Arrangement.End) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 5.dp),
+            horizontalArrangement = Arrangement.End
+        ) {
             Icon(
                 painter = painterResource(id = R.drawable.ic_arrow_forward_circle),
                 contentDescription = stringResource(id = R.string.icon),

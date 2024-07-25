@@ -27,7 +27,7 @@ import com.example.jetpack.configuration.Language
 import com.example.jetpack.configuration.Menu
 import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
-import com.example.jetpack.data.enums.Star
+import com.example.jetpack.domain.enums.Star
 import com.example.jetpack.ui.component.CoreBottomBar
 import com.example.jetpack.ui.component.CoreFloatingMenu
 import com.example.jetpack.ui.fragment.home.component.HomeTopBar
@@ -45,6 +45,9 @@ class SettingFragment : CoreFragment() {
     private val viewModel: SettingViewModel by viewModels()
     private var showRateDialog by mutableStateOf(false)
 
+    /*************************************************
+     * rate
+     */
     private fun rate(star: Star, content: String) {
         if (star == Star.FOUR || star == Star.FIVE) {
             val manager = ReviewManagerFactory.create(requireContext())

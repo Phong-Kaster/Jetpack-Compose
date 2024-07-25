@@ -1,4 +1,4 @@
-package com.example.jetpack.data.model
+package com.example.jetpack.domain.model
 
 import javax.annotation.concurrent.Immutable
 import kotlin.math.max

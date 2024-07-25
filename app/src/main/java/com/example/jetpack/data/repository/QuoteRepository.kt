@@ -4,7 +4,7 @@ import com.example.jetpack.data.database.QuoteDatabase
 import com.example.jetpack.data.database.entity.QuoteEntity
 import com.example.jetpack.data.database.mapper.QuoteMapper.toEntity
 import com.example.jetpack.data.database.mapper.QuoteMapper.toModel
-import com.example.jetpack.data.model.Quote
+import com.example.jetpack.domain.model.Quote
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject

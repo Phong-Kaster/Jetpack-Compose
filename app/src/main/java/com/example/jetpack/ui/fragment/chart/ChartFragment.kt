@@ -11,7 +11,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.jetpack.R
 import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
-import com.example.jetpack.data.enums.ChartShortcut
+import com.example.jetpack.domain.enums.ChartShortcut
 import com.example.jetpack.ui.component.CoreBottomBar
 import com.example.jetpack.ui.component.CoreFloatingMenu
 import com.example.jetpack.ui.fragment.chart.component.ChartTopBar
@@ -23,6 +23,10 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class InsightFragment : CoreFragment() {
+
+    /*************************************************
+     * ComposeView
+     */
     @Composable
     override fun ComposeView() {
         super.ComposeView()

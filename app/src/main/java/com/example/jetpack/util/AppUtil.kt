@@ -1,16 +1,19 @@
 package com.example.jetpack.util
 
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.net.Uri
+import android.os.Build
 import android.util.Log
 import android.view.Window
-import androidx.core.content.ContextCompat.startActivity
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
+import androidx.test.uiautomator.v18.BuildConfig
 import com.example.jetpack.R
 
 
@@ -62,5 +65,30 @@ object AppUtil {
         intent.putExtra(Intent.EXTRA_TEXT, body)
 
         return intent
+    }
+
+    fun copyToClipboard(context: Context, text: String){
+        val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val clip = ClipData.newPlainText("Copied Text", text)
+        clipboard.setPrimaryClip(clip)
+    }
+
+    fun shareApplication(context: Context){
+        try {
+            var shareMessage = context.getString(R.string.let_me_recommend_you_this_application)
+            shareMessage = (shareMessage + "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID) + "\n\n"
+
+            val shareIntent = Intent(Intent.ACTION_SEND)
+            shareIntent.setType("text/plain")
+            shareIntent.putExtra(Intent.EXTRA_SUBJECT, context.getString(R.string.app_name))
+            shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage)
+
+
+            val chooserIntent = Intent.createChooser(shareIntent, "")
+
+            context.startActivity(chooserIntent)
+        } catch (ex: Exception) {
+            ex.printStackTrace()
+        }
     }
 }

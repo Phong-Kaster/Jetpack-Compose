@@ -1,6 +1,6 @@
-package com.example.jetpack.data.model
+package com.example.jetpack.domain.model
 
-import com.example.jetpack.data.enums.Category
+import com.example.jetpack.domain.enums.Category
 import java.time.LocalDate
 import java.util.Date
 import javax.annotation.concurrent.Immutable

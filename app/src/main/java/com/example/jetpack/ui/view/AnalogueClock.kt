@@ -89,7 +89,7 @@ fun AnalogueClock(
 
                 // draw Circle
                 drawCircle(
-                    color = PrimaryColor,
+                    color = Color.White,
                     radius = radius,
                     center = Offset(x = center.x, y = center.y),
                     style = Stroke(width = 10F)
@@ -105,7 +105,7 @@ fun AnalogueClock(
 
                 // draw hour hand
                 drawLine(
-                    color = PrimaryColor,
+                    color = Color.Red,
                     strokeWidth = radius * .02f,
                     cap = StrokeCap.Square,
                     start = Offset(x = center.x, y = center.y),
@@ -117,7 +117,7 @@ fun AnalogueClock(
 
                 // draw minute hand
                 drawLine(
-                    color = PrimaryColor,
+                    color = Color.Cyan,
                     strokeWidth = radius * 0.02f,
                     cap = StrokeCap.Square,
                     start = Offset(x = center.x, y = center.y),
@@ -130,7 +130,7 @@ fun AnalogueClock(
 
                 // draw second hand
                 drawLine(
-                    color = Color.Cyan,
+                    color = Color.White,
                     strokeWidth = radius * .02f,
                     cap = StrokeCap.Square,
                     start = Offset(x = center.x, y = center.y),
@@ -151,7 +151,7 @@ fun AnalogueClock(
                         drawText(
                             textMeasurer = textMeasurer,
                             text = text,
-                            style = TextStyle(color = PrimaryColor),
+                            style = TextStyle(color = Color.White),
                             topLeft = Offset(
                                 x = cos(minuteAngleRoman.toRadian()).toFloat() * (radius * 0.85F) + center.x - textLayout.size.width * 0.5F,
                                 y = sin(minuteAngleRoman.toRadian()).toFloat() * (radius * 0.85F) + center.y - textLayout.size.height * 0.5F

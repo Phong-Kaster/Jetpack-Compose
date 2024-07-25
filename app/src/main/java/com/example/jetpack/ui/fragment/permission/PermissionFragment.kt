@@ -64,6 +64,9 @@ class PermissionFragment : CoreFragment() {
             }
         }
 
+    /*************************************************
+     * setupNotification
+     */
     private fun setupNotification() {
         //1. Request POST NOTIFICATION permission if device has Android OS from 13
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -93,6 +96,9 @@ class PermissionFragment : CoreFragment() {
         android.Manifest.permission.RECORD_AUDIO
     )
 
+    /*************************************************
+     * multiplePermissionLauncher
+     */
     private val multiplePermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
             val enableRecordAudio = it[android.Manifest.permission.RECORD_AUDIO]
@@ -120,8 +126,8 @@ class PermissionFragment : CoreFragment() {
         }
 
 
-    /**
-     * OPEN SETTING APPLICATION
+    /*************************************************
+     * openSettingPermission
      */
     private fun openSettingPermission() {
         try {
@@ -134,6 +140,9 @@ class PermissionFragment : CoreFragment() {
         }
     }
 
+    /*************************************************
+     * settingLauncher
+     */
     private val settingLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
 

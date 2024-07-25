@@ -1,4 +1,4 @@
-package com.example.jetpack.data.enums
+package com.example.jetpack.domain.enums
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
@@ -31,5 +31,6 @@ enum class HomeShortcut(
     SharedElementTransition(drawable = R.drawable.ic_shared_element_transition, text = R.string.shared_element_transition),
     CollapsibleTopbar2(drawable = R.drawable.ic_bottom_article, text = R.string.collapsible_topbar_2),
     CollapsibleTopbar3(drawable = R.drawable.ic_bottom_article, text = R.string.collapsible_topbar_3),
+    LastKnownLocation(drawable = R.drawable.ic_last_know_location, text = R.string.last_know_location),
     ;
 }

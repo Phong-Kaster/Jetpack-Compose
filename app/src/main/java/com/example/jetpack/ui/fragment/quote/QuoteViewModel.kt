@@ -2,7 +2,7 @@ package com.example.jetpack.ui.fragment.quote
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.jetpack.data.model.Quote
+import com.example.jetpack.domain.model.Quote
 import com.example.jetpack.data.repository.QuoteRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.collections.immutable.ImmutableList

@@ -31,8 +31,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.jetpack.R
-import com.example.jetpack.data.enums.Category
-import com.example.jetpack.data.enums.Category.Companion.getSubcategories
+import com.example.jetpack.domain.enums.Category
+import com.example.jetpack.domain.enums.Category.Companion.getSubcategories
 import com.example.jetpack.ui.theme.PrimaryColor
 import com.example.jetpack.ui.theme.customizedTextStyle
 import com.example.jetpack.util.ViewUtil

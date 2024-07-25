@@ -1,5 +1,7 @@
 package com.example.jetpack.ui.fragment.article
 
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.LocalOverscrollConfiguration
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -8,9 +10,9 @@ import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -27,15 +29,18 @@ import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
 import com.example.jetpack.ui.component.CoreAlertDialog
 import com.example.jetpack.ui.component.CoreBottomBar
-import com.example.jetpack.ui.component.CoreDialog
 import com.example.jetpack.ui.component.CoreExpandableFloatingButton
 import com.example.jetpack.ui.component.SquareElement
+import com.example.jetpack.ui.fragment.article.component.AnimatedBorderCard
 import com.example.jetpack.ui.fragment.home.component.HomeDialog
 import com.example.jetpack.ui.fragment.home.component.HomeTopBar
 import com.example.jetpack.ui.theme.Background
 import com.example.jetpack.ui.theme.PrimaryColor
 import dagger.hilt.android.AndroidEntryPoint
 
+/**
+ * Animate borders in Jetpack Compose - https://proandroiddev.com/animate-borders-in-jetpack-compose-ca359deed7d5
+ */
 @AndroidEntryPoint
 class ArticleFragment : CoreFragment() {
 
@@ -71,6 +76,7 @@ class ArticleFragment : CoreFragment() {
  *     val state = rememberLazyGridState()
  *     val fabExtended by remember { derivedStateOf { state.firstVisibleItemIndex == 0 } }
  */
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ArticleLayout(
     onOpenAlertDialog: () -> Unit = {},
@@ -91,32 +97,42 @@ fun ArticleLayout(
         },
         backgroundColor = Background
     ) {
-        LazyVerticalGrid(
-            state = state,
-            columns = GridCells.Fixed(2),
-            horizontalArrangement = Arrangement.spacedBy(16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp),
-            modifier = Modifier
-                .padding(start = 16.dp, end = 16.dp, top = 0.dp, bottom = 32.dp)
-                .fillMaxSize()
-        ) {
-            item(key = "key1", span = { GridItemSpan(2) }) {
-                Text(text = stringResource(id = R.string.fake_content), color = PrimaryColor)
-            }
+        // Remove overscroll effect for lazy grid
+        CompositionLocalProvider(
+            LocalOverscrollConfiguration provides null
+        ){
+            LazyVerticalGrid(
+                state = state,
+                columns = GridCells.Fixed(2),
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
+                verticalArrangement = Arrangement.spacedBy(16.dp),
+                modifier = Modifier
+                    .padding(start = 16.dp, end = 16.dp, top = 0.dp, bottom = 32.dp)
+                    .fillMaxSize()
+            ) {
+                item(key = "key1", span = { GridItemSpan(2) }) {
+                    Text(text = stringResource(id = R.string.fake_content), color = PrimaryColor)
+                }
 
-            items(
-                items = Language.entries,
-                key = { item: Language -> item.name },
-                itemContent = {language: Language ->
-                    SquareElement(
-                        language = language,
-                        onClick = {
-                            when(language) {
-                                Language.English -> onOpenAlertDialog()
-                                else -> onOpenDialog()
-                            }
-                        })
-                })
+                item(key = "AnimatedBorder", span = { GridItemSpan(2) }) {
+                    AnimatedBorderCard()
+                }
+
+                items(
+                    items = Language.entries,
+                    key = { item: Language -> item.name },
+
+                    itemContent = {language: Language ->
+                        SquareElement(
+                            language = language,
+                            onClick = {
+                                when(language) {
+                                    Language.English -> onOpenAlertDialog()
+                                    else -> onOpenDialog()
+                                }
+                            })
+                    })
+            }
         }
     }
 }

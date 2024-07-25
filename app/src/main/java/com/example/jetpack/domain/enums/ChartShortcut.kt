@@ -1,4 +1,4 @@
-package com.example.jetpack.data.enums
+package com.example.jetpack.domain.enums
 
 import androidx.annotation.StringRes
 import com.example.jetpack.R

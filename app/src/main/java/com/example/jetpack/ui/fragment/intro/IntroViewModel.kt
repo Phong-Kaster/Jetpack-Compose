@@ -29,6 +29,9 @@ constructor(
         }
     }
 
+    /*************************************************
+     * setLanguage
+     */
     fun setLanguage(language: Language) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
@@ -41,6 +44,9 @@ constructor(
         }
     }
 
+    /*************************************************
+     * setEnableIntro
+     */
     fun setEnableIntro(enable: Boolean){
         viewModelScope.launch(Dispatchers.IO) {
             try {

@@ -20,13 +20,17 @@ import androidx.compose.ui.unit.dp
 object ViewUtil {
     @Composable
     fun PreviewContent(
-        content: @Composable ColumnScope.() -> Unit = {}
+        modifier: Modifier = Modifier,
+        content: @Composable ( ColumnScope.() -> Unit )? = {},
+
     ) {
         Column(
             verticalArrangement = Arrangement.Center,
-            modifier = Modifier
+            modifier = modifier
                 .fillMaxWidth()
-                .background(color = Color.DarkGray)) {
+                .background(color = Color.DarkGray)
+        ) {
+            if (content == null) return@Column
             content()
         }
     }

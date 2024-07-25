@@ -29,6 +29,9 @@ constructor(
         }
     }
 
+    /*************************************************
+     * setLanguage
+     */
     fun setLanguage(language: Language) {
         viewModelScope.launch(Dispatchers.IO) {
             try {

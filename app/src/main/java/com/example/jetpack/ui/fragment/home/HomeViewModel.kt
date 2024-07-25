@@ -2,8 +2,8 @@ package com.example.jetpack.ui.fragment.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.jetpack.data.enums.HomeShortcut
-import com.example.jetpack.data.enums.SortOption
+import com.example.jetpack.domain.enums.HomeShortcut
+import com.example.jetpack.domain.enums.SortOption
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
@@ -14,6 +14,9 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+/**
+ * MVVM Architecture - https://github.com/akhilesh0707/Rick-and-Morty
+ */
 @HiltViewModel
 class HomeViewModel
 @Inject
@@ -22,6 +25,9 @@ constructor() : ViewModel() {
     private val _shortcuts = MutableStateFlow<ImmutableList<HomeShortcut>>(persistentListOf())
     val shortcuts = _shortcuts.asStateFlow()
 
+    /*************************************************
+     * shortcutsWithLifecycle
+     */
     val shortcutsWithLifecycle = MutableStateFlow<ImmutableList<HomeShortcut>>(persistentListOf())
 
     init {
@@ -34,6 +40,9 @@ constructor() : ViewModel() {
         }
     }
 
+    /*************************************************
+     * searchWithKeyword
+     */
     fun searchWithKeyword(keyword: String) {
         viewModelScope.launch(Dispatchers.IO) {
             val list = HomeShortcut.entries.filter { homeShortcut: HomeShortcut ->
@@ -45,12 +54,18 @@ constructor() : ViewModel() {
         }
     }
 
+    /*************************************************
+     * resetShortcuts
+     */
     fun resetShortcuts(){
         viewModelScope.launch(Dispatchers.IO){
             _shortcuts.value = HomeShortcut.entries.toImmutableList()
         }
     }
 
+    /*************************************************
+     * applySortOption
+     */
     fun applySortOption(option: SortOption){
         viewModelScope.launch(Dispatchers.IO){
             _shortcuts.value = when(option){

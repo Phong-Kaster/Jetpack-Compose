@@ -2,7 +2,7 @@ package com.example.jetpack.data.database.mapper
 
 import com.example.jetpack.data.database.entity.QuoteEntity
 import com.example.jetpack.data.database.mapper.QuoteMapper.toModel
-import com.example.jetpack.data.model.Quote
+import com.example.jetpack.domain.model.Quote
 
 object QuoteMapper {
     fun QuoteEntity.toModel(): Quote {

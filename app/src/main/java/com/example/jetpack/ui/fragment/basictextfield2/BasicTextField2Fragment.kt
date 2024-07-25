@@ -59,7 +59,9 @@ import kotlinx.coroutines.flow.collectLatest
 @AndroidEntryPoint
 class BasicTextFieldFragment : CoreFragment() {
 
-
+    /*************************************************
+     * ComposeView
+     */
     @Composable
     override fun ComposeView() {
         super.ComposeView()
