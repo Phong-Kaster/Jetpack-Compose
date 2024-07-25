@@ -12,5 +12,6 @@ class JetpackApplication : Application() {
         Log.d("TAG", "onCreate - the A commit")
         Log.d("TAG", "onCreate - the B commit")
         Log.d("TAG", "onCreate - the C commit")
+        Log.d("TAG", "onCreate - the D commit")
     }
 }
