@@ -32,7 +32,7 @@ import com.example.jetpack.ui.component.CoreBottomBar
 import com.example.jetpack.ui.component.CoreExpandableFloatingButton
 import com.example.jetpack.ui.component.SquareElement
 import com.example.jetpack.ui.fragment.article.component.AnimatedBorderCard
-import com.example.jetpack.ui.fragment.article.component.WeatherOverall
+import com.example.jetpack.ui.fragment.article.component.WeatherSunrise
 import com.example.jetpack.ui.fragment.home.component.HomeDialog
 import com.example.jetpack.ui.fragment.home.component.HomeTopBar
 import com.example.jetpack.ui.theme.Background
@@ -120,7 +120,7 @@ fun ArticleLayout(
                 }
 
                 item(key = "WeatherOverall", span = { GridItemSpan(2) }) {
-                    WeatherOverall(modifier = Modifier)
+                    WeatherSunrise(modifier = Modifier)
                 }
 
 
