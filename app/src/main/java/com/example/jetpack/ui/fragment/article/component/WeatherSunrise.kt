@@ -71,7 +71,7 @@ fun WeatherSunrise(
     // sunset
     val calendarSunset = Calendar.getInstance()
     calendarSunset.time = Date()
-    calendarSunset.set(Calendar.HOUR_OF_DAY, 6)
+    calendarSunset.set(Calendar.HOUR_OF_DAY, 18)
     calendarSunset.set(Calendar.MINUTE, 15)
     calendarSunset.set(Calendar.SECOND, 30)
     calendarSunset.time
