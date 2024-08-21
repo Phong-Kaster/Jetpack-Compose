@@ -29,6 +29,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.jetpack.R
 import com.example.jetpack.configuration.Constant
+import com.example.jetpack.ui.theme.Background2
 import com.example.jetpack.ui.theme.customizedTextStyle
 import com.example.jetpack.util.DateUtil
 import com.example.jetpack.util.DateUtil.formatWithPattern
@@ -83,22 +84,25 @@ fun WeatherSunrise(
 
     val diameter = 200
     //val percent = 0.1// the sun rise 55% of circular arc
-    val percent = DateUtil.calculatePercent(sunrise = calendarSunrise.time, sunset = calendarSunset.time)
+    val percent =
+        DateUtil.calculatePercent(sunrise = calendarSunrise.time, sunset = calendarSunset.time)
     val canvasPercent = 1 - percent // because the canvas start from top left corner
-    val radian = -(canvasPercent * 180) * (Math.PI / 180) // we places minus because the canvas start from top left corner
+    val radian =
+        -(canvasPercent * 180) * (Math.PI / 180) // we places minus because the canvas start from top left corner
 
 
 
-    Column(modifier = modifier.fillMaxWidth()) {
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+            .background(color = Background2)
+    ) {
         // Moon Phase
         Column(
             verticalArrangement = Arrangement.Center,
             modifier = Modifier
                 .fillMaxWidth()
                 .clip(shape = RoundedCornerShape(20.dp))
-                .background(
-                    color = Color.White.copy(alpha = 0.3f)
-                )
                 .padding(horizontal = 16.dp, vertical = 16.dp)
         ) {
 

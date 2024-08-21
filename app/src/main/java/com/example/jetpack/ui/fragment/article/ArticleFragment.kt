@@ -2,14 +2,18 @@ package com.example.jetpack.ui.fragment.article
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.LocalOverscrollConfiguration
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -19,6 +23,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -32,10 +39,13 @@ import com.example.jetpack.ui.component.CoreBottomBar
 import com.example.jetpack.ui.component.CoreExpandableFloatingButton
 import com.example.jetpack.ui.component.SquareElement
 import com.example.jetpack.ui.fragment.article.component.AnimatedBorderCard
+import com.example.jetpack.ui.fragment.article.component.DNAHelix
 import com.example.jetpack.ui.fragment.article.component.WeatherSunrise
 import com.example.jetpack.ui.fragment.home.component.HomeDialog
 import com.example.jetpack.ui.fragment.home.component.HomeTopBar
+import com.example.jetpack.ui.modifier.borderWithAnimatedGradient
 import com.example.jetpack.ui.theme.Background
+import com.example.jetpack.ui.theme.Background2
 import com.example.jetpack.ui.theme.PrimaryColor
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -101,7 +111,7 @@ fun ArticleLayout(
         // Remove overscroll effect for lazy grid
         CompositionLocalProvider(
             LocalOverscrollConfiguration provides null
-        ){
+        ) {
             LazyVerticalGrid(
                 state = state,
                 columns = GridCells.Fixed(2),
@@ -119,21 +129,34 @@ fun ArticleLayout(
                     AnimatedBorderCard()
                 }
 
-                item(key = "WeatherOverall", span = { GridItemSpan(2) }) {
-                    WeatherSunrise(modifier = Modifier)
+                item(key = "WeatherSunrise", span = { GridItemSpan(2) }) {
+                    WeatherSunrise(modifier = Modifier.clip(shape = RoundedCornerShape(25.dp)))
+                }
+
+                item(key = "DNAHelix", span = { GridItemSpan(2) }) {
+                    DNAHelix(
+                        firstColor = Color.Yellow,
+                        secondColor = Color.Blue,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(80.dp)
+                            .clip(shape = RoundedCornerShape(0.dp))
+                            .background(color = Background2, shape = RoundedCornerShape(25.dp))
+                            .padding(vertical = 16.dp, horizontal = 16.dp)
+
+                    )
                 }
 
 
-
                 items(
-                    items = Language.entries,
+                    items = Language.entries.take(2),
                     key = { item: Language -> item.name },
 
-                    itemContent = {language: Language ->
+                    itemContent = { language: Language ->
                         SquareElement(
                             language = language,
                             onClick = {
-                                when(language) {
+                                when (language) {
                                     Language.English -> onOpenAlertDialog()
                                     else -> onOpenDialog()
                                 }
