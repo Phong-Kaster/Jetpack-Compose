@@ -1,4 +1,4 @@
-package com.example.jetpack.ui.fragment.article.component
+package com.example.jetpack.ui.view
 
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.RepeatMode
@@ -19,7 +19,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.example.jetpack.ui.theme.Background
 import com.example.jetpack.ui.theme.Background2
 import kotlin.math.sin
 

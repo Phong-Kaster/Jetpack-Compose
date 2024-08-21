@@ -37,13 +37,13 @@ import com.example.jetpack.core.CoreLayout
 import com.example.jetpack.ui.component.CoreAlertDialog
 import com.example.jetpack.ui.component.CoreBottomBar
 import com.example.jetpack.ui.component.CoreExpandableFloatingButton
+import com.example.jetpack.ui.component.CoreTextAnimationDialog
 import com.example.jetpack.ui.component.SquareElement
-import com.example.jetpack.ui.fragment.article.component.AnimatedBorderCard
-import com.example.jetpack.ui.fragment.article.component.DNAHelix
-import com.example.jetpack.ui.fragment.article.component.WeatherSunrise
+import com.example.jetpack.ui.view.AnimatedBorderCard
+import com.example.jetpack.ui.view.DNAHelix
+import com.example.jetpack.ui.view.WeatherSunrise
 import com.example.jetpack.ui.fragment.home.component.HomeDialog
 import com.example.jetpack.ui.fragment.home.component.HomeTopBar
-import com.example.jetpack.ui.modifier.borderWithAnimatedGradient
 import com.example.jetpack.ui.theme.Background
 import com.example.jetpack.ui.theme.Background2
 import com.example.jetpack.ui.theme.PrimaryColor
@@ -57,6 +57,7 @@ class ArticleFragment : CoreFragment() {
 
     private var showAlertDialog by mutableStateOf(false)
     private var showDialog by mutableStateOf(false)
+    private var showDottedTextDialog by mutableStateOf(false)
 
     @Composable
     override fun ComposeView() {
@@ -65,6 +66,7 @@ class ArticleFragment : CoreFragment() {
         ArticleLayout(
             onOpenAlertDialog = { showAlertDialog = true },
             onOpenDialog = { showDialog = true },
+            onOpenDottedTextDialog = { showDottedTextDialog = true },
         )
 
         HomeDialog(
@@ -75,6 +77,11 @@ class ArticleFragment : CoreFragment() {
         CoreAlertDialog(
             enable = showAlertDialog,
             onDismissRequest = { showAlertDialog = false },
+        )
+
+        CoreTextAnimationDialog(
+            enable = showDottedTextDialog,
+            onDismissRequest = { showDottedTextDialog = false },
         )
     }
 }
@@ -92,6 +99,7 @@ class ArticleFragment : CoreFragment() {
 fun ArticleLayout(
     onOpenAlertDialog: () -> Unit = {},
     onOpenDialog: () -> Unit = {},
+    onOpenDottedTextDialog: () -> Unit = {},
 ) {
     // for lazy grid state
     val state = rememberLazyGridState()
@@ -122,7 +130,7 @@ fun ArticleLayout(
                     .fillMaxSize()
             ) {
                 item(key = "key1", span = { GridItemSpan(2) }) {
-                    Text(text = stringResource(id = R.string.fake_content), color = PrimaryColor)
+                    Text(text = stringResource(R.string.this_screen_shows_special_effects), color = PrimaryColor)
                 }
 
                 item(key = "AnimatedBorder", span = { GridItemSpan(2) }) {
@@ -137,6 +145,8 @@ fun ArticleLayout(
                     DNAHelix(
                         firstColor = Color.Yellow,
                         secondColor = Color.Blue,
+                        lineBrush = {_,_ -> SolidColor(Color.White) },
+                        cycleDuration = 15000,
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(80.dp)
@@ -146,6 +156,7 @@ fun ArticleLayout(
 
                     )
                 }
+
 
 
                 items(
@@ -158,6 +169,7 @@ fun ArticleLayout(
                             onClick = {
                                 when (language) {
                                     Language.English -> onOpenAlertDialog()
+                                    Language.German -> onOpenDottedTextDialog()
                                     else -> onOpenDialog()
                                 }
                             })
