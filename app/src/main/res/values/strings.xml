@@ -119,4 +119,5 @@
     <string name="location_access">Location access</string>
     <string name="last_know_location">Last know location</string>
     <string name="this_screen_shows_special_effects"><![CDATA[This screen shows special effects and components that I have done on my own & collected on Internet]]></string>
+    <string name="bubble_chart">Bubble Chart</string>
 </resources>
