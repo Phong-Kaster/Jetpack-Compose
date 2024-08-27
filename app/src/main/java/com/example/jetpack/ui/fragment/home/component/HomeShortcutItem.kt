@@ -32,6 +32,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.jetpack.R
+import com.example.jetpack.core.LocalTheme
 import com.example.jetpack.domain.enums.HomeShortcut
 import com.example.jetpack.ui.theme.PrimaryColor
 import com.example.jetpack.ui.theme.customizedTextStyle
@@ -51,7 +52,7 @@ fun HomeShortcutItem(
             .clickable { onClick(shortcut) }
             .border(
                 width = 0.5.dp,
-                color = Color.White.copy(alpha = 0.5F),
+                color = LocalTheme.current.primary.copy(alpha = 0.5F),
                 shape = RoundedCornerShape(15.dp)
             )
             /*.background(color = Color.Black.copy(alpha = 0.1F))*/
@@ -61,7 +62,7 @@ fun HomeShortcutItem(
             painter = painterResource(id = shortcut.drawable),
             contentDescription = stringResource(id = R.string.icon),
             modifier = Modifier.size(25.dp),
-            tint = PrimaryColor
+            tint = LocalTheme.current.primary
         )
 
         Spacer(modifier = Modifier.width(10.dp))
@@ -69,7 +70,7 @@ fun HomeShortcutItem(
         Column(modifier = Modifier.weight(0.9F)){
             Text(
                 text = stringResource(id = shortcut.text),
-                color = PrimaryColor,
+                color = LocalTheme.current.primary,
                 style = customizedTextStyle(fontWeight = 400, fontSize = 18),
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
@@ -79,7 +80,7 @@ fun HomeShortcutItem(
 
         Icon(
             imageVector = Icons.Default.KeyboardArrowRight,
-            tint = PrimaryColor,
+            tint = LocalTheme.current.primary,
             contentDescription = null
         )
     }
