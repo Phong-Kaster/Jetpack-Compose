@@ -80,7 +80,7 @@ fun SettingItem(
         Icon(
             Icons.Rounded.KeyboardArrowRight,
             contentDescription = null,
-            tint = PrimaryColor,
+            tint = LocalTheme.current.textColor,
             modifier = Modifier.size(14.dp)
         )
     }

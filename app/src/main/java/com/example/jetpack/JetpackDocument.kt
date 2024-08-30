@@ -16,6 +16,9 @@ import javax.inject.Singleton
  * # [7 - How to Create Animated Gender Sign in Jetpack Compose](https://medium.com/@kappdev/how-to-create-animated-gender-sign-in-jetpack-compose-4d7e1809f4d1)
  * # [8 - Understanding Window Insets in Jetpack Compose](https://proandroiddev.com/understanding-window-insets-in-jetpack-compose-46245b9ceffa)
  * # [9 - Jetpack Compose: Reducing recomposition on Bubbles Animations](https://engineering.traderepublic.com/jetpack-compose-reducing-recomposition-on-bubbles-animations-a68eafef6bf2)
+ * # --> For 30/08/2024
+ * # [10 - Shimmer & Shadow Loading Effect Animation with Jetpack Compose](https://proandroiddev.com/shimmer-shadow-loading-effect-animation-with-jetpack-compose-f4b3de28dc2b)
+ *
  */
 @Singleton
 class JetpackDocument {}

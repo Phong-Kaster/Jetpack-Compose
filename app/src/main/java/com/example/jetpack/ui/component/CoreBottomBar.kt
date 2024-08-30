@@ -170,13 +170,13 @@ private fun BottomBarItem(
             painter = painterResource(drawableId),
             contentDescription = stringResource(id = stringId),
             modifier = Modifier.size(24.dp),
-            tint = if (selected) LocalTheme.current.primary else LocalTheme.current.dim,
+            tint = if (selected) LocalTheme.current.textColor else LocalTheme.current.dim,
         )
 
         Text(
             text = stringResource(stringId),
             style = if (!selected) body13 else medium13,
-            color = if (selected) LocalTheme.current.primary else LocalTheme.current.dim,
+            color = if (selected) LocalTheme.current.textColor else LocalTheme.current.dim,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
         )

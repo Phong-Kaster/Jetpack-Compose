@@ -29,6 +29,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.jetpack.configuration.Constant
+import com.example.jetpack.core.LocalTheme
 import com.example.jetpack.domain.model.ChartElement
 import com.example.jetpack.ui.theme.Background
 import com.example.jetpack.ui.theme.PrimaryColor
@@ -100,7 +101,7 @@ fun BloodPressureChart2(
             Column(
                 modifier = Modifier
                     .matchParentSize()
-                    .background(color = Background)
+                    .background(color = LocalTheme.current.background)
                     .padding(start = 0.dp, end = 0.dp, bottom = 32.dp, top = 32.dp)
                     .drawChartBaseline(
                         textMeasurer = rememberTextMeasurer(),
@@ -121,7 +122,7 @@ fun BloodPressureChart2(
                 contentPadding = PaddingValues(start = 0.dp, end = 12.dp),
                 modifier = Modifier
                     .matchParentSize()
-                    .background(color = Background)
+                    .background(color = LocalTheme.current.background)
                     .padding(start = 0.dp, end = 0.dp, bottom = 32.dp, top = 32.dp)
                     .drawChartBaseline(
                         textMeasurer = rememberTextMeasurer(),
@@ -195,7 +196,7 @@ fun Modifier.drawChartBaseline(
 
             drawText(
                 textLayoutResult = textLayoutResult,
-                color = PrimaryColor,
+                color = Color.White,
                 topLeft = Offset(x = 0F, y = yOffset - textLayoutResult.size.height * 0.5F)
             )
 

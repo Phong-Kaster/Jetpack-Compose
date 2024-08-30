@@ -35,6 +35,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.jetpack.core.LocalTheme
 import com.example.jetpack.domain.model.ChartElement
 import com.example.jetpack.ui.theme.PrimaryColor
 import com.example.jetpack.ui.theme.customizedTextStyle
@@ -87,6 +88,7 @@ fun LineChart(
                     .weight(1F),
                 onDraw = {
                     val spacing = size.height / maximum
+
 
                     milestone.forEach {
                         val reverse = maximum - it * maximum
