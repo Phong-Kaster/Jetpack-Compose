@@ -42,6 +42,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.jetpack.R
 import com.example.jetpack.configuration.Menu
 import com.example.jetpack.core.LocalNavController
+import com.example.jetpack.core.LocalTheme
 import com.example.jetpack.ui.fragment.home.component.HomeBottomSheet
 import com.example.jetpack.ui.theme.Background
 import com.example.jetpack.ui.theme.IconColor
@@ -69,7 +70,7 @@ fun CoreBottomBar() {
         modifier = Modifier
             .fillMaxWidth()
             .height(70.dp)
-            .background(color = Background)
+            .background(color = LocalTheme.current.background)
             .border(0.dp, Color.LightGray)
             .padding(horizontal = 12.dp),
         verticalAlignment = Alignment.CenterVertically,
@@ -94,7 +95,7 @@ fun CoreBottomBar() {
                 .padding(horizontal = 12.dp)
                 .size(48.dp)
                 .clip(shape = CircleShape)
-                .background(PrimaryColor)
+                .background(color = LocalTheme.current.second)
                 .onGloballyPositioned {
                     tutorial.addButtonSize = it.boundsInRoot()
                 }
@@ -104,7 +105,7 @@ fun CoreBottomBar() {
                 imageVector = Icons.Rounded.Add,
                 contentDescription = null,
                 modifier = Modifier.size(30.dp),
-                tint = OppositePrimaryColor
+                tint = Color.White
             )
         }
 
@@ -159,13 +160,13 @@ private fun BottomBarItem(
             painter = painterResource(drawableId),
             contentDescription = stringResource(id = stringId),
             modifier = Modifier.size(24.dp),
-            tint = if (selected) PrimaryColor else IconColor,
+            tint = if (selected) LocalTheme.current.primary else IconColor,
         )
 
         Text(
             text = stringResource(stringId),
             style = if (!selected) body13 else medium13,
-            color = if (selected) PrimaryColor else IconColor,
+            color = if (selected) LocalTheme.current.primary else IconColor,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
         )

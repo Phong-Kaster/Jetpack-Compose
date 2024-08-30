@@ -68,7 +68,7 @@ fun IntroLayout(
     )
 
     // This launched effect helps us to scroll automatically
-    /*LaunchedEffect(Unit) {
+    LaunchedEffect(Unit) {
         while (true) {
             if (!pagerState.isScrollInProgress) {
                 delay(2500)
@@ -80,7 +80,7 @@ fun IntroLayout(
                 delay(1000)
             }
         }
-    }*/
+    }
 
     LaunchedEffect(key1 = pagerState.settledPage ) {
         launch {

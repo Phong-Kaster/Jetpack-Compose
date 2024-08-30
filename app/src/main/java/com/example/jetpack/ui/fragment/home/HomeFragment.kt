@@ -37,6 +37,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -47,6 +48,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.jetpack.R
 import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
+import com.example.jetpack.core.LocalTheme
 import com.example.jetpack.domain.enums.HomeShortcut
 import com.example.jetpack.domain.enums.SortOption
 import com.example.jetpack.lifecycleobserver.NotificationLifecycleObserver
@@ -189,11 +191,11 @@ fun HomeLayout(
     BackHandler(enabled = true, onBack = onOpenConfirmDialog)
 
     CoreLayout(
-        backgroundColor = Background,
+        backgroundColor = LocalTheme.current.background,
         topBar = {
             CoreTopBarWithScrollBehavior(
-                backgroundColor = PrimaryColor,
-                scrolledContainerColor = PrimaryColor,
+                backgroundColor = LocalTheme.current.second,
+                scrolledContainerColor = LocalTheme.current.second,
                 scrollBehavior = scrollBehavior,
                 navigationIconContent = {},
                 modifier = Modifier.clip(
@@ -210,7 +212,7 @@ fun HomeLayout(
                             .fillMaxWidth()
                             .padding(horizontal = 16.dp, vertical = 16.dp)
                             .statusBarsPadding(),
-                        textColor = Background
+                        textColor = Color.White
                     )
                 }
             )
@@ -249,7 +251,7 @@ fun HomeLayout(
                         content = {
                             Icon(
                                 imageVector = Icons.Default.Menu,
-                                tint = PrimaryColor,
+                                tint = Color.White,
                                 contentDescription = stringResource(id = R.string.icon),
                             )
 

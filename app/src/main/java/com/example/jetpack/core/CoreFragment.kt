@@ -16,6 +16,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import com.example.jetpack.ui.theme.DarkCustomizedTheme
 import com.example.jetpack.ui.theme.JetpackComposeTheme
 import com.example.jetpack.util.AppUtil
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,6 +25,7 @@ import java.util.Locale
 
 val LocalLocale = staticCompositionLocalOf { Locale.getDefault() }
 val LocalNavController = staticCompositionLocalOf<NavController?> { null }
+val LocalTheme = staticCompositionLocalOf { DarkCustomizedTheme }
 
 @AndroidEntryPoint
 open class CoreFragment : Fragment(), CoreBehavior {

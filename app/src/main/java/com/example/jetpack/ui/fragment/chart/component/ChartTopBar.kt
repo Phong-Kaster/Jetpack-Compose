@@ -31,7 +31,6 @@ import com.example.jetpack.ui.theme.PrimaryColor
 import com.example.jetpack.ui.theme.customizedTextStyle
 import com.example.jetpack.util.ViewUtil
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ChartTopBar(
     chosenChip: ChartShortcut,

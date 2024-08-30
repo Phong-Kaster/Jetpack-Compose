@@ -63,7 +63,7 @@ fun SearchBar(
             .padding(horizontal = 10.dp)
             .drawBehind {
                 drawLine(
-                    color = PrimaryColor,
+                    color = Color.White,
                     start = Offset(x = 0F, y = this.size.height),
                     end = Offset(x = size.width, y = this.size.height)
                 )
@@ -85,7 +85,7 @@ fun SearchBar(
                     Icon(
                         painter = painterResource(id = leadingIcon),
                         contentDescription = null,
-                        tint = PrimaryColor,
+                        tint = Color.White,
                         modifier = Modifier.size(24.dp)
                     )
                 }
@@ -111,7 +111,7 @@ fun SearchBar(
             placeholder = {
                 Text(
                     text = stringResource(R.string.search),
-                    color = PrimaryColor.copy(alpha = 0.3f),
+                    color = Color.White.copy(alpha = 0.3f),
                     textAlign = TextAlign.Start,
                     fontFamily = FontFamily(Font(R.font.inter_black)),
                     fontSize = 14.sp,

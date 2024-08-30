@@ -1,11 +1,12 @@
 package com.example.jetpack.util
 
 import android.annotation.SuppressLint
-import com.example.jetpack.configuration.Language
-import java.text.DateFormat
+import android.util.Log
 import java.text.SimpleDateFormat
+import java.util.Calendar
 import java.util.Date
 import java.util.Locale
+import kotlin.math.abs
 
 object DateUtil {
     /**
@@ -28,9 +29,97 @@ object DateUtil {
     const val PATTERN_dd_MMM = "dd MMM" // 14 DEC
     const val PATTERN_MMM = "MMM" // 14 DEC
     const val PATTERN_dd = "dd" // 14
+
+
     @SuppressLint("SimpleDateFormat")
     fun Date.formatWithPattern(pattern: String, locale: Locale = Locale.getDefault()): String {
         val simpleDateFormat = SimpleDateFormat(pattern, locale)
         return simpleDateFormat.format(this@formatWithPattern)
+    }
+
+    /*******************************
+     * compute difference days between two dates
+     * for instance: from 08-08-2024 to 09-08-2024 differs 1 days 2 hours 34 minutes 42 seconds+
+     */
+    fun computeDifferenceDaysBetweenTwoDates(
+        fromDate: Date,
+        toDate: Date
+    ): Long {
+        val difference: Long = fromDate.time - toDate.time
+        val seconds = difference / 1000
+        val minutes = seconds / 60
+        val hours = minutes / 60
+        val days = hours / 24
+        return days
+    }
+
+    /*******************************
+     * compute difference days between two dates
+     * for instance: from 08-08-2024 to 09-08-2024 differs 1 days 2 hours 34 minutes 42 seconds+
+     */
+    fun computeDifferenceHoursBetweenTwoDates(
+        fromDate: Date,
+        toDate: Date
+    ): Long {
+        val difference: Long = fromDate.time - toDate.time
+        val seconds = difference / 1000
+        val minutes = seconds / 60
+        val hours = minutes / 60
+        return hours
+    }
+
+    /*******************************
+     * compute difference days between two dates
+     * for instance: from 08-08-2024 to 09-08-2024 differs 1 days 2 hours 34 minutes 42 seconds+
+     */
+    fun computeDifferenceMinutesBetweenTwoDates(
+        fromDate: Date,
+        toDate: Date
+    ): Long {
+        val difference: Long = fromDate.time - toDate.time
+        val seconds = difference / 1000
+        val minutes = seconds / 60
+        return minutes
+    }
+
+    /*******************************
+     * compute difference days between two dates
+     * for instance: from 08-08-2024 to 09-08-2024 differs 1 days 2 hours 34 minutes 42 seconds+
+     */
+    fun computeDifferenceSecondsBetweenTwoDates(
+        fromDate: Date,
+        toDate: Date
+    ): Long {
+        val difference: Long = fromDate.time - toDate.time
+        val seconds = difference / 1000
+        return seconds
+    }
+
+    fun calculatePercent(sunrise: Date, sunset: Date): Float {
+        val calendarSunrise = Calendar.getInstance()
+        calendarSunrise.time = sunrise
+
+        val calendarSunset = Calendar.getInstance()
+        calendarSunset.time = sunset
+
+        val calendarNow = Calendar.getInstance()
+        calendarNow.time = Date()
+
+        val distance: Long = abs(calendarSunrise.timeInMillis - calendarSunset.timeInMillis)
+        val elapsedDistance: Long = abs(calendarNow.timeInMillis - calendarSunrise.timeInMillis)
+        val percent = (elapsedDistance.toDouble() / distance)
+
+
+//        Log.d("TAG", "calculatePercent --------------------")
+//        Log.d("TAG", "calculatePercent - sunrise = $sunrise")
+//        Log.d("TAG", "calculatePercent - sunset =  $sunset")
+//        Log.d("TAG", "calculatePercent - distance = $distance")
+//        Log.d("TAG", "calculatePercent - elapsedDistance = $elapsedDistance")
+//        Log.d("TAG", "calculatePercent - percent = $percent ")
+//        Log.d("TAG", "calculatePercent - percent = ${(elapsedDistance / distance)} ")
+//        Log.d("TAG", "calculatePercent - percent = ${(elapsedDistance - distance)} ")
+//        Log.d("TAG", "calculatePercent - percent = ${(elapsedDistance * distance)} ")
+//        Log.d("TAG", "calculatePercent - percent = ${(elapsedDistance + distance)} ")
+        return if(percent > 1) 1f else percent.toFloat()
     }
 }

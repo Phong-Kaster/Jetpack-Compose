@@ -14,6 +14,7 @@ import com.example.jetpack.core.CoreLayout
 import com.example.jetpack.domain.enums.ChartShortcut
 import com.example.jetpack.ui.component.CoreBottomBar
 import com.example.jetpack.ui.component.CoreFloatingMenu
+import com.example.jetpack.ui.fragment.chart.component.BubbleChartScreen
 import com.example.jetpack.ui.fragment.chart.component.ChartTopBar
 import com.example.jetpack.ui.fragment.chart.component.LineChartScreen
 import com.example.jetpack.ui.fragment.chart.component.RingChartScreen
@@ -56,6 +57,7 @@ fun InsightLayout() {
                     ChartShortcut.AnalogueClock -> AnalogueClock()
                     ChartShortcut.LineChart -> LineChartScreen()
                     ChartShortcut.RingChart -> RingChartScreen()
+                    ChartShortcut.BubbleChart -> BubbleChartScreen()
                 }
             })
     }
