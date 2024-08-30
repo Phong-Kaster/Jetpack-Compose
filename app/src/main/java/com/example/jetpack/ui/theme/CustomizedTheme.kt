@@ -8,15 +8,27 @@ import androidx.compose.ui.graphics.Color
  */
 data class CustomizedTheme(
     val primary: Color,
-    val second: Color,
+    val onPrimary: Color,
+    val secondary: Color,
+    val onSecondary: Color,
     val background: Color,
-    val error: Color
+    val error: Color,
+    val onError: Color,
+    val textColor: Color,
+    val dim: Color,
+    val onDim: Color,
 )
 
 val DarkCustomizedTheme = CustomizedTheme(
     primary = Color(0xFF9EFFFF),
-    second = Color(0xFF004BDC),
+    onPrimary = Color.White,
+    secondary = Color(0xFF004BDC),
+    onSecondary = Color.White,
     background = Color(0xFF2C3141),
-    error = Color(0xFFFF5449)
+    error = Color(0xFFFF5449),
+    onError = Color.White,
+    textColor = Color.White,
+    dim = Color(0xFF8C8C8C),
+    onDim = Color(0xFF2C3141)
 )
 

@@ -60,7 +60,6 @@ import com.example.jetpack.ui.component.CoreTopBarWithScrollBehavior
 import com.example.jetpack.ui.fragment.accuweather.component.SearchBar
 import com.example.jetpack.ui.fragment.home.component.HomeDialog
 import com.example.jetpack.ui.fragment.home.component.HomeShortcutItem
-import com.example.jetpack.ui.theme.Background
 import com.example.jetpack.ui.theme.PrimaryColor
 import com.example.jetpack.ui.view.ShimmerItem
 import com.example.jetpack.ui.theme.customizedTextStyle
@@ -194,8 +193,8 @@ fun HomeLayout(
         backgroundColor = LocalTheme.current.background,
         topBar = {
             CoreTopBarWithScrollBehavior(
-                backgroundColor = LocalTheme.current.second,
-                scrolledContainerColor = LocalTheme.current.second,
+                backgroundColor = LocalTheme.current.secondary,
+                scrolledContainerColor = LocalTheme.current.secondary,
                 scrollBehavior = scrollBehavior,
                 navigationIconContent = {},
                 modifier = Modifier.clip(
@@ -208,11 +207,11 @@ fun HomeLayout(
                 ),
                 content = {
                     DigitalClock3(
+                        textColor = LocalTheme.current.onSecondary,
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(horizontal = 16.dp, vertical = 16.dp)
                             .statusBarsPadding(),
-                        textColor = Color.White
                     )
                 }
             )

@@ -27,6 +27,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.jetpack.R
+import com.example.jetpack.core.LocalTheme
+import com.example.jetpack.ui.modifier.borderWithAnimatedGradient
 import com.example.jetpack.ui.theme.Background
 import com.example.jetpack.ui.theme.PrimaryColor
 import com.example.jetpack.ui.theme.ShadowColor
@@ -47,11 +49,14 @@ fun SettingItem(
         modifier = Modifier
             .outerShadow(4.dp, 1.dp, ShadowColor, RoundedCornerShape(15.dp))
             .fillMaxWidth()
+            .borderWithAnimatedGradient(
+                width = 2.dp,
+                shape = RoundedCornerShape(15.dp),
+            )
             .clip(shape = RoundedCornerShape(15.dp))
             .clickable { onClick() }
-            .border(width = 0.5.dp, color = PrimaryColor, shape = RoundedCornerShape(15.dp))
             .heightIn(64.dp)
-            .background(color = Background)
+            .background(color = LocalTheme.current.background)
             .padding(horizontal = 16.dp),
         horizontalArrangement = Arrangement.Start,
         verticalAlignment = Alignment.CenterVertically,
@@ -59,16 +64,16 @@ fun SettingItem(
         Icon(
             painter = painterResource(id = icon),
             contentDescription = null,
-            tint = PrimaryColor,
+            tint = LocalTheme.current.textColor,
             modifier = Modifier.size(25.dp)
         )
         Spacer(modifier = Modifier.width(10.dp))
         Column(
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            Text(text = title, style = body15, color = PrimaryColor)
+            Text(text = title, style = body15, color = LocalTheme.current.textColor)
             if (subtitle != null) {
-                Text(text = subtitle, style = body14, color = WeakColor)
+                Text(text = subtitle, style = body14, color = LocalTheme.current.dim)
             }
         }
         Spacer(modifier = Modifier.weight(0.9F))

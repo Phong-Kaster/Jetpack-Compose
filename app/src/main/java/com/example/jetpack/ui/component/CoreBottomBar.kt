@@ -3,7 +3,6 @@ package com.example.jetpack.ui.component
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
@@ -14,8 +13,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.Icon
@@ -44,13 +43,11 @@ import com.example.jetpack.configuration.Menu
 import com.example.jetpack.core.LocalNavController
 import com.example.jetpack.core.LocalTheme
 import com.example.jetpack.ui.fragment.home.component.HomeBottomSheet
-import com.example.jetpack.ui.theme.Background
 import com.example.jetpack.ui.theme.IconColor
-import com.example.jetpack.ui.theme.PrimaryColor
 import com.example.jetpack.ui.theme.body13
 import com.example.jetpack.ui.theme.medium13
 import com.example.jetpack.ui.fragment.tutorial.component.LocalTutorial
-import com.example.jetpack.ui.theme.OppositePrimaryColor
+import com.example.jetpack.ui.modifier.borderWithAnimatedGradient
 import com.example.jetpack.util.ViewUtil
 import com.example.jetpack.util.ViewUtil.CenterColumn
 
@@ -70,8 +67,21 @@ fun CoreBottomBar() {
         modifier = Modifier
             .fillMaxWidth()
             .height(70.dp)
+            .borderWithAnimatedGradient(
+                width = 2.dp,
+                shape = RoundedCornerShape(0.dp),
+                colors = listOf(
+                    Color(0xFF004BDC),
+                    Color(0xFF004BDC),
+                    Color(0xFF9EFFFF),
+                    Color(0xFF9EFFFF),
+                    Color(0xFF9EFFFF),
+                    Color(0xFF9EFFFF),
+                    Color(0xFF004BDC),
+                    Color(0xFF004BDC)
+                ),
+            )
             .background(color = LocalTheme.current.background)
-            .border(0.dp, Color.LightGray)
             .padding(horizontal = 12.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceEvenly,
@@ -95,7 +105,7 @@ fun CoreBottomBar() {
                 .padding(horizontal = 12.dp)
                 .size(48.dp)
                 .clip(shape = CircleShape)
-                .background(color = LocalTheme.current.second)
+                .background(color = LocalTheme.current.secondary)
                 .onGloballyPositioned {
                     tutorial.addButtonSize = it.boundsInRoot()
                 }
@@ -160,13 +170,13 @@ private fun BottomBarItem(
             painter = painterResource(drawableId),
             contentDescription = stringResource(id = stringId),
             modifier = Modifier.size(24.dp),
-            tint = if (selected) LocalTheme.current.primary else IconColor,
+            tint = if (selected) LocalTheme.current.primary else LocalTheme.current.dim,
         )
 
         Text(
             text = stringResource(stringId),
             style = if (!selected) body13 else medium13,
-            color = if (selected) LocalTheme.current.primary else IconColor,
+            color = if (selected) LocalTheme.current.primary else LocalTheme.current.dim,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
         )

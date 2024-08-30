@@ -34,6 +34,7 @@ import com.example.jetpack.configuration.Language
 import com.example.jetpack.configuration.Menu
 import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
+import com.example.jetpack.core.LocalTheme
 import com.example.jetpack.ui.component.CoreAlertDialog
 import com.example.jetpack.ui.component.CoreBottomBar
 import com.example.jetpack.ui.component.CoreExpandableFloatingButton
@@ -44,6 +45,7 @@ import com.example.jetpack.ui.view.DNAHelix
 import com.example.jetpack.ui.view.WeatherSunrise
 import com.example.jetpack.ui.fragment.home.component.HomeDialog
 import com.example.jetpack.ui.fragment.home.component.HomeTopBar
+import com.example.jetpack.ui.modifier.borderWithAnimatedGradient
 import com.example.jetpack.ui.theme.Background
 import com.example.jetpack.ui.theme.Background2
 import com.example.jetpack.ui.theme.PrimaryColor
@@ -114,7 +116,7 @@ fun ArticleLayout(
                 modifier = Modifier
             )
         },
-        backgroundColor = Background
+        backgroundColor = LocalTheme.current.background,
     ) {
         // Remove overscroll effect for lazy grid
         CompositionLocalProvider(
@@ -130,7 +132,10 @@ fun ArticleLayout(
                     .fillMaxSize()
             ) {
                 item(key = "key1", span = { GridItemSpan(2) }) {
-                    Text(text = stringResource(R.string.this_screen_shows_special_effects), color = PrimaryColor)
+                    Text(
+                        text = stringResource(R.string.this_screen_shows_special_effects),
+                        color = LocalTheme.current.textColor
+                    )
                 }
 
                 item(key = "AnimatedBorder", span = { GridItemSpan(2) }) {
@@ -138,19 +143,30 @@ fun ArticleLayout(
                 }
 
                 item(key = "WeatherSunrise", span = { GridItemSpan(2) }) {
-                    WeatherSunrise(modifier = Modifier.clip(shape = RoundedCornerShape(25.dp)))
+                    WeatherSunrise(
+                        modifier = Modifier
+                            .borderWithAnimatedGradient(
+                                width = 3.dp,
+                                shape = RoundedCornerShape(25.dp)
+                            )
+                            .clip(shape = RoundedCornerShape(25.dp))
+                    )
                 }
 
                 item(key = "DNAHelix", span = { GridItemSpan(2) }) {
                     DNAHelix(
                         firstColor = Color.Yellow,
                         secondColor = Color.Blue,
-                        lineBrush = {_,_ -> SolidColor(Color.White) },
+                        lineBrush = { _, _ -> SolidColor(Color.White) },
                         cycleDuration = 15000,
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(80.dp)
-                            .clip(shape = RoundedCornerShape(0.dp))
+                            .borderWithAnimatedGradient(
+                                width = 3.dp,
+                                shape = RoundedCornerShape(25.dp)
+                            )
+                            .clip(shape = RoundedCornerShape(25.dp))
                             .background(color = Background2, shape = RoundedCornerShape(25.dp))
                             .padding(vertical = 16.dp, horizontal = 16.dp)
 

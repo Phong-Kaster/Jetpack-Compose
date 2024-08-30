@@ -11,6 +11,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.jetpack.R
 import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
+import com.example.jetpack.core.LocalTheme
 import com.example.jetpack.domain.enums.ChartShortcut
 import com.example.jetpack.ui.component.CoreBottomBar
 import com.example.jetpack.ui.component.CoreFloatingMenu
@@ -47,7 +48,7 @@ fun InsightLayout() {
         },
         bottomBar = { CoreBottomBar() },
         floatingActionButton = { CoreFloatingMenu() },
-        backgroundColor = Background
+        backgroundColor = LocalTheme.current.background
     ) {
         AnimatedContent(
             targetState = chosenChip,

@@ -27,6 +27,7 @@ import com.example.jetpack.configuration.Language
 import com.example.jetpack.configuration.Menu
 import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
+import com.example.jetpack.core.LocalTheme
 import com.example.jetpack.domain.enums.Star
 import com.example.jetpack.ui.component.CoreBottomBar
 import com.example.jetpack.ui.component.CoreFloatingMenu
@@ -149,7 +150,7 @@ fun SettingLayout(
         topBar = { HomeTopBar(name = stringResource(id = Menu.Setting.nameId)) },
         floatingActionButton = { CoreFloatingMenu() },
         bottomBar = { CoreBottomBar() },
-        backgroundColor = Background
+        backgroundColor = LocalTheme.current.background
     ) {
         Column(
             modifier = Modifier
