@@ -99,7 +99,7 @@ fun LineChart(
                             style = customizedTextStyle(
                                 fontWeight = 400,
                                 fontSize = 12
-                            ).copy(color = PrimaryColor),
+                            ).copy(color = Color.White),
                             topLeft = Offset(
                                 x = size.width * 0.5F - textMeasurer.measure(text).size.width * 0.5F,
                                 y = (maximum * it) * spacing - (padding * 0.45F).toPx()
@@ -176,7 +176,7 @@ fun LineChartElement(
                 val y = (maximum - element.valueMin) * spacing
 
                 drawCircle(
-                    color = PrimaryColor,
+                    color = Color.White,
                     /*style = Stroke(width = (chartElementCircle * 0.35F).dp.toPx()),*/
                     radius = chartElementCircle,
                     center = Offset(x = x, y = y)
@@ -188,7 +188,7 @@ fun LineChartElement(
                         text = element.valueMin.toInt().toString(),
                         style = TextStyle(
                             fontSize = 12.sp,
-                            color = PrimaryColor,
+                            color = Color.White,
                             background = Color.Transparent
                         ),
                         topLeft = Offset(
@@ -205,7 +205,7 @@ fun LineChartElement(
                     val yNextElement =
                         (maximum - nextElement.valueMin) * spacing
                     drawLine(
-                        color = PrimaryColor,
+                        color = Color.White,
                         start = Offset(x = size.width * 0.5F, y = y),
                         end = Offset(x = size.width * 0.5F + size.width, y = yNextElement)
                     )
@@ -215,7 +215,7 @@ fun LineChartElement(
         Text(
             text = element.name,
             style = customizedTextStyle(fontSize = 12, fontWeight = 400),
-            color = PrimaryColor,
+            color = LocalTheme.current.textColor,
             textAlign = TextAlign.Center,
             modifier = Modifier
         )

@@ -37,14 +37,14 @@ data class ChartElement(
                 ChartElement(name = "P", valueMin = 130F, valueMax = 255F),
                 ChartElement(name = "Q", valueMin = 125F, valueMax = 250F),
                 ChartElement(name = "R", valueMin = -5F, valueMax = 0F),
-                ChartElement(name = "S", valueMin = 0F, valueMax = 0F),
-                ChartElement(name = "T", valueMin = 0F, valueMax = 0F),
-                ChartElement(name = "U", valueMin = 0F, valueMax = 0F),
-                ChartElement(name = "V", valueMin = 0F, valueMax = 15F),
-                ChartElement(name = "W", valueMin = 0F, valueMax = 25F),
-                ChartElement(name = "X", valueMin = 0F, valueMax = 35F),
-                ChartElement(name = "Y", valueMin = 0F, valueMax = 45F),
-                ChartElement(name = "Z", valueMin = 0F, valueMax = 55F),
+                ChartElement(name = "S", valueMin = 45F, valueMax = 0F),
+                ChartElement(name = "T", valueMin = 32F, valueMax = 0F),
+                ChartElement(name = "U", valueMin = 97F, valueMax = 0F),
+                ChartElement(name = "V", valueMin = 55F, valueMax = 15F),
+                ChartElement(name = "W", valueMin = 80F, valueMax = 25F),
+                ChartElement(name = "X", valueMin = 96F, valueMax = 35F),
+                ChartElement(name = "Y", valueMin = 88F, valueMax = 45F),
+                ChartElement(name = "Z", valueMin = 68F, valueMax = 55F),
             )
         }
 
