@@ -173,13 +173,16 @@ private fun BottomBarItem(
             tint = if (selected) LocalTheme.current.textColor else LocalTheme.current.dim,
         )
 
-        Text(
-            text = stringResource(stringId),
-            style = if (!selected) body13 else medium13,
-            color = if (selected) LocalTheme.current.textColor else LocalTheme.current.dim,
-            maxLines = 1,
-            overflow = TextOverflow.Ellipsis,
-        )
+        if (selected) {
+            Text(
+                text = stringResource(stringId),
+                style = if (!selected) body13 else medium13,
+                color = if (selected) LocalTheme.current.textColor else LocalTheme.current.dim,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+            )
+        }
+
     }
 }
 

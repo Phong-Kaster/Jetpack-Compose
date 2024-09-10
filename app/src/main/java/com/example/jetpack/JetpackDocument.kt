@@ -18,7 +18,8 @@ import javax.inject.Singleton
  * # [9 - Jetpack Compose: Reducing recomposition on Bubbles Animations](https://engineering.traderepublic.com/jetpack-compose-reducing-recomposition-on-bubbles-animations-a68eafef6bf2)
  * # --> For 30/08/2024
  * # [10 - Shimmer & Shadow Loading Effect Animation with Jetpack Compose](https://proandroiddev.com/shimmer-shadow-loading-effect-animation-with-jetpack-compose-f4b3de28dc2b)
- *
+ * # --> For 10/09/2024
+ * # [11 - Create an Atomic Loader in Jetpack Compose](https://medium.com/@kappdev/how-to-create-an-atomic-loader-in-jetpack-compose-cbf0a74aa5fa)
  */
 @Singleton
 class JetpackDocument {}
