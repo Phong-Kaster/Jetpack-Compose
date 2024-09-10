@@ -18,6 +18,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.jetpack.R
+import com.example.jetpack.core.LocalTheme
 import com.example.jetpack.ui.theme.customizedTextStyle
 import com.example.jetpack.ui.theme.PrimaryColor
 import com.example.jetpack.ui.theme.TextColor1
@@ -35,7 +36,7 @@ fun IntroContent(
         Text(
             text = stringResource(titleId),
             style = customizedTextStyle(30, 700),
-            color = TextColor1,
+            color = LocalTheme.current.textColor,
             textAlign = TextAlign.Center,
             modifier = Modifier.padding(horizontal = 24.dp),
         )
@@ -44,7 +45,7 @@ fun IntroContent(
         Text(
             text = stringResource(contentId),
             style = body16,
-            color = TextColor1,
+            color = LocalTheme.current.textColor,
             textAlign = TextAlign.Center,
             modifier = Modifier.padding(horizontal = 24.dp),
         )
@@ -53,7 +54,7 @@ fun IntroContent(
         Icon(
             painter = painterResource(id = imageId),
             contentDescription = null,
-            tint =  TextColor1,
+            tint =  LocalTheme.current.textColor,
             modifier = Modifier
                 .fillMaxWidth(0.5f)
                 .weight(1f),

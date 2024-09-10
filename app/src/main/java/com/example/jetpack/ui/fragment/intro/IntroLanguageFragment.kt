@@ -16,6 +16,7 @@ import com.example.jetpack.R
 import com.example.jetpack.configuration.Language
 import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
+import com.example.jetpack.core.LocalTheme
 import com.example.jetpack.ui.component.CoreTopBar
 import com.example.jetpack.ui.fragment.language.component.LanguageList
 import com.example.jetpack.ui.theme.Background
@@ -66,7 +67,7 @@ fun LanguageLayout(
                 onClickRight = onConfirm
             )
         },
-        backgroundColor = Background,
+        backgroundColor = LocalTheme.current.background,
     ) {
         LanguageList(
             list = Language.getSortedList(),

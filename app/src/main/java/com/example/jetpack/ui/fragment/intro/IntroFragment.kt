@@ -25,6 +25,7 @@ import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import com.example.jetpack.R
 import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
+import com.example.jetpack.core.LocalTheme
 import com.example.jetpack.ui.fragment.intro.component.IntroContent
 import com.example.jetpack.ui.fragment.intro.component.IntroIndicator
 import com.example.jetpack.ui.theme.Background
@@ -101,7 +102,7 @@ fun IntroLayout(
     CoreLayout(
         modifier = Modifier,
         content = {
-            Column(modifier = Modifier.background(color = Background)) {
+            Column(modifier = Modifier.background(color = LocalTheme.current.background)) {
                 Spacer(modifier = Modifier.height(20.dp))
 
 
@@ -146,7 +147,7 @@ fun IntroLayout(
                     Text(
                         text = stringResource(R.string.fake_title),
                         style = customizedTextStyle(20, 600),
-                        color = PrimaryColor,
+                        color = LocalTheme.current.primary,
                         textDecoration = TextDecoration.None,
                         modifier = Modifier
                             .align(Alignment.CenterEnd)
