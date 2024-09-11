@@ -36,4 +36,13 @@ object Constant {
     const val FOREGROUND_SERVICE_CHANNEL_DESCRIPTION = "foreground_service_description"
     const val FOREGROUND_SERVICE_ACTION_START = "foreground_service_action_start"
     const val FOREGROUND_SERVICE_ACTION_STOP = "foreground_service_action_stop"
+
+    const val DEFAULT_SCREEN_RECORDING_TIME = 9999
+    const val SECOND_ON_MINUTE = 60 // a minute has 60 seconds
+    const val MINUTE_ON_HOUR = 60 // a hour has 60 minutes
+
+    const val INITIAL_PAGE_HOUR = 4800 // we have to initial page to make time picker loop when it reach 23h
+    const val INITIAL_PAGE_MINUTE = 6000 // we have to initial page to make time picker loop when it reach 23h
+    const val INITIAL_PAGE_SECOND = 6000 // we have to initial page to make time picker loop when it reach 23h
+    const val MAXIMUM_PAGE = 10000 // we have to initial page to make time picker loop when it reach 23h
 }

@@ -24,7 +24,9 @@ val Border = Color(0xFFEEEEEE)
 val ShadowColor = Color(0xFFEEEEEE)
 val WeakColor = Color(0xFF999999)
 val IconColor = Color(0xFF8C8C8C)
-
+val ColorTextSecondary = Color(0xFF333333)
+val ColorTextPrimary = Color.Black
+val ColorTextHelp = Color(0xFF8A8A8A)
 
 // TEXT COLOR
 val TextColor1 = PrimaryColor

@@ -120,4 +120,11 @@
     <string name="last_know_location">Last know location</string>
     <string name="this_screen_shows_special_effects"><![CDATA[This screen shows special effects and components that I have done on my own & collected on Internet]]></string>
     <string name="bubble_chart">Bubble Chart</string>
+    <string name="privacy">Privacy</string>
+    <string name="timed_recording">Timed recording</string>
+    <string name="none">None</string>
+    <string name="customize">Customize</string>
+    <string name="hour">Hour</string>
+    <string name="minute">Minute</string>
+    <string name="second">Second</string>
 </resources>

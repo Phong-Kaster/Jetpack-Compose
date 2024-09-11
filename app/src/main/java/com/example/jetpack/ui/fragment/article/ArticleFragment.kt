@@ -35,20 +35,21 @@ import com.example.jetpack.configuration.Menu
 import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
 import com.example.jetpack.core.LocalTheme
+import com.example.jetpack.domain.enums.Subsetting
 import com.example.jetpack.ui.component.CoreAlertDialog
 import com.example.jetpack.ui.component.CoreBottomBar
 import com.example.jetpack.ui.component.CoreExpandableFloatingButton
 import com.example.jetpack.ui.component.CoreTextAnimationDialog
 import com.example.jetpack.ui.component.SquareElement
+import com.example.jetpack.ui.dialog.WheelTimePickerDialog
 import com.example.jetpack.ui.view.AnimatedBorderCard
 import com.example.jetpack.ui.view.DNAHelix
 import com.example.jetpack.ui.view.WeatherSunrise
 import com.example.jetpack.ui.fragment.home.component.HomeDialog
 import com.example.jetpack.ui.fragment.home.component.HomeTopBar
 import com.example.jetpack.ui.modifier.borderWithAnimatedGradient
-import com.example.jetpack.ui.theme.Background
 import com.example.jetpack.ui.theme.Background2
-import com.example.jetpack.ui.theme.PrimaryColor
+import com.example.jetpack.ui.view.SubsettingElement
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -60,6 +61,7 @@ class ArticleFragment : CoreFragment() {
     private var showAlertDialog by mutableStateOf(false)
     private var showDialog by mutableStateOf(false)
     private var showDottedTextDialog by mutableStateOf(false)
+    private var showWheelTimePickerDialog by mutableStateOf(false)
 
     @Composable
     override fun ComposeView() {
@@ -69,6 +71,7 @@ class ArticleFragment : CoreFragment() {
             onOpenAlertDialog = { showAlertDialog = true },
             onOpenDialog = { showDialog = true },
             onOpenDottedTextDialog = { showDottedTextDialog = true },
+            onOpenWheelTimePicker = { showWheelTimePickerDialog = true }
         )
 
         HomeDialog(
@@ -84,6 +87,15 @@ class ArticleFragment : CoreFragment() {
         CoreTextAnimationDialog(
             enable = showDottedTextDialog,
             onDismissRequest = { showDottedTextDialog = false },
+        )
+
+        WheelTimePickerDialog(
+            enable = showWheelTimePickerDialog,
+            screenRecordingTime = 18960,
+            onDismissRequest = { showWheelTimePickerDialog = false },
+            onConfirm = {hour, minute, second ->
+                showToast("$hour:$minute:$second")
+            }
         )
     }
 }
@@ -102,6 +114,7 @@ fun ArticleLayout(
     onOpenAlertDialog: () -> Unit = {},
     onOpenDialog: () -> Unit = {},
     onOpenDottedTextDialog: () -> Unit = {},
+    onOpenWheelTimePicker: () -> Unit = {},
 ) {
     // for lazy grid state
     val state = rememberLazyGridState()
@@ -131,7 +144,7 @@ fun ArticleLayout(
                     .padding(start = 16.dp, end = 16.dp, top = 0.dp, bottom = 32.dp)
                     .fillMaxSize()
             ) {
-                item(key = "key1", span = { GridItemSpan(2) }) {
+                item(key = "title", span = { GridItemSpan(2) }) {
                     Text(
                         text = stringResource(R.string.this_screen_shows_special_effects),
                         color = LocalTheme.current.textColor
@@ -167,9 +180,8 @@ fun ArticleLayout(
                                 shape = RoundedCornerShape(25.dp)
                             )
                             .clip(shape = RoundedCornerShape(25.dp))
-                            .background(color = Background2, shape = RoundedCornerShape(25.dp))
+                            .background(color = LocalTheme.current.background, shape = RoundedCornerShape(25.dp))
                             .padding(vertical = 16.dp, horizontal = 16.dp)
-
                     )
                 }
 
@@ -178,7 +190,6 @@ fun ArticleLayout(
                 items(
                     items = Language.entries.take(2),
                     key = { item: Language -> item.name },
-
                     itemContent = { language: Language ->
                         SquareElement(
                             language = language,
@@ -189,7 +200,27 @@ fun ArticleLayout(
                                     else -> onOpenDialog()
                                 }
                             })
-                    })
+                    }
+                )
+
+                item(
+                    key = "WheelTimePicker",
+                    span = { GridItemSpan(2) },
+                    content = {
+                        SubsettingElement(
+                            subsetting = Subsetting.TimedRecording,
+                            onClick = onOpenWheelTimePicker,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .borderWithAnimatedGradient(
+                                    width = 3.dp,
+                                    shape = RoundedCornerShape(25.dp)
+                                )
+                                .clip(shape = RoundedCornerShape(25.dp))
+                                .background(color = LocalTheme.current.background, shape = RoundedCornerShape(25.dp))
+                        )
+                    }
+                )
             }
         }
     }
