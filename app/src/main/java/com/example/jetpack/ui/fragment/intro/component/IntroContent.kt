@@ -51,10 +51,9 @@ fun IntroContent(
         )
         Spacer(modifier = Modifier.height(20.dp))
 
-        Icon(
+        Image(
             painter = painterResource(id = imageId),
-            contentDescription = null,
-            tint =  LocalTheme.current.textColor,
+            contentDescription = "Icon",
             modifier = Modifier
                 .fillMaxWidth(0.5f)
                 .weight(1f),

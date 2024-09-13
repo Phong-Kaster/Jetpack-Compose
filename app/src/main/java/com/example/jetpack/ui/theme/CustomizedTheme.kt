@@ -21,9 +21,9 @@ data class CustomizedTheme(
 
 val DarkCustomizedTheme = CustomizedTheme(
     primary = Color(0xFF9EFFFF),
-    onPrimary = Color.White,
+    onPrimary = Color(0xFF2C3141),
     secondary = Color(0xFF004BDC),
-    onSecondary = Color.White,
+    onSecondary = Color(0xFF2C3141),
     background = Color(0xFF2C3141),
     error = Color(0xFFFF5449),
     onError = Color.White,

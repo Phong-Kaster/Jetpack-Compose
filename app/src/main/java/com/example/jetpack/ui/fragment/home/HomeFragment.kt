@@ -207,7 +207,7 @@ fun HomeLayout(
                 ),
                 content = {
                     DigitalClock3(
-                        textColor = LocalTheme.current.onSecondary,
+                        textColor = LocalTheme.current.textColor,
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(horizontal = 16.dp, vertical = 16.dp)
