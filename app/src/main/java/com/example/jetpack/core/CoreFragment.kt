@@ -13,6 +13,8 @@ import androidx.compose.runtime.rememberCompositionContext
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.unit.Density
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
@@ -41,6 +43,7 @@ open class CoreFragment : Fragment(), CoreBehavior {
                 CompositionLocalProvider(
                     LocalNavController provides findNavController(),
                     LocalLocale provides requireActivity().resources.configuration.locales[0],
+                    LocalDensity provides Density(LocalDensity.current.density, 1f),
                     *compositionLocalProvider().toTypedArray()
                 ) {
                     JetpackComposeTheme {
