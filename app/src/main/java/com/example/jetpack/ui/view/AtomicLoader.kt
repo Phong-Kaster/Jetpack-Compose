@@ -8,19 +8,28 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.center
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.PathOperation
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.jetpack.core.LocalTheme
+import com.example.jetpack.util.ViewUtil
 
+/**
+ * # [Create an Atomic Loader in Jetpack Compose](https://medium.com/@kappdev/how-to-create-an-atomic-loader-in-jetpack-compose-cbf0a74aa5fa)
+ */
 @Composable
 fun AtomicLoader(
     modifier: Modifier = Modifier
@@ -31,7 +40,7 @@ fun AtomicLoader(
         initialValue = 0f,
         targetValue = 360f,
         animationSpec = infiniteRepeatable(
-            animation = tween(durationMillis = 1000, delayMillis = 0, easing = LinearEasing)
+            animation = tween(durationMillis = 3000, delayMillis = 0, easing = LinearEasing)
         ),
         label = "rotation"
     )
@@ -42,8 +51,8 @@ fun AtomicLoader(
             rotationX = 35f,
             rotationY = -45f,
             rotationZ = -90f + rotation.value,
-            borderColor = LocalTheme.current.primary,
-            borderWidth = 1.dp,
+            borderColor = Color.Red,
+            borderWidth = 3.dp,
             modifier = Modifier.matchParentSize()
         )
 
@@ -51,8 +60,8 @@ fun AtomicLoader(
             rotationX = 50f,
             rotationY = 10f,
             rotationZ = rotation.value,
-            borderColor = LocalTheme.current.secondary,
-            borderWidth = 1.dp,
+            borderColor = Color.Cyan,
+            borderWidth = 3.dp,
             modifier = Modifier.matchParentSize()
         )
 
@@ -61,7 +70,7 @@ fun AtomicLoader(
             rotationY = 55f,
             rotationZ = 90f + rotation.value,
             borderColor = LocalTheme.current.textColor,
-            borderWidth = 1.dp,
+            borderWidth = 3.dp,
             modifier = Modifier.matchParentSize()
         )
     }
@@ -86,14 +95,14 @@ fun RotatingCircle(
     borderWidth: Dp,
     modifier: Modifier = Modifier
 ) {
-    Canvas(modifier = modifier
-        .background(color = LocalTheme.current.background)
-        .graphicsLayer {
-            this.rotationX = rotationX
-            this.rotationY = rotationY
-            this.rotationZ = rotationZ
-            cameraDistance = 12f * density
-        }) {
+    Canvas(
+        modifier = modifier
+            .graphicsLayer {
+                this.rotationX = rotationX
+                this.rotationY = rotationY
+                this.rotationZ = rotationZ
+                cameraDistance = 12f * density
+            }) {
         val mainCircle = Path().apply {
             addOval(oval = Rect(size.center, size.minDimension * 0.5f))
         }
@@ -112,4 +121,27 @@ fun RotatingCircle(
 
         drawPath(path = path, color = borderColor)
     }
+}
+
+@Preview
+@Composable
+private fun PreviewAtomicLoader() {
+    ViewUtil.PreviewContent(
+        content = {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(
+                        brush = Brush.radialGradient(
+                            listOf(Color(0xFF3C4B57), Color(0xFF1C262B))
+                        )
+                    ),
+                contentAlignment = Alignment.Center
+            ) {
+                AtomicLoader(
+                    modifier = Modifier.size(100.dp)
+                )
+            }
+        }
+    )
 }

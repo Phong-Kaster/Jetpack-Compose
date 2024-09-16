@@ -1,9 +1,15 @@
 package com.example.jetpack.ui.fragment.article
 
+import android.os.Bundle
+import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.LocalOverscrollConfiguration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -62,6 +68,22 @@ class ArticleFragment : CoreFragment() {
     private var showDialog by mutableStateOf(false)
     private var showDottedTextDialog by mutableStateOf(false)
     private var showWheelTimePickerDialog by mutableStateOf(false)
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+
+        val numbers = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+        val (even, odd) = numbers.partition { it % 2 == 0 }
+
+        Log.d("TAG", "onCreateView - even = $even")
+        Log.d("TAG", "onCreateView - odd = $odd")
+
+        return super.onCreateView(inflater, container, savedInstanceState)
+    }
+
 
     @Composable
     override fun ComposeView() {
@@ -235,14 +257,15 @@ fun ArticleLayout(
                         AtomicLoader(
                             modifier = Modifier
                                 .padding(5.dp)
-                                .background(color = LocalTheme.current.background)
-                                .borderWithAnimatedGradient(
-                                    width = 3.dp,
-                                    shape = RoundedCornerShape(25.dp)
-                                )
                                 .clip(shape = RoundedCornerShape(25.dp))
                                 .width(150.dp)
                                 .aspectRatio(1f)
+                                .borderWithAnimatedGradient(
+                                    colorBackground = LocalTheme.current.background,
+                                    width = 3.dp,
+                                    shape = RoundedCornerShape(25.dp)
+                                )
+
                         )
                     }
                 )
