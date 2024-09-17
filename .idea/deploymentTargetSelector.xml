@@ -4,8 +4,16 @@
     <selectionStates>
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
+        <DropdownSelection timestamp="2024-09-16T07:15:35.456951400Z">
+          <Target type="DEFAULT_BOOT">
+            <handle>
+              <DeviceId pluginId="PhysicalDevice" identifier="serial=ca005952" />
+            </handle>
+          </Target>
+        </DropdownSelection>
+        <DialogSelection />
       </SelectionState>
-      <SelectionState runConfigName="Generate Baseline Profile for app">
+      <SelectionState runConfigName="Generate Baseline Profile">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>
