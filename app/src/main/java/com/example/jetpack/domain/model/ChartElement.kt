@@ -13,10 +13,37 @@ import kotlin.math.min
  */
 @Immutable
 data class ChartElement(
-    val name: String,
-    val valueMin: Float,
-    val valueMax: Float = 100F,
+    var name: String,
+    var valueMin: Float,
+    var valueMax: Float = 100F,
 ) {
+
+    class Builder() {
+        private var name: String = ""
+        private var valueMin: Float = 0f
+        private var valueMax: Float = 100F
+
+        fun setName(name: String): Builder {
+            this.name = name
+            return this
+        }
+
+        fun setValueMin(valueMin: Float): Builder {
+            this.valueMin = valueMin
+            return this
+        }
+
+        fun setValueMax(valueMax: Float): Builder {
+            this.valueMax = valueMax
+            return this
+        }
+
+        fun create(): ChartElement {
+            return ChartElement(name, valueMin, valueMax)
+        }
+    }
+
+
     companion object {
         fun getFakeElements(): List<ChartElement> {
             return listOf(
@@ -60,8 +87,5 @@ data class ChartElement(
         fun ChartElement.getMinValue(): Float {
             return min(valueMax, valueMin)
         }
-
-
-
     }
 }

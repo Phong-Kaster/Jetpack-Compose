@@ -53,7 +53,6 @@ fun RingChart2(
     val animationSweepAngleRed by animateFloatAsState(targetValue = sweepAngleRed, animationSpec = animationSpecFloat2, label = "animationSweepAngleRed")
     val animationSweepAngleBlue by animateFloatAsState(targetValue = sweepAngleBlue, animationSpec = animationSpecFloat3, label = "animationSweepAngleBlue")
 
-
     LaunchedEffect(key1 = data) {
         sweepAngleGreen = 270F
         sweepAngleYellow = 260F

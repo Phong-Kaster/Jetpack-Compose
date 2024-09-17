@@ -23,6 +23,7 @@ object AppUtil {
             Log.d(tag, "----------------------------")
         }
         Log.d(tag, "-> message: $message")
+
     }
 
     fun openWebsite(context: Context, url: String) {

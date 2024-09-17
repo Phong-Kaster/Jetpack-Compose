@@ -20,6 +20,8 @@ import javax.inject.Singleton
  * # [10 - Shimmer & Shadow Loading Effect Animation with Jetpack Compose](https://proandroiddev.com/shimmer-shadow-loading-effect-animation-with-jetpack-compose-f4b3de28dc2b)
  * # --> For 10/09/2024
  * # [11 - Create an Atomic Loader in Jetpack Compose](https://medium.com/@kappdev/how-to-create-an-atomic-loader-in-jetpack-compose-cbf0a74aa5fa)
+ * # --> For 17/09/2024
+ * # [12 - Handling State in Jetpack Compose](https://medium.com/@harmanpreet.khera/handling-state-in-jetpack-compose-best-practices-ccffc09ce46a)
  */
 @Singleton
 class JetpackDocument {}
