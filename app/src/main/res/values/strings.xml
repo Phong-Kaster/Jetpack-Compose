@@ -128,4 +128,6 @@
     <string name="minute">Minute</string>
     <string name="second">Second</string>
     <string name="let_s_go">Let\'s go</string>
+    <string name="instagram_carousel">Instagram Carousel</string>
+    <string name="long_press_on_indicator">Long press on indicator and drag to change color quickly</string>
 </resources>

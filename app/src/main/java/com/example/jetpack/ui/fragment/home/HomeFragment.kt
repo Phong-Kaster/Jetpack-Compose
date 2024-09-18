@@ -158,7 +158,10 @@ class HomeFragment : CoreFragment() {
                     HomeShortcut.CollapsibleTopbar -> safeNavigate(R.id.toCollasibleTopbar)
                     HomeShortcut.CollapsibleTopbar2 -> safeNavigate(R.id.toCollapsibleTopbar2)
                     HomeShortcut.LastKnownLocation -> safeNavigate(R.id.toLastKnownLocation)
-                    else -> {}
+                    HomeShortcut.InstagramCarousel -> safeNavigate(R.id.toInstagramCarousel)
+                    else -> {
+                        showToast(it.name)
+                    }
                 }
             })
     }
