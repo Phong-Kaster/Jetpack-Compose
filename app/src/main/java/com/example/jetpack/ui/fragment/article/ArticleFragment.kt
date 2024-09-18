@@ -166,13 +166,6 @@ fun ArticleLayout(
                     .padding(start = 16.dp, end = 16.dp, top = 0.dp, bottom = 32.dp)
                     .fillMaxSize()
             ) {
-//                item(key = "title", span = { GridItemSpan(2) }) {
-//                    Text(
-//                        text = stringResource(R.string.this_screen_shows_special_effects),
-//                        color = LocalTheme.current.textColor
-//                    )
-//                }
-
                 item(key = "AnimatedBorder", span = { GridItemSpan(2) }) {
                     AnimatedBorderCard()
                 }
@@ -181,6 +174,7 @@ fun ArticleLayout(
                     WeatherSunrise(
                         modifier = Modifier
                             .borderWithAnimatedGradient(
+                                colorBackground = LocalTheme.current.background,
                                 width = 3.dp,
                                 shape = RoundedCornerShape(25.dp)
                             )
@@ -198,6 +192,7 @@ fun ArticleLayout(
                             .fillMaxWidth()
                             .height(80.dp)
                             .borderWithAnimatedGradient(
+                                colorBackground = LocalTheme.current.background,
                                 width = 3.dp,
                                 shape = RoundedCornerShape(25.dp)
                             )
@@ -238,6 +233,7 @@ fun ArticleLayout(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .borderWithAnimatedGradient(
+                                    colorBackground = LocalTheme.current.background,
                                     width = 3.dp,
                                     shape = RoundedCornerShape(25.dp)
                                 )
