@@ -4,6 +4,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
@@ -51,6 +52,7 @@ import com.example.jetpack.core.CoreLayout
 import com.example.jetpack.core.LocalTheme
 import com.example.jetpack.domain.enums.HomeShortcut
 import com.example.jetpack.domain.enums.SortOption
+import com.example.jetpack.domain.model.Boxy
 import com.example.jetpack.lifecycleobserver.NotificationLifecycleObserver
 import com.example.jetpack.notification.LockscreenManager
 import com.example.jetpack.notification.NotificationManager
@@ -86,6 +88,18 @@ class HomeFragment : CoreFragment() {
 
         setupNotificationLauncher()
         setupNotification()
+        setupContent()
+    }
+
+    private fun setupContent() {
+        val boxNumber = Boxy(100)
+        val boxText = Boxy("Hello")
+        val boxList = Boxy(listOf("a", "b", "c"))
+
+
+        Log.d("TAG", "setupContent - boxNumber = ${boxNumber.getGenericContent()}")
+        Log.d("TAG", "setupContent - boxText = ${boxText.getGenericContent()}")
+        Log.d("TAG", "setupContent - boxList = ${boxList.getGenericContent()}")
     }
 
     /*************************************************
