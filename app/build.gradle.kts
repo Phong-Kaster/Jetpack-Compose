@@ -118,9 +118,9 @@ dependencies {
 
 
     // Get started with the Navigation component - https://developer.android.com/guide/navigation/get-started#Set-up
-    implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
-    implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
-    implementation("androidx.navigation:navigation-compose:2.7.7")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.8.1")
+    implementation("androidx.navigation:navigation-ui-ktx:2.8.1")
+    implementation("androidx.navigation:navigation-compose:2.8.1")
 
 
     // In-app Review - https://developer.android.com/guide/playcore/in-app-review/kotlin-java#setup
@@ -158,8 +158,8 @@ dependencies {
 
     // Lottie for Android - https://github.com/airbnb/lottie-android
     // https://lottiefiles.com/blog/working-with-lottie-animations/getting-started-with-lottie-animations-in-android-app/
-    implementation("com.airbnb.android:lottie:6.4.0")
-    implementation("com.airbnb.android:lottie-compose:6.4.0")
+    implementation("com.airbnb.android:lottie:6.5.1")
+    implementation("com.airbnb.android:lottie-compose:6.5.1")
 
 
     // https://mvnrepository.com/artifact/androidx.compose.foundation/foundation
