@@ -88,19 +88,8 @@ class HomeFragment : CoreFragment() {
 
         setupNotificationLauncher()
         setupNotification()
-        setupContent()
     }
 
-    private fun setupContent() {
-        val boxNumber = Boxy(100)
-        val boxText = Boxy("Hello")
-        val boxList = Boxy(listOf("a", "b", "c"))
-
-
-        Log.d("TAG", "setupContent - boxNumber = ${boxNumber.getGenericContent()}")
-        Log.d("TAG", "setupContent - boxText = ${boxText.getGenericContent()}")
-        Log.d("TAG", "setupContent - boxList = ${boxList.getGenericContent()}")
-    }
 
     /*************************************************
      * setupNotificationLauncher
@@ -173,6 +162,7 @@ class HomeFragment : CoreFragment() {
                     HomeShortcut.CollapsibleTopbar2 -> safeNavigate(R.id.toCollapsibleTopbar2)
                     HomeShortcut.LastKnownLocation -> safeNavigate(R.id.toLastKnownLocation)
                     HomeShortcut.InstagramCarousel -> safeNavigate(R.id.toInstagramCarousel)
+                    HomeShortcut.Animation -> safeNavigate(R.id.toAnimation)
                     else -> {
                         showToast(it.name)
                     }

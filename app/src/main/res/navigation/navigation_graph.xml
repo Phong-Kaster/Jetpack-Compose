@@ -148,6 +148,9 @@
         android:id="@+id/instagramCarouselFragment"
         android:name="com.example.jetpack.ui.fragment.instagramcarousel.InstagramCarouselFragment" />
 
+    <fragment
+        android:id="@+id/animationFragment"
+        android:name="com.example.jetpack.ui.fragment.animation.AnimationFragment" />
 
     <activity
         android:id="@+id/lockscreenActivity"
@@ -372,6 +375,15 @@
     <action
         android:id="@+id/toInstagramCarousel"
         app:destination="@id/instagramCarouselFragment"
+        app:enterAnim="@anim/enter_slide_in_right"
+        app:exitAnim="@anim/exit_slide_out_left"
+        app:popEnterAnim="@anim/enter_slide_in_left"
+        app:popExitAnim="@anim/exit_slide_out_right"
+        app:popUpToInclusive="true"/>
+
+    <action
+        android:id="@+id/toAnimation"
+        app:destination="@id/animationFragment"
         app:enterAnim="@anim/enter_slide_in_right"
         app:exitAnim="@anim/exit_slide_out_left"
         app:popEnterAnim="@anim/enter_slide_in_left"

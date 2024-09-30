@@ -25,6 +25,8 @@ import javax.inject.Singleton
  * # [12 - Handling State in Jetpack Compose](https://medium.com/@harmanpreet.khera/handling-state-in-jetpack-compose-best-practices-ccffc09ce46a)
  * # --> For 19/09/2024
  * # [13 - Sealed Class vs Sealed Interface vs Enum in Kotlin](https://abhinaygupta1998.medium.com/sealed-class-vs-sealed-interface-vs-enum-in-kotlin-f65a0d139141)
+ * # --> For 30/09/2024
+ * # [14 - Creating a Time Picker Based on the ELSA Speak App](https://proandroiddev.com/creating-a-time-picker-based-on-the-elsa-speak-app-using-jetpack-compose-de931876acac)
  */
 @Singleton
 class JetpackDocument {}

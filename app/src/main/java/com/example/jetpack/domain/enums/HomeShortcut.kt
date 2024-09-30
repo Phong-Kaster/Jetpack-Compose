@@ -12,6 +12,7 @@ enum class HomeShortcut(
     @StringRes val content: Int = 0,
 )
 {
+    Animation(drawable = R.drawable.ic_iron_cross_wehtmatch, text = R.string.animation),
     Tutorial(drawable = R.drawable.ic_toturial, text = R.string.tutorial),
     Quote(drawable = R.drawable.ic_quote, text = R.string.quote),
     AccuWeatherLocation(drawable = R.drawable.ic_weather, text = R.string.accu_weather),
