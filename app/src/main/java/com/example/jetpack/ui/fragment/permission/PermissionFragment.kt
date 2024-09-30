@@ -44,7 +44,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class PermissionFragment : CoreFragment() {
 
-    private val TAG = "PermissionFragment"
+    override val TAG = "PermissionFragment"
 
 
     /***************************************

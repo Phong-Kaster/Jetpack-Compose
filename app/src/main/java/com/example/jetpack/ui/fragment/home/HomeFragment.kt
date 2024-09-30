@@ -196,6 +196,7 @@ fun HomeLayout(
 
     BackHandler(enabled = true, onBack = onOpenConfirmDialog)
 
+
     CoreLayout(
         backgroundColor = LocalTheme.current.background,
         topBar = {

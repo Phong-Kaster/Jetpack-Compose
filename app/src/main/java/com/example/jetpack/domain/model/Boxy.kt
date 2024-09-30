@@ -8,7 +8,7 @@ import android.util.Log
  */
 class Boxy<X>(val content: X) {
 
-    private val TAG = this.javaClass.simpleName
+    val TAG =  this.javaClass.simpleName
 
     fun getGenericContent(): X {
         return content

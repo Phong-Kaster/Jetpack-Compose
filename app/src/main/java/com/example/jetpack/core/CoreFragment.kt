@@ -32,6 +32,8 @@ val LocalTheme = staticCompositionLocalOf { DarkCustomizedTheme }
 @AndroidEntryPoint
 open class CoreFragment : Fragment(), CoreBehavior {
 
+    protected open val TAG = this.javaClass.simpleName
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

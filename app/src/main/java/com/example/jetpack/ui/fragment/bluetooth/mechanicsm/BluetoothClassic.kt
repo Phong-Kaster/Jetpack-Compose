@@ -22,7 +22,7 @@ class BluetoothClassic
 @Inject
 constructor(val context: JetpackApplication) {
 
-    private val tag = "BluetoothRepository"
+    val TAG =  "BluetoothRepository"
     private var bluetoothManager: BluetoothManager = context.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
     private val discoveredDevices = mutableListOf<BluetoothDevice>()
 
@@ -110,7 +110,7 @@ constructor(val context: JetpackApplication) {
      * followed by a page scan of each device found to retrieve its Bluetooth name.
      */
     fun startDiscovery() {
-        Log.d(tag, "BluetoothRepository - startDiscovery")
+        Log.d(TAG, "BluetoothRepository - startDiscovery")
         val isBluetoothSupported = isBluetoothSupported()
         val isBluetoothEnabled = isBluetoothEnabled()
 
@@ -130,7 +130,7 @@ constructor(val context: JetpackApplication) {
 
 
     fun stopDiscovery() {
-        Log.d(tag, "BluetoothRepository - stopDiscovery")
+        Log.d(TAG, "BluetoothRepository - stopDiscovery")
 
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH_SCAN) == PackageManager.PERMISSION_DENIED) {
             return
