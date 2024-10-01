@@ -53,6 +53,7 @@ import com.example.jetpack.ui.fragment.home.component.HomeTopBar
 import com.example.jetpack.ui.modifier.borderWithAnimatedGradient
 import com.example.jetpack.ui.view.AnimatedBorderCard
 import com.example.jetpack.ui.view.AtomicLoader
+import com.example.jetpack.ui.view.ContextualFlowRowSample
 import com.example.jetpack.ui.view.DNAHelix
 import com.example.jetpack.ui.view.SubsettingElement
 import com.example.jetpack.ui.view.WeatherSunrise
@@ -230,6 +231,27 @@ fun ArticleLayout(
                         SubsettingElement(
                             subsetting = Subsetting.TimedRecording,
                             onClick = onOpenWheelTimePicker,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .borderWithAnimatedGradient(
+                                    colorBackground = LocalTheme.current.background,
+                                    width = 3.dp,
+                                    shape = RoundedCornerShape(25.dp)
+                                )
+                                .clip(shape = RoundedCornerShape(25.dp))
+                                .background(
+                                    color = LocalTheme.current.background,
+                                    shape = RoundedCornerShape(25.dp)
+                                )
+                        )
+                    }
+                )
+
+                item(
+                    key = "ContextualFlowRow",
+                    span = { GridItemSpan(2) },
+                    content = {
+                        ContextualFlowRowSample(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .borderWithAnimatedGradient(

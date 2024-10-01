@@ -30,7 +30,7 @@ val LocalNavController = staticCompositionLocalOf<NavController?> { null }
 val LocalTheme = staticCompositionLocalOf { DarkCustomizedTheme }
 
 @AndroidEntryPoint
-open class CoreFragment : Fragment(), CoreBehavior {
+open class  CoreFragment : Fragment(), CoreBehavior {
 
     protected open val TAG = this.javaClass.simpleName
 
