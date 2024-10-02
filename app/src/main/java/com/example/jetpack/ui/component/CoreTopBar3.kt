@@ -37,10 +37,11 @@ fun CoreTopBar3(
     onRightClick: () -> Unit = {},
     textColor: Color = PrimaryColor,
     iconColor: Color = PrimaryColor,
+    modifier: Modifier = Modifier
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .statusBarsPadding()
             .background(color = Color.Transparent)

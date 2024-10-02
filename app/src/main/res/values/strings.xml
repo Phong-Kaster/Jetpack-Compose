@@ -131,4 +131,7 @@
     <string name="instagram_carousel">Instagram Carousel</string>
     <string name="long_press_on_indicator">Long press on indicator and drag to change color quickly</string>
     <string name="animation">Animation</string>
+    <string name="combine_with_input_transformation">Combine with Input Transformation</string>
+    <string name="digit_only">Digit only</string>
+    <string name="unique_text_field_with_decoration_box">Unique Text Field With Decoration Box</string>
 </resources>
