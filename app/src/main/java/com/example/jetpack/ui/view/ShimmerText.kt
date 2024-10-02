@@ -19,6 +19,7 @@ import androidx.compose.ui.graphics.LinearGradientShader
 import androidx.compose.ui.graphics.Shader
 import androidx.compose.ui.graphics.ShaderBrush
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextAlign
 
 /**
  * ShimmerText
@@ -37,6 +38,7 @@ fun ShimmerText(
     text: String,
     shimmerColor: Color,
     modifier: Modifier = Modifier,
+    textAlign: TextAlign? = null,
     textStyle: TextStyle = LocalTextStyle.current,
     animationSpec: DurationBasedAnimationSpec<Float> = tween(1000, 500, LinearEasing)
 ) {
@@ -69,6 +71,7 @@ fun ShimmerText(
 
     Text(
         text = text,
+        textAlign = textAlign,
         style = textStyle.copy(brush = brush),
         modifier = modifier
     )
