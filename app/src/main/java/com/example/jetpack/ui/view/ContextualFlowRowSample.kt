@@ -43,9 +43,7 @@ fun ContextualFlowRowSample(
     var maxLines by remember { mutableIntStateOf(MAXIMUM) }
     ContextualFlowRow(
         modifier = modifier
-            .systemBarsPadding()
-            .animateContentSize()
-            .padding(all = 8.dp),
+            .animateContentSize(),
         itemCount = Language.entries.size,
         maxLines = maxLines,
         overflow = ContextualFlowRowOverflow.expandOrCollapseIndicator(

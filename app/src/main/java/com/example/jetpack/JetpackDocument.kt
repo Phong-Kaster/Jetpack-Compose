@@ -29,6 +29,7 @@ import javax.inject.Singleton
  * # [14 - Creating a Time Picker Based on the ELSA Speak App](https://proandroiddev.com/creating-a-time-picker-based-on-the-elsa-speak-app-using-jetpack-compose-de931876acac)
  * # --> For 01/10/2024
  * # [15 - FloatingActionButton Lost in Jetpack Compose? A Material 3 Bottom Sheet Rescue Mission](https://www.google.com/url?q=https://medium.com/@efebu/floatingactionbutton-lost-in-jetpack-compose-a-material-3-bottom-sheet-rescue-mission-d77c959ef596?source%3Demail-b3a77c058080-1727293019539-digest.reader-a7e74ceedf8e-d77c959ef596----9-109------------------2b4cf684_d6b7_480d_8306_8fac9ded35e8-1&source=gmail&ust=1727851847585000&usg=AOvVaw0ZiyrX8olnKaZU0HKK2Y8K)
+ * # [16 - Kotlin Coroutines - how to merge asynchronous results in Kotlin](https://medium.com/@jtlalka/kotlin-coroutines-how-to-merge-asynchronous-results-in-kotlin-674c3079edba)
  */
 @Singleton
 class JetpackDocument {}

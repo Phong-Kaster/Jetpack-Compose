@@ -264,6 +264,7 @@ fun ArticleLayout(
                                     color = LocalTheme.current.background,
                                     shape = RoundedCornerShape(25.dp)
                                 )
+                                .padding(vertical = 10.dp)
                         )
                     }
                 )

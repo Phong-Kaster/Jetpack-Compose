@@ -22,7 +22,7 @@ import com.example.jetpack.ui.component.CoreTopBar3
 import com.example.jetpack.ui.fragment.basictextfield.component.CombineWithBuiltInInputTransformation
 import com.example.jetpack.ui.fragment.basictextfield.component.CombineWithInputTransformation
 import com.example.jetpack.ui.fragment.basictextfield.component.CommonUsage
-import com.example.jetpack.ui.fragment.basictextfield.component.UniqueTextFieldWithDecorationBox
+
 import com.example.jetpack.ui.fragment.basictextfield.component.VisualTransformation
 import com.example.jetpack.util.NavigationUtil.safeNavigateUp
 import dagger.hilt.android.AndroidEntryPoint
@@ -84,7 +84,6 @@ fun BasicTextFieldLayout(
 
                 item(key= "VisualTransformation"){ VisualTransformation() }
 
-                item(key = "UniqueTextFieldWithDecorationBox"){ UniqueTextFieldWithDecorationBox() }
             }
         })
 }
