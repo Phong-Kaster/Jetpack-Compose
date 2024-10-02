@@ -20,3 +20,4 @@ val animationInfiniteFloat = infiniteRepeatable<Float>(animation = tween(duratio
 val animationInfiniteFloat2 = infiniteRepeatable<Float>(animation = tween(durationMillis = 2000), repeatMode = RepeatMode.Restart)
 val animationInfiniteFloat3 = infiniteRepeatable<Float>(animation = tween(durationMillis = 3000), repeatMode = RepeatMode.Restart)
 val animationInfiniteFloat4 = infiniteRepeatable<Float>(animation = tween(durationMillis = 4000), repeatMode = RepeatMode.Restart)
+val animationInfiniteFloat5 = infiniteRepeatable<Float>(animation = tween(durationMillis = 5000), repeatMode = RepeatMode.Restart)

@@ -134,4 +134,6 @@
     <string name="combine_with_input_transformation">Combine with Input Transformation</string>
     <string name="digit_only">Digit only</string>
     <string name="unique_text_field_with_decoration_box">Unique Text Field With Decoration Box</string>
+    <string name="dark_mode">Dark mode</string>
+    <string name="light_mode">Light mode</string>
 </resources>

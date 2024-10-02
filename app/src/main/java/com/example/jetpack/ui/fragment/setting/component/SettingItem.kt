@@ -35,6 +35,7 @@ import com.example.jetpack.ui.theme.ShadowColor
 import com.example.jetpack.ui.theme.WeakColor
 import com.example.jetpack.ui.theme.body14
 import com.example.jetpack.ui.theme.body15
+import com.example.jetpack.ui.theme.customizedTextStyle
 import com.example.jetpack.ui.theme.outerShadow
 import com.example.jetpack.util.ViewUtil
 
@@ -71,7 +72,14 @@ fun SettingItem(
         Column(
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            Text(text = title, style = body15, color = LocalTheme.current.textColor)
+            Text(
+                text = title,
+                style = customizedTextStyle(
+                    fontSize = 16,
+                    fontWeight = 600
+                ),
+                color = LocalTheme.current.textColor
+            )
             if (subtitle != null) {
                 Text(text = subtitle, style = body14, color = LocalTheme.current.dim)
             }

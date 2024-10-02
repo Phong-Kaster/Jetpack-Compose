@@ -32,3 +32,16 @@ val DarkCustomizedTheme = CustomizedTheme(
     onDim = Color(0xFF2C3141)
 )
 
+val LightCustomizedTheme = CustomizedTheme(
+    primary = Color(0xFF9EFFFF),
+    onPrimary = Color(0xFF2C3141),
+    secondary = Color(0xFF004BDC),
+    onSecondary = Color(0xFF2C3141),
+    background = Color(0xFFFFFFFF),
+    error = Color(0xFFFF5449),
+    onError = Color.Black,
+    textColor = Color.Black,
+    dim = Color(0xFF8C8C8C),
+    onDim = Color(0xFF2C3141)
+)
+
