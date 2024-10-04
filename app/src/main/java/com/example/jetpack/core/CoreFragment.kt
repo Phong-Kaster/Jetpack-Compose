@@ -12,11 +12,13 @@ import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Density
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.example.jetpack.data.repository.SettingRepository
@@ -25,6 +27,11 @@ import com.example.jetpack.ui.theme.JetpackComposeTheme
 import com.example.jetpack.ui.theme.LightCustomizedTheme
 import com.example.jetpack.util.AppUtil
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import java.util.Locale
 import javax.inject.Inject
 
@@ -39,6 +46,8 @@ open class CoreFragment : Fragment(), CoreBehavior {
     @Inject
     lateinit var settingRepository: SettingRepository
     protected open val TAG = this.javaClass.simpleName
+
+    /** Dark Mode*/
     var enableDarkMode by mutableStateOf(false)
 
     override fun onCreateView(
@@ -99,6 +108,10 @@ open class CoreFragment : Fragment(), CoreBehavior {
     }
 
     private fun setupDarkMode() {
-        enableDarkMode = settingRepository.enableDarkMode()
+        lifecycleScope.launch {
+            settingRepository.enableDarkModeFlow().collect {
+                enableDarkMode = it
+            }
+        }
     }
 }

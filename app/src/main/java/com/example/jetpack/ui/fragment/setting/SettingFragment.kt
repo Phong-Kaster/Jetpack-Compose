@@ -132,11 +132,7 @@ class SettingFragment : CoreFragment() {
                 val destination = R.id.toSettingIcon
                 safeNavigate(destination)
             },
-            onChangeDarkMode = {
-                val isDarkMode = viewModel.enableDarkMode.value
-                viewModel.onChangeDarkMode()
-                enableDarkMode = !isDarkMode
-            }
+            onChangeDarkMode = { viewModel.onChangeDarkMode() }
         )
     }
 }
