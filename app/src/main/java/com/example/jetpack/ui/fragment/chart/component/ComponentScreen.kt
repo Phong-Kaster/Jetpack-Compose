@@ -38,8 +38,8 @@ fun ComponentScreen(
         horizontalArrangement = Arrangement.spacedBy(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
         modifier = Modifier
-            .padding(start = 16.dp, end = 16.dp, top = 0.dp, bottom = 32.dp)
             .fillMaxSize()
+            .padding(horizontal = 16.dp, vertical = 16.dp)
     ) {
         items(
             items = Language.entries.take(2),

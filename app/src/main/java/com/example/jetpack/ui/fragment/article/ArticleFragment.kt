@@ -62,6 +62,7 @@ import com.example.jetpack.ui.fragment.home.component.HomeTopBar
 import com.example.jetpack.ui.modifier.borderWithAnimatedGradient
 import com.example.jetpack.ui.modifier.doublePulseEffect
 import com.example.jetpack.ui.modifier.pulseEffect
+import com.example.jetpack.ui.view.AnalogueClock
 import com.example.jetpack.ui.view.AnimatedBorderCard
 import com.example.jetpack.ui.view.AnimatedThemeSwitcher
 import com.example.jetpack.ui.view.AtomicLoader
@@ -159,7 +160,7 @@ fun ArticleLayout() {
                 item(key = "DNAHelix", span = { GridItemSpan(2) }) {
                     DNAHelix(
                         firstColor = Color.Yellow,
-                        secondColor = Color.Blue,
+                        secondColor = Color.Red,
                         lineBrush = { _, _ -> SolidColor(Color.White) },
                         cycleDuration = 15000,
                         modifier = Modifier
@@ -277,6 +278,23 @@ fun ArticleLayout() {
                                     shape = RoundedCornerShape(25.dp)
                                 )
 
+                        )
+                    }
+                )
+
+                item(
+                    key = "AnalogueClock",
+                    span = { GridItemSpan(1) },
+                    content = {
+                        AnalogueClock(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .aspectRatio(1f)
+                                .borderWithAnimatedGradient(
+                                    colorBackground = LocalTheme.current.background,
+                                    width = 3.dp,
+                                    shape = RoundedCornerShape(25.dp)
+                                )
                         )
                     }
                 )

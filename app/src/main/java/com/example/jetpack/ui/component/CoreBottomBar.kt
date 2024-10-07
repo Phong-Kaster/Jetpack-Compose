@@ -48,6 +48,7 @@ import com.example.jetpack.ui.theme.body13
 import com.example.jetpack.ui.theme.medium13
 import com.example.jetpack.ui.fragment.tutorial.component.LocalTutorial
 import com.example.jetpack.ui.modifier.borderWithAnimatedGradient
+import com.example.jetpack.ui.theme.customizedTextStyle
 import com.example.jetpack.util.ViewUtil
 import com.example.jetpack.util.ViewUtil.CenterColumn
 
@@ -176,7 +177,10 @@ private fun BottomBarItem(
         if (selected) {
             Text(
                 text = stringResource(stringId),
-                style = if (!selected) body13 else medium13,
+                style = customizedTextStyle(
+                    fontSize = 14,
+                    fontWeight = 600,
+                ),
                 color = if (selected) LocalTheme.current.textColor else LocalTheme.current.dim,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,

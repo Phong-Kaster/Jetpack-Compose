@@ -73,9 +73,9 @@ fun AnalogueClock(
         }
     }
 
-    Column(modifier = Modifier.fillMaxSize()) {
+    Column(modifier = modifier.fillMaxSize()) {
         Canvas(
-            modifier = modifier.fillMaxSize(),
+            modifier = Modifier.fillMaxSize(),
             onDraw =
             {
                 /**
