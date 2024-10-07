@@ -55,13 +55,18 @@ import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
 import com.example.jetpack.core.LocalTheme
 import com.example.jetpack.domain.enums.ChartShortcut
+import com.example.jetpack.ui.component.CoreAlertDialog
 import com.example.jetpack.ui.component.CoreBottomBar
 import com.example.jetpack.ui.component.CoreExpandableFloatingButton
 import com.example.jetpack.ui.component.CoreFloatingMenu
+import com.example.jetpack.ui.component.CoreTextAnimationDialog
+import com.example.jetpack.ui.dialog.WheelTimePickerDialog
 import com.example.jetpack.ui.fragment.chart.component.BubbleChartScreen
 import com.example.jetpack.ui.fragment.chart.component.ChartTopBar
+import com.example.jetpack.ui.fragment.chart.component.ComponentScreen
 import com.example.jetpack.ui.fragment.chart.component.LineChartScreen
 import com.example.jetpack.ui.fragment.chart.component.RingChartScreen
+import com.example.jetpack.ui.fragment.home.component.HomeDialog
 import com.example.jetpack.ui.modifier.borderWithAnimatedGradient
 import com.example.jetpack.ui.theme.Background
 import com.example.jetpack.ui.theme.customizedTextStyle
@@ -77,6 +82,12 @@ import kotlin.math.roundToInt
 @AndroidEntryPoint
 class InsightFragment : CoreFragment() {
 
+    private var showAlertDialog by mutableStateOf(false)
+    private var showDialog by mutableStateOf(false)
+    private var showDottedTextDialog by mutableStateOf(false)
+    private var showWheelTimePickerDialog by mutableStateOf(false)
+
+
     /*************************************************
      * ComposeView
      */
@@ -88,6 +99,34 @@ class InsightFragment : CoreFragment() {
             onClick = {
                 Toast.makeText(context, context.getString(R.string.app_name), Toast.LENGTH_SHORT)
                     .show()
+            },
+            onOpenAlertDialog = { showAlertDialog = true },
+            onOpenDialog = { showDialog = true },
+            onOpenDottedTextDialog = { showDottedTextDialog = true },
+            onOpenWheelTimePicker = { showWheelTimePickerDialog = true }
+        )
+
+        HomeDialog(
+            enable = showDialog,
+            onDismissRequest = { showDialog = false },
+        )
+
+        CoreAlertDialog(
+            enable = showAlertDialog,
+            onDismissRequest = { showAlertDialog = false },
+        )
+
+        CoreTextAnimationDialog(
+            enable = showDottedTextDialog,
+            onDismissRequest = { showDottedTextDialog = false },
+        )
+
+        WheelTimePickerDialog(
+            enable = showWheelTimePickerDialog,
+            screenRecordingTime = 18960,
+            onDismissRequest = { showWheelTimePickerDialog = false },
+            onConfirm = { hour, minute, second ->
+                showToast("$hour:$minute:$second")
             }
         )
     }
@@ -99,7 +138,12 @@ class InsightFragment : CoreFragment() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun InsightLayout(
-    onClick: () -> Unit = {}
+    onClick: () -> Unit = {},
+
+    onOpenAlertDialog: () -> Unit = {},
+    onOpenDottedTextDialog: () -> Unit = {},
+    onOpenDialog: () -> Unit = {},
+    onOpenWheelTimePicker: () -> Unit = {},
 ) {
     var chosenChip: ChartShortcut by rememberSaveable { mutableStateOf(ChartShortcut.LineChart) }
 
@@ -166,6 +210,12 @@ fun InsightLayout(
                                 ChartShortcut.LineChart -> LineChartScreen()
                                 ChartShortcut.RingChart -> RingChartScreen()
                                 ChartShortcut.BubbleChart -> BubbleChartScreen()
+                                ChartShortcut.Component -> ComponentScreen(
+                                    onOpenWheelTimePicker = onOpenWheelTimePicker,
+                                    onOpenAlertDialog = onOpenAlertDialog,
+                                    onOpenDialog = onOpenDialog,
+                                    onOpenDottedTextDialog = onOpenDottedTextDialog,
+                                )
                             }
                         }
                     )

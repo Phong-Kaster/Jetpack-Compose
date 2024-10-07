@@ -4,7 +4,6 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
@@ -52,7 +51,6 @@ import com.example.jetpack.core.CoreLayout
 import com.example.jetpack.core.LocalTheme
 import com.example.jetpack.domain.enums.HomeShortcut
 import com.example.jetpack.domain.enums.SortOption
-import com.example.jetpack.domain.model.Boxy
 import com.example.jetpack.lifecycleobserver.NotificationLifecycleObserver
 import com.example.jetpack.notification.LockscreenManager
 import com.example.jetpack.notification.NotificationManager
@@ -63,7 +61,7 @@ import com.example.jetpack.ui.fragment.accuweather.component.SearchBar
 import com.example.jetpack.ui.fragment.home.component.HomeDialog
 import com.example.jetpack.ui.fragment.home.component.HomeShortcutItem
 import com.example.jetpack.ui.theme.PrimaryColor
-import com.example.jetpack.ui.view.ShimmerItem
+import com.example.jetpack.ui.modifier.ShimmerItem
 import com.example.jetpack.ui.theme.customizedTextStyle
 import com.example.jetpack.ui.view.DigitalClock3
 import com.example.jetpack.util.NavigationUtil.safeNavigate

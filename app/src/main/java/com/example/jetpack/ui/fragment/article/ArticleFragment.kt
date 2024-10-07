@@ -5,9 +5,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.LocalOverscrollConfiguration
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
@@ -22,7 +24,10 @@ import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.derivedStateOf
@@ -32,11 +37,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.jetpack.R
 import com.example.jetpack.configuration.Language
 import com.example.jetpack.configuration.Menu
 import com.example.jetpack.core.CoreFragment
@@ -52,6 +60,8 @@ import com.example.jetpack.ui.dialog.WheelTimePickerDialog
 import com.example.jetpack.ui.fragment.home.component.HomeDialog
 import com.example.jetpack.ui.fragment.home.component.HomeTopBar
 import com.example.jetpack.ui.modifier.borderWithAnimatedGradient
+import com.example.jetpack.ui.modifier.doublePulseEffect
+import com.example.jetpack.ui.modifier.pulseEffect
 import com.example.jetpack.ui.view.AnimatedBorderCard
 import com.example.jetpack.ui.view.AnimatedThemeSwitcher
 import com.example.jetpack.ui.view.AtomicLoader
@@ -67,10 +77,6 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class ArticleFragment : CoreFragment() {
 
-    private var showAlertDialog by mutableStateOf(false)
-    private var showDialog by mutableStateOf(false)
-    private var showDottedTextDialog by mutableStateOf(false)
-    private var showWheelTimePickerDialog by mutableStateOf(false)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -91,37 +97,7 @@ class ArticleFragment : CoreFragment() {
     @Composable
     override fun ComposeView() {
         super.ComposeView()
-
-        ArticleLayout(
-            onOpenAlertDialog = { showAlertDialog = true },
-            onOpenDialog = { showDialog = true },
-            onOpenDottedTextDialog = { showDottedTextDialog = true },
-            onOpenWheelTimePicker = { showWheelTimePickerDialog = true }
-        )
-
-        HomeDialog(
-            enable = showDialog,
-            onDismissRequest = { showDialog = false },
-        )
-
-        CoreAlertDialog(
-            enable = showAlertDialog,
-            onDismissRequest = { showAlertDialog = false },
-        )
-
-        CoreTextAnimationDialog(
-            enable = showDottedTextDialog,
-            onDismissRequest = { showDottedTextDialog = false },
-        )
-
-        WheelTimePickerDialog(
-            enable = showWheelTimePickerDialog,
-            screenRecordingTime = 18960,
-            onDismissRequest = { showWheelTimePickerDialog = false },
-            onConfirm = { hour, minute, second ->
-                showToast("$hour:$minute:$second")
-            }
-        )
+        ArticleLayout()
     }
 }
 
@@ -135,12 +111,7 @@ class ArticleFragment : CoreFragment() {
  */
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun ArticleLayout(
-    onOpenAlertDialog: () -> Unit = {},
-    onOpenDialog: () -> Unit = {},
-    onOpenDottedTextDialog: () -> Unit = {},
-    onOpenWheelTimePicker: () -> Unit = {},
-) {
+fun ArticleLayout() {
     // for lazy grid state
     val state = rememberLazyGridState()
     val extended by remember { derivedStateOf { state.firstVisibleItemIndex > 0 } }
@@ -210,29 +181,13 @@ fun ArticleLayout(
 
 
 
-                items(
-                    items = Language.entries.take(2),
-                    key = { item: Language -> item.name },
-                    itemContent = { language: Language ->
-                        SquareElement(
-                            language = language,
-                            onClick = {
-                                when (language) {
-                                    Language.English -> onOpenAlertDialog()
-                                    Language.German -> onOpenDottedTextDialog()
-                                    else -> onOpenDialog()
-                                }
-                            })
-                    }
-                )
 
                 item(
-                    key = "WheelTimePicker",
-                    span = { GridItemSpan(2) },
+                    key = "PulseEffect",
+                    span = { GridItemSpan(1) },
                     content = {
-                        SubsettingElement(
-                            subsetting = Subsetting.TimedRecording,
-                            onClick = onOpenWheelTimePicker,
+                        IconButton(
+                            onClick = {},
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .borderWithAnimatedGradient(
@@ -241,19 +196,37 @@ fun ArticleLayout(
                                     shape = RoundedCornerShape(25.dp)
                                 )
                                 .clip(shape = RoundedCornerShape(25.dp))
-                                .background(
-                                    color = LocalTheme.current.background,
-                                    shape = RoundedCornerShape(25.dp)
-                                )
-                        )
+                                .aspectRatio(1f)
+                        ) {
+                            Icon(
+                                painter = painterResource(id = R.drawable.ic_nazi_eagle),
+                                contentDescription = "Icon",
+                                tint = Color.White,
+                                modifier = Modifier
+                                    .pulseEffect(
+                                        initialScale = 0f,
+                                        targetScale = 1.2f,
+                                        shape = CircleShape,
+                                        brush = Brush.radialGradient(
+                                            0.3f to Color.Yellow,
+                                            0.6f to Color.Blue,
+                                            1f to Color.Yellow
+                                        )
+                                    )
+                                    .fillMaxWidth(0.8f)
+                                    .aspectRatio(1f)
+                                    .padding(16.dp)
+                            )
+                        }
                     }
                 )
 
                 item(
-                    key = "ContextualFlowRow",
-                    span = { GridItemSpan(2) },
+                    key = "DoublePulseEffect",
+                    span = { GridItemSpan(1) },
                     content = {
-                        ContextualFlowRowSample(
+                        IconButton(
+                            onClick = {},
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .borderWithAnimatedGradient(
@@ -262,12 +235,29 @@ fun ArticleLayout(
                                     shape = RoundedCornerShape(25.dp)
                                 )
                                 .clip(shape = RoundedCornerShape(25.dp))
-                                .background(
-                                    color = LocalTheme.current.background,
-                                    shape = RoundedCornerShape(25.dp)
-                                )
-                                .padding(vertical = 10.dp)
-                        )
+                                .aspectRatio(1f)
+                        ) {
+                            Icon(
+                                painter = painterResource(id = R.drawable.ic_iron_cross_wehtmatch),
+                                contentDescription = "Icon",
+                                tint = Color.White,
+                                modifier = Modifier
+                                    .doublePulseEffect(
+                                        initialScale = 0f,
+                                        targetScale = 1f,
+                                        shape = RoundedCornerShape(25.dp),
+                                        brush = Brush.radialGradient(
+                                            0.3f to Color.Yellow,
+                                            0.6f to Color.Blue,
+                                            1f to Color.Yellow
+                                        ),
+                                        duration = 3000,
+                                    )
+                                    .fillMaxWidth(0.8f)
+                                    .aspectRatio(1f)
+                                    .padding(16.dp)
+                            )
+                        }
                     }
                 )
 
@@ -290,12 +280,10 @@ fun ArticleLayout(
                         )
                     }
                 )
-                
             }
         }
     }
 }
-
 
 
 @Preview

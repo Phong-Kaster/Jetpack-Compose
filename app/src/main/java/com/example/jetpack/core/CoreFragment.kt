@@ -45,10 +45,10 @@ open class CoreFragment : Fragment(), CoreBehavior {
 
     @Inject
     lateinit var settingRepository: SettingRepository
-    protected open val TAG = this.javaClass.simpleName
+    protected open val TAG: String = this.javaClass.simpleName
 
     /** Dark Mode*/
-    var enableDarkMode by mutableStateOf(false)
+    private var enableDarkMode by mutableStateOf(true)
 
     override fun onCreateView(
         inflater: LayoutInflater,

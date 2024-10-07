@@ -14,4 +14,5 @@ enum class ChartShortcut(
     RadarChart(text = R.string.radar_chart),*/
     AnalogueClock(text = R.string.analogue_clock),
     BubbleChart(text = R.string.bubble_chart),
+    Component(text = R.string.component)
 }
