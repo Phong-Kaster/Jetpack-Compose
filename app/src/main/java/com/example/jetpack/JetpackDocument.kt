@@ -33,6 +33,7 @@ import javax.inject.Singleton
  * # [17 - Advanced Multithreading and Concurrency in Android](https://medium.com/@harmanpreet.khera/advanced-multithreading-and-concurrency-in-android-5ef9c085face)
  * # --> For 10/10/2024
  * # [18 - Lines in Android Jetpack Compose](https://medium.com/@ridvanozcan48/lines-in-android-jetpack-compose-bd4bdc64ef4c)
+ * # [19 - Kotlin Cheat Sheet for Android Developers](https://android-dev-nexus.medium.com/kotlin-cheat-sheet-for-android-developers-02882a996bc1)
  */
 @Singleton
 class JetpackDocument {}
