@@ -34,6 +34,8 @@ import javax.inject.Singleton
  * # --> For 10/10/2024
  * # [18 - Lines in Android Jetpack Compose](https://medium.com/@ridvanozcan48/lines-in-android-jetpack-compose-bd4bdc64ef4c)
  * # [19 - Kotlin Cheat Sheet for Android Developers](https://android-dev-nexus.medium.com/kotlin-cheat-sheet-for-android-developers-02882a996bc1)
+ * # --> For 15/10/2024
+ * # [20 - Mastering Kotlin Scope Functions](https://android-dev-nexus.medium.com/mastering-kotlin-scope-functions-94c8de1fc4ed)
  */
 @Singleton
 class JetpackDocument {}
