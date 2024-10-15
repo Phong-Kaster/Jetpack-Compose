@@ -32,7 +32,6 @@ import com.example.jetpack.configuration.Constant
 import com.example.jetpack.core.LocalTheme
 import com.example.jetpack.domain.model.ChartElement
 import com.example.jetpack.ui.theme.Background
-import com.example.jetpack.ui.theme.PrimaryColor
 import com.example.jetpack.ui.theme.customizedTextStyle
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
@@ -109,7 +108,7 @@ fun BloodPressureChart2(
                         maxAlignment = alignment.second,
                         numberLine = 4,
                         dateHeight = dateHeight,
-                        enableDashline = records.isNotEmpty()
+                        enableDashedLine = records.isNotEmpty()
                     )
             ) {
                 /*BloodPressureEmpty(
@@ -130,7 +129,7 @@ fun BloodPressureChart2(
                         maxAlignment = alignment.second,
                         numberLine = 4,
                         dateHeight = dateHeight,
-                        enableDashline = records.isNotEmpty()
+                        enableDashedLine = records.isNotEmpty()
                     )
                     .padding(start = 28.dp),
                 state = state,
@@ -169,7 +168,7 @@ fun Modifier.drawChartBaseline(
     minAlignment: Float,
     numberLine: Int,
     dateHeight: Dp,
-    enableDashline: Boolean,
+    enableDashedLine: Boolean,
 ): Modifier = drawWithCache {
     val spacing: Float = (maxAlignment - minAlignment) / numberLine
 
@@ -200,7 +199,7 @@ fun Modifier.drawChartBaseline(
                 topLeft = Offset(x = 0F, y = yOffset - textLayoutResult.size.height * 0.5F)
             )
 
-            if(enableDashline){
+            if(enableDashedLine){
                 drawLine(
                     color = Color(0xFFD9D9D9),
                     start = Offset(x = maxValueWidth * 1.5F, y = yOffset),
