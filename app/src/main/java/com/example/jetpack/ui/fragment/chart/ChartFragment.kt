@@ -145,7 +145,7 @@ fun InsightLayout(
     onOpenDialog: () -> Unit = {},
     onOpenWheelTimePicker: () -> Unit = {},
 ) {
-    var chosenChip: ChartShortcut by rememberSaveable { mutableStateOf(ChartShortcut.Component) }
+    var chosenChip: ChartShortcut by rememberSaveable { mutableStateOf(ChartShortcut.LineChart) }
 
     /** For Bottom Sheet Scaffold*/
     val bottomSheetState = rememberStandardBottomSheetState()
@@ -209,13 +209,14 @@ fun InsightLayout(
                                 ChartShortcut.AnalogueClock -> AnalogueClock()
                                 ChartShortcut.LineChart -> LineChartScreen()
                                 ChartShortcut.RingChart -> RingChartScreen()
-                                ChartShortcut.BubbleChart -> BubbleChartScreen()
+                                //ChartShortcut.BubbleChart -> BubbleChartScreen()
                                 ChartShortcut.Component -> ComponentScreen(
                                     onOpenWheelTimePicker = onOpenWheelTimePicker,
                                     onOpenAlertDialog = onOpenAlertDialog,
                                     onOpenDialog = onOpenDialog,
                                     onOpenDottedTextDialog = onOpenDottedTextDialog,
                                 )
+                                else -> Unit
                             }
                         }
                     )
