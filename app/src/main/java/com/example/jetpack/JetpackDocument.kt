@@ -36,6 +36,7 @@ import javax.inject.Singleton
  * # [19 - Kotlin Cheat Sheet for Android Developers](https://android-dev-nexus.medium.com/kotlin-cheat-sheet-for-android-developers-02882a996bc1)
  * # --> For 15/10/2024
  * # [20 - Mastering Kotlin Scope Functions](https://android-dev-nexus.medium.com/mastering-kotlin-scope-functions-94c8de1fc4ed)
+ * # [21 - 7 Kotlin Flow Operators that you must know](https://medium.com/@myofficework000/7-kotlin-flow-operators-that-you-must-know-62eb726e3ff4)
  */
 @Singleton
 class JetpackDocument {}
