@@ -137,4 +137,5 @@
     <string name="dark_mode">Dark mode</string>
     <string name="light_mode">Light mode</string>
     <string name="component">Component</string>
+    <string name="kotlin_flow">Kotlin flow</string>
 </resources>

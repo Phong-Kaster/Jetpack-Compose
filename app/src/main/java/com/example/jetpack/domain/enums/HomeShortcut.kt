@@ -31,5 +31,6 @@ enum class HomeShortcut(
     CollapsibleTopbar3(drawable = R.drawable.ic_bottom_article, text = R.string.collapsible_topbar_3),
     LastKnownLocation(drawable = R.drawable.ic_last_know_location, text = R.string.last_know_location),
     InstagramCarousel(drawable = R.drawable.ic_instagram, text = R.string.instagram_carousel),
+    KotlinFlow(drawable = R.drawable.ic_kotlin, text = R.string.kotlin_flow),
     ;
 }
