@@ -209,7 +209,7 @@ fun InsightLayout(
                                 ChartShortcut.AnalogueClock -> AnalogueClock()
                                 ChartShortcut.LineChart -> LineChartScreen()
                                 ChartShortcut.RingChart -> RingChartScreen()
-                                //ChartShortcut.BubbleChart -> BubbleChartScreen()
+                                ChartShortcut.BubbleChart -> BubbleChartScreen()
                                 ChartShortcut.Component -> ComponentScreen(
                                     onOpenWheelTimePicker = onOpenWheelTimePicker,
                                     onOpenAlertDialog = onOpenAlertDialog,

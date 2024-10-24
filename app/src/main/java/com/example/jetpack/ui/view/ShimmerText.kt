@@ -6,6 +6,8 @@ import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -18,8 +20,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.LinearGradientShader
 import androidx.compose.ui.graphics.Shader
 import androidx.compose.ui.graphics.ShaderBrush
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
+import com.example.jetpack.R
+import com.example.jetpack.core.LocalTheme
+import com.example.jetpack.ui.theme.animationSpecFloat1
+import com.example.jetpack.ui.theme.customizedTextStyle
 
 /**
  * ShimmerText
@@ -74,5 +82,18 @@ fun ShimmerText(
         textAlign = textAlign,
         style = textStyle.copy(brush = brush),
         modifier = modifier
+    )
+}
+
+@Preview
+@Composable
+private fun PreviewShimmerText() {
+    ShimmerText(
+        text = stringResource(id = R.string.app_name),
+        shimmerColor = Color.Red,
+        textAlign = TextAlign.Center,
+        textStyle = customizedTextStyle(fontSize = 16, fontWeight = 600, color = Color.White),
+        animationSpec = animationSpecFloat1,
+        modifier = Modifier.fillMaxWidth().background(color = LocalTheme.current.background)
     )
 }

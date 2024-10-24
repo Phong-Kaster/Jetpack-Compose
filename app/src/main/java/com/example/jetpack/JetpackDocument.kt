@@ -37,6 +37,8 @@ import javax.inject.Singleton
  * # --> For 15/10/2024
  * # [20 - Mastering Kotlin Scope Functions](https://android-dev-nexus.medium.com/mastering-kotlin-scope-functions-94c8de1fc4ed)
  * # [21 - 7 Kotlin Flow Operators that you must know](https://medium.com/@myofficework000/7-kotlin-flow-operators-that-you-must-know-62eb726e3ff4)
+ * # [22 - Custom Sliders in Jetpack Compose](https://medium.com/@anandgaur22/custom-sliders-in-jetpack-compose-9bc8deb32482)
+ * # [23 - 7 ADB Commands Every Android Developer Should Know](https://proandroiddev.com/7-adb-commands-every-android-developer-should-know-fbfb419e8827)
  */
 @Singleton
 class JetpackDocument {}

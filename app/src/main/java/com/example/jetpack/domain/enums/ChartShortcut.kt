@@ -14,6 +14,6 @@ enum class ChartShortcut(
     AreaChart(text = R.string.area_chart),
     RadarChart(text = R.string.radar_chart),*/
     AnalogueClock(text = R.string.analogue_clock),
-    //BubbleChart(text = R.string.bubble_chart),
+    BubbleChart(text = R.string.bubble_chart),
 
 }

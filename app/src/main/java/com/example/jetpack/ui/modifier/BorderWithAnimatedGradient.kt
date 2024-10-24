@@ -38,6 +38,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.jetpack.R
+import com.example.jetpack.core.LocalTheme
 import com.example.jetpack.ui.theme.customizedTextStyle
 
 /**
@@ -126,6 +127,7 @@ private fun ExampleWithBorderWithAnimatedGradient() {
                 .clip(shape = RoundedCornerShape(25.dp))
                 .borderWithAnimatedGradient(
                     width = 5.dp,
+                    colorBackground = LocalTheme.current.background,
                     shape = RoundedCornerShape(25.dp),
                     colors = listOf(Color(0xFF004BDC), Color(0xFF004BDC), Color(0xFF9EFFFF), Color(0xFF9EFFFF), Color(0xFF9EFFFF), Color(0xFF9EFFFF), Color(0xFF004BDC), Color(0xFF004BDC)),
                 )
@@ -145,12 +147,12 @@ private fun ExampleWithBorderWithAnimatedGradient() {
             ) {
                 Text(
                     text = stringResource(id = R.string.app_name),
-                    style = customizedTextStyle(fontSize = 14, fontWeight = 500, color = Color.Black)
+                    style = customizedTextStyle(fontSize = 14, fontWeight = 500, color = Color.White)
                 )
 
                 Text(
                     text = "borderWithAnimatedGradient",
-                    style = customizedTextStyle(fontSize = 14, fontWeight = 500, color = Color.Black)
+                    style = customizedTextStyle(fontSize = 14, fontWeight = 500, color = Color.White)
                 )
             }
         }
