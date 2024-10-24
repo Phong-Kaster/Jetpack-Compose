@@ -15,8 +15,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.Text
+import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -37,7 +37,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.jetpack.core.LocalTheme
 import com.example.jetpack.domain.model.ChartElement
-import com.example.jetpack.ui.theme.PrimaryColor
 import com.example.jetpack.ui.theme.customizedTextStyle
 import com.example.jetpack.util.ViewUtil
 import kotlin.math.roundToInt
@@ -166,7 +165,7 @@ fun LineChartElement(
                 .width(padding * 2F)
                 .weight(1F)
                 .clickable(
-                    indication = rememberRipple(bounded = true, color = Color.Blue),
+                    indication = ripple(bounded = true, color = Color.Blue),
                     interactionSource = remember { MutableInteractionSource() },
                     onClick = { onClick(element) }),
             onDraw = {

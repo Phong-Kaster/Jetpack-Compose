@@ -29,6 +29,7 @@ import com.example.jetpack.ui.theme.PrimaryColor
  * @see [Motion Layout Button in Android Jetpack Compose](https://www.geeksforgeeks.org/motion-layout-button-in-android-jetpack-compose/)
  * @see [Compose MotionLayout JSON Syntax](https://github.com/androidx/constraintlayout/wiki/Compose-MotionLayout-JSON-Syntax)
  */
+@OptIn(ExperimentalMotionApi::class)
 @Composable
 fun AnimationLayout1(
     onClick: () -> Unit = {}

@@ -42,7 +42,7 @@ fun CoreBottomSheet(
             containerColor = containerColor,
             sheetState = sheetState,
             dragHandle = null,
-            windowInsets = windowInsets,
+            contentWindowInsets = { windowInsets },
         ) {
             Column(modifier = Modifier.navigationBarsPadding()) {
                 content()

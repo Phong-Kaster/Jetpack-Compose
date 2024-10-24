@@ -16,9 +16,9 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
-import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
+import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -43,9 +43,6 @@ import com.example.jetpack.configuration.Menu
 import com.example.jetpack.core.LocalNavController
 import com.example.jetpack.core.LocalTheme
 import com.example.jetpack.ui.fragment.home.component.HomeBottomSheet
-import com.example.jetpack.ui.theme.IconColor
-import com.example.jetpack.ui.theme.body13
-import com.example.jetpack.ui.theme.medium13
 import com.example.jetpack.ui.fragment.tutorial.component.LocalTutorial
 import com.example.jetpack.ui.modifier.borderWithAnimatedGradient
 import com.example.jetpack.ui.theme.customizedTextStyle
@@ -161,7 +158,7 @@ private fun BottomBarItem(
         modifier = modifier
             .clickable(
                 interactionSource = remember { MutableInteractionSource() },
-                indication = rememberRipple(bounded = false, radius = 35.dp),
+                indication = ripple(bounded = false, radius = 35.dp),
                 onClick = onClick
             )
             .padding(top = 4.dp, bottom = 12.dp),
