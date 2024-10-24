@@ -58,7 +58,7 @@ class NotificationReceiver : BroadcastReceiver() {
             .setStyle(NotificationCompat.BigTextStyle().bigText(context.getString(R.string.fake_content)))
             .setCustomContentView(layoutSmall)
             .setCustomBigContentView(layoutBig)
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setAutoCancel(true)
 
 

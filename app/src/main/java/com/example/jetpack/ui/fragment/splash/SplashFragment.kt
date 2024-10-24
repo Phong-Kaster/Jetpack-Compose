@@ -1,5 +1,6 @@
 package com.example.jetpack.ui.fragment.splash
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
@@ -32,6 +34,7 @@ import com.airbnb.lottie.compose.rememberLottieComposition
 import com.example.jetpack.R
 import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
+import com.example.jetpack.domain.enums.ApplicationLogo
 import com.example.jetpack.ui.theme.Background2
 import com.example.jetpack.ui.theme.customizedTextStyle
 import com.example.jetpack.util.NavigationUtil.safeNavigate
@@ -75,10 +78,7 @@ fun SplashLayout(
 ) {
     var progress by remember { mutableFloatStateOf(0F) }
     val scope = rememberCoroutineScope()
-
-    val composition by rememberLottieComposition(
-        spec = LottieCompositionSpec.RawRes(R.raw.lottie_animation_loading)
-    )
+    val applicationLogo: ApplicationLogo by remember { mutableStateOf(ApplicationLogo.generateRandomLogo()) }
 
     LaunchedEffect(Unit) {
         scope.launch {
@@ -104,27 +104,16 @@ fun SplashLayout(
                     .fillMaxWidth()
                     .padding(vertical = 16.dp)
             ) {
-//                LottieAnimation(
-//                    composition = composition,
-//                    restartOnPlay = true,
-//                    iterations = LottieConstants.IterateForever,
-//                    contentScale = ContentScale.FillBounds,
-//                    modifier = Modifier
-//                        .size(80.dp)
-//
-//                )
+                Text(
+                    text = stringResource(R.string.app_name),
+                    style = customizedTextStyle(color = Color.White),
+                    modifier = Modifier
+                )
 
                 LinearProgressIndicator(
                     color = Color(0xFF004BDC),
                     trackColor = Color(0xFF9EFFFF),
                     strokeCap = StrokeCap.Round,
-                )
-
-
-                Text(
-                    text = stringResource(R.string.app_name),
-                    style = customizedTextStyle(color = Color.White),
-                    modifier = Modifier
                 )
             }
         },
@@ -133,16 +122,13 @@ fun SplashLayout(
                 modifier = Modifier
                     .fillMaxSize()
             ) {
-                Icon(
-                    painter = painterResource(R.drawable.ic_nazi_eagle),
+                Image(
+                    painter = painterResource(applicationLogo.photo),
                     contentDescription = null,
-                    tint = Color.White,
                     modifier = Modifier
                         .size(160.dp)
                         .clip(RoundedCornerShape(40))
                 )
-
-
             }
         }
     )

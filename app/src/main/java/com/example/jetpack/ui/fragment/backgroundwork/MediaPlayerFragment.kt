@@ -54,7 +54,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MediaPlayerFragment : CoreFragment() {
 
-    val TAG = "MediaPlayerService"
+    override val TAG = "MediaPlayerService"
 
     private lateinit var mediaPlayerService: MediaPlayerService
     private var isConnected: Boolean = false

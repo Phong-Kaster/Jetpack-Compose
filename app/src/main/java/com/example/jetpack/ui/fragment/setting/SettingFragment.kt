@@ -2,9 +2,7 @@ package com.example.jetpack.ui.fragment.setting
 
 import android.content.Intent
 import android.net.Uri
-import android.util.Log
 import android.widget.Toast
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,7 +15,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -27,13 +24,14 @@ import com.example.jetpack.configuration.Language
 import com.example.jetpack.configuration.Menu
 import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
+import com.example.jetpack.core.LocalTheme
 import com.example.jetpack.domain.enums.Star
 import com.example.jetpack.ui.component.CoreBottomBar
 import com.example.jetpack.ui.component.CoreFloatingMenu
 import com.example.jetpack.ui.fragment.home.component.HomeTopBar
 import com.example.jetpack.ui.fragment.setting.component.RateDialog
+import com.example.jetpack.ui.fragment.setting.component.SettingDarkMode
 import com.example.jetpack.ui.fragment.setting.component.SettingItem
-import com.example.jetpack.ui.theme.Background
 import com.example.jetpack.util.AppUtil
 import com.example.jetpack.util.NavigationUtil.safeNavigate
 import com.google.android.play.core.review.ReviewManagerFactory
@@ -104,7 +102,6 @@ class SettingFragment : CoreFragment() {
     @Composable
     override fun ComposeView() {
         super.ComposeView()
-
         RateDialog(
             enable = showRateDialog,
             onDismissRequest = { showRateDialog = !showRateDialog },
@@ -114,7 +111,11 @@ class SettingFragment : CoreFragment() {
             },
         )
 
+
+
+
         SettingLayout(
+            enableDarkMode =  viewModel.enableDarkMode.collectAsState().value,
             languageFromCache = viewModel.chosenLanguage.collectAsState().value,
             onRate = { showRateDialog = !showRateDialog },
             onOpenPrivatePolicy = { AppUtil.openWebsite(context = requireContext(), "https://www.youtube.com/") },
@@ -131,12 +132,14 @@ class SettingFragment : CoreFragment() {
                 val destination = R.id.toSettingIcon
                 safeNavigate(destination)
             },
+            onChangeDarkMode = { viewModel.onChangeDarkMode() }
         )
     }
 }
 
 @Composable
 fun SettingLayout(
+    enableDarkMode: Boolean,
     languageFromCache: Language,
     onOpenLanguage: () -> Unit = {},
     onOpenDisclaimer: () -> Unit = {},
@@ -144,12 +147,13 @@ fun SettingLayout(
     onOpenPrivatePolicy: () -> Unit = {},
     onRate: () -> Unit = {},
     onOpenIconSetting: () -> Unit = {},
+    onChangeDarkMode: ()->Unit = {},
 ) {
     CoreLayout(
         topBar = { HomeTopBar(name = stringResource(id = Menu.Setting.nameId)) },
         floatingActionButton = { CoreFloatingMenu() },
         bottomBar = { CoreBottomBar() },
-        backgroundColor = Background
+        backgroundColor = LocalTheme.current.background
     ) {
         Column(
             modifier = Modifier
@@ -158,6 +162,12 @@ fun SettingLayout(
                 .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
+            SettingDarkMode(
+                enableDarkMode = enableDarkMode,
+                onClick = onChangeDarkMode,
+                modifier = Modifier,
+            )
+
             SettingItem(
                 icon = R.drawable.ic_language,
                 title = stringResource(id = R.string.language),
@@ -206,5 +216,8 @@ fun SettingLayout(
 @Preview
 @Composable
 fun PreviewSettingLayout() {
-    SettingLayout(languageFromCache = Language.English)
+    SettingLayout(
+        enableDarkMode = false,
+        languageFromCache = Language.English
+    )
 }

@@ -122,7 +122,7 @@
 
     <fragment
         android:id="@+id/basicTextField2Fragment"
-        android:name="com.example.jetpack.ui.fragment.basictextfield2.BasicTextFieldFragment" />
+        android:name="com.example.jetpack.ui.fragment.basictextfield.BasicTextFieldFragment" />
 
     <fragment
         android:id="@+id/collapsibleTopBarFragment"
@@ -143,6 +143,19 @@
     <fragment
         android:id="@+id/lastKnownLocationFragment"
         android:name="com.example.jetpack.ui.fragment.location.LastKnownLocationFragment" />
+
+    <fragment
+        android:id="@+id/instagramCarouselFragment"
+        android:name="com.example.jetpack.ui.fragment.instagramcarousel.InstagramCarouselFragment" />
+
+    <fragment
+        android:id="@+id/animationFragment"
+        android:name="com.example.jetpack.ui.fragment.animation.AnimationFragment" />
+
+    <fragment
+        android:id="@+id/kotlinFlowFragment"
+        android:name="com.example.jetpack.ui.fragment.kotlinflow.KotlinFlowFragment" />
+
 
     <activity
         android:id="@+id/lockscreenActivity"
@@ -358,6 +371,33 @@
     <action
         android:id="@+id/toLastKnownLocation"
         app:destination="@id/lastKnownLocationFragment"
+        app:enterAnim="@anim/enter_slide_in_right"
+        app:exitAnim="@anim/exit_slide_out_left"
+        app:popEnterAnim="@anim/enter_slide_in_left"
+        app:popExitAnim="@anim/exit_slide_out_right"
+        app:popUpToInclusive="true"/>
+
+    <action
+        android:id="@+id/toInstagramCarousel"
+        app:destination="@id/instagramCarouselFragment"
+        app:enterAnim="@anim/enter_slide_in_right"
+        app:exitAnim="@anim/exit_slide_out_left"
+        app:popEnterAnim="@anim/enter_slide_in_left"
+        app:popExitAnim="@anim/exit_slide_out_right"
+        app:popUpToInclusive="true"/>
+
+    <action
+        android:id="@+id/toAnimation"
+        app:destination="@id/animationFragment"
+        app:enterAnim="@anim/enter_slide_in_right"
+        app:exitAnim="@anim/exit_slide_out_left"
+        app:popEnterAnim="@anim/enter_slide_in_left"
+        app:popExitAnim="@anim/exit_slide_out_right"
+        app:popUpToInclusive="true"/>
+
+    <action
+        android:id="@+id/toKotlinFlow"
+        app:destination="@id/kotlinFlowFragment"
         app:enterAnim="@anim/enter_slide_in_right"
         app:exitAnim="@anim/exit_slide_out_left"
         app:popEnterAnim="@anim/enter_slide_in_left"

@@ -1,20 +1,33 @@
 package com.example.jetpack.ui.fragment.article
 
+import android.os.Bundle
+import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.LocalOverscrollConfiguration
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Text
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.derivedStateOf
@@ -24,8 +37,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -34,19 +49,27 @@ import com.example.jetpack.configuration.Language
 import com.example.jetpack.configuration.Menu
 import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
+import com.example.jetpack.core.LocalTheme
+import com.example.jetpack.domain.enums.Subsetting
 import com.example.jetpack.ui.component.CoreAlertDialog
 import com.example.jetpack.ui.component.CoreBottomBar
 import com.example.jetpack.ui.component.CoreExpandableFloatingButton
 import com.example.jetpack.ui.component.CoreTextAnimationDialog
 import com.example.jetpack.ui.component.SquareElement
-import com.example.jetpack.ui.view.AnimatedBorderCard
-import com.example.jetpack.ui.view.DNAHelix
-import com.example.jetpack.ui.view.WeatherSunrise
+import com.example.jetpack.ui.dialog.WheelTimePickerDialog
 import com.example.jetpack.ui.fragment.home.component.HomeDialog
 import com.example.jetpack.ui.fragment.home.component.HomeTopBar
-import com.example.jetpack.ui.theme.Background
-import com.example.jetpack.ui.theme.Background2
-import com.example.jetpack.ui.theme.PrimaryColor
+import com.example.jetpack.ui.modifier.borderWithAnimatedGradient
+import com.example.jetpack.ui.modifier.doublePulseEffect
+import com.example.jetpack.ui.modifier.pulseEffect
+import com.example.jetpack.ui.view.AnalogueClock
+import com.example.jetpack.ui.view.AnimatedBorderCard
+import com.example.jetpack.ui.view.AnimatedThemeSwitcher
+import com.example.jetpack.ui.view.AtomicLoader
+import com.example.jetpack.ui.view.ContextualFlowRowSample
+import com.example.jetpack.ui.view.DNAHelix
+import com.example.jetpack.ui.view.SubsettingElement
+import com.example.jetpack.ui.view.WeatherSunrise
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -55,34 +78,27 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class ArticleFragment : CoreFragment() {
 
-    private var showAlertDialog by mutableStateOf(false)
-    private var showDialog by mutableStateOf(false)
-    private var showDottedTextDialog by mutableStateOf(false)
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+
+        val numbers = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+        val (even, odd) = numbers.partition { it % 2 == 0 }
+
+        Log.d("TAG", "onCreateView - even = $even")
+        Log.d("TAG", "onCreateView - odd = $odd")
+
+        return super.onCreateView(inflater, container, savedInstanceState)
+    }
+
 
     @Composable
     override fun ComposeView() {
         super.ComposeView()
-
-        ArticleLayout(
-            onOpenAlertDialog = { showAlertDialog = true },
-            onOpenDialog = { showDialog = true },
-            onOpenDottedTextDialog = { showDottedTextDialog = true },
-        )
-
-        HomeDialog(
-            enable = showDialog,
-            onDismissRequest = { showDialog = false },
-        )
-
-        CoreAlertDialog(
-            enable = showAlertDialog,
-            onDismissRequest = { showAlertDialog = false },
-        )
-
-        CoreTextAnimationDialog(
-            enable = showDottedTextDialog,
-            onDismissRequest = { showDottedTextDialog = false },
-        )
+        ArticleLayout()
     }
 }
 
@@ -96,11 +112,7 @@ class ArticleFragment : CoreFragment() {
  */
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun ArticleLayout(
-    onOpenAlertDialog: () -> Unit = {},
-    onOpenDialog: () -> Unit = {},
-    onOpenDottedTextDialog: () -> Unit = {},
-) {
+fun ArticleLayout() {
     // for lazy grid state
     val state = rememberLazyGridState()
     val extended by remember { derivedStateOf { state.firstVisibleItemIndex > 0 } }
@@ -114,7 +126,7 @@ fun ArticleLayout(
                 modifier = Modifier
             )
         },
-        backgroundColor = Background
+        backgroundColor = LocalTheme.current.background,
     ) {
         // Remove overscroll effect for lazy grid
         CompositionLocalProvider(
@@ -129,55 +141,168 @@ fun ArticleLayout(
                     .padding(start = 16.dp, end = 16.dp, top = 0.dp, bottom = 32.dp)
                     .fillMaxSize()
             ) {
-                item(key = "key1", span = { GridItemSpan(2) }) {
-                    Text(text = stringResource(R.string.this_screen_shows_special_effects), color = PrimaryColor)
-                }
-
                 item(key = "AnimatedBorder", span = { GridItemSpan(2) }) {
                     AnimatedBorderCard()
                 }
 
                 item(key = "WeatherSunrise", span = { GridItemSpan(2) }) {
-                    WeatherSunrise(modifier = Modifier.clip(shape = RoundedCornerShape(25.dp)))
+                    WeatherSunrise(
+                        modifier = Modifier
+                            .borderWithAnimatedGradient(
+                                colorBackground = LocalTheme.current.background,
+                                width = 3.dp,
+                                shape = RoundedCornerShape(25.dp)
+                            )
+                            .clip(shape = RoundedCornerShape(25.dp))
+                    )
                 }
 
                 item(key = "DNAHelix", span = { GridItemSpan(2) }) {
                     DNAHelix(
                         firstColor = Color.Yellow,
-                        secondColor = Color.Blue,
-                        lineBrush = {_,_ -> SolidColor(Color.White) },
+                        secondColor = Color.Red,
+                        lineBrush = { _, _ -> SolidColor(Color.White) },
                         cycleDuration = 15000,
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(80.dp)
-                            .clip(shape = RoundedCornerShape(0.dp))
-                            .background(color = Background2, shape = RoundedCornerShape(25.dp))
+                            .borderWithAnimatedGradient(
+                                colorBackground = LocalTheme.current.background,
+                                width = 3.dp,
+                                shape = RoundedCornerShape(25.dp)
+                            )
+                            .clip(shape = RoundedCornerShape(25.dp))
+                            .background(
+                                color = LocalTheme.current.background,
+                                shape = RoundedCornerShape(25.dp)
+                            )
                             .padding(vertical = 16.dp, horizontal = 16.dp)
-
                     )
                 }
 
 
 
-                items(
-                    items = Language.entries.take(2),
-                    key = { item: Language -> item.name },
 
-                    itemContent = { language: Language ->
-                        SquareElement(
-                            language = language,
-                            onClick = {
-                                when (language) {
-                                    Language.English -> onOpenAlertDialog()
-                                    Language.German -> onOpenDottedTextDialog()
-                                    else -> onOpenDialog()
-                                }
-                            })
-                    })
+                item(
+                    key = "PulseEffect",
+                    span = { GridItemSpan(1) },
+                    content = {
+                        IconButton(
+                            onClick = {},
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .borderWithAnimatedGradient(
+                                    colorBackground = LocalTheme.current.background,
+                                    width = 3.dp,
+                                    shape = RoundedCornerShape(25.dp)
+                                )
+                                .clip(shape = RoundedCornerShape(25.dp))
+                                .aspectRatio(1f)
+                        ) {
+                            Icon(
+                                painter = painterResource(id = R.drawable.ic_nazi_eagle),
+                                contentDescription = "Icon",
+                                tint = Color.White,
+                                modifier = Modifier
+                                    .pulseEffect(
+                                        initialScale = 0f,
+                                        targetScale = 1.2f,
+                                        shape = CircleShape,
+                                        brush = Brush.radialGradient(
+                                            0.3f to Color.Yellow,
+                                            0.6f to Color.Blue,
+                                            1f to Color.Yellow
+                                        )
+                                    )
+                                    .fillMaxWidth(0.8f)
+                                    .aspectRatio(1f)
+                                    .padding(16.dp)
+                            )
+                        }
+                    }
+                )
+
+                item(
+                    key = "DoublePulseEffect",
+                    span = { GridItemSpan(1) },
+                    content = {
+                        IconButton(
+                            onClick = {},
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .borderWithAnimatedGradient(
+                                    colorBackground = LocalTheme.current.background,
+                                    width = 3.dp,
+                                    shape = RoundedCornerShape(25.dp)
+                                )
+                                .clip(shape = RoundedCornerShape(25.dp))
+                                .aspectRatio(1f)
+                        ) {
+                            Icon(
+                                painter = painterResource(id = R.drawable.ic_iron_cross_wehtmatch),
+                                contentDescription = "Icon",
+                                tint = Color.White,
+                                modifier = Modifier
+                                    .doublePulseEffect(
+                                        initialScale = 0f,
+                                        targetScale = 1f,
+                                        shape = RoundedCornerShape(25.dp),
+                                        brush = Brush.radialGradient(
+                                            0.3f to Color.Yellow,
+                                            0.6f to Color.Blue,
+                                            1f to Color.Yellow
+                                        ),
+                                        duration = 3000,
+                                    )
+                                    .fillMaxWidth(0.8f)
+                                    .aspectRatio(1f)
+                                    .padding(16.dp)
+                            )
+                        }
+                    }
+                )
+
+                item(
+                    key = "AtomicLoader",
+                    span = { GridItemSpan(1) },
+                    content = {
+                        AtomicLoader(
+                            modifier = Modifier
+                                .padding(5.dp)
+                                .clip(shape = RoundedCornerShape(25.dp))
+                                .width(150.dp)
+                                .aspectRatio(1f)
+                                .borderWithAnimatedGradient(
+                                    colorBackground = LocalTheme.current.background,
+                                    width = 3.dp,
+                                    shape = RoundedCornerShape(25.dp)
+                                )
+
+                        )
+                    }
+                )
+
+                item(
+                    key = "AnalogueClock",
+                    span = { GridItemSpan(1) },
+                    content = {
+                        AnalogueClock(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .aspectRatio(1f)
+                                .borderWithAnimatedGradient(
+                                    colorBackground = LocalTheme.current.background,
+                                    width = 3.dp,
+                                    shape = RoundedCornerShape(25.dp)
+                                )
+                        )
+                    }
+                )
             }
         }
     }
 }
+
 
 @Preview
 @Composable

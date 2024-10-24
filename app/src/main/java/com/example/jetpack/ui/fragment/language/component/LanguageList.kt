@@ -20,12 +20,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.jetpack.configuration.Language
+import com.example.jetpack.core.LocalTheme
 import com.example.jetpack.ui.theme.Background
 import com.example.jetpack.ui.theme.OppositeBackground
 import com.example.jetpack.ui.theme.OppositePrimaryColor
@@ -69,7 +71,7 @@ fun LanguageItem(
             .fillMaxWidth()
             .height(56.dp)
             .clip(shape = RoundedCornerShape(15.dp))
-            .background(if (selected) PrimaryColor else Background)
+            .background(color = if (selected) LocalTheme.current.primary else LocalTheme.current.background)
             .clickable(onClick = onClick)
             .padding(horizontal = 16.dp),
         verticalAlignment = Alignment.CenterVertically
@@ -84,7 +86,7 @@ fun LanguageItem(
         Text(
             text = stringResource(id = language.text),
             style = h16,
-            color = if (selected) OppositePrimaryColor else OppositeBackground
+            color = if (selected) Color.Black else Color.White
         )
     }
 }

@@ -1,11 +1,9 @@
 package com.example.jetpack.ui.fragment.chart.chartcomponent
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -30,9 +28,8 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.jetpack.configuration.Constant
 import com.example.jetpack.domain.model.ChartElement
-import com.example.jetpack.ui.theme.Background
-import com.example.jetpack.ui.theme.PrimaryColor
 import com.example.jetpack.ui.theme.customizedTextStyle
+import com.example.jetpack.util.ViewUtil
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toImmutableList
@@ -41,7 +38,7 @@ private val alignmentLinesPathEffect = PathEffect.dashPathEffect(floatArrayOf(10
 private val dateHeight: Dp = 30.dp
 
 @Composable
-fun BloodPressureChart2(
+fun BloodPressureChart(
     records: ImmutableList<ChartElement>,
     modifier: Modifier = Modifier,
 ) {
@@ -100,7 +97,6 @@ fun BloodPressureChart2(
             Column(
                 modifier = Modifier
                     .matchParentSize()
-                    .background(color = Background)
                     .padding(start = 0.dp, end = 0.dp, bottom = 32.dp, top = 32.dp)
                     .drawChartBaseline(
                         textMeasurer = rememberTextMeasurer(),
@@ -108,7 +104,7 @@ fun BloodPressureChart2(
                         maxAlignment = alignment.second,
                         numberLine = 4,
                         dateHeight = dateHeight,
-                        enableDashline = records.isNotEmpty()
+                        enableDashedLine = records.isNotEmpty()
                     )
             ) {
                 /*BloodPressureEmpty(
@@ -121,7 +117,6 @@ fun BloodPressureChart2(
                 contentPadding = PaddingValues(start = 0.dp, end = 12.dp),
                 modifier = Modifier
                     .matchParentSize()
-                    .background(color = Background)
                     .padding(start = 0.dp, end = 0.dp, bottom = 32.dp, top = 32.dp)
                     .drawChartBaseline(
                         textMeasurer = rememberTextMeasurer(),
@@ -129,7 +124,7 @@ fun BloodPressureChart2(
                         maxAlignment = alignment.second,
                         numberLine = 4,
                         dateHeight = dateHeight,
-                        enableDashline = records.isNotEmpty()
+                        enableDashedLine = records.isNotEmpty()
                     )
                     .padding(start = 28.dp),
                 state = state,
@@ -162,13 +157,13 @@ fun BloodPressureChart2(
  * @param numberLine is the number of dashed line that chart will draw
  * @param dateHeight is the minimum of height that text of date can be shown fully
  */
-fun Modifier.drawChartBaseline(
+private fun Modifier.drawChartBaseline(
     textMeasurer: TextMeasurer,
     maxAlignment: Float,
     minAlignment: Float,
     numberLine: Int,
     dateHeight: Dp,
-    enableDashline: Boolean,
+    enableDashedLine: Boolean,
 ): Modifier = drawWithCache {
     val spacing: Float = (maxAlignment - minAlignment) / numberLine
 
@@ -195,11 +190,11 @@ fun Modifier.drawChartBaseline(
 
             drawText(
                 textLayoutResult = textLayoutResult,
-                color = PrimaryColor,
+                color = Color.White,
                 topLeft = Offset(x = 0F, y = yOffset - textLayoutResult.size.height * 0.5F)
             )
 
-            if(enableDashline){
+            if(enableDashedLine){
                 drawLine(
                     color = Color(0xFFD9D9D9),
                     start = Offset(x = maxValueWidth * 1.5F, y = yOffset),
@@ -216,15 +211,10 @@ fun Modifier.drawChartBaseline(
 
 @Preview
 @Composable
-private fun PreviewBloodPressureChart2Data() {
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .aspectRatio(1F)
-            .background(color = Color.DarkGray)
-    ) {
-        BloodPressureChart2(
-            modifier = Modifier.matchParentSize(),
+private fun PreviewBloodPressureChartData() {
+    ViewUtil.PreviewContent{
+        BloodPressureChart(
+            modifier = Modifier,
             records = ChartElement.getFakeElements().toImmutableList()
         )
     }
@@ -232,15 +222,10 @@ private fun PreviewBloodPressureChart2Data() {
 
 @Preview
 @Composable
-private fun PreviewBloodPressureChart2Empty() {
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .aspectRatio(1F)
-            .background(color = Background)
-    ) {
-        BloodPressureChart2(
-            modifier = Modifier.matchParentSize(),
+private fun PreviewBloodPressureChartEmpty() {
+    ViewUtil.PreviewContent{
+        BloodPressureChart(
+            modifier = Modifier,
             records = persistentListOf()
         )
     }

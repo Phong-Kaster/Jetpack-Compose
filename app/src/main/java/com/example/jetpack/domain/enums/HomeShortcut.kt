@@ -12,10 +12,8 @@ enum class HomeShortcut(
     @StringRes val content: Int = 0,
 )
 {
+    Animation(drawable = R.drawable.ic_iron_cross_wehtmatch, text = R.string.animation),
     Tutorial(drawable = R.drawable.ic_toturial, text = R.string.tutorial),
-    /*Language(drawable = R.drawable.ic_language, text = R.string.language),
-    Disclaimer(drawable = R.drawable.ic_disclaimer, text = R.string.disclaimer),
-    Rate(drawable = R.drawable.ic_star_disable, text = R.string.rate),*/
     Quote(drawable = R.drawable.ic_quote, text = R.string.quote),
     AccuWeatherLocation(drawable = R.drawable.ic_weather, text = R.string.accu_weather),
     Permissions(drawable = R.drawable.ic_permission, text = R.string.permissions),
@@ -32,5 +30,7 @@ enum class HomeShortcut(
     CollapsibleTopbar2(drawable = R.drawable.ic_bottom_article, text = R.string.collapsible_topbar_2),
     CollapsibleTopbar3(drawable = R.drawable.ic_bottom_article, text = R.string.collapsible_topbar_3),
     LastKnownLocation(drawable = R.drawable.ic_last_know_location, text = R.string.last_know_location),
+    InstagramCarousel(drawable = R.drawable.ic_instagram, text = R.string.instagram_carousel),
+    KotlinFlow(drawable = R.drawable.ic_kotlin, text = R.string.kotlin_flow),
     ;
 }

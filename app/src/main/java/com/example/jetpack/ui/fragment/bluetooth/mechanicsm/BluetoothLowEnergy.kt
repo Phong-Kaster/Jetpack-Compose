@@ -31,7 +31,7 @@ class BluetoothLowEnergy
 @Inject
 constructor(val context: JetpackApplication) {
 
-    private val tag = "BluetoothLowEnergy"
+    val TAG =  "BluetoothLowEnergy"
     private var bluetoothManager: BluetoothManager = context.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
     private val discoveredDevices = mutableListOf<BluetoothDevice>()
 
@@ -98,16 +98,16 @@ constructor(val context: JetpackApplication) {
                 _scanningFlow.value = false
 
                 bluetoothLeScanner?.stopScan(leScanCallback)
-                Log.d(tag, "stop scanning using Bluetooth Low Energy")
+                Log.d(TAG, "stop scanning using Bluetooth Low Energy")
             }, SCAN_PERIOD)
             _scanningFlow.value = true
 
             bluetoothLeScanner?.startScan(leScanCallback)
-            Log.d(tag, "start scanning using Bluetooth Low Energy")
+            Log.d(TAG, "start scanning using Bluetooth Low Energy")
         } else {
             _scanningFlow.value = false
             bluetoothLeScanner?.stopScan(leScanCallback)
-            Log.d(tag, "stop scanning using Bluetooth Low Energy")
+            Log.d(TAG, "stop scanning using Bluetooth Low Energy")
         }
     }
 

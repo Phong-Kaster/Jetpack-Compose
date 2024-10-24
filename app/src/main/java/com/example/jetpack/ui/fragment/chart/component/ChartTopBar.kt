@@ -23,6 +23,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.jetpack.R
 import com.example.jetpack.configuration.Menu
+import com.example.jetpack.core.LocalTheme
 import com.example.jetpack.domain.enums.ChartShortcut
 import com.example.jetpack.ui.fragment.home.component.HomeTopBar
 import com.example.jetpack.ui.theme.Background
@@ -39,7 +40,7 @@ fun ChartTopBar(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .background(color = Background)
+            .background(color = LocalTheme.current.background)
     ) {
         HomeTopBar(name = stringResource(id = Menu.Insight.nameId))
         LazyRow(
@@ -58,21 +59,22 @@ fun ChartTopBar(
                             containerColor = Color.Transparent,
                             labelColor = Color.Blue,
                             iconColor = OppositePrimaryColor,
-                            selectedContainerColor = PrimaryColor,
+                            selectedContainerColor = LocalTheme.current.secondary,
                             selectedLabelColor = OppositePrimaryColor,
                             disabledContainerColor = Color.Transparent,
                         ),
                         border = FilterChipDefaults.filterChipBorder(
                             enabled = true,
                             selected = true,
-                            selectedBorderColor = PrimaryColor,
+                            borderWidth = 2.dp,
+                            selectedBorderColor = if (chosenChip == it  ) LocalTheme.current.secondary else LocalTheme.current.textColor,
 
-                        ),
+                            ),
                         label = {
                             Text(
                                 text = stringResource(id = it.text),
                                 style = customizedTextStyle(),
-                                color = if (chosenChip == it) OppositePrimaryColor else PrimaryColor
+                                color = if (chosenChip == it) LocalTheme.current.textColor else LocalTheme.current.textColor
                             )
                         },
                         leadingIcon =
@@ -82,7 +84,7 @@ fun ChartTopBar(
                                     imageVector = Icons.Filled.Done,
                                     contentDescription = stringResource(id = R.string.icon),
                                     modifier = Modifier.size(FilterChipDefaults.IconSize),
-                                    tint = OppositePrimaryColor
+                                    tint = LocalTheme.current.textColor
                                 )
                             }
                         } else {

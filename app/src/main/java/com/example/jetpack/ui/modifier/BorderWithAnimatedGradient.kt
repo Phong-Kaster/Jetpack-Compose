@@ -38,6 +38,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.jetpack.R
+import com.example.jetpack.core.LocalTheme
 import com.example.jetpack.ui.theme.customizedTextStyle
 
 /**
@@ -48,6 +49,7 @@ import com.example.jetpack.ui.theme.customizedTextStyle
  */
 @SuppressLint("ModifierFactoryUnreferencedReceiver")
 fun Modifier.borderWithAnimatedGradient(
+    colorBackground: Color = Color.White,
     width: Dp = 2.dp,
     shape: Shape = RoundedCornerShape(20.dp),
     colors: List<Color> = listOf(
@@ -78,6 +80,8 @@ fun Modifier.borderWithAnimatedGradient(
         label = "angle"
     )
 
+
+
     clip(shape = shape)
         .padding(width)
         .drawBehind {
@@ -90,7 +94,7 @@ fun Modifier.borderWithAnimatedGradient(
             }
 
             drawRoundRect(
-                color = Color.White,
+                color = colorBackground,
                 topLeft = Offset(1.dp.toPx(), 1.dp.toPx()),
                 size = Size(
                     width = size.width - 2.dp.toPx(),
@@ -123,11 +127,12 @@ private fun ExampleWithBorderWithAnimatedGradient() {
                 .clip(shape = RoundedCornerShape(25.dp))
                 .borderWithAnimatedGradient(
                     width = 5.dp,
+                    colorBackground = LocalTheme.current.background,
                     shape = RoundedCornerShape(25.dp),
                     colors = listOf(Color(0xFF004BDC), Color(0xFF004BDC), Color(0xFF9EFFFF), Color(0xFF9EFFFF), Color(0xFF9EFFFF), Color(0xFF9EFFFF), Color(0xFF004BDC), Color(0xFF004BDC)),
                 )
                 .padding(horizontal = 10.dp, vertical = 10.dp)
-                .background(color = Color.White, shape = RoundedCornerShape(25.dp))
+                .background(color = Color.Transparent, shape = RoundedCornerShape(25.dp))
                 .padding(horizontal = 16.dp)
         ) {
             Image(
@@ -142,12 +147,12 @@ private fun ExampleWithBorderWithAnimatedGradient() {
             ) {
                 Text(
                     text = stringResource(id = R.string.app_name),
-                    style = customizedTextStyle(fontSize = 14, fontWeight = 500, color = Color.Black)
+                    style = customizedTextStyle(fontSize = 14, fontWeight = 500, color = Color.White)
                 )
 
                 Text(
                     text = "borderWithAnimatedGradient",
-                    style = customizedTextStyle(fontSize = 14, fontWeight = 500, color = Color.Black)
+                    style = customizedTextStyle(fontSize = 14, fontWeight = 500, color = Color.White)
                 )
             }
         }

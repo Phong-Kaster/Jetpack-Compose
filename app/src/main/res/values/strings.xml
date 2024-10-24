@@ -120,4 +120,22 @@
     <string name="last_know_location">Last know location</string>
     <string name="this_screen_shows_special_effects"><![CDATA[This screen shows special effects and components that I have done on my own & collected on Internet]]></string>
     <string name="bubble_chart">Bubble Chart</string>
+    <string name="privacy">Privacy</string>
+    <string name="timed_recording">Timed recording</string>
+    <string name="none">None</string>
+    <string name="customize">Customize</string>
+    <string name="hour">Hour</string>
+    <string name="minute">Minute</string>
+    <string name="second">Second</string>
+    <string name="let_s_go">Let\'s go</string>
+    <string name="instagram_carousel">Instagram Carousel</string>
+    <string name="long_press_on_indicator">Long press on indicator and drag to change color quickly</string>
+    <string name="animation">Animation</string>
+    <string name="combine_with_input_transformation">Combine with Input Transformation</string>
+    <string name="digit_only">Digit only</string>
+    <string name="unique_text_field_with_decoration_box">Unique Text Field With Decoration Box</string>
+    <string name="dark_mode">Dark mode</string>
+    <string name="light_mode">Light mode</string>
+    <string name="component">Component</string>
+    <string name="kotlin_flow">Kotlin flow</string>
 </resources>

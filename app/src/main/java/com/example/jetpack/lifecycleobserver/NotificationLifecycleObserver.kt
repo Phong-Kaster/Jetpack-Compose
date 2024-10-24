@@ -114,6 +114,7 @@ constructor(
                 val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
                 val uri = Uri.fromParts("package", activity.packageName, null)
                 intent.setData(uri)
+
                 settingLauncher.launch(intent)
             }
 

@@ -16,4 +16,5 @@ constructor(
     val createAtEpochDay: Long = LocalDate.now().toEpochDay()
 )
 {
+
 }

@@ -22,6 +22,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.jetpack.R
+import com.example.jetpack.core.LocalTheme
 import com.example.jetpack.ui.theme.Background
 import com.example.jetpack.ui.theme.OppositePrimaryColor
 import com.example.jetpack.ui.theme.PrimaryColor
@@ -31,9 +32,9 @@ import com.example.jetpack.ui.theme.medium18
 fun CoreTopBar(
     title: String? = null,
     @DrawableRes leftIcon: Int? = null,
-    @ColorRes leftBackground: Color = OppositePrimaryColor,
+    @ColorRes leftBackground: Color = LocalTheme.current.secondary,
     @DrawableRes rightIcon: Int? = null,
-    @ColorRes rightBackground: Color = OppositePrimaryColor,
+    @ColorRes rightBackground: Color =  LocalTheme.current.secondary,
     onClickLeft: () -> Unit = {},
     onClickRight: () -> Unit = {},
 ) {
@@ -41,7 +42,7 @@ fun CoreTopBar(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .background(color = Background)
+            .background(color = LocalTheme.current.background)
             .statusBarsPadding()
             .padding(16.dp),
     ) {
@@ -49,7 +50,7 @@ fun CoreTopBar(
             Text(
                 text = title,
                 style = medium18,
-                color = PrimaryColor,
+                color = LocalTheme.current.primary,
                 modifier = Modifier
                     .align(Alignment.Center)
             )
@@ -63,14 +64,14 @@ fun CoreTopBar(
                 },
                 modifier = Modifier
                     .clip(shape = CircleShape)
-                    .background(color = PrimaryColor)
+                    .background(color = LocalTheme.current.primary)
                     .size(24.dp)
             ) {
                 Icon(
                     painter = painterResource(id = leftIcon),
                     contentDescription = null,
                     tint = leftBackground,
-                    modifier = Modifier.size(15.dp)
+                    modifier = Modifier.size(15.dp),
                 )
             }
         }
@@ -83,7 +84,7 @@ fun CoreTopBar(
                 },
                 modifier = Modifier
                     .clip(shape = CircleShape)
-                    .background(color = PrimaryColor)
+                    .background(color = LocalTheme.current.primary)
                     .size(24.dp)
                     .align(Alignment.CenterEnd)
             ) {

@@ -7,16 +7,19 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
@@ -25,6 +28,7 @@ import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import com.example.jetpack.R
 import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
+import com.example.jetpack.core.LocalTheme
 import com.example.jetpack.ui.fragment.intro.component.IntroContent
 import com.example.jetpack.ui.fragment.intro.component.IntroIndicator
 import com.example.jetpack.ui.theme.Background
@@ -49,8 +53,11 @@ class IntroFragment : CoreFragment() {
             onStart = {
                 viewModel.setEnableIntro(enable = false)
 
-                val destination = IntroFragmentDirections.fromIntroToHome()
-                safeNavigate(destination = destination)
+//                val destination = IntroFragmentDirections.fromIntroToHome()
+//                safeNavigate(destination = destination)
+
+                val destination = R.id.fromIntroToHome
+                safeNavigate(destination)
             }
         )
     }
@@ -82,11 +89,11 @@ fun IntroLayout(
         }
     }
 
-    LaunchedEffect(key1 = pagerState.settledPage ) {
+    LaunchedEffect(key1 = pagerState.settledPage) {
         launch {
             delay(1000)
             with(pagerState) {
-                val target = if (settledPage  < pageCount - 1) settledPage + 1 else 0
+                val target = if (settledPage < pageCount - 1) settledPage + 1 else 0
                 animateScrollToPage(
                     page = target,
                     animationSpec = tween(
@@ -101,9 +108,13 @@ fun IntroLayout(
     CoreLayout(
         modifier = Modifier,
         content = {
-            Column(modifier = Modifier.background(color = Background)) {
-                Spacer(modifier = Modifier.height(20.dp))
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(color = LocalTheme.current.background)
+            ) {
 
+                Spacer(modifier = Modifier.height(20.dp))
 
                 HorizontalPager(
                     state = pagerState,
@@ -116,19 +127,19 @@ fun IntroLayout(
                         0 -> IntroContent(
                             titleId = R.string.fake_title,
                             contentId = R.string.fake_message,
-                            imageId = R.drawable.ic_nazi_eagle
+                            imageId = R.drawable.ic_iron_cross_bundeswehr
                         )
 
                         1 -> IntroContent(
                             titleId = R.string.fake_title,
                             contentId = R.string.fake_message,
-                            imageId = R.drawable.ic_nazi_eagle
+                            imageId = R.drawable.ic_iron_cross_wehtmatch
                         )
 
                         2 -> IntroContent(
                             titleId = R.string.fake_title,
                             contentId = R.string.fake_message,
-                            imageId = R.drawable.ic_nazi_eagle
+                            imageId = R.drawable.ic_iron_cross
                         )
                     }
                 }
@@ -136,7 +147,7 @@ fun IntroLayout(
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(horizontal = 0.dp, vertical = 12.dp)
+                        .padding(horizontal = 16.dp, vertical = 12.dp)
                 ) {
                     IntroIndicator(
                         currentPage = pagerState.currentPage % numberOfSlide,
@@ -144,15 +155,21 @@ fun IntroLayout(
                         modifier = Modifier.align(Alignment.Center),
                     )
                     Text(
-                        text = stringResource(R.string.fake_title),
+                        text = stringResource(R.string.let_s_go),
                         style = customizedTextStyle(20, 600),
-                        color = PrimaryColor,
+                        color = LocalTheme.current.onPrimary,
                         textDecoration = TextDecoration.None,
                         modifier = Modifier
-                            .align(Alignment.CenterEnd)
+                            .clip(shape = RoundedCornerShape(20.dp))
                             .clickable { onStart() }
+                            .background(color = LocalTheme.current.primary)
+                            .padding(horizontal = 15.dp, vertical = 5.dp)
+                            .align(Alignment.CenterEnd)
+
                     )
                 }
+
+                Spacer(modifier = Modifier.height(60.dp))
             }
         })
 }

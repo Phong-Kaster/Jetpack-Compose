@@ -3,6 +3,7 @@ package com.example.jetpack.data.repository
 import com.example.jetpack.configuration.Language
 import com.example.jetpack.configuration.Logo
 import com.example.jetpack.data.datastore.SettingDatastore
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -49,5 +50,17 @@ constructor(
 
     fun setLogo(logo: Logo){
         settingDatastore.logo = logo
+    }
+
+    // LANGUAGE
+    fun enableDarkMode(): Boolean  {
+        return settingDatastore.enableDarkMode
+    }
+
+    fun enableDarkModeFlow(): Flow<Boolean> = settingDatastore.enableDarkModeFlow
+
+
+    fun setEnableDarkMode(boolean: Boolean) {
+        settingDatastore.enableDarkMode = boolean
     }
 }

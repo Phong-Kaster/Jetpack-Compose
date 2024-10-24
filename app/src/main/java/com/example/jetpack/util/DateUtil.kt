@@ -122,4 +122,31 @@ object DateUtil {
 //        Log.d("TAG", "calculatePercent - percent = ${(elapsedDistance + distance)} ")
         return if(percent > 1) 1f else percent.toFloat()
     }
+
+    /**
+     * convert from seconds to hours
+     * for example: 18960 seconds = 5 hour 15 minute 30 second
+     */
+    fun Int.toHour(): Int {
+        val outcome = this / (60 * 60)
+        return outcome
+    }
+
+    /**
+     * convert from seconds to hours
+     * for example: 18960 seconds = 5 hour 15 minute 30 second
+     */
+    fun Int.toMinute(): Int {
+        val leftSecond = this - this.toHour() * 60 * 60
+        val outcome = leftSecond / 60
+        return outcome
+    }
+
+    /**
+     * convert from seconds to hours
+     * for example: 18960 seconds = 5 hour 15 minute 30 second
+     */
+    fun Int.toSecond(): Int {
+        return this - this.toHour() * 60 * 60 - this.toMinute() * 60
+    }
 }

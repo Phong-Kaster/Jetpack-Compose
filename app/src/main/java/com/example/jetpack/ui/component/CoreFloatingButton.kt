@@ -43,13 +43,15 @@ import com.example.jetpack.ui.theme.OppositePrimaryColor
 import com.example.jetpack.ui.theme.PrimaryColor
 
 @Composable
-fun CoreFloatingMenu() {
+fun CoreFloatingMenu(
+    modifier: Modifier = Modifier
+) {
     val navController = LocalNavController.current ?: rememberNavController()
     var expand by remember { mutableStateOf(false) }
 
 
     Column(
-        modifier = Modifier.wrapContentSize()
+        modifier = modifier.wrapContentSize()
     ) {
         AnimatedVisibility(
             visible = expand,

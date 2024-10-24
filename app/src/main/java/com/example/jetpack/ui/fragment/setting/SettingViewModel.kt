@@ -25,6 +25,9 @@ constructor(
     private val _chosenLogo = MutableStateFlow(Logo.Origin)
     var chosenLogo = _chosenLogo.asStateFlow()
 
+    private val _enableDarkMode = MutableStateFlow(false)
+    var enableDarkMode = _enableDarkMode.asStateFlow()
+
     init {
         viewModelScope.launch(Dispatchers.IO) {
             settingRepository.getLanguageFlow().collectLatest {
@@ -34,6 +37,19 @@ constructor(
 
         viewModelScope.launch(Dispatchers.IO) {
             _chosenLogo.value = settingRepository.getLogo()
+        }
+
+        viewModelScope.launch(Dispatchers.IO) {
+            settingRepository.enableDarkModeFlow().collectLatest {
+                _enableDarkMode.value = it
+            }
+        }
+    }
+
+    fun onChangeDarkMode(){
+        viewModelScope.launch(Dispatchers.IO){
+            _enableDarkMode.value = !_enableDarkMode.value
+            settingRepository.setEnableDarkMode(_enableDarkMode.value)
         }
     }
 }

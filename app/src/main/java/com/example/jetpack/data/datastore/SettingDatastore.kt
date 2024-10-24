@@ -33,6 +33,7 @@ constructor(application: JetpackApplication) {
     private val enableIntroKey = booleanPreferencesKey("enableIntroKey")
     private val enableLanguageIntroKey = booleanPreferencesKey("enableLanguageIntroKey")
     private val logoKey = stringPreferencesKey("logoKey")
+    private val enableDarkModeKey = booleanPreferencesKey("enableDarkModeKey")
 
     // Enable Intro
     var enableIntro: Boolean
@@ -70,4 +71,11 @@ constructor(application: JetpackApplication) {
                 it[logoKey] = value.name
             }
         }
+
+    // Enable Intro
+    var enableDarkMode: Boolean
+        get() = runBlocking { datastore.data.first()[enableDarkModeKey] ?: true }
+        set(value) = runBlocking { datastore.edit { pref -> pref[enableDarkModeKey] = value } }
+
+    val enableDarkModeFlow: Flow<Boolean> =  datastore.data.map { preference -> preference[enableDarkModeKey] ?: true }
 }

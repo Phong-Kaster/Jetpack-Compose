@@ -1,4 +1,4 @@
-package com.example.jetpack.ui.view
+package com.example.jetpack.ui.modifier
 
 import android.annotation.SuppressLint
 import androidx.compose.animation.core.animateFloat

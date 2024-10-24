@@ -16,6 +16,7 @@ import com.example.jetpack.R
 import com.example.jetpack.configuration.Language
 import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
+import com.example.jetpack.core.LocalTheme
 import com.example.jetpack.ui.component.CoreTopBar
 import com.example.jetpack.ui.fragment.language.component.LanguageList
 import com.example.jetpack.ui.theme.Background
@@ -60,13 +61,14 @@ fun LanguageLayout(
             CoreTopBar(
                 title = stringResource(R.string.fake_title),
                 onClickLeft = onBack,
-                rightIcon = R.drawable.ic_forward,
+                rightIcon = R.drawable.ic_check,
                 leftIcon = R.drawable.ic_back,
-
+                leftBackground = LocalTheme.current.onPrimary,
+                rightBackground = LocalTheme.current.onPrimary,
                 onClickRight = onConfirm
             )
         },
-        backgroundColor = Background,
+        backgroundColor = LocalTheme.current.background,
     ) {
         LanguageList(
             list = Language.getSortedList(),

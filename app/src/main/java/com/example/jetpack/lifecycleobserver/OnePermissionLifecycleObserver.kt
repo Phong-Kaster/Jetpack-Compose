@@ -36,7 +36,7 @@ constructor(
     lateinit var launcher: ActivityResultLauncher<PermissionName>
     private lateinit var settingLauncher: ActivityResultLauncher<Intent>
 
-    private val tag = "NotificationRuntimeLauncher2"
+    val TAG =  "NotificationRuntimeLauncher2"
     override fun onCreate(owner: LifecycleOwner) {
         launcher = createRuntimeLauncher(owner)
         settingLauncher = createSystemLauncher(owner)

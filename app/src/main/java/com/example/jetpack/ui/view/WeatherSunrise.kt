@@ -24,6 +24,7 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.translate
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -81,7 +82,7 @@ fun WeatherSunrise(
     val painter = rememberVectorPainter(image = vector)
 
 
-    val diameter = 200
+    val diameter = 180
     //val percent = 0.1// the sun rise 55% of circular arc
     val percent =
         DateUtil.calculatePercent(sunrise = calendarSunrise.time, sunset = calendarSunset.time)
@@ -117,14 +118,14 @@ fun WeatherSunrise(
                 ) {
                     Text(
                         text = calendarSunrise.time.formatWithPattern(DateUtil.PATTERN_hh_mm_aa),
-                        style = customizedTextStyle(fontSize = 14, fontWeight = 600),
+                        style = customizedTextStyle(fontSize = 12, fontWeight = 600),
                         color = Color.White,
                         modifier = Modifier,
                     )
 
                     Text(
                         text = "Sunrise",
-                        style = customizedTextStyle(fontSize = 14, fontWeight = 400),
+                        style = customizedTextStyle(fontSize = 12, fontWeight = 400),
                         color = Color.White,
                         modifier = Modifier
                     )
@@ -193,14 +194,14 @@ fun WeatherSunrise(
                 ) {
                     Text(
                         text = calendarSunset.time.formatWithPattern(DateUtil.PATTERN_hh_mm_aa),
-                        style = customizedTextStyle(fontSize = 14, fontWeight = 600),
+                        style = customizedTextStyle(fontSize = 12, fontWeight = 600),
                         color = Color.White,
                         modifier = Modifier,
                     )
 
                     Text(
                         text = "Sunrise",
-                        style = customizedTextStyle(fontSize = 14, fontWeight = 400),
+                        style = customizedTextStyle(fontSize = 12, fontWeight = 400),
                         color = Color.White,
                         modifier = Modifier
                     )

@@ -60,9 +60,8 @@ import com.example.jetpack.ui.component.CoreTopBarWithScrollBehavior
 import com.example.jetpack.ui.fragment.accuweather.component.SearchBar
 import com.example.jetpack.ui.fragment.home.component.HomeDialog
 import com.example.jetpack.ui.fragment.home.component.HomeShortcutItem
-import com.example.jetpack.ui.theme.Background
 import com.example.jetpack.ui.theme.PrimaryColor
-import com.example.jetpack.ui.view.ShimmerItem
+import com.example.jetpack.ui.modifier.ShimmerItem
 import com.example.jetpack.ui.theme.customizedTextStyle
 import com.example.jetpack.ui.view.DigitalClock3
 import com.example.jetpack.util.NavigationUtil.safeNavigate
@@ -88,6 +87,7 @@ class HomeFragment : CoreFragment() {
         setupNotificationLauncher()
         setupNotification()
     }
+
 
     /*************************************************
      * setupNotificationLauncher
@@ -159,7 +159,12 @@ class HomeFragment : CoreFragment() {
                     HomeShortcut.CollapsibleTopbar -> safeNavigate(R.id.toCollasibleTopbar)
                     HomeShortcut.CollapsibleTopbar2 -> safeNavigate(R.id.toCollapsibleTopbar2)
                     HomeShortcut.LastKnownLocation -> safeNavigate(R.id.toLastKnownLocation)
-                    else -> {}
+                    HomeShortcut.InstagramCarousel -> safeNavigate(R.id.toInstagramCarousel)
+                    HomeShortcut.Animation -> safeNavigate(R.id.toAnimation)
+                    HomeShortcut.KotlinFlow -> safeNavigate(R.id.toKotlinFlow)
+                    else -> {
+                        showToast(it.name)
+                    }
                 }
             })
     }
@@ -190,12 +195,13 @@ fun HomeLayout(
 
     BackHandler(enabled = true, onBack = onOpenConfirmDialog)
 
+
     CoreLayout(
         backgroundColor = LocalTheme.current.background,
         topBar = {
             CoreTopBarWithScrollBehavior(
-                backgroundColor = LocalTheme.current.second,
-                scrolledContainerColor = LocalTheme.current.second,
+                backgroundColor = LocalTheme.current.secondary,
+                scrolledContainerColor = LocalTheme.current.secondary,
                 scrollBehavior = scrollBehavior,
                 navigationIconContent = {},
                 modifier = Modifier.clip(
@@ -208,11 +214,11 @@ fun HomeLayout(
                 ),
                 content = {
                     DigitalClock3(
+                        textColor = LocalTheme.current.textColor,
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(horizontal = 16.dp, vertical = 16.dp)
                             .statusBarsPadding(),
-                        textColor = Color.White
                     )
                 }
             )

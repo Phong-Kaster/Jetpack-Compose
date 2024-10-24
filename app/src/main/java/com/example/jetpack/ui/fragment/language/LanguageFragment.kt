@@ -11,6 +11,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -20,6 +21,7 @@ import com.example.jetpack.R
 import com.example.jetpack.configuration.Language
 import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
+import com.example.jetpack.core.LocalTheme
 import com.example.jetpack.ui.component.CoreButton
 import com.example.jetpack.ui.component.CoreTopBar
 import com.example.jetpack.ui.component.SolidButton
@@ -71,14 +73,14 @@ fun LanguageLayout(
         bottomBar = {
             Column(modifier = Modifier
                 .fillMaxWidth()
-                .background(color = Background)
+                .background(color = LocalTheme.current.background)
                 .padding(16.dp)
             ){
                 SolidButton(
                     modifier = Modifier.fillMaxWidth(),
-                    backgroundColor = PrimaryColor,
+                    backgroundColor = LocalTheme.current.primary,
                     text = stringResource(id = R.string.save),
-                    textColor = OppositePrimaryColor,
+                    textColor = Color.Black,
                     textStyle = body16.copy(fontWeight = FontWeight(700)),
                     onClick = { onConfirm() },
                     marginHorizontal = 0.dp,
@@ -86,7 +88,7 @@ fun LanguageLayout(
                 )
             }
         },
-        modifier = Modifier.background(color = Background)
+        modifier = Modifier.background(color = LocalTheme.current.background)
     ) {
         LanguageList(
             list = Language.entries,
@@ -94,7 +96,7 @@ fun LanguageLayout(
             onClick = { onChange(it) },
             modifier = Modifier
                 .fillMaxSize()
-                .background(color = Background)
+                .background(color = LocalTheme.current.background)
                 .padding(horizontal = 16.dp),
         )
     }

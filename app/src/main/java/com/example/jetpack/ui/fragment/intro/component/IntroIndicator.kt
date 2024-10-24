@@ -13,6 +13,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.jetpack.core.LocalTheme
 import com.example.jetpack.ui.theme.PrimaryColor
 import com.example.jetpack.util.ViewUtil
 
@@ -24,7 +25,7 @@ fun IntroIndicator(currentPage: Int, pageSize: Int, modifier: Modifier = Modifie
                 modifier = Modifier
                     .size(10.dp)
                     .clip(shape = CircleShape)
-                    .background(if (currentPage == it) PrimaryColor else Color.LightGray)
+                    .background(color = if (currentPage == it) LocalTheme.current.primary else LocalTheme.current.dim)
             )
         }
     }
@@ -35,9 +36,7 @@ fun IntroIndicator(currentPage: Int, pageSize: Int, modifier: Modifier = Modifie
 fun PreviewIntroIndicator() {
     ViewUtil.PreviewContent {
         IntroIndicator(
-            currentPage = 1,
-            pageSize = 3,
-            modifier = Modifier.fillMaxWidth()
+            currentPage = 1, pageSize = 3, modifier = Modifier.fillMaxWidth()
         )
     }
 }

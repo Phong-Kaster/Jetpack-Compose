@@ -29,6 +29,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.jetpack.R
 import com.example.jetpack.configuration.Language
+import com.example.jetpack.core.LocalTheme
 import com.example.jetpack.ui.modifier.borderWithAnimatedGradient
 import com.example.jetpack.ui.theme.Background2
 import com.example.jetpack.ui.theme.customizedTextStyle
@@ -45,11 +46,12 @@ fun SquareElement(
         modifier = Modifier
             .clip(shape = RoundedCornerShape(20.dp))
             .borderWithAnimatedGradient(
+                colorBackground = LocalTheme.current.background,
                 width = 3.dp,
                 shape = RoundedCornerShape(25.dp),
                 colors = listOf(Color(0xFF004BDC), Color(0xFF004BDC), Color(0xFF9EFFFF), Color(0xFF9EFFFF), Color(0xFF9EFFFF), Color(0xFF9EFFFF), Color(0xFF004BDC), Color(0xFF004BDC)),
             )
-            .background(color = Background2, shape = RoundedCornerShape(25.dp))
+            .background(color = LocalTheme.current.background, shape = RoundedCornerShape(25.dp))
             .clickable { onClick(language) }
             .aspectRatio(1F)
     ) {

@@ -25,7 +25,7 @@ import kotlinx.coroutines.flow.asStateFlow
 @AndroidEntryPoint
 class MediaPlayerService : Service() {
 
-    private val TAG = "MediaPlayerService"
+    val TAG =  "MediaPlayerService"
 
     /* For media player */
     private var player: MediaPlayer? = null

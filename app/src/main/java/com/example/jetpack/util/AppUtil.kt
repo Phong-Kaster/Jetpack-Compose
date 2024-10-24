@@ -7,13 +7,11 @@ import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.net.Uri
-import android.os.Build
 import android.util.Log
 import android.view.Window
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
-import androidx.test.uiautomator.v18.BuildConfig
 import com.example.jetpack.R
 
 
@@ -23,6 +21,7 @@ object AppUtil {
             Log.d(tag, "----------------------------")
         }
         Log.d(tag, "-> message: $message")
+
     }
 
     fun openWebsite(context: Context, url: String) {
@@ -76,7 +75,7 @@ object AppUtil {
     fun shareApplication(context: Context){
         try {
             var shareMessage = context.getString(R.string.let_me_recommend_you_this_application)
-            shareMessage = (shareMessage + "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID) + "\n\n"
+            //shareMessage = (shareMessage + "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID) + "\n\n"
 
             val shareIntent = Intent(Intent.ACTION_SEND)
             shareIntent.setType("text/plain")

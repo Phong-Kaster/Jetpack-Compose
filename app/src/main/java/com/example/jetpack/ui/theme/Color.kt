@@ -1,5 +1,7 @@
 package com.example.jetpack.ui.theme
 
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 
 val Purple80 = Color(0xFFD0BCFF)
@@ -16,7 +18,7 @@ val PrimaryColor = Color(0xFFFFCC00)
 val OppositePrimaryColor = Color.Black
 
 // BACKGROUND COLOR
-val Background = Color(0xFF121212)
+val Background = Color(0xFF2C3141)
 val Background2 = Color(0xFF2C3141)
 val OppositeBackground = Color.White
 
@@ -24,7 +26,9 @@ val Border = Color(0xFFEEEEEE)
 val ShadowColor = Color(0xFFEEEEEE)
 val WeakColor = Color(0xFF999999)
 val IconColor = Color(0xFF8C8C8C)
-
+val ColorTextSecondary = Color(0xFF333333)
+val ColorTextPrimary = Color.Black
+val ColorTextHelp = Color(0xFF8A8A8A)
 
 // TEXT COLOR
 val TextColor1 = PrimaryColor
@@ -120,3 +124,15 @@ val ColorWindSpeedGale = Color(0xFFC9A30D)
 val ColorWindSpeedStrongGale = Color(0xFFD38919)
 val ColorWindSpeedStorm = Color(0xFFBC5918)
 val ColorWindSpeedHurricaneForce = Color(0xFFA83636)
+
+val colorSunset = Color(0xFFCB8AAA)
+val brushSunset = Brush.linearGradient(
+    colors = listOf(
+        Color(0xFFBE83D1),
+        Color(0xFFCB8AAA),
+        Color(0xFFDD9476),
+        Color(0xFFF19F3A),
+    ),
+    start = Offset(0f, 0f),
+    end = Offset(2 * Float.POSITIVE_INFINITY, 2 * Float.POSITIVE_INFINITY),
+)

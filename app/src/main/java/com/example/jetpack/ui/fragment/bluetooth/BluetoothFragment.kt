@@ -65,7 +65,7 @@ import javax.inject.Inject
 class BluetoothFragment : CoreFragment() {
 
     private val viewModel: BluetoothViewModel2  by viewModels()
-    private val tag = "bluetooth"
+    override val TAG =  "bluetooth"
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupBluetoothLifecycleObserver()
