@@ -1,5 +1,7 @@
 package com.example.jetpack.ui.fragment.chart.component
 
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,6 +16,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.jetpack.configuration.Language
@@ -21,6 +25,8 @@ import com.example.jetpack.core.LocalTheme
 import com.example.jetpack.domain.enums.Subsetting
 import com.example.jetpack.ui.component.SquareElement
 import com.example.jetpack.ui.modifier.borderWithAnimatedGradient
+import com.example.jetpack.ui.theme.animationInfiniteFloatSuperLong
+import com.example.jetpack.ui.view.AnimatedProgressBar
 import com.example.jetpack.ui.view.ContextualFlowRowSample
 import com.example.jetpack.ui.view.SubsettingElement
 
@@ -31,7 +37,17 @@ fun ComponentScreen(
     onOpenDialog: () -> Unit = {},
     onOpenWheelTimePicker: () -> Unit = {},
 ) {
+
     val state = rememberLazyGridState()
+
+    val infiniteTransition = rememberInfiniteTransition(label = "inifiniteTransition")
+    val animatedProgress = infiniteTransition.animateFloat(
+        initialValue = 0f,
+        targetValue = 1f,
+        animationSpec = animationInfiniteFloatSuperLong,
+        label = "animatedProgress"
+    )
+
     LazyVerticalGrid(
         state = state,
         columns = GridCells.Fixed(2),
@@ -101,6 +117,34 @@ fun ComponentScreen(
                 )
             }
         )
+
+        item(
+            key = "AnimatedProgressBar",
+            span = { GridItemSpan(2) },
+            content = {
+                AnimatedProgressBar(
+                    progress = animatedProgress.value,
+                    colors = listOf(Color.Red, Color.Yellow, Color.Green, Color.Cyan, Color.Blue, Color.Magenta),
+                    glowRadius = 20.dp,
+                    strokeWidth = 5.dp,
+                    gradientAnimationSpeed = 5000,
+                    trackBrush = SolidColor(Color.DarkGray),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .borderWithAnimatedGradient(
+                            colorBackground = LocalTheme.current.background,
+                            width = 3.dp,
+                            shape = RoundedCornerShape(20.dp)
+                        )
+                        .clip(shape = RoundedCornerShape(20.dp))
+                        .background(
+                            color = LocalTheme.current.background,
+                            shape = RoundedCornerShape(20.dp)
+                        )
+                        .padding(vertical = 16.dp, horizontal = 10.dp)
+
+                )
+            })
     }
 }
 
