@@ -66,14 +66,14 @@ fun SquareElement(
 
         Text(
             text = stringResource(id = language.text),
-            style = customizedTextStyle(fontWeight = 400, fontSize = 18),
+            style = customizedTextStyle(fontWeight = 400, fontSize = 18, color = LocalTheme.current.textColor),
             maxLines = 1,
             overflow = TextOverflow.Ellipsis
         )
 
         Text(
             text = language.name,
-            style = customizedTextStyle(fontWeight = 400, fontSize = 28),
+            style = customizedTextStyle(fontWeight = 400, fontSize = 28, color = LocalTheme.current.textColor),
             maxLines = 1,
             overflow = TextOverflow.Ellipsis
         )
@@ -81,7 +81,7 @@ fun SquareElement(
 
         Text(
             text = language.code,
-            style = customizedTextStyle(fontWeight = 300, fontSize = 16),
+            style = customizedTextStyle(fontWeight = 300, fontSize = 16, color = LocalTheme.current.textColor),
             maxLines = 1,
             overflow = TextOverflow.Ellipsis
         )

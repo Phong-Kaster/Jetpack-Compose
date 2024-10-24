@@ -4,6 +4,7 @@ import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -28,6 +29,7 @@ import com.example.jetpack.ui.modifier.borderWithAnimatedGradient
 import com.example.jetpack.ui.theme.animationInfiniteFloatSuperLong
 import com.example.jetpack.ui.view.AnimatedProgressBar
 import com.example.jetpack.ui.view.ContextualFlowRowSample
+import com.example.jetpack.ui.view.CustomizedCheckbox
 import com.example.jetpack.ui.view.SubsettingElement
 
 @Composable
@@ -119,12 +121,19 @@ fun ComponentScreen(
         )
 
         item(
-            key = "AnimatedProgressBar",
+            key = "AnimatedProgressBar2",
             span = { GridItemSpan(2) },
             content = {
                 AnimatedProgressBar(
                     progress = animatedProgress.value,
-                    colors = listOf(Color.Red, Color.Yellow, Color.Green, Color.Cyan, Color.Blue, Color.Magenta),
+                    colors = listOf(
+                        Color.Red,
+                        Color.Yellow,
+                        Color.Green,
+                        Color.Cyan,
+                        Color.Blue,
+                        Color.Magenta
+                    ),
                     glowRadius = 20.dp,
                     strokeWidth = 5.dp,
                     gradientAnimationSpeed = 5000,
@@ -144,7 +153,18 @@ fun ComponentScreen(
                         .padding(vertical = 16.dp, horizontal = 10.dp)
 
                 )
-            })
+            }
+        )
+
+        item(
+            key = "CustomizedCheckbox",
+            span = { GridItemSpan(1) },
+            content = {
+                CustomizedCheckbox(
+                    modifier = Modifier.aspectRatio(1f)
+                )
+            }
+        )
     }
 }
 
