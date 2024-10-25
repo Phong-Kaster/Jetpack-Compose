@@ -4,6 +4,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
@@ -29,6 +30,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -64,7 +66,6 @@ import com.example.jetpack.ui.theme.PrimaryColor
 import com.example.jetpack.ui.modifier.ShimmerItem
 import com.example.jetpack.ui.theme.customizedTextStyle
 import com.example.jetpack.ui.view.DigitalClock3
-import com.example.jetpack.util.EncryptionUtil
 import com.example.jetpack.util.NavigationUtil.safeNavigate
 import com.example.jetpack.util.PermissionUtil
 import dagger.hilt.android.AndroidEntryPoint
@@ -194,6 +195,10 @@ fun HomeLayout(
     val state = rememberLazyListState()
     val fabExtended by remember { derivedStateOf { state.firstVisibleItemIndex > 0 } }
 
+
+    LaunchedEffect(state) {
+        Log.d("TAG", "state.firstVisibleItemIndex > 0 = ${state.firstVisibleItemIndex > 0} ")
+    }
     BackHandler(enabled = true, onBack = onOpenConfirmDialog)
 
 

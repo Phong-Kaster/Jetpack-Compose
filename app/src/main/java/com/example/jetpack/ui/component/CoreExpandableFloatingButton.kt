@@ -49,7 +49,9 @@ import com.example.jetpack.ui.theme.customizedTextStyle
 import kotlin.math.roundToInt
 
 @Composable
-fun CoreExpandableFloatingButton(
+fun
+
+        CoreExpandableFloatingButton(
     extended: Boolean,
     modifier: Modifier = Modifier,
 ) {
@@ -110,7 +112,7 @@ fun CoreExpandableFloatingButton(
                             })
                 },
                 text = {
-                    if (extended) {
+                    if (!extended) {
                         Text(
                             text = stringResource(id = R.string.app_name),
                             style = customizedTextStyle(
@@ -121,7 +123,7 @@ fun CoreExpandableFloatingButton(
                         )
                     }
                 },
-                extended = extended
+                extended = !extended
             )
         }
     }
