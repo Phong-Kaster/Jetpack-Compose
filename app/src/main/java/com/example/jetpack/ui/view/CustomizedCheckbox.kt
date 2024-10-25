@@ -1,12 +1,11 @@
 package com.example.jetpack.ui.view
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Check
@@ -22,15 +21,16 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.jetpack.core.LocalTheme
 
 @Composable
 fun CustomizedCheckbox(
     checked: Boolean = false,
     onChangeChecked: (Boolean) -> Unit = {},
-    checkColor: Color = Color.White,
+    checkedCheckmarkColor: Color = Color.White,
+    checkedBoxColor: Color = Color.Blue,
+    checkedBorderColor: Color = Color.Transparent,
     modifier: Modifier = Modifier,
-    shape: RoundedCornerShape = RoundedCornerShape(20.dp)
+    shape: RoundedCornerShape = RoundedCornerShape(10.dp)
 ) {
     var isChecked by remember(checked) { mutableStateOf(checked) }
 
@@ -42,16 +42,22 @@ fun CustomizedCheckbox(
                 isChecked = !isChecked
                 onChangeChecked(isChecked)
             }
-            .background(color = if (isChecked) LocalTheme.current.secondary else Color.Transparent)
+            .border(
+                width = 1.dp,
+                color = checkedBorderColor,
+                shape = shape
+            )
+            .background(color = if (isChecked) checkedBoxColor else Color.Transparent)
             .padding(5.dp)
     ) {
         Icon(
             imageVector = Icons.Rounded.Check,
-            tint = checkColor,
+            tint = checkedCheckmarkColor,
             contentDescription = "Icon",
             modifier = Modifier.size(24.dp)
         )
     }
+
 }
 
 @Preview
@@ -59,6 +65,8 @@ fun CustomizedCheckbox(
 private fun PreviewCustomizedCheckbox() {
     CustomizedCheckbox(
         checked = true,
+        checkedCheckmarkColor = Color.Blue,
+        checkedBoxColor = Color.Yellow,
         onChangeChecked = { isChecked -> }
     )
 }

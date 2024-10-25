@@ -4,7 +4,7 @@ import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -121,7 +121,38 @@ fun ComponentScreen(
         )
 
         item(
-            key = "AnimatedProgressBar2",
+            key = "CustomizedCheckbox",
+            span = { GridItemSpan(2) },
+            content = {
+                Row(
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    modifier = Modifier.fillMaxWidth()
+                        .borderWithAnimatedGradient(
+                            colorBackground = LocalTheme.current.background,
+                            width = 3.dp,
+                            shape = RoundedCornerShape(20.dp)
+                        )
+                        .clip(shape = RoundedCornerShape(20.dp))
+                        .background(
+                            color = LocalTheme.current.background,
+                            shape = RoundedCornerShape(20.dp)
+                        )
+                        .padding(vertical = 16.dp, horizontal = 10.dp)
+                ) {
+                    CustomizedCheckbox(shape = RoundedCornerShape(10.dp))
+                    CustomizedCheckbox(shape = RoundedCornerShape(10.dp))
+                    CustomizedCheckbox(shape = RoundedCornerShape(10.dp))
+                    CustomizedCheckbox(shape = RoundedCornerShape(10.dp))
+                    CustomizedCheckbox(shape = RoundedCornerShape(10.dp))
+                    CustomizedCheckbox(shape = RoundedCornerShape(10.dp))
+                    CustomizedCheckbox(shape = RoundedCornerShape(10.dp))
+                }
+            }
+        )
+
+
+        item(
+            key = "AnimatedProgressBar",
             span = { GridItemSpan(2) },
             content = {
                 AnimatedProgressBar(
@@ -152,16 +183,6 @@ fun ComponentScreen(
                         )
                         .padding(vertical = 16.dp, horizontal = 10.dp)
 
-                )
-            }
-        )
-
-        item(
-            key = "CustomizedCheckbox",
-            span = { GridItemSpan(1) },
-            content = {
-                CustomizedCheckbox(
-                    modifier = Modifier.aspectRatio(1f)
                 )
             }
         )

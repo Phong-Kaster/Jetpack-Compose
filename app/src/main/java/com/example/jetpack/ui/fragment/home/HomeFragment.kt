@@ -64,6 +64,7 @@ import com.example.jetpack.ui.theme.PrimaryColor
 import com.example.jetpack.ui.modifier.ShimmerItem
 import com.example.jetpack.ui.theme.customizedTextStyle
 import com.example.jetpack.ui.view.DigitalClock3
+import com.example.jetpack.util.EncryptionUtil
 import com.example.jetpack.util.NavigationUtil.safeNavigate
 import com.example.jetpack.util.PermissionUtil
 import dagger.hilt.android.AndroidEntryPoint
@@ -217,7 +218,7 @@ fun HomeLayout(
                         textColor = LocalTheme.current.textColor,
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(horizontal = 16.dp, vertical = 16.dp)
+                            .padding(horizontal = 16.dp)
                             .statusBarsPadding(),
                     )
                 }
@@ -307,7 +308,10 @@ fun HomeLayout(
                 itemContent = { homeShortcut: HomeShortcut ->
                     when (homeShortcut) {
                         HomeShortcut.AccuWeatherLocation -> {
-                            Column(modifier = Modifier) {
+                            Column(
+                                verticalArrangement = Arrangement.spacedBy(16.dp),
+                                modifier = Modifier
+                            ) {
                                 ShimmerItem(
                                     loading = true,
                                     content = {

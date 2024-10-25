@@ -124,7 +124,7 @@ constructor() : ViewModel() {
 
     private fun reduce() {
         viewModelScope.launch(Dispatchers.IO) {
-           val sumOfReduce = builderFlowOf.reduce { accumulator, value -> accumulator + value } // Result: 15
+           val sumOfReduce = flowOf(1, 2, 3, 4, 5).reduce { accumulator, value -> accumulator + value } // Result: 15
             Log.d(TAG, "reduce - sumOfReduce = $sumOfReduce")
         }
     }

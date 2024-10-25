@@ -42,7 +42,7 @@ fun HomeShortcutItem(
             .clip(shape = RoundedCornerShape(15.dp))
             .clickable { onClick(shortcut) }
             .border(
-                width = 0.5.dp,
+                width = 1.dp,
                 color = LocalTheme.current.textColor.copy(alpha = 0.5F),
                 shape = RoundedCornerShape(15.dp)
             )
