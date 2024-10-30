@@ -14,13 +14,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.jetpack.domain.model.ChartElement
-import com.example.jetpack.ui.fragment.chart.chartcomponent.RingChart
-import com.example.jetpack.ui.fragment.chart.chartcomponent.RingChart2
-import com.example.jetpack.ui.theme.Background
+import com.example.jetpack.ui.fragment.chart.chartcomponent.BarChart
 import com.example.jetpack.ui.theme.customizedTextStyle
 
 @Composable
-fun RingChartScreen() {
+fun BarChartScreen() {
     LazyColumn(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(space = 10.dp, alignment = Alignment.Top),
@@ -28,44 +26,27 @@ fun RingChartScreen() {
             .fillMaxSize()
             .padding(16.dp),
     ) {
-        item(key = "RingChart") {
+        item(key = "BarChart") {
             Column(
                 verticalArrangement = Arrangement.spacedBy(16.dp),
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text(
-                    text = "Ring Chart",
+                    text = "Bar Chart",
                     style = customizedTextStyle(
                         fontSize = 14,
                         fontWeight = 600,
                         color = Color.White
                     )
                 )
-                RingChart(data = ChartElement.getFakeElements(), centerColor = Background)
+                BarChart(records = ChartElement.getFakeElements(), modifier = Modifier)
             }
         }
-        item(key = "RingChart2") {
-            Column(
-                verticalArrangement = Arrangement.spacedBy(16.dp),
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text(
-                    text = "Ring Chart 2",
-                    style = customizedTextStyle(
-                        fontSize = 14,
-                        fontWeight = 600,
-                        color = Color.White
-                    )
-                )
-                RingChart2(data = ChartElement.getFakeElements())
-            }
-        }
-
     }
 }
 
 @Preview
 @Composable
-fun PreviewRingChartScreen() {
-    RingChartScreen()
+private fun PreviewBarChartScreen() {
+    BarChartScreen()
 }

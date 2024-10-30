@@ -14,15 +14,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.jetpack.domain.model.ChartElement
-import com.example.jetpack.ui.fragment.chart.chartcomponent.BloodPressureChart
-import com.example.jetpack.ui.fragment.chart.chartcomponent.CurvyLineChart
-import com.example.jetpack.ui.fragment.chart.chartcomponent.LineChart
 import com.example.jetpack.ui.fragment.chart.chartcomponent.WeatherHourlyChart
 import com.example.jetpack.ui.theme.customizedTextStyle
 import kotlinx.collections.immutable.toImmutableList
 
 @Composable
-fun LineChartScreen() {
+fun AreaChartScreen() {
     LazyColumn(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(space = 10.dp, alignment = Alignment.Top),
@@ -30,72 +27,30 @@ fun LineChartScreen() {
             .fillMaxSize()
             .padding(16.dp),
     ) {
-
-
-        item(key = "CurvyLineChart") {
+        item(key = "WeatherHourlyChart") {
             Column(
                 verticalArrangement = Arrangement.spacedBy(16.dp),
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text(
-                    text = "CurvyLineChart",
+                    text = "WeatherHourlyChart",
                     style = customizedTextStyle(
                         fontSize = 14,
                         fontWeight = 600,
                         color = Color.White
                     )
                 )
-                CurvyLineChart(
+                WeatherHourlyChart(
                     records = ChartElement.getFakeElements().toImmutableList(),
                     modifier = Modifier
                 )
             }
         }
-
-        item(key = "LineChart") {
-            Column(
-                verticalArrangement = Arrangement.spacedBy(10.dp),
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text(
-                    text = "Line Chart",
-                    style = customizedTextStyle(
-                        fontSize = 14,
-                        fontWeight = 600,
-                        color = Color.White
-                    )
-                )
-                LineChart(data = ChartElement.getFakeElements())
-            }
-        }
-
-
-        item(key = "BloodPressureChart") {
-            Column(
-                verticalArrangement = Arrangement.spacedBy(10.dp),
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text(
-                    text = "Blood Pressure Chart",
-                    style = customizedTextStyle(
-                        fontSize = 14,
-                        fontWeight = 600,
-                        color = Color.White
-                    )
-                )
-                BloodPressureChart(
-                    records = ChartElement.getFakeElements().toImmutableList(),
-                    modifier = Modifier
-                )
-            }
-        }
-
-
     }
 }
 
 @Preview
 @Composable
-fun PreviewLineChartScreen() {
-    LineChartScreen()
+private fun PreviewAreaChartScreen() {
+    AreaChartScreen()
 }

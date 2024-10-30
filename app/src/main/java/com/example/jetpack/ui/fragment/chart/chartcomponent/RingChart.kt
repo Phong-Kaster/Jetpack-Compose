@@ -13,6 +13,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -50,19 +53,28 @@ import com.example.jetpack.util.ViewUtil
 private val chartSize: Dp = 150.dp
 private val innerChartSize: Dp = chartSize * 0.67F
 private const val filledAngle = 360F // A filled angle is an angle equal to 360° (entire circle)
+//private val colors = listOf(
+//    ColorWindSpeedCalm,
+//    ColorWindSpeedLightAir,
+//    ColorWindSpeedLight,
+//    ColorWindSpeedGentle,
+//    ColorWindSpeedModerate,
+//    ColorWindSpeedFresh,
+//    ColorWindSpeedStrong,
+//    ColorWindSpeedNearGale,
+//    ColorWindSpeedGale,
+//    ColorWindSpeedStrongGale,
+//    ColorWindSpeedStorm,
+//    ColorWindSpeedHurricaneForce,
+//)
+
 private val colors = listOf(
-    ColorWindSpeedCalm,
-    ColorWindSpeedLightAir,
-    ColorWindSpeedLight,
-    ColorWindSpeedGentle,
-    ColorWindSpeedModerate,
-    ColorWindSpeedFresh,
-    ColorWindSpeedStrong,
-    ColorWindSpeedNearGale,
-    ColorWindSpeedGale,
-    ColorWindSpeedStrongGale,
-    ColorWindSpeedStorm,
-    ColorWindSpeedHurricaneForce,
+    Color.Red,
+    Color.Yellow,
+    Color.Green,
+    Color.Cyan,
+    Color.Blue,
+    Color.Magenta
 )
 
 /**
@@ -162,22 +174,25 @@ fun RingChart(
             )
         }
 
-        Column(
-            verticalArrangement = Arrangement.Center,
+        LazyColumn(
+            verticalArrangement = Arrangement.spacedBy(5.dp),
             modifier = Modifier
                 .fillMaxWidth()
                 .fillMaxHeight()
-                .padding(horizontal = 5.dp)
         ) {
-            data.forEachIndexed { index, element ->
-                Row(modifier = Modifier.fillMaxWidth()) {
-                    Text(
-                        text = "${element.name} (${percentTargetValues[index].toPercentage()} %)",
-                        color = colors[index % colors.size],
-                        style = customizedTextStyle(fontSize = 12, fontWeight = 400)
-                    )
+            itemsIndexed(
+                items = data,
+                key = { index: Int, item: ChartElement -> index },
+                itemContent = { index: Int, item: ChartElement ->
+                    Row(modifier = Modifier.fillMaxWidth()) {
+                        Text(
+                            text = "${item.name} (${percentTargetValues[index].toPercentage()} %)",
+                            color = colors[index % colors.size],
+                            style = customizedTextStyle(fontSize = 12, fontWeight = 400)
+                        )
+                    }
                 }
-            }
+            )
         }
     }
 }

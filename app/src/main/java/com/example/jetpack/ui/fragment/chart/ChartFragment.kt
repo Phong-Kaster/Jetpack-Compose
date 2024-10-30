@@ -61,6 +61,8 @@ import com.example.jetpack.ui.component.CoreExpandableFloatingButton
 import com.example.jetpack.ui.component.CoreFloatingMenu
 import com.example.jetpack.ui.component.CoreTextAnimationDialog
 import com.example.jetpack.ui.dialog.WheelTimePickerDialog
+import com.example.jetpack.ui.fragment.chart.component.AreaChartScreen
+import com.example.jetpack.ui.fragment.chart.component.BarChartScreen
 import com.example.jetpack.ui.fragment.chart.component.BubbleChartScreen
 import com.example.jetpack.ui.fragment.chart.component.ChartTopBar
 import com.example.jetpack.ui.fragment.chart.component.ComponentScreen
@@ -209,7 +211,9 @@ fun InsightLayout(
                                 ChartShortcut.AnalogueClock -> AnalogueClock()
                                 ChartShortcut.LineChart -> LineChartScreen()
                                 ChartShortcut.RingChart -> RingChartScreen()
-                                ChartShortcut.BubbleChart -> BubbleChartScreen()
+                                //ChartShortcut.BubbleChart -> BubbleChartScreen()
+                                ChartShortcut.BarChart -> BarChartScreen()
+                                ChartShortcut.AreaChart -> AreaChartScreen()
                                 ChartShortcut.Component -> ComponentScreen(
                                     onOpenWheelTimePicker = onOpenWheelTimePicker,
                                     onOpenAlertDialog = onOpenAlertDialog,
