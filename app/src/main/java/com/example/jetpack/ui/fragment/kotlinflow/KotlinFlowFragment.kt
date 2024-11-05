@@ -44,9 +44,11 @@ class KotlinFlowFragment : CoreFragment() {
 
     override fun onStart() {
         super.onStart()
-        viewModel.builderTypeFlow()
-        runCoroutineAndGetResult()
-        useJobForControlCoroutine()
+        //viewModel.builderTypeFlow()
+        //runCoroutineAndGetResult()
+        //useJobForControlCoroutine()
+        //viewModel.combine4Flows()
+        viewModel.combine6Flows()
     }
 
     /**
