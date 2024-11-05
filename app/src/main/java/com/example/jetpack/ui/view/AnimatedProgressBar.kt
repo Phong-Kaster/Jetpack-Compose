@@ -104,7 +104,7 @@ fun AnimatedProgressBar(
 
 
                 // Combine colors with their transformed positions
-                val pairs = colors.zip(transformedSpots)
+                val pairs = colors. zip(transformedSpots)
                     .sortedBy { it.second } // For instance, result: [("Red", 0.1f), ("Green", 0.5f), ("Blue", 0.9f)]
 
 

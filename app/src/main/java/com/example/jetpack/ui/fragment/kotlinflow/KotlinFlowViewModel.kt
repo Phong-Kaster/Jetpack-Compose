@@ -34,9 +34,6 @@ class KotlinFlowViewModel
 constructor() : ViewModel() {
     private val TAG = this.javaClass.simpleName
 
-    init {
-
-    }
 
     /**
      * ----------------------------------- Flow Builder Types ---------------------------------------*/
@@ -200,7 +197,7 @@ constructor() : ViewModel() {
     }
 
     fun combine6Flows() {
-        Log.d(TAG, "combine4Flows ------------------------- ")
+        Log.d(TAG, "combine6Flows ------------------------- ")
         viewModelScope.launch(Dispatchers.IO) {
             val flow = flowOf(1, 2, 3, 4)
             val flow2 = flowOf(1, 2, 3, 0)

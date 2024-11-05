@@ -1,5 +1,7 @@
 package com.example.jetpack.configuration
 
+import androidx.compose.ui.graphics.Color
+
 object Constant {
     const val SETTING_DATASTORE = "setting_datastore"
     const val TUTORIAL_DATASTORE = "tutorial_datastore"
@@ -27,7 +29,7 @@ object Constant {
     const val ACCU_WEATHER_URL = "https://dataservice.accuweather.com"
 
     /* default range */
-    val defaultRange:  Pair<Float, Float> = 0F to 300F
+    val defaultRange: Pair<Float, Float> = 0F to 300F
 
     /* FOREGROUND SERVICE */
     const val FOREGROUND_SERVICE_CHANNEL_ID = "foreground_service_id"
@@ -41,8 +43,14 @@ object Constant {
     const val SECOND_ON_MINUTE = 60 // a minute has 60 seconds
     const val MINUTE_ON_HOUR = 60 // a hour has 60 minutes
 
-    const val INITIAL_PAGE_HOUR = 4800 // we have to initial page to make time picker loop when it reach 23h
-    const val INITIAL_PAGE_MINUTE = 6000 // we have to initial page to make time picker loop when it reach 23h
-    const val INITIAL_PAGE_SECOND = 6000 // we have to initial page to make time picker loop when it reach 23h
-    const val MAXIMUM_PAGE = 10000 // we have to initial page to make time picker loop when it reach 23h
+    const val INITIAL_PAGE_HOUR =
+        4800 // we have to initial page to make time picker loop when it reach 23h
+    const val INITIAL_PAGE_MINUTE =
+        6000 // we have to initial page to make time picker loop when it reach 23h
+    const val INITIAL_PAGE_SECOND =
+        6000 // we have to initial page to make time picker loop when it reach 23h
+    const val MAXIMUM_PAGE =
+        10000 // we have to initial page to make time picker loop when it reach 23h
+
+    val LIST_OF_COLOUR = listOf(Color.Red, Color.Yellow, Color.Green, Color.Cyan, Color.Blue, Color.Magenta, Color.Red, Color.Yellow, Color.Green, Color.Cyan, Color.Blue, Color.Magenta, Color.Red, Color.Yellow, Color.Green, Color.Cyan, Color.Blue, Color.Magenta)
 }
