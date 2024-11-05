@@ -27,7 +27,7 @@ import kotlinx.coroutines.launch
  * Gap Pie Chart
  */
 @Composable
-fun GapPieChart(
+fun DonutChart(
     records: List<ChartElement> = ChartElement.getFakeElements(4),
     modifier: Modifier = Modifier,
 ) {
@@ -112,5 +112,5 @@ private class GapPie(
 @Preview
 @Composable
 private fun PreviewGapPieChart() {
-    GapPieChart()
+    DonutChart()
 }

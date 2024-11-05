@@ -24,18 +24,13 @@ import com.example.jetpack.ui.theme.animationSpecFloat1
 import kotlinx.coroutines.launch
 
 /**
- * Gap Pie Chart
+ * Pie Chart
  */
 @Composable
-fun GapPieChart2(
-    gapDegrees: Int = 20,
+fun PieChart(
     records: List<ChartElement> = ChartElement.getFakeElements(4),
     modifier: Modifier = Modifier,
 ) {
-    val fullDegrees = 360 // A full circle
-    val leftDegrees by remember(records) {
-        derivedStateOf { fullDegrees - (records.size * gapDegrees) }
-    }
 
     val listOfNumber by remember(records) {
         derivedStateOf { records.map { element -> element.valueMax } }
@@ -45,18 +40,21 @@ fun GapPieChart2(
         derivedStateOf { listOfNumber.sum() }
     }
 
+    //val listOfColour = listOf(Color.Red, Color.Yellow, Color.Green, Color.Blue)
+
+
     var currentSum by remember { mutableFloatStateOf(0f) }
-    val listOfPie: List<GapPie2> by remember(listOfNumber, sum) {
+    val listOfPie: List<Pie> by remember(listOfNumber, sum) {
         derivedStateOf {
             listOfNumber.mapIndexed { index: Int, number: Float ->
 
-                val startAngle = currentSum + (gapDegrees * index)
-                currentSum += (number / sum) * leftDegrees
+                val startAngle = currentSum
+                currentSum += (number / sum) * 360
 
-                val sweepAngle = (number / sum) * leftDegrees
+                val sweepAngle = (number / sum) * 360
 
 
-                GapPie2(
+                Pie(
                     startAngle = startAngle,
                     sweepAngle = sweepAngle,
                     color = LIST_OF_COLOUR[index],
@@ -82,7 +80,7 @@ fun GapPieChart2(
 
     Canvas(
         modifier = modifier
-            .size(150.dp)
+            .size(160.dp)
             .padding(10.dp)
     ) {
         listOfPie.reversed().forEach { pie ->
@@ -90,8 +88,7 @@ fun GapPieChart2(
                 color = pie.color,
                 startAngle = pie.startAngle,
                 sweepAngle = pie.animation.value,
-                useCenter = false,
-                style = Stroke(width = 50f, cap = StrokeCap.Round)
+                useCenter = true,
             )
         }
     }
@@ -104,7 +101,7 @@ fun GapPieChart2(
  * @param sweepAngle is the sweep angle of arc
  * @param color is the color of arc
  */
-private class GapPie2(
+private class Pie(
     val animation: Animatable<Float, AnimationVector1D>,
     val startAngle: Float = -90f,
     val sweepAngle: Float = 0f,
@@ -113,6 +110,6 @@ private class GapPie2(
 
 @Preview
 @Composable
-private fun PreviewGapPieChart2() {
-    GapPieChart2()
+private fun PreviewPieChart() {
+    PieChart()
 }

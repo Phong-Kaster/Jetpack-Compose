@@ -53,20 +53,7 @@ import com.example.jetpack.util.ViewUtil
 private val chartSize: Dp = 150.dp
 private val innerChartSize: Dp = chartSize * 0.67F
 private const val filledAngle = 360F // A filled angle is an angle equal to 360° (entire circle)
-//private val colors = listOf(
-//    ColorWindSpeedCalm,
-//    ColorWindSpeedLightAir,
-//    ColorWindSpeedLight,
-//    ColorWindSpeedGentle,
-//    ColorWindSpeedModerate,
-//    ColorWindSpeedFresh,
-//    ColorWindSpeedStrong,
-//    ColorWindSpeedNearGale,
-//    ColorWindSpeedGale,
-//    ColorWindSpeedStrongGale,
-//    ColorWindSpeedStorm,
-//    ColorWindSpeedHurricaneForce,
-//)
+
 
 private val colors = listOf(
     Color.Red,
@@ -199,7 +186,7 @@ fun RingChart(
 
 @Preview
 @Composable
-fun PreviewPieChart() {
+fun PreviewRingChart() {
     ViewUtil.PreviewContent {
         RingChart(data = ChartElement.getFakeElements())
     }

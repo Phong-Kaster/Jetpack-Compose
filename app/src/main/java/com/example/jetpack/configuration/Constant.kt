@@ -52,5 +52,21 @@ object Constant {
     const val MAXIMUM_PAGE =
         10000 // we have to initial page to make time picker loop when it reach 23h
 
-    val LIST_OF_COLOUR = listOf(Color.Red, Color.Yellow, Color.Green, Color.Cyan, Color.Blue, Color.Magenta, Color.Red, Color.Yellow, Color.Green, Color.Cyan, Color.Blue, Color.Magenta, Color.Red, Color.Yellow, Color.Green, Color.Cyan, Color.Blue, Color.Magenta)
+    val LIST_OF_COLOUR = listOf(
+        Color.Cyan,
+        Color.Blue,
+        Color.Magenta,
+        Color.Red,
+        Color.Yellow,
+        Color.Green,
+        Color.Cyan,
+        Color.Blue,
+        Color.Magenta,
+        Color.Red,
+        Color.Yellow,
+        Color.Green,
+        Color.Cyan,
+        Color.Blue,
+        Color.Magenta
+    )
 }

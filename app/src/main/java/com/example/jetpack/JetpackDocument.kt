@@ -28,6 +28,7 @@ import javax.inject.Singleton
  * # [22 - Custom Sliders in Jetpack Compose](https://medium.com/@anandgaur22/custom-sliders-in-jetpack-compose-9bc8deb32482)
  * # [23 - 7 ADB Commands Every Android Developer Should Know](https://proandroiddev.com/7-adb-commands-every-android-developer-should-know-fbfb419e8827)
  * # [24 - Coroutines Cheat Sheet for Android Developers](https://android-dev-nexus.medium.com/coroutines-cheat-sheet-for-android-developers-6ee2049b268c)
+ * # [25 - TOP 5 Icon Resources for all your Projects!](https://medium.com/@stevdza-san/top-5-icon-resources-for-all-your-projects-82551fe7362d)
  */
 @Singleton
 class JetpackDocument {}
