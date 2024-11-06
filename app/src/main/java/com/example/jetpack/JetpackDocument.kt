@@ -29,6 +29,7 @@ import javax.inject.Singleton
  * # [23 - 7 ADB Commands Every Android Developer Should Know](https://proandroiddev.com/7-adb-commands-every-android-developer-should-know-fbfb419e8827)
  * # [24 - Coroutines Cheat Sheet for Android Developers](https://android-dev-nexus.medium.com/coroutines-cheat-sheet-for-android-developers-6ee2049b268c)
  * # [25 - TOP 5 Icon Resources for all your Projects!](https://medium.com/@stevdza-san/top-5-icon-resources-for-all-your-projects-82551fe7362d)
+ * # [26 - The two best ways to secure your API keys in Android projects](https://proandroiddev.com/the-2-best-ways-to-secure-your-api-keys-in-android-projects-12f6a9939053)
  */
 @Singleton
 class JetpackDocument {}
