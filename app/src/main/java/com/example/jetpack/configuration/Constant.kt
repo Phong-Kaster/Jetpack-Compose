@@ -25,7 +25,7 @@ object Constant {
     const val NOTIFICATION_MILESTONE_3_MINUTE = 39
 
     /* AccuWeather - https://developer.accuweather.com/accuweather-locations-api/apis/get/locations/v1/cities/autocomplete */
-    const val ACCU_WEATHER_KEY = "x5ADcexs7Ge2ge8ZlB8T8JnJtWG4AhSJ"
+    const val ACCU_WEATHER_KEY = "ldjskgPZUf0u08CWHUQoG4msDPx0NvuK"
     const val ACCU_WEATHER_URL = "https://dataservice.accuweather.com"
 
     /* default range */

@@ -16,6 +16,7 @@ import androidx.compose.runtime.snapshotFlow
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.compose.ui.unit.Density
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -58,6 +59,7 @@ open class CoreFragment : Fragment(), CoreBehavior {
         makeStatusBarTransparent()
         setupDarkMode()
         return ComposeView(requireActivity()).apply {
+            setViewCompositionStrategy(strategy = ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent {
                 CompositionLocalProvider(
                     LocalNavController provides findNavController(),
