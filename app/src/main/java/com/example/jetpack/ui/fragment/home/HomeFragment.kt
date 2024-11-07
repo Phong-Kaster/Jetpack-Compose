@@ -164,6 +164,7 @@ class HomeFragment : CoreFragment() {
                     HomeShortcut.InstagramCarousel -> safeNavigate(R.id.toInstagramCarousel)
                     HomeShortcut.Animation -> safeNavigate(R.id.toAnimation)
                     HomeShortcut.KotlinFlow -> safeNavigate(R.id.toKotlinFlow)
+                    HomeShortcut.PitchToZoom -> safeNavigate(R.id.toPitchToZoom)
                     else -> {
                         showToast(it.name)
                     }

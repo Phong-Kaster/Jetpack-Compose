@@ -32,5 +32,6 @@ enum class HomeShortcut(
     LastKnownLocation(drawable = R.drawable.ic_last_know_location, text = R.string.last_know_location),
     InstagramCarousel(drawable = R.drawable.ic_instagram, text = R.string.instagram_carousel),
     KotlinFlow(drawable = R.drawable.ic_kotlin, text = R.string.kotlin_flow),
+    PitchToZoom(drawable = R.drawable.ic_pitch_to_zoom, text = R.string.pitch_to_zoom),
     ;
 }

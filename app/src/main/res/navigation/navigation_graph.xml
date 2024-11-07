@@ -156,6 +156,10 @@
         android:id="@+id/kotlinFlowFragment"
         android:name="com.example.jetpack.ui.fragment.kotlinflow.KotlinFlowFragment" />
 
+    <fragment
+        android:id="@+id/pitchToZoomFragment"
+        android:name="com.example.jetpack.ui.fragment.pitchtozoom.PitchToZoomFragment" />
+
 
     <activity
         android:id="@+id/lockscreenActivity"
@@ -398,6 +402,15 @@
     <action
         android:id="@+id/toKotlinFlow"
         app:destination="@id/kotlinFlowFragment"
+        app:enterAnim="@anim/enter_slide_in_right"
+        app:exitAnim="@anim/exit_slide_out_left"
+        app:popEnterAnim="@anim/enter_slide_in_left"
+        app:popExitAnim="@anim/exit_slide_out_right"
+        app:popUpToInclusive="true"/>
+
+    <action
+        android:id="@+id/toPitchToZoom"
+        app:destination="@id/pitchToZoomFragment"
         app:enterAnim="@anim/enter_slide_in_right"
         app:exitAnim="@anim/exit_slide_out_left"
         app:popEnterAnim="@anim/enter_slide_in_left"
