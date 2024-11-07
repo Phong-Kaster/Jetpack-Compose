@@ -20,7 +20,7 @@ object AppUtil {
         if(enableDivider){
             Log.d(tag, "----------------------------")
         }
-        Log.d(tag, "-> message: $message")
+        Log.d(tag, "-> message = $message")
 
     }
 

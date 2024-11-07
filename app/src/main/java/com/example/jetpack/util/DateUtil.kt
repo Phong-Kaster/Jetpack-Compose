@@ -126,6 +126,7 @@ object DateUtil {
     /**
      * convert from seconds to hours
      * for example: 18960 seconds = 5 hour 15 minute 30 second
+     * @return hour
      */
     fun Int.toHour(): Int {
         val outcome = this / (60 * 60)
@@ -135,6 +136,7 @@ object DateUtil {
     /**
      * convert from seconds to hours
      * for example: 18960 seconds = 5 hour 15 minute 30 second
+     * @return minute
      */
     fun Int.toMinute(): Int {
         val leftSecond = this - this.toHour() * 60 * 60
@@ -145,6 +147,7 @@ object DateUtil {
     /**
      * convert from seconds to hours
      * for example: 18960 seconds = 5 hour 15 minute 30 second
+     * @return second
      */
     fun Int.toSecond(): Int {
         return this - this.toHour() * 60 * 60 - this.toMinute() * 60
