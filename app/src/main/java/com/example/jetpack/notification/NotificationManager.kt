@@ -12,9 +12,10 @@ import com.example.jetpack.util.AppUtil
 import java.util.Calendar
 
 /**
- * @author Phong-Apero
- * @since 07-09-2023
  * this class is responsible for creating & show notification
+ *
+ * @author Phong-Kaster
+ * @since 07-09-2023
  */
 object NotificationManager {
     /**

@@ -161,6 +161,10 @@
         android:name="com.example.jetpack.ui.fragment.pitchtozoom.PitchToZoomFragment" />
 
 
+    <fragment
+        android:id="@+id/downloadWithWorkerFragment"
+        android:name="com.example.jetpack.ui.fragment.downloadwithworker.DownloadWithWorkerFragment" />
+
     <activity
         android:id="@+id/lockscreenActivity"
         android:name="com.example.jetpack.ui.activity.LockscreenActivity" />
@@ -411,6 +415,15 @@
     <action
         android:id="@+id/toPitchToZoom"
         app:destination="@id/pitchToZoomFragment"
+        app:enterAnim="@anim/enter_slide_in_right"
+        app:exitAnim="@anim/exit_slide_out_left"
+        app:popEnterAnim="@anim/enter_slide_in_left"
+        app:popExitAnim="@anim/exit_slide_out_right"
+        app:popUpToInclusive="true"/>
+
+    <action
+        android:id="@+id/toDownloadWithWorker"
+        app:destination="@id/downloadWithWorkerFragment"
         app:enterAnim="@anim/enter_slide_in_right"
         app:exitAnim="@anim/exit_slide_out_left"
         app:popEnterAnim="@anim/enter_slide_in_left"

@@ -165,6 +165,7 @@ class HomeFragment : CoreFragment() {
                     HomeShortcut.Animation -> safeNavigate(R.id.toAnimation)
                     HomeShortcut.KotlinFlow -> safeNavigate(R.id.toKotlinFlow)
                     HomeShortcut.PitchToZoom -> safeNavigate(R.id.toPitchToZoom)
+                    HomeShortcut.DownloadWithWorkerManager -> safeNavigate(R.id.toDownloadWithWorker)
                     else -> {
                         showToast(it.name)
                     }

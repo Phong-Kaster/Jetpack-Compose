@@ -174,6 +174,12 @@ dependencies {
 
     // For map manager
     implementation("com.google.android.gms:play-services-location:21.3.0")
+
+
+    // Getting started with WorkManager - https://developer.android.com/develop/background-work/background-tasks/persistent/getting-started
+    implementation("androidx.work:work-runtime-ktx:2.9.0")
+    implementation("androidx.hilt:hilt-work:1.2.0")
+    kapt("androidx.hilt:hilt-compiler:1.2.0")
 }
 
 // Dependency injection with Hilt - Allow references to generated code

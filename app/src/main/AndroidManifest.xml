@@ -41,6 +41,12 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" /> <!--Android 14 or higher | only handle media playback - https://developer.android.com/develop/background-work/services/foreground-services#request-foreground-service-permissions-->
 
 
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+
     <application
         android:name=".JetpackApplication"
         android:allowBackup="true"

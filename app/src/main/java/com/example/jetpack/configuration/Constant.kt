@@ -31,7 +31,7 @@ object Constant {
     /* default range */
     val defaultRange: Pair<Float, Float> = 0F to 300F
 
-    /* FOREGROUND SERVICE */
+    /* foreground service */
     const val FOREGROUND_SERVICE_CHANNEL_ID = "foreground_service_id"
     const val FOREGROUND_SERVICE_NOTIFICATION_ID = 1
     const val FOREGROUND_SERVICE_CHANNEL_NAME = "foreground_service"
@@ -69,4 +69,18 @@ object Constant {
         Color.Blue,
         Color.Magenta
     )
+
+    /* only for download file worker */
+    const val DOWNLOAD_FILE_WORKER_KEY_FILE_URL = "key_file_url"
+    const val DOWNLOAD_FILE_WORKER_KEY_FILE_TYPE = "key_file_type"
+
+    const val DOWNLOAD_FILE_WORKER_KEY_FILE_NAME = "key_file_name"
+    const val DOWNLOAD_FILE_WORKER_KEY_FILE_URI = "key_file_uri"
+
+    const val DOWNLOAD_FILE_WORKER_CHANNEL_NAME = "download_file_worker_demo_channel"
+    const val DOWNLOAD_FILE_WORKER_CHANNEL_DESCRIPTION = "download_file_worker_demo_description"
+
+    const val DOWNLOAD_FILE_WORKER_CHANNEL_ID = "download_file_worker_demo_channel_123456"
+    const val DOWNLOAD_FILE_WORKER_NOTIFICATION_ID = 1
+    /* end of only for download file worker */
 }

@@ -139,4 +139,5 @@
     <string name="component">Component</string>
     <string name="kotlin_flow">Kotlin flow</string>
     <string name="pitch_to_zoom">Pitch To Zoom</string>
+    <string name="download_with_worker_manager">Download with worker manager</string>
 </resources>
