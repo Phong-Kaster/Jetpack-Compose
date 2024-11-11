@@ -13,6 +13,7 @@ import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import com.example.jetpack.R
+import java.util.UUID
 
 
 object AppUtil {
@@ -23,6 +24,8 @@ object AppUtil {
         Log.d(tag, "-> message = $message")
 
     }
+
+    fun generateUUID(): String = UUID.randomUUID().toString()
 
     fun openWebsite(context: Context, url: String) {
         val uri = Uri.parse(url)

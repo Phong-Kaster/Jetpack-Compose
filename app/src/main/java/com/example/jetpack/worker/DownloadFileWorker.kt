@@ -1,6 +1,8 @@
 package com.example.jetpack.worker
 
 import android.Manifest
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.ContentValues
 import android.content.Context
 import android.content.pm.PackageManager
@@ -8,6 +10,8 @@ import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
+import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
@@ -18,7 +22,10 @@ import androidx.work.WorkerParameters
 import androidx.work.workDataOf
 import com.example.jetpack.R
 import com.example.jetpack.configuration.Constant
-import com.example.jetpack.notification.NotificationManager
+import com.example.jetpack.configuration.Constant.DOWNLOAD_FILE_WORKER_CHANNEL_DESCRIPTION
+import com.example.jetpack.configuration.Constant.DOWNLOAD_FILE_WORKER_CHANNEL_ID
+import com.example.jetpack.configuration.Constant.DOWNLOAD_FILE_WORKER_CHANNEL_NAME
+import com.example.jetpack.configuration.Constant.DOWNLOAD_FILE_WORKER_NOTIFICATION_ID
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
 import java.io.File
@@ -29,11 +36,16 @@ import java.net.URL
  * # [Step by Step Guide to Download Files With WorkManager](https://proandroiddev.com/step-by-step-guide-to-download-files-with-workmanager-b0231b03efd1)
  */
 @HiltWorker
-class DownloadFileWorker @AssistedInject constructor(
+class DownloadFileWorker
+@AssistedInject
+constructor(
     @Assisted private val context: Context,
     @Assisted workerParameters: WorkerParameters
 ) : CoroutineWorker(context, workerParameters) {
 
+    private val TAG = this.javaClass.simpleName
+
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override suspend fun doWork(): Result {
 
         val fileUrl = inputData.getString(Constant.DOWNLOAD_FILE_WORKER_KEY_FILE_URL) ?: ""
@@ -45,7 +57,7 @@ class DownloadFileWorker @AssistedInject constructor(
             return Result.failure()
 
         /*Create notification channel for Android 8 & higher*/
-        NotificationManager.createNotificationChannel(context = context)
+        createNotificationChannel(context = context)
 
         /*show notification with progress bar*/
         popupNotification(context = context)
@@ -57,25 +69,65 @@ class DownloadFileWorker @AssistedInject constructor(
             context = context
         )
 
-        NotificationManagerCompat.from(context).cancel(Constant.DOWNLOAD_FILE_WORKER_NOTIFICATION_ID)
+        NotificationManagerCompat
+            .from(context)
+            .cancel(DOWNLOAD_FILE_WORKER_NOTIFICATION_ID)
+
         return if (uri == null)
             Result.failure()
-         else
+        else
             Result.success(workDataOf(Constant.DOWNLOAD_FILE_WORKER_KEY_FILE_URI to uri.toString()))
+
     }
 
-    private fun popupNotification(context: Context) {
-        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED)
+    private fun createNotificationChannel(context: Context) {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is not in the Support Library.
+
+        val importance = NotificationManager.IMPORTANCE_DEFAULT
+        val channel = NotificationChannel(
+            DOWNLOAD_FILE_WORKER_CHANNEL_ID,
+            DOWNLOAD_FILE_WORKER_CHANNEL_NAME,
+            importance
+        ).apply {
+            description = DOWNLOAD_FILE_WORKER_CHANNEL_DESCRIPTION
+        }
+        // Register the channel with the system.
+        val notificationManager: NotificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager.createNotificationChannel(channel)
+    }
+
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
+    fun popupNotification(context: Context) {
+        Log.d(TAG, "popupNotification: ")
+
+        val enableNotification = ActivityCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS)
+        Log.d(TAG, "popupNotification - enableNotification = $enableNotification")
+        if (enableNotification != PackageManager.PERMISSION_GRANTED) {
             return
+        }
 
-        val builder = NotificationCompat.Builder(context, Constant.DOWNLOAD_FILE_WORKER_CHANNEL_ID)
+
+        Log.d(TAG, "popupNotification - builder")
+        val builder = NotificationCompat.Builder(context, DOWNLOAD_FILE_WORKER_CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_iron_cross_wehtmatch)
-            .setContentTitle("Downloading your file...")
+            .setContentTitle(context.getString(R.string.app_name))
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setOngoing(true)
-            .setProgress(0, 0, true)
+            .setContentText("Downloading your file...")
+            .setStyle(NotificationCompat.BigTextStyle()
+                .bigText("Downloading your file..."))
+            .setProgress(100, 50, true)
 
-        NotificationManagerCompat.from(context)
-            .notify(Constant.DOWNLOAD_FILE_WORKER_NOTIFICATION_ID, builder.build())
+        //4. Show notification with notificationId which is a unique int for each notification that you must define
+        val notificationManager = NotificationManagerCompat.from(context)
+        try {
+            notificationManager.cancel(DOWNLOAD_FILE_WORKER_NOTIFICATION_ID)
+            notificationManager.notify(DOWNLOAD_FILE_WORKER_NOTIFICATION_ID, builder.build())
+            Log.d(TAG, "popupNotification - notify")
+        }catch (ex: Exception) {
+            ex.printStackTrace()
+        }
     }
 
     /**
@@ -108,7 +160,7 @@ class DownloadFileWorker @AssistedInject constructor(
             val contentValues = ContentValues().apply {
                 put(MediaStore.MediaColumns.DISPLAY_NAME, fileName)
                 put(MediaStore.MediaColumns.MIME_TYPE, mimeType)
-                put(MediaStore.MediaColumns.RELATIVE_PATH, "Download/DownloaderDemo")
+                put(MediaStore.MediaColumns.RELATIVE_PATH, "Download/Demo")
             }
             val resolver = context.contentResolver
 

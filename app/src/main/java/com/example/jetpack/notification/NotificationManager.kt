@@ -6,6 +6,7 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import com.example.jetpack.R
 import com.example.jetpack.configuration.Constant.NOTIFICATION_CHANNEL_ID
 import com.example.jetpack.util.AppUtil
@@ -21,6 +22,9 @@ object NotificationManager {
     /**
      * Note: Create the NotificationChannel, but only on API 26+ because the NotificationChannel
      * class is new and not in the support library
+     *
+     *
+     * NOTIFICATION_CHANNEL_ID must to be the same with CHANNEL ID in Notification Builder.
      */
     fun createNotificationChannel(context: Context) {
         //1. define variable

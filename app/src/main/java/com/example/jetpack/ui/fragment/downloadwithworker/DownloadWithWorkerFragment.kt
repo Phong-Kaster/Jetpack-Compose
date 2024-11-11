@@ -2,45 +2,41 @@ package com.example.jetpack.ui.fragment.downloadwithworker
 
 import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.os.Build
+import android.util.Log
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
-import androidx.work.Constraints
-import androidx.work.Data
-import androidx.work.ExistingWorkPolicy
-import androidx.work.NetworkType
-import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.WorkInfo
-import androidx.work.WorkManager
+import androidx.fragment.app.viewModels
 import com.example.jetpack.R
-import com.example.jetpack.configuration.Constant
 import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
 import com.example.jetpack.core.LocalTheme
-import com.example.jetpack.domain.model.DownloadFile
 import com.example.jetpack.ui.component.CoreTopBar
 import com.example.jetpack.ui.theme.customizedTextStyle
 import com.example.jetpack.util.NavigationUtil.safeNavigateUp
-import com.example.jetpack.worker.DownloadFileWorker
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -50,117 +46,52 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class DownloadWithWorkerFragment : CoreFragment() {
 
-    private fun startDownloadingFile(
-        file: DownloadFile,
-        onSuccess: (String) -> Unit,
-        onFailure: (String) -> Unit,
-        onRunning: () -> Unit
-    ) {
-        val data = Data.Builder()
+    private val viewModel: DownloadWithWorkerViewModel by viewModels()
 
-        data.apply {
-            putString(Constant.DOWNLOAD_FILE_WORKER_KEY_FILE_NAME, file.name)
-            putString(Constant.DOWNLOAD_FILE_WORKER_KEY_FILE_URL, file.url)
-            putString(Constant.DOWNLOAD_FILE_WORKER_KEY_FILE_TYPE, file.type)
-        }
-
-        val constraints = Constraints.Builder()
-            .setRequiredNetworkType(NetworkType.CONNECTED)
-            .setRequiresStorageNotLow(true)
-            .setRequiresBatteryNotLow(true)
-            .build()
-
-
-        val downloadFileWorker = OneTimeWorkRequestBuilder<DownloadFileWorker>()
-            .setConstraints(constraints)
-            .setInputData(data.build())
-            .build()
-
-        val workManager = WorkManager.getInstance(requireContext())
-        workManager.enqueueUniqueWork(
-            "oneFileDownloadWork_${System.currentTimeMillis()}",
-            ExistingWorkPolicy.KEEP,
-            downloadFileWorker
-        )
-
-        workManager.getWorkInfoByIdLiveData(downloadFileWorker.id)
-            .observe(this) { info ->
-                info?.let {
-                    when (it.state) {
-                        WorkInfo.State.SUCCEEDED -> {
-                            onSuccess(
-                                it.outputData.getString(Constant.DOWNLOAD_FILE_WORKER_KEY_FILE_URI)
-                                    ?: ""
-                            )
-                        }
-
-                        WorkInfo.State.FAILED -> onFailure("Downloading failed!")
-                        WorkInfo.State.RUNNING -> onRunning()
-                        else -> onFailure("Something went wrong")
-
-                    }
-                }
-            }
-    }
-
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     @Composable
     override fun ComposeView() {
         super.ComposeView()
 
-        var targetFile = remember {
-            mutableStateOf(
-                DownloadFile(
-                    id = "10",
-                    name = "PDF File 10 MB",
-                    type = "PDF",
-                    url = "https://www.learningcontainer.com/wp-content/uploads/2019/09/sample-pdf-download-10-mb.pdf",
-                    downloadedUri = null
-                )
-            )
-        }
-
-
         DownloadWithWorkerLayout(
-            downloadFile = targetFile.value,
-            onStartDownload = { downloadFile: DownloadFile ->
-                startDownloadingFile(
-                    file = downloadFile,
-                    onSuccess = { downloadedUri ->
-                        targetFile.value = targetFile.value.copy(
-                            isDownloading = false,
-                            downloadedUri = downloadedUri
-                        )
-                    },
-                    onFailure = { downloadedUri ->
-                        targetFile.value =
-                            targetFile.value.copy(isDownloading = false, downloadedUri = null)
-                    },
-                    onRunning = {
-                        targetFile.value = targetFile.value.copy(isDownloading = true)
-                    }
-                )
+            state = viewModel.state.collectAsState().value,
+            onChoosePDF = { },
+            onChooseVideo = { },
+            onBack = { safeNavigateUp() },
+            onDownload = {
+                Log.d(TAG, "onDownload")
+                Log.d(TAG, "onDownload - state = ${viewModel.state.value}")
+                if (viewModel.state.value.fileLink.isEmpty()) {
+                    showToast(message = "File link is empty !")
+                    return@DownloadWithWorkerLayout
+                }
+                viewModel.startDownloadingFile(lifecycleOwner = this)
             },
-            onOpenFile = { downloadFile: DownloadFile ->
+            onOpenFile = {
                 val intent = Intent(Intent.ACTION_VIEW)
-                intent.setDataAndType(downloadFile.downloadedUri?.toUri(), "application/pdf")
+                intent.setDataAndType(
+                    viewModel.state.value.fileUri?.toUri(),
+                    viewModel.state.value.mimeType
+                )
                 intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                 try {
                     startActivity(intent)
                 } catch (ex: ActivityNotFoundException) {
                     ex.printStackTrace()
-                    Toast.makeText(requireContext(), "Can't open Pdf", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Can't open", Toast.LENGTH_SHORT).show()
                 }
-            },
-            onBack = { safeNavigateUp() }
+            }
         )
     }
 }
 
 @Composable
 fun DownloadWithWorkerLayout(
-    downloadFile: DownloadFile,
-    onStartDownload: (DownloadFile) -> Unit = {},
-    onOpenFile: (DownloadFile) -> Unit = {},
+    state: DownloadWithWorkerState,
+    onChoosePDF: () -> Unit = {},
+    onChooseVideo: () -> Unit = {},
+    onDownload: () -> Unit = {},
+    onOpenFile: () -> Unit = {},
     onBack: () -> Unit = {},
 ) {
     CoreLayout(
@@ -171,10 +102,8 @@ fun DownloadWithWorkerLayout(
                 onClickLeft = onBack
             )
         },
-        backgroundColor = LocalTheme.current.background,
-        content = {
-            Box(
-                contentAlignment = Alignment.Center,
+        bottomBar = {
+            Row(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(16.dp)
@@ -185,60 +114,132 @@ fun DownloadWithWorkerLayout(
                     )
                     .background(color = LocalTheme.current.background)
                     .clickable {
-                        if (downloadFile.isDownloading)
+                        if (state.isDownloading)
                             return@clickable
 
-                        if (downloadFile.downloadedUri.isNullOrEmpty())
-                            onStartDownload(downloadFile)
+                        if (state.fileUri.isNullOrEmpty())
+                            onDownload()
                         else
-                            onOpenFile(downloadFile)
+                            onOpenFile()
 
                     }
-                    .padding(16.dp)
+                    .padding(16.dp),
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                Row(
+                Column(
                     modifier = Modifier
-                        .fillMaxWidth(),
-                    verticalAlignment = Alignment.CenterVertically
+                        .fillMaxWidth(0.8f)
                 ) {
-                    Column(
-                        modifier = Modifier
-                            .fillMaxWidth(0.8f)
-                    ) {
+                    Text(
+                        text = state.fileName,
+                        style = customizedTextStyle(
+                            fontWeight = 700,
+                            fontSize = 18,
+                            color = LocalTheme.current.textColor
+                        ),
+                    )
+
+                    Row {
                         Text(
-                            text = downloadFile.name,
                             style = customizedTextStyle(
-                                fontWeight = 700,
-                                fontSize = 18,
+                                fontWeight = 400,
+                                fontSize = 14,
                                 color = LocalTheme.current.textColor
                             ),
-                        )
-
-                        Row {
-                            Text(
-                                text = if (downloadFile.isDownloading)
-                                    "Downloading..."
+                            text = if (state.isDownloading)
+                                "${stringResource(R.string.downloading)}..."
+                            else
+                                if (state.fileUri.isNullOrEmpty())
+                                    stringResource(R.string.tap_to_download)
                                 else
-                                    if (downloadFile.downloadedUri.isNullOrEmpty()) "Tap to download the file" else "Tap to open file",
+                                    stringResource(R.string.tap_to_open),
+                        )
+                    }
+
+                }
+
+                if (state.isDownloading) {
+                    CircularProgressIndicator(
+                        color = LocalTheme.current.primary,
+                        modifier = Modifier
+                            .size(32.dp)
+                            .align(Alignment.CenterVertically)
+                    )
+                }
+            }
+        },
+        backgroundColor = LocalTheme.current.background,
+        content = {
+            LazyColumn(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(
+                    space = 16.dp,
+                    alignment = Alignment.CenterVertically
+                ),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp)
+            ) {
+                item(
+                    key = "setupDownloadPdfExample",
+                    content = {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clip(shape = RoundedCornerShape(16.dp))
+                                .clickable { onChoosePDF() }
+                                .background(
+                                    color = LocalTheme.current.primary,
+                                    shape = RoundedCornerShape(16.dp)
+                                )
+                                .padding(16.dp)
+                        ) {
+                            Text(
+                                text = "Click to setup download PDF Example",
                                 style = customizedTextStyle(
-                                    fontWeight = 400,
+                                    fontWeight = 600,
                                     fontSize = 14,
-                                    color = LocalTheme.current.textColor
+                                    color = LocalTheme.current.onPrimary
                                 ),
+                                maxLines = 1,
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .basicMarquee(Int.MAX_VALUE)
                             )
                         }
-
                     }
+                )
 
-                    if (downloadFile.isDownloading) {
-                        CircularProgressIndicator(
-                            color = LocalTheme.current.primary,
+
+                item(
+                    key = "setupDownloadVideoExample",
+                    content = {
+                        Row(
                             modifier = Modifier
-                                .size(32.dp)
-                                .align(Alignment.CenterVertically)
-                        )
+                                .fillMaxWidth()
+                                .clip(shape = RoundedCornerShape(16.dp))
+                                .clickable { onChooseVideo() }
+                                .background(
+                                    color = LocalTheme.current.primary,
+                                    shape = RoundedCornerShape(16.dp)
+                                )
+                                .padding(16.dp)
+                        ) {
+                            Text(
+                                text = "Click to setup download Video Example",
+                                style = customizedTextStyle(
+                                    fontWeight = 600,
+                                    fontSize = 14,
+                                    color = LocalTheme.current.onPrimary
+                                ),
+                                maxLines = 1,
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .basicMarquee(Int.MAX_VALUE)
+                            )
+                        }
                     }
-                }
+                )
             }
         }
     )
@@ -247,15 +248,7 @@ fun DownloadWithWorkerLayout(
 @Preview
 @Composable
 private fun PreviewDownloadWithWorker() {
-    val downloadFile = DownloadFile(
-        id = "10",
-        name = "PDF File 10 MB",
-        type = "PDF",
-        url = "https://www.learningcontainer.com/wp-content/uploads/2019/09/sample-pdf-download-10-mb.pdf",
-        downloadedUri = null
-    )
-
     DownloadWithWorkerLayout(
-        downloadFile = downloadFile
+        state = DownloadWithWorkerState()
     )
 }

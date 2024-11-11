@@ -80,7 +80,10 @@ object Constant {
     const val DOWNLOAD_FILE_WORKER_CHANNEL_NAME = "download_file_worker_demo_channel"
     const val DOWNLOAD_FILE_WORKER_CHANNEL_DESCRIPTION = "download_file_worker_demo_description"
 
-    const val DOWNLOAD_FILE_WORKER_CHANNEL_ID = "download_file_worker_demo_channel_123456"
-    const val DOWNLOAD_FILE_WORKER_NOTIFICATION_ID = 1
+    const val DOWNLOAD_FILE_WORKER_CHANNEL_ID = "download_file_worker_channel"
+    const val DOWNLOAD_FILE_WORKER_NOTIFICATION_ID = 1687
     /* end of only for download file worker */
+
+    val MP4: Pair<String, String> = "mp4" to "video/mp4"
+    val PDF: Pair<String, String> = "pdf" to "application/pdf"
 }
