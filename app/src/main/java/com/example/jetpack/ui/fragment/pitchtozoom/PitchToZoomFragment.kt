@@ -74,13 +74,15 @@ fun PitchToZoomLayout(
         },
         bottomBar = {
             Text(
-                text = "The Napoleonic Wars greatly expanded the French empire until Napoleon Bonaparte’s military prowess faltered and he was exiled.",
+                text = stringResource(R.string.the_napoleonic_wars_greatly_expanded),
                 style = customizedTextStyle(
                     fontSize = 16,
                     fontWeight = 600,
                     color = LocalTheme.current.textColor
                 ),
-                modifier = Modifier.padding(16.dp)
+                modifier = Modifier
+                    .background(color = LocalTheme.current.background)
+                    .padding(16.dp)
             )
         },
         backgroundColor = LocalTheme.current.background,

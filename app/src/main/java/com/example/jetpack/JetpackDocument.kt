@@ -29,9 +29,10 @@ import javax.inject.Singleton
  * # [23 - 7 ADB Commands Every Android Developer Should Know](https://proandroiddev.com/7-adb-commands-every-android-developer-should-know-fbfb419e8827)
  * # [24 - Coroutines Cheat Sheet for Android Developers](https://android-dev-nexus.medium.com/coroutines-cheat-sheet-for-android-developers-6ee2049b268c)
  * # [25 - TOP 5 Icon Resources for all your Projects!](https://medium.com/@stevdza-san/top-5-icon-resources-for-all-your-projects-82551fe7362d)
- * # [26 - The two best ways to secure your API keys in Android projects](https://proandroiddev.com/the-2-best-ways-to-secure-your-api-keys-in-android-projects-12f6a9939053)
+ * # [26 - Security - The two best ways to secure your API keys in Android projects](https://proandroiddev.com/the-2-best-ways-to-secure-your-api-keys-in-android-projects-12f6a9939053)
  * # [27 - Should You Use UUIDs for Database Keys?](https://medium.com/@tecnicorabi/should-you-use-uuids-for-database-keys-597b15b000bb)
  * # [28 - Modeling ViewModel State in Android: A Guide to Clean, Scalable Patterns](https://medium.com/clean-android-dev/modeling-viewmodel-state-in-android-a-guide-to-clean-scalable-patterns-d42932ade940)
- */
+ * # [29 - Security - SSL Pinning in Android](https://medium.com/@anandgaur22/ssl-pinning-in-android-14851dc41703)
+ * */
 @Singleton
 class JetpackDocument {}

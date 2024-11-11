@@ -140,4 +140,9 @@
     <string name="kotlin_flow">Kotlin flow</string>
     <string name="pitch_to_zoom">Pitch To Zoom</string>
     <string name="download_with_worker_manager">Download with worker manager</string>
+    <string name="the_napoleonic_wars_greatly_expanded">The Napoleonic Wars greatly expanded the French empire until Napoleon Bonaparte’s military prowess faltered and he was exiled</string>
+    <string name="curvy_line_chart">Curvy Line Chart</string>
+    <string name="blood_pressure_chart">Blood Pressure Chart</string>
+    <string name="pie_chart">Pie Chart</string>
+    <string name="donut_chart">Donut Chart</string>
 </resources>

@@ -11,8 +11,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.jetpack.R
 import com.example.jetpack.domain.model.ChartElement
 import com.example.jetpack.ui.fragment.chart.chartcomponent.BloodPressureChart
 import com.example.jetpack.ui.fragment.chart.chartcomponent.CurvyLineChart
@@ -38,7 +40,7 @@ fun LineChartScreen() {
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text(
-                    text = "CurvyLineChart",
+                    text = stringResource(R.string.curvy_line_chart),
                     style = customizedTextStyle(
                         fontSize = 14,
                         fontWeight = 600,
@@ -58,7 +60,7 @@ fun LineChartScreen() {
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text(
-                    text = "Line Chart",
+                    text = stringResource(R.string.line_chart),
                     style = customizedTextStyle(
                         fontSize = 14,
                         fontWeight = 600,
@@ -76,7 +78,7 @@ fun LineChartScreen() {
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text(
-                    text = "Blood Pressure Chart",
+                    text = stringResource(R.string.blood_pressure_chart),
                     style = customizedTextStyle(
                         fontSize = 14,
                         fontWeight = 600,

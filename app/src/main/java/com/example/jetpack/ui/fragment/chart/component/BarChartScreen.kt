@@ -11,8 +11,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.jetpack.R
 import com.example.jetpack.domain.model.ChartElement
 import com.example.jetpack.ui.fragment.chart.chartcomponent.BarChart
 import com.example.jetpack.ui.theme.customizedTextStyle
@@ -32,7 +34,7 @@ fun BarChartScreen() {
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text(
-                    text = "Bar Chart",
+                    text = stringResource(R.string.bar_chart),
                     style = customizedTextStyle(
                         fontSize = 14,
                         fontWeight = 600,

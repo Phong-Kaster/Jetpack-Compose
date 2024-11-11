@@ -15,9 +15,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.jetpack.R
 import com.example.jetpack.domain.model.ChartElement
 import com.example.jetpack.ui.fragment.chart.chartcomponent.DonutChart
 import com.example.jetpack.ui.fragment.chart.chartcomponent.DonutChart2
@@ -36,14 +38,14 @@ fun RingChartScreen() {
             .fillMaxSize()
             .padding(16.dp),
     ) {
-        item(key = "RingChart",
+        item(key = "Ring Chart",
             span = { GridItemSpan(2) }) {
             Column(
                 verticalArrangement = Arrangement.spacedBy(16.dp),
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text(
-                    text = "Ring Chart",
+                    text = stringResource(R.string.ring_chart),
                     style = customizedTextStyle(
                         fontSize = 14,
                         fontWeight = 600,
@@ -60,7 +62,7 @@ fun RingChartScreen() {
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text(
-                    text = "Ring Chart 2",
+                    text = "${stringResource(R.string.ring_chart)} 2",
                     style = customizedTextStyle(
                         fontSize = 14,
                         fontWeight = 600,
@@ -79,7 +81,7 @@ fun RingChartScreen() {
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text(
-                    text = "Pie Chart",
+                    text = stringResource(R.string.pie_chart),
                     style = customizedTextStyle(
                         fontSize = 14,
                         fontWeight = 600,
@@ -104,7 +106,7 @@ fun RingChartScreen() {
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text(
-                    text = "Donut Chart",
+                    text = stringResource(R.string.donut_chart),
                     style = customizedTextStyle(
                         fontSize = 14,
                         fontWeight = 600,
