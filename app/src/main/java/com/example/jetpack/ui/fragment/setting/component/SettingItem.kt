@@ -81,7 +81,15 @@ fun SettingItem(
                 color = LocalTheme.current.textColor
             )
             if (subtitle != null) {
-                Text(text = subtitle, style = body14, color = LocalTheme.current.dim)
+                Text(
+                    text = subtitle,
+                    style = customizedTextStyle(
+                        fontWeight = 600,
+                        fontSize = 16,
+                        color = LocalTheme.current.error
+                    ),
+
+                )
             }
         }
         Spacer(modifier = Modifier.weight(0.9F))

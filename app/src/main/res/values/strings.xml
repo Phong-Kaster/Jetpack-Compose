@@ -145,4 +145,6 @@
     <string name="blood_pressure_chart">Blood Pressure Chart</string>
     <string name="pie_chart">Pie Chart</string>
     <string name="donut_chart">Donut Chart</string>
+    <string name="background">Background</string>
+    <string name="text">Text</string>
 </resources>
