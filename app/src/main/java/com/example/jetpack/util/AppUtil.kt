@@ -27,6 +27,10 @@ object AppUtil {
 
     fun generateUUID(): String = UUID.randomUUID().toString()
 
+    fun Context.showToast(message: String){
+        android.widget.Toast.makeText(this, message, android.widget.Toast.LENGTH_SHORT).show()
+    }
+
     fun openWebsite(context: Context, url: String) {
         val uri = Uri.parse(url)
         val intent = Intent(Intent.ACTION_VIEW)

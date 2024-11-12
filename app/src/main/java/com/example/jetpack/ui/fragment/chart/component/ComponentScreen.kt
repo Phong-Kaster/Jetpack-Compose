@@ -3,20 +3,33 @@ package com.example.jetpack.ui.fragment.chart.component
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.foundation.background
+import androidx.compose.foundation.basicMarquee
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.KeyboardArrowRight
+import androidx.compose.material.icons.rounded.Close
+import androidx.compose.material.icons.rounded.Delete
+import androidx.compose.material.icons.rounded.Favorite
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -24,12 +37,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.jetpack.R
 import com.example.jetpack.configuration.Language
 import com.example.jetpack.core.LocalTheme
+import com.example.jetpack.domain.enums.HomeShortcut
 import com.example.jetpack.domain.enums.Subsetting
 import com.example.jetpack.ui.component.SquareElement
+import com.example.jetpack.ui.fragment.home.component.HomeShortcutItem
 import com.example.jetpack.ui.modifier.borderWithAnimatedGradient
 import com.example.jetpack.ui.theme.animationInfiniteFloatSuperLong
 import com.example.jetpack.ui.theme.customizedTextStyle
@@ -38,6 +58,8 @@ import com.example.jetpack.ui.view.ColorSquare
 import com.example.jetpack.ui.view.ContextualFlowRowSample
 import com.example.jetpack.ui.view.CustomizedCheckbox
 import com.example.jetpack.ui.view.SubsettingElement
+import com.example.jetpack.ui.view.SwipeToReveal
+import com.example.jetpack.util.AppUtil.showToast
 
 @Composable
 fun ComponentScreen(
@@ -47,6 +69,7 @@ fun ComponentScreen(
     onOpenWheelTimePicker: () -> Unit = {},
 ) {
 
+    val context = LocalContext.current
     val state = rememberLazyGridState()
 
     val infiniteTransition = rememberInfiniteTransition(label = "inifiniteTransition")
@@ -66,6 +89,77 @@ fun ComponentScreen(
             .fillMaxSize()
             .padding(horizontal = 16.dp, vertical = 16.dp)
     ) {
+        item(
+            key = "swipeToReveal",
+            span = { GridItemSpan(2) },
+            content = {
+                SwipeToReveal(
+                    actions = {
+                        IconButton(
+                            colors = IconButtonDefaults.iconButtonColors(
+                                containerColor = Color.Red,
+                                contentColor = Color.White
+                            ),
+                            onClick = { context.showToast("Delete") },
+                            content = {
+                                Icon(
+                                    imageVector = Icons.Rounded.Close,
+                                    tint = Color.White,
+                                    contentDescription = null,
+                                    modifier = Modifier
+                                )
+                            }
+                        )
+                    },
+                    modifier = Modifier.background(color = LocalTheme.current.background),
+                    content = {
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .borderWithAnimatedGradient(
+                                    colorBackground = LocalTheme.current.background,
+                                    width = 3.dp,
+                                    shape = RoundedCornerShape(25.dp)
+                                )
+                                .clip(shape = RoundedCornerShape(25.dp))
+                                .background(
+                                    color = LocalTheme.current.background,
+                                    shape = RoundedCornerShape(25.dp)
+                                )
+                                .padding(16.dp)
+                        ) {
+                            Icon(
+                                painter = painterResource(id = R.drawable.ic_heer),
+                                contentDescription = stringResource(id = R.string.icon),
+                                modifier = Modifier.size(25.dp),
+                                tint = LocalTheme.current.textColor
+                            )
+
+                            Spacer(modifier = Modifier.width(10.dp))
+
+                            Column(modifier = Modifier.weight(0.9F)){
+                                Text(
+                                    text = "Swipe left to reveal",
+                                    color = LocalTheme.current.textColor,
+                                    style = customizedTextStyle(fontWeight = 400, fontSize = 18),
+                                    maxLines = 1,
+                                    overflow = TextOverflow.Ellipsis,
+                                    modifier = Modifier.basicMarquee(iterations = Int.MAX_VALUE)
+                                )
+                            }
+
+                            Icon(
+                                imageVector = Icons.Default.KeyboardArrowRight,
+                                tint = LocalTheme.current.textColor,
+                                contentDescription = null
+                            )
+                        }
+                    },
+                )
+            }
+        )
+
         items(
             items = Language.entries.take(2),
             key = { item: Language -> item.name },
