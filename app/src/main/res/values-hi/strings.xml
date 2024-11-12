@@ -87,7 +87,7 @@
     <string name="no_internet_connection">कोई इंटरनेट कनेक्शन नहीं</string>
     <string name="search">खोजें...</string>
     <string name="foreground_service">फोरग्राउंड सेवा</string>
-    <string name="playing_sundial_dreams">सनडायल ड्रीम्स खेलना</string>
+
     <string name="basic_text_field_with_state">स्थिति के साथ बुनियादी पाठ क्षेत्र</string>
     <string name="common_usage">सामान्य उपयोग</string>
     <string name="original">मूल</string>

@@ -87,7 +87,6 @@
     <string name="no_internet_connection">Aucune connexion internet</string>
     <string name="search">Rechercher...</string>
     <string name="foreground_service">Service au premier plan</string>
-    <string name="playing_sundial_dreams">Jouer à Sundial Dreams</string>
     <string name="basic_text_field_with_state">Champ de texte de base avec état</string>
     <string name="common_usage">Usage courant</string>
     <string name="original">Original</string>

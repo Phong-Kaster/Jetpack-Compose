@@ -9,10 +9,13 @@ import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.filled.KeyboardArrowRight
@@ -26,6 +29,7 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -35,12 +39,14 @@ import com.example.jetpack.R
 import com.example.jetpack.backgroundwork.MediaPlayerService
 import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
+import com.example.jetpack.core.LocalTheme
 import com.example.jetpack.ui.component.CoreTopBar2
 import com.example.jetpack.ui.fragment.backgroundwork.MediaPlayer.getBackward
 import com.example.jetpack.ui.fragment.backgroundwork.MediaPlayer.getForward
 import com.example.jetpack.ui.fragment.backgroundwork.MediaPlayer.getTitle
 import com.example.jetpack.ui.theme.Background
 import com.example.jetpack.ui.theme.PrimaryColor
+import com.example.jetpack.ui.theme.customizedTextStyle
 import com.example.jetpack.util.NavigationUtil.safeNavigateUp
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -176,30 +182,40 @@ private fun ForegroundServiceLayout(
             )
         },
         content = {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally
+            Box(
+                contentAlignment = Alignment.Center,
+                modifier = Modifier.fillMaxSize()
             ) {
                 Text(
                     text = songName,
-                    color = PrimaryColor,
+                    color = LocalTheme.current.textColor,
+                    style = customizedTextStyle(
+                        fontWeight = 600,
+                        fontSize = 16,
+                    ),
                     modifier = Modifier
                         .basicMarquee(Int.MAX_VALUE)
-                        .align(Alignment.CenterHorizontally)
+                        .align(BiasAlignment(horizontalBias = 0f, verticalBias = 0f))
                         .padding(vertical = 16.dp)
                 )
 
                 // BACKWARD, PLAY PAUSE & FORWARD
                 Row(
                     horizontalArrangement = Arrangement.Center,
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .align(BiasAlignment(horizontalBias = 0f, verticalBias = 1f))
+                        .padding(16.dp)
                 ) {
                     IconButton(
                         onClick = onBackward,
                         content = {
                             Icon(
                                 imageVector = Icons.Default.KeyboardArrowLeft,
-                                tint = PrimaryColor,
-                                contentDescription = stringResource(id = R.string.icon)
+                                tint = LocalTheme.current.textColor,
+                                contentDescription = stringResource(id = R.string.icon),
+                                modifier = Modifier
+                                    .size(80.dp)
                             )
                         },
                         modifier = Modifier
@@ -212,11 +228,14 @@ private fun ForegroundServiceLayout(
                                 painter =
                                 if (isPlaying) painterResource(id = R.drawable.ic_pause)
                                 else painterResource(id = R.drawable.ic_play),
-                                tint = PrimaryColor,
-                                contentDescription = stringResource(id = R.string.icon)
+                                tint = LocalTheme.current.textColor,
+                                contentDescription = stringResource(id = R.string.icon),
+                                modifier = Modifier
+                                    .size(100.dp)
                             )
                         },
                         modifier = Modifier
+
                     )
 
                     IconButton(
@@ -224,8 +243,10 @@ private fun ForegroundServiceLayout(
                         content = {
                             Icon(
                                 imageVector = Icons.Default.KeyboardArrowRight,
-                                tint = PrimaryColor,
-                                contentDescription = stringResource(id = R.string.icon)
+                                tint = LocalTheme.current.textColor,
+                                contentDescription = stringResource(id = R.string.icon),
+                                modifier = Modifier
+                                    .size(80.dp)
                             )
                         },
                         modifier = Modifier

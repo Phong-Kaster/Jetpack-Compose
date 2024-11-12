@@ -1,5 +1,6 @@
 package com.example.jetpack.backgroundwork
 
+
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -7,13 +8,15 @@ import android.app.PendingIntent
 import android.app.Service
 import android.content.Context
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.media.AudioAttributes
 import android.media.MediaPlayer
 import android.os.Binder
 import android.os.IBinder
 import android.util.Log
+import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
-import androidx.core.content.ContextCompat
+import androidx.media3.ui.PlayerNotificationManager
 import com.example.jetpack.MainActivity
 import com.example.jetpack.R
 import com.example.jetpack.configuration.Constant
@@ -25,7 +28,7 @@ import kotlinx.coroutines.flow.asStateFlow
 @AndroidEntryPoint
 class MediaPlayerService : Service() {
 
-    val TAG =  "MediaPlayerService"
+    private val TAG = this.javaClass.simpleName
 
     /* For media player */
     private var player: MediaPlayer? = null
@@ -41,8 +44,32 @@ class MediaPlayerService : Service() {
 
     @Override
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        Log.d(TAG, "onStartCommand: ")
+        Log.d(TAG, "onStartCommand")
+        Log.d(TAG, "onStartCommand - action = ${intent?.action}")
+        Log.d(TAG, "onStartCommand - isPlaying.value = ${isPlaying.value}")
         createNotificationChannel()
+        when (intent?.action) {
+            Constant.ACTION_PLAY -> {
+                if (isPlaying.value) {
+                    pause()
+                } else {
+                    resume()
+                }
+            }
+
+            Constant.ACTION_PAUSE -> pause()
+            Constant.ACTION_STOP -> {
+                if (isPlaying.value) {
+                    pause()
+                }
+                destroyService()
+                stop()
+                stopForeground(STOP_FOREGROUND_REMOVE)
+                stopSelf()
+                notificationManager.cancel(Constant.FOREGROUND_SERVICE_NOTIFICATION_ID)
+            }
+        }
+        fireNotification()
         return START_STICKY
     }
 
@@ -139,24 +166,57 @@ class MediaPlayerService : Service() {
         val notificationIntent = Intent(this, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
         }
-        val pendingIntent = PendingIntent.getActivity(
-            this, 0, notificationIntent,
-            PendingIntent.FLAG_IMMUTABLE
-        )
+        val pendingIntent =
+            PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_IMMUTABLE)
 
-        val builder = NotificationCompat.Builder(this, Constant.FOREGROUND_SERVICE_CHANNEL_ID)
+        val playIntent =
+            Intent(this, MediaPlayerService::class.java).apply { action = Constant.ACTION_PLAY }
+        val playPendingIntent =
+            PendingIntent.getService(this, 0, playIntent, PendingIntent.FLAG_IMMUTABLE)
+
+        /*val pauseIntent = Intent(this, MediaPlayerService::class.java).apply { action = Constant.ACTION_PAUSE }
+        val pausePendingIntent = PendingIntent.getService( this, 1, pauseIntent, PendingIntent.FLAG_IMMUTABLE )*/
+
+        val stopIntent =
+            Intent(this, MediaPlayerService::class.java).apply { action = Constant.ACTION_STOP }
+        val stopPendingIntent =
+            PendingIntent.getService(this, 2, stopIntent, PendingIntent.FLAG_IMMUTABLE)
+
+        /*val builder = NotificationCompat.Builder(this, Constant.FOREGROUND_SERVICE_CHANNEL_ID)
             .setContentTitle(getString(R.string.app_name))
-            .setContentText(getString(R.string.playing_sundial_dreams))
+            .setContentText("Playing music")
             .setStyle(NotificationCompat.DecoratedCustomViewStyle())
             .setColorized(true)
-            .setColor(ContextCompat.getColor(this, R.color.primary))
+            //.setColor(ContextCompat.getColor(this, R.color.primary))
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setContentIntent(pendingIntent)
-            .setSmallIcon(R.drawable.img_german)
+            .setSmallIcon(R.drawable.ic_iron_cross_wehtmatch)
+            .addAction(R.drawable.ic_play, "Play", playPendingIntent)
+            .addAction(R.drawable.ic_pause, "Pause", pausePendingIntent)
+            .addAction(R.drawable.ic_close, "Stop", stopPendingIntent)
+            .setSilent(false)
+            .setAutoCancel(false)
+            .setOngoing(true)
+            .setOnlyAlertOnce(true)*/
+
+        // Inflate the custom notification layout
+        val notificationLayout =
+            RemoteViews(packageName, R.layout.layout_notification_music_controller)
+        notificationLayout.setOnClickPendingIntent(R.id.notification_play_pause, playPendingIntent)
+        notificationLayout.setOnClickPendingIntent(R.id.notification_stop, stopPendingIntent)
+
+        val builder = NotificationCompat.Builder(this, Constant.FOREGROUND_SERVICE_CHANNEL_ID)
+            .setSmallIcon(R.drawable.ic_iron_cross_wehtmatch)
+            .setContentIntent(pendingIntent)
+            .setContentTitle(getString(R.string.app_name))
+            .setCustomContentView(notificationLayout)
+            .setCustomBigContentView(notificationLayout)
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setSilent(false)
             .setAutoCancel(false)
             .setOngoing(true)
             .setOnlyAlertOnce(true)
+
 
         return builder.build()
     }

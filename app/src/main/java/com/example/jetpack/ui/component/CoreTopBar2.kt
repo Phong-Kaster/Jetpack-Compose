@@ -24,6 +24,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.jetpack.R
+import com.example.jetpack.core.LocalTheme
 import com.example.jetpack.ui.theme.OppositePrimaryColor
 import com.example.jetpack.ui.theme.PrimaryColor
 import com.example.jetpack.ui.theme.customizedTextStyle
@@ -52,13 +53,13 @@ fun CoreTopBar2(
             },
             modifier = Modifier
                 .clip(shape = CircleShape)
-                .background(color = PrimaryColor)
+                .background(color = LocalTheme.current.primary)
                 .size(24.dp)
         ) {
             Icon(
                 painter = painterResource(id = iconLeft ?: R.drawable.ic_back),
                 contentDescription = null,
-                tint = OppositePrimaryColor,
+                tint = LocalTheme.current.onPrimary,
                 modifier = Modifier.size(15.dp)
             )
         }
@@ -78,7 +79,7 @@ fun CoreTopBar2(
                     fontSize = 16,
                     fontWeight = 700
                 ),
-                color = PrimaryColor,
+                color = LocalTheme.current.primary,
                 modifier = Modifier
                     .basicMarquee(Int.MAX_VALUE)
 
@@ -93,13 +94,13 @@ fun CoreTopBar2(
                 onClick = { onRightClick() },
                 modifier = Modifier
                     .clip(shape = CircleShape)
-                    .background(color = PrimaryColor)
+                    .background(color = LocalTheme.current.primary)
                     .size(24.dp)
             ) {
                 Icon(
                     painter = painterResource(id = iconRight),
                     contentDescription = null,
-                    tint = OppositePrimaryColor,
+                    tint = LocalTheme.current.onPrimary,
                     modifier = Modifier.size(15.dp)
                 )
             }
