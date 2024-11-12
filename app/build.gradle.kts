@@ -9,6 +9,7 @@ plugins {
     id("androidx.navigation.safeargs")
     id("androidx.baselineprofile")
     id("org.jetbrains.kotlin.plugin.compose")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -129,13 +130,13 @@ dependencies {
     // ConstraintLayout in Compose - https://developer.android.com/jetpack/compose/layouts/constraintlayout#get-started
     // Motion Layout 1 - https://developer.android.com/develop/ui/views/animations/motionlayout
     // Motion Layout 2 - https://medium.com/mindful-engineering/after-going-through-this-blog-youll-achieve-this-kind-of-polished-animation-using-motionlayout-6b76ec41c6ab
-    implementation("androidx.constraintlayout:constraintlayout-compose-android:1.1.0-rc01")
+    implementation("androidx.constraintlayout:constraintlayout-compose-android:1.1.0")
 
 
     // Save data in a local database using Room - https://developer.android.com/training/data-storage/room#setup
     implementation("androidx.room:room-runtime:2.6.1")
     implementation("androidx.room:room-ktx:2.6.1")
-    kapt("androidx.room:room-compiler:2.6.1")
+    ksp("androidx.room:room-compiler:2.6.1")
 
 
     // GSON - https://github.com/google/gson
@@ -179,10 +180,10 @@ dependencies {
     // Getting started with WorkManager - https://developer.android.com/develop/background-work/background-tasks/persistent/getting-started
     implementation("androidx.work:work-runtime-ktx:2.9.0")
     implementation("androidx.hilt:hilt-work:1.2.0")
-    kapt("androidx.hilt:hilt-compiler:1.2.0")
+    ksp("androidx.hilt:hilt-compiler:1.2.0")
 }
 
 // Dependency injection with Hilt - Allow references to generated code
-kapt {
-    correctErrorTypes = true
-}
+//kapt {
+//    correctErrorTypes = true
+//}
