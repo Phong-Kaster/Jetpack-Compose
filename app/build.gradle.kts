@@ -162,23 +162,23 @@ dependencies {
 
 
     // https://mvnrepository.com/artifact/androidx.compose.foundation/foundation
-    implementation("androidx.compose.foundation:foundation:1.7.4")
+    implementation("androidx.compose.foundation:foundation:1.7.5")
 
 
     // Consume flows safely in Jetpack Compose - https://medium.com/androiddevelopers/consuming-flows-safely-in-jetpack-compose-cde014d0d5a3
-    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.8.6")
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.8.7")
 
 
     // Shared Element Transition - https://developer.android.com/develop/ui/compose/animation/shared-elements
     // Shared Element Transition In Jetpack Compose: Enriching Android User Experiences - https://getstream.io/blog/shared-element-compose/
-    implementation("androidx.compose.animation:animation:1.7.4")
+    implementation("androidx.compose.animation:animation:1.7.5")
 
     // For map manager
     implementation("com.google.android.gms:play-services-location:21.3.0")
 
 
     // Getting started with WorkManager - https://developer.android.com/develop/background-work/background-tasks/persistent/getting-started
-    implementation("androidx.work:work-runtime-ktx:2.9.0")
+    implementation("androidx.work:work-runtime-ktx:2.10.0")
     implementation("androidx.hilt:hilt-work:1.2.0")
     ksp("androidx.hilt:hilt-compiler:1.2.0")
 }
