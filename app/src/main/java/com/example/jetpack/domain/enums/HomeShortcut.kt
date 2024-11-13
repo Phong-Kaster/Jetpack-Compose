@@ -23,7 +23,7 @@ enum class HomeShortcut(
     Bluetooth(drawable = R.drawable.ic_bluetooth, text = R.string.bluetooth),
     Tooltip(drawable = R.drawable.ic_tooltip, text = R.string.tooltip),
     Webview(drawable = R.drawable.ic_webview, text = R.string.webview),
-    ForegroundService(drawable = R.drawable.ic_service, text = R.string.foreground_service),
+    MediaPlayer(drawable = R.drawable.ic_music_note, text = R.string.media_player),
     BasicTextField2(drawable = R.drawable.ic_basic_text_field_2, text = R.string.basic_text_field_with_state),
     CollapsibleTopbar(drawable = R.drawable.ic_collapsible_top_bar, text = R.string.collapsible_topbar),
     SharedElementTransition(drawable = R.drawable.ic_shared_element_transition, text = R.string.shared_element_transition),

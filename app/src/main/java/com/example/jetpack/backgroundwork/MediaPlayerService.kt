@@ -37,9 +37,12 @@ class MediaPlayerService : Service() {
     private var _isPlaying = MutableStateFlow(false)
     val isPlaying = _isPlaying.asStateFlow()
 
-    /*name of the song is playing*/
+    /*name of the song will be played*/
     var songName: String = ""
     var song: Int = 0
+
+    /*callback is the way to skip next/previous*/
+    var callback: Callback? = null
 
     override fun onCreate() {
         super.onCreate()
@@ -53,6 +56,8 @@ class MediaPlayerService : Service() {
         Log.d(TAG, "onStartCommand - action = ${intent?.action}")
         createNotificationChannel()
         when (intent?.action) {
+            Constant.ACTION_PAUSE -> pause()
+            Constant.ACTION_STOP -> stop()
             Constant.ACTION_PLAY -> {
                 if (isPlaying.value) {
                     pause()
@@ -60,19 +65,9 @@ class MediaPlayerService : Service() {
                     resume()
                 }
             }
-
-            Constant.ACTION_PAUSE -> pause()
-            Constant.ACTION_STOP -> {
-                if (isPlaying.value) {
-                    pause()
-                }
-                destroyService()
-                stopForeground(STOP_FOREGROUND_REMOVE)
-                stopSelf()
-                notificationManager.cancel(Constant.FOREGROUND_SERVICE_NOTIFICATION_ID)
-            }
+            Constant.ACTION_NEXT -> callback?.next()
+            Constant.ACTION_PREVIOUS -> callback?.previous()
         }
-        //fireNotification(currentAction = Constant.ACTION_PAUSE)
         return START_STICKY
     }
 
@@ -101,14 +96,7 @@ class MediaPlayerService : Service() {
         return localBinder
     }
 
-    fun destroyService() {
-        Log.d(TAG, "destroyService")
-        player?.stop()
-        player?.release()
-        player = null
-        _isPlaying.value = false
-        notificationManager.cancel(Constant.FOREGROUND_SERVICE_NOTIFICATION_ID)
-    }
+
 
     /**
      * ------------------------------ ONLY FOR MEDIA PLAYER ------------------------------
@@ -120,11 +108,11 @@ class MediaPlayerService : Service() {
             .setUsage(AudioAttributes.USAGE_MEDIA)
             .build()
 
-        if (player == null) {
-            player = MediaPlayer.create(this, song)
-            player?.setAudioAttributes(audioAttributes)
-            player?.setOnPreparedListener(callbackPrepared)
-        }
+        if (player != null) return
+
+        player = MediaPlayer.create(this, song)
+        player?.setAudioAttributes(audioAttributes)
+        player?.setOnPreparedListener(callbackPrepared)
     }
 
     fun resume() {
@@ -145,24 +133,41 @@ class MediaPlayerService : Service() {
         _isPlaying.value = false
     }
 
-    fun stop() {
-        try {
-            player?.stop()
-            _isPlaying.value = false
-        } catch (ex: Exception) {
-            ex.printStackTrace()
+    private fun stop() {
+        Log.d(TAG, "stop")
+        if (isPlaying.value) {
+            pause()
         }
+        destroyService()
+        stopForeground(STOP_FOREGROUND_REMOVE)
+        stopSelf()
+        notificationManager.cancel(Constant.FOREGROUND_SERVICE_NOTIFICATION_ID)
     }
 
+    /**
+     * this playSong function runs for start media player for the first time or
+     * users click stop notification then return app & click play song immediately
+     * */
     fun playSong() {
         Log.d(TAG, "playSong")
         fireNotification(currentAction = Constant.ACTION_PLAY)
+
         _isPlaying.value = false
         player?.release()
         player = null
+
         initializeMediaPlayer()
         player?.start()
         _isPlaying.value = true
+    }
+
+    fun destroyService() {
+        Log.d(TAG, "destroyService")
+        _isPlaying.value = false
+        player?.stop()
+        player?.release()
+        player = null
+        notificationManager.cancel(Constant.FOREGROUND_SERVICE_NOTIFICATION_ID)
     }
 
     /**
@@ -180,96 +185,77 @@ class MediaPlayerService : Service() {
     }
 
     private fun createNotification(currentAction: String): Notification {
-        Log.d(TAG, "createNotification - current Action = $currentAction")
         val notificationIntent = Intent(this, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
         }
-        val pendingIntent =
-            PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_IMMUTABLE)
+        val pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_IMMUTABLE)
 
 
-        val play =
-            Intent(this, MediaPlayerReceiver::class.java).apply { action = Constant.ACTION_PLAY }
-        val pause =
-            Intent(this, MediaPlayerReceiver::class.java).apply { action = Constant.ACTION_PAUSE }
-        val stop =
-            Intent(this, MediaPlayerReceiver::class.java).apply { action = Constant.ACTION_STOP }
-
-        val playPendingIntent =
-            PendingIntent.getBroadcast(this, 0, play, PendingIntent.FLAG_IMMUTABLE)
-        val pausePendingIntent =
-            PendingIntent.getBroadcast(this, 0, pause, PendingIntent.FLAG_IMMUTABLE)
-        val stopPendingIntent =
-            PendingIntent.getBroadcast(this, 0, stop, PendingIntent.FLAG_IMMUTABLE)
-
-        /*val builder = NotificationCompat.Builder(this, Constant.FOREGROUND_SERVICE_CHANNEL_ID)
-            .setContentTitle(getString(R.string.app_name))
-            .setContentText("Playing music")
-            .setStyle(NotificationCompat.DecoratedCustomViewStyle())
-            .setColorized(true)
-            //.setColor(ContextCompat.getColor(this, R.color.primary))
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-            .setContentIntent(pendingIntent)
-            .setSmallIcon(R.drawable.ic_iron_cross_wehtmatch)
-            .addAction(R.drawable.ic_play, "Play", playPendingIntent)
-            .addAction(R.drawable.ic_pause, "Pause", pausePendingIntent)
-            .addAction(R.drawable.ic_close, "Stop", stopPendingIntent)
-            .setSilent(false)
-            .setAutoCancel(false)
-            .setOngoing(true)
-            .setOnlyAlertOnce(true)*/
+        /** Define actions for media player */
+        val play = Intent(this, MediaPlayerReceiver::class.java).apply { action = Constant.ACTION_PLAY }
+        val pause = Intent(this, MediaPlayerReceiver::class.java).apply { action = Constant.ACTION_PAUSE }
+        val stop = Intent(this, MediaPlayerReceiver::class.java).apply { action = Constant.ACTION_STOP }
+        val previous = Intent(this, MediaPlayerReceiver::class.java).apply { action = Constant.ACTION_PREVIOUS }
+        val next = Intent(this, MediaPlayerReceiver::class.java).apply { action = Constant.ACTION_NEXT }
 
 
-        // Inflate the small custom notification layout
-        val notificationLayoutSmall =
-            RemoteViews(packageName, R.layout.layout_notification_music_controller_small)
-        val notificationLayoutBig =
-            RemoteViews(packageName, R.layout.layout_notification_music_controller_big)
+        val playPendingIntent = PendingIntent.getBroadcast(this, 0, play, PendingIntent.FLAG_IMMUTABLE)
+        val pausePendingIntent = PendingIntent.getBroadcast(this, 0, pause, PendingIntent.FLAG_IMMUTABLE)
+        val stopPendingIntent = PendingIntent.getBroadcast(this, 0, stop, PendingIntent.FLAG_IMMUTABLE)
+        val previousPendingIntent = PendingIntent.getBroadcast(this, 0, previous, PendingIntent.FLAG_IMMUTABLE)
+        val nextPendingIntent = PendingIntent.getBroadcast(this, 0, next, PendingIntent.FLAG_IMMUTABLE)
 
 
-        /*Show button play/pause based on current action*/
+        /** Inflate the small custom notification layout*/
+        val notificationSmall = RemoteViews(packageName, R.layout.layout_notification_music_controller_small)
+        val notificationBig = RemoteViews(packageName, R.layout.layout_notification_music_controller_big)
+
+
+        /** Show button play/pause based on current action*/
         if (currentAction == Constant.ACTION_PLAY) {
-            notificationLayoutSmall.setViewVisibility(R.id.button_play, View.GONE)
-            notificationLayoutBig.setViewVisibility(R.id.button_play, View.GONE)
+            notificationSmall.setViewVisibility(R.id.button_play, View.GONE)
+            notificationBig.setViewVisibility(R.id.button_play, View.GONE)
 
-            notificationLayoutSmall.setViewVisibility(R.id.button_pause, View.VISIBLE)
-            notificationLayoutBig.setViewVisibility(R.id.button_pause, View.VISIBLE)
+            notificationSmall.setViewVisibility(R.id.button_pause, View.VISIBLE)
+            notificationBig.setViewVisibility(R.id.button_pause, View.VISIBLE)
         } else {
-            notificationLayoutSmall.setViewVisibility(R.id.button_play, View.VISIBLE)
-            notificationLayoutBig.setViewVisibility(R.id.button_play, View.VISIBLE)
+            notificationSmall.setViewVisibility(R.id.button_play, View.VISIBLE)
+            notificationBig.setViewVisibility(R.id.button_play, View.VISIBLE)
 
-            notificationLayoutSmall.setViewVisibility(R.id.button_pause, View.GONE)
-            notificationLayoutBig.setViewVisibility(R.id.button_pause, View.GONE)
+            notificationSmall.setViewVisibility(R.id.button_pause, View.GONE)
+            notificationBig.setViewVisibility(R.id.button_pause, View.GONE)
         }
 
 
-        // Inflate the small notification layout
-        notificationLayoutSmall.setOnClickPendingIntent(R.id.button_play, playPendingIntent)
-        notificationLayoutSmall.setOnClickPendingIntent(R.id.button_pause, pausePendingIntent)
-        notificationLayoutSmall.setOnClickPendingIntent(R.id.button_stop, stopPendingIntent)
+        /** Inflate the small notification layout*/
+        notificationSmall.setOnClickPendingIntent(R.id.button_play, playPendingIntent)
+        notificationSmall.setOnClickPendingIntent(R.id.button_pause, pausePendingIntent)
+        notificationSmall.setOnClickPendingIntent(R.id.button_stop, stopPendingIntent)
+        notificationSmall.setOnClickPendingIntent(R.id.button_next, nextPendingIntent)
 
 
-        // Inflate the big notification layout
-        notificationLayoutBig.setTextViewText(R.id.title, songName)
-        notificationLayoutBig.setOnClickPendingIntent(R.id.button_play, playPendingIntent)
-        notificationLayoutBig.setOnClickPendingIntent(R.id.button_pause, pausePendingIntent)
-        notificationLayoutBig.setOnClickPendingIntent(R.id.button_stop, stopPendingIntent)
+        /** Inflate the big notification layout*/
+        notificationBig.setTextViewText(R.id.title, songName)
+        notificationBig.setOnClickPendingIntent(R.id.button_play, playPendingIntent)
+        notificationBig.setOnClickPendingIntent(R.id.button_pause, pausePendingIntent)
+        notificationBig.setOnClickPendingIntent(R.id.button_stop, stopPendingIntent)
+        notificationBig.setOnClickPendingIntent(R.id.button_next, nextPendingIntent)
+        notificationBig.setOnClickPendingIntent(R.id.button_previous, previousPendingIntent)
 
 
         val builder = NotificationCompat.Builder(this, Constant.FOREGROUND_SERVICE_CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_iron_cross_wehtmatch)
             .setContentIntent(pendingIntent)
             .setContentTitle(getString(R.string.app_name))
-            .setCustomContentView(notificationLayoutSmall)
-            .setCustomBigContentView(notificationLayoutBig)
+            .setCustomContentView(notificationSmall)
+            .setCustomBigContentView(notificationBig)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setSilent(false)
             .setAutoCancel(false)
             .setOngoing(true)
             .setOnlyAlertOnce(true)
-            .setStyle(
-                androidx.media.app.NotificationCompat.MediaStyle()
-            )
+            .setStyle(androidx.media.app.NotificationCompat.MediaStyle())
+
         return builder.build()
     }
 
@@ -277,5 +263,11 @@ class MediaPlayerService : Service() {
     fun fireNotification(currentAction: String) {
         val notification = createNotification(currentAction = currentAction)
         notificationManager.notify(Constant.FOREGROUND_SERVICE_NOTIFICATION_ID, notification)
+    }
+
+
+    interface Callback {
+        fun next()
+        fun previous()
     }
 }

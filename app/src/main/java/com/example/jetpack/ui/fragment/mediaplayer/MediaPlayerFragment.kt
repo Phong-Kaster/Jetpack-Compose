@@ -14,9 +14,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.KeyboardArrowLeft
-import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -52,8 +49,9 @@ import dagger.hilt.android.AndroidEntryPoint
  * This screen creates a basic media player with MediaPlayer.
  * It combines a foreground service and a bound service
  *
- * [Create a Music Player on Android: Song Playback] - https://code.tutsplus.com/create-a-music-player-on-android-song-playback--mobile-22778t
- * [Creating a music player app in Kotlin with MediaPlayer and ExoPlayer] - https://reintech.io/blog/creating-music-player-app-kotlin-mediaplayer-exoplayer
+ * [Create a Music Player on Android: Song Playback](https://code.tutsplus.com/create-a-music-player-on-android-song-playback--mobile-22778t)
+ *
+ * [Creating a music player app in Kotlin with MediaPlayer and ExoPlayer](https://reintech.io/blog/creating-music-player-app-kotlin-mediaplayer-exoplayer)
  */
 @AndroidEntryPoint
 class MediaPlayerFragment : CoreFragment() {
@@ -69,8 +67,23 @@ class MediaPlayerFragment : CoreFragment() {
     private val albums = listOf(
         R.raw.sundial_dreams,
         R.raw.the_enchanted_garden,
-        R.raw.through_the_arbor
+        R.raw.through_the_arbor,
+        R.raw.we_are_who_we_are
     )
+
+
+    /**
+     * ------------------------------ CALLBACK OF MEDIA PLAYER SERVICE ------------------------------
+     */
+    private val callback = object: MediaPlayerService.Callback {
+        override fun next() {
+            goForward()
+        }
+
+        override fun previous() {
+            goBackward()
+        }
+    }
 
     /*************************************************
      * Defines callbacks for service binding, passed to bindService().
@@ -82,12 +95,18 @@ class MediaPlayerFragment : CoreFragment() {
             val binder = service as MediaPlayerService.LocalBinder
             mediaPlayerService = binder.getService()
 
-            mediaPlayerService.song = albums[song]
-            mediaPlayerService.initializeMediaPlayer()
-
             // get name of song
             songName = albums[song].getTitle(context = requireContext())
+
+
             mediaPlayerService.songName = songName
+            mediaPlayerService.song = albums[song]
+
+
+            mediaPlayerService.callback = callback
+            mediaPlayerService.initializeMediaPlayer()
+
+
             mediaPlayerService.fireNotification(currentAction = Constant.ACTION_PAUSE)
             isConnected = true
         }
@@ -119,6 +138,7 @@ class MediaPlayerFragment : CoreFragment() {
         requireContext().startService(intent)
     }
 
+
     /*************************************************
      * stopMediaPlayerService
      */
@@ -126,6 +146,25 @@ class MediaPlayerFragment : CoreFragment() {
         Log.d(TAG, "MediaPlayerService - stop")
         requireContext().unbindService(connection)
         isConnected = false
+    }
+
+    /*************************************************
+     * skip next song
+     */
+    private fun goForward(){
+        song = song.getForward(albums)
+        songName = albums[song].getTitle(context = requireContext())
+        mediaPlayerService.songName = songName
+        mediaPlayerService.song = albums[song]
+        mediaPlayerService.playSong()
+    }
+
+    private fun goBackward(){
+        song = song.getBackward(albums)
+        songName = albums[song].getTitle(context = requireContext())
+        mediaPlayerService.songName = songName
+        mediaPlayerService.song = albums[song]
+        mediaPlayerService.playSong()
     }
 
     @Composable
@@ -149,19 +188,8 @@ class MediaPlayerFragment : CoreFragment() {
                     mediaPlayerService.resume()
                 }
             },
-            onBackward = {
-                song = song.getBackward(albums)
-                songName = albums[song].getTitle(context = requireContext())
-                mediaPlayerService.songName = songName
-                mediaPlayerService.song = albums[song]
-                mediaPlayerService.playSong()
-            },
-            onForward = {
-                song = song.getForward(albums)
-                songName = albums[song].getTitle(context = requireContext())
-                mediaPlayerService.songName = songName
-                mediaPlayerService.playSong()
-            }
+            onBackward = { goBackward() },
+            onForward = { goForward() }
         )
     }
 }

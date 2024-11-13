@@ -117,7 +117,7 @@
         android:name="com.example.jetpack.ui.fragment.webview.WebviewFragment" />
 
     <fragment
-        android:id="@+id/foregroundServiceFragment"
+        android:id="@+id/mediaPlayerFragment"
         android:name="com.example.jetpack.ui.fragment.mediaplayer.MediaPlayerFragment" />
 
     <fragment
@@ -323,8 +323,8 @@
         app:popUpToInclusive="true"/>
 
     <action
-        android:id="@+id/toForegroundService"
-        app:destination="@id/foregroundServiceFragment"
+        android:id="@+id/toMediaPlayer"
+        app:destination="@id/mediaPlayerFragment"
         app:enterAnim="@anim/enter_slide_in_right"
         app:exitAnim="@anim/exit_slide_out_left"
         app:popEnterAnim="@anim/enter_slide_in_left"

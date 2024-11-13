@@ -91,4 +91,6 @@ object Constant {
     const val ACTION_PLAY = "action_play"
     const val ACTION_PAUSE = "action_pause"
     const val ACTION_STOP = "action_stop"
+    const val ACTION_NEXT = "action_next"
+    const val ACTION_PREVIOUS = "action_previous"
 }

@@ -60,16 +60,16 @@
                 android:src="@drawable/ic_music_pause" />
 
             <!-- Next Button -->
-            <!--<ImageButton
-                android:id="@+id/notification_next"
+            <ImageButton
+                android:id="@+id/button_next"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:background="?android:attr/selectableItemBackground"
                 android:contentDescription="next"
-                android:src="@drawable/ic_next" />-->
+                android:src="@drawable/ic_music_skip_next" />
 
 
-            <!-- Next Button -->
+            <!-- Stop Button -->
             <ImageButton
                 android:id="@+id/button_stop"
                 android:layout_width="48dp"

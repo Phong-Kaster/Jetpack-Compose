@@ -26,6 +26,8 @@ class MediaPlayerReceiver : BroadcastReceiver() {
             Constant.ACTION_PLAY -> actionToMediaPlayerService.action = Constant.ACTION_PLAY
             Constant.ACTION_PAUSE -> actionToMediaPlayerService.action = Constant.ACTION_PAUSE
             Constant.ACTION_STOP -> actionToMediaPlayerService.action = Constant.ACTION_STOP
+            Constant.ACTION_NEXT -> actionToMediaPlayerService.action = Constant.ACTION_NEXT
+            Constant.ACTION_PREVIOUS -> actionToMediaPlayerService.action = Constant.ACTION_PREVIOUS
         }
 
         try {
