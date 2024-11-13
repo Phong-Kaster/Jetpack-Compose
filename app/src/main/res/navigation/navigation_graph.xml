@@ -118,7 +118,7 @@
 
     <fragment
         android:id="@+id/foregroundServiceFragment"
-        android:name="com.example.jetpack.ui.fragment.backgroundwork.MediaPlayerFragment" />
+        android:name="com.example.jetpack.ui.fragment.mediaplayer.MediaPlayerFragment" />
 
     <fragment
         android:id="@+id/basicTextField2Fragment"

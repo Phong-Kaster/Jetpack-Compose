@@ -1,4 +1,4 @@
-package com.example.jetpack.ui.fragment.backgroundwork
+package com.example.jetpack.ui.fragment.mediaplayer
 
 import android.content.Context
 import android.media.MediaMetadataRetriever

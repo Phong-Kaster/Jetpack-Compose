@@ -7,7 +7,7 @@
 
     <!-- Album Art -->
     <ImageView
-        android:id="@+id/notification_album_art"
+        android:id="@+id/album_art"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:contentDescription="Album Art"
@@ -30,7 +30,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/notification_title"
+                android:id="@+id/title"
                 style="@style/TextAppearance.Compat.Notification.Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -61,41 +61,51 @@
             android:orientation="horizontal">
 
             <!-- Previous Button -->
-            <!--<ImageButton
-                android:id="@+id/notification_previous"
+            <ImageButton
+                android:id="@+id/button_previous"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:background="?android:attr/selectableItemBackground"
                 android:contentDescription="previous"
-                android:src="@drawable/ic_previous" />-->
+                android:src="@drawable/ic_music_skip_previous" />
 
             <!-- Play/Pause Button -->
             <ImageButton
-                android:id="@+id/notification_play_pause"
+                android:id="@+id/button_play"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:background="?android:attr/selectableItemBackground"
                 android:contentDescription="play"
-                android:src="@drawable/ic_play" />
+                android:src="@drawable/ic_music_play"
+                android:visibility="visible" />
+
+            <ImageButton
+                android:id="@+id/button_pause"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:contentDescription="pause"
+                android:src="@drawable/ic_music_pause"
+                android:visibility="gone" />
 
             <!-- Next Button -->
-            <!--<ImageButton
-                android:id="@+id/notification_next"
+            <ImageButton
+                android:id="@+id/button_next"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:background="?android:attr/selectableItemBackground"
                 android:contentDescription="next"
-                android:src="@drawable/ic_next" />-->
+                android:src="@drawable/ic_music_skip_next" />
 
 
             <!-- Next Button -->
             <ImageButton
-                android:id="@+id/notification_stop"
+                android:id="@+id/button_stop"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:background="?android:attr/selectableItemBackground"
                 android:contentDescription="next"
-                android:src="@drawable/ic_close" />
+                android:src="@drawable/ic_music_stop" />
 
         </LinearLayout>
     </LinearLayout>

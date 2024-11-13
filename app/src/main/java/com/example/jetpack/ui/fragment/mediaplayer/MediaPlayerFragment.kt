@@ -1,4 +1,4 @@
-package com.example.jetpack.ui.fragment.backgroundwork
+package com.example.jetpack.ui.fragment.mediaplayer
 
 import android.content.ComponentName
 import android.content.Context
@@ -6,11 +6,9 @@ import android.content.Intent
 import android.content.ServiceConnection
 import android.os.IBinder
 import android.util.Log
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -37,15 +35,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.jetpack.R
 import com.example.jetpack.backgroundwork.MediaPlayerService
+import com.example.jetpack.configuration.Constant
 import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
 import com.example.jetpack.core.LocalTheme
 import com.example.jetpack.ui.component.CoreTopBar2
-import com.example.jetpack.ui.fragment.backgroundwork.MediaPlayer.getBackward
-import com.example.jetpack.ui.fragment.backgroundwork.MediaPlayer.getForward
-import com.example.jetpack.ui.fragment.backgroundwork.MediaPlayer.getTitle
+import com.example.jetpack.ui.fragment.mediaplayer.MediaPlayer.getBackward
+import com.example.jetpack.ui.fragment.mediaplayer.MediaPlayer.getForward
+import com.example.jetpack.ui.fragment.mediaplayer.MediaPlayer.getTitle
 import com.example.jetpack.ui.theme.Background
-import com.example.jetpack.ui.theme.PrimaryColor
 import com.example.jetpack.ui.theme.customizedTextStyle
 import com.example.jetpack.util.NavigationUtil.safeNavigateUp
 import dagger.hilt.android.AndroidEntryPoint
@@ -83,11 +81,14 @@ class MediaPlayerFragment : CoreFragment() {
             // We've bound to LocalService, cast the IBinder and get LocalService instance.
             val binder = service as MediaPlayerService.LocalBinder
             mediaPlayerService = binder.getService()
-            mediaPlayerService.initializeMediaPlayer(song = albums[song])
 
+            mediaPlayerService.song = albums[song]
+            mediaPlayerService.initializeMediaPlayer()
 
             // get name of song
             songName = albums[song].getTitle(context = requireContext())
+            mediaPlayerService.songName = songName
+            mediaPlayerService.fireNotification(currentAction = Constant.ACTION_PAUSE)
             isConnected = true
         }
 
@@ -151,12 +152,15 @@ class MediaPlayerFragment : CoreFragment() {
             onBackward = {
                 song = song.getBackward(albums)
                 songName = albums[song].getTitle(context = requireContext())
-                mediaPlayerService.playSong(song = albums[song])
+                mediaPlayerService.songName = songName
+                mediaPlayerService.song = albums[song]
+                mediaPlayerService.playSong()
             },
             onForward = {
                 song = song.getForward(albums)
                 songName = albums[song].getTitle(context = requireContext())
-                mediaPlayerService.playSong(song = albums[song])
+                mediaPlayerService.songName = songName
+                mediaPlayerService.playSong()
             }
         )
     }
@@ -201,7 +205,7 @@ private fun ForegroundServiceLayout(
 
                 // BACKWARD, PLAY PAUSE & FORWARD
                 Row(
-                    horizontalArrangement = Arrangement.Center,
+                    horizontalArrangement = Arrangement.SpaceAround,
                     modifier = Modifier
                         .fillMaxWidth()
                         .align(BiasAlignment(horizontalBias = 0f, verticalBias = 1f))
@@ -211,7 +215,7 @@ private fun ForegroundServiceLayout(
                         onClick = onBackward,
                         content = {
                             Icon(
-                                imageVector = Icons.Default.KeyboardArrowLeft,
+                                painter = painterResource(R.drawable.ic_music_skip_previous),
                                 tint = LocalTheme.current.textColor,
                                 contentDescription = stringResource(id = R.string.icon),
                                 modifier = Modifier
@@ -226,12 +230,12 @@ private fun ForegroundServiceLayout(
                         content = {
                             Icon(
                                 painter =
-                                if (isPlaying) painterResource(id = R.drawable.ic_pause)
-                                else painterResource(id = R.drawable.ic_play),
+                                if (isPlaying) painterResource(id = R.drawable.ic_music_pause)
+                                else painterResource(id = R.drawable.ic_music_play),
                                 tint = LocalTheme.current.textColor,
                                 contentDescription = stringResource(id = R.string.icon),
                                 modifier = Modifier
-                                    .size(100.dp)
+                                    .size(48.dp)
                             )
                         },
                         modifier = Modifier
@@ -242,7 +246,7 @@ private fun ForegroundServiceLayout(
                         onClick = onForward,
                         content = {
                             Icon(
-                                imageVector = Icons.Default.KeyboardArrowRight,
+                                painter = painterResource(R.drawable.ic_music_skip_next),
                                 tint = LocalTheme.current.textColor,
                                 contentDescription = stringResource(id = R.string.icon),
                                 modifier = Modifier
