@@ -4,7 +4,7 @@ import android.content.Context
 import android.media.MediaMetadataRetriever
 import android.net.Uri
 
-object MediaPlayer {
+object MediaPlayerUtil {
     /**
      * return title and artirst of song
      * for example, Sundial Dream - Kelvin Dream

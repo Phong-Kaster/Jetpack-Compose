@@ -4,8 +4,10 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
+import android.os.Bundle
 import android.os.IBinder
 import android.util.Log
+import android.view.View
 import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -30,6 +32,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.fragment.app.viewModels
 import com.example.jetpack.R
 import com.example.jetpack.backgroundwork.MediaPlayerService
 import com.example.jetpack.configuration.Constant
@@ -37,9 +40,9 @@ import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
 import com.example.jetpack.core.LocalTheme
 import com.example.jetpack.ui.component.CoreTopBar2
-import com.example.jetpack.ui.fragment.mediaplayer.MediaPlayer.getBackward
-import com.example.jetpack.ui.fragment.mediaplayer.MediaPlayer.getForward
-import com.example.jetpack.ui.fragment.mediaplayer.MediaPlayer.getTitle
+import com.example.jetpack.ui.fragment.mediaplayer.MediaPlayerUtil.getBackward
+import com.example.jetpack.ui.fragment.mediaplayer.MediaPlayerUtil.getForward
+import com.example.jetpack.ui.fragment.mediaplayer.MediaPlayerUtil.getTitle
 import com.example.jetpack.ui.theme.Background
 import com.example.jetpack.ui.theme.customizedTextStyle
 import com.example.jetpack.util.NavigationUtil.safeNavigateUp
@@ -56,10 +59,9 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MediaPlayerFragment : CoreFragment() {
 
-    override val TAG = "MediaPlayerService"
-
     private lateinit var mediaPlayerService: MediaPlayerService
     private var isConnected: Boolean = false
+    private val viewModel: MediaPlayerViewModel by viewModels()
 
 
     private var songName: String by mutableStateOf("")
@@ -71,6 +73,11 @@ class MediaPlayerFragment : CoreFragment() {
         R.raw.we_are_who_we_are
     )
 
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel.collectSongInStorage()
+    }
 
     /**
      * ------------------------------ CALLBACK OF MEDIA PLAYER SERVICE ------------------------------

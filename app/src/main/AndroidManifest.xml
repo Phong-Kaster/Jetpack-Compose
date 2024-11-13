@@ -28,10 +28,12 @@
         tools:targetApi="s" />
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
 
+
     <!-- for using Bluetooth on Android 11 (API level 30) or lower - https://developer.android.com/develop/connectivity/bluetooth/bt-permissions#declare-android11-or-lower -->
     <uses-permission
         android:name="android.permission.BLUETOOTH"
         android:maxSdkVersion="30" />
+
 
     <!-- BLUETOOTH -->
     <uses-permission
@@ -50,17 +52,18 @@
         android:required="false" /><!-- Our app can NOT work without Bluetooth, if set true then this app will be hidden on Google Play Store - https://developer.android.com/develop/connectivity/bluetooth/bt-permissions#features-->
 
 
+
     <!-- FOREGROUND SERVICE -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" /> <!--Android 9 and higher | is the general green light for any foreground service -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" /> <!--Android 14 or higher | only handle media playback - https://developer.android.com/develop/background-work/services/foreground-services#request-foreground-service-permissions-->
 
 
-    <uses-permission
-        android:name="android.permission.READ_EXTERNAL_STORAGE"
-        android:maxSdkVersion="32" />
-    <uses-permission
-        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        android:maxSdkVersion="32" />
+
+    <!-- READ EXTERNAL STORAGE -->
+    <!-- Required only if your app needs to access audio files that other apps created. -->
+    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="32" />
 
     <application
         android:name=".JetpackApplication"

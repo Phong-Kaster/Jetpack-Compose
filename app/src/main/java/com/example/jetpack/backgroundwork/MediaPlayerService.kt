@@ -184,6 +184,9 @@ class MediaPlayerService : Service() {
         notificationManager.createNotificationChannel(channel)
     }
 
+    /**
+     * create notification with customized layout with 2 form: big & small
+     */
     private fun createNotification(currentAction: String): Notification {
         val notificationIntent = Intent(this, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
