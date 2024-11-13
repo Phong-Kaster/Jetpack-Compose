@@ -121,6 +121,10 @@
         android:name="com.example.jetpack.ui.fragment.mediaplayer.MediaPlayerFragment" />
 
     <fragment
+        android:id="@+id/mediaPlayerFragment2"
+        android:name="com.example.jetpack.ui.fragment.mediaplayer.MediaPlayerFragment2" />
+
+    <fragment
         android:id="@+id/basicTextField2Fragment"
         android:name="com.example.jetpack.ui.fragment.basictextfield.BasicTextFieldFragment" />
 
@@ -330,6 +334,16 @@
         app:popEnterAnim="@anim/enter_slide_in_left"
         app:popExitAnim="@anim/exit_slide_out_right"
         app:popUpToInclusive="true"/>
+
+    <action
+        android:id="@+id/toMediaPlayer2"
+        app:destination="@id/mediaPlayerFragment2"
+        app:enterAnim="@anim/enter_slide_in_right"
+        app:exitAnim="@anim/exit_slide_out_left"
+        app:popEnterAnim="@anim/enter_slide_in_left"
+        app:popExitAnim="@anim/exit_slide_out_right"
+        app:popUpToInclusive="true"/>
+
 
     <action
         android:id="@+id/toBasicTextField2"

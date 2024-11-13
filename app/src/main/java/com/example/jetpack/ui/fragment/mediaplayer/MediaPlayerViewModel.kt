@@ -8,13 +8,16 @@ import android.os.Build
 import android.provider.MediaStore
 import android.util.Log
 import android.util.Size
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.jetpack.JetpackApplication
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 @HiltViewModel
@@ -24,9 +27,13 @@ constructor(
     private val applicationContext: JetpackApplication
 ) : ViewModel() {
 
-
     private val TAG = this.javaClass.simpleName
-    val listOfSong = mutableListOf<Song>()
+
+    private var _song = MutableStateFlow<Song?>(Song())
+    val song = _song.asStateFlow()
+
+    private var index = mutableIntStateOf(0)
+    private val listOfSong = mutableListOf<Song>()
 
     init {
         collectSongInStorage()
@@ -102,8 +109,11 @@ constructor(
                 }
             }
 
+            _song.value = listOfSong[index.intValue]
+
             Log.d(TAG, "collectSongInStorage - listOfSong = $listOfSong")
             Log.d(TAG, "collectSongInStorage - listOfSong = ${listOfSong.size}")
+            Log.d(TAG, "collectSongInStorage - song = ${_song.value}")
         }
     }
 }

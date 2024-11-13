@@ -156,6 +156,7 @@ class HomeFragment : CoreFragment() {
                     HomeShortcut.Bluetooth -> safeNavigate(R.id.toBluetooth)
                     HomeShortcut.Webview -> safeNavigate(R.id.toWebview)
                     HomeShortcut.MediaPlayer -> safeNavigate(R.id.toMediaPlayer)
+                    HomeShortcut.MediaPlayer2 -> safeNavigate(R.id.toMediaPlayer2)
                     HomeShortcut.BasicTextField2 -> safeNavigate(R.id.toBasicTextField2)
                     HomeShortcut.SharedElementTransition -> safeNavigate(R.id.toSharedElementTransition)
                     HomeShortcut.CollapsibleTopbar -> safeNavigate(R.id.toCollasibleTopbar)

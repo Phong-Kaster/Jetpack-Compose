@@ -23,10 +23,6 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
@@ -61,39 +57,14 @@ import dagger.hilt.android.AndroidEntryPoint
  * [Creating a music player app in Kotlin with MediaPlayer and ExoPlayer](https://reintech.io/blog/creating-music-player-app-kotlin-mediaplayer-exoplayer)
  */
 @AndroidEntryPoint
-class MediaPlayerFragment : CoreFragment() {
-
+class MediaPlayerFragment2 : CoreFragment() {
     private lateinit var mediaPlayerService: MediaPlayerService
     private var isConnected: Boolean = false
     private val viewModel: MediaPlayerViewModel by viewModels()
 
-
-    private var songName: String by mutableStateOf("")
-    private var song: Int by mutableIntStateOf(0)
-    private val albums = listOf(
-        R.raw.sundial_dreams,
-        R.raw.the_enchanted_garden,
-        R.raw.through_the_arbor,
-        R.raw.we_are_who_we_are
-    )
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.collectSongInStorage()
-    }
-
-    /**
-     * ------------------------------ CALLBACK OF MEDIA PLAYER SERVICE ------------------------------
-     */
-    private val callback = object : MediaPlayerService.Callback {
-        override fun next() {
-            goForward()
-        }
-
-        override fun previous() {
-            goBackward()
-        }
     }
 
     /*************************************************
@@ -107,11 +78,11 @@ class MediaPlayerFragment : CoreFragment() {
             mediaPlayerService = binder.getService()
 
             // get name of song
-            songName = albums[song].getTitle(context = requireContext())
+            //songName = albums[song].getTitle(context = requireContext())
 
 
-            mediaPlayerService.songName = songName
-            mediaPlayerService.song = albums[song]
+            //mediaPlayerService.songName = songName
+            //mediaPlayerService.song = albums[song]
 
 
             mediaPlayerService.callback = callback
@@ -128,6 +99,18 @@ class MediaPlayerFragment : CoreFragment() {
         }
     }
 
+    /**
+     * ------------------------------ CALLBACK OF MEDIA PLAYER SERVICE ------------------------------
+     */
+    private val callback = object : MediaPlayerService.Callback {
+        override fun next() {
+            goForward()
+        }
+
+        override fun previous() {
+            goBackward()
+        }
+    }
 
     override fun onStart() {
         super.onStart()
@@ -163,18 +146,18 @@ class MediaPlayerFragment : CoreFragment() {
      * skip next song
      */
     private fun goForward() {
-        song = song.getForward(albums)
-        songName = albums[song].getTitle(context = requireContext())
-        mediaPlayerService.songName = songName
-        mediaPlayerService.song = albums[song]
+        //song = song.getForward(albums)
+        //songName = albums[song].getTitle(context = requireContext())
+        //mediaPlayerService.songName = songName
+        //mediaPlayerService.song = albums[song]
         mediaPlayerService.playSong()
     }
 
     private fun goBackward() {
-        song = song.getBackward(albums)
-        songName = albums[song].getTitle(context = requireContext())
-        mediaPlayerService.songName = songName
-        mediaPlayerService.song = albums[song]
+        //song = song.getBackward(albums)
+        //songName = albums[song].getTitle(context = requireContext())
+        //mediaPlayerService.songName = songName
+        //mediaPlayerService.song = albums[song]
         mediaPlayerService.playSong()
     }
 
@@ -188,10 +171,9 @@ class MediaPlayerFragment : CoreFragment() {
                 false
             }
 
-        ForegroundServiceLayout(
+        MediaPlayer2Layout(
             song = viewModel.song.collectAsState().value ?: Song(),
             isPlaying = isPlaying,
-            songName = songName,
             onBack = { safeNavigateUp() },
             onPlayPause = {
                 if (isPlaying) {
@@ -206,12 +188,10 @@ class MediaPlayerFragment : CoreFragment() {
     }
 }
 
-
 @Composable
-private fun ForegroundServiceLayout(
+fun MediaPlayer2Layout(
     song: Song,
     isPlaying: Boolean,
-    songName: String,
     onBack: () -> Unit = {},
     onPlayPause: () -> Unit = {},
     onBackward: () -> Unit = {},
@@ -221,7 +201,7 @@ private fun ForegroundServiceLayout(
         backgroundColor = Background,
         topBar = {
             CoreTopBar2(
-                title = stringResource(id = R.string.foreground_service),
+                title = stringResource(id = R.string.media_player),
                 titleArrangement = Arrangement.Start,
                 onLeftClick = onBack,
             )
@@ -238,7 +218,7 @@ private fun ForegroundServiceLayout(
                         .align(BiasAlignment(horizontalBias = 0f, verticalBias = -0.5f))
                 ) {
                     Image(
-                        painter = if(song.thumbnail == null)
+                        painter = if (song.thumbnail == null)
                             painterResource(R.drawable.img_napoleon_bonaparte)
                         else
                             rememberImagePainter(song.thumbnail),
@@ -248,7 +228,7 @@ private fun ForegroundServiceLayout(
                     )
 
                     Text(
-                        text = songName,
+                        text = song.name,
                         color = LocalTheme.current.textColor,
                         style = customizedTextStyle(
                             fontWeight = 600,
@@ -321,10 +301,19 @@ private fun ForegroundServiceLayout(
 
 @Preview
 @Composable
-private fun PreviewForegroundServiceLayout() {
-    ForegroundServiceLayout(
-        isPlaying = false,
-        song = Song(),
-        songName = stringResource(id = R.string.fake_title)
+private fun PreviewMediaPlayer2Layout() {
+    MediaPlayer2Layout(
+        isPlaying = true,
+        song = Song(
+            name = "Napoleon",
+            duration = 100,
+            thumbnail = null,
+            size = 100,
+            uri = null
+        ),
+        onBack = {},
+        onForward = {},
+        onBackward = {},
+        onPlayPause = {},
     )
 }

@@ -184,11 +184,14 @@ dependencies {
     implementation("androidx.hilt:hilt-work:1.2.0")
     ksp("androidx.hilt:hilt-compiler:1.2.0")
 
+
     // For media playback using ExoPlayer
     implementation("androidx.media3:media3-exoplayer:1.4.1")
     implementation("androidx.media:media:1.7.0")
 
 
+    // Coil Compose - https://github.com/coil-kt/coil
+    implementation("io.coil-kt:coil-compose:2.7.0")
 }
 
 // Dependency injection with Hilt - Allow references to generated code
