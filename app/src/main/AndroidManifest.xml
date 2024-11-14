@@ -180,9 +180,25 @@
             android:exported="false"
             android:foregroundServiceType="mediaPlayback" />
 
+        <service
+            android:name=".backgroundwork.MediaPlayerService2"
+            android:exported="false"
+            android:foregroundServiceType="mediaPlayback" />
+
         <!-- MEDIA PLAYER SERVICE -->
         <receiver
             android:name=".backgroundwork.MediaPlayerReceiver"
+            android:exported="false">
+            <intent-filter>
+                <!-- There actions are stored in configuration/Constant -->
+                <action android:name="action_play" />
+                <action android:name="action_pause" />
+                <action android:name="action_stop" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name=".backgroundwork.MediaPlayerReceiver2"
             android:exported="false">
             <intent-filter>
                 <!-- There actions are stored in configuration/Constant -->

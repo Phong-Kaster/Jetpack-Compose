@@ -94,8 +94,8 @@ constructor(
     /**
      * song that users choose now
      */
-    private var _song = MutableStateFlow<Song?>(Song())
-    val chosenSong = _song.asStateFlow()
+    private var _chosenSong = MutableStateFlow<Song?>(Song())
+    val chosenSong = _chosenSong.asStateFlow()
 
     /**
      * All songs in device
@@ -183,11 +183,11 @@ constructor(
             }
 
             Log.d(TAG, "collectSongInStorage - listOfSong = ${listOfSong.size}")
-            Log.d(TAG, "collectSongInStorage - song = ${_song.value}")
+            Log.d(TAG, "collectSongInStorage - song = ${_chosenSong.value}")
 
             if (listOfSong.isEmpty()) return@launch
             _songs.value = listOfSong.distinct().toImmutableList()
-            _song.value = listOfSong[index]
+            _chosenSong.value = _songs.value[index]
         }
     }
 
@@ -225,10 +225,34 @@ constructor(
         }
     }
 
-    fun updateChosenSong(chosenIndex:Int, chosenSong: Song) {
+    fun updateChosenSong(chosenIndex: Int, chosenSong: Song) {
         viewModelScope.launch(Dispatchers.IO) {
-            _song.value = chosenSong
+            _chosenSong.value = chosenSong
             index = chosenIndex
+        }
+    }
+
+    fun goForward() {
+        viewModelScope.launch(Dispatchers.IO) {
+            if (index < _songs.value.size - 1) {
+                index++
+                _chosenSong.value = _songs.value[index]
+            } else {
+                index = 0
+                _chosenSong.value = _songs.value[index]
+            }
+        }
+    }
+
+    fun goBackward() {
+        viewModelScope.launch(Dispatchers.IO) {
+            if (index > 0) {
+                index--
+                _chosenSong.value = _songs.value[index]
+            } else {
+                index = _songs.value.size - 1
+                _chosenSong.value = _songs.value[index]
+            }
         }
     }
 }

@@ -6,14 +6,12 @@ import android.os.Bundle
 import android.os.IBinder
 import android.util.Log
 import android.view.View
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -21,8 +19,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -42,6 +38,7 @@ import androidx.fragment.app.viewModels
 import coil.compose.rememberImagePainter
 import com.example.jetpack.R
 import com.example.jetpack.backgroundwork.MediaPlayerService
+import com.example.jetpack.backgroundwork.MediaPlayerService2
 import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
 import com.example.jetpack.core.LocalTheme
@@ -66,7 +63,7 @@ import kotlinx.collections.immutable.persistentListOf
  */
 @AndroidEntryPoint
 class MediaPlayerFragment2 : CoreFragment() {
-    private lateinit var mediaPlayerService: MediaPlayerService
+    private lateinit var mediaPlayerService2: MediaPlayerService2
     private var isConnected: Boolean = false
     private val viewModel: MediaPlayerViewModel by viewModels()
 
@@ -82,8 +79,8 @@ class MediaPlayerFragment2 : CoreFragment() {
 
         override fun onServiceConnected(className: ComponentName, service: IBinder) {
             // We've bound to LocalService, cast the IBinder and get LocalService instance.
-            val binder = service as MediaPlayerService.LocalBinder
-            mediaPlayerService = binder.getService()
+            val binder = service as MediaPlayerService2.LocalBinder
+            mediaPlayerService2 = binder.getService()
 
             // get name of song
             /*songName = albums[song].getTitle(context = requireContext())
@@ -102,7 +99,7 @@ class MediaPlayerFragment2 : CoreFragment() {
         }
 
         override fun onServiceDisconnected(arg0: ComponentName) {
-            mediaPlayerService.destroyService()
+            mediaPlayerService2.destroyService()
             isConnected = false
         }
     }
@@ -154,21 +151,23 @@ class MediaPlayerFragment2 : CoreFragment() {
      * skip next song
      */
     private fun goForward() {
-        requireContext().showToast(message = "Forward")
+        //requireContext().showToast(message = "Forward")
         //song = song.getForward(albums)
         //songName = albums[song].getTitle(context = requireContext())
         //mediaPlayerService.songName = songName
         //mediaPlayerService.song = albums[song]
         //mediaPlayerService.playSong()
+        viewModel.goForward()
     }
 
     private fun goBackward() {
-        requireContext().showToast(message = "Backward")
+        //requireContext().showToast(message = "Backward")
         //song = song.getBackward(albums)
         //songName = albums[song].getTitle(context = requireContext())
         //mediaPlayerService.songName = songName
         //mediaPlayerService.song = albums[song]
         //mediaPlayerService.playSong()
+        viewModel.goBackward()
     }
 
     @Composable
