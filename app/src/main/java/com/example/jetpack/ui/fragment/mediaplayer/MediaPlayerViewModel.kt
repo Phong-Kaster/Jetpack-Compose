@@ -38,7 +38,9 @@ constructor(
         collectSongInStorage()
     }
 
-    @SuppressLint("NewApi")
+    /**
+     * ------------------------------ ONLY FOR MEDIA PLAYER FRAGMENT 2 ------------------------------
+     */
     fun collectSongInStorage() {
         viewModelScope.launch(Dispatchers.IO) {
             val collection =
@@ -87,14 +89,11 @@ constructor(
                     val duration = cursor.getInt(durationColumn)
                     val size = cursor.getInt(sizeColumn)
 
-                    val uri: Uri = ContentUris.withAppendedId(
-                        MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
-                        id
-                    )
+                    val uri: Uri = ContentUris.withAppendedId(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, id)
 
                     // Load thumbnail of a specific media item.
-                    val thumbnail: Bitmap =
-                        applicationContext.contentResolver.loadThumbnail(uri, Size(640, 480), null)
+                    val thumbnail = loadThumbnail(uri = uri)
+
 
                     // Stores column values and the contentUri in a local object
                     // that represents the media file.
@@ -116,5 +115,21 @@ constructor(
             Log.d(TAG, "collectSongInStorage - listOfSong = ${listOfSong.size}")
             Log.d(TAG, "collectSongInStorage - song = ${_song.value}")
         }
+    }
+
+    private fun loadThumbnail(uri: Uri): Bitmap {
+        val thumbnail: Bitmap =
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                applicationContext.contentResolver.loadThumbnail(uri, Size(640, 480), null)
+            } else {
+                MediaStore.Images.Thumbnails.getThumbnail(
+                    applicationContext.contentResolver,
+                    ContentUris.parseId(uri),
+                    MediaStore.Images.Thumbnails.MINI_KIND,
+                    null
+                )
+            }
+
+        return thumbnail
     }
 }
