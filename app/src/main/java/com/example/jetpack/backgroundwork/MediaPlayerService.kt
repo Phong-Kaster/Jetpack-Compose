@@ -233,8 +233,8 @@ class MediaPlayerService : Service() {
         /** Inflate the small notification layout*/
         notificationSmall.setOnClickPendingIntent(R.id.button_play, playPendingIntent)
         notificationSmall.setOnClickPendingIntent(R.id.button_pause, pausePendingIntent)
-        notificationSmall.setOnClickPendingIntent(R.id.button_stop, stopPendingIntent)
         notificationSmall.setOnClickPendingIntent(R.id.button_next, nextPendingIntent)
+        notificationSmall.setOnClickPendingIntent(R.id.button_previous, previousPendingIntent)
 
 
         /** Inflate the big notification layout*/

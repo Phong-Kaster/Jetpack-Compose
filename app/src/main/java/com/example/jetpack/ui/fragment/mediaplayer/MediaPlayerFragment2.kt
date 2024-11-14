@@ -40,9 +40,6 @@ import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
 import com.example.jetpack.core.LocalTheme
 import com.example.jetpack.ui.component.CoreTopBar2
-import com.example.jetpack.ui.fragment.mediaplayer.MediaPlayerUtil.getBackward
-import com.example.jetpack.ui.fragment.mediaplayer.MediaPlayerUtil.getForward
-import com.example.jetpack.ui.fragment.mediaplayer.MediaPlayerUtil.getTitle
 import com.example.jetpack.ui.theme.Background
 import com.example.jetpack.ui.theme.customizedTextStyle
 import com.example.jetpack.util.NavigationUtil.safeNavigateUp
@@ -86,7 +83,7 @@ class MediaPlayerFragment2 : CoreFragment() {
 
 
             mediaPlayerService.callback = callback
-            mediaPlayerService.initializeMediaPlayer()
+            //mediaPlayerService.initializeMediaPlayer()
 
 
             mediaPlayerService.fireNotification(currentAction = Constant.ACTION_PAUSE)

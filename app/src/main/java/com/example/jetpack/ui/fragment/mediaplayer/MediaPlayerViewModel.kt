@@ -9,7 +9,6 @@ import android.provider.MediaStore
 import android.util.Log
 import android.util.Size
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.jetpack.JetpackApplication
@@ -108,6 +107,8 @@ constructor(
                     )
                 }
             }
+
+            if (listOfSong.isEmpty()) return@launch
 
             _song.value = listOfSong[index.intValue]
 

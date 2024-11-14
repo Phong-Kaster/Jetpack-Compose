@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.LocalOverscrollConfiguration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -238,21 +239,20 @@ fun ArticleLayout() {
                                 .clip(shape = RoundedCornerShape(25.dp))
                                 .aspectRatio(1f)
                         ) {
-                            Icon(
-                                painter = painterResource(id = R.drawable.ic_iron_cross_wehtmatch),
+                            Image(
+                                painter = painterResource(id = R.drawable.img_swastika_black_circle),
                                 contentDescription = "Icon",
-                                tint = Color.White,
                                 modifier = Modifier
                                     .doublePulseEffect(
                                         initialScale = 0f,
-                                        targetScale = 1f,
-                                        shape = RoundedCornerShape(25.dp),
-                                        brush = Brush.radialGradient(
-                                            0.3f to Color.Yellow,
-                                            0.6f to Color.Blue,
-                                            1f to Color.Yellow
-                                        ),
+                                        targetScale = 1.5f,
+                                        shape = CircleShape,
                                         duration = 3000,
+                                        brush = Brush.radialGradient(
+                                            0.3f to Color.Red,
+                                            0.6f to Color.White,
+                                            1f to Color.Red
+                                        ),
                                     )
                                     .fillMaxWidth(0.8f)
                                     .aspectRatio(1f)

@@ -199,9 +199,6 @@ fun HomeLayout(
     val fabExtended by remember { derivedStateOf { state.firstVisibleItemIndex > 0 } }
 
 
-    LaunchedEffect(state) {
-        Log.d("TAG", "state.firstVisibleItemIndex > 0 = ${state.firstVisibleItemIndex > 0} ")
-    }
     BackHandler(enabled = true, onBack = onOpenConfirmDialog)
 
 
