@@ -38,6 +38,7 @@ import com.example.jetpack.ui.theme.customizedTextStyle
 
 @Composable
 fun SongElement(
+    enabled: Boolean,
     song: Song,
     onClick: ()->Unit = {},
     modifier: Modifier = Modifier,
@@ -102,7 +103,7 @@ fun SongElement(
                 style = customizedTextStyle(
                     fontSize = 16,
                     fontWeight = 600,
-                    color = LocalTheme.current.textColor
+                    color = if(enabled) LocalTheme.current.primary else LocalTheme.current.textColor
                 ),
                 modifier = Modifier
                     .fillMaxWidth()
@@ -110,8 +111,14 @@ fun SongElement(
             )
 
             Text(
-                style = customizedTextStyle(fontSize = 14, fontWeight = 400, color = LocalTheme.current.textColor),
-                modifier = Modifier.fillMaxWidth().basicMarquee(Int.MAX_VALUE),
+                style = customizedTextStyle(
+                    fontSize = 14,
+                    fontWeight = 400,
+                    color = if (enabled) LocalTheme.current.primary else LocalTheme.current.textColor
+                ),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .basicMarquee(Int.MAX_VALUE),
                 text = if (song.artist.contains("<unknown>"))
                     stringResource(R.string.unknown)
                 else
@@ -139,6 +146,7 @@ fun SongElement(
 @Composable
 private fun PreviewSongElement() {
     SongElement(
+        enabled = false,
         song = Song.getFakeSong2()
     )
 }

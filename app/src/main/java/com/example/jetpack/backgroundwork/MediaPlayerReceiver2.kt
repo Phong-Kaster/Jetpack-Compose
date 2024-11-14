@@ -18,7 +18,7 @@ class MediaPlayerReceiver2 : BroadcastReceiver() {
         }
 
 
-        val actionToMediaPlayerService = Intent(context, MediaPlayerService::class.java)
+        val actionToMediaPlayerService = Intent(context, MediaPlayerService2::class.java)
         when (intent.action) {
             Constant.ACTION_PLAY -> actionToMediaPlayerService.action = Constant.ACTION_PLAY
             Constant.ACTION_PAUSE -> actionToMediaPlayerService.action = Constant.ACTION_PAUSE

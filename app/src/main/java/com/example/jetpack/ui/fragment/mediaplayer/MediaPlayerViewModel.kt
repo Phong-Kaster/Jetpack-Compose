@@ -91,11 +91,13 @@ constructor(
     private var index by mutableIntStateOf(0)
     private val listOfSong = mutableListOf<Song>()
 
+
     /**
      * song that users choose now
      */
     private var _chosenSong = MutableStateFlow<Song?>(Song())
     val chosenSong = _chosenSong.asStateFlow()
+
 
     /**
      * All songs in device
@@ -110,6 +112,10 @@ constructor(
 
     /**
      * ------------------------------ ONLY FOR MEDIA PLAYER FRAGMENT 2 ------------------------------
+     */
+
+    /***********************************
+     * collectSongsInStorage
      */
     fun collectSongInStorage() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -193,6 +199,10 @@ constructor(
 
     /**********************************
      * Load album art of a song
+     *
+     * @param context application context
+     * @param uri uri of song
+     * @return Bitmap of album art
      */
     private fun loadThumbnail(context: Context, uri: Uri): Bitmap? {
         // Check if the file exists val
@@ -225,6 +235,12 @@ constructor(
         }
     }
 
+    /**********************************
+     * update Chosen Song
+     *
+     * @param chosenIndex index of chosen song in a list of song from device
+     * @param chosenSong song that users choose now
+     */
     fun updateChosenSong(chosenIndex: Int, chosenSong: Song) {
         viewModelScope.launch(Dispatchers.IO) {
             _chosenSong.value = chosenSong
@@ -232,7 +248,12 @@ constructor(
         }
     }
 
-    fun goForward() {
+    /**********************************
+     * go Forward to get next song in the list of song
+     */
+    fun goForward(
+        onPlayMusic: (Song)->Unit = {}
+    ) {
         viewModelScope.launch(Dispatchers.IO) {
             if (index < _songs.value.size - 1) {
                 index++
@@ -241,10 +262,17 @@ constructor(
                 index = 0
                 _chosenSong.value = _songs.value[index]
             }
+
+            onPlayMusic(_chosenSong.value ?: Song())
         }
     }
 
-    fun goBackward() {
+    /**********************************
+     * go Backward to get previous song in the list of song
+     */
+    fun goBackward(
+        onPlayMusic: (Song)->Unit = {}
+    ) {
         viewModelScope.launch(Dispatchers.IO) {
             if (index > 0) {
                 index--
@@ -253,6 +281,8 @@ constructor(
                 index = _songs.value.size - 1
                 _chosenSong.value = _songs.value[index]
             }
+
+            onPlayMusic(_chosenSong.value ?: Song())
         }
     }
 }

@@ -64,8 +64,14 @@ class MediaPlayerService2 : Service() {
                 }
             }
 
-            Constant.ACTION_NEXT -> callback?.next()
-            Constant.ACTION_PREVIOUS -> callback?.previous()
+            Constant.ACTION_NEXT -> {
+                Log.d(TAG, "onStartCommand - callback next")
+                callback?.next()
+            }
+            Constant.ACTION_PREVIOUS -> {
+                Log.d(TAG, "onStartCommand - callback previous")
+                callback?.previous()
+            }
         }
         return START_STICKY
     }
@@ -107,6 +113,8 @@ class MediaPlayerService2 : Service() {
             .build()
 
         if (player != null) return
+
+        if (song?.uri == null) return
 
         player = MediaPlayer.create(this, song?.uri)
         player?.setAudioAttributes(audioAttributes)
@@ -194,11 +202,11 @@ class MediaPlayerService2 : Service() {
 
 
         /** Define actions for media player */
-        val play = Intent(this, MediaPlayerReceiver::class.java).apply { action = Constant.ACTION_PLAY }
-        val pause = Intent(this, MediaPlayerReceiver::class.java).apply { action = Constant.ACTION_PAUSE }
-        val stop = Intent(this, MediaPlayerReceiver::class.java).apply { action = Constant.ACTION_STOP }
-        val previous = Intent(this, MediaPlayerReceiver::class.java).apply { action = Constant.ACTION_PREVIOUS }
-        val next = Intent(this, MediaPlayerReceiver::class.java).apply { action = Constant.ACTION_NEXT }
+        val play = Intent(this, MediaPlayerReceiver2::class.java).apply { action = Constant.ACTION_PLAY }
+        val pause = Intent(this, MediaPlayerReceiver2::class.java).apply { action = Constant.ACTION_PAUSE }
+        val stop = Intent(this, MediaPlayerReceiver2::class.java).apply { action = Constant.ACTION_STOP }
+        val previous = Intent(this, MediaPlayerReceiver2::class.java).apply { action = Constant.ACTION_PREVIOUS }
+        val next = Intent(this, MediaPlayerReceiver2::class.java).apply { action = Constant.ACTION_NEXT }
 
 
         val playPendingIntent = PendingIntent.getBroadcast(this, 0, play, PendingIntent.FLAG_IMMUTABLE)
@@ -252,7 +260,7 @@ class MediaPlayerService2 : Service() {
             .setCustomContentView(notificationSmall)
             .setCustomBigContentView(notificationBig)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-            .setSilent(false)
+            .setSilent(true)
             .setAutoCancel(false)
             .setOngoing(true)
             .setOnlyAlertOnce(true)

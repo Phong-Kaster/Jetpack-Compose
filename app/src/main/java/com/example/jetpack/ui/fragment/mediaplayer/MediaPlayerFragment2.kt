@@ -1,6 +1,8 @@
 package com.example.jetpack.ui.fragment.mediaplayer
 
 import android.content.ComponentName
+import android.content.Context
+import android.content.Intent
 import android.content.ServiceConnection
 import android.os.Bundle
 import android.os.IBinder
@@ -21,6 +23,7 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -37,8 +40,8 @@ import androidx.compose.ui.unit.dp
 import androidx.fragment.app.viewModels
 import coil.compose.rememberImagePainter
 import com.example.jetpack.R
-import com.example.jetpack.backgroundwork.MediaPlayerService
 import com.example.jetpack.backgroundwork.MediaPlayerService2
+import com.example.jetpack.configuration.Constant
 import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
 import com.example.jetpack.core.LocalTheme
@@ -64,7 +67,7 @@ import kotlinx.collections.immutable.persistentListOf
 @AndroidEntryPoint
 class MediaPlayerFragment2 : CoreFragment() {
     private lateinit var mediaPlayerService2: MediaPlayerService2
-    private var isConnected: Boolean = false
+    private var isConnected: Boolean by mutableStateOf(false)
     private val viewModel: MediaPlayerViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -83,18 +86,11 @@ class MediaPlayerFragment2 : CoreFragment() {
             mediaPlayerService2 = binder.getService()
 
             // get name of song
-            /*songName = albums[song].getTitle(context = requireContext())
+            mediaPlayerService2.callback = callback
+            mediaPlayerService2.initializeMediaPlayer()
 
 
-            mediaPlayerService.songName = songName
-            mediaPlayerService.song = albums[song]*/
-
-
-            /*mediaPlayerService.callback = callback
-            mediaPlayerService.initializeMediaPlayer()
-
-
-            mediaPlayerService.fireNotification(currentAction = Constant.ACTION_PAUSE)*/
+            mediaPlayerService2.fireNotification(currentAction = Constant.ACTION_PAUSE)
             isConnected = true
         }
 
@@ -107,12 +103,14 @@ class MediaPlayerFragment2 : CoreFragment() {
     /**
      * ------------------------------ CALLBACK OF MEDIA PLAYER SERVICE ------------------------------
      */
-    private val callback = object : MediaPlayerService.Callback {
+    private val callback = object : MediaPlayerService2.Callback {
         override fun next() {
+            Log.d(TAG, "next - goForward")
             goForward()
         }
 
         override fun previous() {
+            Log.d(TAG, "previous - goBackward")
             goBackward()
         }
     }
@@ -132,9 +130,9 @@ class MediaPlayerFragment2 : CoreFragment() {
      */
     private fun startMediaPlayerService() {
         Log.d(TAG, "MediaPlayerService - start")
-        /*val intent = Intent(requireContext(), MediaPlayerService::class.java)
+        val intent = Intent(requireContext(), MediaPlayerService2::class.java)
         requireContext().bindService(intent, connection, Context.BIND_AUTO_CREATE)
-        requireContext().startService(intent)*/
+        requireContext().startService(intent)
     }
 
 
@@ -143,7 +141,7 @@ class MediaPlayerFragment2 : CoreFragment() {
      */
     private fun stopMediaPlayerService() {
         Log.d(TAG, "MediaPlayerService - stop")
-        /*requireContext().unbindService(connection)*/
+        requireContext().unbindService(connection)
         isConnected = false
     }
 
@@ -157,9 +155,17 @@ class MediaPlayerFragment2 : CoreFragment() {
         //mediaPlayerService.songName = songName
         //mediaPlayerService.song = albums[song]
         //mediaPlayerService.playSong()
-        viewModel.goForward()
+        viewModel.goForward(
+            onPlayMusic = { song ->
+                val runnable = Runnable { playMusic(song = song) }
+                requireActivity().runOnUiThread(runnable)
+            }
+        )
     }
 
+    /*************************************************
+     * skip previous song
+     */
     private fun goBackward() {
         //requireContext().showToast(message = "Backward")
         //song = song.getBackward(albums)
@@ -167,13 +173,42 @@ class MediaPlayerFragment2 : CoreFragment() {
         //mediaPlayerService.songName = songName
         //mediaPlayerService.song = albums[song]
         //mediaPlayerService.playSong()
-        viewModel.goBackward()
+        viewModel.goBackward(
+            onPlayMusic = { song ->
+
+                val runnable = Runnable { playMusic(song = song) }
+                requireActivity().runOnUiThread(runnable)
+            }
+        )
+    }
+
+    /*************************************************
+     * play music
+     */
+    private fun playMusic(song: Song) {
+        mediaPlayerService2.song = song
+        mediaPlayerService2.fireNotification(currentAction = Constant.ACTION_PLAY)
+        mediaPlayerService2.playSong()
     }
 
     @Composable
     override fun ComposeView() {
         super.ComposeView()
-        var isPlaying by remember { mutableStateOf(false) }
+        var isPlaying =
+            if (isConnected) mediaPlayerService2.isPlaying.collectAsState().value else false
+
+
+        /** listen music player service set up completely & setup when the service is ready*/
+        /*LaunchedEffect(
+            key1 = viewModel.chosenSong.collectAsState().value,
+            key2 = isConnected
+        ) {
+            if (!isConnected) return@LaunchedEffect
+            if (viewModel.chosenSong.value == null) return@LaunchedEffect
+
+            //mediaPlayerService2.song = viewModel.chosenSong.value
+            //mediaPlayerService2.fireNotification(currentAction = Constant.ACTION_PAUSE)
+        }*/
 
         MediaPlayer2Layout(
             chosenSong = viewModel.chosenSong.collectAsState().value ?: Song(),
@@ -183,20 +218,22 @@ class MediaPlayerFragment2 : CoreFragment() {
             onBackward = { goBackward() },
             onForward = { goForward() },
             onChangeSong = { index, song ->
-                viewModel.updateChosenSong(
-                    chosenIndex = index,
-                    chosenSong = song
-                )
+                /*update UI*/
+                viewModel.updateChosenSong(chosenIndex = index, chosenSong = song)
+
+                /*update media player service 2*/
+                playMusic(song = song)
             },
             onPlayPause = {
                 if (isPlaying) {
                     isPlaying = false
                     requireContext().showToast(message = "Pause")
-                    //mediaPlayerService.pause()
+                    mediaPlayerService2.pause()
+
                 } else {
                     isPlaying = true
                     requireContext().showToast(message = "Play")
-                    //mediaPlayerService.resume()
+                    mediaPlayerService2.resume()
                 }
             },
         )
@@ -295,6 +332,7 @@ fun MediaPlayer2Layout(
                         key = { index: Int, song: Song -> index },
                         itemContent = { index: Int, song: Song ->
                             SongElement(
+                                enabled = chosenSong == song,
                                 song = song,
                                 onClick = { onChangeSong(index, song) },
                                 modifier = Modifier.fillMaxWidth()
