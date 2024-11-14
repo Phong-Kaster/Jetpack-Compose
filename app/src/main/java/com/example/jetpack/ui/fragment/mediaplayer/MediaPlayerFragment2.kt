@@ -1,14 +1,14 @@
 package com.example.jetpack.ui.fragment.mediaplayer
 
 import android.content.ComponentName
-import android.content.Context
-import android.content.Intent
 import android.content.ServiceConnection
 import android.os.Bundle
 import android.os.IBinder
 import android.util.Log
 import android.view.View
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -18,6 +18,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -28,10 +31,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -40,17 +42,19 @@ import androidx.fragment.app.viewModels
 import coil.compose.rememberImagePainter
 import com.example.jetpack.R
 import com.example.jetpack.backgroundwork.MediaPlayerService
-import com.example.jetpack.configuration.Constant
 import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
 import com.example.jetpack.core.LocalTheme
 import com.example.jetpack.ui.component.CoreTopBar2
-import com.example.jetpack.ui.fragment.mediaplayer.MediaPlayerUtil.getTitle
+import com.example.jetpack.ui.fragment.mediaplayer.component.MusicController
+import com.example.jetpack.ui.fragment.mediaplayer.component.SongElement
 import com.example.jetpack.ui.theme.Background
 import com.example.jetpack.ui.theme.customizedTextStyle
 import com.example.jetpack.util.AppUtil.showToast
 import com.example.jetpack.util.NavigationUtil.safeNavigateUp
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.persistentListOf
 
 /**
  * This screen creates a basic media player with MediaPlayer.
@@ -70,6 +74,7 @@ class MediaPlayerFragment2 : CoreFragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel.collectSongInStorage()
     }
+
     /*************************************************
      * Defines callbacks for service binding, passed to bindService().
      */
@@ -172,11 +177,18 @@ class MediaPlayerFragment2 : CoreFragment() {
         var isPlaying by remember { mutableStateOf(false) }
 
         MediaPlayer2Layout(
-            song = viewModel.song.collectAsState().value ?: Song(),
+            chosenSong = viewModel.chosenSong.collectAsState().value ?: Song(),
+            songs = viewModel.songs.collectAsState().value,
             isPlaying = isPlaying,
             onBack = { safeNavigateUp() },
             onBackward = { goBackward() },
             onForward = { goForward() },
+            onChangeSong = { index, song ->
+                viewModel.updateChosenSong(
+                    chosenIndex = index,
+                    chosenSong = song
+                )
+            },
             onPlayPause = {
                 if (isPlaying) {
                     isPlaying = false
@@ -194,12 +206,14 @@ class MediaPlayerFragment2 : CoreFragment() {
 
 @Composable
 fun MediaPlayer2Layout(
-    song: Song,
+    chosenSong: Song,
+    songs: ImmutableList<Song>,
     isPlaying: Boolean,
     onBack: () -> Unit = {},
     onPlayPause: () -> Unit = {},
     onBackward: () -> Unit = {},
     onForward: () -> Unit = {},
+    onChangeSong: (Int, Song) -> Unit = { _, _ -> },
 ) {
     CoreLayout(
         backgroundColor = Background,
@@ -211,28 +225,45 @@ fun MediaPlayer2Layout(
             )
         },
         content = {
-            Box(
-                contentAlignment = Alignment.Center,
+            Column(
                 modifier = Modifier.fillMaxSize()
             ) {
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.spacedBy(32.dp),
+                    verticalArrangement = Arrangement.spacedBy(16.dp),
                     modifier = Modifier
-                        .align(BiasAlignment(horizontalBias = 0f, verticalBias = -0.5f))
+                        .fillMaxWidth()
                 ) {
-                    Image(
-                        painter = if (song.thumbnail == null)
-                            painterResource(R.drawable.img_napoleon_bonaparte)
-                        else
-                            rememberImagePainter(song.thumbnail),
-                        contentDescription = "Album",
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier.fillMaxWidth()
-                    )
+                    if (chosenSong.thumbnail == null) {
+                        Box(
+                            contentAlignment = Alignment.Center,
+                            modifier = Modifier
+                                .clip(shape = RoundedCornerShape(10.dp))
+                                .background(color = LocalTheme.current.secondary)
+                                .size(150.dp)
+                        ) {
+                            Image(
+                                painter = painterResource(R.drawable.ic_music_note),
+                                contentDescription = "Album",
+                                contentScale = ContentScale.Crop,
+                                modifier = Modifier
+                                    .size(75.dp)
 
+                            )
+                        }
+                    } else {
+                        Image(
+                            painter = rememberImagePainter(chosenSong.thumbnail),
+                            contentDescription = "Album",
+                            contentScale = ContentScale.Crop,
+                            modifier = Modifier
+                                .clip(shape = RoundedCornerShape(10.dp))
+                                .background(color = LocalTheme.current.secondary)
+                                .size(150.dp)
+                        )
+                    }
                     Text(
-                        text = song.name,
+                        text = chosenSong.name,
                         color = LocalTheme.current.textColor,
                         style = customizedTextStyle(
                             fontWeight = 600,
@@ -244,58 +275,32 @@ fun MediaPlayer2Layout(
                     )
                 }
 
+                MusicController(
+                    isPlaying = isPlaying,
+                    onBackward = onBackward,
+                    onForward = onForward,
+                    onPlayPause = onPlayPause,
+                    modifier = Modifier
+                )
 
-                // BACKWARD, PLAY PAUSE & FORWARD
-                Row(
-                    horizontalArrangement = Arrangement.SpaceAround,
+
+                LazyColumn(
+                    verticalArrangement = Arrangement.spacedBy(16.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .align(BiasAlignment(horizontalBias = 0f, verticalBias = 1f))
                         .padding(16.dp)
                 ) {
-                    IconButton(
-                        onClick = onBackward,
-                        content = {
-                            Icon(
-                                painter = painterResource(R.drawable.ic_music_skip_previous),
-                                tint = LocalTheme.current.textColor,
-                                contentDescription = stringResource(id = R.string.icon),
-                                modifier = Modifier
-                                    .size(80.dp)
+                    itemsIndexed(
+                        items = songs,
+                        key = { index: Int, song: Song -> index },
+                        itemContent = { index: Int, song: Song ->
+                            SongElement(
+                                song = song,
+                                onClick = { onChangeSong(index, song) },
+                                modifier = Modifier.fillMaxWidth()
                             )
-                        },
-                        modifier = Modifier
-                    )
-
-                    IconButton(
-                        onClick = onPlayPause,
-                        content = {
-                            Icon(
-                                painter =
-                                if (isPlaying) painterResource(id = R.drawable.ic_music_pause)
-                                else painterResource(id = R.drawable.ic_music_play),
-                                tint = LocalTheme.current.textColor,
-                                contentDescription = stringResource(id = R.string.icon),
-                                modifier = Modifier
-                                    .size(48.dp)
-                            )
-                        },
-                        modifier = Modifier
-
-                    )
-
-                    IconButton(
-                        onClick = onForward,
-                        content = {
-                            Icon(
-                                painter = painterResource(R.drawable.ic_music_skip_next),
-                                tint = LocalTheme.current.textColor,
-                                contentDescription = stringResource(id = R.string.icon),
-                                modifier = Modifier
-                                    .size(80.dp)
-                            )
-                        },
-                        modifier = Modifier
+                        }
                     )
                 }
             }
@@ -308,12 +313,10 @@ fun MediaPlayer2Layout(
 private fun PreviewMediaPlayer2Layout() {
     MediaPlayer2Layout(
         isPlaying = true,
-        song = Song(
-            name = "Napoleon",
-            duration = 100,
-            thumbnail = null,
-            size = 100,
-            uri = null
+        chosenSong = Song.getFakeSong2(),
+        songs = persistentListOf(
+            Song.getFakeSong1(),
+            Song.getFakeSong2()
         ),
         onBack = {},
         onForward = {},

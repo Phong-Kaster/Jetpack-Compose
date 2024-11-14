@@ -189,7 +189,7 @@ class MediaPlayerFragment : CoreFragment() {
             }
 
         ForegroundServiceLayout(
-            song = viewModel.song.collectAsState().value ?: Song(),
+            song = viewModel.chosenSong.collectAsState().value ?: Song(),
             isPlaying = isPlaying,
             songName = songName,
             onBack = { safeNavigateUp() },

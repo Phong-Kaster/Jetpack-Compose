@@ -151,4 +151,9 @@
     <string name="tap_to_open">Tap to open</string>
     <string name="media_player">Media player</string>
     <string name="media_player_2">Media player 2</string>
+    <string name="filename_can_not_be_empty">Filename can not be empty</string>
+    <string name="filename_can_not_be_blank">Filename can not be blank</string>
+    <string name="filename_can_not_have_more_than_31_characters">Filename can not have more than 31 characters</string>
+    <string name="filename_can_not_have_the_following_character"><![CDATA[Filename can not have the following characters: !@#$%&amp;*(){}]]></string>
+    <string name="unknown">Unknown</string>
 </resources>

@@ -1,6 +1,5 @@
 package com.example.jetpack.ui.fragment.mediaplayer
 
-import android.annotation.SuppressLint
 import android.content.ContentUris
 import android.content.Context
 import android.graphics.Bitmap
@@ -9,10 +8,13 @@ import android.os.Build
 import android.provider.MediaStore
 import android.util.Log
 import android.util.Size
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.jetpack.JetpackApplication
+import com.example.jetpack.util.FileUtil.getNameWithoutExtensionFromAudio
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
@@ -86,14 +88,14 @@ constructor(
 
     private val TAG = this.javaClass.simpleName
 
-    private var index = mutableIntStateOf(0)
+    private var index by mutableIntStateOf(0)
     private val listOfSong = mutableListOf<Song>()
 
     /**
      * song that users choose now
      */
     private var _song = MutableStateFlow<Song?>(Song())
-    val song = _song.asStateFlow()
+    val chosenSong = _song.asStateFlow()
 
     /**
      * All songs in device
@@ -124,6 +126,7 @@ constructor(
             val projection = arrayOf(
                 MediaStore.Audio.Media._ID,
                 MediaStore.Audio.Media.DISPLAY_NAME,
+                MediaStore.Audio.Media.ARTIST,
                 MediaStore.Audio.Media.DURATION,
                 MediaStore.Audio.Media.SIZE
             )
@@ -145,16 +148,16 @@ constructor(
             query?.use { cursor ->
                 // Cache column indices.
                 val idColumn = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media._ID)
-                val nameColumn =
-                    cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DISPLAY_NAME)
-                val durationColumn =
-                    cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DURATION)
+                val nameColumn = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DISPLAY_NAME)
+                val artistColumn = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ARTIST)
+                val durationColumn = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DURATION)
                 val sizeColumn = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.SIZE)
 
                 while (cursor.moveToNext()) {
                     // Get values of columns for a given Audio.
                     val id = cursor.getLong(idColumn)
                     val name = cursor.getString(nameColumn)
+                    val artist = cursor.getString(artistColumn)
                     val duration = cursor.getInt(durationColumn)
                     val size = cursor.getInt(sizeColumn)
 
@@ -169,7 +172,8 @@ constructor(
                     // that represents the media file.
 
                     listOfSong += Song(
-                        name = name,
+                        name = name.getNameWithoutExtensionFromAudio(),
+                        artist = artist,
                         duration = duration,
                         size = size,
                         uri = uri,
@@ -178,13 +182,12 @@ constructor(
                 }
             }
 
-            /*Log.d(TAG, "collectSongInStorage - listOfSong = ${listOfSong.size}")
-            Log.d(TAG, "collectSongInStorage - listOfSong = $listOfSong")
-            Log.d(TAG, "collectSongInStorage - song = ${_song.value}")*/
+            Log.d(TAG, "collectSongInStorage - listOfSong = ${listOfSong.size}")
+            Log.d(TAG, "collectSongInStorage - song = ${_song.value}")
 
             if (listOfSong.isEmpty()) return@launch
-            _songs.value = listOfSong.toImmutableList()
-            _song.value = listOfSong[index.intValue]
+            _songs.value = listOfSong.distinct().toImmutableList()
+            _song.value = listOfSong[index]
         }
     }
 
@@ -196,10 +199,9 @@ constructor(
         val cursor = context.contentResolver.query(uri, null, null, null, null)
         if (cursor == null || !cursor.moveToFirst()) {
             cursor?.close()
-            throw java.io.FileNotFoundException("No album art found at the given URI: $uri")
+            return null
         }
         cursor.close()
-        Log.d(TAG, "loadThumbnail - cursor close")
 
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             try {
@@ -220,6 +222,13 @@ constructor(
                 ex.printStackTrace()
                 null
             }
+        }
+    }
+
+    fun updateChosenSong(chosenIndex:Int, chosenSong: Song) {
+        viewModelScope.launch(Dispatchers.IO) {
+            _song.value = chosenSong
+            index = chosenIndex
         }
     }
 }
