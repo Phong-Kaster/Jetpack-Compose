@@ -31,8 +31,6 @@ import com.example.jetpack.core.CoreLayout
 import com.example.jetpack.core.LocalTheme
 import com.example.jetpack.ui.fragment.intro.component.IntroContent
 import com.example.jetpack.ui.fragment.intro.component.IntroIndicator
-import com.example.jetpack.ui.theme.Background
-import com.example.jetpack.ui.theme.PrimaryColor
 import com.example.jetpack.ui.theme.customizedTextStyle
 import com.example.jetpack.util.NavigationUtil.safeNavigate
 import dagger.hilt.android.AndroidEntryPoint
@@ -133,7 +131,7 @@ fun IntroLayout(
                         1 -> IntroContent(
                             titleId = R.string.fake_title,
                             contentId = R.string.fake_message,
-                            imageId = R.drawable.ic_iron_cross_wehtmatch
+                            imageId = R.drawable.ic_nazi_wehtmatch
                         )
 
                         2 -> IntroContent(

@@ -114,9 +114,9 @@
             android:name=".LogoNaziSymbol"
             android:enabled="false"
             android:exported="true"
-            android:icon="@drawable/ic_nazi_symbol"
+            android:icon="@drawable/ic_nazi_swastika"
             android:label="@string/app_name"
-            android:roundIcon="@drawable/ic_nazi_symbol"
+            android:roundIcon="@drawable/ic_nazi_swastika"
             android:targetActivity=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

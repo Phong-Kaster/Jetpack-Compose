@@ -7,7 +7,6 @@ import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
-import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -24,7 +23,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -35,6 +34,7 @@ import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
 import com.example.jetpack.core.LocalTheme
 import com.example.jetpack.ui.component.CoreTopBar
+import com.example.jetpack.ui.fragment.downloadwithworker.component.DownloadOption
 import com.example.jetpack.ui.theme.customizedTextStyle
 import com.example.jetpack.util.NavigationUtil.safeNavigateUp
 import dagger.hilt.android.AndroidEntryPoint
@@ -55,8 +55,8 @@ class DownloadWithWorkerFragment : CoreFragment() {
 
         DownloadWithWorkerLayout(
             state = viewModel.state.collectAsState().value,
-            onChoosePDF = { },
-            onChooseVideo = { },
+            onChoosePDF = { viewModel.choosePDF() },
+            onChooseVideo = { viewModel.chooseVideo() },
             onBack = { safeNavigateUp() },
             onDownload = {
                 Log.d(TAG, "onDownload")
@@ -109,7 +109,10 @@ fun DownloadWithWorkerLayout(
                     .padding(16.dp)
                     .border(
                         width = 2.dp,
-                        color = LocalTheme.current.primary,
+                        color = if (state.fileLink.isEmpty())
+                            Color.LightGray
+                        else
+                            LocalTheme.current.primary,
                         shape = RoundedCornerShape(16.dp)
                     )
                     .background(color = LocalTheme.current.background)
@@ -135,7 +138,10 @@ fun DownloadWithWorkerLayout(
                         style = customizedTextStyle(
                             fontWeight = 700,
                             fontSize = 18,
-                            color = LocalTheme.current.textColor
+                            color = if (state.fileLink.isEmpty())
+                                Color.LightGray
+                            else
+                                LocalTheme.current.textColor
                         ),
                     )
 
@@ -144,7 +150,10 @@ fun DownloadWithWorkerLayout(
                             style = customizedTextStyle(
                                 fontWeight = 400,
                                 fontSize = 14,
-                                color = LocalTheme.current.textColor
+                                color = if (state.fileLink.isEmpty())
+                                    Color.LightGray
+                                else
+                                    LocalTheme.current.textColor
                             ),
                             text = if (state.isDownloading)
                                 "${stringResource(R.string.downloading)}..."
@@ -181,63 +190,23 @@ fun DownloadWithWorkerLayout(
                     .padding(16.dp)
             ) {
                 item(
-                    key = "setupDownloadPdfExample",
+                    key = "PDFExample",
                     content = {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .clip(shape = RoundedCornerShape(16.dp))
-                                .clickable { onChoosePDF() }
-                                .background(
-                                    color = LocalTheme.current.primary,
-                                    shape = RoundedCornerShape(16.dp)
-                                )
-                                .padding(16.dp)
-                        ) {
-                            Text(
-                                text = "Click to setup download PDF Example",
-                                style = customizedTextStyle(
-                                    fontWeight = 600,
-                                    fontSize = 14,
-                                    color = LocalTheme.current.onPrimary
-                                ),
-                                maxLines = 1,
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .basicMarquee(Int.MAX_VALUE)
-                            )
-                        }
+                        DownloadOption(
+                            title = "PDF Example",
+                            onClick = onChoosePDF,
+                        )
                     }
                 )
 
 
                 item(
-                    key = "setupDownloadVideoExample",
+                    key = "VideoExample",
                     content = {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .clip(shape = RoundedCornerShape(16.dp))
-                                .clickable { onChooseVideo() }
-                                .background(
-                                    color = LocalTheme.current.primary,
-                                    shape = RoundedCornerShape(16.dp)
-                                )
-                                .padding(16.dp)
-                        ) {
-                            Text(
-                                text = "Click to setup download Video Example",
-                                style = customizedTextStyle(
-                                    fontWeight = 600,
-                                    fontSize = 14,
-                                    color = LocalTheme.current.onPrimary
-                                ),
-                                maxLines = 1,
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .basicMarquee(Int.MAX_VALUE)
-                            )
-                        }
+                        DownloadOption(
+                            title = "Video Example",
+                            onClick = onChooseVideo,
+                        )
                     }
                 )
             }

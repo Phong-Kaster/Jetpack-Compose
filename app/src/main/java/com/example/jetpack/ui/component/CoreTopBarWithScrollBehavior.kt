@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -81,7 +80,7 @@ private fun PreviewCoreTopBarWithScrollBehavior() {
                     modifier = Modifier.background(color = Background)
                 ) {
                     Icon(
-                        painter = painterResource(id = R.drawable.ic_nazi_symbol),
+                        painter = painterResource(id = R.drawable.ic_nazi_swastika),
                         contentDescription = null,
                         tint = PrimaryColor,
                         modifier = Modifier

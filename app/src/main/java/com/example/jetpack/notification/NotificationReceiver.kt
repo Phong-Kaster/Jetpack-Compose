@@ -15,7 +15,6 @@ import com.example.jetpack.R
 import com.example.jetpack.configuration.Constant.NOTIFICATION_ID
 import com.example.jetpack.configuration.Constant.NOTIFICATION_CHANNEL_ID
 import com.example.jetpack.notification.NotificationManager.sendNotification
-import com.example.jetpack.util.AppUtil
 
 
 class NotificationReceiver : BroadcastReceiver() {
@@ -52,7 +51,7 @@ class NotificationReceiver : BroadcastReceiver() {
 
         //3. define notification builder
         val builder: NotificationCompat.Builder = NotificationCompat.Builder(context, NOTIFICATION_CHANNEL_ID)
-            .setSmallIcon(R.drawable.ic_nazi_symbol)
+            .setSmallIcon(R.drawable.ic_nazi_swastika)
             .setContentTitle(context.getString(R.string.app_name))
             .setContentText(context.getString(R.string.fake_title))
             .setStyle(NotificationCompat.BigTextStyle().bigText(context.getString(R.string.fake_content)))

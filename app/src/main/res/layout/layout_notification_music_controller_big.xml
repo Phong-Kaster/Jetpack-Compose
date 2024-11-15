@@ -12,7 +12,7 @@
         android:layout_height="80dp"
         android:contentDescription="Album Art"
         android:scaleType="centerCrop"
-        android:src="@drawable/ic_iron_cross_wehtmatch" />
+        android:src="@drawable/ic_nazi_wehtmatch" />
 
 
     <LinearLayout

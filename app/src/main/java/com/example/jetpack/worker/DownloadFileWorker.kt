@@ -11,6 +11,7 @@ import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
@@ -26,11 +27,13 @@ import com.example.jetpack.configuration.Constant.DOWNLOAD_FILE_WORKER_CHANNEL_D
 import com.example.jetpack.configuration.Constant.DOWNLOAD_FILE_WORKER_CHANNEL_ID
 import com.example.jetpack.configuration.Constant.DOWNLOAD_FILE_WORKER_CHANNEL_NAME
 import com.example.jetpack.configuration.Constant.DOWNLOAD_FILE_WORKER_NOTIFICATION_ID
+import com.example.jetpack.util.AppUtil.showToast
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
 import java.io.File
 import java.io.FileOutputStream
 import java.net.URL
+
 
 /**
  * # [Step by Step Guide to Download Files With WorkManager](https://proandroiddev.com/step-by-step-guide-to-download-files-with-workmanager-b0231b03efd1)
@@ -52,6 +55,10 @@ constructor(
         val fileName = inputData.getString(Constant.DOWNLOAD_FILE_WORKER_KEY_FILE_NAME) ?: ""
         val fileType = inputData.getString(Constant.DOWNLOAD_FILE_WORKER_KEY_FILE_TYPE) ?: ""
 
+        Log.d(TAG, "doWork - fileName = $fileName")
+        Log.d(TAG, "doWork - fileUrl = $fileUrl")
+        Log.d(TAG, "doWork - fileType = $fileType")
+
         /* If one of 3 fields is empty then stop*/
         if (fileName.isEmpty() || fileType.isEmpty() || fileUrl.isEmpty())
             return Result.failure()
@@ -60,19 +67,22 @@ constructor(
         createNotificationChannel(context = context)
 
         /*show notification with progress bar*/
-        popupNotification(context = context)
+        popupNotification(context = context, fileName = fileName)
 
-        val uri = getSavedFileUri(
-            fileName = fileName,
-            fileType = fileType,
-            fileUrl = fileUrl,
-            context = context
-        )
+        var uri: Uri? = null
+        try {
+            uri = getSavedFileUri(
+                fileName = fileName,
+                fileType = fileType,
+                fileUrl = fileUrl,
+                context = context
+            )
+        } catch (ex: Exception) {
+            Log.d(TAG, "error = ${ex.message}")
+            ex.printStackTrace()
+        }
 
-        NotificationManagerCompat
-            .from(context)
-            .cancel(DOWNLOAD_FILE_WORKER_NOTIFICATION_ID)
-
+        cancelNotification()
         return if (uri == null)
             Result.failure()
         else
@@ -93,30 +103,26 @@ constructor(
             description = DOWNLOAD_FILE_WORKER_CHANNEL_DESCRIPTION
         }
         // Register the channel with the system.
-        val notificationManager: NotificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val notificationManager: NotificationManager =
+            context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.createNotificationChannel(channel)
     }
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
-    fun popupNotification(context: Context) {
-        Log.d(TAG, "popupNotification: ")
+    fun popupNotification(context: Context, fileName: String) {
 
-        val enableNotification = ActivityCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS)
-        Log.d(TAG, "popupNotification - enableNotification = $enableNotification")
+        val enableNotification =
+            ActivityCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS)
         if (enableNotification != PackageManager.PERMISSION_GRANTED) {
             return
         }
 
 
-        Log.d(TAG, "popupNotification - builder")
         val builder = NotificationCompat.Builder(context, DOWNLOAD_FILE_WORKER_CHANNEL_ID)
-            .setSmallIcon(R.drawable.ic_iron_cross_wehtmatch)
-            .setContentTitle(context.getString(R.string.app_name))
+            .setSmallIcon(R.drawable.ic_nazi_wehtmatch)
+            .setContentTitle("Downloading $fileName")
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setOngoing(true)
-            .setContentText("Downloading your file...")
-            .setStyle(NotificationCompat.BigTextStyle()
-                .bigText("Downloading your file..."))
             .setProgress(100, 50, true)
 
         //4. Show notification with notificationId which is a unique int for each notification that you must define
@@ -124,10 +130,15 @@ constructor(
         try {
             notificationManager.cancel(DOWNLOAD_FILE_WORKER_NOTIFICATION_ID)
             notificationManager.notify(DOWNLOAD_FILE_WORKER_NOTIFICATION_ID, builder.build())
-            Log.d(TAG, "popupNotification - notify")
-        }catch (ex: Exception) {
+        } catch (ex: Exception) {
             ex.printStackTrace()
         }
+    }
+
+    private fun cancelNotification() {
+        NotificationManagerCompat
+            .from(context)
+            .cancel(DOWNLOAD_FILE_WORKER_NOTIFICATION_ID)
     }
 
     /**
@@ -146,11 +157,13 @@ constructor(
     ): Uri? {
         /*It checks the fileType and sets the corresponding MIME type. If the file type is not recognized, it returns null*/
         val mimeType = when (fileType) {
-            "PDF" -> "application/pdf"
-            "PNG" -> "image/png"
-            "MP4" -> "video/mp4"
+            Constant.PDF.first -> Constant.PDF.second
+            Constant.PNG.first -> Constant.PNG.second
+            Constant.MP4.first -> Constant.MP4.second
             else -> ""
         }
+
+        Log.d(TAG, "getSavedFileUri - mimeType = $mimeType")
 
         /* If the MIME type is empty (i.e., the file type was not recognized), it returns null */
         if (mimeType.isEmpty()) return null

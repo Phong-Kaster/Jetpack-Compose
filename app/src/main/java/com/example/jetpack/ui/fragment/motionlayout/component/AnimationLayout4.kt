@@ -3,7 +3,6 @@ package com.example.jetpack.ui.fragment.motionlayout.component
 import android.util.Log
 import androidx.compose.animation.core.FloatExponentialDecaySpec
 import androidx.compose.animation.core.animateDecay
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
@@ -22,7 +21,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -51,7 +49,6 @@ import com.example.jetpack.ui.theme.PrimaryColor
 import com.example.jetpack.ui.theme.customizedTextStyle
 import kotlinx.coroutines.cancelChildren
 import kotlinx.coroutines.launch
-import kotlin.math.roundToInt
 
 private val MinToolbarHeight = 96.dp
 private val MaxToolbarHeight = 176.dp
@@ -208,7 +205,7 @@ fun CollapsingToolbar(
                 Icon(
                     painter =
                     if (progress == 1F) painterResource(id = R.drawable.ic_nazi_eagle)
-                    else painterResource(id = R.drawable.ic_nazi_symbol),
+                    else painterResource(id = R.drawable.ic_nazi_swastika),
                     contentDescription = null,
                     tint = if (progress == 1F) PrimaryColor else Color.Black,
                     modifier = Modifier

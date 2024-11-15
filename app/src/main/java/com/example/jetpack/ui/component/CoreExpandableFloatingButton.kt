@@ -99,7 +99,7 @@ fun
             CoreExpandableFloatingButtonContent(
                 icon = {
                     Icon(
-                        painter = painterResource(id = R.drawable.ic_nazi_symbol),
+                        painter = painterResource(id = R.drawable.ic_nazi_swastika),
                         contentDescription = null,
                         tint = OppositePrimaryColor,
                         modifier = Modifier

@@ -265,7 +265,7 @@ class MediaPlayerService2 : Service() {
 
 
         val builder = NotificationCompat.Builder(this, Constant.FOREGROUND_SERVICE_CHANNEL_ID)
-            .setSmallIcon(R.drawable.ic_iron_cross_wehtmatch)
+            .setSmallIcon(R.drawable.ic_nazi_wehtmatch)
             .setContentIntent(pendingIntent)
             .setContentTitle(getString(R.string.app_name))
             .setCustomContentView(notificationSmall)

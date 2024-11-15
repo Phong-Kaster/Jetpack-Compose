@@ -91,7 +91,7 @@ fun CollapsibleTopbar2Layout(
                         modifier = Modifier.fillMaxWidth()
                     ) {
                         Icon(
-                            painter = painterResource(id = R.drawable.ic_nazi_symbol),
+                            painter = painterResource(id = R.drawable.ic_nazi_swastika),
                             contentDescription = stringResource(id = R.string.icon),
                             tint = PrimaryColor,
                             modifier = Modifier.size(24.dp)

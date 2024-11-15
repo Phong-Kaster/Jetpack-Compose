@@ -33,35 +33,28 @@ constructor(
     private var _state = MutableStateFlow(DownloadWithWorkerState())
     val state = _state.asStateFlow()
 
-    init {
-        //choosePDFtoDownload()
 
-    }
-
-/*     fun choosePDFtoDownload(){
+     fun choosePDF(){
         viewModelScope.launch(Dispatchers.IO) {
             _state.value = _state.value.copy(
                 id = "1",
                 fileName = "PDF Example",
-//                fileType = Constant.PDF.first,
                 fileType = "pdf",
                 fileLink = "https://www.learningcontainer.com/wp-content/uploads/2019/09/sample-pdf-download-10-mb.pdf",
                 fileUri = null,
                 isDownloading = false,
-//                mimeType = Constant.PDF.second,
                 mimeType = "application/pdf",
             )
-            Log.d(TAG, "state = ${_state.value}")
         }
-    }*/
+    }
 
-    fun chooseVideotoDownload(){
+    fun chooseVideo(){
         viewModelScope.launch(Dispatchers.IO) {
             _state.value = _state.value.copy(
                 id = "2",
                 fileName = "Video Example",
                 fileType = Constant.MP4.first,
-                fileLink = "https://file-examples.com/storage/fe91352fe66730de9982024/2017/04/file_example_MP4_1920_18MG.mp4",
+                fileLink = "https://file-examples.com/storage/fec85039006734629a992d7/2017/04/file_example_MP4_1920_18MG.mp4",
                 fileUri = null,
                 isDownloading = false,
                 mimeType = Constant.MP4.second
@@ -81,6 +74,7 @@ constructor(
             putString(Constant.DOWNLOAD_FILE_WORKER_KEY_FILE_URL, _state.value.fileLink)
             putString(Constant.DOWNLOAD_FILE_WORKER_KEY_FILE_TYPE, _state.value.fileType)
         }
+
 
         val constraints = Constraints.Builder()
             .setRequiredNetworkType(NetworkType.CONNECTED)

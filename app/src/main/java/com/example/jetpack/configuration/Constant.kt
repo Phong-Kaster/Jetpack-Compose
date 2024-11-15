@@ -86,6 +86,7 @@ object Constant {
 
     val MP4: Pair<String, String> = "mp4" to "video/mp4"
     val PDF: Pair<String, String> = "pdf" to "application/pdf"
+    val PNG: Pair<String, String> = "png" to  "image/png"
 
     const val ACTION = "action"
     const val ACTION_PLAY = "action_play"
