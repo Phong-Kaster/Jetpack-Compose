@@ -119,7 +119,9 @@ constructor(
      */
     fun collectSongInStorage() {
         viewModelScope.launch(Dispatchers.IO) {
+            _songs.value = persistentListOf()
             listOfSong.clear()
+
             val collection =
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                     MediaStore.Audio.Media.getContentUri(
@@ -144,6 +146,7 @@ constructor(
             // Display Audios in alphabetical order based on their display name.
             val sortOrder = "${MediaStore.Audio.Media.DISPLAY_NAME} ASC"
 
+            // Scan & get songs in device
             val query = applicationContext.contentResolver.query(
                 collection,
                 projection,
@@ -151,6 +154,7 @@ constructor(
                 selectionArgs,
                 sortOrder
             )
+
             query?.use { cursor ->
                 // Cache column indices.
                 val idColumn = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media._ID)
@@ -166,9 +170,7 @@ constructor(
                     val artist = cursor.getString(artistColumn)
                     val duration = cursor.getInt(durationColumn)
                     val size = cursor.getInt(sizeColumn)
-
-                    val uri: Uri =
-                        ContentUris.withAppendedId(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, id)
+                    val uri: Uri = ContentUris.withAppendedId(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, id)
 
                     // Load thumbnail of a specific media item.
                     val thumbnail: Bitmap? = loadThumbnail(context = applicationContext, uri = uri)
@@ -176,8 +178,7 @@ constructor(
 
                     // Stores column values and the contentUri in a local object
                     // that represents the media file.
-
-                    listOfSong += Song(
+                    val song = Song(
                         name = name.getNameWithoutExtensionFromAudio(),
                         artist = artist,
                         duration = duration,
@@ -185,13 +186,20 @@ constructor(
                         uri = uri,
                         thumbnail = thumbnail
                     )
+
+                    // If a song exists in the list then skip. Otherwise, add it
+                    val isDuplicate: Boolean = listOfSong.any { it.name == song.name }
+                    if (isDuplicate) continue
+
+
+                    listOfSong.add(song)
                 }
             }
 
-            Log.d(TAG, "collectSongInStorage - listOfSong = ${listOfSong.size}")
-            Log.d(TAG, "collectSongInStorage - song = ${_chosenSong.value}")
 
+            /*if there is nothing songs found, then stop*/
             if (listOfSong.isEmpty()) return@launch
+
             _songs.value = listOfSong.distinct().toImmutableList()
             _chosenSong.value = _songs.value[index]
         }
@@ -252,7 +260,7 @@ constructor(
      * go Forward to get next song in the list of song
      */
     fun goForward(
-        onPlayMusic: (Song)->Unit = {}
+        onPlayMusic: (Song) -> Unit = {}
     ) {
         viewModelScope.launch(Dispatchers.IO) {
             if (index < _songs.value.size - 1) {
@@ -271,7 +279,7 @@ constructor(
      * go Backward to get previous song in the list of song
      */
     fun goBackward(
-        onPlayMusic: (Song)->Unit = {}
+        onPlayMusic: (Song) -> Unit = {}
     ) {
         viewModelScope.launch(Dispatchers.IO) {
             if (index > 0) {

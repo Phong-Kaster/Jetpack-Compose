@@ -7,6 +7,7 @@ import android.app.PendingIntent
 import android.app.Service
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
 import android.media.AudioAttributes
 import android.media.MediaPlayer
 import android.os.Binder
@@ -236,8 +237,18 @@ class MediaPlayerService2 : Service() {
             notificationBig.setViewVisibility(R.id.button_pause, View.GONE)
         }
 
-
         /** Inflate the small notification layout*/
+        val thumbnail: Bitmap? = song?.thumbnail
+        Log.d(TAG, "createNotification - albumArtUri = $thumbnail")
+        if (thumbnail != null) {
+            notificationSmall.setImageViewBitmap(R.id.thumbnail, thumbnail)
+            notificationBig.setImageViewBitmap(R.id.thumbnail, thumbnail)
+        } else {
+            // Optional: Set a default image if the URI is null
+            notificationSmall.setImageViewResource(R.id.thumbnail, R.drawable.ic_kotlin)
+            notificationBig.setImageViewResource(R.id.thumbnail, R.drawable.ic_kotlin)
+        }
+
         notificationSmall.setOnClickPendingIntent(R.id.button_play, playPendingIntent)
         notificationSmall.setOnClickPendingIntent(R.id.button_pause, pausePendingIntent)
         notificationSmall.setOnClickPendingIntent(R.id.button_next, nextPendingIntent)

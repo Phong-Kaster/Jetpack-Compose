@@ -4,7 +4,6 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
@@ -30,7 +29,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -155,8 +153,8 @@ class HomeFragment : CoreFragment() {
                     HomeShortcut.Login -> safeNavigate(R.id.toLogin)
                     HomeShortcut.Bluetooth -> safeNavigate(R.id.toBluetooth)
                     HomeShortcut.Webview -> safeNavigate(R.id.toWebview)
-                    HomeShortcut.MediaPlayer -> safeNavigate(R.id.toMediaPlayer)
-                    HomeShortcut.MediaPlayer2 -> safeNavigate(R.id.toMediaPlayer2)
+                    HomeShortcut.MusicPlayer -> safeNavigate(R.id.toMediaPlayer)
+                    HomeShortcut.MusicPlayer2 -> safeNavigate(R.id.toMediaPlayer2)
                     HomeShortcut.BasicTextField2 -> safeNavigate(R.id.toBasicTextField2)
                     HomeShortcut.SharedElementTransition -> safeNavigate(R.id.toSharedElementTransition)
                     HomeShortcut.CollapsibleTopbar -> safeNavigate(R.id.toCollasibleTopbar)
@@ -167,9 +165,7 @@ class HomeFragment : CoreFragment() {
                     HomeShortcut.KotlinFlow -> safeNavigate(R.id.toKotlinFlow)
                     HomeShortcut.PitchToZoom -> safeNavigate(R.id.toPitchToZoom)
                     HomeShortcut.DownloadWithWorkerManager -> safeNavigate(R.id.toDownloadWithWorker)
-                    else -> {
-                        showToast(it.name)
-                    }
+                    else -> showToast(it.name)
                 }
             })
     }

@@ -192,6 +192,10 @@ dependencies {
 
     // Coil Compose - https://github.com/coil-kt/coil
     implementation("io.coil-kt:coil-compose:2.7.0")
+
+    // Ensure you have Glide library dependency in your build.gradle file
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.12.0")
 }
 
 // Dependency injection with Hilt - Allow references to generated code

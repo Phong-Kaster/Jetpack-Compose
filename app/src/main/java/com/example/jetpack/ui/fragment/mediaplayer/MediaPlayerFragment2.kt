@@ -255,7 +255,7 @@ fun MediaPlayer2Layout(
         backgroundColor = Background,
         topBar = {
             CoreTopBar2(
-                title = stringResource(id = R.string.media_player),
+                title = stringResource(id = R.string.music_player),
                 titleArrangement = Arrangement.Start,
                 onLeftClick = onBack,
             )
