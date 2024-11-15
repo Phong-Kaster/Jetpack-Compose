@@ -45,7 +45,9 @@ import com.example.jetpack.configuration.Constant
 import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
 import com.example.jetpack.core.LocalTheme
+import com.example.jetpack.domain.enums.HomeShortcut
 import com.example.jetpack.ui.component.CoreTopBar2
+import com.example.jetpack.ui.component.CoreTopBarWithHomeShortcut
 import com.example.jetpack.ui.fragment.mediaplayer.component.MusicController
 import com.example.jetpack.ui.fragment.mediaplayer.component.SongElement
 import com.example.jetpack.ui.theme.Background
@@ -254,9 +256,9 @@ fun MediaPlayer2Layout(
     CoreLayout(
         backgroundColor = Background,
         topBar = {
-            CoreTopBar2(
-                title = stringResource(id = R.string.music_player),
-                titleArrangement = Arrangement.Start,
+            CoreTopBarWithHomeShortcut(
+                homeShortcut = HomeShortcut.MusicPlayer2,
+                iconLeft = R.drawable.ic_back,
                 onLeftClick = onBack,
             )
         },

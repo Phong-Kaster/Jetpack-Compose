@@ -142,8 +142,8 @@ class HomeFragment : CoreFragment() {
             onSearchKeyword = { viewModel.searchWithKeyword(it) },
             onClearKeyword = { viewModel.resetShortcuts() },
             onApplySortOption = { viewModel.applySortOption(it) },
-            onOpenShortcut = {
-                when (it) {
+            onOpenShortcut = { shortcut->
+                when (shortcut) {
                     HomeShortcut.Tutorial -> safeNavigate(R.id.toTutorial)
                     HomeShortcut.Quote -> safeNavigate(R.id.toQuote)
                     HomeShortcut.AccuWeatherLocation -> safeNavigate(R.id.toAccuWeatherLocation)
@@ -156,7 +156,6 @@ class HomeFragment : CoreFragment() {
                     HomeShortcut.MusicPlayer -> safeNavigate(R.id.toMediaPlayer)
                     HomeShortcut.MusicPlayer2 -> safeNavigate(R.id.toMediaPlayer2)
                     HomeShortcut.BasicTextField2 -> safeNavigate(R.id.toBasicTextField2)
-                    HomeShortcut.SharedElementTransition -> safeNavigate(R.id.toSharedElementTransition)
                     HomeShortcut.CollapsibleTopbar -> safeNavigate(R.id.toCollasibleTopbar)
                     HomeShortcut.CollapsibleTopbar2 -> safeNavigate(R.id.toCollapsibleTopbar2)
                     HomeShortcut.LastKnownLocation -> safeNavigate(R.id.toLastKnownLocation)
@@ -165,7 +164,8 @@ class HomeFragment : CoreFragment() {
                     HomeShortcut.KotlinFlow -> safeNavigate(R.id.toKotlinFlow)
                     HomeShortcut.PitchToZoom -> safeNavigate(R.id.toPitchToZoom)
                     HomeShortcut.DownloadWithWorkerManager -> safeNavigate(R.id.toDownloadWithWorker)
-                    else -> showToast(it.name)
+                    HomeShortcut.DownloadManager -> safeNavigate(R.id.toDownloadManager)
+                    else -> showToast(shortcut.name)
                 }
             })
     }

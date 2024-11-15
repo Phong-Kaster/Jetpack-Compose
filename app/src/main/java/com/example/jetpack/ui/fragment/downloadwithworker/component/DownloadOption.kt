@@ -23,9 +23,10 @@ import com.example.jetpack.ui.theme.customizedTextStyle
 fun DownloadOption(
     title: String = "PDF Example",
     onClick: ()->Unit = {},
+    modifier: Modifier = Modifier
 ){
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .clip(shape = RoundedCornerShape(16.dp))
             .clickable { onClick() }

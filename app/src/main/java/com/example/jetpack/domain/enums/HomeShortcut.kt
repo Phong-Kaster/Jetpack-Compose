@@ -34,6 +34,7 @@ enum class HomeShortcut(
     InstagramCarousel(drawable = R.drawable.ic_instagram, text = R.string.instagram_carousel),
     KotlinFlow(drawable = R.drawable.ic_kotlin, text = R.string.kotlin_flow),
     PitchToZoom(drawable = R.drawable.ic_pitch_to_zoom, text = R.string.pitch_to_zoom),
-    DownloadWithWorkerManager(drawable = R.drawable.ic_download_with_worker, text = R.string.download_with_worker_manager)
+    DownloadWithWorkerManager(drawable = R.drawable.ic_download_with_worker, text = R.string.download_with_worker_manager),
+    DownloadManager(drawable = R.drawable.ic_download_manager, text = R.string.download_manager),
     ;
 }

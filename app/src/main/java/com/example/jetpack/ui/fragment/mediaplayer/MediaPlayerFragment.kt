@@ -43,7 +43,9 @@ import com.example.jetpack.configuration.Constant
 import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
 import com.example.jetpack.core.LocalTheme
+import com.example.jetpack.domain.enums.HomeShortcut
 import com.example.jetpack.ui.component.CoreTopBar2
+import com.example.jetpack.ui.component.CoreTopBarWithHomeShortcut
 import com.example.jetpack.ui.fragment.mediaplayer.MediaPlayerUtil.getBackward
 import com.example.jetpack.ui.fragment.mediaplayer.MediaPlayerUtil.getForward
 import com.example.jetpack.ui.fragment.mediaplayer.MediaPlayerUtil.getTitle
@@ -220,9 +222,9 @@ private fun ForegroundServiceLayout(
     CoreLayout(
         backgroundColor = Background,
         topBar = {
-            CoreTopBar2(
-                title = stringResource(id = R.string.foreground_service),
-                titleArrangement = Arrangement.Start,
+            CoreTopBarWithHomeShortcut(
+                homeShortcut = HomeShortcut.MusicPlayer,
+                iconLeft = R.drawable.ic_back,
                 onLeftClick = onBack,
             )
         },

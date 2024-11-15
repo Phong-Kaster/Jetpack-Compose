@@ -157,4 +157,5 @@
     <string name="music_player">Music player using Media player</string>
     <string name="music_player_2">Music player using Media player 2</string>
     <string name="tap_to_set_up">Tap to set up</string>
+    <string name="download_manager">Download manager</string>
 </resources>
