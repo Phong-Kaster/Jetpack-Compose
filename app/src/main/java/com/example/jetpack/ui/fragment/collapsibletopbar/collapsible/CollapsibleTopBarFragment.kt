@@ -1,4 +1,4 @@
-package com.example.jetpack.ui.fragment.collapsibletopbar.collapsibletopbar
+package com.example.jetpack.ui.fragment.collapsibletopbar.collapsible
 
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
@@ -51,7 +51,7 @@ import androidx.compose.ui.zIndex
 import com.example.jetpack.R
 import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.LocalTheme
-import com.example.jetpack.ui.fragment.collapsibletopbar.collapsibletopbar.component.MealInfo
+import com.example.jetpack.ui.fragment.collapsibletopbar.collapsible.component.MealInfo
 import com.example.jetpack.ui.theme.Background
 import com.example.jetpack.ui.theme.OppositePrimaryColor
 import com.example.jetpack.ui.theme.PrimaryColor

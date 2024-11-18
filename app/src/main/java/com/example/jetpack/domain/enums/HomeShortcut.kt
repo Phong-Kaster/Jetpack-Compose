@@ -32,6 +32,7 @@ enum class HomeShortcut(
     CollapsibleTopbar2(drawable = R.drawable.ic_bottom_article, text = R.string.collapsible_topbar_2),
     CollapsibleTopbar3(drawable = R.drawable.ic_bottom_article, text = R.string.collapsible_topbar_3),
     CollapsibleTopbar4(drawable = R.drawable.ic_bottom_article, text = R.string.collapsible_topbar_4),
+    CollapsibleTopbar5(drawable = R.drawable.ic_bottom_article, text = R.string.collapsible_topbar_5),
 
     LastKnownLocation(drawable = R.drawable.ic_last_know_location, text = R.string.last_know_location),
     InstagramCarousel(drawable = R.drawable.ic_instagram, text = R.string.instagram_carousel),

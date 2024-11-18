@@ -130,20 +130,24 @@
 
     <fragment
         android:id="@+id/collapsibleTopBarFragment"
-        android:name="com.example.jetpack.ui.fragment.collapsibletopbar.collapsibletopbar.CollapsibleTopBarFragment" />
+        android:name="com.example.jetpack.ui.fragment.collapsibletopbar.collapsible.CollapsibleTopBarFragment" />
 
 
     <fragment
         android:id="@+id/collapsibleTopBar2Fragment"
-        android:name="com.example.jetpack.ui.fragment.collapsibletopbar.collapsibletopbar2.CollapsibleTopbar2Fragment" />
+        android:name="com.example.jetpack.ui.fragment.collapsibletopbar.collapsible2.CollapsibleTopbar2Fragment" />
 
     <fragment
         android:id="@+id/collapsibleTopBar3Fragment"
-        android:name="com.example.jetpack.ui.fragment.collapsibletopbar.collapsibletopbar3.CollapsibleTopbar3Fragment" />
+        android:name="com.example.jetpack.ui.fragment.collapsibletopbar.collapsible3.CollapsibleTopbar3Fragment" />
 
     <fragment
         android:id="@+id/collapsibleTopBar4Fragment"
-        android:name="com.example.jetpack.ui.fragment.collapsibletopbar.collapsibletopbar4.CollapsibleTopbar4Fragment" />
+        android:name="com.example.jetpack.ui.fragment.collapsibletopbar.collapsible4.CollapsibleTopbar4Fragment" />
+
+    <fragment
+        android:id="@+id/collapsibleTopBar5Fragment"
+        android:name="com.example.jetpack.ui.fragment.collapsibletopbar.collapsible5.CollapsibleTopbar5Fragment" />
 
     <fragment
         android:id="@+id/lastKnownLocationFragment"
@@ -389,6 +393,16 @@
     <action
         android:id="@+id/toCollapsibleTopbar4"
         app:destination="@id/collapsibleTopBar4Fragment"
+        app:enterAnim="@anim/enter_slide_in_right"
+        app:exitAnim="@anim/exit_slide_out_left"
+        app:popEnterAnim="@anim/enter_slide_in_left"
+        app:popExitAnim="@anim/exit_slide_out_right"
+        app:popUpToInclusive="true"/>
+
+
+    <action
+        android:id="@+id/toCollapsibleTopbar5"
+        app:destination="@id/collapsibleTopBar5Fragment"
         app:enterAnim="@anim/enter_slide_in_right"
         app:exitAnim="@anim/exit_slide_out_left"
         app:popEnterAnim="@anim/enter_slide_in_left"

@@ -1,4 +1,4 @@
-package com.example.jetpack.ui.fragment.collapsibletopbar.collapsibletopbar.component
+package com.example.jetpack.ui.fragment.collapsibletopbar.collapsible.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.basicMarquee

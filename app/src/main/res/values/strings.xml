@@ -158,5 +158,6 @@
     <string name="tap_to_set_up">Tap to set up</string>
     <string name="download_manager">Download manager</string>
     <string name="collapsible_topbar_4">Collapsible Topbar 4</string>
+    <string name="collapsible_topbar_5">Collapsible Topbar 5</string>
     <string name="about">About</string>
 </resources>

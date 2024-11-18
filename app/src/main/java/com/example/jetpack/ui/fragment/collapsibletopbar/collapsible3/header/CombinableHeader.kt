@@ -1,4 +1,4 @@
-package com.example.jetpack.ui.fragment.collapsibletopbar.collapsibletopbar3.header
+package com.example.jetpack.ui.fragment.collapsibletopbar.collapsible3.header
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -6,7 +6,7 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.jetpack.R
-import com.example.jetpack.ui.fragment.collapsibletopbar.collapsibletopbar3.header.ToolbarState.Companion.isShown
+import com.example.jetpack.ui.fragment.collapsibletopbar.collapsible3.header.ToolbarState.Companion.isShown
 
 @Composable
 fun CombinableHeader(

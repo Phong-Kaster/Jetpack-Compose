@@ -1,11 +1,9 @@
-package com.example.jetpack.ui.fragment.collapsibletopbar.collapsibletopbar3.component
+package com.example.jetpack.ui.fragment.collapsibletopbar.collapsible3.component
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -13,15 +11,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.positionInWindow
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.jetpack.R
 import com.example.jetpack.core.LocalTheme
-import com.example.jetpack.ui.fragment.collapsibletopbar.collapsibletopbar3.header.ToolbarState
-import com.example.jetpack.ui.fragment.collapsibletopbar.collapsibletopbar3.state.Dimens
-import com.example.jetpack.ui.fragment.collapsibletopbar.collapsibletopbar3.state.visible
-import com.example.jetpack.ui.theme.PrimaryColor
+import com.example.jetpack.ui.fragment.collapsibletopbar.collapsible3.header.ToolbarState
+import com.example.jetpack.ui.fragment.collapsibletopbar.collapsible3.state.visible
 import com.example.jetpack.ui.theme.customizedTextStyle
 
 @Composable

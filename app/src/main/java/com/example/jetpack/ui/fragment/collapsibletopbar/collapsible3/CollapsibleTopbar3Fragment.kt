@@ -1,4 +1,4 @@
-package com.example.jetpack.ui.fragment.collapsibletopbar.collapsibletopbar3
+package com.example.jetpack.ui.fragment.collapsibletopbar.collapsible3
 
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateFloat
@@ -29,12 +29,12 @@ import androidx.compose.ui.unit.dp
 import com.example.jetpack.R
 import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
-import com.example.jetpack.ui.fragment.collapsibletopbar.collapsibletopbar3.component.PlantImage
-import com.example.jetpack.ui.fragment.collapsibletopbar.collapsibletopbar3.component.PlantInformation
-import com.example.jetpack.ui.fragment.collapsibletopbar.collapsibletopbar3.header.CombinableHeader
-import com.example.jetpack.ui.fragment.collapsibletopbar.collapsibletopbar3.header.ToolbarState
-import com.example.jetpack.ui.fragment.collapsibletopbar.collapsibletopbar3.state.Dimens
-import com.example.jetpack.ui.fragment.collapsibletopbar.collapsibletopbar3.state.ScreenScroller
+import com.example.jetpack.ui.fragment.collapsibletopbar.collapsible3.component.PlantImage
+import com.example.jetpack.ui.fragment.collapsibletopbar.collapsible3.component.PlantInformation
+import com.example.jetpack.ui.fragment.collapsibletopbar.collapsible3.header.CombinableHeader
+import com.example.jetpack.ui.fragment.collapsibletopbar.collapsible3.header.ToolbarState
+import com.example.jetpack.ui.fragment.collapsibletopbar.collapsible3.state.Dimens
+import com.example.jetpack.ui.fragment.collapsibletopbar.collapsible3.state.ScreenScroller
 import com.example.jetpack.ui.theme.Background
 import dagger.hilt.android.AndroidEntryPoint
 

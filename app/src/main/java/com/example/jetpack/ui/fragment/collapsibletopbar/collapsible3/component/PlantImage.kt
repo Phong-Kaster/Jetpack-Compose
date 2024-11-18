@@ -1,8 +1,7 @@
-package com.example.jetpack.ui.fragment.collapsibletopbar.collapsibletopbar3.component
+package com.example.jetpack.ui.fragment.collapsibletopbar.collapsible3.component
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable

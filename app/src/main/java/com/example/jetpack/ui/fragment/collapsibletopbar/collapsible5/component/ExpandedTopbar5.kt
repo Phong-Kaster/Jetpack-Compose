@@ -1,27 +1,17 @@
-package com.example.jetpack.ui.fragment.collapsibletopbar.collapsibletopbar4.component
+package com.example.jetpack.ui.fragment.collapsibletopbar.collapsible5.component
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.statusBarsPadding
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.KeyboardArrowLeft
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
@@ -34,31 +24,34 @@ import com.example.jetpack.ui.theme.customizedTextStyle
 import com.example.jetpack.ui.view.AnimatedProgressBar
 
 @Composable
-fun ExpandedTopbar(
-    onBack: () -> Unit = {},
-    modifier: Modifier = Modifier
-) {
-
+fun ExpandedTopbar5(modifier: Modifier = Modifier) {
     val progress = 0.5f
 
     Column(
         verticalArrangement = Arrangement.spacedBy(16.dp),
         modifier = modifier
             .fillMaxWidth()
-            .clip(shape = RoundedCornerShape(10.dp))
+            .clip(
+                shape = RoundedCornerShape(
+                    topStart = 0.dp,
+                    topEnd = 0.dp,
+                    bottomStart = 10.dp,
+                    bottomEnd = 10.dp
+                )
+            )
             .background(
-                brush = Brush.linearGradient(
-                    colors = listOf(
-                        LocalTheme.current.primary,
+                brush = Brush.horizontalGradient(
+                    colors =
+                    listOf(
                         LocalTheme.current.secondary,
                         LocalTheme.current.secondary,
+                        //LocalTheme.current.primary,
                     )
                 )
             )
-            .padding(horizontal = 16.dp, vertical = 16.dp)
-            .statusBarsPadding()
+            .padding(start = 16.dp, end = 16.dp, bottom = 16.dp, top = 0.dp)
     ) {
-        Icon(
+        /*Icon(
             imageVector = Icons.Rounded.KeyboardArrowLeft,
             tint = LocalTheme.current.primary,
             contentDescription = "Icon",
@@ -68,26 +61,16 @@ fun ExpandedTopbar(
                 .padding(3.dp)
                 .clickable { onBack() }
                 .size(20.dp)
-        )
+        )*/
 
-
-        Text(
+        /*Text(
             text = stringResource(R.string.app_name),
             style = customizedTextStyle(
                 fontSize = 22,
                 fontWeight = 800,
                 color = LocalTheme.current.textColor
             )
-        )
-
-        Text(
-            text = stringResource(R.string.fake_message),
-            style = customizedTextStyle(
-                fontSize = 14,
-                fontWeight = 400,
-                color = LocalTheme.current.textColor
-            )
-        )
+        )*/
 
         Text(
             text = stringResource(R.string.fake_content),
@@ -134,15 +117,11 @@ fun ExpandedTopbar(
                 .fillMaxWidth()
                 .padding(horizontal = 5.dp)
         )
-
     }
 }
 
-
 @Preview
 @Composable
-private fun PreviewExpandedTopbar() {
-    ExpandedTopbar(
-        modifier = Modifier
-    )
+private fun PreviewExpandTopbar5() {
+    ExpandedTopbar5()
 }

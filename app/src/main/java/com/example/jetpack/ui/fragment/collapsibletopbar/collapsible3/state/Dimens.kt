@@ -1,4 +1,4 @@
-package com.example.jetpack.ui.fragment.collapsibletopbar.collapsibletopbar3.state
+package com.example.jetpack.ui.fragment.collapsibletopbar.collapsible3.state
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.dimensionResource
