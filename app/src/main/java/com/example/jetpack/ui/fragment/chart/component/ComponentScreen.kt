@@ -2,15 +2,14 @@ package com.example.jetpack.ui.fragment.chart.component
 
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.basicMarquee
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -25,8 +24,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material.icons.rounded.Close
-import androidx.compose.material.icons.rounded.Delete
-import androidx.compose.material.icons.rounded.Favorite
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonDefaults
@@ -46,10 +43,8 @@ import androidx.compose.ui.unit.dp
 import com.example.jetpack.R
 import com.example.jetpack.configuration.Language
 import com.example.jetpack.core.LocalTheme
-import com.example.jetpack.domain.enums.HomeShortcut
 import com.example.jetpack.domain.enums.Subsetting
 import com.example.jetpack.ui.component.SquareElement
-import com.example.jetpack.ui.fragment.home.component.HomeShortcutItem
 import com.example.jetpack.ui.modifier.borderWithAnimatedGradient
 import com.example.jetpack.ui.theme.animationInfiniteFloatSuperLong
 import com.example.jetpack.ui.theme.customizedTextStyle
@@ -67,6 +62,7 @@ fun ComponentScreen(
     onOpenDottedTextDialog: () -> Unit = {},
     onOpenDialog: () -> Unit = {},
     onOpenWheelTimePicker: () -> Unit = {},
+    onOpenCountdownSnackbar: ()->Unit = {},
 ) {
 
     val context = LocalContext.current
@@ -138,7 +134,7 @@ fun ComponentScreen(
 
                             Spacer(modifier = Modifier.width(10.dp))
 
-                            Column(modifier = Modifier.weight(0.9F)){
+                            Column(modifier = Modifier.weight(0.9F)) {
                                 Text(
                                     text = "Swipe left to reveal",
                                     color = LocalTheme.current.textColor,
@@ -157,6 +153,46 @@ fun ComponentScreen(
                         }
                     },
                 )
+            }
+        )
+
+        item(
+            key = "CountdownSnackbar",
+            span = { GridItemSpan(2) },
+            content = {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .borderWithAnimatedGradient(
+                            colorBackground = LocalTheme.current.background,
+                            width = 3.dp,
+                            shape = RoundedCornerShape(25.dp)
+                        )
+                        .clip(shape = RoundedCornerShape(25.dp))
+                        .clickable { onOpenCountdownSnackbar() }
+                        .background(
+                            color = LocalTheme.current.background,
+                            shape = RoundedCornerShape(25.dp)
+                        )
+                        .padding(16.dp)
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.ic_iron_cross_bundeswehr),
+                        contentDescription = stringResource(id = R.string.icon),
+                        modifier = Modifier.size(25.dp),
+                    )
+
+                    Spacer(modifier = Modifier.width(10.dp))
+
+                    Text(
+                        text = stringResource(R.string.countdown_snackbar),
+                        color = LocalTheme.current.textColor,
+                        style = customizedTextStyle(fontWeight = 400, fontSize = 18),
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                        modifier = Modifier.basicMarquee(iterations = Int.MAX_VALUE)
+                    )
+                }
             }
         )
 

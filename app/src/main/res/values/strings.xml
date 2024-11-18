@@ -160,4 +160,5 @@
     <string name="collapsible_topbar_4">Collapsible Topbar 4</string>
     <string name="collapsible_topbar_5">Collapsible Topbar 5</string>
     <string name="about">About</string>
+    <string name="countdown_snackbar">Countdown Snackbar</string>
 </resources>

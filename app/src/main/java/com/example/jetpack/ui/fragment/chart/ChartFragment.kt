@@ -9,7 +9,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -19,14 +18,14 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.BottomSheetScaffold
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
+import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.SnackbarResult
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberBottomSheetScaffoldState
 import androidx.compose.material3.rememberStandardBottomSheetState
 import androidx.compose.runtime.Composable
@@ -34,13 +33,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.drawBehind
-import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalContext
@@ -57,25 +55,22 @@ import com.example.jetpack.core.LocalTheme
 import com.example.jetpack.domain.enums.ChartShortcut
 import com.example.jetpack.ui.component.CoreAlertDialog
 import com.example.jetpack.ui.component.CoreBottomBar
-import com.example.jetpack.ui.component.CoreExpandableFloatingButton
-import com.example.jetpack.ui.component.CoreFloatingMenu
 import com.example.jetpack.ui.component.CoreTextAnimationDialog
 import com.example.jetpack.ui.dialog.WheelTimePickerDialog
 import com.example.jetpack.ui.fragment.chart.component.AreaChartScreen
 import com.example.jetpack.ui.fragment.chart.component.BarChartScreen
-import com.example.jetpack.ui.fragment.chart.component.BubbleChartScreen
 import com.example.jetpack.ui.fragment.chart.component.ChartTopBar
 import com.example.jetpack.ui.fragment.chart.component.ComponentScreen
 import com.example.jetpack.ui.fragment.chart.component.LineChartScreen
 import com.example.jetpack.ui.fragment.chart.component.RingChartScreen
 import com.example.jetpack.ui.fragment.home.component.HomeDialog
-import com.example.jetpack.ui.modifier.borderWithAnimatedGradient
-import com.example.jetpack.ui.theme.Background
 import com.example.jetpack.ui.theme.customizedTextStyle
 import com.example.jetpack.ui.view.AnalogueClock
-import com.example.jetpack.ui.view.ContextualFlowRowSample
+import com.example.jetpack.ui.view.CountdownSnackbar
 import com.example.jetpack.ui.view.ShimmerText
+import com.example.jetpack.util.AppUtil.showToast
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 
 /**
@@ -97,15 +92,14 @@ class InsightFragment : CoreFragment() {
     override fun ComposeView() {
         super.ComposeView()
         val context = LocalContext.current
+
+
         InsightLayout(
-            onClick = {
-                Toast.makeText(context, context.getString(R.string.app_name), Toast.LENGTH_SHORT)
-                    .show()
-            },
+            onClick = { context.showToast(message = context.getString(R.string.app_name)) },
             onOpenAlertDialog = { showAlertDialog = true },
             onOpenDialog = { showDialog = true },
             onOpenDottedTextDialog = { showDottedTextDialog = true },
-            onOpenWheelTimePicker = { showWheelTimePickerDialog = true }
+            onOpenWheelTimePicker = { showWheelTimePickerDialog = true },
         )
 
         HomeDialog(
@@ -146,7 +140,9 @@ fun InsightLayout(
     onOpenDottedTextDialog: () -> Unit = {},
     onOpenDialog: () -> Unit = {},
     onOpenWheelTimePicker: () -> Unit = {},
-) {
+
+    ) {
+    val context = LocalContext.current
     var chosenChip: ChartShortcut by rememberSaveable { mutableStateOf(ChartShortcut.LineChart) }
 
     /** For Bottom Sheet Scaffold*/
@@ -156,8 +152,31 @@ fun InsightLayout(
     /** For Floating Action Button*/
     var fabHeight by remember { mutableIntStateOf(0) }
 
+    /** For show countdown snackbar*/
+    val scope = rememberCoroutineScope()
+    // Define a SnackbarHostState to manage the state of the snackbar
+    val snackbarHostState = remember { SnackbarHostState() }
+
+
     CoreLayout(
-        bottomBar = { CoreBottomBar() },
+        bottomBar = {
+            Column(modifier = Modifier.fillMaxWidth()) {
+                // Create a SnackbarHost to display the snackbar
+                SnackbarHost(
+                    hostState = snackbarHostState,
+                    modifier = Modifier
+                ) { data ->
+                    // Use the CountdownSnackbar
+                    CountdownSnackbar(
+                        snackbarData = data,
+                        containerColor = LocalTheme.current.primary,
+                        contentColor = LocalTheme.current.secondary,
+                    )
+                }
+
+                CoreBottomBar()
+            }
+        },
         backgroundColor = LocalTheme.current.background
     ) {
         BottomSheetScaffold(
@@ -219,7 +238,28 @@ fun InsightLayout(
                                     onOpenAlertDialog = onOpenAlertDialog,
                                     onOpenDialog = onOpenDialog,
                                     onOpenDottedTextDialog = onOpenDottedTextDialog,
+                                    onOpenCountdownSnackbar = {
+                                        scope.launch {
+                                            // Show a snackbar
+                                            val result = snackbarHostState.showSnackbar(
+                                                message = "User account deleted.",
+                                                actionLabel = "UNDO",
+                                                duration = SnackbarDuration.Indefinite
+                                            )
+                                            // Handle the snackbar result
+                                            when (result) {
+                                                SnackbarResult.Dismissed -> context.showToast(
+                                                    message = "Deleted permanently"
+                                                )
+
+                                                SnackbarResult.ActionPerformed -> context.showToast(
+                                                    message = "Deletion canceled"
+                                                )
+                                            }
+                                        }
+                                    },
                                 )
+
                                 else -> Unit
                             }
                         }
