@@ -26,10 +26,13 @@ enum class HomeShortcut(
     MusicPlayer(drawable = R.drawable.ic_music_note, text = R.string.music_player),
     MusicPlayer2(drawable = R.drawable.ic_music_note, text = R.string.music_player_2),
     BasicTextField2(drawable = R.drawable.ic_basic_text_field_2, text = R.string.basic_text_field_with_state),
+
     CollapsibleTopbar(drawable = R.drawable.ic_collapsible_top_bar, text = R.string.collapsible_topbar),
     SharedElementTransition(drawable = R.drawable.ic_shared_element_transition, text = R.string.shared_element_transition),
     CollapsibleTopbar2(drawable = R.drawable.ic_bottom_article, text = R.string.collapsible_topbar_2),
     CollapsibleTopbar3(drawable = R.drawable.ic_bottom_article, text = R.string.collapsible_topbar_3),
+    CollapsibleTopbar4(drawable = R.drawable.ic_bottom_article, text = R.string.collapsible_topbar_4),
+
     LastKnownLocation(drawable = R.drawable.ic_last_know_location, text = R.string.last_know_location),
     InstagramCarousel(drawable = R.drawable.ic_instagram, text = R.string.instagram_carousel),
     KotlinFlow(drawable = R.drawable.ic_kotlin, text = R.string.kotlin_flow),

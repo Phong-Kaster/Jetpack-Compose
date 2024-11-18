@@ -1,6 +1,8 @@
 package com.example.jetpack.configuration
 
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 
 object Constant {
     const val SETTING_DATASTORE = "setting_datastore"
@@ -88,10 +90,15 @@ object Constant {
     val PDF: Pair<String, String> = "pdf" to "application/pdf"
     val PNG: Pair<String, String> = "png" to  "image/png"
 
+    /*They are used in MediaPlayerService/MediaPlayerReceiver*/
     const val ACTION = "action"
     const val ACTION_PLAY = "action_play"
     const val ACTION_PAUSE = "action_pause"
     const val ACTION_STOP = "action_stop"
     const val ACTION_NEXT = "action_next"
     const val ACTION_PREVIOUS = "action_previous"
+
+    /*They are used in Collapsible Topbar 4 Fragment*/
+    val AppBarCollapsedHeight: Dp = 56.dp
+    val AppBarExpandedHeight: Dp = 400.dp
 }

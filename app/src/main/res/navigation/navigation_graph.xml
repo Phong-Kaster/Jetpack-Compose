@@ -142,6 +142,10 @@
         android:name="com.example.jetpack.ui.fragment.collapsibletopbar.collapsibletopbar3.CollapsibleTopbar3Fragment" />
 
     <fragment
+        android:id="@+id/collapsibleTopBar4Fragment"
+        android:name="com.example.jetpack.ui.fragment.collapsibletopbar.collapsibletopbar4.CollapsibleTopbar4Fragment" />
+
+    <fragment
         android:id="@+id/lastKnownLocationFragment"
         android:name="com.example.jetpack.ui.fragment.location.LastKnownLocationFragment" />
 
@@ -376,6 +380,15 @@
     <action
         android:id="@+id/toCollapsibleTopbar3"
         app:destination="@id/collapsibleTopBar3Fragment"
+        app:enterAnim="@anim/enter_slide_in_right"
+        app:exitAnim="@anim/exit_slide_out_left"
+        app:popEnterAnim="@anim/enter_slide_in_left"
+        app:popExitAnim="@anim/exit_slide_out_right"
+        app:popUpToInclusive="true"/>
+
+    <action
+        android:id="@+id/toCollapsibleTopbar4"
+        app:destination="@id/collapsibleTopBar4Fragment"
         app:enterAnim="@anim/enter_slide_in_right"
         app:exitAnim="@anim/exit_slide_out_left"
         app:popEnterAnim="@anim/enter_slide_in_left"

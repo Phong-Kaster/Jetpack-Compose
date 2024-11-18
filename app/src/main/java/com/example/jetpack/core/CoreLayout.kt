@@ -26,7 +26,7 @@ fun CoreLayout(
     bottomBar: @Composable () -> Unit = {},
     snackbarHost: @Composable () -> Unit = {},
     floatingActionButton: @Composable () -> Unit = {},
-    backgroundColor: Color = Color.White,
+    backgroundColor: Color = Color(0xFF2C3141),
     contentWindowInsets: WindowInsets = WindowInsets(0.dp, 0.dp, 0.dp, 0.dp),
     content: @Composable () -> Unit,
 ) {

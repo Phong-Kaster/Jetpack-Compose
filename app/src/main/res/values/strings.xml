@@ -1,11 +1,10 @@
 <resources>
     <string name="app_name">Bundeswehr</string>
-    <string name="fake_title">Lorem Ipsum</string>
-    <string name="fake_message">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.</string>
-    <string name="fake_content">
+    <string name="fake_title" translatable="false">Lorem Ipsum</string>
+    <string name="fake_message" translatable="false">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.</string>
+    <string name="fake_content" translatable="false">
         Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-        \n\n
-        Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec qu</string>
+        \n\nAenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec qu</string>
 
     <string name="home">Home</string>
     <string name="chart">Chart</string>
@@ -158,4 +157,6 @@
     <string name="music_player_2">Music player using Media player 2</string>
     <string name="tap_to_set_up">Tap to set up</string>
     <string name="download_manager">Download manager</string>
+    <string name="collapsible_topbar_4">Collapsible Topbar 4</string>
+    <string name="about">About</string>
 </resources>

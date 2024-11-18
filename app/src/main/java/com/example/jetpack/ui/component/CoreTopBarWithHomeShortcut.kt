@@ -34,10 +34,11 @@ fun CoreTopBarWithHomeShortcut(
     homeShortcut: HomeShortcut = HomeShortcut.AccuWeatherLocation,
     onLeftClick: () -> Unit = {},
     onRightClick: () -> Unit = {},
+    modifier: Modifier = Modifier,
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .statusBarsPadding()
             .background(color = Color.Transparent)
