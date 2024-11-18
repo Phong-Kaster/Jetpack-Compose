@@ -1,4 +1,4 @@
-package com.example.jetpack.ui.fragment.collapsibletopbar
+package com.example.jetpack.ui.fragment.collapsibletopbar.collapsibletopbar2
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -33,9 +33,9 @@ import androidx.compose.ui.unit.dp
 import com.example.jetpack.R
 import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
+import com.example.jetpack.core.LocalTheme
 import com.example.jetpack.ui.component.CoreTopBarWithScrollBehavior
 import com.example.jetpack.ui.theme.Background
-import com.example.jetpack.ui.theme.PrimaryColor
 import com.example.jetpack.ui.theme.customizedTextStyle
 import com.example.jetpack.ui.view.ButtonBookmark
 import com.example.jetpack.ui.view.ButtonFavorite
@@ -77,7 +77,7 @@ fun CollapsibleTopbar2Layout(
                             Icon(
                                 imageVector = Icons.Default.ArrowBack,
                                 contentDescription = stringResource(R.string.icon),
-                                tint = PrimaryColor
+                                tint = LocalTheme.current.textColor
                             )
                         })
                 },
@@ -93,13 +93,13 @@ fun CollapsibleTopbar2Layout(
                         Icon(
                             painter = painterResource(id = R.drawable.ic_nazi_swastika),
                             contentDescription = stringResource(id = R.string.icon),
-                            tint = PrimaryColor,
+                            tint = LocalTheme.current.textColor,
                             modifier = Modifier.size(24.dp)
                         )
 
                         Text(
                             text = buildAnnotatedString {
-                                withStyle(style = customizedTextStyle(color = PrimaryColor).toSpanStyle()) {
+                                withStyle(style = customizedTextStyle(color = LocalTheme.current.textColor).toSpanStyle()) {
                                     append(text = stringResource(id = R.string.wikipedia))
                                     append(text = "\n")
                                     append(text = stringResource(id = R.string.flag_of_nazi_germany))
@@ -150,37 +150,37 @@ fun CollapsibleTopbar2Layout(
                     ) {
                         Text(
                             text = stringResource(R.string.the_flag_of_nazi_germany),
-                            style = customizedTextStyle(fontSize = 18, color = PrimaryColor),
+                            style = customizedTextStyle(fontSize = 18, color = LocalTheme.current.textColor),
                             modifier = Modifier.fillMaxWidth()
                         )
 
                         Text(
                             text = stringResource(R.string.after_rejecting_many_suggestions),
-                            style = customizedTextStyle(fontSize = 18, color = PrimaryColor),
+                            style = customizedTextStyle(fontSize = 18, color = LocalTheme.current.textColor),
                             modifier = Modifier.fillMaxWidth()
                         )
 
                         Text(
                             text = stringResource(R.string.after_rejecting_many_suggestions),
-                            style = customizedTextStyle(fontSize = 18, color = PrimaryColor),
+                            style = customizedTextStyle(fontSize = 18, color = LocalTheme.current.textColor),
                             modifier = Modifier.fillMaxWidth()
                         )
 
                         Text(
                             text = stringResource(R.string.i_myself_meanwhile_after_innumerable),
-                            style = customizedTextStyle(fontSize = 18, color = PrimaryColor),
+                            style = customizedTextStyle(fontSize = 18, color = LocalTheme.current.textColor),
                             modifier = Modifier.fillMaxWidth()
                         )
 
                         Text(
                             text = stringResource(R.string.after_hitler_was_appointed),
-                            style = customizedTextStyle(fontSize = 18, color = PrimaryColor),
+                            style = customizedTextStyle(fontSize = 18, color = LocalTheme.current.textColor),
                             modifier = Modifier.fillMaxWidth()
                         )
 
                         Text(
                             text = stringResource(R.string.on_15_september_1935_one_year_after_the_death),
-                            style = customizedTextStyle(fontSize = 18, color = PrimaryColor),
+                            style = customizedTextStyle(fontSize = 18, color = LocalTheme.current.textColor),
                             modifier = Modifier.fillMaxWidth()
                         )
                     }

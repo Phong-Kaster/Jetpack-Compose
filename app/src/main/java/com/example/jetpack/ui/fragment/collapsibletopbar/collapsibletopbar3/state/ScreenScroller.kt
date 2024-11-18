@@ -1,10 +1,10 @@
-package com.example.jetpack.ui.fragment.collapsibletopbar.state
+package com.example.jetpack.ui.fragment.collapsibletopbar.collapsibletopbar3.state
 
 import androidx.compose.animation.core.MutableTransitionState
 import androidx.compose.foundation.ScrollState
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.dp
-import com.example.jetpack.ui.fragment.collapsibletopbar.component3.header.ToolbarState
+import com.example.jetpack.ui.fragment.collapsibletopbar.collapsibletopbar3.header.ToolbarState
 
 // Value obtained empirically so that the header buttons don't surpass the header container
 private val HeaderTransitionOffset = 190.dp

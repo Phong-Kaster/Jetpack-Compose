@@ -130,16 +130,16 @@
 
     <fragment
         android:id="@+id/collapsibleTopBarFragment"
-        android:name="com.example.jetpack.ui.fragment.collapsibletopbar.CollapsibleTopBarFragment" />
+        android:name="com.example.jetpack.ui.fragment.collapsibletopbar.collapsibletopbar.CollapsibleTopBarFragment" />
 
 
     <fragment
         android:id="@+id/collapsibleTopBar2Fragment"
-        android:name="com.example.jetpack.ui.fragment.collapsibletopbar.CollapsibleTopbar2Fragment" />
+        android:name="com.example.jetpack.ui.fragment.collapsibletopbar.collapsibletopbar2.CollapsibleTopbar2Fragment" />
 
     <fragment
         android:id="@+id/collapsibleTopBar3Fragment"
-        android:name="com.example.jetpack.ui.fragment.collapsibletopbar.CollapsibleTopbar3Fragment" />
+        android:name="com.example.jetpack.ui.fragment.collapsibletopbar.collapsibletopbar3.CollapsibleTopbar3Fragment" />
 
     <fragment
         android:id="@+id/lastKnownLocationFragment"

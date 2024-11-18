@@ -1,4 +1,4 @@
-package com.example.jetpack.ui.fragment.collapsibletopbar
+package com.example.jetpack.ui.fragment.collapsibletopbar.collapsibletopbar
 
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
@@ -50,7 +50,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import com.example.jetpack.R
 import com.example.jetpack.core.CoreFragment
-import com.example.jetpack.ui.fragment.collapsibletopbar.component.MealInfo
+import com.example.jetpack.core.LocalTheme
+import com.example.jetpack.ui.fragment.collapsibletopbar.collapsibletopbar.component.MealInfo
 import com.example.jetpack.ui.theme.Background
 import com.example.jetpack.ui.theme.OppositePrimaryColor
 import com.example.jetpack.ui.theme.PrimaryColor
@@ -182,7 +183,8 @@ fun CollapsibleTopBarLayout(
                             text = stringResource(id = R.string.fake_content),
                             style = customizedTextStyle(
                                 fontSize = 14,
-                                fontWeight = 500
+                                fontWeight = 500,
+                                color = LocalTheme.current.textColor
                             ),
                             modifier = Modifier
                                 .fillMaxWidth()

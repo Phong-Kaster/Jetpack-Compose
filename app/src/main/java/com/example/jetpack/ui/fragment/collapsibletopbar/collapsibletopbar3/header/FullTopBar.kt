@@ -1,4 +1,4 @@
-package com.example.jetpack.ui.fragment.collapsibletopbar.component3.header
+package com.example.jetpack.ui.fragment.collapsibletopbar.collapsibletopbar3.header
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -21,7 +21,7 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.jetpack.R
-import com.example.jetpack.ui.fragment.collapsibletopbar.state.Dimens
+import com.example.jetpack.ui.fragment.collapsibletopbar.collapsibletopbar3.state.Dimens
 import com.example.jetpack.ui.theme.Background
 import com.example.jetpack.ui.theme.PrimaryColor
 

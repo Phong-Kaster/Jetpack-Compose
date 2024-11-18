@@ -1,4 +1,4 @@
-package com.example.jetpack.ui.fragment.collapsibletopbar.component3.component
+package com.example.jetpack.ui.fragment.collapsibletopbar.collapsibletopbar3.component
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -17,9 +17,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.jetpack.R
-import com.example.jetpack.ui.fragment.collapsibletopbar.component3.header.ToolbarState
-import com.example.jetpack.ui.fragment.collapsibletopbar.state.Dimens
-import com.example.jetpack.ui.fragment.collapsibletopbar.state.visible
+import com.example.jetpack.core.LocalTheme
+import com.example.jetpack.ui.fragment.collapsibletopbar.collapsibletopbar3.header.ToolbarState
+import com.example.jetpack.ui.fragment.collapsibletopbar.collapsibletopbar3.state.Dimens
+import com.example.jetpack.ui.fragment.collapsibletopbar.collapsibletopbar3.state.visible
 import com.example.jetpack.ui.theme.PrimaryColor
 import com.example.jetpack.ui.theme.customizedTextStyle
 
@@ -33,7 +34,7 @@ fun PlantInformation(
         Text(
             text = stringResource(id = R.string.flag_of_nazi_germany),
             style = customizedTextStyle(),
-            color = PrimaryColor,
+            color = LocalTheme.current.textColor,
             modifier = Modifier
                 .padding(vertical = 16.dp)
                 .align(Alignment.CenterHorizontally)
@@ -50,37 +51,37 @@ fun PlantInformation(
         ) {
             Text(
                 text = stringResource(R.string.the_flag_of_nazi_germany),
-                style = customizedTextStyle(fontSize = 18, color = PrimaryColor),
+                style = customizedTextStyle(fontSize = 18, color = LocalTheme.current.textColor),
                 modifier = Modifier.fillMaxWidth()
             )
 
             Text(
                 text = stringResource(R.string.after_rejecting_many_suggestions),
-                style = customizedTextStyle(fontSize = 18, color = PrimaryColor),
+                style = customizedTextStyle(fontSize = 18, color = LocalTheme.current.textColor),
                 modifier = Modifier.fillMaxWidth()
             )
 
             Text(
                 text = stringResource(R.string.after_rejecting_many_suggestions),
-                style = customizedTextStyle(fontSize = 18, color = PrimaryColor),
+                style = customizedTextStyle(fontSize = 18, color = LocalTheme.current.textColor),
                 modifier = Modifier.fillMaxWidth()
             )
 
             Text(
                 text = stringResource(R.string.i_myself_meanwhile_after_innumerable),
-                style = customizedTextStyle(fontSize = 18, color = PrimaryColor),
+                style = customizedTextStyle(fontSize = 18, color = LocalTheme.current.textColor),
                 modifier = Modifier.fillMaxWidth()
             )
 
             Text(
                 text = stringResource(R.string.after_hitler_was_appointed),
-                style = customizedTextStyle(fontSize = 18, color = PrimaryColor),
+                style = customizedTextStyle(fontSize = 18, color = LocalTheme.current.textColor),
                 modifier = Modifier.fillMaxWidth()
             )
 
             Text(
                 text = stringResource(R.string.on_15_september_1935_one_year_after_the_death),
-                style = customizedTextStyle(fontSize = 18, color = PrimaryColor),
+                style = customizedTextStyle(fontSize = 18, color = LocalTheme.current.textColor),
                 modifier = Modifier.fillMaxWidth()
             )
         }

@@ -1,4 +1,4 @@
-package com.example.jetpack.ui.fragment.collapsibletopbar.component3.header
+package com.example.jetpack.ui.fragment.collapsibletopbar.collapsibletopbar3.header
 
 // Toolbar state related classes and functions to achieve the CollapsingToolbarLayout animation
 enum class ToolbarState {

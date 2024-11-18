@@ -1,6 +1,5 @@
-package com.example.jetpack.ui.fragment.collapsibletopbar.component
+package com.example.jetpack.ui.fragment.collapsibletopbar.collapsibletopbar.component
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.layout.Arrangement
@@ -21,7 +20,6 @@ import androidx.compose.ui.unit.dp
 import com.example.jetpack.R
 import com.example.jetpack.ui.theme.customizedTextStyle
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun MealInfo(
     modifier: Modifier = Modifier

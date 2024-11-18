@@ -1,4 +1,4 @@
-package com.example.jetpack.ui.fragment.collapsibletopbar.component3.header
+package com.example.jetpack.ui.fragment.collapsibletopbar.collapsibletopbar3.header
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.statusBarsPadding

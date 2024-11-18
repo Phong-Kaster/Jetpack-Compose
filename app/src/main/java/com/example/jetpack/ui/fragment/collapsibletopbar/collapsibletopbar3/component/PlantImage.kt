@@ -1,4 +1,4 @@
-package com.example.jetpack.ui.fragment.collapsibletopbar.component3.component
+package com.example.jetpack.ui.fragment.collapsibletopbar.collapsibletopbar3.component
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
