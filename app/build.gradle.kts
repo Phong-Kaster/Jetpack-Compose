@@ -119,9 +119,9 @@ dependencies {
 
 
     // Get started with the Navigation component - https://developer.android.com/guide/navigation/get-started#Set-up
-    implementation("androidx.navigation:navigation-fragment-ktx:2.8.3")
-    implementation("androidx.navigation:navigation-ui-ktx:2.8.3")
-    implementation("androidx.navigation:navigation-compose:2.8.3")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.8.4")
+    implementation("androidx.navigation:navigation-ui-ktx:2.8.4")
+    implementation("androidx.navigation:navigation-compose:2.8.4")
 
 
     // In-app Review - https://developer.android.com/guide/playcore/in-app-review/kotlin-java#setup
