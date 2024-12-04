@@ -49,9 +49,7 @@ import com.example.jetpack.ui.theme.customizedTextStyle
 import kotlin.math.roundToInt
 
 @Composable
-fun
-
-        CoreExpandableFloatingButton(
+fun CoreExpandableFloatingButton(
     extended: Boolean,
     modifier: Modifier = Modifier,
 ) {
@@ -73,7 +71,10 @@ fun
                         FloatingActionButton(
                             containerColor = PrimaryColor,
                             onClick = { navController.navigate(it.destinationId) },
-                            modifier = Modifier.padding(16.dp).height(48.dp).widthIn(min = 48.dp)
+                            modifier = Modifier
+                                .padding(16.dp)
+                                .height(48.dp)
+                                .widthIn(min = 48.dp)
                         ) {
                             Icon(
                                 painter = painterResource(id = it.drawableId),
