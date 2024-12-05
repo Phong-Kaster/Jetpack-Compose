@@ -38,5 +38,36 @@ enum class Language
             }
             return list
         }
+
+        /**
+         * put language of device to the top of list
+         */
+        fun generateListLanguage(): List<Language> {
+            val supportedLanguages = Language.entries
+
+            val deviceLanguage = Locale.getDefault().language
+            val isLanguageSupported = deviceLanguage in supportedLanguages.map { it.code }
+            val isDeviceLanguageEnglish = deviceLanguage == English.code
+            val outcome = mutableListOf<Language>()
+
+
+            if (isLanguageSupported) {
+                val defaultLanguage = supportedLanguages.find { it.code == deviceLanguage } ?: English
+                outcome.add(defaultLanguage)
+            }
+
+
+            for (language in supportedLanguages) {
+                if (language == English && isDeviceLanguageEnglish) {
+                    continue
+                } else if (language.code == deviceLanguage) {
+                    continue
+                } else {
+                    outcome.add(language)
+                }
+            }
+
+            return outcome
+        }
     }
 }
