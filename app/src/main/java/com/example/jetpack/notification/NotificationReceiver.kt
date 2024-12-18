@@ -12,6 +12,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.example.jetpack.MainActivity
 import com.example.jetpack.R
+import com.example.jetpack.configuration.Constant
 import com.example.jetpack.configuration.Constant.NOTIFICATION_ID
 import com.example.jetpack.configuration.Constant.NOTIFICATION_CHANNEL_ID
 import com.example.jetpack.notification.NotificationManager.sendNotification
@@ -37,7 +38,7 @@ class NotificationReceiver : BroadcastReceiver() {
         destinationIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
 
         // if there are more than 2 buttons on customized layout then requestCode must not the same between pending intents
-        val pendingIntent = PendingIntent.getActivity(context, 1896, destinationIntent, PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
+        val pendingIntent = PendingIntent.getActivity(context, Constant.REQUEST_CODE_1, destinationIntent, PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
 
 
         //2. set customized view

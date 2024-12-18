@@ -98,7 +98,12 @@ object Constant {
     const val ACTION_NEXT = "action_next"
     const val ACTION_PREVIOUS = "action_previous"
     const val MESSAGE = "message"
+
+
     /*They are used in Collapsible Topbar 4 Fragment*/
     val AppBarCollapsedHeight: Dp = 56.dp
     val AppBarExpandedHeight: Dp = 400.dp
+
+    const val REQUEST_CODE_1 = 1896
+    const val REQUEST_CODE_2 = 1897
 }
