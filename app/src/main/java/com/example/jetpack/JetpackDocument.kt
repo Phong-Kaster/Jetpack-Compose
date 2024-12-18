@@ -33,6 +33,7 @@ import javax.inject.Singleton
  * # [27 - Should You Use UUIDs for Database Keys?](https://medium.com/@tecnicorabi/should-you-use-uuids-for-database-keys-597b15b000bb)
  * # [28 - Modeling ViewModel State in Android: A Guide to Clean, Scalable Patterns](https://medium.com/clean-android-dev/modeling-viewmodel-state-in-android-a-guide-to-clean-scalable-patterns-d42932ade940)
  * # [29 - Security - SSL Pinning in Android](https://medium.com/@anandgaur22/ssl-pinning-in-android-14851dc41703)
+ * # [30 - Pattern - Simple Event Bus in Android using coroutines and flows](https://blog.tinaciousdesign.com/simple-event-bus-android-coroutines-flows)
  * */
 @Singleton
 class JetpackDocument {}
