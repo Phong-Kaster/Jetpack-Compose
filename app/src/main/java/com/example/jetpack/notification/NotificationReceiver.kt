@@ -35,7 +35,9 @@ class NotificationReceiver : BroadcastReceiver() {
         val destinationIntent = Intent(context, MainActivity::class.java)
         destinationIntent.putExtra("message", "Phong0asd")
         destinationIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-        val pendingIntent = PendingIntent.getActivity(context, 1896, destinationIntent, PendingIntent.FLAG_IMMUTABLE)
+
+        // if there are more than 2 buttons on customized layout then requestCode must not the same between pending intents
+        val pendingIntent = PendingIntent.getActivity(context, 1896, destinationIntent, PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
 
 
         //2. set customized view
