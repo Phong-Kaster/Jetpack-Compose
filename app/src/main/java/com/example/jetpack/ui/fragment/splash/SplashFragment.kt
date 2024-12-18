@@ -1,5 +1,8 @@
 package com.example.jetpack.ui.fragment.splash
 
+import android.os.Bundle
+import android.util.Log
+import android.view.View
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -8,7 +11,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -29,9 +31,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.viewModels
-import com.airbnb.lottie.compose.LottieCompositionSpec
-import com.airbnb.lottie.compose.rememberLottieComposition
 import com.example.jetpack.R
+import com.example.jetpack.configuration.Constant
 import com.example.jetpack.core.CoreFragment
 import com.example.jetpack.core.CoreLayout
 import com.example.jetpack.domain.enums.ApplicationLogo
@@ -47,12 +48,19 @@ import kotlinx.coroutines.launch
 /**
  * 1. lay URI cua video
  * 2. tu URI lay ra thumbnail
- * 
+ *
  */
 @AndroidEntryPoint
 class SplashFragment : CoreFragment() {
 
     private val viewModel: SplashViewModel by viewModels()
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val message= requireActivity().intent.getStringExtra(Constant.MESSAGE)
+        Log.d(TAG, "onViewCreated - message = $message")
+    }
 
     @Composable
     override fun ComposeView() {

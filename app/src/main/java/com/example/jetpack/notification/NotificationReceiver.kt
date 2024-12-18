@@ -33,6 +33,7 @@ class NotificationReceiver : BroadcastReceiver() {
     private fun popupNotification(context: Context, intent: Intent) {
         //1. Create an explicit intent for an Activity in your app
         val destinationIntent = Intent(context, MainActivity::class.java)
+        destinationIntent.putExtra("message", "Phong0asd")
         destinationIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
         val pendingIntent = PendingIntent.getActivity(context, 1896, destinationIntent, PendingIntent.FLAG_IMMUTABLE)
 

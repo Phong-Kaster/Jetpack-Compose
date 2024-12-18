@@ -8,11 +8,13 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.util.Log
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.example.jetpack.MainActivity
 import com.example.jetpack.R
+import com.example.jetpack.configuration.Constant
 import com.example.jetpack.configuration.Constant.NOTIFICATION_CHANNEL_ID
 import com.example.jetpack.configuration.Constant.NOTIFICATION_ID
 import com.example.jetpack.util.AppUtil
@@ -82,8 +84,10 @@ object NotificationManager {
     }
 
      fun fireProgressNotification(context: Context){
+         Log.d("TAG", "fireProgressNotification: ")
         //1. Create an explicit intent for an Activity in your app
         val destinationIntent = Intent(context, MainActivity::class.java)
+         destinationIntent.putExtra(Constant.MESSAGE, "Phongaksjdfol")
         destinationIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
         val pendingIntent = PendingIntent.getActivity(context, 1896, destinationIntent, PendingIntent.FLAG_IMMUTABLE)
 

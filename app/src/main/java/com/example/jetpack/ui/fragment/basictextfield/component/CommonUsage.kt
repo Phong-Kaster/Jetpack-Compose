@@ -27,7 +27,6 @@ import com.example.jetpack.ui.theme.customizedTextStyle
 
 @Composable
 fun CommonUsage(
-
     modifier: Modifier = Modifier
 ) {
     val usernameState = rememberTextFieldState()
