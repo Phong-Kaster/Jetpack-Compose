@@ -107,12 +107,12 @@ class HomeFragment : CoreFragment() {
     private fun setupNotification() {
         Log.d(TAG, "setupNotification: ")
         // 1. Request POST NOTIFICATION permission if device has Android OS from 13
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) return
-        Log.d(TAG, "setupNotification Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU = ${Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU} ")
-        val isAccessed: Boolean = PermissionUtil.isNotiEnabled(context = requireContext())
-        if (!isAccessed){
-            notificationLifecycleObserver.systemLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
-            return
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            val isAccessed: Boolean = PermissionUtil.isNotiEnabled(context = requireContext())
+            if (!isAccessed) {
+                //notificationLifecycleObserver.systemLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                return
+            }
         }
 
 
@@ -124,9 +124,6 @@ class HomeFragment : CoreFragment() {
         // 3. Create lockscreen-styled notification and send it every day
         LockscreenManager.createNotificationChannel(context = requireContext())
         LockscreenManager.sendNotification(context = requireContext())
-
-        Log.d(TAG, "fireProgressNotification")
-        NotificationManager.fireProgressNotification(context = requireContext())
     }
 
     @Composable
