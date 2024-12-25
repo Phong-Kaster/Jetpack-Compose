@@ -79,7 +79,8 @@ object NotificationManager {
 
         //Final. set up notification at specific time
         val intent = Intent(context, NotificationReceiver::class.java)
-        val pendingIntent = PendingIntent.getBroadcast(context, 100, intent, PendingIntent.FLAG_IMMUTABLE)
+        intent.putExtra(Constant.MESSAGE, "Phong-Kaster")
+        val pendingIntent = PendingIntent.getBroadcast(context, 100, intent, PendingIntent.FLAG_MUTABLE)
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, alarmTime.timeInMillis, pendingIntent)
     }
 
