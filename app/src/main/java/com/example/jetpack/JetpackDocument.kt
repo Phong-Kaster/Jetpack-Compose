@@ -36,6 +36,7 @@ import javax.inject.Singleton
  * # [30 - Pattern - Simple Event Bus in Android using coroutines and flows](https://blog.tinaciousdesign.com/simple-event-bus-android-coroutines-flows)
  * # [31 - Building a Custom Vertical Progress Bar in Jetpack Compose](https://proandroiddev.com/building-a-custom-vertical-progress-bar-in-jetpack-compose-433a387998ef)
  * # [32 - Handle exception in Kotlin](https://proandroiddev.com/effective-exception-handling-in-kotlin-coroutines-android-6925d0d95c21)
- *  */
+ * # [33 - Mastering Global State Management](https://proandroiddev.com/mastering-global-state-management-in-android-with-jetpack-compose-e99350fad822)
+ * */
 @Singleton
 class JetpackDocument {}
