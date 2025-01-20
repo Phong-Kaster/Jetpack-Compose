@@ -37,6 +37,7 @@ import javax.inject.Singleton
  * # [31 - Building a Custom Vertical Progress Bar in Jetpack Compose](https://proandroiddev.com/building-a-custom-vertical-progress-bar-in-jetpack-compose-433a387998ef)
  * # [32 - Handle exception in Kotlin](https://proandroiddev.com/effective-exception-handling-in-kotlin-coroutines-android-6925d0d95c21)
  * # [33 - Mastering Global State Management](https://proandroiddev.com/mastering-global-state-management-in-android-with-jetpack-compose-e99350fad822)
- * */
+ * # [34 - Guide to Foreground Services on Android 14](https://medium.com/@domen.lanisnik/guide-to-foreground-services-on-android-9d0127dc8f9a#:~:text=Each%20foreground%20service%20type%20has,service%20will%20throw%20an%20exception.)
+ *  */
 @Singleton
 class JetpackDocument {}

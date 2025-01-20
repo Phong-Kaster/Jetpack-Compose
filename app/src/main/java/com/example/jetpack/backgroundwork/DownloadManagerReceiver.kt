@@ -8,6 +8,9 @@ import android.content.Intent
 import androidx.core.app.NotificationCompat
 import javax.inject.Singleton
 
+/**
+ * # [Guide to Foreground Services on Android 14](https://medium.com/@domen.lanisnik/guide-to-foreground-services-on-android-9d0127dc8f9a#:~:text=Each%20foreground%20service%20type%20has,service%20will%20throw%20an%20exception.)
+ */
 @Singleton
 class DownloadManagerReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
