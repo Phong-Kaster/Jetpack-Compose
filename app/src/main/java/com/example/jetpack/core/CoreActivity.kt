@@ -9,7 +9,10 @@ import android.widget.Toast
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.Composable
+import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import com.example.jetpack.util.AppUtil
 import com.example.jetpack.util.LanguageUtil
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,34 +32,16 @@ constructor() : AppCompatActivity(), CoreBehavior {
     }
 
     @Composable
-    open fun ComposeView() {
-
-    }
+    open fun ComposeView() { }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //hideNavigationBar()
-
-        setContent {
-            ComposeView()
-        }
-    }
-
-    override fun hideNavigationBar() {
+        AppUtil.hideStatusBar(window = this.window)
         AppUtil.hideNavigationBar(window = this.window)
+        setContent { ComposeView() }
     }
 
     override fun trackEvent(name: String) {}
-
-    override fun showLoading() {}
-    override fun makeStatusBarTransparent() {
-        /*with(window) {
-            setFlags(
-                android.view.WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
-                android.view.WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
-            )
-        }*/
-    }
 
     override fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()

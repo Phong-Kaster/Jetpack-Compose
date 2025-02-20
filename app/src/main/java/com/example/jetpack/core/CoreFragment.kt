@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -56,7 +57,6 @@ open class CoreFragment : Fragment(), CoreBehavior {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        makeStatusBarTransparent()
         setupDarkMode()
         return ComposeView(requireActivity()).apply {
             setViewCompositionStrategy(strategy = ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
@@ -93,21 +93,7 @@ open class CoreFragment : Fragment(), CoreBehavior {
         return AppUtil.isInternetConnected(context = requireContext())
     }
 
-    override fun hideNavigationBar() {
-        AppUtil.hideNavigationBar(window = requireActivity().window)
-    }
-
     override fun trackEvent(name: String) {}
-
-    override fun showLoading() {}
-    override fun makeStatusBarTransparent() {
-        /*with(requireActivity().window) {
-            setFlags(
-                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
-                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
-            )
-        }*/
-    }
 
     private fun setupDarkMode() {
         lifecycleScope.launch {
