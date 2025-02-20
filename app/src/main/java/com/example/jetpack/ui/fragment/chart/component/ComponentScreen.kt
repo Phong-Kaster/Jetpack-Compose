@@ -477,6 +477,19 @@ fun ComponentScreen(
                 )
             }
         )
+
+        item(
+            key = "canvasCustomizedProgress",
+            span = { GridItemSpan(2) },
+            content = {
+                ColorSquare(
+                    backgroundTitle = "FFC0B9",
+                    textTitle = "FFFFC5",
+                    backgroundColor = Color(0xFFFFC0B9),
+                    textColor = Color(0xFFFFFFC5),
+                )
+            }
+        )
     }
 }
 

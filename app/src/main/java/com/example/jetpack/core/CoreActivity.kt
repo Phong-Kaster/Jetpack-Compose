@@ -36,7 +36,7 @@ constructor() : AppCompatActivity(), CoreBehavior {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        AppUtil.hideStatusBar(window = this.window)
+        //AppUtil.hideStatusBar(window = this.window)
         AppUtil.hideNavigationBar(window = this.window)
         setContent { ComposeView() }
     }

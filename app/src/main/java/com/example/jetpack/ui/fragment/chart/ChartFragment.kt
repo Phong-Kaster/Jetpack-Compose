@@ -60,6 +60,7 @@ import com.example.jetpack.ui.dialog.WheelTimePickerDialog
 import com.example.jetpack.ui.fragment.chart.component.AreaChartScreen
 import com.example.jetpack.ui.fragment.chart.component.BarChartScreen
 import com.example.jetpack.ui.fragment.chart.component.ChartTopBar
+import com.example.jetpack.ui.fragment.chart.component.ColourScreen
 import com.example.jetpack.ui.fragment.chart.component.ComponentScreen
 import com.example.jetpack.ui.fragment.chart.component.LineChartScreen
 import com.example.jetpack.ui.fragment.chart.component.RingChartScreen
@@ -233,6 +234,7 @@ fun InsightLayout(
                                 //ChartShortcut.BubbleChart -> BubbleChartScreen()
                                 ChartShortcut.BarChart -> BarChartScreen()
                                 ChartShortcut.AreaChart -> AreaChartScreen()
+                                ChartShortcut.ColourScreen -> ColourScreen()
                                 ChartShortcut.Component -> ComponentScreen(
                                     onOpenWheelTimePicker = onOpenWheelTimePicker,
                                     onOpenAlertDialog = onOpenAlertDialog,
@@ -259,7 +261,6 @@ fun InsightLayout(
                                         }
                                     },
                                 )
-
                                 else -> Unit
                             }
                         }

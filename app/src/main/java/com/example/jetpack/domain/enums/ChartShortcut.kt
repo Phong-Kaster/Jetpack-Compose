@@ -1,6 +1,10 @@
 package com.example.jetpack.domain.enums
 
 import androidx.annotation.StringRes
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import com.example.jetpack.R
 
 enum class ChartShortcut(
@@ -15,4 +19,13 @@ enum class ChartShortcut(
     //RadarChart(text = R.string.radar_chart),
     AnalogueClock(text = R.string.analogue_clock),
     //BubbleChart(text = R.string.bubble_chart),
+    ColourScreen(text = R.string.colour),
+}
+
+@Preview
+@Composable
+private fun Preview() {
+    Text(
+        text = stringResource(R.string.colour)
+    )
 }
