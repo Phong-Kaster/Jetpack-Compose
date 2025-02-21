@@ -7,9 +7,11 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -32,6 +34,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.platform.LocalContext
@@ -40,12 +43,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.constraintlayout.helper.widget.Grid
 import com.example.jetpack.R
 import com.example.jetpack.configuration.Language
 import com.example.jetpack.core.LocalTheme
 import com.example.jetpack.domain.enums.Subsetting
 import com.example.jetpack.ui.component.SquareElement
 import com.example.jetpack.ui.modifier.borderWithAnimatedGradient
+import com.example.jetpack.ui.theme.PrimaryColor
 import com.example.jetpack.ui.theme.animationInfiniteFloatSuperLong
 import com.example.jetpack.ui.theme.customizedTextStyle
 import com.example.jetpack.ui.view.AnimatedProgressBar
@@ -62,7 +67,7 @@ fun ComponentScreen(
     onOpenDottedTextDialog: () -> Unit = {},
     onOpenDialog: () -> Unit = {},
     onOpenWheelTimePicker: () -> Unit = {},
-    onOpenCountdownSnackbar: ()->Unit = {},
+    onOpenCountdownSnackbar: () -> Unit = {},
 ) {
 
     val context = LocalContext.current
@@ -322,6 +327,14 @@ fun ComponentScreen(
                         .padding(vertical = 16.dp, horizontal = 10.dp)
 
                 )
+            }
+        )
+
+        item(
+            key = "PathInCanvas",
+            span = { GridItemSpan(2) },
+            content = {
+
             }
         )
     }
