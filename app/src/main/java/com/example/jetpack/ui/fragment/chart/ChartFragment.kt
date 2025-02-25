@@ -59,6 +59,7 @@ import com.example.jetpack.ui.component.CoreTextAnimationDialog
 import com.example.jetpack.ui.dialog.WheelTimePickerDialog
 import com.example.jetpack.ui.fragment.chart.component.AreaChartScreen
 import com.example.jetpack.ui.fragment.chart.component.BarChartScreen
+import com.example.jetpack.ui.fragment.chart.component.CalendarScreen
 import com.example.jetpack.ui.fragment.chart.component.ChartTopBar
 import com.example.jetpack.ui.fragment.chart.component.ColourScreen
 import com.example.jetpack.ui.fragment.chart.component.ComponentScreen
@@ -235,6 +236,7 @@ fun InsightLayout(
                                 ChartShortcut.BarChart -> BarChartScreen()
                                 ChartShortcut.AreaChart -> AreaChartScreen()
                                 ChartShortcut.ColourScreen -> ColourScreen()
+                                ChartShortcut.Calendar -> CalendarScreen()
                                 ChartShortcut.Component -> ComponentScreen(
                                     onOpenWheelTimePicker = onOpenWheelTimePicker,
                                     onOpenAlertDialog = onOpenAlertDialog,

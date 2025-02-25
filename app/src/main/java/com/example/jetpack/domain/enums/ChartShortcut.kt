@@ -20,12 +20,13 @@ enum class ChartShortcut(
     AnalogueClock(text = R.string.analogue_clock),
     //BubbleChart(text = R.string.bubble_chart),
     ColourScreen(text = R.string.colour),
+    Calendar(text = R.string.calendar),
 }
 
 @Preview
 @Composable
 private fun Preview() {
     Text(
-        text = stringResource(R.string.colour)
+        text = stringResource(R.string.calendar)
     )
 }

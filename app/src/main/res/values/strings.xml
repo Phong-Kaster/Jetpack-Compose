@@ -162,4 +162,5 @@
     <string name="about">About</string>
     <string name="countdown_snackbar">Countdown Snackbar</string>
     <string name="colour">Colour</string>
+    <string name="calendar">Calendar</string>
 </resources>
