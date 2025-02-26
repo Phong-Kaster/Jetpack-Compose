@@ -145,7 +145,7 @@ fun InsightLayout(
 
     ) {
     val context = LocalContext.current
-    var chosenChip: ChartShortcut by rememberSaveable { mutableStateOf(ChartShortcut.LineChart) }
+    var chosenChip: ChartShortcut by rememberSaveable { mutableStateOf(ChartShortcut.Calendar) }
 
     /** For Bottom Sheet Scaffold*/
     val bottomSheetState = rememberStandardBottomSheetState()

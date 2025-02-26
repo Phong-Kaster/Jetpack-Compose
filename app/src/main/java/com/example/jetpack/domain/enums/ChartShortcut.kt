@@ -10,6 +10,7 @@ import com.example.jetpack.R
 enum class ChartShortcut(
     @StringRes val text: Int
 ) {
+    Calendar(text = R.string.calendar),
     LineChart(text = R.string.line_chart),
     Component(text = R.string.component),
     RingChart(text = R.string.ring_chart),
@@ -20,7 +21,6 @@ enum class ChartShortcut(
     AnalogueClock(text = R.string.analogue_clock),
     //BubbleChart(text = R.string.bubble_chart),
     ColourScreen(text = R.string.colour),
-    Calendar(text = R.string.calendar),
 }
 
 @Preview

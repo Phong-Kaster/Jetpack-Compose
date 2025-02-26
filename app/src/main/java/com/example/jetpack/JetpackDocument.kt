@@ -38,6 +38,6 @@ import javax.inject.Singleton
  * # [32 - Handle exception in Kotlin](https://proandroiddev.com/effective-exception-handling-in-kotlin-coroutines-android-6925d0d95c21)
  * # [33 - Mastering Global State Management](https://proandroiddev.com/mastering-global-state-management-in-android-with-jetpack-compose-e99350fad822)
  * # [34 - Guide to Foreground Services on Android 14](https://medium.com/@domen.lanisnik/guide-to-foreground-services-on-android-9d0127dc8f9a#:~:text=Each%20foreground%20service%20type%20has,service%20will%20throw%20an%20exception.)
- *  */
+ * # [35 - Android Studio Productivity Tips](https://proandroiddev.com/android-studio-productivity-tips-a5e49d4ef55c?source=email-b3a77c058080-1740511407291-digest.reader-c72404660798-a5e49d4ef55c----0-99------------------39b923ba_7ab2_4225_935e_59945041711b-1)  */
 @Singleton
 class JetpackDocument {}
