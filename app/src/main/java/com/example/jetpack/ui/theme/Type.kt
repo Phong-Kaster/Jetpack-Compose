@@ -9,6 +9,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 import com.example.jetpack.R
@@ -101,13 +102,15 @@ fun customizedTextStyle(
     fontSize: Int = 14,
     fontWeight: Int = 400,
     lineHeight: Int = (fontSize * 1.5f).toInt(),
-    color: Color = TextColor3
+    color: Color = TextColor3,
+    textDecoration: TextDecoration? = null,
 ): TextStyle = TextStyle(
     fontFamily = InterFontFamily,
     fontSize = fontSize.sp,
     fontWeight = FontWeight(fontWeight),
     lineHeight = lineHeight.sp,
     color = color,
+    textDecoration = textDecoration
 )
 
 private val TextUnit.nonScaledSp

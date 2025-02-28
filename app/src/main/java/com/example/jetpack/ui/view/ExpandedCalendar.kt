@@ -6,8 +6,12 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -21,6 +25,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -32,94 +37,109 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.jetpack.R
 import com.example.jetpack.core.LocalTheme
 import com.example.jetpack.domain.enums.CalendarWeekday
 import com.example.jetpack.domain.enums.Weekday
+import com.example.jetpack.ui.modifier.borderWithAnimatedGradient
 import com.example.jetpack.ui.theme.customizedTextStyle
 import com.example.jetpack.util.AppUtil
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import java.time.LocalDate
 import java.time.YearMonth
-import java.time.format.DateTimeFormatter
-import java.util.Locale
-import kotlin.math.roundToInt
-
-@Preview
-@Composable
-private fun PreviewExpandableHorizontalCalendar() {
-    ExpandedCalendar(
-        modifier = Modifier.fillMaxWidth(),
-    )
-}
 
 
 @Composable
 fun ExpandedCalendar(
     modifier: Modifier = Modifier,
-    initialMonth: YearMonth = YearMonth.now(),
+    initialMonth: YearMonth,
 ) {
     val TAG = "ExpandedCalendar"
-    val maximumPage = 12
+    val maximumPage = 1000000
+
+
+    val targetPage = remember {
+        derivedStateOf {
+            // Calculate relative position for the current month
+            val currentYearMonth = YearMonth.now()
+
+            val monthsDifference =
+                (currentYearMonth.year - initialMonth.year) * 12 + (currentYearMonth.monthValue - initialMonth.monthValue)
+            monthsDifference.coerceIn(0, maximumPage - 1) // 02/2025
+        }
+    }
+
     var chosenCalendarWeekday by remember { mutableStateOf(CalendarWeekday()) }
     val pagerState = rememberPagerState(
-        initialPage = (maximumPage * 0.5f).toInt(),
+        initialPage = targetPage.value,
         pageCount = { maximumPage }
     )
-
-    val currentMonthOffset by remember(pagerState.currentPage) {
+    var currentPage by remember { mutableIntStateOf(0) }
+    val currentMonth by remember(currentPage) {
         derivedStateOf {
-            pagerState.currentPage - (maximumPage * 0.5f).toInt()
+            initialMonth.plusMonths(currentPage.toLong())
         }
     }
 
-    val today = YearMonth.now()
-    val todayOffset = today.monthValue - initialMonth.monthValue + (today.year - initialMonth.year) * 12
-    val coroutineScope = rememberCoroutineScope()
 
-    LaunchedEffect(Unit){
+    LaunchedEffect(Unit) {
         snapshotFlow { pagerState.settledPage }.collectLatest { settledPage ->
             AppUtil.logcat(tag = TAG, message = "settledPage = $settledPage", enableDivider = true)
+            currentPage = settledPage
+        }
+    }
+
+    val scope = rememberCoroutineScope()
+    fun scrollToday() {
+        scope.launch {
+            // Calculate relative position for the current month
+            val currentYearMonth = YearMonth.now()
+
+            val monthsDifference =
+                (currentYearMonth.year - initialMonth.year) * 12 + (currentYearMonth.monthValue - initialMonth.monthValue)
+            val target = monthsDifference.coerceIn(0, maximumPage - 1) // 02/2025
+            pagerState.animateScrollToPage(target)
         }
     }
 
 
-    LaunchedEffect(Unit){
-        AppUtil.logcat(tag = TAG, message = "initialMonth = $initialMonth", enableDivider = true)
-    }
 
-    Column(modifier = Modifier.fillMaxWidth()) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(color = LocalTheme.current.background)
+    ) {
         Text(
-            text = "${chosenCalendarWeekday.dayOfWeek}, ${chosenCalendarWeekday.gregorianDay}/${chosenCalendarWeekday.gregorianMonth}/${chosenCalendarWeekday.gregorianYear}",
+            text = "${
+                currentMonth.month.name.lowercase().replaceFirstChar { it.uppercase() }
+            } ${currentMonth.year}",
             style = customizedTextStyle(
                 fontSize = 16,
                 fontWeight = 600,
                 color = LocalTheme.current.textColor,
             ),
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp, vertical = 8.dp),
+                .padding(horizontal = 16.dp, vertical = 16.dp),
         )
 
         HorizontalPager(
+            verticalAlignment = Alignment.Top,
+            beyondViewportPageCount = 2,
             state = pagerState,
             modifier = Modifier
                 .fillMaxWidth()
                 .background(color = LocalTheme.current.background)
-                .wrapContentHeight(),
-            verticalAlignment = Alignment.Top
+                .requiredHeight(300.dp)
         ) { page ->
-            val currentMonth = initialMonth.plusMonths(page.toLong())
-            val daysInMonth = currentMonth.lengthOfMonth()
-            val firstDayOfWeek = currentMonth.atDay(1).dayOfWeek.value % 7
-            val daysToPrepend = if (firstDayOfWeek == 0) 0 else firstDayOfWeek
-
-            AppUtil.logcat(tag = TAG, message = "currentMonth ${currentMonth.monthValue} has $daysInMonth days")
-            AppUtil.logcat(tag = TAG, message = "currentMonthOffset = $currentMonthOffset")
-            AppUtil.logcat(tag = TAG, message = "firstDayOfWeek = $firstDayOfWeek")
-            AppUtil.logcat(tag = TAG, message = "daysToPrepend = $daysToPrepend")
+            AppUtil.logcat(tag = TAG, message = "created page = ${page}")
+            val month = initialMonth.plusMonths(page.toLong())
+            val daysInMonth = month.lengthOfMonth()
+            val firstDayOfWeek =
+                (month.atDay(1).dayOfWeek.value + 6) % 7 // Shifted by 1 to start on Monday
+            val daysToPrepend = firstDayOfWeek
 
             LazyVerticalGrid(
                 columns = GridCells.Fixed(7),
@@ -158,7 +178,7 @@ fun ExpandedCalendar(
                                     color = if (index >= daysToPrepend) {
                                         val dayOfMonth = index - daysToPrepend + 1
                                         val calendarWeekday = CalendarWeekday(
-                                            localDate = currentMonth.atDay(dayOfMonth)
+                                            localDate = month.atDay(dayOfMonth)
                                         )
 
                                         if (chosenCalendarWeekday == calendarWeekday) {
@@ -173,7 +193,7 @@ fun ExpandedCalendar(
                                 .clickable {
                                     val calendarWeekday = if (index >= daysToPrepend) {
                                         val dayOfMonth = index - daysToPrepend + 1
-                                        CalendarWeekday(localDate = currentMonth.atDay(dayOfMonth))
+                                        CalendarWeekday(localDate = month.atDay(dayOfMonth))
                                     } else
                                         null
                                     chosenCalendarWeekday = calendarWeekday ?: CalendarWeekday()
@@ -184,10 +204,17 @@ fun ExpandedCalendar(
                         ) {
                             if (index >= daysToPrepend) {
                                 val dayOfMonth = index - daysToPrepend + 1
-                                val calendarWeekday = CalendarWeekday(localDate = currentMonth.atDay(dayOfMonth))
+                                val calendarWeekday =
+                                    CalendarWeekday(localDate = month.atDay(dayOfMonth))
                                 Text(
                                     text = dayOfMonth.toString(),
-                                    style = customizedTextStyle(),
+                                    style =
+                                    if (calendarWeekday == chosenCalendarWeekday)
+                                        customizedTextStyle(
+                                            fontSize = 16
+                                        )
+                                    else
+                                        customizedTextStyle(),
                                     textAlign = TextAlign.Center,
                                     color = if (calendarWeekday == chosenCalendarWeekday) LocalTheme.current.secondary else Color.White
                                 )
@@ -197,5 +224,62 @@ fun ExpandedCalendar(
                 )
             }
         }
+
+        Spacer(
+            modifier = Modifier
+                .fillMaxWidth()
+                .clip(shape = RoundedCornerShape(10.dp))
+                .background(color = LocalTheme.current.primary)
+                .height(1.dp)
+                .padding(horizontal = 16.dp)
+        )
+
+
+        Spacer(
+            modifier = Modifier
+            .fillMaxWidth()
+            .height(16.dp)
+        )
+
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp)
+        ) {
+            Text(
+                text = "${chosenCalendarWeekday.dayOfWeek}, ${chosenCalendarWeekday.gregorianDay}/${chosenCalendarWeekday.gregorianMonth}/${chosenCalendarWeekday.gregorianYear}",
+                style = customizedTextStyle(
+                    fontSize = 12,
+                    fontWeight = 600,
+                    color = LocalTheme.current.textColor,
+                ),
+                modifier = Modifier,
+            )
+
+            Text(
+                text = stringResource(R.string.today),
+                style = customizedTextStyle(
+                    fontSize = 12,
+                    fontWeight = 600,
+                    color = LocalTheme.current.primary,
+                    textDecoration = TextDecoration.Underline
+                ),
+                modifier = Modifier
+                    .clip(shape = RoundedCornerShape(15.dp))
+                    .clickable { scrollToday() }
+            )
+        }
+
     }
+}
+
+@Preview
+@Composable
+private fun PreviewExpandableHorizontalCalendar() {
+    ExpandedCalendar(
+        modifier = Modifier.fillMaxWidth(),
+        initialMonth = YearMonth.of(2024, 12)
+    )
 }

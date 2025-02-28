@@ -177,4 +177,5 @@
     <string name="sat">Sat</string>
     <string name="sunday">Sunday</string>
     <string name="sun">Sun</string>
+    <string name="today">Today</string>
 </resources>

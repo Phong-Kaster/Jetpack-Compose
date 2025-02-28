@@ -15,11 +15,11 @@ enum class Weekday(
     @StringRes val shortName: Int,
     val dayOfWeek: Int,
 ) {
-    SUNDAY(fullName = R.string.sunday, shortName = R.string.sun, dayOfWeek = 1),
     MONDAY(fullName = R.string.monday, shortName = R.string.mon, dayOfWeek = 2),
     TUESDAY(fullName = R.string.tuesday, shortName = R.string.tue, dayOfWeek = 3),
     WEDNESDAY(fullName = R.string.wednesday, shortName = R.string.wed, dayOfWeek = 4),
     THURSDAY(fullName = R.string.thursday, shortName = R.string.thu, dayOfWeek = 5),
     FRIDAY(fullName = R.string.friday, shortName = R.string.fri, dayOfWeek = 6),
     SATURDAY(fullName = R.string.saturday, shortName = R.string.sat, dayOfWeek = 7),
+    SUNDAY(fullName = R.string.sunday, shortName = R.string.sun, dayOfWeek = 1),
 }
