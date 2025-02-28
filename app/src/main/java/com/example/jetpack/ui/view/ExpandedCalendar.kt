@@ -137,8 +137,7 @@ fun ExpandedCalendar(
             AppUtil.logcat(tag = TAG, message = "created page = ${page}")
             val month = initialMonth.plusMonths(page.toLong())
             val daysInMonth = month.lengthOfMonth()
-            val firstDayOfWeek =
-                (month.atDay(1).dayOfWeek.value + 6) % 7 // Shifted by 1 to start on Monday
+            val firstDayOfWeek = (month.atDay(1).dayOfWeek.value + 6) % 7 // Shifted by 1 to start on Monday
             val daysToPrepend = firstDayOfWeek
 
             LazyVerticalGrid(
