@@ -121,8 +121,7 @@ fun ExpandedCalendar(
                 fontWeight = 600,
                 color = LocalTheme.current.textColor,
             ),
-            modifier = Modifier
-                .padding(horizontal = 16.dp, vertical = 16.dp),
+            modifier = Modifier,
         )
 
         HorizontalPager(
@@ -245,7 +244,6 @@ fun ExpandedCalendar(
             horizontalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 16.dp)
         ) {
             Text(
                 text = "${chosenCalendarWeekday.dayOfWeek}, ${chosenCalendarWeekday.gregorianDay}/${chosenCalendarWeekday.gregorianMonth}/${chosenCalendarWeekday.gregorianYear}",

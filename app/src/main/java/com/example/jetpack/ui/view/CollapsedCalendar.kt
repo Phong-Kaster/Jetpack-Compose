@@ -1,6 +1,5 @@
 package com.example.jetpack.ui.view
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -15,7 +14,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -33,7 +31,6 @@ import com.example.jetpack.domain.enums.CalendarWeekday
 import com.example.jetpack.ui.theme.customizedTextStyle
 import com.example.jetpack.util.AppUtil
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 import java.time.YearMonth
 
 @Composable
@@ -41,14 +38,21 @@ fun CollapsedCalendar(
     modifier: Modifier = Modifier,
     initialMonth: YearMonth,
 ) {
-    val TAG = "ExpandedCalendar"
+    val TAG = "CollapsedCalendar"
     val maximumPage = 1000000
+
+    var startDayOfWeek by remember {
+        mutableStateOf(
+            initialMonth.atDay(1).minusDays(initialMonth.atDay(1).dayOfWeek.value.toLong() - 1)
+        )
+    }
 
     var chosenWeekday by remember { mutableStateOf(CalendarWeekday()) }
     val pagerState = rememberPagerState(initialPage = maximumPage / 2, pageCount = { maximumPage })
-    val coroutineScope = rememberCoroutineScope()
+    var currentPage by remember { mutableIntStateOf(0) }
+    val scope = rememberCoroutineScope()
 
-    
+
     fun getDaysOfWeek(baseDate: YearMonth): List<java.time.LocalDate> {
         val firstDayOfWeek = baseDate.atDay(1).dayOfWeek.value
         val startOfWeek = baseDate.atDay(1).minusDays(firstDayOfWeek.toLong() - 1)
@@ -59,20 +63,27 @@ fun CollapsedCalendar(
         return this.plusMonths((weeksToAdd * 7) / 30)
     }
 
+    LaunchedEffect(Unit){
+        AppUtil.logcat(tag = TAG, message = "startDayOfWeek = $startDayOfWeek")
+    }
+
     LaunchedEffect(Unit) {
-        snapshotFlow { pagerState.currentPage }
-            .collectLatest { page ->
-                Log.d(TAG, "Navigated to week: $page")
-            }
+        snapshotFlow { pagerState.currentPage }.collectLatest { page ->
+            currentPage = page
+        }
     }
 
     HorizontalPager(
         state = pagerState,
         modifier = modifier.fillMaxWidth()
     ) { page ->
-        val weekOffset = page - (maximumPage / 2)
-        val updatedMonth = initialMonth.plusWeeks(weekOffset.toLong())
-        val daysInWeek = getDaysOfWeek(updatedMonth)
+//        if (page > pagerState.settledPage) {
+//            startDayOfWeek = startDayOfWeek.plusDays(7)
+//        } else if (page < pagerState.settledPage) {
+//            startDayOfWeek = startDayOfWeek.minusDays(7)
+//        }
+
+        val daysInWeek = List(7) { startDayOfWeek.plusDays(it.toLong()) }
 
         Row(
             modifier = Modifier
@@ -98,12 +109,16 @@ fun CollapsedCalendar(
                         .size(40.dp),
                 ) {
                     Text(
-                        text = day.dayOfWeek.name.take(3),
+                        text = day.dayOfWeek.name
+                            .lowercase()
+                            .replaceFirstChar { it.uppercase() }
+                            .take(3),
                         style = if (calendarWeekday == chosenWeekday)
                             customizedTextStyle(color = LocalTheme.current.secondary)
                         else
                             customizedTextStyle(color = Color.White),
                     )
+
                     Text(
                         text = day.dayOfMonth.toString(),
                         style = if (calendarWeekday == chosenWeekday)
