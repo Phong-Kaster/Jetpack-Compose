@@ -16,8 +16,11 @@ import androidx.compose.ui.unit.dp
 import com.example.jetpack.R
 import com.example.jetpack.core.LocalTheme
 import com.example.jetpack.ui.fragment.collapsibletopbar.collapsible3.header.ToolbarState
-import com.example.jetpack.ui.fragment.collapsibletopbar.collapsible3.state.visible
 import com.example.jetpack.ui.theme.customizedTextStyle
+
+fun Modifier.visible(visible: () -> Boolean): Modifier = this.then(
+    if (visible()) Modifier else Modifier.padding(0.dp)
+)
 
 @Composable
 fun PlantInformation(

@@ -1,8 +1,7 @@
 package com.example.jetpack.ui.fragment.collapsibletopbar.collapsible3
 
 import androidx.compose.animation.core.Spring
-import androidx.compose.animation.core.animateFloat
-import androidx.compose.animation.core.rememberTransition
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.spring
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -53,26 +52,19 @@ fun CollapsibleTopbar3Layout() {
 
     val scrollState = rememberScrollState()
     var plantScroller by remember { mutableStateOf(ScreenScroller(scrollState, Float.MIN_VALUE)) }
-    val transitionState =
-        remember(plantScroller) { plantScroller.toolbarTransitionState }
     val toolbarState = plantScroller.getToolbarState(LocalDensity.current)
 
     // Transition that fades in/out the header with the image and the Toolbar
-    val transition = rememberTransition(transitionState, label = "")
-    val toolbarAlpha = transition.animateFloat(
-        transitionSpec = { spring(stiffness = Spring.StiffnessLow) },
-        label = "toolbarAlpha",
-        targetValueByState = { toolbarTransitionState ->
-            if (toolbarTransitionState == ToolbarState.HIDDEN) 0f
-            else 1f
-        })
-    val contentAlpha = transition.animateFloat(
-        transitionSpec = { spring(stiffness = Spring.StiffnessLow) },
-        label = "contentAlpha",
-        targetValueByState = { toolbarTransitionState ->
-            if (toolbarTransitionState == ToolbarState.HIDDEN) 1f
-            else 0f
-        })
+    val toolbarAlpha = animateFloatAsState(
+        targetValue = if (toolbarState == ToolbarState.HIDDEN) 0f else 1f,
+        animationSpec = spring(stiffness = Spring.StiffnessLow),
+        label = "toolbarAlpha"
+    ).value
+    val contentAlpha = animateFloatAsState(
+        targetValue = if (toolbarState == ToolbarState.HIDDEN) 1f else 0f,
+        animationSpec = spring(stiffness = Spring.StiffnessLow),
+        label = "contentAlpha"
+    ).value
 
     val toolbarHeightPx = with(LocalDensity.current) {
         Dimens.PlantDetailAppBarHeight.roundToPx().toFloat()
@@ -115,7 +107,7 @@ fun CollapsibleTopbar3Layout() {
                             // is released
                             maxOf(candidateHeight, 1.dp)
                         },
-                        modifier = Modifier.alpha(contentAlpha.value)
+                        modifier = Modifier.alpha(contentAlpha)
                     )
 
                     PlantInformation(
@@ -135,8 +127,8 @@ fun CollapsibleTopbar3Layout() {
                 CombinableHeader(
                     title = stringResource(id = R.string.flag_of_nazi_germany),
                     toolbarState = toolbarState,
-                    toolbarAlpha = { toolbarAlpha.value },
-                    contentAlpha = { contentAlpha.value }
+                    toolbarAlpha = { toolbarAlpha },
+                    contentAlpha = { contentAlpha }
                 )
             }
         }
