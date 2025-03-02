@@ -101,6 +101,7 @@ fun ExpandedCalendar(
             val monthsDifference =
                 (currentYearMonth.year - initialMonth.year) * 12 + (currentYearMonth.monthValue - initialMonth.monthValue)
             val target = monthsDifference.coerceIn(0, maximumPage - 1) // 02/2025
+            chosenCalendarWeekday = CalendarWeekday()
             pagerState.animateScrollToPage(target)
         }
     }
@@ -223,16 +224,16 @@ fun ExpandedCalendar(
             }
         }
 
-        Spacer(
-            modifier = Modifier
-                .fillMaxWidth()
-                .clip(shape = RoundedCornerShape(10.dp))
-                .background(color = LocalTheme.current.primary)
-                .height(1.dp)
-                .padding(horizontal = 16.dp)
-        )
-
-
+//        Spacer(
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .clip(shape = RoundedCornerShape(10.dp))
+//                .background(color = LocalTheme.current.primary)
+//                .height(1.dp)
+//                .padding(horizontal = 16.dp)
+//        )
+//
+//
         Spacer(
             modifier = Modifier
             .fillMaxWidth()

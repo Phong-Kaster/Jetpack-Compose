@@ -20,6 +20,7 @@ import com.example.jetpack.core.LocalTheme
 import com.example.jetpack.ui.theme.customizedTextStyle
 import com.example.jetpack.ui.view.CollapsedCalendar
 import com.example.jetpack.ui.view.ExpandedCalendar
+import com.example.jetpack.ui.view.HeaderAndLayout
 import java.time.YearMonth
 
 @Composable
@@ -37,47 +38,32 @@ fun CalendarScreen() {
                 item(
                     key = "CollapsedCalendar",
                     content = {
-                        Column(
-                            verticalArrangement = Arrangement.spacedBy(16.dp),
-                            modifier = Modifier.fillMaxWidth()
-                        ) {
-                            Text(
-                                text = "1. CollapsedCalendar",
-                                style = customizedTextStyle(
-                                    fontSize = 14,
-                                    fontWeight = 600,
-                                    color = Color.White
+                        HeaderAndLayout(
+                            title = "",
+                            modifier = Modifier,
+                            content = {
+                                CollapsedCalendar(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    initialMonth = YearMonth.of(2020, 3)
                                 )
-                            )
-
-                            CollapsedCalendar(
-                                modifier = Modifier.fillMaxWidth(),
-                                initialMonth = YearMonth.of(2020, 3)
-                            )
-                        }
+                            }
+                        )
                     }
                 )
 
                 item(
                     key = "ExpandedCalendar",
                     content = {
-                        Column(
-                            verticalArrangement = Arrangement.spacedBy(16.dp),
-                            modifier = Modifier.fillMaxWidth()
-                        ) {
-                            Text(
-                                text = "2. ExpandedCalendar",
-                                style = customizedTextStyle(
-                                    fontSize = 14,
-                                    fontWeight = 600,
-                                    color = Color.White
+                        HeaderAndLayout(
+                            title = "",
+                            modifier = Modifier,
+                            content = {
+                                ExpandedCalendar(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    initialMonth = YearMonth.of(2020, 3)
                                 )
-                            )
-                            ExpandedCalendar(
-                                modifier = Modifier.fillMaxWidth(),
-                                initialMonth = YearMonth.of(2020, 3)
-                            )
-                        }
+                            }
+                        )
                     }
                 )
             }
