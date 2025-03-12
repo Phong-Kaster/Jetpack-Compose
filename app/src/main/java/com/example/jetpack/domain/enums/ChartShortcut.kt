@@ -21,6 +21,7 @@ enum class ChartShortcut(
     AnalogueClock(text = R.string.analogue_clock),
     //BubbleChart(text = R.string.bubble_chart),
     ColourScreen(text = R.string.colour),
+    TestScreen(text = R.string.colour),
 }
 
 @Preview

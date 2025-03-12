@@ -65,6 +65,7 @@ import com.example.jetpack.ui.fragment.chart.component.ColourScreen
 import com.example.jetpack.ui.fragment.chart.component.ComponentScreen
 import com.example.jetpack.ui.fragment.chart.component.LineChartScreen
 import com.example.jetpack.ui.fragment.chart.component.RingChartScreen
+import com.example.jetpack.ui.fragment.chart.component.TestScreen
 import com.example.jetpack.ui.fragment.home.component.HomeDialog
 import com.example.jetpack.ui.theme.customizedTextStyle
 import com.example.jetpack.ui.view.AnalogueClock
@@ -263,6 +264,7 @@ fun InsightLayout(
                                         }
                                     },
                                 )
+                                ChartShortcut.TestScreen -> TestScreen()
                                 else -> Unit
                             }
                         }
