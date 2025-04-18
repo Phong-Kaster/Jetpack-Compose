@@ -7,13 +7,21 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.activity.compose.BackHandler
+import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -36,8 +44,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.CornerRadius
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.painterResource
@@ -116,7 +128,6 @@ class HomeFragment : CoreFragment() {
         }
 
 
-
         // 2. Create notification channel and setup daily notification
         NotificationManager.createNotificationChannel(context = requireContext())
         NotificationManager.sendNotification(context = requireContext())
@@ -147,7 +158,7 @@ class HomeFragment : CoreFragment() {
             onSearchKeyword = { viewModel.searchWithKeyword(it) },
             onClearKeyword = { viewModel.resetShortcuts() },
             onApplySortOption = { viewModel.applySortOption(it) },
-            onOpenShortcut = { shortcut->
+            onOpenShortcut = { shortcut ->
                 when (shortcut) {
                     HomeShortcut.Tutorial -> safeNavigate(R.id.toTutorial)
                     HomeShortcut.Quote -> safeNavigate(R.id.toQuote)
@@ -245,8 +256,6 @@ fun HomeLayout(
                 .fillMaxSize()
                 .nestedScroll(scrollBehavior.nestedScrollConnection)
         ) {
-
-
             item(key = "searchBarAndSortMenu") {
                 Row(
                     horizontalArrangement = Arrangement.Start,
@@ -311,7 +320,12 @@ fun HomeLayout(
                 }
 
             }
-
+            item {
+                OverlappingRoundedBackground(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                )
+            }
 
             items(
                 items = shortcuts,
@@ -345,9 +359,70 @@ fun HomeLayout(
             )
         }
     }
-
-
 }
+
+
+@Composable
+fun OverlappingRoundedBackground(modifier: Modifier = Modifier) {
+
+    val fraction = 0.75f
+    val verticalBias = 0.1f
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .aspectRatio(358/232f)
+    ) {
+        Spacer(
+            modifier = Modifier
+                .fillMaxWidth(fraction * 0.70f)
+                .clip(
+                    RoundedCornerShape(
+                        topStart = 0.dp,
+                        topEnd = 50.dp,
+                        bottomEnd = 0.dp,
+                        bottomStart = 50.dp
+                    )
+                )
+                .background(Color.Blue)
+                .aspectRatio(2f)
+                .align(BiasAlignment(horizontalBias = 1f, verticalBias = verticalBias+0.4f))
+        )
+
+        Spacer(
+            modifier = Modifier
+                .fillMaxWidth(fraction)
+                .clip(
+                    RoundedCornerShape(
+                        topStart = 0.dp,
+                        topEnd = 50.dp,
+                        bottomEnd = 0.dp,
+                        bottomStart = 50.dp
+                    )
+                )
+                .background(Color.White)
+                .aspectRatio(2f)
+                .align(BiasAlignment(horizontalBias = 1f, verticalBias = verticalBias))
+        )
+
+        Spacer(
+            modifier = Modifier
+                .fillMaxWidth()
+                .clip(
+                    RoundedCornerShape(
+                        topStart = 0.dp,
+                        topEnd = 50.dp,
+                        bottomEnd = 0.dp,
+                        bottomStart = 50.dp
+                    )
+                )
+                .background(Color.Red)
+                .aspectRatio(2f)
+        )
+
+
+    }
+}
+
 
 @Preview
 @Composable
