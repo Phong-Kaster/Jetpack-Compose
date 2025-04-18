@@ -45,6 +45,7 @@ import com.example.jetpack.configuration.Language
 import com.example.jetpack.core.LocalTheme
 import com.example.jetpack.domain.enums.Subsetting
 import com.example.jetpack.ui.component.SquareElement
+import com.example.jetpack.ui.modifier.PremiumWatermarkExample
 import com.example.jetpack.ui.modifier.borderWithAnimatedGradient
 import com.example.jetpack.ui.theme.animationInfiniteFloatSuperLong
 import com.example.jetpack.ui.theme.customizedTextStyle
@@ -330,6 +331,14 @@ fun ComponentScreen(
             span = { GridItemSpan(2) },
             content = {
                 CustomizedProgressBar()
+            }
+        )
+
+        item(
+            key = "premiumWatermark",
+            span = { GridItemSpan(2) },
+            content = {
+                PremiumWatermarkExample()
             }
         )
 

@@ -65,6 +65,7 @@ import com.example.jetpack.ui.fragment.chart.component.ColourScreen
 import com.example.jetpack.ui.fragment.chart.component.ComponentScreen
 import com.example.jetpack.ui.fragment.chart.component.LineChartScreen
 import com.example.jetpack.ui.fragment.chart.component.RingChartScreen
+import com.example.jetpack.ui.fragment.chart.component.TestScreen
 import com.example.jetpack.ui.fragment.home.component.HomeDialog
 import com.example.jetpack.ui.theme.customizedTextStyle
 import com.example.jetpack.ui.view.AnalogueClock
@@ -263,81 +264,12 @@ fun InsightLayout(
                                         }
                                     },
                                 )
+
+                                ChartShortcut.TestScreen -> TestScreen()
                                 else -> Unit
                             }
                         }
                     )
-
-
-                    Box(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .onSizeChanged(onSizeChanged = { fabHeight = it.height })
-                            .offset(offset = {
-                                IntOffset(
-                                    x = 0,
-                                    y = bottomSheetState
-                                        .requireOffset()
-                                        .roundToInt() - (fabHeight * 3f).roundToInt()
-                                )
-                            })
-                            .padding(16.dp)
-                    ) {
-                        Box(
-                            contentAlignment = Alignment.Center,
-                            modifier = Modifier
-                                .align(Alignment.CenterEnd)
-                                .clip(RoundedCornerShape(10.dp))
-                                .clickable { onClick() }
-                                .height(50.dp),
-                            content = {
-                                Column(modifier = Modifier.matchParentSize()) {
-                                    Spacer(
-                                        modifier = Modifier
-                                            .fillMaxWidth()
-                                            .weight(1f)
-                                            .background(color = Color.Black)
-                                    )
-                                    Spacer(
-                                        modifier = Modifier
-                                            .fillMaxWidth()
-                                            .weight(1f)
-                                            .background(color = Color(0xFFDD0000))
-                                    )
-
-                                    Spacer(
-                                        modifier = Modifier
-                                            .fillMaxWidth()
-                                            .weight(1f)
-                                            .background(color = Color(0xFFFFCC00))
-                                    )
-                                }
-                                Row(
-                                    verticalAlignment = Alignment.CenterVertically,
-                                    modifier = Modifier.padding(horizontal = 10.dp, vertical = 5.dp)
-                                ) {
-                                    Image(
-                                        painter = painterResource(id = R.drawable.ic_bundeswehr),
-                                        contentDescription = "Icon",
-                                        modifier = Modifier.size(24.dp)
-                                    )
-
-                                    Spacer(modifier = Modifier.width(10.dp))
-
-
-                                    Text(
-                                        text = stringResource(id = R.string.app_name),
-                                        style = customizedTextStyle(
-                                            fontSize = 16,
-                                            fontWeight = 600,
-                                            color = Color.White
-                                        )
-                                    )
-                                }
-
-                            }
-                        )
-                    }
                 }
             }
         )
