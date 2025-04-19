@@ -365,16 +365,16 @@ fun HomeLayout(
 @Composable
 fun OverlappingRoundedBackground(modifier: Modifier = Modifier) {
 
-    val fraction = 0.75f
+    val fraction = 0.8f
     val verticalBias = 0.1f
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .aspectRatio(358/232f)
+            .aspectRatio(358 / 232f)
     ) {
         Spacer(
             modifier = Modifier
-                .fillMaxWidth(fraction * 0.70f)
+                .fillMaxWidth(fraction * 0.80f)
                 .clip(
                     RoundedCornerShape(
                         topStart = 0.dp,
@@ -385,7 +385,7 @@ fun OverlappingRoundedBackground(modifier: Modifier = Modifier) {
                 )
                 .background(Color.Blue)
                 .aspectRatio(2f)
-                .align(BiasAlignment(horizontalBias = 1f, verticalBias = verticalBias+0.4f))
+                .align(BiasAlignment(horizontalBias = 1f, verticalBias = verticalBias +0.4f))
         )
 
         Spacer(
@@ -399,7 +399,7 @@ fun OverlappingRoundedBackground(modifier: Modifier = Modifier) {
                         bottomStart = 50.dp
                     )
                 )
-                .background(Color.White)
+                .background(Color.Black)
                 .aspectRatio(2f)
                 .align(BiasAlignment(horizontalBias = 1f, verticalBias = verticalBias))
         )
