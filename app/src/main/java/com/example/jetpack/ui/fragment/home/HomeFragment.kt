@@ -362,79 +362,12 @@ fun HomeLayout(
 }
 
 
-@Composable
-fun OverlappingRoundedBackground(modifier: Modifier = Modifier) {
 
-    val fraction = 0.8f
-    val verticalBias = 0.1f
-    Box(
-        modifier = modifier
-            .fillMaxWidth()
-            .aspectRatio(358 / 232f)
-    ) {
-        Spacer(
-            modifier = Modifier
-                .fillMaxWidth(fraction * 0.80f)
-                .clip(
-                    RoundedCornerShape(
-                        topStart = 0.dp,
-                        topEnd = 50.dp,
-                        bottomEnd = 0.dp,
-                        bottomStart = 50.dp
-                    )
-                )
-                .background(Color.Blue)
-                .aspectRatio(2f)
-                .align(BiasAlignment(horizontalBias = 1f, verticalBias = verticalBias +0.4f))
-        )
-
-        Spacer(
-            modifier = Modifier
-                .fillMaxWidth(fraction)
-                .clip(
-                    RoundedCornerShape(
-                        topStart = 0.dp,
-                        topEnd = 50.dp,
-                        bottomEnd = 0.dp,
-                        bottomStart = 50.dp
-                    )
-                )
-                .background(Color.Black)
-                .aspectRatio(2f)
-                .align(BiasAlignment(horizontalBias = 1f, verticalBias = verticalBias))
-        )
-
-        Spacer(
-            modifier = Modifier
-                .fillMaxWidth()
-                .clip(
-                    RoundedCornerShape(
-                        topStart = 0.dp,
-                        topEnd = 50.dp,
-                        bottomEnd = 0.dp,
-                        bottomStart = 50.dp
-                    )
-                )
-                .background(Color.Red)
-                .aspectRatio(2f)
-        )
-
-
-    }
-}
 
 
 @Preview
 @Composable
 fun PreviewHome() {
-    HomeLayout(
-        shortcuts = HomeShortcut.entries.toImmutableList(),
-    )
-}
-
-@Preview
-@Composable
-fun PreviewHomeWithLoading() {
     HomeLayout(
         shortcuts = HomeShortcut.entries.toImmutableList(),
     )
