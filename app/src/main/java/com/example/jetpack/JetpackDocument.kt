@@ -40,6 +40,8 @@ import javax.inject.Singleton
  * # [34 - Guide to Foreground Services on Android 14](https://medium.com/@domen.lanisnik/guide-to-foreground-services-on-android-9d0127dc8f9a#:~:text=Each%20foreground%20service%20type%20has,service%20will%20throw%20an%20exception.)
  * # [35 - Android Studio Productivity Tips](https://proandroiddev.com/android-studio-productivity-tips-a5e49d4ef55c?source=email-b3a77c058080-1740511407291-digest.reader-c72404660798-a5e49d4ef55c----0-99------------------39b923ba_7ab2_4225_935e_59945041711b-1)
  * # [36 - Kotlin operator function](https://nameisjayant.medium.com/8-kotlin-secrets-no-one-talks-about-but-you-should-know-8d40c941ba92)
- * */
+ * # [37 - Tinder-like gestures](https://blogs.kaffein.in/building-a-swipe-left--right-card-experience-in-jetpackcompose.html)
+ * # [38 - Widget Load Image with URI](https://stackoverflow.com/questions/74361073/how-to-load-images-from-the-internet-into-a-widget-with-jetpack-glance)
+ *  */
 @Singleton
 class JetpackDocument {}
