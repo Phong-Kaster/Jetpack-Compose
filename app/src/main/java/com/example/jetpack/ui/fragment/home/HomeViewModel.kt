@@ -37,21 +37,37 @@ constructor() : ViewModel() {
     val shortcutsWithLifecycle = MutableStateFlow<ImmutableList<HomeShortcut>>(persistentListOf())
 
     init {
-        viewModelScope.launch(Dispatchers.IO) {
-            _shortcuts.value = HomeShortcut.entries.sortedBy { it.name }.toImmutableList()
-        }
-
-        viewModelScope.launch(Dispatchers.IO) {
-            shortcutsWithLifecycle.value = HomeShortcut.entries.sortedBy { it.name }.toImmutableList()
-        }
+        sortListOfShortcut()
+        sortListOfLifecycleShortcut()
         sampleMergeTwoAsychFunctions()
     }
 
+    /**
+     * sortListOfShortcut() and sortListOfLifecycleShortcut()
+     * - These are just sorting operations on in-memory lists.
+     * They don't perform I/O operations and are CPU-lightweight.
+     * Dispatchers.Default would be more appropriate.
+     */
+    private fun sortListOfShortcut() {
+        viewModelScope.launch(Dispatchers.Default) {
+            _shortcuts.value = HomeShortcut.entries.sortedBy { it.name }.toImmutableList()
+        }
+    }
+
+    private fun sortListOfLifecycleShortcut() {
+        viewModelScope.launch(Dispatchers.IO) {
+            shortcutsWithLifecycle.value =
+                HomeShortcut.entries.sortedBy { it.name }.toImmutableList()
+        }
+    }
+
     /*************************************************
-     * searchWithKeyword
+     * searchWithKeyword - Simple string filtering and sorting.
+     * Again, this is a CPU operation, not I/O.
+     * Use Dispatchers.Default.
      */
     fun searchWithKeyword(keyword: String) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(Dispatchers.Default) {
             val list = HomeShortcut.entries.filter { homeShortcut: HomeShortcut ->
                 homeShortcut.name.lowercase().contains(keyword)
             }
@@ -64,21 +80,25 @@ constructor() : ViewModel() {
     /*************************************************
      * resetShortcuts
      */
-    fun resetShortcuts(){
-        viewModelScope.launch(Dispatchers.IO){
+    fun resetShortcuts() {
+        viewModelScope.launch(Dispatchers.Default) {
             _shortcuts.value = HomeShortcut.entries.toImmutableList()
         }
     }
 
     /*************************************************
-     * applySortOption
+     * applySortOption  - Similar to above, purely computational. Use Dispatchers.Default.
      */
-    fun applySortOption(option: SortOption){
-        viewModelScope.launch(Dispatchers.IO){
-            _shortcuts.value = when(option){
+    fun applySortOption(option: SortOption) {
+        viewModelScope.launch(Dispatchers.Default) {
+            _shortcuts.value = when (option) {
                 SortOption.Original -> HomeShortcut.entries.toImmutableList()
-                SortOption.AlphabetAscending -> HomeShortcut.entries.sortedBy { it.name }.toImmutableList()
-                SortOption.AlphabetDescending -> HomeShortcut.entries.sortedByDescending { it.name }.toImmutableList()
+                SortOption.AlphabetAscending -> HomeShortcut.entries.sortedBy { it.name }
+                    .toImmutableList()
+
+                SortOption.AlphabetDescending -> HomeShortcut.entries.sortedByDescending { it.name }
+                    .toImmutableList()
+
                 SortOption.Inverted -> HomeShortcut.entries.reversed().toImmutableList()
                 else -> HomeShortcut.entries.sortedBy { it.name }.toImmutableList()
             }
@@ -99,14 +119,19 @@ constructor() : ViewModel() {
     }
 
     fun sampleMergeTwoAsychFunctions() {
-        viewModelScope.launch(Dispatchers.IO){
+        viewModelScope.launch(Dispatchers.IO) {
             val message1 = async { funcA() }
             val message2 = async { funcA() }
             val message3 = async { funcA() }
             val message4 = async { funcA() }
 
             CoroutineUtil.mergeAsync(message1, message2, message3, message4)
-                .onSuccess { Log.d(TAG, "Success: ${it.first} ${it.second} ${it.third} ${it.fourth}") }
+                .onSuccess {
+                    Log.d(
+                        TAG,
+                        "Success: ${it.first} ${it.second} ${it.third} ${it.fourth}"
+                    )
+                }
                 .onFailure { Log.d(TAG, "Error: $it") }
         }
     }

@@ -79,6 +79,7 @@ import com.example.jetpack.ui.theme.PrimaryColor
 import com.example.jetpack.ui.modifier.ShimmerItem
 import com.example.jetpack.ui.theme.customizedTextStyle
 import com.example.jetpack.ui.view.DigitalClock3
+import com.example.jetpack.ui.view.OverlappingRoundedBackground
 import com.example.jetpack.util.NavigationUtil.safeNavigate
 import com.example.jetpack.util.PermissionUtil
 import dagger.hilt.android.AndroidEntryPoint
