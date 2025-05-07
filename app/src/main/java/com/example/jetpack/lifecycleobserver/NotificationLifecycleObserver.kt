@@ -66,7 +66,7 @@ constructor(
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     private fun createSettingLauncher(owner: LifecycleOwner): ActivityResultLauncher<Intent> {
         return registry.register("SettingPermissionLauncher", owner, ActivityResultContracts.StartActivityForResult()){
-            val enabled = PermissionUtil.isNotiEnabled(context = activity)
+            val enabled = PermissionUtil.isNotificationEnabled(context = activity)
             if (enabled) {
                 NotificationManager.sendNotification(context = activity)
                 LockscreenManager.sendNotification(context = activity)

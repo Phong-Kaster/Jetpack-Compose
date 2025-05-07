@@ -70,7 +70,7 @@ class PermissionFragment2 : CoreFragment() {
         // Request POST NOTIFICATION permission if device has Android OS from 13
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) return
 
-        val isAccessed: Boolean = PermissionUtil.isNotiEnabled(context = requireContext())
+        val isAccessed: Boolean = PermissionUtil.isNotificationEnabled(context = requireContext())
         if (isAccessed) return
         onePermissionObserver.launcher.launch(android.Manifest.permission.POST_NOTIFICATIONS)
     }

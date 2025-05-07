@@ -15,6 +15,8 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import com.example.jetpack.util.AppUtil
 import com.example.jetpack.util.LanguageUtil
+import com.example.jetpack.util.NetworkUtil
+import com.example.jetpack.util.SystemBarUtil
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -37,7 +39,7 @@ constructor() : AppCompatActivity(), CoreBehavior {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //AppUtil.hideStatusBar(window = this.window)
-        AppUtil.hideNavigationBar(window = this.window)
+        SystemBarUtil.hideNavigationBar(window = this.window)
         setContent { ComposeView() }
     }
 
@@ -48,6 +50,6 @@ constructor() : AppCompatActivity(), CoreBehavior {
     }
 
     override fun isInternetConnected(): Boolean {
-        return AppUtil.isInternetConnected(context = this)
+        return NetworkUtil.isInternetConnected(context = this)
     }
 }

@@ -28,6 +28,7 @@ import com.example.jetpack.ui.theme.DarkCustomizedTheme
 import com.example.jetpack.ui.theme.JetpackComposeTheme
 import com.example.jetpack.ui.theme.LightCustomizedTheme
 import com.example.jetpack.util.AppUtil
+import com.example.jetpack.util.NetworkUtil
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -90,7 +91,7 @@ open class CoreFragment : Fragment(), CoreBehavior {
     }
 
     override fun isInternetConnected(): Boolean {
-        return AppUtil.isInternetConnected(context = requireContext())
+        return NetworkUtil.isInternetConnected(context = requireContext())
     }
 
     override fun trackEvent(name: String) {}
