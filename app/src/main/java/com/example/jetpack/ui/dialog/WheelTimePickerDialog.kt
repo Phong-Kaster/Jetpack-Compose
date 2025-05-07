@@ -45,10 +45,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.jetpack.R
 import com.example.jetpack.configuration.Constant
-import com.example.jetpack.core.LocalTheme
+import com.example.jetpack.core.base.LocalTheme
 import com.example.jetpack.domain.enums.TimeConfiguration
 import com.example.jetpack.ui.component.CoreDialog
-import com.example.jetpack.ui.theme.ColorTextPrimary
 import com.example.jetpack.ui.theme.customizedTextStyle
 import com.example.jetpack.util.DateUtil.toHour
 import com.example.jetpack.util.DateUtil.toMinute

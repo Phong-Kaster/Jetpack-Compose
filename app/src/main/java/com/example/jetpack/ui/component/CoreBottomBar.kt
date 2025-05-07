@@ -40,8 +40,8 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.jetpack.R
 import com.example.jetpack.configuration.Menu
-import com.example.jetpack.core.LocalNavController
-import com.example.jetpack.core.LocalTheme
+import com.example.jetpack.core.base.LocalNavController
+import com.example.jetpack.core.base.LocalTheme
 import com.example.jetpack.ui.fragment.home.component.HomeBottomSheet
 import com.example.jetpack.ui.fragment.tutorial.component.LocalTutorial
 import com.example.jetpack.ui.modifier.borderWithAnimatedGradient

@@ -40,11 +40,10 @@ import coil.compose.rememberImagePainter
 import com.example.jetpack.R
 import com.example.jetpack.backgroundwork.MediaPlayerService
 import com.example.jetpack.configuration.Constant
-import com.example.jetpack.core.CoreFragment
-import com.example.jetpack.core.CoreLayout
-import com.example.jetpack.core.LocalTheme
+import com.example.jetpack.core.base.CoreFragment
+import com.example.jetpack.core.base.CoreLayout
+import com.example.jetpack.core.base.LocalTheme
 import com.example.jetpack.domain.enums.HomeShortcut
-import com.example.jetpack.ui.component.CoreTopBar2
 import com.example.jetpack.ui.component.CoreTopBarWithHomeShortcut
 import com.example.jetpack.ui.fragment.mediaplayer.MediaPlayerUtil.getBackward
 import com.example.jetpack.ui.fragment.mediaplayer.MediaPlayerUtil.getForward

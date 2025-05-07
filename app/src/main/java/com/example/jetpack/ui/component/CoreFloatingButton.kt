@@ -34,7 +34,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.rememberNavController
 import com.example.jetpack.R
 import com.example.jetpack.configuration.Menu
-import com.example.jetpack.core.LocalNavController
+import com.example.jetpack.core.base.LocalNavController
 import com.example.jetpack.ui.theme.OppositePrimaryColor
 import com.example.jetpack.ui.theme.PrimaryColor
 

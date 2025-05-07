@@ -30,11 +30,10 @@ import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import androidx.fragment.app.viewModels
 import com.example.jetpack.R
-import com.example.jetpack.core.CoreFragment
-import com.example.jetpack.core.CoreLayout
-import com.example.jetpack.core.LocalTheme
+import com.example.jetpack.core.base.CoreFragment
+import com.example.jetpack.core.base.CoreLayout
+import com.example.jetpack.core.base.LocalTheme
 import com.example.jetpack.domain.enums.HomeShortcut
-import com.example.jetpack.ui.component.CoreTopBar
 import com.example.jetpack.ui.component.CoreTopBarWithHomeShortcut
 import com.example.jetpack.ui.fragment.downloadwithworker.component.DownloadOption
 import com.example.jetpack.ui.theme.customizedTextStyle

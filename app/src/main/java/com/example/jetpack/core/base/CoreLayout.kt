@@ -1,4 +1,4 @@
-package com.example.jetpack.core
+package com.example.jetpack.core.base
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable

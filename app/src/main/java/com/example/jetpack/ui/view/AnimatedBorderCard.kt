@@ -20,7 +20,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.jetpack.R
-import com.example.jetpack.core.LocalTheme
+import com.example.jetpack.core.base.LocalTheme
 import com.example.jetpack.ui.modifier.borderWithAnimatedGradient
 import com.example.jetpack.ui.theme.Background2
 import com.example.jetpack.ui.theme.customizedTextStyle

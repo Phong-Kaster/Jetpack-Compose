@@ -1,4 +1,4 @@
-package com.example.jetpack.core
+package com.example.jetpack.core.base
 
 interface CoreBehavior {
 

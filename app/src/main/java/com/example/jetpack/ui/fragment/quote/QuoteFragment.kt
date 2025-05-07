@@ -29,8 +29,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.viewModels
 import com.example.jetpack.R
-import com.example.jetpack.core.CoreFragment
-import com.example.jetpack.core.CoreLayout
+import com.example.jetpack.core.base.CoreFragment
+import com.example.jetpack.core.base.CoreLayout
 import com.example.jetpack.domain.enums.Category
 import com.example.jetpack.domain.model.Quote
 import com.example.jetpack.ui.component.CoreTopBar

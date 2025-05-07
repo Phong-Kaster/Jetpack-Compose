@@ -26,7 +26,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.jetpack.R
 import androidx.core.graphics.createBitmap
-import com.example.jetpack.core.CoreLayout
+import com.example.jetpack.core.base.CoreLayout
 
 // 1. Contrast Adjustment Function
 fun adjustContrast(bitmap: Bitmap, contrast: Float): Bitmap {

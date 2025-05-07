@@ -3,15 +3,12 @@ package com.example.jetpack.ui.view
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -33,10 +30,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.jetpack.R
-import com.example.jetpack.core.LocalTheme
-import com.example.jetpack.ui.theme.animationInfiniteFloat2
+import com.example.jetpack.core.base.LocalTheme
 import com.example.jetpack.ui.theme.animationInfiniteFloat5
-import com.example.jetpack.ui.theme.animationSpecFloat1
 import com.example.jetpack.ui.theme.customizedTextStyle
 
 @Composable

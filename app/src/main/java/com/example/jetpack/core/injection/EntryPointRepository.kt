@@ -1,4 +1,4 @@
-package com.example.jetpack.injection
+package com.example.jetpack.core.injection
 
 import com.example.jetpack.data.repository.SettingRepository
 import dagger.hilt.EntryPoint

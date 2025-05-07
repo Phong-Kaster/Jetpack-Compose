@@ -1,25 +1,17 @@
-package com.example.jetpack.core
-
+package com.example.jetpack.core.base
 
 import android.content.Context
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.Composable
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.WindowInsetsControllerCompat
-import com.example.jetpack.util.AppUtil
+import com.example.jetpack.core.base.CoreBehavior
 import com.example.jetpack.util.LanguageUtil
 import com.example.jetpack.util.NetworkUtil
 import com.example.jetpack.util.SystemBarUtil
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
-
 
 @AndroidEntryPoint
 open class CoreActivity

@@ -1,4 +1,4 @@
-package com.example.jetpack.injection.module
+package com.example.jetpack.core.injection.module
 
 import com.example.jetpack.configuration.Constant
 import com.example.jetpack.network.interceptor.AccuWeatherInterceptor

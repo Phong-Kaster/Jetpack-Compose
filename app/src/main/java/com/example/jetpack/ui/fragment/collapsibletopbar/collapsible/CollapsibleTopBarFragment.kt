@@ -49,8 +49,8 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import com.example.jetpack.R
-import com.example.jetpack.core.CoreFragment
-import com.example.jetpack.core.LocalTheme
+import com.example.jetpack.core.base.CoreFragment
+import com.example.jetpack.core.base.LocalTheme
 import com.example.jetpack.ui.fragment.collapsibletopbar.collapsible.component.MealInfo
 import com.example.jetpack.ui.theme.Background
 import com.example.jetpack.ui.theme.OppositePrimaryColor

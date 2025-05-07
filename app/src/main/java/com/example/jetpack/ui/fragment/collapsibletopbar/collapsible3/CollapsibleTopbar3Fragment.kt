@@ -26,8 +26,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.jetpack.R
-import com.example.jetpack.core.CoreFragment
-import com.example.jetpack.core.CoreLayout
+import com.example.jetpack.core.base.CoreFragment
+import com.example.jetpack.core.base.CoreLayout
 import com.example.jetpack.ui.fragment.collapsibletopbar.collapsible3.component.PlantImage
 import com.example.jetpack.ui.fragment.collapsibletopbar.collapsible3.component.PlantInformation
 import com.example.jetpack.ui.fragment.collapsibletopbar.collapsible3.header.CombinableHeader

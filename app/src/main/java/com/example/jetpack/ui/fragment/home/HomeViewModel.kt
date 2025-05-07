@@ -7,6 +7,7 @@ import com.example.jetpack.domain.enums.HomeShortcut
 import com.example.jetpack.domain.enums.SortOption
 import com.example.jetpack.util.AppUtil
 import com.example.jetpack.util.CoroutineUtil
+import com.example.jetpack.util.LogUtil
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
@@ -139,13 +140,13 @@ constructor() : ViewModel() {
     }
 
     private fun utilizeSampleRunCatching() {
-        AppUtil.logcat(tag = "utilizeSampleRunCatching", message = "Start")
+        LogUtil.logcat(tag = "utilizeSampleRunCatching", message = "Start")
         val block: Result<Int> = runCatching {
             // Some code that might throw an exception
             10 / 0
         }
 
-        block.onSuccess {  AppUtil.logcat(tag = "utilizeSampleRunCatching", message ="Success: $it") }
-            .onFailure {  AppUtil.logcat(tag = "utilizeSampleRunCatching", message = "Failure: $it") }
+        block.onSuccess {  LogUtil.logcat(tag = "utilizeSampleRunCatching", message ="Success: $it") }
+            .onFailure {  LogUtil.logcat(tag = "utilizeSampleRunCatching", message = "Failure: $it") }
     }
 }

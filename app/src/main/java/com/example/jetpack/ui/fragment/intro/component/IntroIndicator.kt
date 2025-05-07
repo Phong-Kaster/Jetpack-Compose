@@ -10,11 +10,9 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.jetpack.core.LocalTheme
-import com.example.jetpack.ui.theme.PrimaryColor
+import com.example.jetpack.core.base.LocalTheme
 import com.example.jetpack.util.ViewUtil
 
 @Composable

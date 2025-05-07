@@ -22,9 +22,9 @@ import androidx.fragment.app.viewModels
 import com.example.jetpack.R
 import com.example.jetpack.configuration.Language
 import com.example.jetpack.configuration.Menu
-import com.example.jetpack.core.CoreFragment
-import com.example.jetpack.core.CoreLayout
-import com.example.jetpack.core.LocalTheme
+import com.example.jetpack.core.base.CoreFragment
+import com.example.jetpack.core.base.CoreLayout
+import com.example.jetpack.core.base.LocalTheme
 import com.example.jetpack.domain.enums.Star
 import com.example.jetpack.ui.component.CoreBottomBar
 import com.example.jetpack.ui.component.CoreFloatingMenu
@@ -33,7 +33,9 @@ import com.example.jetpack.ui.fragment.setting.component.RateDialog
 import com.example.jetpack.ui.fragment.setting.component.SettingDarkMode
 import com.example.jetpack.ui.fragment.setting.component.SettingItem
 import com.example.jetpack.util.AppUtil
+import com.example.jetpack.util.LogUtil
 import com.example.jetpack.util.NavigationUtil.safeNavigate
+import com.example.jetpack.util.SharingUtil
 import com.google.android.play.core.review.ReviewManagerFactory
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -76,18 +78,18 @@ class SettingFragment : CoreFragment() {
                         Toast.LENGTH_SHORT
                     ).show()
                 }
-                AppUtil.logcat(message = "addOnCompleteListener")
+                LogUtil.logcat(message = "addOnCompleteListener")
             }.addOnCanceledListener {
-                AppUtil.logcat(message = "addOnCanceledListener")
+                LogUtil.logcat(message = "addOnCanceledListener")
             }.addOnFailureListener {
-                AppUtil.logcat(message = "addOnFailureListener")
+                LogUtil.logcat(message = "addOnFailureListener")
             }.addOnSuccessListener {
-                AppUtil.logcat(message = "addOnSuccessListener")
+                LogUtil.logcat(message = "addOnSuccessListener")
             }
         } else {
             try {
                 /*AdsProvider.disableAppResume()*/
-                val intent = AppUtil.composeEmail(
+                val intent = SharingUtil.composeEmail(
                     context = requireContext(),
                     star = star.value,
                     feedback = content

@@ -14,12 +14,11 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import com.example.jetpack.R
 import com.example.jetpack.configuration.Language
-import com.example.jetpack.core.CoreFragment
-import com.example.jetpack.core.CoreLayout
-import com.example.jetpack.core.LocalTheme
+import com.example.jetpack.core.base.CoreFragment
+import com.example.jetpack.core.base.CoreLayout
+import com.example.jetpack.core.base.LocalTheme
 import com.example.jetpack.ui.component.CoreTopBar
 import com.example.jetpack.ui.fragment.language.component.LanguageList
-import com.example.jetpack.ui.theme.Background
 import com.example.jetpack.util.NavigationUtil.safeNavigate
 import com.example.jetpack.util.ViewUtil
 import dagger.hilt.android.AndroidEntryPoint

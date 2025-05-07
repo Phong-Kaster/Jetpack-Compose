@@ -1,10 +1,9 @@
-package com.example.jetpack.core
+package com.example.jetpack.core.base
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import android.widget.Toast
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -13,7 +12,6 @@ import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.compose.runtime.snapshotFlow
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.LocalDensity
@@ -27,13 +25,8 @@ import com.example.jetpack.data.repository.SettingRepository
 import com.example.jetpack.ui.theme.DarkCustomizedTheme
 import com.example.jetpack.ui.theme.JetpackComposeTheme
 import com.example.jetpack.ui.theme.LightCustomizedTheme
-import com.example.jetpack.util.AppUtil
 import com.example.jetpack.util.NetworkUtil
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import java.util.Locale
 import javax.inject.Inject

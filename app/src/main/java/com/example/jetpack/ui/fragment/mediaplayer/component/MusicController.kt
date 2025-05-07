@@ -13,7 +13,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.jetpack.R
-import com.example.jetpack.core.LocalTheme
+import com.example.jetpack.core.base.LocalTheme
 
 @Composable
 fun MusicController(

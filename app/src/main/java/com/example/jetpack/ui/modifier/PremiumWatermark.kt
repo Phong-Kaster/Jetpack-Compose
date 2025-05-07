@@ -45,7 +45,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.isUnspecified
 import androidx.compose.ui.unit.toIntSize
 import com.example.jetpack.R
-import com.example.jetpack.core.LocalTheme
+import com.example.jetpack.core.base.LocalTheme
 
 /**
  * [Premium watermark](https://medium.com/@kappdev/how-to-create-a-reusable-premium-watermark-in-jetpack-compose-83d79e9ce7c3)

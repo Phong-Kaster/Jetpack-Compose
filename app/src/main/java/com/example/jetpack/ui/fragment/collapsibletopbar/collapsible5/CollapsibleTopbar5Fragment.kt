@@ -22,9 +22,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.jetpack.R
-import com.example.jetpack.core.CoreFragment
-import com.example.jetpack.core.CoreLayout
-import com.example.jetpack.core.LocalTheme
+import com.example.jetpack.core.base.CoreFragment
+import com.example.jetpack.core.base.CoreLayout
+import com.example.jetpack.core.base.LocalTheme
 import com.example.jetpack.ui.fragment.collapsibletopbar.collapsible5.component.CollapsedTopbar5
 import com.example.jetpack.ui.fragment.collapsibletopbar.collapsible5.component.ExpandedTopbar5
 import com.example.jetpack.ui.theme.customizedTextStyle

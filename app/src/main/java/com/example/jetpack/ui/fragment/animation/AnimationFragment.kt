@@ -1,28 +1,17 @@
 package com.example.jetpack.ui.fragment.animation
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.key
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.drawBehind
-import androidx.compose.ui.draw.drawWithCache
-import androidx.compose.ui.draw.drawWithContent
-import androidx.compose.ui.geometry.CornerRadius
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.jetpack.R
-import com.example.jetpack.core.CoreFragment
-import com.example.jetpack.core.CoreLayout
+import com.example.jetpack.core.base.CoreFragment
+import com.example.jetpack.core.base.CoreLayout
 import com.example.jetpack.ui.component.CoreTopBar
 import com.example.jetpack.ui.fragment.animation.component.DrawBehindExample
 import com.example.jetpack.ui.fragment.animation.component.DrawWithContentExmaple
@@ -31,7 +20,6 @@ import com.example.jetpack.ui.fragment.animation.component.KeyframeAnimationExam
 import com.example.jetpack.ui.fragment.animation.component.SpringAnimationExample
 import com.example.jetpack.ui.fragment.animation.component.TweenAnimationExample
 import com.example.jetpack.ui.theme.Background
-import com.example.jetpack.ui.theme.customizedTextStyle
 import com.example.jetpack.util.NavigationUtil.safeNavigateUp
 import dagger.hilt.android.AndroidEntryPoint
 

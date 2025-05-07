@@ -43,7 +43,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.jetpack.R
-import com.example.jetpack.core.CoreFragment
+import com.example.jetpack.core.base.CoreFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

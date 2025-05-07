@@ -19,6 +19,7 @@ import com.example.jetpack.R
 import com.example.jetpack.notification.LockscreenManager
 import com.example.jetpack.notification.NotificationManager
 import com.example.jetpack.util.AppUtil
+import com.example.jetpack.util.LogUtil
 import com.example.jetpack.util.PermissionUtil
 import javax.inject.Inject
 
@@ -71,7 +72,7 @@ constructor(
                 NotificationManager.sendNotification(context = activity)
                 LockscreenManager.sendNotification(context = activity)
             } else {
-                AppUtil.logcat("Manifest.permission.POST_NOTIFICATIONS is rejected !")
+                LogUtil.logcat("Manifest.permission.POST_NOTIFICATIONS is rejected !")
             }
         }
     }

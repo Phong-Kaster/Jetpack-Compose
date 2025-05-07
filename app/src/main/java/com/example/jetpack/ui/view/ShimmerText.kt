@@ -25,7 +25,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.jetpack.R
-import com.example.jetpack.core.LocalTheme
+import com.example.jetpack.core.base.LocalTheme
 import com.example.jetpack.ui.theme.animationSpecFloat1
 import com.example.jetpack.ui.theme.customizedTextStyle
 

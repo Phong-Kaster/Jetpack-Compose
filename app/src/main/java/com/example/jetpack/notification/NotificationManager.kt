@@ -18,6 +18,7 @@ import com.example.jetpack.configuration.Constant
 import com.example.jetpack.configuration.Constant.NOTIFICATION_CHANNEL_ID
 import com.example.jetpack.configuration.Constant.NOTIFICATION_ID
 import com.example.jetpack.util.AppUtil
+import com.example.jetpack.util.LogUtil
 import java.util.Calendar
 
 
@@ -62,7 +63,7 @@ object NotificationManager {
 
 
         //2. find time of next notification
-        AppUtil.logcat(message = "now is $date/$month/$year $currentHour:$currentMinute")
+        LogUtil.logcat(message = "now is $date/$month/$year $currentHour:$currentMinute")
 
 
         // 3. fire notification at specific time

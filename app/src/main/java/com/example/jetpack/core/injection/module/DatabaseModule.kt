@@ -1,4 +1,4 @@
-package com.example.jetpack.injection.module
+package com.example.jetpack.core.injection.module
 
 import android.content.Context
 import androidx.room.Room

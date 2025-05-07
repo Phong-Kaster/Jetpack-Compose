@@ -33,8 +33,8 @@ import androidx.compose.ui.unit.dp
 import androidx.fragment.app.viewModels
 import com.example.jetpack.R
 import com.example.jetpack.configuration.Constant
-import com.example.jetpack.core.CoreFragment
-import com.example.jetpack.core.CoreLayout
+import com.example.jetpack.core.base.CoreFragment
+import com.example.jetpack.core.base.CoreLayout
 import com.example.jetpack.domain.enums.ApplicationLogo
 import com.example.jetpack.ui.theme.Background2
 import com.example.jetpack.ui.theme.customizedTextStyle
