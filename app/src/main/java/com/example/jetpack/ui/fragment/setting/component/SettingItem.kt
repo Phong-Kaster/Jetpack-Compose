@@ -49,8 +49,8 @@ fun SettingItem(
 ) {
     val infiniteTransition = rememberInfiniteTransition(label = "infinite transition")
     val animatedColor = infiniteTransition.animateColor(
-        initialValue = Color.Red,
-        targetValue = Color.Blue,
+        initialValue = Color.Green,
+        targetValue = Color.Yellow,
         animationSpec = infiniteRepeatable(animation = tween(1500), RepeatMode.Reverse),
         label = "animatedColor"
     ).value
