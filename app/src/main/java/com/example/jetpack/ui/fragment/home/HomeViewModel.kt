@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.jetpack.domain.enums.HomeShortcut
 import com.example.jetpack.domain.enums.SortOption
+import com.example.jetpack.util.AppUtil
 import com.example.jetpack.util.CoroutineUtil
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.collections.immutable.ImmutableList
@@ -40,6 +41,7 @@ constructor() : ViewModel() {
         sortListOfShortcut()
         sortListOfLifecycleShortcut()
         sampleMergeTwoAsychFunctions()
+        utilizeSampleRunCatching()
     }
 
     /**
@@ -134,5 +136,16 @@ constructor() : ViewModel() {
                 }
                 .onFailure { Log.d(TAG, "Error: $it") }
         }
+    }
+
+    private fun utilizeSampleRunCatching() {
+        AppUtil.logcat(tag = "utilizeSampleRunCatching", message = "Start")
+        val block: Result<Int> = runCatching {
+            // Some code that might throw an exception
+            10 / 0
+        }
+
+        block.onSuccess {  AppUtil.logcat(tag = "utilizeSampleRunCatching", message ="Success: $it") }
+            .onFailure {  AppUtil.logcat(tag = "utilizeSampleRunCatching", message = "Failure: $it") }
     }
 }
