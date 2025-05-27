@@ -111,7 +111,7 @@ object FileUtil {
         }
 
         if (name.length > 31) {
-            return R.string.filename_can_not_have_more_than_31_characters
+            return R.string.filename_can_not_have_the_following_character
         }
 
         val invalidCharacter = listOf(

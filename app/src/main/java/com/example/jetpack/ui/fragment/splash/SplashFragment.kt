@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.View
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -40,7 +41,6 @@ import com.example.jetpack.ui.theme.Background2
 import com.example.jetpack.ui.theme.customizedTextStyle
 import com.example.jetpack.util.NavigationUtil.safeNavigate
 import com.example.jetpack.util.ViewUtil
-import com.example.jetpack.util.ViewUtil.CenterBox
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -126,7 +126,8 @@ fun SplashLayout(
             }
         },
         content = {
-            CenterBox(
+            Box(
+                contentAlignment = Alignment.Center,
                 modifier = Modifier
                     .fillMaxSize()
             ) {

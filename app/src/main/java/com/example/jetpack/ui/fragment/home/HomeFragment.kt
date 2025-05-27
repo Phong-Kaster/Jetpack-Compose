@@ -5,6 +5,7 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -30,6 +31,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -42,7 +44,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -65,11 +66,16 @@ import com.example.jetpack.ui.theme.PrimaryColor
 import com.example.jetpack.ui.modifier.ShimmerItem
 import com.example.jetpack.ui.theme.customizedTextStyle
 import com.example.jetpack.ui.view.DigitalClock3
+import com.example.jetpack.util.AppUtil.showToast
 import com.example.jetpack.util.NavigationUtil.safeNavigate
 import com.example.jetpack.util.PermissionUtil
+import com.example.jetpack.util.ViewUtil.isAtBottom
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toImmutableList
+import kotlinx.coroutines.flow.distinctUntilChanged
+import androidx.compose.runtime.snapshotFlow
+import androidx.compose.ui.tooling.preview.Preview
 
 /**
  * MVVM Architecture - https://github.com/akhilesh0707/Rick-and-Morty
@@ -108,7 +114,8 @@ class HomeFragment : CoreFragment() {
         Log.d(TAG, "setupNotification: ")
         // 1. Request POST NOTIFICATION permission if device has Android OS from 13
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            val isAccessed: Boolean = PermissionUtil.isNotificationEnabled(context = requireContext())
+            val isAccessed: Boolean =
+                PermissionUtil.isNotificationEnabled(context = requireContext())
             if (!isAccessed) {
                 //notificationLifecycleObserver.systemLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
                 return
@@ -174,7 +181,11 @@ class HomeFragment : CoreFragment() {
                     HomeShortcut.DownloadManager -> safeNavigate(R.id.toDownloadManager)
                     else -> showToast(shortcut.name)
                 }
-            })
+            },
+            onReachAtTheBottom = {
+                requireContext().showToast("You have reached the bottom!")
+            }
+        )
     }
 }
 
@@ -188,7 +199,8 @@ fun HomeLayout(
     onChangeKeyword: (String) -> Unit = {},
     onSearchKeyword: (String) -> Unit = {},
     onClearKeyword: () -> Unit = {},
-    onApplySortOption: (SortOption) -> Unit = {}
+    onApplySortOption: (SortOption) -> Unit = {},
+    onReachAtTheBottom: () -> Unit = {},
 ) {
 
     var expandSortMenu by remember { mutableStateOf(false) }
@@ -199,8 +211,18 @@ fun HomeLayout(
 
     // for expandable floating action button
     val state = rememberLazyListState()
-    val fabExtended by remember { derivedStateOf { state.firstVisibleItemIndex > 0 } }
 
+    LaunchedEffect(
+        key1 = state,
+        block = {
+            snapshotFlow { state.isAtBottom() }
+                .distinctUntilChanged()
+                .collect { atTheBottom ->
+                    if (!atTheBottom) return@collect
+                    onReachAtTheBottom()
+                }
+        }
+    )
 
     BackHandler(enabled = true, onBack = onOpenConfirmDialog)
 
@@ -233,7 +255,7 @@ fun HomeLayout(
             )
         },
         bottomBar = { CoreBottomBar() },
-        floatingActionButton = { CoreExpandableFloatingButton(extended = fabExtended) },
+        floatingActionButton = { CoreExpandableFloatingButton(extended = state.firstVisibleItemIndex > 0) },
         modifier = Modifier
     ) {
         LazyColumn(
@@ -348,9 +370,6 @@ fun HomeLayout(
         }
     }
 }
-
-
-
 
 
 @Preview
