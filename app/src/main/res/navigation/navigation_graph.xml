@@ -126,7 +126,7 @@
 
     <fragment
         android:id="@+id/basicTextField2Fragment"
-        android:name="com.example.jetpack.ui.fragment.basictextfield.BasicTextFieldFragment" />
+        android:name="com.example.jetpack.ui.fragment.textfield.BasicTextFieldFragment" />
 
     <fragment
         android:id="@+id/collapsibleTopBarFragment"

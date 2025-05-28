@@ -1,58 +1,59 @@
-package com.example.jetpack.ui.fragment.basictextfield.component
+package com.example.jetpack.ui.fragment.textfield.component
 
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.text.input.InputTransformation
 import androidx.compose.foundation.text.input.TextFieldLineLimits
+import androidx.compose.foundation.text.input.allCaps
+import androidx.compose.foundation.text.input.maxLength
 import androidx.compose.foundation.text.input.rememberTextFieldState
+import androidx.compose.foundation.text.input.then
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.derivedStateOf
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
-import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.jetpack.R
 import com.example.jetpack.core.base.LocalTheme
 import com.example.jetpack.ui.theme.customizedTextStyle
 
+
 @Composable
-fun CommonUsage(
+fun CombineWithBuiltInInputTransformation(
     modifier: Modifier = Modifier
 ) {
-    val usernameState = rememberTextFieldState()
-    val showError by remember(usernameState.text) {
-        derivedStateOf {
-            usernameState.text.contains("a")
-        }
-    }
+    val maxSixCharacters = rememberTextFieldState()
 
-    Column(modifier = modifier) {
+
+    // Combine with built-in Input Transformation
+
+    Column(modifier = modifier){
         Text(
-            text = stringResource(R.string.common_usage),
+            text = "Combine with built-in Input Transformation",
             style = customizedTextStyle(
-                fontSize = 18, fontWeight = 700, color = Color.Cyan
+                fontSize = 18, fontWeight = 700, color = Color.White
             ), modifier = Modifier.padding(vertical = 10.dp)
         )
-
         BasicTextField(
-            state = usernameState,
+            state = maxSixCharacters,
             cursorBrush = SolidColor(Color.Cyan),
             lineLimits = TextFieldLineLimits.SingleLine,
             textStyle = customizedTextStyle(color = LocalTheme.current.primary),
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
+            inputTransformation = InputTransformation.maxLength(6)
+                .then(InputTransformation.allCaps(Locale.current)),
             decorator = { innerTextField ->
-                if (usernameState.text.isEmpty()) {
+                if (maxSixCharacters.text.isEmpty()) {
                     Text(
-                        text = stringResource(id = R.string.search),
-                        style = customizedTextStyle()
+                        text = "All capitalized 6 characters", style = customizedTextStyle()
                     )
                 }
                 innerTextField()
@@ -66,21 +67,12 @@ fun CommonUsage(
                 )
                 .padding(vertical = 16.dp, horizontal = 16.dp),
         )
-        AnimatedVisibility(
-            visible = showError, modifier = Modifier.padding(vertical = 10.dp)
-        ) {
-            Text(
-                text = "Username is invalid, please try again !",
-                style = customizedTextStyle(color = Color.Red)
-            )
-        }
     }
+
 }
 
 @Preview
 @Composable
-private fun PreviewCommonUsage() {
-    CommonUsage(
-        modifier = Modifier
-    )
+private fun PreviewCombineWithBuiltInInputTransformation() {
+    CombineWithBuiltInInputTransformation()
 }

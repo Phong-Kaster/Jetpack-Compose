@@ -1,4 +1,4 @@
-package com.example.jetpack.ui.fragment.basictextfield.component
+package com.example.jetpack.ui.fragment.textfield.component
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
@@ -9,55 +9,49 @@ import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.input.InputTransformation
 import androidx.compose.foundation.text.input.TextFieldLineLimits
-import androidx.compose.foundation.text.input.allCaps
 import androidx.compose.foundation.text.input.maxLength
 import androidx.compose.foundation.text.input.rememberTextFieldState
-import androidx.compose.foundation.text.input.then
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.jetpack.core.base.LocalTheme
 import com.example.jetpack.ui.theme.customizedTextStyle
-
+import com.example.jetpack.util.inputtransformation.VerificationCodeTransformation
 
 @Composable
-fun CombineWithBuiltInInputTransformation(
+fun VisualTransformation(
     modifier: Modifier = Modifier
 ) {
-    val maxSixCharacters = rememberTextFieldState()
+    val visualTransformation = rememberTextFieldState()
 
-
-    // Combine with built-in Input Transformation
-
-    Column(modifier = modifier){
+    Column(modifier = modifier) {
+        // Visual Transformation
         Text(
-            text = "Combine with built-in Input Transformation",
+            text = "Visual transformation | OutputTransformation",
             style = customizedTextStyle(
-                fontSize = 18, fontWeight = 700, color = Color.Cyan
-            ), modifier = Modifier.padding(vertical = 10.dp)
+                fontSize = 18,
+                fontWeight = 700,
+                color = Color.White
+            ),
+            modifier = Modifier.padding(vertical = 10.dp)
         )
         BasicTextField(
-            state = maxSixCharacters,
+            state = visualTransformation,
             cursorBrush = SolidColor(Color.Cyan),
             lineLimits = TextFieldLineLimits.SingleLine,
-            textStyle = customizedTextStyle(color = LocalTheme.current.primary),
+            textStyle = customizedTextStyle(
+                color = LocalTheme.current.primary,
+                fontSize = 14
+            ),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-            inputTransformation = InputTransformation.maxLength(6)
-                .then(InputTransformation.allCaps(Locale.current)),
-            decorator = { innerTextField ->
-                if (maxSixCharacters.text.isEmpty()) {
-                    Text(
-                        text = "All capitalized 6 characters", style = customizedTextStyle()
-                    )
-                }
-                innerTextField()
-            },
+            inputTransformation = InputTransformation.maxLength(6),
+            outputTransformation = VerificationCodeTransformation,
+            decorator = { innerTextField -> innerTextField() },
             modifier = Modifier
                 .fillMaxWidth()
                 .border(
@@ -73,6 +67,6 @@ fun CombineWithBuiltInInputTransformation(
 
 @Preview
 @Composable
-private fun PreviewCombineWithBuiltInInputTransformation() {
-    CombineWithBuiltInInputTransformation()
+private fun PreviewVisualTransformation() {
+    VisualTransformation()
 }

@@ -53,6 +53,10 @@ val InterFontFamily = FontFamily(
     Font(R.font.inter_thin, FontWeight.Thin),
 )
 
+val SofiaFontFamily = FontFamily(
+    Font(R.font.font_sofia_pro_black, FontWeight.Black),
+)
+
 val InterTypography = Typography(
     headlineLarge = TextStyle(
         fontFamily = InterFontFamily,
@@ -104,8 +108,9 @@ fun customizedTextStyle(
     lineHeight: Int = (fontSize * 1.5f).toInt(),
     color: Color = TextColor3,
     textDecoration: TextDecoration? = null,
+    fontFamily: FontFamily = InterFontFamily,
 ): TextStyle = TextStyle(
-    fontFamily = InterFontFamily,
+    fontFamily = fontFamily,
     fontSize = fontSize.sp,
     fontWeight = FontWeight(fontWeight),
     lineHeight = lineHeight.sp,

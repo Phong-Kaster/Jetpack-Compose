@@ -177,4 +177,5 @@
     <string name="sun">Sun</string>
     <string name="today">Today</string>
     <string name="filename_can_not_be_blank">Filename can not blank</string>
+    <string name="autofill">Autofill</string>
 </resources>
