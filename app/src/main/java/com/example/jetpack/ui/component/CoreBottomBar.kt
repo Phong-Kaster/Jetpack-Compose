@@ -1,5 +1,6 @@
 package com.example.jetpack.ui.component
 
+import android.graphics.drawable.Icon
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.background

@@ -330,12 +330,7 @@ fun HomeLayout(
                 }
 
             }
-//            item {
-//                OverlappingRoundedBackground(
-//                    modifier = Modifier
-//                        .fillMaxWidth()
-//                )
-//            }
+
 
             items(
                 items = shortcuts,
