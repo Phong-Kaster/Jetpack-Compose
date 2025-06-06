@@ -1,5 +1,6 @@
 package com.example.jetpack.ui.fragment.chart.component
 
+import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.foundation.Image
@@ -27,8 +28,13 @@ import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -77,6 +83,8 @@ fun ComponentScreen(
         label = "animatedProgress"
     )
 
+    var expanded by remember { mutableStateOf(false) }
+
     LazyVerticalGrid(
         state = state,
         columns = GridCells.Fixed(2),
@@ -86,6 +94,36 @@ fun ComponentScreen(
             .fillMaxSize()
             .padding(horizontal = 16.dp, vertical = 16.dp)
     ) {
+        item(
+            key = "animateContentSize",
+            span = { GridItemSpan(2) },
+            content = {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .animateContentSize() // 👈 magic happens here
+                        .clickable { expanded = !expanded }
+                ) {
+                    Text(
+                        text = "Animate Content Size", style = customizedTextStyle(
+                            fontSize = 20,
+                            color = Color.White,
+                        )
+                    )
+
+                    if (expanded) {
+                        Text(
+                            text = "Here's the full description of Animate Content Size...",
+                            style = customizedTextStyle(
+                                fontSize = 16,
+                                color = Color.White,
+                            )
+                        )
+                    }
+                }
+            }
+        )
+
         item(
             key = "swipeToReveal",
             span = { GridItemSpan(2) },

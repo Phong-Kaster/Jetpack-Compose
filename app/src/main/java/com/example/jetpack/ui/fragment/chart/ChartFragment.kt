@@ -183,23 +183,23 @@ fun InsightLayout(
                 .fillMaxSize()
                 .background(color = LocalTheme.current.background),
             sheetContent = {
-                ShimmerText(
-                    text = "Phong Kaster",
-                    shimmerColor = LocalTheme.current.primary,
-                    textStyle = customizedTextStyle(
-                        fontSize = 32,
-                        fontWeight = 600,
-                    ),
-                    textAlign = TextAlign.Center,
-                    animationSpec = tween(
-                        durationMillis = 3000,
-                        delayMillis = 0,
-                        easing = LinearEasing
-                    ),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 10.dp)
-                )
+//                ShimmerText(
+//                    text = "Phong Kaster",
+//                    shimmerColor = LocalTheme.current.primary,
+//                    textStyle = customizedTextStyle(
+//                        fontSize = 32,
+//                        fontWeight = 600,
+//                    ),
+//                    textAlign = TextAlign.Center,
+//                    animationSpec = tween(
+//                        durationMillis = 3000,
+//                        delayMillis = 0,
+//                        easing = LinearEasing
+//                    ),
+//                    modifier = Modifier
+//                        .fillMaxWidth()
+//                        .padding(vertical = 10.dp)
+//                )
             },
             content = { innerPadding ->
                 Box(
