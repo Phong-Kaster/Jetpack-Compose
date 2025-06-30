@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -64,13 +65,9 @@ fun CollapsedCalendar(
     var chosenWeekday by remember { mutableStateOf(CalendarWeekday()) }
 
     val pagerState = rememberPagerState(initialPage = initialPage, pageCount = { maximumPage })
-    var currentPage by remember { mutableStateOf(0) }
+    var currentPage by remember { mutableIntStateOf(0) }
 
-    val startDayOfWeek by remember {
-        mutableStateOf(
-            initialMonth.atDay(1).minusDays(initialMonth.atDay(1).dayOfWeek.value.toLong() - 1)
-        )
-    }
+    val startDayOfWeek by remember { mutableStateOf(initialMonth.atDay(1).minusDays(initialMonth.atDay(1).dayOfWeek.value.toLong() - 1)) }
     val endDayOfWeek by remember(startDayOfWeek) { derivedStateOf { startDayOfWeek.plusDays(6) } }
 
     // Calculate the current week number

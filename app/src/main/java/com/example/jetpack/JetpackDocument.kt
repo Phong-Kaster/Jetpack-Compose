@@ -42,6 +42,7 @@ import javax.inject.Singleton
  * # [36 - Kotlin operator function](https://nameisjayant.medium.com/8-kotlin-secrets-no-one-talks-about-but-you-should-know-8d40c941ba92)
  * # [37 - Tinder-like gestures](https://blogs.kaffein.in/building-a-swipe-left--right-card-experience-in-jetpackcompose.html)
  * # [38 - Widget Load Image with URI](https://stackoverflow.com/questions/74361073/how-to-load-images-from-the-internet-into-a-widget-with-jetpack-glance)
- *  */
+ * # [39 - Building an Animated Stacked Bar Chart in Jetpack Compose](https://jyotimoykashyap.medium.com/building-an-animated-stacked-bar-chart-in-jetpack-compose-9ad2b2acc5e1)
+ * */
 @Singleton
 class JetpackDocument {}
