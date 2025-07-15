@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import java.util.UUID
+import androidx.core.net.toUri
 
 
 object AppUtil {
@@ -15,9 +16,14 @@ object AppUtil {
     }
 
     fun openWebsite(context: Context, url: String) {
-        val uri = Uri.parse(url)
-        val intent = Intent(Intent.ACTION_VIEW)
-        intent.setData(uri)
-        context.startActivity(intent)
+        try {
+            val uri = url.toUri()
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = uri
+            context.startActivity(intent)
+        } catch (ex: Exception){
+            ex.printStackTrace()
+        }
+
     }
 }
