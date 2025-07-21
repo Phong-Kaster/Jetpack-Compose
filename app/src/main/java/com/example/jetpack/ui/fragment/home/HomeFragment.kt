@@ -93,6 +93,14 @@ class HomeFragment : CoreFragment() {
 
         setupNotificationLauncher()
         setupNotification()
+        exampleSet()
+    }
+
+    private fun exampleSet(){
+        val set : Set<String> = setOf<String>("Hello", "World")
+        for(item in set){
+            Log.d(TAG, "exampleSet: $item")
+        }
     }
 
 

@@ -6,6 +6,7 @@ import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.basicMarquee
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -13,6 +14,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -59,6 +61,7 @@ import com.example.jetpack.ui.view.AnimatedProgressBar
 import com.example.jetpack.ui.view.ContextualFlowRowSample
 import com.example.jetpack.ui.view.CustomizedCheckbox
 import com.example.jetpack.ui.view.CustomizedProgressBar
+import com.example.jetpack.ui.view.GradientProgressIndicator
 import com.example.jetpack.ui.view.SubsettingElement
 import com.example.jetpack.ui.view.SwipeToReveal
 import com.example.jetpack.util.AppUtil.showToast
@@ -365,6 +368,31 @@ fun ComponentScreen(
         )
 
         item(
+            key = "GradientProgressIndicator",
+            content = {
+                GradientProgressIndicator(
+                    colors = listOf(
+                        Color.Red,
+                        Color.Yellow,
+                        Color.Green,
+                        Color.Cyan,
+                        Color.Blue,
+                        Color.Magenta
+                    ),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(10.dp)
+                        .clip(shape = RoundedCornerShape(20.dp))
+                        .background(
+                            color = LocalTheme.current.background,
+                            shape = RoundedCornerShape(20.dp)
+                        )
+                        .padding(vertical = 16.dp, horizontal = 10.dp)
+                )
+            }
+        )
+
+        item(
             key = "PathInCanvas",
             span = { GridItemSpan(2) },
             content = {
@@ -376,7 +404,16 @@ fun ComponentScreen(
             key = "premiumWatermark",
             span = { GridItemSpan(2) },
             content = {
-                PremiumWatermarkExample()
+                PremiumWatermarkExample(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .border(
+                            width = 1.dp,
+                            color = LocalTheme.current.primary,
+                            shape = RoundedCornerShape(20.dp),
+                        )
+                        .padding(vertical = 16.dp, horizontal = 10.dp)
+                )
             }
         )
 

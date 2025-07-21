@@ -162,11 +162,13 @@ fun Modifier.premiumWatermark(
 
 
 @Composable
-fun PremiumWatermarkExample() {
+fun PremiumWatermarkExample(
+    modifier: Modifier = Modifier,
+) {
     var checked by remember { mutableStateOf(false) }
     Column(
         verticalArrangement = Arrangement.spacedBy(8.dp),
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .background(color = LocalTheme.current.background)
 

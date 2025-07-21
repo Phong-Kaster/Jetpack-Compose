@@ -1,7 +1,9 @@
-package com.example.jetpack.ui.theme
+package com.example.jetpack.ui.modifier
 
 import android.graphics.BlurMaskFilter
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.composed
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.graphics.ClipOp
 import androidx.compose.ui.graphics.Color
@@ -77,6 +79,15 @@ fun Modifier.outerShadow(
         // This shadow is clipped to be only visible outside the bounds
         it.drawPath(path, paint)
     }
+}
+
+fun Modifier.defaultOuterShadow(): Modifier {
+    return this.outerShadow(
+        shadowRadius = 6.dp,
+        spreadRadius = 4.dp,
+        shape = RoundedCornerShape(12.dp),
+        shadowColor = Color(0x12000000)
+    )
 }
 
 /** Draw shadow both inside of the component */

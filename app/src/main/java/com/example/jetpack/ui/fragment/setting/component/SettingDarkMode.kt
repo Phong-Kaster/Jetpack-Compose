@@ -23,7 +23,7 @@ import com.example.jetpack.core.base.LocalTheme
 import com.example.jetpack.ui.modifier.borderWithAnimatedGradient
 import com.example.jetpack.ui.theme.ShadowColor
 import com.example.jetpack.ui.theme.customizedTextStyle
-import com.example.jetpack.ui.theme.outerShadow
+import com.example.jetpack.ui.modifier.outerShadow
 import com.example.jetpack.ui.view.AnimatedThemeSwitcher
 
 @Composable
