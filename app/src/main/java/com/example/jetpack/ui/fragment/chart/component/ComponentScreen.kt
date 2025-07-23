@@ -238,21 +238,7 @@ fun ComponentScreen(
             }
         )
 
-        items(
-            items = Language.entries.take(2),
-            key = { item: Language -> item.name },
-            itemContent = { language: Language ->
-                SquareElement(
-                    language = language,
-                    onClick = {
-                        when (language) {
-                            Language.English -> onOpenAlertDialog()
-                            Language.German -> onOpenDottedTextDialog()
-                            else -> onOpenDialog()
-                        }
-                    })
-            }
-        )
+
 
         item(
             key = "WheelTimePicker",
@@ -369,16 +355,9 @@ fun ComponentScreen(
 
         item(
             key = "GradientProgressIndicator",
+            span = { GridItemSpan(2) },
             content = {
                 GradientProgressIndicator(
-                    colors = listOf(
-                        Color.Red,
-                        Color.Yellow,
-                        Color.Green,
-                        Color.Cyan,
-                        Color.Blue,
-                        Color.Magenta
-                    ),
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(10.dp)
@@ -387,7 +366,6 @@ fun ComponentScreen(
                             color = LocalTheme.current.background,
                             shape = RoundedCornerShape(20.dp)
                         )
-                        .padding(vertical = 16.dp, horizontal = 10.dp)
                 )
             }
         )
@@ -417,7 +395,21 @@ fun ComponentScreen(
             }
         )
 
-
+        items(
+            items = Language.entries.take(2),
+            key = { item: Language -> item.name },
+            itemContent = { language: Language ->
+                SquareElement(
+                    language = language,
+                    onClick = {
+                        when (language) {
+                            Language.English -> onOpenAlertDialog()
+                            Language.German -> onOpenDottedTextDialog()
+                            else -> onOpenDialog()
+                        }
+                    })
+            }
+        )
     }
 }
 

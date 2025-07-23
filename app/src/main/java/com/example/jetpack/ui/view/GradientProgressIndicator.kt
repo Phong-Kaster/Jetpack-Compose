@@ -1,6 +1,7 @@
 package com.example.jetpack.ui.view
 
 import androidx.compose.animation.core.FastOutLinearInEasing
+import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
@@ -24,22 +25,22 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun GradientProgressIndicator(
-    colors: List<Color> = listOf(
-        Color.Red,
-        Color.Yellow,
-        Color.Green,
-        Color.Cyan,
-        Color.Blue,
-        Color.Magenta
+    brush: Brush = Brush.linearGradient(
+        colors = listOf(
+            Color(0xFF007AFF),
+            Color(0xFF34C759),
+            Color(0xFFFF9500),
+            Color(0xFFFF2D55)
+        )
     ),
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     val infiniteTransition = rememberInfiniteTransition(label = "infinite transition")
     val progressAnimate by infiniteTransition.animateFloat(
         initialValue = 0f,
         targetValue = 1f,
         animationSpec = infiniteRepeatable(
-            animation = tween(durationMillis = 1000, easing = FastOutLinearInEasing),
+            animation = tween(durationMillis = 2500, easing = LinearEasing),
             repeatMode = RepeatMode.Restart,
 
             ),
@@ -48,7 +49,8 @@ fun GradientProgressIndicator(
 
     Canvas(
         modifier = modifier
-            .clipToBounds() // prevent drawing outside the bounds
+            .fillMaxWidth()
+            //.clipToBounds() // prevent drawing outside the bounds
     ) {
         drawRoundRect(
             color = Color(0xFFE5E5EA),
@@ -68,9 +70,7 @@ fun GradientProgressIndicator(
             top = 0f,
             block = {
                 drawRoundRect(
-                    brush = Brush.linearGradient(
-                        colors = colors
-                    ),
+                    brush = brush,
                     cornerRadius = CornerRadius(10.dp.toPx()),
                     topLeft = Offset.Zero,
                     size = Size(
