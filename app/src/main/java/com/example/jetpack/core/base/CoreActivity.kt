@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.Composable
 import com.example.jetpack.core.base.CoreBehavior
@@ -30,7 +31,7 @@ constructor() : AppCompatActivity(), CoreBehavior {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //AppUtil.hideStatusBar(window = this.window)
+        enableEdgeToEdge()
         SystemBarUtil.hideNavigationBar(window = this.window)
         setContent { ComposeView() }
     }

@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.JetpackCompose" parent="Theme.AppCompat.NoActionBar">
+    <!--this setting ensures that status bar will be visible with transparent background-->
+    <!--Theme Jetpack Compose separates 2 version: one for devices run on Android API 30 & higher, the other for Android API 29 & lower-->
+    <style name="Core.Theme.JetpackCompose" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
+    <style name="Theme.JetpackCompose" parent="Core.Theme.JetpackCompose">
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="android:windowLightStatusBar">false</item>
-        <item name="android:windowTranslucentNavigation">false</item>
     </style>
 
     <style name="Theme.Lockscreen" parent="Theme.AppCompat.NoActionBar">

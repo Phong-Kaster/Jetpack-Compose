@@ -61,3 +61,47 @@ fun CoreLayout(
         }
     }
 }
+
+@Composable
+fun CoreLayout(
+    modifier: Modifier = Modifier,
+    showLoading: Boolean = false,
+    topBar: @Composable () -> Unit = {},
+    bottomBar: @Composable () -> Unit = {},
+    snackbarHost: @Composable () -> Unit = {},
+    floatingActionButton: @Composable () -> Unit = {},
+    contentWindowInsets: WindowInsets = WindowInsets(0.dp, 0.dp, 0.dp, 0.dp),
+    content: @Composable () -> Unit,
+) {
+    val focusManager = LocalFocusManager.current
+
+    Scaffold(
+        modifier = modifier
+            .fillMaxSize()
+            .background(color = LocalTheme.current.background)
+            .clickable(
+                interactionSource = remember { MutableInteractionSource() },
+                indication = null,
+                onClick = { focusManager.clearFocus() }
+            ),
+        topBar = topBar,
+        bottomBar = bottomBar,
+        snackbarHost = snackbarHost,
+        floatingActionButton = floatingActionButton,
+        containerColor = Color.Unspecified,
+        contentWindowInsets = contentWindowInsets,
+    ) { padding ->
+        Box(
+            modifier = Modifier
+                .padding(padding)
+                .fillMaxSize(),
+            contentAlignment = Alignment.Center,
+        ) {
+            if (showLoading) {
+                CircularProgressIndicator()
+            } else {
+                content()
+            }
+        }
+    }
+}

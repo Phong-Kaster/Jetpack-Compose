@@ -96,9 +96,9 @@ class HomeFragment : CoreFragment() {
         exampleSet()
     }
 
-    private fun exampleSet(){
-        val set : Set<String> = setOf<String>("Hello", "World")
-        for(item in set){
+    private fun exampleSet() {
+        val set: Set<String> = setOf<String>("Hello", "World")
+        for (item in set) {
             Log.d(TAG, "exampleSet: $item")
         }
     }
@@ -236,28 +236,27 @@ fun HomeLayout(
 
 
     CoreLayout(
-        backgroundColor = LocalTheme.current.background,
         topBar = {
             CoreTopBarWithScrollBehavior(
                 backgroundColor = LocalTheme.current.secondary,
                 scrolledContainerColor = LocalTheme.current.secondary,
                 scrollBehavior = scrollBehavior,
                 navigationIconContent = {},
-                modifier = Modifier.clip(
-                    shape = RoundedCornerShape(
-                        topStart = 0.dp,
-                        topEnd = 0.dp,
-                        bottomStart = 5.dp,
-                        bottomEnd = 5.dp
-                    )
-                ),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clip(
+                        shape = RoundedCornerShape(
+                            topStart = 0.dp,
+                            topEnd = 0.dp,
+                            bottomStart = 5.dp,
+                            bottomEnd = 5.dp
+                        )
+                    ),
                 content = {
                     DigitalClock3(
                         textColor = LocalTheme.current.textColor,
                         modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(horizontal = 16.dp)
-                            .statusBarsPadding(),
+                            .fillMaxWidth(),
                     )
                 }
             )
@@ -270,8 +269,8 @@ fun HomeLayout(
             state = state,
             verticalArrangement = Arrangement.spacedBy(16.dp),
             modifier = Modifier
-                .padding(start = 16.dp, end = 16.dp, top = 0.dp, bottom = 32.dp)
                 .fillMaxSize()
+                .padding(horizontal = 16.dp, vertical = 16.dp)
                 .nestedScroll(scrollBehavior.nestedScrollConnection)
         ) {
             item(key = "searchBarAndSortMenu") {
