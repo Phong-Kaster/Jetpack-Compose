@@ -61,6 +61,7 @@ import com.example.jetpack.ui.view.AnimatedProgressBar
 import com.example.jetpack.ui.view.ContextualFlowRowSample
 import com.example.jetpack.ui.view.CustomizedCheckbox
 import com.example.jetpack.ui.view.CustomizedProgressBar
+import com.example.jetpack.ui.view.GlowingButton
 import com.example.jetpack.ui.view.GradientProgressIndicator
 import com.example.jetpack.ui.view.SubsettingElement
 import com.example.jetpack.ui.view.SwipeToReveal
@@ -357,16 +358,31 @@ fun ComponentScreen(
             key = "GradientProgressIndicator",
             span = { GridItemSpan(2) },
             content = {
-                GradientProgressIndicator(
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(16.dp),
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(10.dp)
-                        .clip(shape = RoundedCornerShape(20.dp))
-                        .background(
-                            color = LocalTheme.current.background,
-                            shape = RoundedCornerShape(20.dp)
-                        )
-                )
+                ) {
+                    Text(
+                        text = "Gradient Progress Indicator",
+                        style = customizedTextStyle(
+                            fontSize = 14,
+                            fontWeight = 600,
+                            color = Color.White
+                        ),
+                        modifier = Modifier.fillMaxWidth(),
+                    )
+                    GradientProgressIndicator(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(10.dp)
+                            .clip(shape = RoundedCornerShape(20.dp))
+                            .background(
+                                color = LocalTheme.current.background,
+                                shape = RoundedCornerShape(20.dp)
+                            )
+                    )
+                }
             }
         )
 
@@ -408,6 +424,33 @@ fun ComponentScreen(
                             else -> onOpenDialog()
                         }
                     })
+            }
+        )
+
+        item(
+            key = "glowingButton",
+            span = { GridItemSpan(2) },
+            content = {
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(16.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                ) {
+                    Text(
+                        text = "Glowing Button",
+                        style = customizedTextStyle(
+                            fontSize = 14,
+                            fontWeight = 600,
+                            color = Color.White
+                        ),
+                        modifier = Modifier.fillMaxWidth(),
+                    )
+                    GlowingButton(
+                        onClick = {
+                            context.showToast("Glowing Button Clicked")
+                        },
+                    )
+                }
             }
         )
     }
