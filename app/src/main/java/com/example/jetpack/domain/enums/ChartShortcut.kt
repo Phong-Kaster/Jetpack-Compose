@@ -10,9 +10,10 @@ import com.example.jetpack.R
 enum class ChartShortcut(
     @StringRes val text: Int
 ) {
+    Component(text = R.string.component),
     Calendar(text = R.string.calendar),
     LineChart(text = R.string.line_chart),
-    Component(text = R.string.component),
+
     RingChart(text = R.string.ring_chart),
     BarChart(text = R.string.bar_chart),
     //ScatterPlotChart(text = R.string.line_chart),

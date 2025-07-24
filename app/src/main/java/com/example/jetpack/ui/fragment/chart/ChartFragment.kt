@@ -128,7 +128,7 @@ fun InsightLayout(
 
     ) {
     val context = LocalContext.current
-    var chosenChip: ChartShortcut by rememberSaveable { mutableStateOf(ChartShortcut.Calendar) }
+    var chosenChip: ChartShortcut by rememberSaveable { mutableStateOf(ChartShortcut.Component) }
 
     /** For Bottom Sheet Scaffold*/
     val bottomSheetState = rememberStandardBottomSheetState()
@@ -162,9 +162,15 @@ fun InsightLayout(
                 CoreBottomBar()
             }
         },
-        backgroundColor = LocalTheme.current.background
+        backgroundColor = LocalTheme.current.background,
+        topBar = {
+            ChartTopBar(
+                chosenChip = chosenChip,
+                onChange = { chosenChip = it }
+            )
+        },
     ) {
-        BottomSheetScaffold(
+        /*BottomSheetScaffold(
             scaffoldState = scaffoldState,
             topBar = {
                 ChartTopBar(
@@ -254,7 +260,57 @@ fun InsightLayout(
                     )
                 }
             }
-        )
+        )*/
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+        ) {
+            AnimatedContent(
+                targetState = chosenChip,
+                label = stringResource(id = R.string.fake_title),
+                content = { chosenChip ->
+                    when (chosenChip) {
+                        ChartShortcut.AnalogueClock -> AnalogueClock()
+                        ChartShortcut.LineChart -> LineChartScreen()
+                        ChartShortcut.RingChart -> RingChartScreen()
+                        //ChartShortcut.BubbleChart -> BubbleChartScreen()
+                        ChartShortcut.BarChart -> BarChartScreen()
+                        ChartShortcut.AreaChart -> AreaChartScreen()
+                        ChartShortcut.ColourScreen -> ColourScreen()
+                        ChartShortcut.Calendar -> CalendarScreen()
+                        ChartShortcut.Component -> ComponentScreen(
+                            onOpenWheelTimePicker = onOpenWheelTimePicker,
+                            onOpenAlertDialog = onOpenAlertDialog,
+                            onOpenDialog = onOpenDialog,
+                            onOpenDottedTextDialog = onOpenDottedTextDialog,
+                            onOpenCountdownSnackbar = {
+                                scope.launch {
+                                    // Show a snackbar
+                                    val result = snackbarHostState.showSnackbar(
+                                        message = "User account deleted.",
+                                        actionLabel = "UNDO",
+                                        duration = SnackbarDuration.Indefinite
+                                    )
+                                    // Handle the snackbar result
+                                    when (result) {
+                                        SnackbarResult.Dismissed -> context.showToast(
+                                            message = "Deleted permanently"
+                                        )
+
+                                        SnackbarResult.ActionPerformed -> context.showToast(
+                                            message = "Deletion canceled"
+                                        )
+                                    }
+                                }
+                            },
+                        )
+
+                        ChartShortcut.TestScreen -> TestScreen()
+                        else -> Unit
+                    }
+                }
+            )
+        }
     }
 }
 
