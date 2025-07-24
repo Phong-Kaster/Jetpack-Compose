@@ -61,6 +61,7 @@ import com.example.jetpack.ui.view.AnalogueClock
 import com.example.jetpack.ui.view.AnimatedBorderCard
 import com.example.jetpack.ui.view.AtomicLoader
 import com.example.jetpack.ui.view.DNAHelix
+import com.example.jetpack.ui.view.ImageRevealAnimation
 import com.example.jetpack.ui.view.WeatherSunrise
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -113,78 +114,59 @@ fun ArticleLayout() {
         topBar = { HomeTopBar(name = stringResource(id = Menu.Article.nameId)) },
         bottomBar = { CoreBottomBar() },
         floatingActionButton = {
-//            CoreExpandableFloatingButton(
-//                extended = extended,
-//                modifier = Modifier
-//            )
-//            Box(
-//                modifier = Modifier
-//                    .fillMaxWidth()
-//                    .onSizeChanged(onSizeChanged = { fabHeight = it.height })
-//                    .offset(offset = {
-//                        IntOffset(
-//                            x = 0,
-//                            y = bottomSheetState
-//                                .requireOffset()
-//                                .roundToInt() - (fabHeight * 3f).roundToInt()
-//                        )
-//                    })
-//                    .padding(16.dp)
-//            ) {
-                Box(
-                    contentAlignment = Alignment.Center,
-                    modifier = Modifier
-                        .clip(RoundedCornerShape(10.dp))
-                        .clickable {  }
-                        .height(50.dp),
-                    content = {
-                        Column(modifier = Modifier.matchParentSize()) {
-                            Spacer(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .weight(1f)
-                                    .background(color = Color.Black)
-                            )
-                            Spacer(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .weight(1f)
-                                    .background(color = Color(0xFFDD0000))
-                            )
+            Box(
+                contentAlignment = Alignment.Center,
+                modifier = Modifier
+                    .clip(RoundedCornerShape(10.dp))
+                    .clickable { }
+                    .height(50.dp),
+                content = {
+                    Column(modifier = Modifier.matchParentSize()) {
+                        Spacer(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .weight(1f)
+                                .background(color = Color.Black)
+                        )
+                        Spacer(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .weight(1f)
+                                .background(color = Color(0xFFDD0000))
+                        )
 
-                            Spacer(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .weight(1f)
-                                    .background(color = Color(0xFFFFCC00))
-                            )
-                        }
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically,
-                            modifier = Modifier.padding(horizontal = 10.dp, vertical = 5.dp)
-                        ) {
-                            Image(
-                                painter = painterResource(id = R.drawable.ic_bundeswehr),
-                                contentDescription = "Icon",
-                                modifier = Modifier.size(24.dp)
-                            )
-
-                            Spacer(modifier = Modifier.width(10.dp))
-
-
-                            Text(
-                                text = stringResource(id = R.string.app_name),
-                                style = customizedTextStyle(
-                                    fontSize = 16,
-                                    fontWeight = 600,
-                                    color = Color.White
-                                )
-                            )
-                        }
-
+                        Spacer(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .weight(1f)
+                                .background(color = Color(0xFFFFCC00))
+                        )
                     }
-                )
-//            }
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.padding(horizontal = 10.dp, vertical = 5.dp)
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.ic_bundeswehr),
+                            contentDescription = "Icon",
+                            modifier = Modifier.size(24.dp)
+                        )
+
+                        Spacer(modifier = Modifier.width(10.dp))
+
+
+                        Text(
+                            text = stringResource(id = R.string.app_name),
+                            style = customizedTextStyle(
+                                fontSize = 16,
+                                fontWeight = 600,
+                                color = Color.White
+                            )
+                        )
+                    }
+
+                }
+            )
         },
         backgroundColor = LocalTheme.current.background,
     ) {
@@ -201,8 +183,8 @@ fun ArticleLayout() {
                     .padding(start = 16.dp, end = 16.dp, top = 0.dp, bottom = 32.dp)
                     .fillMaxSize()
             ) {
-                item(key = "AnimatedBorder", span = { GridItemSpan(2) }) {
-                    AnimatedBorderCard()
+                item(key = "ImageRevealAnimation", span = { GridItemSpan(2) }) {
+                    ImageRevealAnimation(modifier = Modifier.fillMaxWidth())
                 }
 
                 item(key = "WeatherSunrise", span = { GridItemSpan(2) }) {
@@ -259,10 +241,9 @@ fun ArticleLayout() {
                                 .clip(shape = RoundedCornerShape(25.dp))
                                 .aspectRatio(1f)
                         ) {
-                            Icon(
-                                painter = painterResource(id = R.drawable.ic_nazi_eagle),
+                            Image(
+                                painter = painterResource(id = R.drawable.ic_bundeswehr),
                                 contentDescription = "Icon",
-                                tint = Color.White,
                                 modifier = Modifier
                                     .pulseEffect(
                                         initialScale = 0f,

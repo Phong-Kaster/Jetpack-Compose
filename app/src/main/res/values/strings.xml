@@ -178,4 +178,7 @@
     <string name="today">Today</string>
     <string name="filename_can_not_be_blank">Filename can not blank</string>
     <string name="autofill">Autofill</string>
+    <string name="image_reveal_animation">Image Reveal Animation</string>
+    <string name="before">Before</string>
+    <string name="after">After</string>
 </resources>
