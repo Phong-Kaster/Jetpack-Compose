@@ -35,6 +35,7 @@ import com.example.jetpack.core.base.CoreFragment
 import com.example.jetpack.core.base.CoreLayout
 import com.example.jetpack.core.base.LocalTheme
 import com.example.jetpack.ui.component.CoreTopBar3
+import com.example.jetpack.ui.fragment.textfield.component.AutoSize
 import com.example.jetpack.ui.fragment.textfield.component.CombineWithBuiltInInputTransformation
 import com.example.jetpack.ui.fragment.textfield.component.CombineWithInputTransformation
 import com.example.jetpack.ui.fragment.textfield.component.CommonUsage
@@ -147,6 +148,11 @@ fun BasicTextFieldLayout(
                                 //.semantics { contentType = ContentType.Username },
                         )
                     }
+                }
+
+                item(key = "AutoTextSize") {
+                    AutoSize(
+                    )
                 }
             }
         })
