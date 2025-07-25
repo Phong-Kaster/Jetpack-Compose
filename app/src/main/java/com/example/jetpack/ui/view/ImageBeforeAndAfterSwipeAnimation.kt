@@ -122,27 +122,25 @@ fun ImageBeforeAndAfterSwipeAnimation(modifier: Modifier = Modifier) {
                 .height(200.dp)
         ) {
             // Before Image
-            Box(modifier = Modifier.fillMaxWidth()) {
-                Image(
-                    modifier = Modifier.fillMaxSize(),
-                    contentScale = ContentScale.FillWidth,
-                    painter = painterResource(R.drawable.ic_nazi_germany_flag),
-                    contentDescription = "Before"
-                )
+            Image(
+                modifier = Modifier.fillMaxSize(),
+                contentScale = ContentScale.FillWidth,
+                painter = painterResource(R.drawable.ic_nazi_germany_flag),
+                contentDescription = "Before"
+            )
 
-                Text(
-                    modifier = Modifier
-                        .padding(10.dp)
-                        .align(Alignment.TopStart)
-                        .background(Color(0x99000000), shape = RoundedCornerShape(4.dp))
-                        .padding(horizontal = 8.dp, vertical = 2.dp),
-                    text = stringResource(R.string.before),
-                    style = customizedTextStyle(
-                        fontSize = 14,
-                        fontWeight = 400, color = Color.White,
-                    )
+            Text(
+                modifier = Modifier
+                    .padding(10.dp)
+                    .align(Alignment.TopStart)
+                    .background(Color(0x99000000), shape = RoundedCornerShape(4.dp))
+                    .padding(horizontal = 8.dp, vertical = 2.dp),
+                text = stringResource(R.string.before),
+                style = customizedTextStyle(
+                    fontSize = 14,
+                    fontWeight = 400, color = Color.White,
                 )
-            }
+            )
 
             // After Image Section
             Box(
@@ -178,7 +176,7 @@ fun ImageBeforeAndAfterSwipeAnimation(modifier: Modifier = Modifier) {
                             shadowColor = Color(0x99E99E75),
                             shape = CircleShape,
                         )
-                        .align(Alignment.TopStart)
+                        .align(Alignment.TopEnd)
                         .background(
                             color = Color(0xffE99E75),
                             shape = RoundedCornerShape(4.dp)
