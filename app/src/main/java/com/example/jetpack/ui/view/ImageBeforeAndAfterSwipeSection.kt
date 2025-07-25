@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.GenericShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -36,6 +37,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.IntSize
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
+import androidx.compose.ui.graphics.drawscope.translate
 import com.example.jetpack.R
 import com.example.jetpack.core.base.LocalTheme
 import com.example.jetpack.ui.modifier.outerShadow
@@ -142,31 +150,49 @@ fun ImageBeforeAndAfterSwipeSection(
                 if (boxWidthPx > 0) {
                     // Divider position: moves from right (0) to left (max)
                     val xPx = (boxWidthPx - offsetX).roundToInt()
+                    // Load the handle icon as a Painter, works with VectorDrawable
+                    val painter = painterResource(id = R.drawable.ic_swipe_before_and_after)
                     Box(
                         contentAlignment = Alignment.Center,
                         modifier = Modifier
                             .fillMaxHeight()
                             .offset { IntOffset(x = xPx, y = 0) }
                     ) {
-                        VerticalDivider(
-                            color = Color.White,
-                            thickness = 2.dp,
-                            modifier = Modifier.fillMaxHeight()
-                        )
-
-                        Box(
-                            contentAlignment = Alignment.Center,
+                        // Draw the vertical divider line and the handle icon centered
+                        androidx.compose.foundation.Canvas(
                             modifier = Modifier
-                                .clip(shape = CircleShape)
-                                .background(color = Color.White)
-                                .size(30.dp)
-                        ) {
-                            Image(
-                                painter = painterResource(R.drawable.ic_swipe_before_and_after),
-                                contentDescription = null,
-                                modifier = Modifier.size(20.dp)
-                            )
-                        }
+                                .fillMaxHeight()
+                                .width(2.dp),
+                            onDraw = {
+                                // Draw sharp vertical divider
+                                drawLine(
+                                    color = Color.White,
+                                    start = Offset(size.width / 2, 0f),
+                                    end = Offset(size.width / 2, size.height),
+                                    strokeWidth = size.width // 2.dp
+                                )
+                                // Circle background for handle
+                                val iconSize = 30.dp.toPx() // Circle size for handle background
+                                val painterSize = 20.dp.toPx()
+                                val centerY = size.height / 2
+                                val centerX = size.width / 2
+                                drawCircle(
+                                    color = Color.White,
+                                    radius = iconSize / 2f,
+                                    center = Offset(centerX, centerY)
+                                )
+
+                                // Draw the VectorDrawable directly using painter
+                                translate(
+                                    left = centerX - painterSize / 2f,
+                                    top = centerY - painterSize / 2f
+                                ) {
+                                    with(painter) {
+                                        draw(size = Size(painterSize, painterSize))
+                                    }
+                                }
+                            }
+                        )
                     }
                 }
             }
