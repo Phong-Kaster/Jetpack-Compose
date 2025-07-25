@@ -56,8 +56,7 @@ fun ImageBeforeAndAfterSwipeSection(
 ) {
 
     var boxWidthPx by remember { mutableIntStateOf(0) }
-    // 'offsetX' is the width in px revealed from the right (0 = only after shown, max = before covers all)
-    var offsetX: Float by remember { mutableFloatStateOf(0.5f) }
+    var offsetX by remember { mutableFloatStateOf(0f) } // Start at zero
 
     HeaderAndLayout(
         title = "Image Before and After Swipe Section",
@@ -71,7 +70,12 @@ fun ImageBeforeAndAfterSwipeSection(
                     modifier = Modifier
                         .fillMaxWidth()
                         .clip(RoundedCornerShape(8.dp))
-                        .onSizeChanged { boxWidthPx = it.width }
+                        .onSizeChanged {
+                            boxWidthPx = it.width
+                            if (offsetX == 0f && boxWidthPx > 0) {
+                                offsetX = boxWidthPx / 2f
+                            }
+                        }
                         .fillMaxWidth()
                         .height(200.dp)
                         .pointerInput(boxWidthPx) {
