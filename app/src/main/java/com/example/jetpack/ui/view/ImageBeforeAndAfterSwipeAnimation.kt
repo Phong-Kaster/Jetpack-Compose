@@ -6,6 +6,7 @@ import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -32,9 +33,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.drawscope.translate
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.res.painterResource
@@ -47,6 +52,7 @@ import com.example.jetpack.core.base.LocalTheme
 import com.example.jetpack.ui.modifier.outerShadow
 import com.example.jetpack.ui.theme.customizedTextStyle
 import kotlinx.coroutines.delay
+import kotlin.math.roundToInt
 
 /**
  *The composable displays a UI section for "ImageRevealAnimation" in an app.
@@ -60,6 +66,8 @@ fun ImageBeforeAndAfterSwipeAnimation(modifier: Modifier = Modifier) {
     val dividerLineProgress = remember { Animatable(0f) }
     var boxWidthPx by remember { mutableIntStateOf(0) }
     var showDividerLine by remember { mutableStateOf(true) }
+
+    val offsetX = boxWidthPx * dividerLineProgress.value
 
     /**
      * Animation Logic
@@ -96,77 +104,122 @@ fun ImageBeforeAndAfterSwipeAnimation(modifier: Modifier = Modifier) {
         }
     }
 
-    Column(
-        verticalArrangement = Arrangement.spacedBy(16.dp),
+    HeaderAndLayout(
+        title = "Image Before And After Swipe Animation",
         modifier = modifier
             .fillMaxWidth()
-            .background(color = LocalTheme.current.background)
-    ) {
-        // Title Text - Image Reveal Animation
-        Text(
-            text = stringResource(R.string.image_reveal_animation),
-            style = customizedTextStyle(
-                fontSize = 14,
-                fontWeight = 600,
-                color = Color.White
-            ),
-            modifier = Modifier.fillMaxWidth(),
-        )
+            .background(color = LocalTheme.current.background),
+        content = {
+            Box(modifier = Modifier.fillMaxWidth()) {
 
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .clip(RoundedCornerShape(8.dp))
-                .onSizeChanged { boxWidthPx = it.width }
-                .fillMaxWidth()
-                .height(200.dp)
-        ) {
-            // Before Image
-            Image(
-                modifier = Modifier.fillMaxSize(),
-                contentScale = ContentScale.FillWidth,
-                painter = painterResource(R.drawable.ic_nazi_germany_flag),
-                contentDescription = "Before"
-            )
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clip(RoundedCornerShape(8.dp))
+                        .onSizeChanged {
+                            boxWidthPx = it.width
+                        }
+                        .fillMaxWidth()
+                        .height(200.dp)
+                ) {
+                    // Blurred image (always fills background)
+                    Image(
+                        contentScale = ContentScale.FillWidth,
+                        painter = painterResource(R.drawable.img_nazi_the_man_in_the_high_castle),
+                        contentDescription = "blurred background",
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .blur(10.dp),
+                    )
 
-            Text(
-                modifier = Modifier
-                    .padding(10.dp)
-                    .align(Alignment.TopStart)
-                    .background(Color(0x99000000), shape = RoundedCornerShape(4.dp))
-                    .padding(horizontal = 8.dp, vertical = 2.dp),
-                text = stringResource(R.string.before),
-                style = customizedTextStyle(
-                    fontSize = 14,
-                    fontWeight = 400, color = Color.White,
-                )
-            )
+                    // Clear image - revealed from the right side, covering right side of divider
+                    Box(
+                        modifier = Modifier
+                            .graphicsLayer {
+                                clip = true
+                                shape = GenericShape { size, _ ->
+                                    val revealStart = size.width - offsetX
+                                    moveTo(revealStart, 0f)
+                                    lineTo(size.width, 0f)
+                                    lineTo(size.width, size.height)
+                                    lineTo(revealStart, size.height)
+                                    close()
+                                }
+                            }
+                    ) {
+                        Image(
+                            contentScale = ContentScale.FillWidth,
+                            painter = painterResource(R.drawable.img_nazi_the_man_in_the_high_castle),
+                            contentDescription = "clear image",
+                            modifier = Modifier.fillMaxSize(),
+                        )
 
-            // After Image Section
-            Box(
-                modifier = Modifier
-                    .graphicsLayer {
-                        clip = true
-                        shape = GenericShape { size, _ ->
-                            val revealWidth = size.width * (1f - dividerLineProgress.value)
-                            moveTo(0f, 0f)
-                            lineTo(revealWidth, 0f)
-                            lineTo(revealWidth, size.height)
-                            lineTo(0f, size.height)
-                            close()
+                    }
+
+                    if (boxWidthPx > 0) {
+                        // Divider position: moves from right (0) to left (max)
+                        val xPx = (boxWidthPx - offsetX).roundToInt()
+                        // Load the handle icon as a Painter, works with VectorDrawable
+                        val painter = painterResource(id = R.drawable.ic_swipe_before_and_after)
+                        Box(
+                            contentAlignment = Alignment.Center,
+                            modifier = Modifier
+                                .fillMaxHeight()
+                                .offset { IntOffset(x = xPx, y = 0) }
+                        ) {
+                            // Draw the vertical divider line and the handle icon centered
+                            androidx.compose.foundation.Canvas(
+                                modifier = Modifier
+                                    .fillMaxHeight()
+                                    .width(2.dp),
+                                onDraw = {
+                                    // Draw sharp vertical divider
+                                    drawLine(
+                                        color = Color.White,
+                                        start = Offset(size.width / 2, 0f),
+                                        end = Offset(size.width / 2, size.height),
+                                        strokeWidth = size.width // 2.dp
+                                    )
+                                    // Circle background for handle
+                                    val iconSize = 30.dp.toPx() // Circle size for handle background
+                                    val painterSize = 20.dp.toPx()
+                                    val centerY = size.height / 2
+                                    val centerX = size.width / 2
+                                    drawCircle(
+                                        color = Color.White,
+                                        radius = iconSize / 2f,
+                                        center = Offset(centerX, centerY)
+                                    )
+
+                                    // Draw the VectorDrawable directly using painter
+                                    translate(
+                                        left = centerX - painterSize / 2f,
+                                        top = centerY - painterSize / 2f
+                                    ) {
+                                        with(painter) {
+                                            draw(size = Size(painterSize, painterSize))
+                                        }
+                                    }
+                                }
+                            )
                         }
                     }
-            ) {
-                // After Image
-                Image(
+                }
+
+
+                Text(
                     modifier = Modifier
-                        .fillMaxSize(),
-                    contentScale = ContentScale.FillWidth,
-                    painter = painterResource(R.drawable.img_nazi_the_man_in_the_high_castle),
-                    contentDescription = "After"
+                        .padding(10.dp)
+                        .align(Alignment.TopStart)
+                        .background(Color(0x99000000), shape = RoundedCornerShape(4.dp))
+                        .padding(horizontal = 8.dp, vertical = 2.dp),
+                    text = stringResource(R.string.before),
+                    style = customizedTextStyle(
+                        fontSize = 14,
+                        fontWeight = 400, color = Color.White,
+                    )
                 )
 
-                // Title After
                 Text(
                     modifier = Modifier
                         .padding(10.dp)
@@ -191,53 +244,8 @@ fun ImageBeforeAndAfterSwipeAnimation(modifier: Modifier = Modifier) {
                 )
             }
 
-            if (boxWidthPx > 0 && showDividerLine) {
-                val progress = dividerLineProgress.value
-                val xPx = ((1f - progress) * boxWidthPx).toInt()
-
-                Row(
-                    modifier = Modifier
-                        .fillMaxHeight()
-                        .offset { IntOffset(x = xPx - 8.dp.roundToPx(), y = 0) }
-                ) {
-                    Box(
-                        modifier = Modifier
-                            .width(4.dp)
-                            .fillMaxHeight()
-                            .background(
-                                color = Color(0xffff5b00).copy(alpha = 0.1f)
-                            )
-                            .blur(10.dp)
-                    )
-
-                    Box(
-                        modifier = Modifier
-                            .width(2.5.dp)
-                            .fillMaxHeight()
-                            .background(
-                                brush = Brush.verticalGradient(
-                                    colors = listOf(
-                                        Color(0xFF007AFF),
-                                        Color(0xFF34C759),
-                                    )
-                                )
-                            )
-                    )
-
-                    Box(
-                        modifier = Modifier
-                            .width(4.dp)
-                            .fillMaxHeight()
-                            .background(
-                                color = Color(0xffff5b00).copy(alpha = 0.1f)
-                            )
-                            .blur(10.dp)
-                    )
-                }
-            }
         }
-
-    }
+    )
 }
 
 @Preview
