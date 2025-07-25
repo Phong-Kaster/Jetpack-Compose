@@ -28,7 +28,6 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -58,10 +57,10 @@ import com.example.jetpack.ui.modifier.doublePulseEffect
 import com.example.jetpack.ui.modifier.pulseEffect
 import com.example.jetpack.ui.theme.customizedTextStyle
 import com.example.jetpack.ui.view.AnalogueClock
-import com.example.jetpack.ui.view.AnimatedBorderCard
 import com.example.jetpack.ui.view.AtomicLoader
 import com.example.jetpack.ui.view.DNAHelix
-import com.example.jetpack.ui.view.ImageRevealAnimation
+import com.example.jetpack.ui.view.ImageBeforeAndAfterSwipeAnimation
+import com.example.jetpack.ui.view.ImageBeforeAndAfterSwipeSection
 import com.example.jetpack.ui.view.WeatherSunrise
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -183,8 +182,12 @@ fun ArticleLayout() {
                     .padding(start = 16.dp, end = 16.dp, top = 0.dp, bottom = 32.dp)
                     .fillMaxSize()
             ) {
-                item(key = "ImageRevealAnimation", span = { GridItemSpan(2) }) {
-                    ImageRevealAnimation(modifier = Modifier.fillMaxWidth())
+                item(key = "ImageBeforeAndAfterSwipeAnimation", span = { GridItemSpan(2) }) {
+                    ImageBeforeAndAfterSwipeAnimation(modifier = Modifier.fillMaxWidth())
+                }
+
+                item(key = "ImageBeforeAndAfterSwipeSection", span = { GridItemSpan(2) }) {
+                    ImageBeforeAndAfterSwipeSection(modifier = Modifier.fillMaxWidth())
                 }
 
                 item(key = "WeatherSunrise", span = { GridItemSpan(2) }) {

@@ -2,7 +2,6 @@ package com.example.jetpack.ui.view
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.FastOutLinearInEasing
-import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
@@ -57,7 +56,7 @@ import kotlinx.coroutines.delay
  * @author Phong-Kaster
  */
 @Composable
-fun ImageRevealAnimation(modifier: Modifier = Modifier) {
+fun ImageBeforeAndAfterSwipeAnimation(modifier: Modifier = Modifier) {
     val dividerLineProgress = remember { Animatable(0f) }
     var boxWidthPx by remember { mutableIntStateOf(0) }
     var showDividerLine by remember { mutableStateOf(true) }
@@ -246,5 +245,5 @@ fun ImageRevealAnimation(modifier: Modifier = Modifier) {
 @Preview
 @Composable
 private fun PreviewImageRevealAnimation() {
-    ImageRevealAnimation()
+    ImageBeforeAndAfterSwipeAnimation()
 }
