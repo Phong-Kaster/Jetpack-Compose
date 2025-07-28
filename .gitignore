@@ -13,3 +13,5 @@
 .externalNativeBuild
 .cxx
 local.properties
+/.idea/AndroidProjectSystem.xml
+/.idea/ChatHistory_schema_v2.xml
