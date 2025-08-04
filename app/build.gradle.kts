@@ -80,15 +80,18 @@ android {
 
 dependencies {
 
-    implementation("androidx.core:core-ktx:1.16.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.9.2")
-    implementation("androidx.activity:activity-compose:1.10.1")
-    implementation(platform("androidx.compose:compose-bom:2025.07.00"))
-    implementation("androidx.compose.ui:ui")
-    implementation("androidx.compose.ui:ui-graphics")
-    implementation("androidx.compose.ui:ui-tooling-preview")
-    implementation("androidx.compose.material3:material3")
-    implementation("androidx.appcompat:appcompat:1.7.1")
+    implementation(libs.core.ktx)
+    implementation(libs.lifecycle.runtime.ktx)
+    implementation(libs.activity.compose)
+    implementation(platform(libs.compose.bom))
+
+    implementation(libs.ui)
+    implementation(libs.ui.graphics)
+    implementation(libs.ui.tooling.preview)
+
+    implementation(libs.material3)
+    implementation(libs.appcompat)
+
     implementation("com.google.android.material:material:1.12.0")
     implementation("androidx.constraintlayout:constraintlayout:2.2.1")
     implementation("com.google.firebase:firebase-crashlytics-buildtools:3.0.5")
@@ -111,8 +114,8 @@ dependencies {
 
     // Dependency injection with Hilt - https://developer.android.com/training/dependency-injection/hilt-android#setup
     // Hilt Android Processor - https://mvnrepository.com/artifact/com.google.dagger/hilt-android-compiler
-    implementation("com.google.dagger:hilt-android:2.57")
-    kapt("com.google.dagger:hilt-android-compiler:2.57")
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
     implementation("androidx.hilt:hilt-navigation-fragment:1.2.0")
 
 
@@ -121,9 +124,9 @@ dependencies {
 
 
     // Get started with the Navigation component - https://developer.android.com/guide/navigation/get-started#Set-up
-    implementation("androidx.navigation:navigation-fragment-ktx:2.9.3")
-    implementation("androidx.navigation:navigation-ui-ktx:2.9.3")
-    implementation("androidx.navigation:navigation-compose:2.9.3")
+    implementation(libs.navigation.fragment.ktx)
+    implementation(libs.navigation.ui.ktx)
+    implementation(libs.navigation.compose)
 
 
     // In-app Review - https://developer.android.com/guide/playcore/in-app-review/kotlin-java#setup
@@ -170,7 +173,7 @@ dependencies {
 
 
     // Consume flows safely in Jetpack Compose - https://medium.com/androiddevelopers/consuming-flows-safely-in-jetpack-compose-cde014d0d5a3
-    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.9.2")
+    implementation(libs.lifecycle.runtime.compose)
 
 
     // Shared Element Transition - https://developer.android.com/develop/ui/compose/animation/shared-elements
