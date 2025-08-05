@@ -6,6 +6,7 @@ hilt = "2.57"
 navigation = "2.9.3"
 core-ktx = "1.16.0"
 activity-compose = "1.10.1"
+navigation-safe-args-gradle-plugin = "2.9.3"
 
 [libraries]
 # Compose
@@ -30,6 +31,7 @@ hilt-compiler = { module = "com.google.dagger:hilt-android-compiler", version.re
 # Navigation
 material3 = { module = "androidx.compose.material3:material3" }
 navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigation" }
+navigation-safe-args-gradle-plugin = { module = "androidx.navigation:navigation-safe-args-gradle-plugin", version.ref = "navigation-safe-args-gradle-plugin" }
 navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigation" }
 navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation" }
 
