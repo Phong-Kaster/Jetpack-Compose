@@ -13,15 +13,20 @@ val LocalTutorial =
     staticCompositionLocalOf { TutorialState(enableTutorial = true) }
 
 @Stable
-class TutorialState
-constructor(
+class TutorialState(
     enableTutorial: Boolean,
-    val onDone: () -> Unit = {}
+    val onDone: () -> Unit = {},
 ) {
     var enable by mutableStateOf(enableTutorial)
     var addButtonSize by mutableStateOf(Rect.Zero)
     var titleRect by mutableStateOf(Rect.Zero)
     var photoRect by mutableStateOf(Rect.Zero)
+
+
+
+    var naziBadgeRect by mutableStateOf(Rect.Zero)
+    var naziEagleRect by mutableStateOf(Rect.Zero)
+    val nameRect by mutableStateOf(Rect.Zero)
 
     var currentTutorial by mutableIntStateOf(0)
     val TOTAL_TUTORIALS = 3

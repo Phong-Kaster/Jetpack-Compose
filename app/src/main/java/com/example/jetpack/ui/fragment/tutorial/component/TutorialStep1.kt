@@ -76,7 +76,7 @@ fun TutorialStep1() {
                 .offset { tutorial.addButtonSize.topLeft.toIntOffset() }
                 .clip(shape = CircleShape)
                 .size(48.dp)
-                .background(color = ColorUVIndexLow)
+                .background(color = Color.Red)
                 .clickable { tutorial.currentTutorial = 1 }
                 .constrainAs(button) {}
         ) {

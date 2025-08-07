@@ -13,6 +13,8 @@ constructor(private val tutorialRepository: TutorialRepository) : ViewModel() {
 
     val tutorial = TutorialState(
         enableTutorial = tutorialRepository.enableTutorial(),
-        onDone = { tutorialRepository.disableTutorial() }
+        onDone = {
+//            tutorialRepository.disableTutorial()
+        }
     )
 }

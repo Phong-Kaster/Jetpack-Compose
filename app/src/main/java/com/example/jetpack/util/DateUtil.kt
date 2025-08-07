@@ -23,6 +23,7 @@ object DateUtil {
 
     // DAY FORMAT
     const val PATTERN_EEE_MMM_dd = "EEE, MMM dd" // Mon, December 01
+    const val PATTERN_EEE_MMM_dd_YYYY = "EEE, MMM dd YYYY" // Mon, December 01 2025
     const val PATTERN_EEEE = "EEEE" // Monday
     const val PATTERN_EEE = "EEE" // Mon
     const val PATTERN_YYYY = "YYYY" // 2024

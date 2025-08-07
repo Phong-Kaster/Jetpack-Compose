@@ -197,6 +197,7 @@ dependencies {
 
     // Coil Compose - https://github.com/coil-kt/coil
     implementation("io.coil-kt:coil-compose:2.7.0")
+    implementation("io.coil-kt:coil-gif:2.7.0")
 
     // Ensure you have Glide library dependency in your build.gradle file
     implementation("com.github.bumptech.glide:glide:4.16.0")
