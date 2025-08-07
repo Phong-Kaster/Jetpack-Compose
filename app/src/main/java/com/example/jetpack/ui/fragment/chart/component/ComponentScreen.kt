@@ -18,6 +18,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -59,6 +60,7 @@ import com.example.jetpack.ui.theme.animationInfiniteFloatSuperLong
 import com.example.jetpack.ui.theme.customizedTextStyle
 import com.example.jetpack.ui.view.AnimatedProgressBar
 import com.example.jetpack.ui.view.ContextualFlowRowSample
+import com.example.jetpack.ui.view.CupertinoSwitch
 import com.example.jetpack.ui.view.CustomizedCheckbox
 import com.example.jetpack.ui.view.CustomizedProgressBar
 import com.example.jetpack.ui.view.GlowingButton
@@ -406,7 +408,10 @@ fun ComponentScreen(
                             color = LocalTheme.current.primary,
                             shape = RoundedCornerShape(20.dp),
                         )
-                        .padding(vertical = 16.dp, horizontal = 10.dp)
+                        .clip(shape = RoundedCornerShape(20.dp))
+                        .background(color = Color.DarkGray)
+                        .padding(5.dp)
+
                 )
             }
         )
@@ -450,6 +455,47 @@ fun ComponentScreen(
                             context.showToast("Glowing Button Clicked")
                         },
                     )
+                }
+            }
+        )
+
+        item(
+            key = "cupertinoSwitch",
+            span = { GridItemSpan(1) },
+            content = {
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(16.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                ) {
+                    Text(
+                        text = "Cupertino Switch",
+                        style = customizedTextStyle(
+                            fontSize = 14,
+                            fontWeight = 600,
+                            color = Color.White
+                        ),
+                        modifier = Modifier.fillMaxWidth(),
+                    )
+                    Row(
+                        horizontalArrangement = Arrangement.SpaceAround,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        CupertinoSwitch(
+                            checked = true,
+                            onCheckedChange = { boolean -> },
+                            modifier = Modifier
+                                .wrapContentSize()
+                        )
+
+                        CupertinoSwitch(
+                            checked = false,
+                            onCheckedChange = { boolean -> },
+                            modifier = Modifier
+                                .wrapContentSize()
+                        )
+                    }
+
                 }
             }
         )
