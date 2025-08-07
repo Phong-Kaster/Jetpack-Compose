@@ -34,11 +34,11 @@ fun CupertinoSwitch(
     width: Dp = 51.dp,
     height: Dp = 31.dp,
     thumbSize: Dp = 27.dp,
+    trackOnColor: Color = Color(0xFF34C759),
+    trackOffColor: Color = Color(0xFFDFDFDF),
+    thumbColor: Color = Color.White
 ) {
     var checkedValue by remember(checked) { mutableStateOf(checked) }
-    val trackOnColor = Color(0xFF34C759)
-    val trackOffColor = Color(0xFFDFDFDF)
-    val thumbColor = Color.White
     val trackColor by animateColorAsState(
         targetValue = if (checkedValue) trackOnColor else trackOffColor,
         animationSpec = TweenSpec(durationMillis = 200), label = "trackColor"
