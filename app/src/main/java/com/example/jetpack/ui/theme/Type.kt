@@ -1,12 +1,16 @@
 package com.example.jetpack.ui.theme
 
 import androidx.compose.material3.Typography
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.PlatformTextStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 import com.example.jetpack.R
 
@@ -47,6 +51,10 @@ val InterFontFamily = FontFamily(
     Font(R.font.inter_light, FontWeight.Light),
     Font(R.font.inter_extra_light, FontWeight.ExtraLight),
     Font(R.font.inter_thin, FontWeight.Thin),
+)
+
+val SofiaFontFamily = FontFamily(
+    Font(R.font.font_sofia_pro_black, FontWeight.Black),
 )
 
 val InterTypography = Typography(
@@ -98,14 +106,37 @@ fun customizedTextStyle(
     fontSize: Int = 14,
     fontWeight: Int = 400,
     lineHeight: Int = (fontSize * 1.5f).toInt(),
-    color: Color = TextColor3
+    color: Color = TextColor3,
+    textDecoration: TextDecoration? = null,
+    fontFamily: FontFamily = InterFontFamily,
 ): TextStyle = TextStyle(
-    fontFamily = InterFontFamily,
+    fontFamily = fontFamily,
     fontSize = fontSize.sp,
     fontWeight = FontWeight(fontWeight),
     lineHeight = lineHeight.sp,
     color = color,
+    textDecoration = textDecoration
 )
+
+private val TextUnit.nonScaledSp
+    @Composable
+    get() = (this.value / LocalDensity.current.fontScale).sp
+
+@Composable
+fun customizedTextStyleNonScale(
+    fontSize: Int = 14,
+    fontWeight: Int = 400,
+    lineHeight: Int = (fontSize * 1.5f).toInt(),
+    color: Color = TextColor3
+): TextStyle = TextStyle(
+    fontFamily = InterFontFamily,
+    fontSize = fontSize.sp.nonScaledSp,
+    fontWeight = FontWeight(fontWeight),
+    lineHeight = lineHeight.sp,
+    color = color,
+)
+
+
 
 val h38 = TextStyle(
     fontFamily = InterFontFamily,

@@ -2,7 +2,6 @@ package com.example.jetpack.ui.component
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -26,12 +25,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.example.jetpack.R
 import com.example.jetpack.configuration.Language
-import com.example.jetpack.core.LocalTheme
+import com.example.jetpack.core.base.LocalTheme
 import com.example.jetpack.ui.modifier.borderWithAnimatedGradient
-import com.example.jetpack.ui.theme.Background2
 import com.example.jetpack.ui.theme.customizedTextStyle
 import com.example.jetpack.util.ViewUtil
 
@@ -66,14 +63,14 @@ fun SquareElement(
 
         Text(
             text = stringResource(id = language.text),
-            style = customizedTextStyle(fontWeight = 400, fontSize = 18),
+            style = customizedTextStyle(fontWeight = 400, fontSize = 18, color = LocalTheme.current.textColor),
             maxLines = 1,
             overflow = TextOverflow.Ellipsis
         )
 
         Text(
             text = language.name,
-            style = customizedTextStyle(fontWeight = 400, fontSize = 28),
+            style = customizedTextStyle(fontWeight = 400, fontSize = 28, color = LocalTheme.current.textColor),
             maxLines = 1,
             overflow = TextOverflow.Ellipsis
         )
@@ -81,7 +78,7 @@ fun SquareElement(
 
         Text(
             text = language.code,
-            style = customizedTextStyle(fontWeight = 300, fontSize = 16),
+            style = customizedTextStyle(fontWeight = 300, fontSize = 16, color = LocalTheme.current.textColor),
             maxLines = 1,
             overflow = TextOverflow.Ellipsis
         )

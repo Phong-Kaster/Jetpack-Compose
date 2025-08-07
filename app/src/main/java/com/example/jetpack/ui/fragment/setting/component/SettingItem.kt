@@ -1,7 +1,11 @@
 package com.example.jetpack.ui.fragment.setting.component
 
+import androidx.compose.animation.animateColor
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -14,6 +18,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.BasicText
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.KeyboardArrowRight
 import androidx.compose.material3.Icon
@@ -22,21 +27,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.jetpack.R
-import com.example.jetpack.core.LocalTheme
+import com.example.jetpack.core.base.LocalTheme
 import com.example.jetpack.ui.modifier.borderWithAnimatedGradient
-import com.example.jetpack.ui.theme.Background
-import com.example.jetpack.ui.theme.PrimaryColor
 import com.example.jetpack.ui.theme.ShadowColor
-import com.example.jetpack.ui.theme.WeakColor
-import com.example.jetpack.ui.theme.body14
-import com.example.jetpack.ui.theme.body15
 import com.example.jetpack.ui.theme.customizedTextStyle
-import com.example.jetpack.ui.theme.outerShadow
+import com.example.jetpack.ui.modifier.outerShadow
 import com.example.jetpack.util.ViewUtil
 
 @Composable
@@ -46,6 +47,14 @@ fun SettingItem(
     subtitle: String? = null,
     onClick: () -> Unit,
 ) {
+    val infiniteTransition = rememberInfiniteTransition(label = "infinite transition")
+    val animatedColor = infiniteTransition.animateColor(
+        initialValue = Color.Green,
+        targetValue = Color.Yellow,
+        animationSpec = infiniteRepeatable(animation = tween(1500), RepeatMode.Reverse),
+        label = "animatedColor"
+    ).value
+
     Row(
         modifier = Modifier
             .outerShadow(4.dp, 1.dp, ShadowColor, RoundedCornerShape(15.dp))
@@ -81,7 +90,15 @@ fun SettingItem(
                 color = LocalTheme.current.textColor
             )
             if (subtitle != null) {
-                Text(text = subtitle, style = body14, color = LocalTheme.current.dim)
+                BasicText(
+                    text = subtitle,
+                    color = { animatedColor },
+                    style = customizedTextStyle(
+                        fontWeight = 600,
+                        fontSize = 16,
+                    ),
+
+                )
             }
         }
         Spacer(modifier = Modifier.weight(0.9F))

@@ -1,5 +1,9 @@
 package com.example.jetpack.configuration
 
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
+
 object Constant {
     const val SETTING_DATASTORE = "setting_datastore"
     const val TUTORIAL_DATASTORE = "tutorial_datastore"
@@ -23,13 +27,13 @@ object Constant {
     const val NOTIFICATION_MILESTONE_3_MINUTE = 39
 
     /* AccuWeather - https://developer.accuweather.com/accuweather-locations-api/apis/get/locations/v1/cities/autocomplete */
-    const val ACCU_WEATHER_KEY = "x5ADcexs7Ge2ge8ZlB8T8JnJtWG4AhSJ"
+    const val ACCU_WEATHER_KEY = "ldjskgPZUf0u08CWHUQoG4msDPx0NvuK"
     const val ACCU_WEATHER_URL = "https://dataservice.accuweather.com"
 
     /* default range */
-    val defaultRange:  Pair<Float, Float> = 0F to 300F
+    val defaultRange: Pair<Float, Float> = 0F to 300F
 
-    /* FOREGROUND SERVICE */
+    /* foreground service */
     const val FOREGROUND_SERVICE_CHANNEL_ID = "foreground_service_id"
     const val FOREGROUND_SERVICE_NOTIFICATION_ID = 1
     const val FOREGROUND_SERVICE_CHANNEL_NAME = "foreground_service"
@@ -41,8 +45,65 @@ object Constant {
     const val SECOND_ON_MINUTE = 60 // a minute has 60 seconds
     const val MINUTE_ON_HOUR = 60 // a hour has 60 minutes
 
-    const val INITIAL_PAGE_HOUR = 4800 // we have to initial page to make time picker loop when it reach 23h
-    const val INITIAL_PAGE_MINUTE = 6000 // we have to initial page to make time picker loop when it reach 23h
-    const val INITIAL_PAGE_SECOND = 6000 // we have to initial page to make time picker loop when it reach 23h
-    const val MAXIMUM_PAGE = 10000 // we have to initial page to make time picker loop when it reach 23h
+    const val INITIAL_PAGE_HOUR =
+        4800 // we have to initial page to make time picker loop when it reach 23h
+    const val INITIAL_PAGE_MINUTE =
+        6000 // we have to initial page to make time picker loop when it reach 23h
+    const val INITIAL_PAGE_SECOND =
+        6000 // we have to initial page to make time picker loop when it reach 23h
+    const val MAXIMUM_PAGE =
+        10000 // we have to initial page to make time picker loop when it reach 23h
+
+    val LIST_OF_COLOUR = listOf(
+        Color.Cyan,
+        Color.Blue,
+        Color.Magenta,
+        Color.Red,
+        Color.Yellow,
+        Color.Green,
+        Color.Cyan,
+        Color.Blue,
+        Color.Magenta,
+        Color.Red,
+        Color.Yellow,
+        Color.Green,
+        Color.Cyan,
+        Color.Blue,
+        Color.Magenta
+    )
+
+    /* only for download file worker */
+    const val DOWNLOAD_FILE_WORKER_KEY_FILE_URL = "key_file_url"
+    const val DOWNLOAD_FILE_WORKER_KEY_FILE_TYPE = "key_file_type"
+
+    const val DOWNLOAD_FILE_WORKER_KEY_FILE_NAME = "key_file_name"
+    const val DOWNLOAD_FILE_WORKER_KEY_FILE_URI = "key_file_uri"
+
+    const val DOWNLOAD_FILE_WORKER_CHANNEL_NAME = "download_file_worker_demo_channel"
+    const val DOWNLOAD_FILE_WORKER_CHANNEL_DESCRIPTION = "download_file_worker_demo_description"
+
+    const val DOWNLOAD_FILE_WORKER_CHANNEL_ID = "download_file_worker_channel"
+    const val DOWNLOAD_FILE_WORKER_NOTIFICATION_ID = 1687
+    /* end of only for download file worker */
+
+    val MP4: Pair<String, String> = "mp4" to "video/mp4"
+    val PDF: Pair<String, String> = "pdf" to "application/pdf"
+    val PNG: Pair<String, String> = "png" to  "image/png"
+
+    /*They are used in MediaPlayerService/MediaPlayerReceiver*/
+    const val ACTION = "action"
+    const val ACTION_PLAY = "action_play"
+    const val ACTION_PAUSE = "action_pause"
+    const val ACTION_STOP = "action_stop"
+    const val ACTION_NEXT = "action_next"
+    const val ACTION_PREVIOUS = "action_previous"
+    const val MESSAGE = "message"
+
+
+    /*They are used in Collapsible Topbar 4 Fragment*/
+    val AppBarCollapsedHeight: Dp = 56.dp
+    val AppBarExpandedHeight: Dp = 400.dp
+
+    const val REQUEST_CODE_1 = 1896
+    const val REQUEST_CODE_2 = 1897
 }

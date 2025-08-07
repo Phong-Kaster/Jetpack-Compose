@@ -1,25 +1,40 @@
 package com.example.jetpack.notification
 
+import android.Manifest
 import android.app.AlarmManager
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.util.Log
+import androidx.core.app.ActivityCompat
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
+import com.example.jetpack.MainActivity
 import com.example.jetpack.R
+import com.example.jetpack.configuration.Constant
 import com.example.jetpack.configuration.Constant.NOTIFICATION_CHANNEL_ID
+import com.example.jetpack.configuration.Constant.NOTIFICATION_ID
 import com.example.jetpack.util.AppUtil
+import com.example.jetpack.util.LogUtil
 import java.util.Calendar
 
+
 /**
- * @author Phong-Apero
- * @since 07-09-2023
  * this class is responsible for creating & show notification
+ *
+ * @author Phong-Kaster
+ * @since 07-09-2023
  */
 object NotificationManager {
     /**
      * Note: Create the NotificationChannel, but only on API 26+ because the NotificationChannel
      * class is new and not in the support library
+     *
+     *
+     * NOTIFICATION_CHANNEL_ID must to be the same with CHANNEL ID in Notification Builder.
      */
     fun createNotificationChannel(context: Context) {
         //1. define variable
@@ -48,7 +63,7 @@ object NotificationManager {
 
 
         //2. find time of next notification
-        AppUtil.logcat(message = "now is $date/$month/$year $currentHour:$currentMinute")
+        LogUtil.logcat(message = "now is $date/$month/$year $currentHour:$currentMinute")
 
 
         // 3. fire notification at specific time
@@ -65,7 +80,43 @@ object NotificationManager {
 
         //Final. set up notification at specific time
         val intent = Intent(context, NotificationReceiver::class.java)
-        val pendingIntent = PendingIntent.getBroadcast(context, 100, intent, PendingIntent.FLAG_IMMUTABLE)
+        intent.putExtra(Constant.MESSAGE, "Phong-Kaster")
+        val pendingIntent = PendingIntent.getBroadcast(context, 100, intent, PendingIntent.FLAG_MUTABLE)
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, alarmTime.timeInMillis, pendingIntent)
+    }
+
+     fun fireProgressNotification(context: Context){
+         Log.d("TAG", "fireProgressNotification: ")
+        //1. Create an explicit intent for an Activity in your app
+        val destinationIntent = Intent(context, MainActivity::class.java)
+         destinationIntent.putExtra(Constant.MESSAGE, "Phongaksjdfol")
+        destinationIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        val pendingIntent = PendingIntent.getActivity(context, 1896, destinationIntent, PendingIntent.FLAG_IMMUTABLE)
+
+
+        val builder = NotificationCompat.Builder(context, NOTIFICATION_CHANNEL_ID)
+        builder
+            .setSmallIcon(R.drawable.ic_nazi_swastika)
+            .setContentTitle(context.getString(R.string.downloading))
+            //.setContentText(context.getString(R.string.downloading))
+            .setOngoing(true)
+            .setContentIntent(pendingIntent)
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setProgress(100, 0, true)
+
+
+        //4. Show notification with notificationId which is a unique int for each notification that you must define
+        val notificationManager = NotificationManagerCompat.from(context)
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            return
+        }
+
+
+        try {
+            notificationManager.cancel(NOTIFICATION_ID)
+            notificationManager.notify(NOTIFICATION_ID, builder.build())
+        } catch (ex: Exception) {
+            ex.printStackTrace()
+        }
     }
 }

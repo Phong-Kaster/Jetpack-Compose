@@ -1,11 +1,10 @@
 <resources>
     <string name="app_name">Bundeswehr</string>
-    <string name="fake_title">Lorem Ipsum</string>
-    <string name="fake_message">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.</string>
-    <string name="fake_content">
+    <string name="fake_title" translatable="false">Lorem Ipsum</string>
+    <string name="fake_message" translatable="false">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.</string>
+    <string name="fake_content" translatable="false">
         Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-        \n\n
-        Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec qu</string>
+        \n\nAenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec qu</string>
 
     <string name="home">Home</string>
     <string name="chart">Chart</string>
@@ -88,7 +87,6 @@
     <string name="no_internet_connection">No internet connection</string>
     <string name="search">Search…</string>
     <string name="foreground_service">Foreground Service</string>
-    <string name="playing_sundial_dreams">Playing sundial dreams</string>
     <string name="basic_text_field_with_state">Basic Text Field With State</string>
     <string name="common_usage">Common usage</string>
     <string name="original">Original</string>
@@ -138,4 +136,49 @@
     <string name="light_mode">Light mode</string>
     <string name="component">Component</string>
     <string name="kotlin_flow">Kotlin flow</string>
+    <string name="pitch_to_zoom">Pitch To Zoom</string>
+    <string name="download_with_worker_manager">Download with worker manager</string>
+    <string name="the_napoleonic_wars_greatly_expanded">The Napoleonic Wars greatly expanded the French empire until Napoleon Bonaparte’s military prowess faltered and he was exiled</string>
+    <string name="curvy_line_chart">Curvy Line Chart</string>
+    <string name="blood_pressure_chart">Blood Pressure Chart</string>
+    <string name="pie_chart">Pie Chart</string>
+    <string name="donut_chart">Donut Chart</string>
+    <string name="background">Background</string>
+    <string name="text">Text</string>
+    <string name="downloading">Downloading</string>
+    <string name="tap_to_download">Tap to download</string>
+    <string name="tap_to_open">Tap to open</string>
+    <string name="filename_can_not_be_empty">Filename can not be empty</string>
+    <string name="filename_can_not_have_the_following_character"><![CDATA[Filename can not have the following characters: !@#$%&amp;*(){}]]></string>
+    <string name="unknown">Unknown</string>
+    <string name="music_player">Music player using Media player</string>
+    <string name="music_player_2">Music player using Media player 2</string>
+    <string name="tap_to_set_up">Tap to set up</string>
+    <string name="download_manager">Download manager</string>
+    <string name="collapsible_topbar_4">Collapsible Topbar 4</string>
+    <string name="collapsible_topbar_5">Collapsible Topbar 5</string>
+    <string name="about">About</string>
+    <string name="countdown_snackbar">Countdown Snackbar</string>
+    <string name="colour">Colour</string>
+    <string name="calendar">Calendar</string>
+    <string name="monday">Monday</string>
+    <string name="mon">Mon</string>
+    <string name="tuesday">Tuesday</string>
+    <string name="tue">Tue</string>
+    <string name="wednesday">Wednesday</string>
+    <string name="wed">Wed</string>
+    <string name="thursday">Thursday</string>
+    <string name="thu">Thu</string>
+    <string name="friday">Friday</string>
+    <string name="fri">Fri</string>
+    <string name="saturday">Saturday</string>
+    <string name="sat">Sat</string>
+    <string name="sunday">Sunday</string>
+    <string name="sun">Sun</string>
+    <string name="today">Today</string>
+    <string name="filename_can_not_be_blank">Filename can not blank</string>
+    <string name="autofill">Autofill</string>
+    <string name="image_reveal_animation">Image Reveal Animation</string>
+    <string name="before">Before</string>
+    <string name="after">After</string>
 </resources>

@@ -1,13 +1,11 @@
 package com.example.jetpack.ui.fragment.motionlayout.component
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
@@ -122,7 +120,7 @@ fun AnimationLayout2() {
         )
 
         Icon(
-            painter = painterResource(id = R.drawable.ic_nazi_symbol),
+            painter = painterResource(id = R.drawable.ic_nazi_swastika),
             contentDescription = null,
             tint = PrimaryColor,
             modifier = Modifier

@@ -16,6 +16,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
@@ -48,10 +49,26 @@ fun RingChart2(
     var sweepAngleBlue by remember { mutableFloatStateOf(0F) }
 
 
-    val animationSweepAngleGreen by animateFloatAsState(targetValue = sweepAngleGreen, animationSpec = animationSpecFloat, label = "sweepAngleGreen")
-    val animationSweepAngleYellow by animateFloatAsState(targetValue = sweepAngleYellow, animationSpec = animationSpecFloat1, label = "animationSweepAngleYellow")
-    val animationSweepAngleRed by animateFloatAsState(targetValue = sweepAngleRed, animationSpec = animationSpecFloat2, label = "animationSweepAngleRed")
-    val animationSweepAngleBlue by animateFloatAsState(targetValue = sweepAngleBlue, animationSpec = animationSpecFloat3, label = "animationSweepAngleBlue")
+    val animationSweepAngleGreen by animateFloatAsState(
+        targetValue = sweepAngleGreen,
+        animationSpec = animationSpecFloat,
+        label = "sweepAngleGreen"
+    )
+    val animationSweepAngleYellow by animateFloatAsState(
+        targetValue = sweepAngleYellow,
+        animationSpec = animationSpecFloat1,
+        label = "animationSweepAngleYellow"
+    )
+    val animationSweepAngleRed by animateFloatAsState(
+        targetValue = sweepAngleRed,
+        animationSpec = animationSpecFloat2,
+        label = "animationSweepAngleRed"
+    )
+    val animationSweepAngleBlue by animateFloatAsState(
+        targetValue = sweepAngleBlue,
+        animationSpec = animationSpecFloat3,
+        label = "animationSweepAngleBlue"
+    )
 
     LaunchedEffect(key1 = data) {
         sweepAngleGreen = 270F
@@ -60,7 +77,7 @@ fun RingChart2(
         sweepAngleBlue = 240F
     }
 
-    Row(modifier = Modifier.fillMaxWidth()){
+    Row(modifier = Modifier.fillMaxWidth()) {
         Column(
             modifier = modifier,
             horizontalAlignment = Alignment.Start
@@ -78,7 +95,7 @@ fun RingChart2(
                             style = Stroke(width = strokeWidth)
                         )
                         drawArc(
-                            color = ColorUVIndexModerate,
+                            color = Color.Red,
                             startAngle = startAngle,
                             sweepAngle = animationSweepAngleGreen,
                             useCenter = false,
@@ -99,7 +116,7 @@ fun RingChart2(
                                 style = Stroke(width = strokeWidth)
                             )
                             drawArc(
-                                color = PrimaryColor,
+                                color = Color.Yellow,
                                 startAngle = startAngle,
                                 sweepAngle = animationSweepAngleYellow,
                                 useCenter = false,
@@ -119,7 +136,7 @@ fun RingChart2(
                                     style = Stroke(width = strokeWidth)
                                 )
                                 drawArc(
-                                    color = ColorUVIndexExtremeHigh,
+                                    color = Color.Green,
                                     startAngle = startAngle,
                                     sweepAngle = animationSweepAngleRed,
                                     useCenter = false,
@@ -139,7 +156,7 @@ fun RingChart2(
                                         style = Stroke(width = strokeWidth)
                                     )
                                     drawArc(
-                                        color = ColorPressureLow,
+                                        color = Color.Cyan,
                                         startAngle = startAngle,
                                         sweepAngle = animationSweepAngleBlue,
                                         useCenter = false,

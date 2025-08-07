@@ -22,24 +22,48 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <!-- for using Bluetooth on Android 12 (API level 31) or higher - https://developer.android.com/develop/connectivity/bluetooth/bt-permissions#declare-android12-or-higher-->
-    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" android:usesPermissionFlags="neverForLocation" tools:targetApi="s" />
-    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT"/>
+    <uses-permission
+        android:name="android.permission.BLUETOOTH_SCAN"
+        android:usesPermissionFlags="neverForLocation"
+        tools:targetApi="s" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+
 
     <!-- for using Bluetooth on Android 11 (API level 30) or lower - https://developer.android.com/develop/connectivity/bluetooth/bt-permissions#declare-android11-or-lower -->
-    <uses-permission android:name="android.permission.BLUETOOTH" android:maxSdkVersion="30" />
+    <uses-permission
+        android:name="android.permission.BLUETOOTH"
+        android:maxSdkVersion="30" />
+
 
     <!-- BLUETOOTH -->
-    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" android:usesPermissionFlags="neverForLocation" tools:targetApi="s" /><!-- Android 12 (API level 31) or higher - https://developer.android.com/develop/connectivity/bluetooth/bt-permissions#declare-android12-or-higher-->
+    <uses-permission
+        android:name="android.permission.BLUETOOTH_SCAN"
+        android:usesPermissionFlags="neverForLocation"
+        tools:targetApi="s" /><!-- Android 12 (API level 31) or higher - https://developer.android.com/develop/connectivity/bluetooth/bt-permissions#declare-android12-or-higher-->
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
-    <uses-permission android:name="android.permission.BLUETOOTH" android:maxSdkVersion="30" /><!-- Android 11 (API level 30) or lower - https://developer.android.com/develop/connectivity/bluetooth/bt-permissions#declare-android11-or-lower -->
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" android:maxSdkVersion="30" /><!-- discover local Bluetooth devices - https://developer.android.com/develop/connectivity/bluetooth/bt-permissions#discover-local-devices -->
-    <uses-feature android:name="android.hardware.bluetooth" android:required="false" /><!-- Our app can NOT work without Bluetooth, if set true then this app will be hidden on Google Play Store - https://developer.android.com/develop/connectivity/bluetooth/bt-permissions#features-->
+    <uses-permission
+        android:name="android.permission.BLUETOOTH"
+        android:maxSdkVersion="30" /><!-- Android 11 (API level 30) or lower - https://developer.android.com/develop/connectivity/bluetooth/bt-permissions#declare-android11-or-lower -->
+    <uses-permission
+        android:name="android.permission.BLUETOOTH_ADMIN"
+        android:maxSdkVersion="30" /><!-- discover local Bluetooth devices - https://developer.android.com/develop/connectivity/bluetooth/bt-permissions#discover-local-devices -->
+    <uses-feature
+        android:name="android.hardware.bluetooth"
+        android:required="false" /><!-- Our app can NOT work without Bluetooth, if set true then this app will be hidden on Google Play Store - https://developer.android.com/develop/connectivity/bluetooth/bt-permissions#features-->
+
 
 
     <!-- FOREGROUND SERVICE -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" /> <!--Android 9 and higher | is the general green light for any foreground service -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" /> <!--Android 14 or higher | only handle media playback - https://developer.android.com/develop/background-work/services/foreground-services#request-foreground-service-permissions-->
 
+
+
+    <!-- READ EXTERNAL STORAGE -->
+    <!-- Required only if your app needs to access audio files that other apps created. -->
+    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="32" />
 
     <application
         android:name=".JetpackApplication"
@@ -90,9 +114,9 @@
             android:name=".LogoNaziSymbol"
             android:enabled="false"
             android:exported="true"
-            android:icon="@drawable/ic_nazi_symbol"
+            android:icon="@drawable/ic_nazi_swastika"
             android:label="@string/app_name"
-            android:roundIcon="@drawable/ic_nazi_symbol"
+            android:roundIcon="@drawable/ic_nazi_swastika"
             android:targetActivity=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -155,6 +179,34 @@
             android:name=".backgroundwork.MediaPlayerService"
             android:exported="false"
             android:foregroundServiceType="mediaPlayback" />
+
+        <service
+            android:name=".backgroundwork.MediaPlayerService2"
+            android:exported="false"
+            android:foregroundServiceType="mediaPlayback" />
+
+        <!-- MEDIA PLAYER SERVICE -->
+        <receiver
+            android:name=".backgroundwork.MediaPlayerReceiver"
+            android:exported="false">
+            <intent-filter>
+                <!-- There actions are stored in configuration/Constant -->
+                <action android:name="action_play" />
+                <action android:name="action_pause" />
+                <action android:name="action_stop" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name=".backgroundwork.MediaPlayerReceiver2"
+            android:exported="false">
+            <intent-filter>
+                <!-- There actions are stored in configuration/Constant -->
+                <action android:name="action_play" />
+                <action android:name="action_pause" />
+                <action android:name="action_stop" />
+            </intent-filter>
+        </receiver>
 
     </application>
 

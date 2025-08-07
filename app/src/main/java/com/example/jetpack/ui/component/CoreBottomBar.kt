@@ -40,8 +40,8 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.jetpack.R
 import com.example.jetpack.configuration.Menu
-import com.example.jetpack.core.LocalNavController
-import com.example.jetpack.core.LocalTheme
+import com.example.jetpack.core.base.LocalNavController
+import com.example.jetpack.core.base.LocalTheme
 import com.example.jetpack.ui.fragment.home.component.HomeBottomSheet
 import com.example.jetpack.ui.fragment.tutorial.component.LocalTutorial
 import com.example.jetpack.ui.modifier.borderWithAnimatedGradient
@@ -85,8 +85,8 @@ fun CoreBottomBar() {
         horizontalArrangement = Arrangement.SpaceEvenly,
     ) {
         listOf(Menu.Home, Menu.Insight).forEach { item ->
-            BottomBarItem(
-                selected = currentDestination?.hierarchy?.any { it.id == item.destinationId } == true,
+            BottomBarElement(
+                enable = currentDestination?.hierarchy?.any { it.id == item.destinationId } == true,
                 drawableId = item.drawableId,
                 stringId = item.nameId,
                 modifier = Modifier.weight(1f)
@@ -118,8 +118,8 @@ fun CoreBottomBar() {
         }
 
         listOf(Menu.Article, Menu.Setting).forEach { item ->
-            BottomBarItem(
-                selected = currentDestination?.hierarchy?.any { it.id == item.destinationId } == true,
+            BottomBarElement(
+                enable = currentDestination?.hierarchy?.any { it.id == item.destinationId } == true,
                 drawableId = item.drawableId,
                 stringId = item.nameId,
                 modifier = Modifier.weight(1f)
@@ -147,8 +147,8 @@ fun CoreBottomBar() {
 }
 
 @Composable
-private fun BottomBarItem(
-    selected: Boolean,
+private fun BottomBarElement(
+    enable: Boolean,
     @DrawableRes drawableId: Int,
     @StringRes stringId: Int,
     modifier: Modifier = Modifier,
@@ -168,17 +168,17 @@ private fun BottomBarItem(
             painter = painterResource(drawableId),
             contentDescription = stringResource(id = stringId),
             modifier = Modifier.size(24.dp),
-            tint = if (selected) LocalTheme.current.textColor else LocalTheme.current.dim,
+            tint = if (enable) LocalTheme.current.textColor else LocalTheme.current.dim,
         )
 
-        if (selected) {
+        if (enable) {
             Text(
                 text = stringResource(stringId),
                 style = customizedTextStyle(
                     fontSize = 14,
                     fontWeight = 600,
                 ),
-                color = if (selected) LocalTheme.current.textColor else LocalTheme.current.dim,
+                color = if (enable) LocalTheme.current.textColor else LocalTheme.current.dim,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
             )

@@ -6,8 +6,8 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -51,14 +51,12 @@ object ViewUtil {
         }
     }
 
-    @Composable
-    inline fun CenterBox(modifier: Modifier = Modifier, content: @Composable BoxScope.() -> Unit) {
-        Box(modifier = modifier, contentAlignment = Alignment.Center) { content() }
-    }
-
     fun Offset.toIntOffset(): IntOffset = IntOffset(
         x = x.toInt(),
         y = y.toInt(),
     )
 
+    fun LazyListState.isAtBottom(): Boolean {
+        return layoutInfo.visibleItemsInfo.lastOrNull()?.index == layoutInfo.totalItemsCount - 1
+    }
 }

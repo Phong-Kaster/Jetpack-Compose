@@ -8,12 +8,5 @@ import dagger.hilt.android.HiltAndroidApp
 class JetpackApplication : Application() {
     override fun onCreate() {
         super.onCreate()
-
-        Log.d("TAG", "onCreate - the A commit")
-        Log.d("TAG", "onCreate - the B commit")
-        Log.d("TAG", "onCreate - the C commit")
-        Log.d("TAG", "onCreate - the D commit")
-        Log.d("TAG", "onCreate - the E commit")
-        Log.d("TAG", "onCreate - the G commit")
     }
 }

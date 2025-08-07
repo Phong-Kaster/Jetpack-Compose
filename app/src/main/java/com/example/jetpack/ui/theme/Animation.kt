@@ -21,3 +21,4 @@ val animationInfiniteFloat2 = infiniteRepeatable<Float>(animation = tween(durati
 val animationInfiniteFloat3 = infiniteRepeatable<Float>(animation = tween(durationMillis = 3000), repeatMode = RepeatMode.Restart)
 val animationInfiniteFloat4 = infiniteRepeatable<Float>(animation = tween(durationMillis = 4000), repeatMode = RepeatMode.Restart)
 val animationInfiniteFloat5 = infiniteRepeatable<Float>(animation = tween(durationMillis = 5000), repeatMode = RepeatMode.Restart)
+val animationInfiniteFloatSuperLong = infiniteRepeatable<Float>(animation = tween(durationMillis = 60000), repeatMode = RepeatMode.Restart)

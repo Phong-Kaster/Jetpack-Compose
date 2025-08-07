@@ -99,7 +99,7 @@ fun SearchBar(
                         },
                         content = {
                             Icon(
-                                painter = painterResource(id = R.drawable.ic_close),
+                                painter = painterResource(id = R.drawable.ic_music_stop),
                                 contentDescription = null,
                                 tint = PrimaryColor,
                                 modifier = Modifier.size(24.dp)

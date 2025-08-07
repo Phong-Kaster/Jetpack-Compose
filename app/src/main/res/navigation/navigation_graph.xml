@@ -117,28 +117,37 @@
         android:name="com.example.jetpack.ui.fragment.webview.WebviewFragment" />
 
     <fragment
-        android:id="@+id/foregroundServiceFragment"
-        android:name="com.example.jetpack.ui.fragment.backgroundwork.MediaPlayerFragment" />
+        android:id="@+id/mediaPlayerFragment"
+        android:name="com.example.jetpack.ui.fragment.mediaplayer.MediaPlayerFragment" />
+
+    <fragment
+        android:id="@+id/mediaPlayerFragment2"
+        android:name="com.example.jetpack.ui.fragment.mediaplayer.MediaPlayerFragment2" />
 
     <fragment
         android:id="@+id/basicTextField2Fragment"
-        android:name="com.example.jetpack.ui.fragment.basictextfield.BasicTextFieldFragment" />
+        android:name="com.example.jetpack.ui.fragment.textfield.BasicTextFieldFragment" />
 
     <fragment
         android:id="@+id/collapsibleTopBarFragment"
-        android:name="com.example.jetpack.ui.fragment.collapsibletopbar.CollapsibleTopBarFragment" />
+        android:name="com.example.jetpack.ui.fragment.collapsibletopbar.collapsible.CollapsibleTopBarFragment" />
 
-    <fragment
-        android:id="@+id/sharedElementTransition"
-        android:name="com.example.jetpack.ui.fragment.sharedelementtransition.SharedElementTransitionFragment" />
 
     <fragment
         android:id="@+id/collapsibleTopBar2Fragment"
-        android:name="com.example.jetpack.ui.fragment.collapsibletopbar.CollapsibleTopbar2Fragment" />
+        android:name="com.example.jetpack.ui.fragment.collapsibletopbar.collapsible2.CollapsibleTopbar2Fragment" />
 
     <fragment
         android:id="@+id/collapsibleTopBar3Fragment"
-        android:name="com.example.jetpack.ui.fragment.collapsibletopbar.CollapsibleTopbar3Fragment" />
+        android:name="com.example.jetpack.ui.fragment.collapsibletopbar.collapsible3.CollapsibleTopbar3Fragment" />
+
+    <fragment
+        android:id="@+id/collapsibleTopBar4Fragment"
+        android:name="com.example.jetpack.ui.fragment.collapsibletopbar.collapsible4.CollapsibleTopbar4Fragment" />
+
+    <fragment
+        android:id="@+id/collapsibleTopBar5Fragment"
+        android:name="com.example.jetpack.ui.fragment.collapsibletopbar.collapsible5.CollapsibleTopbar5Fragment" />
 
     <fragment
         android:id="@+id/lastKnownLocationFragment"
@@ -156,6 +165,18 @@
         android:id="@+id/kotlinFlowFragment"
         android:name="com.example.jetpack.ui.fragment.kotlinflow.KotlinFlowFragment" />
 
+    <fragment
+        android:id="@+id/pitchToZoomFragment"
+        android:name="com.example.jetpack.ui.fragment.pitchtozoom.PitchToZoomFragment" />
+
+
+    <fragment
+        android:id="@+id/downloadWithWorkerFragment"
+        android:name="com.example.jetpack.ui.fragment.downloadwithworker.DownloadWithWorkerFragment" />
+
+    <fragment
+        android:id="@+id/downloadManagerFragment"
+        android:name="com.example.jetpack.ui.fragment.downloadmanager.DownloadManagerFragment" />
 
     <activity
         android:id="@+id/lockscreenActivity"
@@ -315,13 +336,23 @@
         app:popUpToInclusive="true"/>
 
     <action
-        android:id="@+id/toForegroundService"
-        app:destination="@id/foregroundServiceFragment"
+        android:id="@+id/toMediaPlayer"
+        app:destination="@id/mediaPlayerFragment"
         app:enterAnim="@anim/enter_slide_in_right"
         app:exitAnim="@anim/exit_slide_out_left"
         app:popEnterAnim="@anim/enter_slide_in_left"
         app:popExitAnim="@anim/exit_slide_out_right"
         app:popUpToInclusive="true"/>
+
+    <action
+        android:id="@+id/toMediaPlayer2"
+        app:destination="@id/mediaPlayerFragment2"
+        app:enterAnim="@anim/enter_slide_in_right"
+        app:exitAnim="@anim/exit_slide_out_left"
+        app:popEnterAnim="@anim/enter_slide_in_left"
+        app:popExitAnim="@anim/exit_slide_out_right"
+        app:popUpToInclusive="true"/>
+
 
     <action
         android:id="@+id/toBasicTextField2"
@@ -342,15 +373,6 @@
         app:popUpToInclusive="true"/>
 
     <action
-        android:id="@+id/toSharedElementTransition"
-        app:destination="@id/sharedElementTransition"
-        app:enterAnim="@anim/enter_slide_in_right"
-        app:exitAnim="@anim/exit_slide_out_left"
-        app:popEnterAnim="@anim/enter_slide_in_left"
-        app:popExitAnim="@anim/exit_slide_out_right"
-        app:popUpToInclusive="true"/>
-
-    <action
         android:id="@+id/toCollapsibleTopbar2"
         app:destination="@id/collapsibleTopBar2Fragment"
         app:enterAnim="@anim/enter_slide_in_right"
@@ -362,6 +384,25 @@
     <action
         android:id="@+id/toCollapsibleTopbar3"
         app:destination="@id/collapsibleTopBar3Fragment"
+        app:enterAnim="@anim/enter_slide_in_right"
+        app:exitAnim="@anim/exit_slide_out_left"
+        app:popEnterAnim="@anim/enter_slide_in_left"
+        app:popExitAnim="@anim/exit_slide_out_right"
+        app:popUpToInclusive="true"/>
+
+    <action
+        android:id="@+id/toCollapsibleTopbar4"
+        app:destination="@id/collapsibleTopBar4Fragment"
+        app:enterAnim="@anim/enter_slide_in_right"
+        app:exitAnim="@anim/exit_slide_out_left"
+        app:popEnterAnim="@anim/enter_slide_in_left"
+        app:popExitAnim="@anim/exit_slide_out_right"
+        app:popUpToInclusive="true"/>
+
+
+    <action
+        android:id="@+id/toCollapsibleTopbar5"
+        app:destination="@id/collapsibleTopBar5Fragment"
         app:enterAnim="@anim/enter_slide_in_right"
         app:exitAnim="@anim/exit_slide_out_left"
         app:popEnterAnim="@anim/enter_slide_in_left"
@@ -398,6 +439,33 @@
     <action
         android:id="@+id/toKotlinFlow"
         app:destination="@id/kotlinFlowFragment"
+        app:enterAnim="@anim/enter_slide_in_right"
+        app:exitAnim="@anim/exit_slide_out_left"
+        app:popEnterAnim="@anim/enter_slide_in_left"
+        app:popExitAnim="@anim/exit_slide_out_right"
+        app:popUpToInclusive="true"/>
+
+    <action
+        android:id="@+id/toPitchToZoom"
+        app:destination="@id/pitchToZoomFragment"
+        app:enterAnim="@anim/enter_slide_in_right"
+        app:exitAnim="@anim/exit_slide_out_left"
+        app:popEnterAnim="@anim/enter_slide_in_left"
+        app:popExitAnim="@anim/exit_slide_out_right"
+        app:popUpToInclusive="true"/>
+
+    <action
+        android:id="@+id/toDownloadWithWorker"
+        app:destination="@id/downloadWithWorkerFragment"
+        app:enterAnim="@anim/enter_slide_in_right"
+        app:exitAnim="@anim/exit_slide_out_left"
+        app:popEnterAnim="@anim/enter_slide_in_left"
+        app:popExitAnim="@anim/exit_slide_out_right"
+        app:popUpToInclusive="true"/>
+
+    <action
+        android:id="@+id/toDownloadManager"
+        app:destination="@id/downloadManagerFragment"
         app:enterAnim="@anim/enter_slide_in_right"
         app:exitAnim="@anim/exit_slide_out_left"
         app:popEnterAnim="@anim/enter_slide_in_left"

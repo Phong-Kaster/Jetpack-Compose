@@ -1,9 +1,7 @@
 package com.example.jetpack.ui.component
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -16,10 +14,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.example.jetpack.R
-import com.example.jetpack.ui.theme.Background
-import com.example.jetpack.ui.theme.medium18
+import com.example.jetpack.ui.theme.customizedTextStyle
 import com.example.jetpack.util.ViewUtil
 
 @Composable
@@ -27,18 +23,20 @@ fun CustomizeTopBar(
     title: String,
     leftContent: @Composable () -> Unit = {},
     rightContent: @Composable () -> Unit = {},
+    modifier: Modifier = Modifier,
 ) {
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
-            .background(color = Background)
-            .statusBarsPadding()
-            .padding(16.dp)
-            .padding(top = 16.dp),
+            .statusBarsPadding(),
     ) {
         Text(
             text = title,
-            style = medium18,
+            style = customizedTextStyle(
+                fontSize = 20,
+                fontWeight = 600,
+                color = Color(0xFF1E3F24)
+            ),
             color = Color.White,
             modifier = Modifier
                 .align(Alignment.Center)

@@ -12,7 +12,7 @@ import com.example.jetpack.configuration.Constant.LOCKSCREEN_CHANNEL_ID
 import java.util.Calendar
 
 /**
- * @author Phong-Apero
+ * @author Phong-Kaster
  * this class manage and trigger Lockscreen Activity as device's lockscreen using Alarm Manager
  */
 object LockscreenManager {

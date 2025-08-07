@@ -21,8 +21,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.jetpack.R
-import com.example.jetpack.core.CoreFragment
-import com.example.jetpack.core.CoreLayout
+import com.example.jetpack.core.base.CoreFragment
+import com.example.jetpack.core.base.CoreLayout
 import com.example.jetpack.ui.component.CoreTopBar2
 import com.example.jetpack.ui.component.SolidButton
 import com.example.jetpack.ui.fragment.permission.component.PermissionPopup
@@ -70,7 +70,7 @@ class PermissionFragment2 : CoreFragment() {
         // Request POST NOTIFICATION permission if device has Android OS from 13
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) return
 
-        val isAccessed: Boolean = PermissionUtil.isNotiEnabled(context = requireContext())
+        val isAccessed: Boolean = PermissionUtil.isNotificationEnabled(context = requireContext())
         if (isAccessed) return
         onePermissionObserver.launcher.launch(android.Manifest.permission.POST_NOTIFICATIONS)
     }

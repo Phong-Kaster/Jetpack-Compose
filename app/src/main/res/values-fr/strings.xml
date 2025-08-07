@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Bundeswehr</string>
-    <string name="fake_title">Lorem Ipsum</string>
-    <string name="fake_message">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.</string>
-    <string name="fake_content">
-    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-    \n\n
-    Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec qu</string>
-
     <string name="home">Accueil</string>
     <string name="chart">Graphique</string>
     <string name="article">Article</string>
@@ -87,7 +80,6 @@
     <string name="no_internet_connection">Aucune connexion internet</string>
     <string name="search">Rechercher...</string>
     <string name="foreground_service">Service au premier plan</string>
-    <string name="playing_sundial_dreams">Jouer à Sundial Dreams</string>
     <string name="basic_text_field_with_state">Champ de texte de base avec état</string>
     <string name="common_usage">Usage courant</string>
     <string name="original">Original</string>
@@ -105,5 +97,43 @@
     <string name="on_15_september_1935_one_year_after_the_death">Le 15 septembre 1935, un an après la mort du président du Reich Paul von Hindenburg, le drapeau nazi est devenu le drapeau national de l\'Allemagne. Une des raisons de ce changement pourrait avoir été l\'"incident de Brême" du 26 juillet 1935, lorsqu\'un groupe de manifestants à New York a embarqué sur le paquebot SS Brême, a arraché le drapeau du Parti nazi du mât et l\'a jeté dans la rivière Hudson. Lorsque l\'ambassadeur allemand a protesté, les responsables américains ont répondu que le drapeau national allemand n\'avait pas été endommagé, seulement un symbole d\'un parti politique.</string>
     <string name="unbookmark">Supprimer le signet</string>
     <string name="bookmark">Signet</string>
-
+    <string name="share">Partager</string>
+    <string name="let_me_recommend_you_this_application">Laissez-moi vous recommander cette application</string>
+    <string name="collapsible_topbar_2">Barre supérieure rétractable 2</string>
+    <string name="collapsible_topbar_3">Barre supérieure rétractable 3</string>
+    <string name="location_enabled">Localisation activée</string>
+    <string name="gps_enabled">GPS activé</string>
+    <string name="or">ou</string>
+    <string name="manual">Manuel</string>
+    <string name="allow">Autoriser</string>
+    <string name="to_receive_personalized">Pour recevoir des prévisions météorologiques et des alertes personnalisées et à jour, veuillez autoriser l\'accès à votre localisation.</string>
+    <string name="location_access">Accès à la localisation</string>
+    <string name="last_know_location">Dernière localisation connue</string>
+    <string name="this_screen_shows_special_effects"><![CDATA[Cet écran montre des effets spéciaux et des composants que j\'ai réalisés moi-même et collectés sur Internet]]></string>
+    <string name="bubble_chart">Diagramme en bulles</string>
+    <string name="privacy">Confidentialité</string>
+    <string name="timed_recording">Enregistrement minuté</string>
+    <string name="none">Aucun</string>
+    <string name="customize">Personnaliser</string>
+    <string name="hour">Heure</string>
+    <string name="minute">Minute</string>
+    <string name="second">Seconde</string>
+    <string name="let_s_go">Allons-y</string>
+    <string name="instagram_carousel">Carrousel Instagram</string>
+    <string name="long_press_on_indicator">Appuyez longuement sur l\'indicateur et faites-le glisser pour changer rapidement la couleur</string>
+    <string name="animation">Animation</string>
+    <string name="combine_with_input_transformation">Combiner avec la transformation d\'entrée</string>
+    <string name="digit_only">Chiffres uniquement</string>
+    <string name="unique_text_field_with_decoration_box">Champ de texte unique avec boîte de décoration</string>
+    <string name="dark_mode">Mode sombre</string>
+    <string name="light_mode">Mode clair</string>
+    <string name="component">Composant</string>
+    <string name="kotlin_flow">Flux Kotlin</string>
+    <string name="pitch_to_zoom">Pincer pour zoomer</string>
+    <string name="download_with_worker_manager">Télécharger avec le gestionnaire de tâches</string>
+    <string name="the_napoleonic_wars_greatly_expanded">Les guerres napoléoniennes ont considérablement étendu l\'empire français jusqu\'à ce que les prouesses militaires de Napoléon Bonaparte déclinent et qu\'il soit exilé</string>
+    <string name="curvy_line_chart">Graphique en ligne courbe</string>
+    <string name="blood_pressure_chart">Graphique de pression artérielle</string>
+    <string name="pie_chart">Diagramme circulaire</string>
+    <string name="donut_chart">Diagramme en anneau</string>
 </resources>

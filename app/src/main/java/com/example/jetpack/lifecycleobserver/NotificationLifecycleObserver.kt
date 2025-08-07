@@ -19,6 +19,7 @@ import com.example.jetpack.R
 import com.example.jetpack.notification.LockscreenManager
 import com.example.jetpack.notification.NotificationManager
 import com.example.jetpack.util.AppUtil
+import com.example.jetpack.util.LogUtil
 import com.example.jetpack.util.PermissionUtil
 import javax.inject.Inject
 
@@ -66,12 +67,12 @@ constructor(
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     private fun createSettingLauncher(owner: LifecycleOwner): ActivityResultLauncher<Intent> {
         return registry.register("SettingPermissionLauncher", owner, ActivityResultContracts.StartActivityForResult()){
-            val enabled = PermissionUtil.isNotiEnabled(context = activity)
+            val enabled = PermissionUtil.isNotificationEnabled(context = activity)
             if (enabled) {
                 NotificationManager.sendNotification(context = activity)
                 LockscreenManager.sendNotification(context = activity)
             } else {
-                AppUtil.logcat("Manifest.permission.POST_NOTIFICATIONS is rejected !")
+                LogUtil.logcat("Manifest.permission.POST_NOTIFICATIONS is rejected !")
             }
         }
     }

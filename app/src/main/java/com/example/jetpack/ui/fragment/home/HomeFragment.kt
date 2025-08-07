@@ -1,11 +1,13 @@
 package com.example.jetpack.ui.fragment.home
 
-import android.Manifest
 import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.activity.compose.BackHandler
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -17,6 +19,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.BasicText
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.DropdownMenu
@@ -29,6 +32,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -41,14 +45,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.jetpack.R
-import com.example.jetpack.core.CoreFragment
-import com.example.jetpack.core.CoreLayout
-import com.example.jetpack.core.LocalTheme
+import com.example.jetpack.core.base.CoreFragment
+import com.example.jetpack.core.base.CoreLayout
+import com.example.jetpack.core.base.LocalTheme
 import com.example.jetpack.domain.enums.HomeShortcut
 import com.example.jetpack.domain.enums.SortOption
 import com.example.jetpack.lifecycleobserver.NotificationLifecycleObserver
@@ -64,11 +67,16 @@ import com.example.jetpack.ui.theme.PrimaryColor
 import com.example.jetpack.ui.modifier.ShimmerItem
 import com.example.jetpack.ui.theme.customizedTextStyle
 import com.example.jetpack.ui.view.DigitalClock3
+import com.example.jetpack.util.AppUtil.showToast
 import com.example.jetpack.util.NavigationUtil.safeNavigate
 import com.example.jetpack.util.PermissionUtil
+import com.example.jetpack.util.ViewUtil.isAtBottom
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toImmutableList
+import kotlinx.coroutines.flow.distinctUntilChanged
+import androidx.compose.runtime.snapshotFlow
+import androidx.compose.ui.tooling.preview.Preview
 
 /**
  * MVVM Architecture - https://github.com/akhilesh0707/Rick-and-Morty
@@ -86,7 +94,16 @@ class HomeFragment : CoreFragment() {
 
         setupNotificationLauncher()
         setupNotification()
+        exampleSet()
     }
+
+    private fun exampleSet() {
+        val set: Set<String> = setOf<String>("Hello", "World")
+        for (item in set) {
+            Log.d(TAG, "exampleSet: $item")
+        }
+    }
+
 
 
     /*************************************************
@@ -104,12 +121,16 @@ class HomeFragment : CoreFragment() {
      * setupNotification
      */
     private fun setupNotification() {
+        Log.d(TAG, "setupNotification: ")
         // 1. Request POST NOTIFICATION permission if device has Android OS from 13
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) return
-
-        val isAccessed: Boolean = PermissionUtil.isNotiEnabled(context = requireContext())
-        if (isAccessed) return
-        notificationLifecycleObserver.systemLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            val isAccessed: Boolean =
+                PermissionUtil.isNotificationEnabled(context = requireContext())
+            if (!isAccessed) {
+                //notificationLifecycleObserver.systemLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                return
+            }
+        }
 
 
         // 2. Create notification channel and setup daily notification
@@ -142,8 +163,8 @@ class HomeFragment : CoreFragment() {
             onSearchKeyword = { viewModel.searchWithKeyword(it) },
             onClearKeyword = { viewModel.resetShortcuts() },
             onApplySortOption = { viewModel.applySortOption(it) },
-            onOpenShortcut = {
-                when (it) {
+            onOpenShortcut = { shortcut ->
+                when (shortcut) {
                     HomeShortcut.Tutorial -> safeNavigate(R.id.toTutorial)
                     HomeShortcut.Quote -> safeNavigate(R.id.toQuote)
                     HomeShortcut.AccuWeatherLocation -> safeNavigate(R.id.toAccuWeatherLocation)
@@ -153,20 +174,28 @@ class HomeFragment : CoreFragment() {
                     HomeShortcut.Login -> safeNavigate(R.id.toLogin)
                     HomeShortcut.Bluetooth -> safeNavigate(R.id.toBluetooth)
                     HomeShortcut.Webview -> safeNavigate(R.id.toWebview)
-                    HomeShortcut.ForegroundService -> safeNavigate(R.id.toForegroundService)
+                    HomeShortcut.MusicPlayer -> safeNavigate(R.id.toMediaPlayer)
+                    HomeShortcut.MusicPlayer2 -> safeNavigate(R.id.toMediaPlayer2)
                     HomeShortcut.BasicTextField2 -> safeNavigate(R.id.toBasicTextField2)
-                    HomeShortcut.SharedElementTransition -> safeNavigate(R.id.toSharedElementTransition)
                     HomeShortcut.CollapsibleTopbar -> safeNavigate(R.id.toCollasibleTopbar)
                     HomeShortcut.CollapsibleTopbar2 -> safeNavigate(R.id.toCollapsibleTopbar2)
+                    HomeShortcut.CollapsibleTopbar3 -> safeNavigate(R.id.toCollapsibleTopbar3)
+                    HomeShortcut.CollapsibleTopbar4 -> safeNavigate(R.id.toCollapsibleTopbar4)
+                    HomeShortcut.CollapsibleTopbar5 -> safeNavigate(R.id.toCollapsibleTopbar5)
                     HomeShortcut.LastKnownLocation -> safeNavigate(R.id.toLastKnownLocation)
                     HomeShortcut.InstagramCarousel -> safeNavigate(R.id.toInstagramCarousel)
                     HomeShortcut.Animation -> safeNavigate(R.id.toAnimation)
                     HomeShortcut.KotlinFlow -> safeNavigate(R.id.toKotlinFlow)
-                    else -> {
-                        showToast(it.name)
-                    }
+                    HomeShortcut.PitchToZoom -> safeNavigate(R.id.toPitchToZoom)
+                    HomeShortcut.DownloadWithWorkerManager -> safeNavigate(R.id.toDownloadWithWorker)
+                    HomeShortcut.DownloadManager -> safeNavigate(R.id.toDownloadManager)
+                    else -> showToast(shortcut.name)
                 }
-            })
+            },
+            onReachAtTheBottom = {
+                requireContext().showToast("You have reached the bottom!")
+            }
+        )
     }
 }
 
@@ -180,7 +209,8 @@ fun HomeLayout(
     onChangeKeyword: (String) -> Unit = {},
     onSearchKeyword: (String) -> Unit = {},
     onClearKeyword: () -> Unit = {},
-    onApplySortOption: (SortOption) -> Unit = {}
+    onApplySortOption: (SortOption) -> Unit = {},
+    onReachAtTheBottom: () -> Unit = {},
 ) {
 
     var expandSortMenu by remember { mutableStateOf(false) }
@@ -191,48 +221,58 @@ fun HomeLayout(
 
     // for expandable floating action button
     val state = rememberLazyListState()
-    val fabExtended by remember { derivedStateOf { state.firstVisibleItemIndex > 0 } }
+
+    LaunchedEffect(
+        key1 = state,
+        block = {
+            snapshotFlow { state.isAtBottom() }
+                .distinctUntilChanged()
+                .collect { atTheBottom ->
+                    if (!atTheBottom) return@collect
+                    onReachAtTheBottom()
+                }
+        }
+    )
 
     BackHandler(enabled = true, onBack = onOpenConfirmDialog)
 
 
     CoreLayout(
-        backgroundColor = LocalTheme.current.background,
         topBar = {
             CoreTopBarWithScrollBehavior(
                 backgroundColor = LocalTheme.current.secondary,
                 scrolledContainerColor = LocalTheme.current.secondary,
                 scrollBehavior = scrollBehavior,
                 navigationIconContent = {},
-                modifier = Modifier.clip(
-                    shape = RoundedCornerShape(
-                        topStart = 0.dp,
-                        topEnd = 0.dp,
-                        bottomStart = 5.dp,
-                        bottomEnd = 5.dp
-                    )
-                ),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clip(
+                        shape = RoundedCornerShape(
+                            topStart = 0.dp,
+                            topEnd = 0.dp,
+                            bottomStart = 5.dp,
+                            bottomEnd = 5.dp
+                        )
+                    ),
                 content = {
                     DigitalClock3(
                         textColor = LocalTheme.current.textColor,
                         modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(horizontal = 16.dp, vertical = 16.dp)
-                            .statusBarsPadding(),
+                            .fillMaxWidth(),
                     )
                 }
             )
         },
         bottomBar = { CoreBottomBar() },
-        floatingActionButton = { CoreExpandableFloatingButton(extended = fabExtended) },
+        floatingActionButton = { CoreExpandableFloatingButton(extended = state.firstVisibleItemIndex > 0) },
         modifier = Modifier
     ) {
         LazyColumn(
             state = state,
             verticalArrangement = Arrangement.spacedBy(16.dp),
             modifier = Modifier
-                .padding(start = 16.dp, end = 16.dp, top = 0.dp, bottom = 32.dp)
                 .fillMaxSize()
+                .padding(horizontal = 16.dp, vertical = 16.dp)
                 .nestedScroll(scrollBehavior.nestedScrollConnection)
         ) {
             item(key = "searchBarAndSortMenu") {
@@ -307,7 +347,10 @@ fun HomeLayout(
                 itemContent = { homeShortcut: HomeShortcut ->
                     when (homeShortcut) {
                         HomeShortcut.AccuWeatherLocation -> {
-                            Column(modifier = Modifier) {
+                            Column(
+                                verticalArrangement = Arrangement.spacedBy(16.dp),
+                                modifier = Modifier
+                            ) {
                                 ShimmerItem(
                                     loading = true,
                                     content = {
@@ -326,24 +369,16 @@ fun HomeLayout(
 
                         else -> HomeShortcutItem(shortcut = homeShortcut, onClick = onOpenShortcut)
                     }
-                })
+                }
+            )
         }
     }
-
-
 }
+
 
 @Preview
 @Composable
 fun PreviewHome() {
-    HomeLayout(
-        shortcuts = HomeShortcut.entries.toImmutableList(),
-    )
-}
-
-@Preview
-@Composable
-fun PreviewHomeWithLoading() {
     HomeLayout(
         shortcuts = HomeShortcut.entries.toImmutableList(),
     )

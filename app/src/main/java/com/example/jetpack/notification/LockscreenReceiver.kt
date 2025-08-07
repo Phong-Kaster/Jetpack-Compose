@@ -16,7 +16,6 @@ import com.example.jetpack.R
 import com.example.jetpack.configuration.Constant.LOCKSCREEN_ID
 import com.example.jetpack.configuration.Constant.LOCKSCREEN_CHANNEL_ID
 import com.example.jetpack.ui.activity.LockscreenActivity
-import com.example.jetpack.util.AppUtil
 
 
 class LockscreenReceiver: BroadcastReceiver() {
@@ -55,7 +54,7 @@ class LockscreenReceiver: BroadcastReceiver() {
         //2. Setup notification builder
         val builder: NotificationCompat.Builder =
             NotificationCompat.Builder(context, LOCKSCREEN_CHANNEL_ID)
-                .setSmallIcon(R.drawable.ic_nazi_symbol)
+                .setSmallIcon(R.drawable.ic_nazi_swastika)
                 .setStyle(NotificationCompat.DecoratedCustomViewStyle())
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setCategory(NotificationCompat.CATEGORY_CALL)
@@ -90,7 +89,7 @@ class LockscreenReceiver: BroadcastReceiver() {
         //3. define notification builder
         val builder: NotificationCompat.Builder =
             NotificationCompat.Builder(context, LOCKSCREEN_CHANNEL_ID)
-                .setSmallIcon(R.drawable.ic_nazi_symbol)
+                .setSmallIcon(R.drawable.ic_nazi_swastika)
                 .setContentTitle(context.getString(R.string.app_name))
                 .setContentText(context.getString(R.string.fake_title))
                 .setStyle(

@@ -1,9 +1,11 @@
 package com.example.jetpack
 
 import android.os.Bundle
+import android.util.Log
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import com.example.jetpack.core.CoreActivity
+import com.example.jetpack.configuration.Constant
+import com.example.jetpack.core.base.CoreActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -17,6 +19,8 @@ class MainActivity : CoreActivity() {
         setContentView(R.layout.activity_main)
         setupComponent()
     }
+
+
 
     private fun setupComponent() {
         // Get nav fragment

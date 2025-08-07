@@ -9,9 +9,9 @@ enum class ApplicationLogo(
     Logo1(photo = R.drawable.ic_nazi_eagle),
     Logo2(photo = R.drawable.ic_iron_cross),
     Logo3(photo = R.drawable.ic_iron_cross_bundeswehr),
-    Logo4(photo = R.drawable.ic_iron_cross_wehtmatch),
+    Logo4(photo = R.drawable.ic_nazi_wehtmatch),
     Logo5(photo = R.drawable.ic_heer),
-    Logo6(photo = R.drawable.ic_nazi_symbol),
+    Logo6(photo = R.drawable.img_swastika_black_circle),
     ;
 
     companion object {

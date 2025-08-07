@@ -45,9 +45,9 @@ data class ChartElement(
 
 
     companion object {
-        fun getFakeElements(): List<ChartElement> {
-            return listOf(
-                ChartElement(name = "A", valueMin = 35F, valueMax = 10F),
+        fun getFakeElements(take: Int? = null): List<ChartElement> {
+            val input =  listOf(
+                ChartElement(name = "A", valueMin = 35F, valueMax = 18F),
                 ChartElement(name = "B", valueMin = 25F, valueMax = 50F),
                 ChartElement(name = "C", valueMin = 50F, valueMax = 31F),
                 ChartElement(name = "D", valueMin = 75F, valueMax = 12F),
@@ -73,6 +73,14 @@ data class ChartElement(
                 ChartElement(name = "Y", valueMin = 88F, valueMax = 45F),
                 ChartElement(name = "Z", valueMin = 68F, valueMax = 55F),
             )
+
+            val outcome = if(take == null){
+                input
+            } else {
+                input.take(take)
+            }
+
+            return outcome
         }
 
         fun getFakeElement(): ChartElement {

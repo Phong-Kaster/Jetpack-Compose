@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--this setting ensures that status bar will be visible with transparent background-->
+    <!--Theme Jetpack Compose separates 2 version: one for devices run on Android API 30 & higher, the other for Android API 29 & lower-->
+    <!-- Create another theme without translucent status bar to have transparent status bar on API 30 -->
+    <style name="Theme.JetpackCompose" parent="Core.Theme.JetpackCompose">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
+
+</resources>

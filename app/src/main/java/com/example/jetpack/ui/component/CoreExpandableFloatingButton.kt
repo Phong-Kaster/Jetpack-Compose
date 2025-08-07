@@ -42,7 +42,7 @@ import androidx.compose.ui.util.lerp
 import androidx.navigation.compose.rememberNavController
 import com.example.jetpack.R
 import com.example.jetpack.configuration.Menu
-import com.example.jetpack.core.LocalNavController
+import com.example.jetpack.core.base.LocalNavController
 import com.example.jetpack.ui.theme.OppositePrimaryColor
 import com.example.jetpack.ui.theme.PrimaryColor
 import com.example.jetpack.ui.theme.customizedTextStyle
@@ -71,7 +71,10 @@ fun CoreExpandableFloatingButton(
                         FloatingActionButton(
                             containerColor = PrimaryColor,
                             onClick = { navController.navigate(it.destinationId) },
-                            modifier = Modifier.padding(16.dp).height(48.dp).widthIn(min = 48.dp)
+                            modifier = Modifier
+                                .padding(16.dp)
+                                .height(48.dp)
+                                .widthIn(min = 48.dp)
                         ) {
                             Icon(
                                 painter = painterResource(id = it.drawableId),
@@ -97,7 +100,7 @@ fun CoreExpandableFloatingButton(
             CoreExpandableFloatingButtonContent(
                 icon = {
                     Icon(
-                        painter = painterResource(id = R.drawable.ic_nazi_symbol),
+                        painter = painterResource(id = R.drawable.ic_nazi_swastika),
                         contentDescription = null,
                         tint = OppositePrimaryColor,
                         modifier = Modifier
@@ -110,7 +113,7 @@ fun CoreExpandableFloatingButton(
                             })
                 },
                 text = {
-                    if (extended) {
+                    if (!extended) {
                         Text(
                             text = stringResource(id = R.string.app_name),
                             style = customizedTextStyle(
@@ -121,7 +124,7 @@ fun CoreExpandableFloatingButton(
                         )
                     }
                 },
-                extended = extended
+                extended = !extended
             )
         }
     }

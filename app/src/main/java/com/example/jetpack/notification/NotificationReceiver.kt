@@ -12,10 +12,10 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.example.jetpack.MainActivity
 import com.example.jetpack.R
+import com.example.jetpack.configuration.Constant
 import com.example.jetpack.configuration.Constant.NOTIFICATION_ID
 import com.example.jetpack.configuration.Constant.NOTIFICATION_CHANNEL_ID
 import com.example.jetpack.notification.NotificationManager.sendNotification
-import com.example.jetpack.util.AppUtil
 
 
 class NotificationReceiver : BroadcastReceiver() {
@@ -34,8 +34,11 @@ class NotificationReceiver : BroadcastReceiver() {
     private fun popupNotification(context: Context, intent: Intent) {
         //1. Create an explicit intent for an Activity in your app
         val destinationIntent = Intent(context, MainActivity::class.java)
+        destinationIntent.putExtra("message", "Phong0asd")
         destinationIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-        val pendingIntent = PendingIntent.getActivity(context, 1896, destinationIntent, PendingIntent.FLAG_IMMUTABLE)
+
+        // if there are more than 2 buttons on customized layout then requestCode must not the same between pending intents
+        val pendingIntent = PendingIntent.getActivity(context, Constant.REQUEST_CODE_1, destinationIntent, PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
 
 
         //2. set customized view
@@ -52,7 +55,7 @@ class NotificationReceiver : BroadcastReceiver() {
 
         //3. define notification builder
         val builder: NotificationCompat.Builder = NotificationCompat.Builder(context, NOTIFICATION_CHANNEL_ID)
-            .setSmallIcon(R.drawable.ic_nazi_symbol)
+            .setSmallIcon(R.drawable.ic_nazi_swastika)
             .setContentTitle(context.getString(R.string.app_name))
             .setContentText(context.getString(R.string.fake_title))
             .setStyle(NotificationCompat.BigTextStyle().bigText(context.getString(R.string.fake_content)))

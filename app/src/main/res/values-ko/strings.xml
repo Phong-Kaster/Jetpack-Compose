@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Bundeswehr</string>
-    <string name="fake_title">Lorem Ipsum</string>
-    <string name="fake_message">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.</string>
-    <string name="fake_content">
-    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-    \n\n
-    Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec qu</string>
-
     <string name="home">홈</string>
     <string name="chart">차트</string>
     <string name="article">기사</string>
@@ -87,7 +80,6 @@
     <string name="no_internet_connection">인터넷 연결 없음</string>
     <string name="search">검색...</string>
     <string name="foreground_service">포그라운드 서비스</string>
-    <string name="playing_sundial_dreams">태양시 꿈 재생</string>
     <string name="basic_text_field_with_state">기본 텍스트 필드와 상태</string>
     <string name="common_usage">일반적인 사용법</string>
     <string name="original">원본</string>
@@ -105,5 +97,43 @@
     <string name="on_15_september_1935_one_year_after_the_death">1935년 9월 15일, 라이히 대통령 파울 폰 힌덴부르크의 사망으로부터 1년 후, 나치 깃발이 독일의 국기가 되었습니다. 변화의 원인 중 하나는 1935년 7월 26일의 "브레멘 사건"일 수 있습니다. 이 사건에서는 뉴욕시의 시위 참가자들이 오션라이너 SS 브레멘에 올라타, 나치당의 깃발을 잭스태프에서 떼어내, 허드슨 강에 던져버렸습니다. 독일 대사가 항의했을 때, 미국 공무원들은 독일의 국기는 해치지 않았고, 단지 정당의 상징만이 해쳐졌다고 응답했습니다. 새로운 깃발 법은 1935년 뉘른베르크에서의 연례 당 대회에서 발표되었습니다. 여기서 헤르만 괴링은, 옛 검정-흰색-빨간색 깃발은 명예롭지만, 과거의 시대의 상징이며, "반동주의자"에 의해 사용될 위협이 있다고 주장했습니다.</string>
     <string name="unbookmark">북마크 해제</string>
     <string name="bookmark">북마크</string>
-
+    <string name="share">공유</string>
+    <string name="let_me_recommend_you_this_application">이 애플리케이션을 추천합니다</string>
+    <string name="collapsible_topbar_2">접을 수 있는 상단바 2</string>
+    <string name="collapsible_topbar_3">접을 수 있는 상단바 3</string>
+    <string name="location_enabled">위치 활성화됨</string>
+    <string name="gps_enabled">GPS 활성화됨</string>
+    <string name="or">또는</string>
+    <string name="manual">매뉴얼</string>
+    <string name="allow">허용</string>
+    <string name="to_receive_personalized">개인 맞춤형 최신 날씨 예보와 경고를 받으려면 위치 접근을 허용해 주세요.</string>
+    <string name="location_access">위치 접근</string>
+    <string name="last_know_location">마지막 알려진 위치</string>
+    <string name="this_screen_shows_special_effects"><![CDATA[이 화면은 제가 직접 만들고 인터넷에서 수집한 특별한 효과와 구성 요소를 보여줍니다]]></string>
+    <string name="bubble_chart">버블 차트</string>
+    <string name="privacy">개인정보</string>
+    <string name="timed_recording">시간 녹음</string>
+    <string name="none">없음</string>
+    <string name="customize">사용자 정의</string>
+    <string name="hour">시간</string>
+    <string name="minute">분</string>
+    <string name="second">초</string>
+    <string name="let_s_go">가자</string>
+    <string name="instagram_carousel">인스타그램 캐러셀</string>
+    <string name="long_press_on_indicator">인디케이터를 길게 눌러서 색상을 빠르게 변경하세요</string>
+    <string name="animation">애니메이션</string>
+    <string name="combine_with_input_transformation">입력 변환과 결합</string>
+    <string name="digit_only">숫자만</string>
+    <string name="unique_text_field_with_decoration_box">장식 상자가 있는 고유 텍스트 필드</string>
+    <string name="dark_mode">다크 모드</string>
+    <string name="light_mode">라이트 모드</string>
+    <string name="component">구성 요소</string>
+    <string name="kotlin_flow">코틀린 플로우</string>
+    <string name="pitch_to_zoom">핀치 줌</string>
+    <string name="download_with_worker_manager">작업 관리자와 함께 다운로드</string>
+    <string name="the_napoleonic_wars_greatly_expanded">나폴레옹 전쟁은 나폴레옹 보나파르트의 군사 기술이 쇠퇴하고 그가 추방되기 전까지 프랑스 제국을 크게 확장했습니다</string>
+    <string name="curvy_line_chart">곡선 라인 차트</string>
+    <string name="blood_pressure_chart">혈압 차트</string>
+    <string name="pie_chart">파이 차트</string>
+    <string name="donut_chart">도넛 차트</string>
 </resources>

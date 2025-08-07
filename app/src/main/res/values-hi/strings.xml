@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Bundeswehr</string>
-    <string name="fake_title">Lorem Ipsum</string>
-    <string name="fake_message">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.</string>
-    <string name="fake_content">
-    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-    \n\n
-    Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec qu</string>
-
     <string name="home">होम</string>
     <string name="chart">चार्ट</string>
     <string name="article">लेख</string>
@@ -87,7 +80,7 @@
     <string name="no_internet_connection">कोई इंटरनेट कनेक्शन नहीं</string>
     <string name="search">खोजें...</string>
     <string name="foreground_service">फोरग्राउंड सेवा</string>
-    <string name="playing_sundial_dreams">सनडायल ड्रीम्स खेलना</string>
+
     <string name="basic_text_field_with_state">स्थिति के साथ बुनियादी पाठ क्षेत्र</string>
     <string name="common_usage">सामान्य उपयोग</string>
     <string name="original">मूल</string>
@@ -105,5 +98,43 @@
     <string name="on_15_september_1935_one_year_after_the_death">15 सितंबर 1935 को, राइच के राष्ट्रपति पॉल वॉन हिंदेनबर्ग की मृत्यु के एक वर्ष बाद, नाजी ध्वज जर्मनी का राष्ट्रीय ध्वज बन गया। परिवर्तन का एक कारण "ब्रेमन घटना" 26 जुलाई 1935 का हो सकता था, जिसमें न्यूयॉर्क सिटी के एक समूह ने डेमोंस्ट्रेटर्स को ओशन लाइनर SS ब्रेमन पर बोर्ड कराया, नाजी पार्टी का ध्वज जैकस्टाफ से छीन लिया, और इसे हडसन नदी में फेंक दिया। जब जर्मन राजदूत ने विरोध किया, तो यूएस अधिकारी ने जवाब दिया कि जर्मन राष्ट्रीय ध्वज को कोई हानि नहीं हुई थी, केवल एक राजनीतिक पार्टी का प्रतीक।</string>
     <string name="unbookmark">बुकमार्क हटाएं</string>
     <string name="bookmark">बुकमार्क</string>
-
+    <string name="share">साझा करें</string>
+    <string name="let_me_recommend_you_this_application">मुझे आपको यह एप्लिकेशन अनुशंसित करने दें</string>
+    <string name="collapsible_topbar_2">संक्षिप्त शीर्ष पट्टी 2</string>
+    <string name="collapsible_topbar_3">संक्षिप्त शीर्ष पट्टी 3</string>
+    <string name="location_enabled">स्थान सक्षम है</string>
+    <string name="gps_enabled">जीपीएस सक्षम है</string>
+    <string name="or">या</string>
+    <string name="manual">मैन्युअल</string>
+    <string name="allow">अनुमति दें</string>
+    <string name="to_receive_personalized">व्यक्तिगत, अप-टू-डेट मौसम पूर्वानुमान और अलर्ट प्राप्त करने के लिए, कृपया अपनी स्थान की अनुमति दें।</string>
+    <string name="location_access">स्थान पहुँच</string>
+    <string name="last_know_location">अंतिम ज्ञात स्थान</string>
+    <string name="this_screen_shows_special_effects"><![CDATA[यह स्क्रीन विशेष प्रभाव और घटक दिखाती है जिन्हें मैंने स्वयं और इंटरनेट पर एकत्र किया है]]></string>
+    <string name="bubble_chart">बबल चार्ट</string>
+    <string name="privacy">गोपनीयता</string>
+    <string name="timed_recording">समयबद्ध रिकॉर्डिंग</string>
+    <string name="none">कोई नहीं</string>
+    <string name="customize">अनुकूलित करें</string>
+    <string name="hour">घंटा</string>
+    <string name="minute">मिनट</string>
+    <string name="second">सेकंड</string>
+    <string name="let_s_go">चलें</string>
+    <string name="instagram_carousel">इंस्टाग्राम कैरोसेल</string>
+    <string name="long_press_on_indicator">रंग जल्दी बदलने के लिए इंडिकेटर पर लंबा दबाएं और खींचें</string>
+    <string name="animation">एनिमेशन</string>
+    <string name="combine_with_input_transformation">इनपुट परिवर्तन के साथ संयोजन करें</string>
+    <string name="digit_only">केवल अंक</string>
+    <string name="unique_text_field_with_decoration_box">सजावट बॉक्स के साथ अद्वितीय पाठ क्षेत्र</string>
+    <string name="dark_mode">डार्क मोड</string>
+    <string name="light_mode">लाइट मोड</string>
+    <string name="component">घटक</string>
+    <string name="kotlin_flow">कोटलिन प्रवाह</string>
+    <string name="pitch_to_zoom">ज़ूम करने के लिए पिच करें</string>
+    <string name="download_with_worker_manager">वर्कर मैनेजर के साथ डाउनलोड करें</string>
+    <string name="the_napoleonic_wars_greatly_expanded">नेपोलियन युद्धों ने फ्रांसीसी साम्राज्य का विस्तार किया जब तक कि नेपोलियन बोनापार्ट की सैन्य प्रतिभा नहीं चूक गई और उसे निर्वासित कर दिया गया</string>
+    <string name="curvy_line_chart">वक्र रेखा चार्ट</string>
+    <string name="blood_pressure_chart">रक्तचाप चार्ट</string>
+    <string name="pie_chart">पाई चार्ट</string>
+    <string name="donut_chart">डोनट चार्ट</string>
 </resources>

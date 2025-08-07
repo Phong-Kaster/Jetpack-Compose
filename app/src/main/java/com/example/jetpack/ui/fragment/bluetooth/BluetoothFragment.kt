@@ -44,18 +44,16 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.viewModels
 import com.example.jetpack.R
-import com.example.jetpack.core.CoreFragment
-import com.example.jetpack.core.CoreLayout
+import com.example.jetpack.core.base.CoreFragment
+import com.example.jetpack.core.base.CoreLayout
 import com.example.jetpack.ui.fragment.bluetooth.component.BluetoothLifecycleObserver
 import com.example.jetpack.ui.fragment.bluetooth.component.PairedDevices
-import com.example.jetpack.ui.fragment.bluetooth.mechanicsm.BluetoothLowEnergy
 import com.example.jetpack.ui.fragment.permission.component.PermissionPopup
 import com.example.jetpack.ui.theme.customizedTextStyle
 import com.example.jetpack.ui.view.AnimationCircularWave
 import com.example.jetpack.util.NavigationUtil.safeNavigateUp
 import com.example.jetpack.util.PermissionUtil
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 /**
  * @author Phong-Kaster

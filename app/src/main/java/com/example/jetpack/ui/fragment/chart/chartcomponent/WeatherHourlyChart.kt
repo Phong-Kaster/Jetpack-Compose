@@ -38,9 +38,8 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.jetpack.R
 import com.example.jetpack.configuration.Constant
-import com.example.jetpack.core.LocalTheme
+import com.example.jetpack.core.base.LocalTheme
 import com.example.jetpack.domain.model.ChartElement
-import com.example.jetpack.ui.theme.brushSunset
 import com.example.jetpack.ui.theme.customizedTextStyle
 
 private val alignmentLinesPathEffect = PathEffect.dashPathEffect(floatArrayOf(10f, 10f), 0f)

@@ -21,8 +21,8 @@ import androidx.compose.ui.unit.dp
 import androidx.fragment.app.viewModels
 import com.example.jetpack.R
 import com.example.jetpack.configuration.Logo
-import com.example.jetpack.core.CoreFragment
-import com.example.jetpack.core.CoreLayout
+import com.example.jetpack.core.base.CoreFragment
+import com.example.jetpack.core.base.CoreLayout
 import com.example.jetpack.ui.component.CoreTopBar
 import com.example.jetpack.ui.component.SolidButton
 import com.example.jetpack.ui.fragment.setting.component.SettingIconList
