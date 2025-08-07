@@ -16,7 +16,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
-import com.example.jetpack.core.LocalTheme
+import com.example.jetpack.core.base.LocalTheme
 
 object ViewUtil {
     @Composable
