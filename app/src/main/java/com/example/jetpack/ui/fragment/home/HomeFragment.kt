@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.compose.BackHandler
 import androidx.annotation.RequiresApi
+import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -275,6 +276,7 @@ fun HomeLayout(
                 .padding(horizontal = 16.dp, vertical = 16.dp)
                 .nestedScroll(scrollBehavior.nestedScrollConnection)
         ) {
+
             item(key = "searchBarAndSortMenu") {
                 Row(
                     horizontalArrangement = Arrangement.Start,
