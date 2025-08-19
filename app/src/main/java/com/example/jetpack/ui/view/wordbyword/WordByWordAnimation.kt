@@ -35,8 +35,7 @@ fun WordByWordAnimation(
         modifier = modifier.size(boxSizeDp)
     ) {
         state.chunksToDisplay.forEachIndexed { index, (text, offset) ->
-            val visibleState =
-                remember { MutableTransitionState(false).apply { targetState = true } }
+            val visibleState = remember { MutableTransitionState(false).apply { targetState = true } }
             AnimatedVisibility(
                 visibleState = visibleState,
                 enter = chunkAnimation(index),
