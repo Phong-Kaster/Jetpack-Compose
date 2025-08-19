@@ -27,7 +27,10 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @Composable
-fun SimpleChuckedTextAnimation(modifier: Modifier = Modifier) {
+fun SimpleChuckedTextAnimation(
+    loopAnimation: Boolean = false,
+    modifier: Modifier = Modifier,
+) {
     val textMeasurer = rememberTextMeasurer()
     val screenWidthPx =
         with(LocalDensity.current) { LocalConfiguration.current.screenWidthDp.dp.roundToPx() }
@@ -40,12 +43,12 @@ fun SimpleChuckedTextAnimation(modifier: Modifier = Modifier) {
         color = Color.White,
     )
 
-    val wordByWordState = remember { WordByWordAnimationState(textMeasurer, textStyle) }
-    val lineByLineState = remember { LineByLineAnimationState(textMeasurer, textStyle) }
-    val charByCharState = remember { CharByCharAnimationState(textMeasurer, textStyle) }
+    val wordByWordState = remember { WordByWordAnimationState(textMeasurer = textMeasurer, defaultTextStyle = textStyle) }
+    val lineByLineState = remember { LineByLineAnimationState(textMeasurer = textMeasurer,  defaultTextStyle = textStyle) }
+    val charByCharState = remember { CharByCharAnimationState(textMeasurer = textMeasurer,  defaultTextStyle = textStyle) }
 
     val dummyText = "Talk with Elyx..."
-
+    val delayBetweenChunkMillis = 20L
     LaunchedEffect(Unit) {
         launch {
             wordByWordState.loadText(
@@ -53,7 +56,7 @@ fun SimpleChuckedTextAnimation(modifier: Modifier = Modifier) {
                 constraints = Constraints(maxWidth = screenWidthPx)
             )
             delay(1000)
-            wordByWordState.showText(200)
+            wordByWordState.showText(delayBetweenChunkMillis)
         }
         launch {
             lineByLineState.loadText(
@@ -61,7 +64,7 @@ fun SimpleChuckedTextAnimation(modifier: Modifier = Modifier) {
                 constraints = Constraints(maxWidth = screenWidthPx)
             )
             delay(1000)
-            lineByLineState.showText(200)
+            lineByLineState.showText(delayBetweenChunkMillis)
         }
 
         launch {
@@ -70,8 +73,25 @@ fun SimpleChuckedTextAnimation(modifier: Modifier = Modifier) {
                 constraints = Constraints(maxWidth = screenWidthPx)
             )
             delay(1000)
-            charByCharState.showText(200)
+            charByCharState.showText(delayBetweenChunkMillis)
         }
+    }
+
+    LaunchedEffect(loopAnimation) {
+        do {
+            // Reset + load text
+            charByCharState.loadText(
+                text = dummyText,
+                constraints = Constraints(maxWidth = screenWidthPx)
+            )
+            delay(1000)
+
+            // Run the animation
+            charByCharState.showText(200)
+
+            // Wait a bit before restarting
+            delay(1000)
+        } while (loopAnimation) // 👈 keep looping if enabled
     }
 
     WordByWordAnimation(

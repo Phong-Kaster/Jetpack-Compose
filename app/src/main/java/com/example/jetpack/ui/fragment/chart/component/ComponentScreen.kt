@@ -521,6 +521,7 @@ fun ComponentScreen(
                     )
 
                     SimpleChuckedTextAnimation(
+                        loopAnimation = true,
                         modifier = Modifier
                             .fillMaxWidth()
                             .borderWithAnimatedGradient(
