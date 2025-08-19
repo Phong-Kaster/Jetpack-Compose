@@ -67,6 +67,7 @@ import com.example.jetpack.ui.view.GlowingButton
 import com.example.jetpack.ui.view.GradientProgressIndicator
 import com.example.jetpack.ui.view.SubsettingElement
 import com.example.jetpack.ui.view.SwipeToReveal
+import com.example.jetpack.ui.view.wordbyword.SimpleChuckedTextAnimation
 import com.example.jetpack.util.AppUtil.showToast
 
 @Composable
@@ -496,6 +497,41 @@ fun ComponentScreen(
                         )
                     }
 
+                }
+            }
+        )
+
+        item(
+            key = "wordByWordAnimation",
+            span = { GridItemSpan(2) },
+            content = {
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(16.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                ) {
+                    Text(
+                        text = "Word By Word Animation",
+                        style = customizedTextStyle(
+                            fontSize = 14,
+                            fontWeight = 600,
+                            color = Color.White
+                        ),
+                        modifier = Modifier.fillMaxWidth(),
+                    )
+
+                    SimpleChuckedTextAnimation(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .borderWithAnimatedGradient(
+                                colorBackground = LocalTheme.current.background,
+                                width = 3.dp,
+                                shape = RoundedCornerShape(20.dp)
+                            )
+                            .clip(shape = RoundedCornerShape(20.dp))
+                            .background(color = Color.Transparent)
+                            .padding(horizontal = 10.dp, vertical = 10.dp)
+                    )
                 }
             }
         )
