@@ -1,4 +1,4 @@
-package com.example.jetpack.ui.view.wordbyword
+package com.example.jetpack.ui.view.wordbyword.component
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.EnterTransition

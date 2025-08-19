@@ -11,7 +11,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.text.style.TextAlign
@@ -19,13 +18,16 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.jetpack.R
+import com.example.jetpack.ui.view.wordbyword.component.WordByWordAnimation
 import com.example.jetpack.ui.view.wordbyword.state.CharByCharAnimationState
 import com.example.jetpack.ui.view.wordbyword.state.LineByLineAnimationState
 import com.example.jetpack.ui.view.wordbyword.state.WordByWordAnimationState
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+/**
+ * # [Word-By-Word Animation](https://medium.com/@kappdev/how-to-create-a-word-by-word-animation-in-jetpack-compose-5494c8a2fbaa)
+ */
 @Composable
 fun SimpleChuckedTextAnimation(
     loopAnimation: Boolean = false,
