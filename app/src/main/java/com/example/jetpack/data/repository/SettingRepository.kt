@@ -2,7 +2,10 @@ package com.example.jetpack.data.repository
 
 import com.example.jetpack.configuration.Language
 import com.example.jetpack.configuration.Logo
+import com.example.jetpack.core.injection.qualifier.DefaultDispatcher
+import com.example.jetpack.core.injection.qualifier.IoDispatcher
 import com.example.jetpack.data.datastore.SettingDatastore
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -12,6 +15,8 @@ class SettingRepository
 @Inject
 constructor(
     private val settingDatastore: SettingDatastore,
+    @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
+    @DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher,
 ) {
     // ENABLE INTRO
     fun enableIntro(): Boolean {
@@ -61,6 +66,8 @@ constructor(
 
 
     fun setEnableDarkMode(boolean: Boolean) {
-        settingDatastore.enableDarkMode = boolean
+        with(ioDispatcher) {
+            settingDatastore.enableDarkMode = boolean
+        }
     }
 }

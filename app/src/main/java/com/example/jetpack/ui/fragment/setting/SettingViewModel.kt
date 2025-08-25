@@ -46,8 +46,8 @@ constructor(
         }
     }
 
-    fun onChangeDarkMode(){
-        viewModelScope.launch(Dispatchers.IO){
+    fun onChangeDarkMode() {
+        viewModelScope.launch {
             _enableDarkMode.value = !_enableDarkMode.value
             settingRepository.setEnableDarkMode(_enableDarkMode.value)
         }
