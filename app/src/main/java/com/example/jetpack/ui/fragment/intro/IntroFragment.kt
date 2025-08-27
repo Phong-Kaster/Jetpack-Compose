@@ -1,6 +1,7 @@
 package com.example.jetpack.ui.fragment.intro
 
 import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -73,14 +74,21 @@ fun IntroLayout(
     )
 
     // This launched effect helps us to scroll automatically
+
+    // This launched effect helps us to scroll automatically
     LaunchedEffect(Unit) {
         while (true) {
             if (!pagerState.isScrollInProgress) {
                 delay(2500)
-                with(pagerState) {
-                    val target = currentPage + 1
-                    launch { pagerState.animateScrollToPage(target) }
+                val nextPage = if (pagerState.currentPage < pagerState.pageCount - 1) {
+                    pagerState.currentPage + 1
+                } else {
+                    0 // Reset to first page
                 }
+                pagerState.animateScrollToPage(
+                    page = nextPage,
+                    animationSpec = tween(durationMillis = 300, easing = LinearEasing)
+                )
             } else {
                 delay(1000)
             }
