@@ -60,6 +60,7 @@ import kotlinx.coroutines.launch
 
 /**
  * # [FloatingActionButton Lost in Jetpack Compose? A Material 3 Bottom Sheet Rescue Mission](https://medium.com/app-dev-pro-tips/floatingactionbutton-lost-in-jetpack-compose-a-material-3-bottom-sheet-rescue-mission-d77c959ef596)
+ * # [Compose Charts library](https://ehsannarmani.github.io/ComposeCharts/charts/line-chart/)
  */
 @AndroidEntryPoint
 class InsightFragment : CoreFragment() {
