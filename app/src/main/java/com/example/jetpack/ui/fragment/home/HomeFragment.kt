@@ -13,6 +13,7 @@ import androidx.compose.animation.Crossfade
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOut
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -401,10 +402,12 @@ fun HomeLayout(
                     exit = slideOut { IntOffset(-state.offset.x - state.contentSize.width, 0) },
                 ) {
                     Image(
-                        painter = painterResource(id = R.drawable.ic_bundeswehr),
+                        painter = painterResource(id = R.drawable.ic_iron_cross_wehtmatch),
                         contentDescription = stringResource(id = R.string.app_name),
                         modifier = Modifier
+                            .background(color = Color.Red, shape = CircleShape)
                             .size(30.dp)
+                            .padding(5.dp)
                     )
                 }
 

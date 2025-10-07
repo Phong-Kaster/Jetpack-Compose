@@ -10,10 +10,16 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.unit.IntOffset
 import kotlin.math.roundToInt
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.VectorConverter
+import androidx.compose.animation.core.tween
+import androidx.compose.runtime.rememberCoroutineScope
+import kotlinx.coroutines.launch
 
 /**
  * A box that can be dragged around the screen.
@@ -29,6 +35,11 @@ fun FloatingDraggableBox(
     content: @Composable BoxScope.(FloatingDraggableState) -> Unit,
 ) {
     val state = remember { mutableStateOf(FloatingDraggableState()) }
+
+
+    // For smooth animation when snapping to edges
+    val animatedOffset = remember { Animatable(Offset(0f, 0f), Offset.VectorConverter) }
+    val scope = rememberCoroutineScope()
 
     // The outer Box defines the area in which we can drag our bubble and the inner Box wraps the bubble.
     Box(
@@ -49,18 +60,61 @@ fun FloatingDraggableBox(
                 }
                 // pointerInput modifier function which helps us to process touch, drag, and gesture events within the region of the modified element
                 .pointerInput(Unit) {
-                    detectDragGestures { _, dragAmount ->
-                        val calculatedX = state.value.offset.x + dragAmount.x.roundToInt()
-                        val calculatedY = state.value.offset.y + dragAmount.y.roundToInt()
+                    detectDragGestures(
+                        onDragStart = {
+                            // sync animation value to current offset before dragging
+                            scope.launch {
+                                animatedOffset.snapTo(
+                                    Offset(
+                                        state.value.offset.x.toFloat(),
+                                        state.value.offset.y.toFloat()
+                                    )
+                                )
+                            }
+                        },
+                        onDrag = { _, dragAmount ->
+                            val calculatedX = state.value.offset.x + dragAmount.x.roundToInt()
+                            val calculatedY = state.value.offset.y + dragAmount.y.roundToInt()
 
-                        // The only thing that we miss right now, is to restrict dragging inside the container
-                        val offset = IntOffset(
-                            calculatedX.coerceIn(0, state.value.dragAreaSize.width),
-                            calculatedY.coerceIn(0, state.value.dragAreaSize.height),
-                        )
+                            // The only thing that we miss right now, is to restrict dragging inside the container
+                            val offset = IntOffset(
+                                calculatedX.coerceIn(0, state.value.dragAreaSize.width),
+                                calculatedY.coerceIn(0, state.value.dragAreaSize.height),
+                            )
 
-                        state.updateOffset(newOffset = offset)
-                    }
+                            state.updateOffset(newOffset = offset)
+                        },
+                        onDragEnd = {
+                            val containerWidth = state.value.containerSize.width
+                            val middleX = containerWidth / 2f
+                            val currentOffset = state.value.offset
+                            val targetX =
+                                if (currentOffset.x < middleX) 0f else state.value.dragAreaSize.width.toFloat()
+                            val targetY = currentOffset.y.toFloat()
+
+                            scope.launch {
+                                animatedOffset.snapTo(
+                                    Offset(
+                                        currentOffset.x.toFloat(),
+                                        currentOffset.y.toFloat()
+                                    )
+                                )
+
+                                animatedOffset.animateTo(
+                                    targetValue = Offset(targetX, targetY),
+                                    animationSpec = tween(durationMillis = 400)
+                                ) {
+                                    // ✅ Update state continuously per frame
+                                    state.updateOffset(
+                                        IntOffset(
+                                            value.x.roundToInt(),
+                                            value.y.roundToInt()
+                                        )
+                                    )
+                                }
+                            }
+                        }
+                    )
                 },
         ) { content(state.value) }
     }
