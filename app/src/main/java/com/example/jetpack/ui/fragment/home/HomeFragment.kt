@@ -8,17 +8,24 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.compose.BackHandler
 import androidx.annotation.RequiresApi
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.Crossfade
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOut
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicText
 import androidx.compose.material.icons.Icons
@@ -78,6 +85,10 @@ import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.flow.distinctUntilChanged
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.IntOffset
+import com.example.jetpack.ui.modifier.shadow
+import com.example.jetpack.ui.view.floatingdraggablebox.FloatingDraggableBox
+import com.example.jetpack.ui.view.floatingdraggablebox.FloatingDraggableState
 
 /**
  * MVVM Architecture - https://github.com/akhilesh0707/Rick-and-Morty
@@ -104,7 +115,6 @@ class HomeFragment : CoreFragment() {
             Log.d(TAG, "exampleSet: $item")
         }
     }
-
 
 
     /*************************************************
@@ -238,143 +248,169 @@ fun HomeLayout(
     BackHandler(enabled = true, onBack = onOpenConfirmDialog)
 
 
-    CoreLayout(
-        topBar = {
-            CoreTopBarWithScrollBehavior(
-                backgroundColor = LocalTheme.current.secondary,
-                scrolledContainerColor = LocalTheme.current.secondary,
-                scrollBehavior = scrollBehavior,
-                navigationIconContent = {},
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clip(
-                        shape = RoundedCornerShape(
-                            topStart = 0.dp,
-                            topEnd = 0.dp,
-                            bottomStart = 5.dp,
-                            bottomEnd = 5.dp
-                        )
-                    ),
-                content = {
-                    DigitalClock3(
-                        textColor = LocalTheme.current.textColor,
-                        modifier = Modifier
-                            .fillMaxWidth(),
-                    )
-                }
-            )
-        },
-        bottomBar = { CoreBottomBar() },
-        floatingActionButton = { CoreExpandableFloatingButton(extended = state.firstVisibleItemIndex > 0) },
-        modifier = Modifier
-    ) {
-        LazyColumn(
-            state = state,
-            verticalArrangement = Arrangement.spacedBy(16.dp),
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(horizontal = 16.dp, vertical = 16.dp)
-                .nestedScroll(scrollBehavior.nestedScrollConnection)
-        ) {
-
-            item(key = "searchBarAndSortMenu") {
-                Row(
-                    horizontalArrangement = Arrangement.Start,
-                    verticalAlignment = Alignment.CenterVertically,
+    Box(modifier = Modifier.fillMaxSize()){
+        CoreLayout(
+            topBar = {
+                CoreTopBarWithScrollBehavior(
+                    backgroundColor = LocalTheme.current.secondary,
+                    scrolledContainerColor = LocalTheme.current.secondary,
+                    scrollBehavior = scrollBehavior,
+                    navigationIconContent = {},
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top = 16.dp)
-                ) {
-                    SearchBar(
-                        onChangeKeyword = onChangeKeyword,
-                        onSearchKeyword = onSearchKeyword,
-                        onClearKeyword = onClearKeyword,
-                        leadingIcon = R.drawable.ic_search,
-                        modifier = Modifier.weight(0.8F)
-                    )
-
-                    // Sort Menu
-                    IconButton(
-                        onClick = { expandSortMenu = true },
-                        content = {
-                            Icon(
-                                imageVector = Icons.Default.Menu,
-                                tint = Color.White,
-                                contentDescription = stringResource(id = R.string.icon),
+                        .clip(
+                            shape = RoundedCornerShape(
+                                topStart = 0.dp,
+                                topEnd = 0.dp,
+                                bottomStart = 5.dp,
+                                bottomEnd = 5.dp
                             )
+                        ),
+                    content = {
+                        DigitalClock3(
+                            textColor = LocalTheme.current.textColor,
+                            modifier = Modifier
+                                .fillMaxWidth(),
+                        )
+                    }
+                )
+            },
+            bottomBar = { CoreBottomBar() },
+            floatingActionButton = { CoreExpandableFloatingButton(extended = state.firstVisibleItemIndex > 0) },
+            modifier = Modifier
+        ) {
+            LazyColumn(
+                state = state,
+                verticalArrangement = Arrangement.spacedBy(16.dp),
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(horizontal = 16.dp, vertical = 16.dp)
+                    .nestedScroll(scrollBehavior.nestedScrollConnection)
+            ) {
 
-                            MaterialTheme(
-                                shapes = MaterialTheme.shapes.copy(
-                                    extraSmall = RoundedCornerShape(15.dp),
+                item(key = "searchBarAndSortMenu") {
+                    Row(
+                        horizontalArrangement = Arrangement.Start,
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 16.dp)
+                    ) {
+                        SearchBar(
+                            onChangeKeyword = onChangeKeyword,
+                            onSearchKeyword = onSearchKeyword,
+                            onClearKeyword = onClearKeyword,
+                            leadingIcon = R.drawable.ic_search,
+                            modifier = Modifier.weight(0.8F)
+                        )
+
+                        // Sort Menu
+                        IconButton(
+                            onClick = { expandSortMenu = true },
+                            content = {
+                                Icon(
+                                    imageVector = Icons.Default.Menu,
+                                    tint = Color.White,
+                                    contentDescription = stringResource(id = R.string.icon),
                                 )
-                            ) {
-                                DropdownMenu(
-                                    expanded = expandSortMenu,
-                                    onDismissRequest = { expandSortMenu = false }
+
+                                MaterialTheme(
+                                    shapes = MaterialTheme.shapes.copy(
+                                        extraSmall = RoundedCornerShape(15.dp),
+                                    )
                                 ) {
-                                    SortOption.entries.forEach { option ->
-                                        DropdownMenuItem(
-                                            leadingIcon = {
-                                                Icon(
-                                                    painter = painterResource(id = option.leadingIcon),
-                                                    tint = PrimaryColor,
-                                                    contentDescription = stringResource(id = R.string.icon)
-                                                )
-                                            },
-                                            text = {
-                                                Text(
-                                                    text = stringResource(id = option.text),
-                                                    style = customizedTextStyle(color = PrimaryColor)
-                                                )
-                                            },
-                                            onClick = {
-                                                expandSortMenu = false
-                                                onApplySortOption(option)
-                                            }
-                                        )
+                                    DropdownMenu(
+                                        expanded = expandSortMenu,
+                                        onDismissRequest = { expandSortMenu = false }
+                                    ) {
+                                        SortOption.entries.forEach { option ->
+                                            DropdownMenuItem(
+                                                leadingIcon = {
+                                                    Icon(
+                                                        painter = painterResource(id = option.leadingIcon),
+                                                        tint = PrimaryColor,
+                                                        contentDescription = stringResource(id = R.string.icon)
+                                                    )
+                                                },
+                                                text = {
+                                                    Text(
+                                                        text = stringResource(id = option.text),
+                                                        style = customizedTextStyle(color = PrimaryColor)
+                                                    )
+                                                },
+                                                onClick = {
+                                                    expandSortMenu = false
+                                                    onApplySortOption(option)
+                                                }
+                                            )
+                                        }
                                     }
                                 }
-                            }
-                        })
+                            })
 
 
-                }
-
-            }
-
-
-            items(
-                items = shortcuts,
-                key = { item: HomeShortcut -> item.name },
-                itemContent = { homeShortcut: HomeShortcut ->
-                    when (homeShortcut) {
-                        HomeShortcut.AccuWeatherLocation -> {
-                            Column(
-                                verticalArrangement = Arrangement.spacedBy(16.dp),
-                                modifier = Modifier
-                            ) {
-                                ShimmerItem(
-                                    loading = true,
-                                    content = {
-                                        HomeShortcutItem(
-                                            shortcut = homeShortcut,
-                                            onClick = onOpenShortcut
-                                        )
-                                    })
-
-                                HomeShortcutItem(
-                                    shortcut = homeShortcut,
-                                    onClick = onOpenShortcut
-                                )
-                            }
-                        }
-
-                        else -> HomeShortcutItem(shortcut = homeShortcut, onClick = onOpenShortcut)
                     }
+
                 }
-            )
+
+
+                items(
+                    items = shortcuts,
+                    key = { item: HomeShortcut -> item.name },
+                    itemContent = { homeShortcut: HomeShortcut ->
+                        when (homeShortcut) {
+                            HomeShortcut.AccuWeatherLocation -> {
+                                Column(
+                                    verticalArrangement = Arrangement.spacedBy(16.dp),
+                                    modifier = Modifier
+                                ) {
+                                    ShimmerItem(
+                                        loading = true,
+                                        content = {
+                                            HomeShortcutItem(
+                                                shortcut = homeShortcut,
+                                                onClick = onOpenShortcut
+                                            )
+                                        })
+
+                                    HomeShortcutItem(
+                                        shortcut = homeShortcut,
+                                        onClick = onOpenShortcut
+                                    )
+                                }
+                            }
+
+                            else -> HomeShortcutItem(shortcut = homeShortcut, onClick = onOpenShortcut)
+                        }
+                    }
+                )
+            }
         }
+
+        FloatingDraggableBox(
+            initialOffset = { state ->
+                IntOffset(
+                    x = (state.containerSize.width - state.contentSize.width) / 2,
+                    y = state.containerSize.height - 2 * state.contentSize.height,
+                )
+            },
+            content = { state ->
+                AnimatedVisibility(
+                    visible = true,
+                    enter = slideInVertically { state.containerSize.height },
+                    exit = slideOut { IntOffset(-state.offset.x - state.contentSize.width, 0) },
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.ic_bundeswehr),
+                        contentDescription = stringResource(id = R.string.app_name),
+                        modifier = Modifier
+                            .size(30.dp)
+                    )
+                }
+
+        })
     }
+
 }
 
 

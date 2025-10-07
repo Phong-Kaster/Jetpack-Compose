@@ -103,6 +103,7 @@ dependencies {
 
     implementation("androidx.media3:media3-ui:1.8.0")
     implementation("androidx.media3:media3-session:1.8.0")
+    implementation(libs.foundation)
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.3.0")
