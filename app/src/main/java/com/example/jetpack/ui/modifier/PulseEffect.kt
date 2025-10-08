@@ -2,8 +2,11 @@ package com.example.jetpack.ui.modifier
 
 import androidx.compose.animation.core.DurationBasedAnimationSpec
 import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.keyframes
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.shape.CircleShape
@@ -11,7 +14,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
@@ -85,4 +90,94 @@ fun Modifier.pulseEffect(
             drawOutline(outline = outline, brush = brush, pulseAlpha)
         }
     }
+}
+
+/**
+ * Usage:
+ *
+ *
+ *         Spacer(
+ *             modifier = Modifier
+ *                 .fillMaxSize()
+ *                 .background(Color.Transparent)
+ *                 .pulseEffect(
+ *                     enabled = isFullyVisible,
+ *                     color = Color.White,
+ *                     animDuration = 400,
+ *                     intervalMillis = (interval - 400).toInt(),
+ *                     centerFraction = Offset(0.5f, 0.3f) // 50% from left, 25% from top
+ *                 )
+ *                 .clipToBounds()
+ *         )
+ */
+@Composable
+fun Modifier.pulseEffect(
+    enabled: Boolean = true,
+    color: Color = Color.White.copy(alpha = 0.3f),
+    initialRadiusFraction: Float = 0f,
+    targetRadiusFraction: Float = 2f,
+    centerFraction: Offset = Offset(0.5f, 0.5f),
+    animDuration: Int = 2000, // renamed to avoid conflict
+    intervalMillis: Int = 500 // ⏱ delay between pulses
+): Modifier {
+    if (!enabled) return this // 🚫 don't draw or animate when disabled
+
+    val totalDuration = animDuration + intervalMillis
+
+    val transition = rememberInfiniteTransition(label = "pulseTransition")
+
+    val pulseProgress by transition.animateFloat(
+        initialValue = initialRadiusFraction,
+        targetValue = targetRadiusFraction,
+        animationSpec = infiniteRepeatable(
+            animation = keyframes {
+                // assign total duration for the whole cycle
+                this.durationMillis = totalDuration
+
+                // pulse grows during the first phase
+                targetRadiusFraction at animDuration with LinearEasing
+
+                // hold steady (pause)
+                targetRadiusFraction at totalDuration
+            },
+            repeatMode = RepeatMode.Restart
+        ),
+        label = "pulseRadius"
+    )
+
+    val alpha by transition.animateFloat(
+        initialValue = 0.6f,
+        targetValue = 0f,
+        animationSpec = infiniteRepeatable(
+            animation = keyframes {
+                this.durationMillis = totalDuration
+
+                // fade out during pulse
+                0f at animDuration with LinearEasing
+
+                // remain transparent during pause
+                0f at totalDuration
+            },
+            repeatMode = RepeatMode.Restart
+        ),
+        label = "pulseAlpha"
+    )
+
+    return this
+        .clipToBounds() // 👈 this makes sure drawing stays inside layout
+        .drawBehind {
+            val maxRadius = size.maxDimension / 2
+            val radius = pulseProgress * maxRadius
+
+            val customCenter = Offset(
+                size.width * centerFraction.x,
+                size.height * centerFraction.y
+            )
+
+            drawCircle(
+                color = color.copy(alpha = alpha),
+                radius = radius,
+                center = customCenter
+            )
+        }
 }
