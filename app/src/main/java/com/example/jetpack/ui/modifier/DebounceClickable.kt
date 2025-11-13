@@ -2,9 +2,11 @@ package com.example.jetpack.ui.modifier
 
 
 import androidx.compose.foundation.clickable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 
@@ -16,23 +18,17 @@ import androidx.compose.ui.composed
  * @param debounceTime The minimum time interval (in milliseconds) between consecutive clicks. Defaults to `500L`.
  * @return A `Modifier` that applies the debounce clickable behavior.
  */
-inline fun Modifier.debounceClickable(
+fun Modifier.debouncedClickable(
+    debounceTime: Long = 600L,
     enabled: Boolean = true,
-    crossinline onClick: () -> Unit,
-    debounceTime: Long = 500L // Default debounce time in milliseconds
+    onClick: () -> Unit
 ): Modifier = composed {
-    // Stores the timestamp of the last click
-    val lastClickTime = remember { mutableLongStateOf(0L) }
+    var lastClickTime by remember { mutableStateOf(0L) }
 
-    // If the modifier is not enabled, return the original Modifier
-    if (!enabled) return@composed this
-
-    // Adds a clickable behavior with debounce logic
-    clickable {
-        val currentTime = System.currentTimeMillis()
-        // Executes the click action only if the time since the last click exceeds the debounce time
-        if (currentTime - lastClickTime.longValue > debounceTime) {
-            lastClickTime.longValue = currentTime
+    Modifier.clickable(enabled = enabled) {
+        val now = System.currentTimeMillis()
+        if (now - lastClickTime >= debounceTime) {
+            lastClickTime = now
             onClick()
         }
     }

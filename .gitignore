@@ -26,3 +26,13 @@ local.properties
 /.idea/copilot.data.migration.ask.xml
 /.idea/copilot.data.migration.ask2agent.xml
 /.idea/copilot.data.migration.edit.xml
+# IntelliJ / Android Studio IDE files
+.idea/misc.xml
+.idea/compiler.xml
+
+# ignore other unneeded IDE files to prevent future issues
+.idea/gradle.xml
+.idea/modules.xml
+.idea/workspace.xml
+.idea/navEditor.xml
+.idea/libraries/
