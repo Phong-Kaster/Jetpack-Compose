@@ -11,12 +11,27 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 
 /**
- * Adds a clickable modifier to a composable with a debounce mechanism to prevent rapid consecutive clicks.
+ * A clickable modifier that ignores fast double clicks.
  *
- * @param enabled Determines whether the clickable modifier is active. Defaults to `true`.
- * @param onClick Lambda function to be executed when the composable is clicked.
- * @param debounceTime The minimum time interval (in milliseconds) between consecutive clicks. Defaults to `500L`.
- * @return A `Modifier` that applies the debounce clickable behavior.
+ * Use this instead of [Modifier.clickable] when you want to prevent
+ * actions (like navigation or API calls) from being triggered too many times
+ * in a short period.
+ *
+ * @param debounceTime  Minimum time (in milliseconds) between two valid clicks.
+ *                      Clicks faster than this are ignored. Default = 600ms.
+ * @param enabled       Whether the button is active or not.
+ * @param onClick       The action to run when the user clicks (and it's not too soon).
+ *
+ * Example:
+ * ```
+ * Button(
+ *     modifier = Modifier.debouncedClickable {
+ *         viewModel.onSubmit()
+ *     }
+ * ) {
+ *     Text("Submit")
+ * }
+ * ```
  */
 fun Modifier.debouncedClickable(
     debounceTime: Long = 600L,
