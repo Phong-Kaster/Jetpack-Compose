@@ -46,6 +46,7 @@ import com.example.jetpack.ui.fragment.home.component.HomeBottomSheet
 import com.example.jetpack.ui.fragment.tutorial.component.LocalTutorial
 import com.example.jetpack.ui.modifier.borderWithAnimatedGradient
 import com.example.jetpack.ui.theme.customizedTextStyle
+import com.example.jetpack.util.NavigationUtil
 import com.example.jetpack.util.ViewUtil
 import com.example.jetpack.util.ViewUtil.CenterColumn
 
@@ -91,6 +92,8 @@ fun CoreBottomBar() {
                 stringId = item.nameId,
                 modifier = Modifier.weight(1f)
             ) {
+                if(!NavigationUtil.canNavigate()) return@BottomBarElement
+
                 if (currentDestination?.id != item.homeDestinationId) {
                     navController.navigate(item.directions)
                 }
@@ -124,6 +127,8 @@ fun CoreBottomBar() {
                 stringId = item.nameId,
                 modifier = Modifier.weight(1f)
             ) {
+                if(!NavigationUtil.canNavigate()) return@BottomBarElement
+
                 if (currentDestination?.id != item.homeDestinationId) {
                     navController.navigate(item.directions)
                 }
