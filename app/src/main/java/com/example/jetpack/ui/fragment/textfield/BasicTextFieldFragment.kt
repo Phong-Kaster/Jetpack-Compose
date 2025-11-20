@@ -113,7 +113,11 @@ fun BasicTextFieldLayout(
 
                 item(key = "SampleFlexibleTextField") { SampleFlexibleTextField() }
 
-                item(key ="footer") { Spacer(modifier = Modifier.fillMaxWidth().height(16.dp)) }
+                item(key = "footer") {
+                    Spacer(modifier = Modifier
+                    .fillMaxWidth()
+                    .height(16.dp))
+                }
             }
         })
 }
