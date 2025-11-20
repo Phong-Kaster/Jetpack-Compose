@@ -1,9 +1,12 @@
 package com.example.jetpack.util
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import kotlin.math.sqrt
+import kotlin.math.pow
 
 object CanvasUtil {
 
@@ -28,4 +31,8 @@ object CanvasUtil {
 
     @Composable
     fun Int.dpToPx(): Float = with(LocalDensity.current) { this@dpToPx.dp.toPx() }
+
+    fun Offset.distanceTo(other: Offset): Float {
+        return sqrt((x - other.x).pow(2) + (y - other.y).pow(2))
+    }
 }
