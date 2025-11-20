@@ -36,3 +36,4 @@ local.properties
 .idea/workspace.xml
 .idea/navEditor.xml
 .idea/libraries/
+/.idea/ChatHistory_schema_v3.xml
