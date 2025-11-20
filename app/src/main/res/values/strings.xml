@@ -181,4 +181,5 @@
     <string name="image_reveal_animation">Image Reveal Animation</string>
     <string name="before">Before</string>
     <string name="after">After</string>
+    <string name="enter_message">Enter message</string>
 </resources>

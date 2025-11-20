@@ -4,8 +4,10 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
@@ -35,10 +37,12 @@ import com.example.jetpack.core.base.CoreFragment
 import com.example.jetpack.core.base.CoreLayout
 import com.example.jetpack.core.base.LocalTheme
 import com.example.jetpack.ui.component.CoreTopBar3
+import com.example.jetpack.ui.fragment.textfield.component.AutoFill
 import com.example.jetpack.ui.fragment.textfield.component.AutoSize
 import com.example.jetpack.ui.fragment.textfield.component.CombineWithBuiltInInputTransformation
 import com.example.jetpack.ui.fragment.textfield.component.CombineWithInputTransformation
 import com.example.jetpack.ui.fragment.textfield.component.CommonUsage
+import com.example.jetpack.ui.fragment.textfield.component.SampleFlexibleTextField
 
 import com.example.jetpack.ui.fragment.textfield.component.VisualTransformation
 import com.example.jetpack.ui.theme.SofiaFontFamily
@@ -94,7 +98,6 @@ fun BasicTextFieldLayout(
                     .background(color = LocalTheme.current.background)
                     .padding(16.dp)
                     .navigationBarsPadding()
-                    .imePadding()
             ) {
                 item(key = "CommonUsage") { CommonUsage(modifier = Modifier) }
 
@@ -104,56 +107,13 @@ fun BasicTextFieldLayout(
 
                 item(key = "VisualTransformation") { VisualTransformation() }
 
-                item(key = "Autofill") {
-                    val autofillTextFieldState = rememberTextFieldState()
-                    Column(modifier = Modifier) {
-                        // Visual Transformation
-                        Text(
-                            text = stringResource(R.string.autofill),
-                            style = customizedTextStyle(
-                                fontSize = 18,
-                                fontWeight = 700,
-                                color = Color.White,
-                                fontFamily = SofiaFontFamily,
-                            ),
-                            modifier = Modifier.padding(vertical = 10.dp)
-                        )
-                        BasicTextField(
-                            state = autofillTextFieldState,
-                            cursorBrush = SolidColor(Color.Cyan),
-                            lineLimits = TextFieldLineLimits.SingleLine,
-                            textStyle = customizedTextStyle(
-                                color = LocalTheme.current.primary,
-                                fontSize = 14,
-                            ),
-                            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-                            inputTransformation = InputTransformation.maxLength(20),
-                            decorator = { innerTextField ->
-                                if (autofillTextFieldState.text.isEmpty()) {
-                                    Text(
-                                        text = "It helps to fill out forms,  checkout processes without manually typing in every detail",
-                                        style = customizedTextStyle()
-                                    )
-                                }
-                                innerTextField()
-                            },
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .border(
-                                    width = 1.dp,
-                                    color = LocalTheme.current.primary,
-                                    shape = RoundedCornerShape(5.dp)
-                                )
-                                .padding(vertical = 16.dp, horizontal = 16.dp)
-                                //.semantics { contentType = ContentType.Username },
-                        )
-                    }
-                }
+                item(key = "Autofill") { AutoFill() }
 
-                item(key = "AutoTextSize") {
-                    AutoSize(
-                    )
-                }
+                item(key = "AutoTextSize") { AutoSize() }
+
+                item(key = "SampleFlexibleTextField") { SampleFlexibleTextField() }
+
+                item(key ="footer") { Spacer(modifier = Modifier.fillMaxWidth().height(16.dp)) }
             }
         })
 }

@@ -33,12 +33,12 @@ import androidx.compose.ui.composed
  * }
  * ```
  */
-fun Modifier.debouncedClickable(
+fun Modifier.debounceClickable(
     debounceTime: Long = 600L,
     enabled: Boolean = true,
-    onClick: () -> Unit
+    onClick: () -> Unit = {},
 ): Modifier = composed {
-    var lastClickTime by remember { mutableStateOf(0L) }
+    var lastClickTime by remember { mutableLongStateOf(0L) }
 
     Modifier.clickable(enabled = enabled) {
         val now = System.currentTimeMillis()

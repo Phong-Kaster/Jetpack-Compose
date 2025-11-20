@@ -1,4 +1,4 @@
-package com.example.jetpack.ui.fragment.basictextfield.component
+package com.example.jetpack.ui.fragment.textfield.component
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
@@ -16,42 +16,51 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.jetpack.R
 import com.example.jetpack.core.base.LocalTheme
+import com.example.jetpack.ui.theme.SofiaFontFamily
 import com.example.jetpack.ui.theme.customizedTextStyle
-import com.example.jetpack.util.inputtransformation.VerificationCodeTransformation
 
 @Composable
-fun VisualTransformation(
-    modifier: Modifier = Modifier
+fun AutoFill(
+    modifier: Modifier = Modifier,
 ) {
-    val visualTransformation = rememberTextFieldState()
-
+    val autofillTextFieldState = rememberTextFieldState()
     Column(modifier = modifier) {
         // Visual Transformation
         Text(
-            text = "Visual transformation | OutputTransformation",
+            text = stringResource(R.string.autofill),
             style = customizedTextStyle(
                 fontSize = 18,
                 fontWeight = 700,
-                color = Color.White
+                color = Color.White,
+                fontFamily = SofiaFontFamily,
             ),
             modifier = Modifier.padding(vertical = 10.dp)
         )
         BasicTextField(
-            state = visualTransformation,
+            state = autofillTextFieldState,
             cursorBrush = SolidColor(Color.Cyan),
             lineLimits = TextFieldLineLimits.SingleLine,
             textStyle = customizedTextStyle(
                 color = LocalTheme.current.primary,
-                fontSize = 14
+                fontSize = 14,
             ),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-            inputTransformation = InputTransformation.maxLength(6),
-            outputTransformation = VerificationCodeTransformation,
-            decorator = { innerTextField -> innerTextField() },
+            inputTransformation = InputTransformation.maxLength(20),
+            decorator = { innerTextField ->
+                if (autofillTextFieldState.text.isEmpty()) {
+                    Text(
+                        text = "It helps to fill out forms,  checkout processes without manually typing in every detail",
+                        style = customizedTextStyle()
+                    )
+                }
+                innerTextField()
+            },
             modifier = Modifier
                 .fillMaxWidth()
                 .border(
@@ -59,14 +68,14 @@ fun VisualTransformation(
                     color = LocalTheme.current.primary,
                     shape = RoundedCornerShape(5.dp)
                 )
-                .padding(vertical = 16.dp, horizontal = 16.dp),
+                .padding(vertical = 16.dp, horizontal = 16.dp)
+            //.semantics { contentType = ContentType.Username },
         )
     }
-
 }
 
 @Preview
 @Composable
-private fun PreviewVisualTransformation() {
-    VisualTransformation()
+private fun PreviewAutoFill(){
+    AutoFill()
 }

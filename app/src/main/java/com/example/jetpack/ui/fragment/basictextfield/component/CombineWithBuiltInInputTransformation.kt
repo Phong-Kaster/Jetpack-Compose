@@ -39,7 +39,7 @@ fun CombineWithBuiltInInputTransformation(
         Text(
             text = "Combine with built-in Input Transformation",
             style = customizedTextStyle(
-                fontSize = 18, fontWeight = 700, color = Color.Cyan
+                fontSize = 18, fontWeight = 700, color = Color.White
             ), modifier = Modifier.padding(vertical = 10.dp)
         )
         BasicTextField(

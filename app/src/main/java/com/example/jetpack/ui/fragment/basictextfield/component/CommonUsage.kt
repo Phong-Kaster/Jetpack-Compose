@@ -41,7 +41,7 @@ fun CommonUsage(
         Text(
             text = stringResource(R.string.common_usage),
             style = customizedTextStyle(
-                fontSize = 18, fontWeight = 700, color = Color.Cyan
+                fontSize = 18, fontWeight = 700, color = Color.White
             ), modifier = Modifier.padding(vertical = 10.dp)
         )
 

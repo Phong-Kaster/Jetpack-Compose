@@ -3,8 +3,6 @@ package com.example.jetpack.ui.fragment.basictextfield
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.imePadding
-import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
@@ -21,6 +19,7 @@ import com.example.jetpack.ui.component.CoreTopBar3
 import com.example.jetpack.ui.fragment.basictextfield.component.CombineWithBuiltInInputTransformation
 import com.example.jetpack.ui.fragment.basictextfield.component.CombineWithInputTransformation
 import com.example.jetpack.ui.fragment.basictextfield.component.CommonUsage
+import com.example.jetpack.ui.fragment.textfield.component.SampleFlexibleTextField
 import com.example.jetpack.ui.fragment.basictextfield.component.VisualTransformation
 import com.example.jetpack.util.NavigationUtil.safeNavigateUp
 import dagger.hilt.android.AndroidEntryPoint
@@ -53,6 +52,7 @@ class BasicTextFieldFragment : CoreFragment() {
 fun BasicTextFieldLayout(
     onBack: () -> Unit = {}
 ) {
+
     CoreLayout(
         topBar = {
             CoreTopBar3(
@@ -71,16 +71,18 @@ fun BasicTextFieldLayout(
                     .fillMaxSize()
                     .background(color = LocalTheme.current.background)
                     .padding(16.dp)
-                    .navigationBarsPadding()
-                    .imePadding()
+//                    .navigationBarsPadding()
+                    //.imePadding()
             ) {
-                item(key = "CommonUsage") { CommonUsage( modifier = Modifier) }
+                item(key = "CommonUsage") { CommonUsage(modifier = Modifier) }
 
                 item(key = "CombineWithBuiltInInputTransformation") { CombineWithBuiltInInputTransformation() }
 
-                item(key = "CombineWithInputTransformation"){ CombineWithInputTransformation() }
+                item(key = "CombineWithInputTransformation") { CombineWithInputTransformation() }
 
-                item(key= "VisualTransformation"){ VisualTransformation() }
+                item(key = "VisualTransformation") { VisualTransformation() }
+
+                item(key = "SampleFlexibleTextField") { SampleFlexibleTextField() }
 
             }
         })

@@ -29,7 +29,7 @@ import com.example.jetpack.ui.theme.customizedTextStyle
 
 @Composable
 fun AutoSize() {
-    var text by remember { mutableStateOf("") }
+    var text by remember { mutableStateOf("Warren Edward Buffett (/ˈbʌfɪt/ BUFF-it; born August 30, 1930)[2] is an American investor and philanthropist who currently serves as the chairman and CEO of the conglomerate holding company Berkshire Hathaway. As a result of his investment success, Buffett is one of the best-known investors in America. According to Forbes, as of May 2025, Buffett's estimated net worth stood at US\$160.2 billion, making him the fifth-richest individual in the world") }
 
     Column(
         verticalArrangement = Arrangement.spacedBy(10.dp),
@@ -46,6 +46,13 @@ fun AutoSize() {
             modifier = Modifier.padding(vertical = 10.dp)
         )
 
+        Text(
+            text = "Text after auto resize",
+            style = customizedTextStyle(
+                fontSize = 14,
+                color = Color.White
+            )
+        )
         BasicText(
             text = text,
             maxLines = 1,
@@ -59,12 +66,13 @@ fun AutoSize() {
             ),
             modifier = Modifier
                 .fillMaxWidth()
-                .clip(shape = RoundedCornerShape(12.dp))
+                .clip(shape = RoundedCornerShape(16.dp))
                 .background(color = LocalTheme.current.secondary)
+                .padding(5.dp)
         )
 
         Text(
-            text = "Enter some text:",
+            text = "Enter some original text:",
             style = customizedTextStyle(
                 fontSize = 14,
                 color = Color.White
@@ -77,7 +85,7 @@ fun AutoSize() {
             decorationBox = { innerTextField ->
                 if (text.isEmpty()) {
                     Text(
-                        text = "Enter text here",
+                        text = "Enter text here....",
                         style = customizedTextStyle()
                     )
                 }

@@ -33,7 +33,7 @@ fun CombineWithInputTransformation(
         Text(
             text = stringResource(R.string.combine_with_input_transformation),
             style = customizedTextStyle(
-                fontSize = 18, fontWeight = 700, color = Color.Cyan
+                fontSize = 18, fontWeight = 700, color = Color.White
             ), modifier = Modifier.padding(vertical = 10.dp)
         )
         BasicTextField(
