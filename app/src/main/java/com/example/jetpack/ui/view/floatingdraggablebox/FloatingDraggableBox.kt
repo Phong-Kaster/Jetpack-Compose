@@ -41,6 +41,15 @@ fun FloatingDraggableBox(
     val animatedOffset = remember { Animatable(Offset(0f, 0f), Offset.VectorConverter) }
     val scope = rememberCoroutineScope()
 
+    DisposableEffect(true) {
+        // Reset position on hide
+        onDispose {
+            val offset = initialOffset(state.value)
+            state.updateOffset(newOffset = offset)
+        }
+    }
+
+
     // The outer Box defines the area in which we can drag our bubble and the inner Box wraps the bubble.
     Box(
         modifier = Modifier
@@ -120,12 +129,5 @@ fun FloatingDraggableBox(
     }
 
 
-    DisposableEffect(true) {
-        // Reset position on hide
-        onDispose {
-            val offset = initialOffset(state.value)
-            state.updateOffset(newOffset = offset)
-        }
-    }
 
 }
