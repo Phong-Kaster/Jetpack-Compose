@@ -37,3 +37,10 @@ local.properties
 .idea/navEditor.xml
 .idea/libraries/
 /.idea/ChatHistory_schema_v3.xml
+
+# Android Studio auto-generated deployment file
+deployment_target_selector.xml
+
+# Most Android projects already ignore .idea because it is user-specific config.
+.idea/
+.idea/deploymentTargetSelector.xml
