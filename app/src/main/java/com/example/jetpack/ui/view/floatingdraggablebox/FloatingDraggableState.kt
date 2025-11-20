@@ -7,23 +7,23 @@ import androidx.compose.ui.unit.IntSize
 /**
  * State of the [FloatingDraggableBox].
  *
- * @param contentSize Size of the content inside the [FloatingDraggableBox].
+ * @param itemSize Size of the content inside the [FloatingDraggableBox].
  * @param containerSize Size of the container in which the [FloatingDraggableBox] is placed.
- * @param offset Current offset of the content inside the [FloatingDraggableBox].
+ * @param position Current offset of the content inside the [FloatingDraggableBox].
  *
- * [containerSize] and [offset] are used to calculate the drag area size. They are useful for calculating the area in
+ * [containerSize] and [position] are used to calculate the drag area size. They are useful for calculating the area in
  * which is permitted to drag out box
  */
 data class FloatingDraggableState(
-    var contentSize: IntSize = IntSize(width = 0, height = 0),
+    var itemSize: IntSize = IntSize(width = 0, height = 0),
     var containerSize: IntSize = IntSize(width = 0, height = 0),
-    var offset: IntOffset = IntOffset(x = 0, y = 0),
+    var position: IntOffset = IntOffset(x = 0, y = 0),
 ) {
 
     val dragAreaSize: IntSize
         get() = IntSize(
-            width = containerSize.width - contentSize.width,
-            height = containerSize.height - contentSize.height,
+            width = containerSize.width - itemSize.width,
+            height = containerSize.height - itemSize.height,
         )
 }
 
@@ -46,23 +46,23 @@ fun MutableState<FloatingDraggableState>.updateContentSize(
     initialOffset: (FloatingDraggableState) -> IntOffset,
 ) {
     val current = value
-    val isFirstRender = newSize.isNotEmpty() && current.contentSize.isEmpty()
+    val isFirstRender = newSize.isNotEmpty() && current.itemSize.isEmpty()
 
     val newOffset = if (isFirstRender) {
-        val stateWithSize = current.copy(contentSize = newSize)
+        val stateWithSize = current.copy(itemSize = newSize)
         initialOffset(stateWithSize)
     } else {
-        current.offset
+        current.position
     }
 
-    value = current.copy(contentSize = newSize, offset = newOffset)
+    value = current.copy(itemSize = newSize, position = newOffset)
 }
 
 /**
  * Updates the offset (position) of the draggable item.
  */
 fun MutableState<FloatingDraggableState>.updateOffset(newOffset: IntOffset) {
-    value = value.copy(offset = newOffset)
+    value = value.copy(position = newOffset)
 }
 
 // ------------------------------------------------------------

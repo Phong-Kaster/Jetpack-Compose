@@ -51,7 +51,7 @@ fun FloatingDraggableBox(
         Box(
             modifier = Modifier
                 // offset modifier function which is used to specify the desired position of a composable by applying a translation to its original position
-                .offset { state.value.offset }
+                .offset { state.value.position }
                 .onGloballyPositioned {
                     state.updateContentSize(
                         newSize = it.size,
@@ -66,15 +66,15 @@ fun FloatingDraggableBox(
                             scope.launch {
                                 animatedOffset.snapTo(
                                     Offset(
-                                        state.value.offset.x.toFloat(),
-                                        state.value.offset.y.toFloat()
+                                        state.value.position.x.toFloat(),
+                                        state.value.position.y.toFloat()
                                     )
                                 )
                             }
                         },
                         onDrag = { _, dragAmount ->
-                            val calculatedX = state.value.offset.x + dragAmount.x.roundToInt()
-                            val calculatedY = state.value.offset.y + dragAmount.y.roundToInt()
+                            val calculatedX = state.value.position.x + dragAmount.x.roundToInt()
+                            val calculatedY = state.value.position.y + dragAmount.y.roundToInt()
 
                             // The only thing that we miss right now, is to restrict dragging inside the container
                             val offset = IntOffset(
@@ -87,7 +87,7 @@ fun FloatingDraggableBox(
                         onDragEnd = {
                             val containerWidth = state.value.containerSize.width
                             val middleX = containerWidth / 2f
-                            val currentOffset = state.value.offset
+                            val currentOffset = state.value.position
                             val targetX =
                                 if (currentOffset.x < middleX) 0f else state.value.dragAreaSize.width.toFloat()
                             val targetY = currentOffset.y.toFloat()

@@ -5,11 +5,8 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.activity.compose.BackHandler
-import androidx.annotation.RequiresApi
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.Crossfade
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOut
 import androidx.compose.foundation.Image
@@ -22,13 +19,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.BasicText
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.DropdownMenu
@@ -42,7 +37,6 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -87,9 +81,7 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
-import com.example.jetpack.ui.modifier.shadow
 import com.example.jetpack.ui.view.floatingdraggablebox.FloatingDraggableBox
-import com.example.jetpack.ui.view.floatingdraggablebox.FloatingDraggableState
 
 /**
  * MVVM Architecture - https://github.com/akhilesh0707/Rick-and-Morty
@@ -249,7 +241,7 @@ fun HomeLayout(
     BackHandler(enabled = true, onBack = onOpenConfirmDialog)
 
 
-    Box(modifier = Modifier.fillMaxSize()){
+    Box(modifier = Modifier.fillMaxSize()) {
         CoreLayout(
             topBar = {
                 CoreTopBarWithScrollBehavior(
@@ -381,7 +373,10 @@ fun HomeLayout(
                                 }
                             }
 
-                            else -> HomeShortcutItem(shortcut = homeShortcut, onClick = onOpenShortcut)
+                            else -> HomeShortcutItem(
+                                shortcut = homeShortcut,
+                                onClick = onOpenShortcut
+                            )
                         }
                     }
                 )
@@ -391,15 +386,15 @@ fun HomeLayout(
         FloatingDraggableBox(
             initialOffset = { state ->
                 IntOffset(
-                    x = (state.containerSize.width - state.contentSize.width) / 2,
-                    y = state.containerSize.height - 2 * state.contentSize.height,
+                    x = (state.containerSize.width - state.itemSize.width), // right edge
+                    y = ((state.containerSize.height - state.itemSize.height) * 0.25f).toInt(), // vertically 75% of screen,
                 )
             },
             content = { state ->
                 AnimatedVisibility(
                     visible = true,
                     enter = slideInVertically { state.containerSize.height },
-                    exit = slideOut { IntOffset(-state.offset.x - state.contentSize.width, 0) },
+                    exit = slideOut { IntOffset(-state.position.x - state.itemSize.width, 0) },
                 ) {
                     Image(
                         painter = painterResource(id = R.drawable.ic_iron_cross_wehtmatch),
@@ -410,10 +405,8 @@ fun HomeLayout(
                             .padding(5.dp)
                     )
                 }
-
-        })
+            })
     }
-
 }
 
 

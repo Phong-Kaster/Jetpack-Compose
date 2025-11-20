@@ -1,19 +1,17 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {
-    id("com.android.application") version "8.12.0" apply false
-    id("org.jetbrains.kotlin.android") version "2.2.0" apply false
+    alias(libs.plugins.androidApplication) apply false
+    alias(libs.plugins.kotlinAndroid) apply false
 
+    /* Dependency injection with Hilt  - https://developer.android.com/training/dependency-injection/hilt-android#setup */
+    alias(libs.plugins.hilt) apply false
 
-    /* Dependency injection with Hilt  - https://developer.android.com/training/dependency-injection/hilt-android#setup*/
-    id("com.google.dagger.hilt.android") version "2.57" apply false
+    alias(libs.plugins.androidTest) apply false
+    alias(libs.plugins.baselineprofile) apply false
 
-
-    id("com.android.test") version "8.12.0" apply false
-    id("androidx.baselineprofile") version "1.4.0" apply false
-
-
-    id("org.jetbrains.kotlin.plugin.compose") version "2.2.0" apply false
-    id("com.google.devtools.ksp") version "2.2.0-2.0.2" apply false
+    alias(libs.plugins.kotlinCompose) apply false
+    alias(libs.plugins.ksp) apply false
+    alias(libs.plugins.navigation.safeArgs) apply false
 }
 
 buildscript {
@@ -21,6 +19,6 @@ buildscript {
         google()
     }
     dependencies {
-        classpath(libs.navigation.safe.args.gradle.plugin)
+        classpath(libs.navigation.safe.args)
     }
 }
