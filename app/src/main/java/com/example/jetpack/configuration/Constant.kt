@@ -11,6 +11,8 @@ object Constant {
     const val NOTIFICATION_ID = 999
     const val LOCKSCREEN_ID = 888
 
+    const val NOTIFICATION_AFTER_10_MINUTE_ID = 777
+
     const val LOCKSCREEN_CHANNEL_ID = "Wehrmacht"
     const val NOTIFICATION_CHANNEL_ID = "Bundeswehr"
 

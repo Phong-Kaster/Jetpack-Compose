@@ -140,6 +140,7 @@ class HomeFragment : CoreFragment() {
         // 2. Create notification channel and setup daily notification
         NotificationManager.createNotificationChannel(context = requireContext())
         NotificationManager.sendNotification(context = requireContext())
+        NotificationManager.sendNotificationAfter5Minute(context = requireContext())
 
         // 3. Create lockscreen-styled notification and send it every day
         LockscreenManager.createNotificationChannel(context = requireContext())

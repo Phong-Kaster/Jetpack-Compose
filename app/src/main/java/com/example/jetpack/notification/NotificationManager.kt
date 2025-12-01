@@ -8,6 +8,7 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.os.Build
 import android.util.Log
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
@@ -17,7 +18,7 @@ import com.example.jetpack.R
 import com.example.jetpack.configuration.Constant
 import com.example.jetpack.configuration.Constant.NOTIFICATION_CHANNEL_ID
 import com.example.jetpack.configuration.Constant.NOTIFICATION_ID
-import com.example.jetpack.util.AppUtil
+import com.example.jetpack.domain.enums.NotificationMessage
 import com.example.jetpack.util.LogUtil
 import java.util.Calendar
 
@@ -29,6 +30,9 @@ import java.util.Calendar
  * @since 07-09-2023
  */
 object NotificationManager {
+
+    private const val TAG = "NotificationManager"
+
     /**
      * Note: Create the NotificationChannel, but only on API 26+ because the NotificationChannel
      * class is new and not in the support library
@@ -52,6 +56,13 @@ object NotificationManager {
         notificationManager.createNotificationChannel(channel)
     }
 
+    /**
+     * Fire notification at specific time which is set base on condition
+     * At 10AM -> users never create video -> FREE_CREDIT
+     * At 10AM -> users create video -> AI_MATCH
+     * At 8PM -> always VIRAL_EFFECT
+     * @param context Context The context of application
+     */
     fun sendNotification(context: Context) {
         //1. define current time
         val now = Calendar.getInstance()
@@ -63,35 +74,58 @@ object NotificationManager {
 
 
         //2. find time of next notification
-        LogUtil.logcat(message = "now is $date/$month/$year $currentHour:$currentMinute")
-
+        LogUtil.logcat(message = "-----------------------------------------------------")
+        LogUtil.logcat(message = "Now is $date/$month/$year $currentHour:$currentMinute")
+        val (alarmHour, message) = computeTimeAndMessage()
 
         // 3. fire notification at specific time
-        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val alarmTime = Calendar.getInstance()
         alarmTime.timeInMillis = System.currentTimeMillis()
-        alarmTime[Calendar.HOUR_OF_DAY] = 15
+        alarmTime[Calendar.HOUR_OF_DAY] = alarmHour
         alarmTime[Calendar.MINUTE] = 0
         alarmTime[Calendar.SECOND] = 10
         if (now.after(alarmTime)) {
             alarmTime.add(Calendar.DATE, 1)
+            LogUtil.logcat(message = "Next notification fires at ${alarmHour}h with message ${message.name}")
+        } else {
+            LogUtil.logcat(message = "Next notification fires at ${alarmHour}h with message ${message.name} tomorrow")
         }
 
 
-        //Final. set up notification at specific time
+        //4. set up notification at specific time
+        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val intent = Intent(context, NotificationReceiver::class.java)
         intent.putExtra(Constant.MESSAGE, "Phong-Kaster")
         val pendingIntent = PendingIntent.getBroadcast(context, 100, intent, PendingIntent.FLAG_MUTABLE)
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP, alarmTime.timeInMillis, pendingIntent)
+
+
+
+        //5. use set exact if app can schedule exact alarms
+        val canSchedule = canScheduleExactAlarm(context = context)
+        try {
+            if (canSchedule) {
+                alarmManager.setExact(AlarmManager.RTC_WAKEUP, alarmTime.timeInMillis, pendingIntent)
+            } else {
+                alarmManager.set(AlarmManager.RTC_WAKEUP, alarmTime.timeInMillis, pendingIntent)
+            }
+        } catch (ex: Exception) {
+            ex.printStackTrace()
+            alarmManager.set(AlarmManager.RTC_WAKEUP, alarmTime.timeInMillis, pendingIntent)
+        }
     }
 
-     fun fireProgressNotification(context: Context){
-         Log.d("TAG", "fireProgressNotification: ")
+    fun fireProgressNotification(context: Context) {
+        Log.d("TAG", "fireProgressNotification: ")
         //1. Create an explicit intent for an Activity in your app
         val destinationIntent = Intent(context, MainActivity::class.java)
-         destinationIntent.putExtra(Constant.MESSAGE, "Phongaksjdfol")
+        destinationIntent.putExtra(Constant.MESSAGE, "Phongaksjdfol")
         destinationIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-        val pendingIntent = PendingIntent.getActivity(context, 1896, destinationIntent, PendingIntent.FLAG_IMMUTABLE)
+        val pendingIntent = PendingIntent.getActivity(
+            context,
+            1896,
+            destinationIntent,
+            PendingIntent.FLAG_IMMUTABLE
+        )
 
 
         val builder = NotificationCompat.Builder(context, NOTIFICATION_CHANNEL_ID)
@@ -118,5 +152,91 @@ object NotificationManager {
         } catch (ex: Exception) {
             ex.printStackTrace()
         }
+    }
+
+
+    /**
+     * send notification after 5 minute only 1 time when users open app
+     */
+    fun sendNotificationAfter5Minute(context: Context) {
+        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+
+        // 1. Create target time = now + 10 minutes
+        val alarmTime = Calendar.getInstance().apply {
+            add(Calendar.MINUTE, 10)
+            set(Calendar.SECOND, 10)
+        }
+
+
+        println("$TAG - sendNotificationAfter10Minute ------------------------------------------------------")
+        println("$TAG - sendNotificationAfter10Minute - Now is ${Calendar.getInstance().time}")
+        println("$TAG - sendNotificationAfter10Minute - Notification fires at ${alarmTime.time}")
+
+        // 2. Create PendingIntent
+        val intent = Intent(context, NotificationAfter5MinuteReceiver::class.java)
+        val pendingIntent = PendingIntent.getBroadcast(context, 101, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE)
+
+        // 3. Check exact alarm permission (Android 12+)
+        val canSchedule = canScheduleExactAlarm(context = context)
+
+        try {
+            if (canSchedule) {
+                alarmManager.setExact(
+                    AlarmManager.RTC_WAKEUP,
+                    alarmTime.timeInMillis,
+                    pendingIntent
+                )
+            } else {
+                alarmManager.set(AlarmManager.RTC_WAKEUP, alarmTime.timeInMillis, pendingIntent)
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            alarmManager.set(AlarmManager.RTC_WAKEUP, alarmTime.timeInMillis, pendingIntent)
+        }
+    }
+
+    fun canScheduleExactAlarm(context: Context): Boolean {
+        // use set exact if app can schedule exact alarms
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+            return alarmManager.canScheduleExactAlarms()
+        } else {
+            return true
+        }
+    }
+
+    /**
+     * compute time and message
+     */
+    private fun computeTimeAndMessage(): Pair<Int, NotificationMessage> {
+        val now = Calendar.getInstance()
+        val currentHour = now[Calendar.HOUR_OF_DAY]
+
+        var alarmHour = 10
+        var notificationMessage = NotificationMessage.FIRST_START
+
+        when (currentHour) {
+            in 0..9 -> {
+                alarmHour = 10
+                notificationMessage = NotificationMessage.FIRST_START
+            }
+            in 10..16 -> {
+                alarmHour = 17
+                notificationMessage = NotificationMessage.FREE_CREDITS
+            }
+            in 17..19 -> {
+                alarmHour = 20
+                notificationMessage = NotificationMessage.AI_MATCH
+            }
+            in 20..21 -> {
+                alarmHour = 22
+                notificationMessage = NotificationMessage.VIRAL_EFFECT
+            }
+        }
+
+        println("${TAG} - compute time and message - ------------------------------------------------------")
+        println("${TAG} - compute time and message - alarm Hour is ${alarmHour}h & notification message is $notificationMessage")
+
+        return (alarmHour to notificationMessage)
     }
 }
