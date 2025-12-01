@@ -1,5 +1,6 @@
 package com.example.jetpack.ui.fragment.home
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
@@ -131,7 +132,7 @@ class HomeFragment : CoreFragment() {
             val isAccessed: Boolean =
                 PermissionUtil.isNotificationEnabled(context = requireContext())
             if (!isAccessed) {
-                //notificationLifecycleObserver.systemLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                notificationLifecycleObserver.systemLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
                 return
             }
         }

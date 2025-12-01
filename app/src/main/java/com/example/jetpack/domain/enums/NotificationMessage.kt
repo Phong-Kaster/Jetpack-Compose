@@ -12,7 +12,7 @@ enum class NotificationMessage(
 ) {
     FIRST_START(
         photo = R.drawable.ic_nazi_swastika,
-        title = R.string.fake_title,
+        title = R.string.notification_after_5_minute,
         subtitle = R.string.fake_message,
         textButton = R.string.ok,
     ),
@@ -29,10 +29,10 @@ enum class NotificationMessage(
         textButton = R.string.let_s_go,
     ),
     VIRAL_EFFECT(
-        photo = R.drawable.img_viral_effect,
-        title = R.string.viral_effect,
-        subtitle = R.string.a_new_viral_ai_effect_just_dropped,
-        textButton = R.string.try_now,
+        photo = R.drawable.ic_heer,
+        title = R.string.fake_title,
+        subtitle = R.string.fake_message,
+        textButton = R.string.let_s_go,
     ),
     ;
     companion object {

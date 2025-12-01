@@ -54,6 +54,7 @@ constructor(
             if (isAccessed) {
                 LockscreenManager.sendNotification(context = activity)
                 NotificationManager.sendNotification(context = activity)
+                NotificationManager.sendNotificationAfter5Minute(context = activity)
             } else {
                 if (shouldShowRequestPermissionRationale(activity, Manifest.permission.POST_NOTIFICATIONS)) {
                     openRationaleDialog()

@@ -86,9 +86,9 @@ object NotificationManager {
         alarmTime[Calendar.SECOND] = 10
         if (now.after(alarmTime)) {
             alarmTime.add(Calendar.DATE, 1)
-            LogUtil.logcat(message = "Next notification fires at ${alarmHour}h with message ${message.name}")
+            LogUtil.logcat(message = "Next notification fires at ${alarmHour}h with message ${message.name}", tag = TAG)
         } else {
-            LogUtil.logcat(message = "Next notification fires at ${alarmHour}h with message ${message.name} tomorrow")
+            LogUtil.logcat(message = "Next notification fires at ${alarmHour}h with message ${message.name} tomorrow", tag = TAG)
         }
 
 
@@ -213,12 +213,12 @@ object NotificationManager {
         val currentHour = now[Calendar.HOUR_OF_DAY]
 
         var alarmHour = 10
-        var notificationMessage = NotificationMessage.FIRST_START
+        var notificationMessage = NotificationMessage.VIRAL_EFFECT
 
         when (currentHour) {
             in 0..9 -> {
                 alarmHour = 10
-                notificationMessage = NotificationMessage.FIRST_START
+                notificationMessage = NotificationMessage.VIRAL_EFFECT
             }
             in 10..16 -> {
                 alarmHour = 17
@@ -228,14 +228,7 @@ object NotificationManager {
                 alarmHour = 20
                 notificationMessage = NotificationMessage.AI_MATCH
             }
-            in 20..21 -> {
-                alarmHour = 22
-                notificationMessage = NotificationMessage.VIRAL_EFFECT
-            }
         }
-
-        println("${TAG} - compute time and message - ------------------------------------------------------")
-        println("${TAG} - compute time and message - alarm Hour is ${alarmHour}h & notification message is $notificationMessage")
 
         return (alarmHour to notificationMessage)
     }
