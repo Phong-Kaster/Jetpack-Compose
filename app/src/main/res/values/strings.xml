@@ -184,4 +184,13 @@
     <string name="enter_message">Enter message</string>
     <string name="let_s_start">Let\'s start</string>
     <string name="notification_after_5_minute">Notification after 5 minute</string>
+    <string name="camera">Camera</string>
+    <string name="camera_perf_des">This allows you to capture new images directly within the app</string>
+    <string name="library">Library</string>
+    <string name="this_enables_you_to_select">This enables you to select and manage your image directly within the app</string>
+    <string name="all">All</string>
+    <string name="download">Download</string>
+    <string name="screenshot">Screenshot</string>
+    <string name="photo_from_device_storage">Photo from device storage</string>
+    <string name="choose_a_language_to_continue">Choose a language to continue</string>
 </resources>

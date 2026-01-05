@@ -40,5 +40,6 @@ enum class HomeShortcut(
     PitchToZoom(drawable = R.drawable.ic_pitch_to_zoom, text = R.string.pitch_to_zoom),
     DownloadWithWorkerManager(drawable = R.drawable.ic_download_with_worker, text = R.string.download_with_worker_manager),
     DownloadManager(drawable = R.drawable.ic_download_manager, text = R.string.download_manager),
+    PhotoFromDeviceStorage(drawable = R.drawable.ic_camera, text = R.string.photo_from_device_storage),
     ;
 }

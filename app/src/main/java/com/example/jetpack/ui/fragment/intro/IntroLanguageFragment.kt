@@ -58,7 +58,7 @@ fun LanguageLayout(
     CoreLayout(
         topBar = {
             CoreTopBar(
-                title = stringResource(R.string.fake_title),
+                title = stringResource(R.string.choose_a_language_to_continue),
                 onClickLeft = onBack,
                 rightIcon = R.drawable.ic_check,
                 leftIcon = R.drawable.ic_back,

@@ -191,5 +191,8 @@ dependencies {
 
     // Ensure you have Glide library dependency in your build.gradle file
     implementation(libs.glide)
-    kapt(libs.glide.compiler)
+    ksp(libs.glide.compiler)
+
+    // Allow request permission in Composable
+    implementation(libs.accompanist.permissions)
 }

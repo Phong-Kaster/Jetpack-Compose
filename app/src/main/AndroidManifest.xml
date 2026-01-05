@@ -49,6 +49,9 @@
         android:maxSdkVersion="30" /><!-- discover local Bluetooth devices - https://developer.android.com/develop/connectivity/bluetooth/bt-permissions#discover-local-devices -->
     <uses-feature
         android:name="android.hardware.bluetooth"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera"
         android:required="false" /><!-- Our app can NOT work without Bluetooth, if set true then this app will be hidden on Google Play Store - https://developer.android.com/develop/connectivity/bluetooth/bt-permissions#features-->
 
 
@@ -64,6 +67,9 @@
     <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="32" />
+
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>
 
     <application
         android:name=".JetpackApplication"
@@ -219,6 +225,15 @@
             </intent-filter>
         </receiver>
 
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
     </application>
 
 </manifest>

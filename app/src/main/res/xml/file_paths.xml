@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Gives access to files in getExternalFilesDir(null) -->
+    <external-files-path
+        name="videos"
+        path="." />
+</paths>
