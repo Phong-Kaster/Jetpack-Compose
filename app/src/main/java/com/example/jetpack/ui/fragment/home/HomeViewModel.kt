@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.jetpack.data.repository.DummyRepository
 import com.example.jetpack.domain.enums.HomeShortcut
 import com.example.jetpack.domain.enums.SortOption
+import com.example.jetpack.domain.model.Status
 import com.example.jetpack.util.AppUtil
 import com.example.jetpack.util.CoroutineUtil
 import com.example.jetpack.util.LogUtil
@@ -18,6 +19,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -49,9 +51,22 @@ constructor(
         callDummyRepository()
 
     }
-    fun  callDummyRepository(){
+
+    fun callDummyRepository() {
         viewModelScope.launch(Dispatchers.IO) {
-            dummyRepository.getCarts()
+            dummyRepository.getCarts().collectLatest { status ->
+                when(status) {
+                    is Status.Success -> {
+                        LogUtil.logcat(tag = TAG, message = "success")
+                    }
+                    is Status.Failure -> {
+                        LogUtil.logcat(tag = TAG, message = "failure")
+                    }
+                    is Status.Loading -> {
+                        LogUtil.logcat(tag = TAG, message = "loading")
+                    }
+                }
+            }
         }
     }
 
@@ -156,7 +171,17 @@ constructor(
             10 / 0
         }
 
-        block.onSuccess {  LogUtil.logcat(tag = "utilizeSampleRunCatching", message ="Success: $it") }
-            .onFailure {  LogUtil.logcat(tag = "utilizeSampleRunCatching", message = "Failure: $it") }
+        block.onSuccess {
+            LogUtil.logcat(
+                tag = "utilizeSampleRunCatching",
+                message = "Success: $it"
+            )
+        }
+            .onFailure {
+                LogUtil.logcat(
+                    tag = "utilizeSampleRunCatching",
+                    message = "Failure: $it"
+                )
+            }
     }
 }

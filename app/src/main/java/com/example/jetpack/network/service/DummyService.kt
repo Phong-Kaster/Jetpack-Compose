@@ -6,5 +6,5 @@ import retrofit2.http.GET
 
 interface DummyService {
     @GET("carts")
-    suspend fun getDummyCarts(): Response<CartsResponse>
+    suspend fun getDummyCarts():CartsResponse
 }

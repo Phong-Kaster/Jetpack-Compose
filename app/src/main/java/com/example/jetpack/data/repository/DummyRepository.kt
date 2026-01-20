@@ -1,30 +1,44 @@
 package com.example.jetpack.data.repository
 
-import com.example.jetpack.network.adapter.AccuWeatherFactory
+import com.example.jetpack.domain.model.Status
+import com.example.jetpack.network.dto.dummy.CartsResponse
 import com.example.jetpack.network.dto.weather.LocationAuto
-import com.example.jetpack.network.service.AccuWeatherService
 import com.example.jetpack.network.service.DummyService
+import com.example.jetpack.network.util.safeApiCallFlow
 import com.example.jetpack.util.LogUtil
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOf
 import javax.inject.Inject
 
 class DummyRepository
-
 @Inject
 constructor(
     private val dummyService: DummyService
 ) {
     private val TAG = this.javaClass.simpleName
-    suspend fun getCarts() {
-        LogUtil.logcat(tag = TAG, message = "getCarts called")
-        val response = withContext(Dispatchers.IO) {
-            dummyService.getDummyCarts()
-        }
-        LogUtil.logcat(tag = TAG, message = "getCarts called response is ${response}")
-        LogUtil.logcat(tag = TAG, message = "getCarts response is ${response.body()}")
-        //val formattedResponse = AccuWeatherFactory().invoke(response) as List<LocationAuto>
+    fun getCarts(): Flow<Status<CartsResponse>> {
+        return flow {
+            emit(Status.Loading())
+            val response = safeApiCallFlow { dummyService.getDummyCarts() }.first()
 
-       // return formattedResponse
+            if (response is Status.Failure) {
+                LogUtil.logcat(tag = TAG, message = "request failed")
+                emit(Status.Failure(message = response.message ?: "Unknown error"))
+                return@flow
+            }
+
+            val data = response.data
+            if (data == null) {
+                LogUtil.logcat(tag = TAG, message = "data is ${data}, stop!")
+                emit(Status.Failure(message = "data is ${data}, stop!"))
+                return@flow
+            }
+
+            val carts = data.carts
+            LogUtil.logcat(tag = TAG, message = "carts is $carts")
+            emit(Status.Success(data = data))
+        }
     }
 }
