@@ -1,4 +1,4 @@
-package com.example.jetpack.network.dto
+package com.example.jetpack.network.dto.weather
 
 import com.google.gson.annotations.SerializedName
 

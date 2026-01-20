@@ -1,10 +1,12 @@
-package com.example.jetpack.network.dto
+package com.example.jetpack.network.dto.weather
 
 import androidx.annotation.Keep
+import com.example.jetpack.network.dto.weather.ParentCity
+import com.example.jetpack.network.dto.weather.Region
+import com.example.jetpack.network.dto.weather.TimeZone
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 import java.util.UUID
-
 
 /**
  * # DTO is Data transfer object
@@ -27,5 +29,3 @@ class LocationGeo(
     @SerializedName("IsAlias") val IsAlias: Boolean? = null,
     @SerializedName("ParentCity") val ParentCity: ParentCity? = ParentCity(),
 ): Serializable
-
-

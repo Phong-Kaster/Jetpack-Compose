@@ -2,6 +2,7 @@ package com.example.jetpack.network.interceptor
 
 import com.example.jetpack.configuration.Constant
 import com.example.jetpack.data.repository.SettingRepository
+import com.example.jetpack.util.LogUtil
 import okhttp3.HttpUrl
 import okhttp3.Interceptor
 import okhttp3.Request
@@ -18,6 +19,7 @@ constructor(
     private val settingRepository: SettingRepository
 ) : Interceptor {
 
+    private val TAG = "AccuWeatherInterceptor"
 
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
@@ -27,19 +29,22 @@ constructor(
 
         val url: HttpUrl = request.url
             .newBuilder()
-            .addQueryParameter("apikey", Constant.ACCU_WEATHER_KEY)
+            //.addQueryParameter("Authorization", "Bearer ${Constant.ACCU_WEATHER_KEY}")
             .addQueryParameter("details", "true")
             .addQueryParameter("language", settingRepository.getLanguage().code)
             .addQueryParameter("metric", "false")
             .build()
 
-        request = request
+
+        val newRequest = request
             .newBuilder()
             .url(url)
+            .addHeader("Authorization", "Bearer ${Constant.ACCU_WEATHER_KEY}")
             .build()
 
+        LogUtil.logcat(message = "newRequest is $newRequest")
 
-        val response: Response = chain.proceed(request)// pass the request/response on to the next interceptor or the server.
+        val response: Response = chain.proceed(newRequest)// pass the request/response on to the next interceptor or the server.
         return response
     }
 }

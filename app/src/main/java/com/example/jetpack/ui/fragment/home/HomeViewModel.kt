@@ -3,6 +3,7 @@ package com.example.jetpack.ui.fragment.home
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.jetpack.data.repository.DummyRepository
 import com.example.jetpack.domain.enums.HomeShortcut
 import com.example.jetpack.domain.enums.SortOption
 import com.example.jetpack.util.AppUtil
@@ -26,7 +27,9 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel
 @Inject
-constructor() : ViewModel() {
+constructor(
+    private val dummyRepository: DummyRepository
+) : ViewModel() {
 
     private val TAG = "HomeViewModel"
 
@@ -43,6 +46,13 @@ constructor() : ViewModel() {
         sortListOfLifecycleShortcut()
         sampleMergeTwoAsychFunctions()
         utilizeSampleRunCatching()
+        callDummyRepository()
+
+    }
+    fun  callDummyRepository(){
+        viewModelScope.launch(Dispatchers.IO) {
+            dummyRepository.getCarts()
+        }
     }
 
     /**

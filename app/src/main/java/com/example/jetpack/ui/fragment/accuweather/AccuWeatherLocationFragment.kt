@@ -14,7 +14,7 @@ import androidx.fragment.app.viewModels
 import com.example.jetpack.R
 import com.example.jetpack.core.base.CoreFragment
 import com.example.jetpack.core.base.CoreLayout
-import com.example.jetpack.network.dto.LocationAuto
+import com.example.jetpack.network.dto.weather.LocationAuto
 import com.example.jetpack.ui.component.CoreTopBar2
 import com.example.jetpack.ui.fragment.accuweather.component.ManageLocationLayoutForSearch
 import com.example.jetpack.ui.fragment.accuweather.component.SearchBar

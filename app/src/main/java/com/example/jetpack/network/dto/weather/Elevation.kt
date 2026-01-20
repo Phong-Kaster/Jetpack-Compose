@@ -1,6 +1,9 @@
-package com.example.jetpack.network.dto
+package com.example.jetpack.network.dto.weather
 
+import com.example.jetpack.network.dto.weather.Imperial
+import com.example.jetpack.network.dto.weather.Metric
 import com.google.gson.annotations.SerializedName
+
 /**
  * # DTO is Data transfer object
  */

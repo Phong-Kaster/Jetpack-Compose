@@ -1,10 +1,11 @@
-package com.example.jetpack.data.repository
+package com.example.jetpack.data.repository.impl
 
 
+import com.example.jetpack.data.repository.WeatherRepository
 import com.example.jetpack.network.adapter.AccuWeatherFactory
-import com.example.jetpack.network.dto.LocationAuto
+import com.example.jetpack.network.dto.weather.LocationAuto
 import com.example.jetpack.network.service.AccuWeatherService
-import com.example.jetpack.util.AppUtil
+import com.example.jetpack.util.LogUtil
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Call
@@ -24,7 +25,7 @@ constructor(
         val response = withContext(Dispatchers.IO) {
             accuWeatherService.searchAutocomplete(keyword = keyword)
         }
-
+        LogUtil.logcat(tag = "WeatherRepositoryImplement", message = "searchAutocomplete is ${response.body()}")
         val formattedResponse = AccuWeatherFactory().invoke(response) as List<LocationAuto>
 
        return formattedResponse

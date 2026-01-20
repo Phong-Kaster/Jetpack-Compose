@@ -1,8 +1,7 @@
-package com.example.jetpack.network.dto
+package com.example.jetpack.network.dto.weather
 
 import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
-
 
 /**
  * # DTO is Data transfer object

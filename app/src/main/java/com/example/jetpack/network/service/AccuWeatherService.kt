@@ -1,7 +1,7 @@
 package com.example.jetpack.network.service
 
-import com.example.jetpack.network.dto.LocationAuto
-import com.example.jetpack.network.dto.LocationGeo
+import com.example.jetpack.network.dto.weather.LocationAuto
+import com.example.jetpack.network.dto.weather.LocationGeo
 import kotlinx.coroutines.Deferred
 import retrofit2.Response
 import retrofit2.http.GET

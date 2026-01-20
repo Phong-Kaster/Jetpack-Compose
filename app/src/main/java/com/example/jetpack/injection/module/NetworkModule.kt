@@ -4,6 +4,7 @@ import com.example.jetpack.configuration.Constant
 import com.example.jetpack.network.interceptor.AccuWeatherInterceptor
 import com.example.jetpack.network.service.AccuWeatherService
 import com.example.jetpack.data.repository.SettingRepository
+import com.example.jetpack.network.service.DummyService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -12,6 +13,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Qualifier
 import javax.inject.Singleton
 
 /**
@@ -31,28 +33,61 @@ object NetworkModule {
     /* Step 2 - provide OkHttpClient with Interceptors */
     @Singleton
     @Provides
-    fun provideOkHttpClient(settingRepository: SettingRepository): OkHttpClient {
+    @WeatherClient
+    fun providerAccuWeatherClient(settingRepository: SettingRepository): OkHttpClient {
+       val accuWeatherInterceptor = AccuWeatherInterceptor(settingRepository = settingRepository)
         return OkHttpClient()
             .newBuilder()
             .addInterceptor(loggingInterceptor)
-            .addInterceptor(AccuWeatherInterceptor(settingRepository = settingRepository))
+            .addInterceptor(accuWeatherInterceptor)
             .build()
     }
 
-    /* Step 3 - provide Retrofit Builder */
     @Singleton
     @Provides
-    fun provideRetrofitBuilder(okHttpClient: OkHttpClient): Retrofit.Builder {
-        return Retrofit.Builder()
-            .addConverterFactory(GsonConverterFactory.create())
-            .client(okHttpClient)
+    fun provideAccuWeatherService(
+        @WeatherClient okHttpClient: OkHttpClient,
+    ): AccuWeatherService {
+
+        val retrofit: Retrofit = Retrofit.Builder()
             .baseUrl(Constant.ACCU_WEATHER_URL)
+            .client(okHttpClient)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        return retrofit.create(AccuWeatherService::class.java)
     }
 
-    /* Step 4 - profile Accu Weather Service */
+
+
     @Singleton
     @Provides
-    fun provideAccuWeatherService(retrofitBuilder: Retrofit.Builder): AccuWeatherService{
-        return retrofitBuilder.build().create(AccuWeatherService::class.java)
+    @DummyClient
+    fun provideDummyClient(): OkHttpClient {
+        return OkHttpClient.Builder()
+            .addInterceptor(loggingInterceptor)
+            .build()
+    }
+
+    @Singleton
+    @Provides
+    fun providerDummyService(
+        @DummyClient  okHttpClient: OkHttpClient,
+    ): DummyService {
+        val retrofit: Retrofit = Retrofit.Builder()
+            .baseUrl("https://dummyjson.com/")
+            .client(okHttpClient)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        return retrofit.create(DummyService::class.java)
     }
 }
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class WeatherClient
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class DummyClient
