@@ -5,7 +5,7 @@ import android.content.Context
 import android.content.res.Configuration
 import android.os.Build
 import android.os.LocaleList
-import com.example.jetpack.core.injection.EntryPointRepository
+import com.example.jetpack.injection.EntryPointRepository
 import dagger.hilt.android.EntryPointAccessors
 import java.util.Locale
 

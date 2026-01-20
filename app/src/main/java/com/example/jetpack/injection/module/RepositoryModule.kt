@@ -1,4 +1,4 @@
-package com.example.jetpack.core.injection.module
+package com.example.jetpack.injection.module
 
 import dagger.Module
 import dagger.hilt.InstallIn

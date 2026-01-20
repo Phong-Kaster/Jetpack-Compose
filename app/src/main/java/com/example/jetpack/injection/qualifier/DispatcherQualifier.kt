@@ -1,4 +1,4 @@
-package com.example.jetpack.core.injection.qualifier
+package com.example.jetpack.injection.qualifier
 
 import javax.inject.Qualifier
 

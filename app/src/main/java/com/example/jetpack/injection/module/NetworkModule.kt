@@ -1,4 +1,4 @@
-package com.example.jetpack.core.injection.module
+package com.example.jetpack.injection.module
 
 import com.example.jetpack.configuration.Constant
 import com.example.jetpack.network.interceptor.AccuWeatherInterceptor
@@ -16,6 +16,7 @@ import javax.inject.Singleton
 
 /**
  * # Interceptors in OkHttp - https://www.linkedin.com/pulse/interceptors-okhttp-mohamad-abuzaid/
+ * # [Advance Retrofit](https://medium.com/android-alchemy/advance-retrofit-handling-authentication-logging-errors-and-more-2b1c7b7cb26f)
  */
 @Module
 @InstallIn(SingletonComponent::class)

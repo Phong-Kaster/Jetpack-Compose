@@ -1,7 +1,7 @@
-package com.example.jetpack.core.injection.module
+package com.example.jetpack.injection.module
 
-import com.example.jetpack.core.injection.qualifier.DefaultDispatcher
-import com.example.jetpack.core.injection.qualifier.IoDispatcher
+import com.example.jetpack.injection.qualifier.DefaultDispatcher
+import com.example.jetpack.injection.qualifier.IoDispatcher
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

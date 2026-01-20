@@ -2,8 +2,8 @@ package com.example.jetpack.data.repository
 
 import com.example.jetpack.configuration.Language
 import com.example.jetpack.configuration.Logo
-import com.example.jetpack.core.injection.qualifier.DefaultDispatcher
-import com.example.jetpack.core.injection.qualifier.IoDispatcher
+import com.example.jetpack.injection.qualifier.DefaultDispatcher
+import com.example.jetpack.injection.qualifier.IoDispatcher
 import com.example.jetpack.data.datastore.SettingDatastore
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
