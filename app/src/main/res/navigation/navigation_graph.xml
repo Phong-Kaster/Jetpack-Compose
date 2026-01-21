@@ -182,6 +182,10 @@
         android:id="@+id/devicePhotoFragment"
         android:name="com.example.jetpack.ui.fragment.devicephoto.DevicePhotoFragment" />
 
+    <fragment
+        android:id="@+id/meccaCompassFragment"
+        android:name="com.example.jetpack.ui.fragment.meccacompass.MeccaCompassFragment" />
+
     <activity
         android:id="@+id/lockscreenActivity"
         android:name="com.example.jetpack.ui.activity.LockscreenActivity" />
@@ -479,6 +483,15 @@
     <action
         android:id="@+id/toDevicePhoto"
         app:destination="@id/devicePhotoFragment"
+        app:enterAnim="@anim/enter_slide_in_right"
+        app:exitAnim="@anim/exit_slide_out_left"
+        app:popEnterAnim="@anim/enter_slide_in_left"
+        app:popExitAnim="@anim/exit_slide_out_right"
+        app:popUpToInclusive="true"/>
+
+    <action
+        android:id="@+id/toMeccaCompass"
+        app:destination="@id/meccaCompassFragment"
         app:enterAnim="@anim/enter_slide_in_right"
         app:exitAnim="@anim/exit_slide_out_left"
         app:popEnterAnim="@anim/enter_slide_in_left"

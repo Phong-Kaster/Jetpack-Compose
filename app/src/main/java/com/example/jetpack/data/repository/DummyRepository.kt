@@ -12,6 +12,11 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
 import javax.inject.Inject
 
+
+/**
+ * # Interceptors in OkHttp - https://www.linkedin.com/pulse/interceptors-okhttp-mohamad-abuzaid/
+ * # [Advance Retrofit](https://medium.com/android-alchemy/advance-retrofit-handling-authentication-logging-errors-and-more-2b1c7b7cb26f)
+ */
 class DummyRepository
 @Inject
 constructor(
@@ -37,7 +42,8 @@ constructor(
             }
 
             val carts = data.carts
-            LogUtil.logcat(tag = TAG, message = "carts is $carts")
+            LogUtil.logcat(tag = TAG, message = "cart is ${carts}")
+            LogUtil.logcat(tag = TAG, message = "there are ${carts.size} element")
             emit(Status.Success(data = data))
         }
     }

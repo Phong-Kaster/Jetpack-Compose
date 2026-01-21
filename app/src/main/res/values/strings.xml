@@ -193,4 +193,5 @@
     <string name="screenshot">Screenshot</string>
     <string name="photo_from_device_storage">Photo from device storage</string>
     <string name="choose_a_language_to_continue">Choose a language to continue</string>
+    <string name="mecca_compass">Mecca Compass</string>
 </resources>

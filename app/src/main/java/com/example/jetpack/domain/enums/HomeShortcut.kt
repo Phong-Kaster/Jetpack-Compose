@@ -41,5 +41,6 @@ enum class HomeShortcut(
     DownloadWithWorkerManager(drawable = R.drawable.ic_download_with_worker, text = R.string.download_with_worker_manager),
     DownloadManager(drawable = R.drawable.ic_download_manager, text = R.string.download_manager),
     PhotoFromDeviceStorage(drawable = R.drawable.ic_camera, text = R.string.photo_from_device_storage),
+    MeccaCompass(drawable = R.drawable.ic_camera, text = R.string.photo_from_device_storage),
     ;
 }

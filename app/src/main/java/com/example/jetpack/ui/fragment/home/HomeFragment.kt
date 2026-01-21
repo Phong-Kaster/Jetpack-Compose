@@ -196,6 +196,7 @@ class HomeFragment : CoreFragment() {
                     HomeShortcut.DownloadWithWorkerManager -> safeNavigate(R.id.toDownloadWithWorker)
                     HomeShortcut.DownloadManager -> safeNavigate(R.id.toDownloadManager)
                     HomeShortcut.PhotoFromDeviceStorage -> safeNavigate(R.id.toDevicePhoto)
+                    HomeShortcut.MeccaCompass -> safeNavigate(R.id.toMeccaCompass)
                     else -> showToast(shortcut.name)
                 }
             },

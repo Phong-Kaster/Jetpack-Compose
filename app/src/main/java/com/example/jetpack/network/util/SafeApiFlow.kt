@@ -1,5 +1,6 @@
 package com.example.jetpack.network.util
 
+import com.bumptech.glide.load.engine.Resource
 import com.example.jetpack.domain.model.Status
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -9,26 +10,64 @@ import retrofit2.HttpException
 import retrofit2.Response
 import java.io.IOException
 import java.net.SocketTimeoutException
+import kotlin.coroutines.cancellation.CancellationException
 
 
-fun <T> safeApiCallFlow(
-    apiCall: suspend () -> T
-): Flow<Status<T>> = flow {
+suspend fun <T> safeApiCall(apiCall: suspend () -> Response<T>): Status<T> {
     try {
-        val result = apiCall()
-        emit(Status.Success(result))
-    } catch (e: SocketTimeoutException) {
-        emit(Status.Failure(message = "Request timeout"))
-    } catch (e: HttpException) {
-        when (e.code()) {
-            in 400..499 -> emit(Status.Failure(message = "Client error (${e.code()})"))
-            in 500..599 -> emit(Status.Failure(message = "Server error (${e.code()})"))
-            else -> emit(Status.Failure(message = "Error is ${e.message}"))
+        val response = apiCall()
+        if (response.isSuccessful) {
+            val body = response.body()
+            if (body != null) {
+                return Status.Success(body)
+            }
         }
-    } catch (e: IOException) {
-        emit(Status.Failure(message = "Check internet connection"))
+        // This handles non-2xx responses (e.g., 404, 500)
+        return Status.Failure("Error ${response.code()}: ${response.message()}")
     } catch (e: Exception) {
-        emit(Status.Failure(message = "Error ${e.message}"))
+        // This handles exceptions like no internet connection
+        return Status.Failure(e.message ?: "An unexpected error occurred")
     }
-}.flowOn(Dispatchers.IO)
+}
 
+fun <T : Any> safeApiCallFlow(
+    apiCall: suspend () -> Response<T>
+): Flow<Status<T>> = flow {
+
+    try {
+        val response = apiCall()
+
+        if (response.isSuccessful) {
+            val body = response.body()
+            if (body != null) {
+                emit(Status.Success(data = body))
+                return@flow
+            }
+        }
+
+        emit(
+            value = Status.Failure(
+                message = "Http error ${response.code()}: ${response.message()}",
+                data = response.body()
+            )
+        )
+
+    } catch (e: Exception) {
+
+        // 🚨 REQUIRED: do NOT catch cancellation
+        if (e is CancellationException) throw e
+
+
+        val failure = when (e) {
+            is SocketTimeoutException ->
+                Status.Failure(message = "Request timeout")
+
+            is IOException -> Status.Failure(message = "No internet connection",)
+
+            else -> Status.Failure(message = "Unexpected error",)
+        }
+
+        emit(failure)
+    }
+
+}.flowOn(Dispatchers.IO)

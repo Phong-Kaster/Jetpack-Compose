@@ -57,10 +57,10 @@ constructor(
             dummyRepository.getCarts().collectLatest { status ->
                 when(status) {
                     is Status.Success -> {
-                        LogUtil.logcat(tag = TAG, message = "success")
+                        LogUtil.logcat(tag = TAG, message = "success with data ${status.data}")
                     }
                     is Status.Failure -> {
-                        LogUtil.logcat(tag = TAG, message = "failure")
+                        LogUtil.logcat(tag = TAG, message = "failure because ${status.message}")
                     }
                     is Status.Loading -> {
                         LogUtil.logcat(tag = TAG, message = "loading")
@@ -155,12 +155,14 @@ constructor(
 
             CoroutineUtil.mergeAsync(message1, message2, message3, message4)
                 .onSuccess {
-                    Log.d(
-                        TAG,
-                        "Success: ${it.first} ${it.second} ${it.third} ${it.fourth}"
-                    )
+//                    Log.d(
+//                        TAG,
+//                        "Success: ${it.first} ${it.second} ${it.third} ${it.fourth}"
+//                    )
                 }
-                .onFailure { Log.d(TAG, "Error: $it") }
+                .onFailure {
+                    Log.d(TAG, "Error: $it")
+                }
         }
     }
 
