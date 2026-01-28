@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.fragment.app.viewModels
 import com.example.jetpack.R
 import com.example.jetpack.configuration.Language
-import com.example.jetpack.configuration.Menu
+import com.example.jetpack.configuration.BottomBarDestination
 import com.example.jetpack.core.base.CoreFragment
 import com.example.jetpack.core.base.CoreLayout
 import com.example.jetpack.core.base.LocalTheme
@@ -152,7 +152,7 @@ fun SettingLayout(
     onChangeDarkMode: ()->Unit = {},
 ) {
     CoreLayout(
-        topBar = { HomeTopBar(name = stringResource(id = Menu.Setting.nameId)) },
+        topBar = { HomeTopBar(name = stringResource(id = BottomBarDestination.Setting.nameId)) },
         floatingActionButton = { CoreFloatingMenu() },
         bottomBar = { CoreBottomBar() },
         backgroundColor = LocalTheme.current.background

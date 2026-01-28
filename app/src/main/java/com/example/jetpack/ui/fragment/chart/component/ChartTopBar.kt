@@ -21,7 +21,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.jetpack.R
-import com.example.jetpack.configuration.Menu
+import com.example.jetpack.configuration.BottomBarDestination
 import com.example.jetpack.core.base.LocalTheme
 import com.example.jetpack.domain.enums.ChartShortcut
 import com.example.jetpack.ui.fragment.home.component.HomeTopBar
@@ -39,7 +39,7 @@ fun ChartTopBar(
             .fillMaxWidth()
             .background(color = LocalTheme.current.background)
     ) {
-        HomeTopBar(name = stringResource(id = Menu.Insight.nameId))
+        HomeTopBar(name = stringResource(id = BottomBarDestination.Insight.nameId))
         LazyRow(
             modifier = Modifier
                 .fillMaxWidth()

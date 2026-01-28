@@ -46,7 +46,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.jetpack.R
-import com.example.jetpack.configuration.Menu
+import com.example.jetpack.configuration.BottomBarDestination
 import com.example.jetpack.core.base.CoreFragment
 import com.example.jetpack.core.base.CoreLayout
 import com.example.jetpack.core.base.LocalTheme
@@ -110,7 +110,7 @@ fun ArticleLayout() {
     val extended by remember { derivedStateOf { state.firstVisibleItemIndex > 0 } }
 
     CoreLayout(
-        topBar = { HomeTopBar(name = stringResource(id = Menu.Article.nameId)) },
+        topBar = { HomeTopBar(name = stringResource(id = BottomBarDestination.Article.nameId)) },
         bottomBar = { CoreBottomBar() },
         floatingActionButton = {
             Box(

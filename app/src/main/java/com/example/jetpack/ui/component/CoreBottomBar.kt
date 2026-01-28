@@ -7,6 +7,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -39,7 +40,7 @@ import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.jetpack.R
-import com.example.jetpack.configuration.Menu
+import com.example.jetpack.configuration.BottomBarDestination
 import com.example.jetpack.core.base.LocalNavController
 import com.example.jetpack.core.base.LocalTheme
 import com.example.jetpack.ui.fragment.home.component.HomeBottomSheet
@@ -48,7 +49,6 @@ import com.example.jetpack.ui.modifier.borderWithAnimatedGradient
 import com.example.jetpack.ui.theme.customizedTextStyle
 import com.example.jetpack.util.NavigationUtil
 import com.example.jetpack.util.ViewUtil
-import com.example.jetpack.util.ViewUtil.CenterColumn
 
 @Composable
 fun CoreBottomBar() {
@@ -85,7 +85,7 @@ fun CoreBottomBar() {
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceEvenly,
     ) {
-        listOf(Menu.Home, Menu.Insight).forEach { item ->
+        listOf(BottomBarDestination.Home, BottomBarDestination.Insight).forEach { item ->
             BottomBarElement(
                 enable = currentDestination?.hierarchy?.any { it.id == item.destinationId } == true,
                 drawableId = item.drawableId,
@@ -120,7 +120,7 @@ fun CoreBottomBar() {
             )
         }
 
-        listOf(Menu.Article, Menu.Setting).forEach { item ->
+        listOf(BottomBarDestination.Article, BottomBarDestination.Setting).forEach { item ->
             BottomBarElement(
                 enable = currentDestination?.hierarchy?.any { it.id == item.destinationId } == true,
                 drawableId = item.drawableId,
@@ -159,7 +159,8 @@ private fun BottomBarElement(
     modifier: Modifier = Modifier,
     onClick: () -> Unit,
 ) {
-    CenterColumn(
+    Column(
+        verticalArrangement = Arrangement.spacedBy(4.dp, Alignment.CenterVertically),
         modifier = modifier
             .clickable(
                 interactionSource = remember { MutableInteractionSource() },
@@ -167,7 +168,6 @@ private fun BottomBarElement(
                 onClick = onClick
             )
             .padding(top = 4.dp, bottom = 12.dp),
-        itemSpacing = 4.dp
     ) {
         Icon(
             painter = painterResource(drawableId),

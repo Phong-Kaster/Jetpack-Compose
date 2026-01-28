@@ -36,21 +36,6 @@ object ViewUtil {
         }
     }
 
-    @Composable
-    inline fun CenterColumn(
-        modifier: Modifier = Modifier,
-        itemSpacing: Dp = 0.dp,
-        content: @Composable ColumnScope.() -> Unit,
-    ) {
-        Column(
-            modifier = modifier,
-            verticalArrangement = Arrangement.spacedBy(itemSpacing, Alignment.CenterVertically),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            content()
-        }
-    }
-
     fun Offset.toIntOffset(): IntOffset = IntOffset(
         x = x.toInt(),
         y = y.toInt(),

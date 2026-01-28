@@ -301,7 +301,7 @@ fun HomeLayout(
                             modifier = Modifier.weight(0.8F)
                         )
 
-                        // Sort Menu
+                        // Sort BottomBarDestination
                         IconButton(
                             onClick = { expandSortMenu = true },
                             content = {

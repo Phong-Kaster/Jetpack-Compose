@@ -5,7 +5,7 @@ import androidx.annotation.IdRes
 import androidx.annotation.StringRes
 import com.example.jetpack.R
 
-enum class Menu (
+enum class BottomBarDestination (
     @StringRes val nameId: Int,
     @DrawableRes val drawableId: Int,
     @IdRes val destinationId: Int,
