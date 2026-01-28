@@ -102,10 +102,8 @@ fun PairedDevices(
 @Preview
 @Composable
 private fun PreviewPairedDevices() {
-    ViewUtil.CenterColumn {
         PairedDevices(
             bluetoothDevices = arrayOf(),
             isDeviceScanning = true
         )
-    }
 }

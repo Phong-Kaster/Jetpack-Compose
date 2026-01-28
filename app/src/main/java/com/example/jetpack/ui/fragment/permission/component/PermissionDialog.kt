@@ -3,8 +3,11 @@ package com.example.jetpack.ui.fragment.permission.component
 import androidx.annotation.StringRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.ui.Alignment
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -22,7 +25,6 @@ import com.example.jetpack.ui.theme.JetpackComposeTheme
 import com.example.jetpack.ui.theme.OppositePrimaryColor
 import com.example.jetpack.ui.theme.PrimaryColor
 import com.example.jetpack.ui.theme.customizedTextStyle
-import com.example.jetpack.util.ViewUtil.CenterColumn
 
 @Composable
 fun PermissionPopup(
@@ -39,12 +41,13 @@ fun PermissionPopup(
                     onDismiss()
                 }
             ) {
-                CenterColumn(
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(15.dp),
                     modifier = Modifier
                         .clip(RoundedCornerShape(20.dp))
                         .background(color = Background)
-                        .padding(horizontal = 16.dp, vertical = 24.dp),
-                    itemSpacing = 15.dp
+                        .padding(horizontal = 16.dp, vertical = 24.dp)
                 ) {
                     Text(
                         text = stringResource(title),
@@ -100,12 +103,13 @@ fun PermissionPopup(
                     onDismiss()
                 }
             ) {
-                CenterColumn(
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(15.dp),
                     modifier = Modifier
                         .clip(RoundedCornerShape(20.dp))
                         .background(color = Background)
-                        .padding(horizontal = 16.dp, vertical = 24.dp),
-                    itemSpacing = 15.dp
+                        .padding(horizontal = 16.dp, vertical = 24.dp)
                 ) {
                     Text(
                         text = stringResource(title),

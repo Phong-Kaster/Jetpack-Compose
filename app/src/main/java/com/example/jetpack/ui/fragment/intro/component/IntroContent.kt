@@ -3,6 +3,7 @@ package com.example.jetpack.ui.fragment.intro.component
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -10,6 +11,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -21,7 +23,6 @@ import com.example.jetpack.core.base.LocalTheme
 import com.example.jetpack.ui.theme.customizedTextStyle
 import com.example.jetpack.ui.theme.body16
 import com.example.jetpack.util.ViewUtil
-import com.example.jetpack.util.ViewUtil.CenterColumn
 
 @Composable
 fun IntroContent(
@@ -29,7 +30,9 @@ fun IntroContent(
     @StringRes contentId: Int = R.string.fake_message,
     @DrawableRes imageId: Int = R.drawable.ic_launcher_foreground,
 ) {
-    CenterColumn(modifier = Modifier.fillMaxSize()) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier.fillMaxSize()) {
         Text(
             text = stringResource(titleId),
             style = customizedTextStyle(30, 700),

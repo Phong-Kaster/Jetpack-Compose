@@ -7,6 +7,7 @@ import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -22,7 +23,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.jetpack.R
-import com.example.jetpack.util.ViewUtil
 
 /**
  * An animation that waves spread out and fade out
@@ -83,7 +83,9 @@ fun AnimationCircularWave(
 @Preview
 @Composable
 private fun PreviewCircularWave() {
-    ViewUtil.CenterColumn {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
         AnimationCircularWave(
             modifier = Modifier.size(100.dp),
             content = {
