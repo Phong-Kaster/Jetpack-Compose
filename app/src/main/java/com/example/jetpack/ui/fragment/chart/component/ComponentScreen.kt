@@ -65,6 +65,7 @@ import com.example.jetpack.ui.view.CustomizedCheckbox
 import com.example.jetpack.ui.view.CustomizedProgressBar
 import com.example.jetpack.ui.view.GlowingButton
 import com.example.jetpack.ui.view.GradientProgressIndicator
+import com.example.jetpack.ui.view.SettingItemWithDropdown
 import com.example.jetpack.ui.view.SubsettingElement
 import com.example.jetpack.ui.view.SwipeToReveal
 import com.example.jetpack.ui.view.wordbyword.SimpleChuckedTextAnimation
@@ -532,6 +533,38 @@ fun ComponentScreen(
                             .clip(shape = RoundedCornerShape(20.dp))
                             .background(color = Color.Transparent)
                             .padding(horizontal = 10.dp, vertical = 10.dp)
+                    )
+                }
+            }
+        )
+
+
+        item(
+            key = "SettingItemWithSwitch",
+            span = { GridItemSpan(2) },
+            content = {
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(16.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                ) {
+                    Text(
+                        text = "SettingItemWithDropdown",
+                        style = customizedTextStyle(
+                            fontSize = 14,
+                            fontWeight = 600,
+                            color = Color.White
+                        ),
+                        modifier = Modifier.fillMaxWidth(),
+                    )
+
+                    var use24Hour by remember { mutableStateOf(false)}
+                    SettingItemWithDropdown(
+                        use24Hour = use24Hour,
+                        onCheckedChange = { use24Hour = it},
+                        nameRes = R.string.timed_recording,
+                        iconRes = R.drawable.ic_iron_cross_bundeswehr,
+                        modifier = Modifier
                     )
                 }
             }
