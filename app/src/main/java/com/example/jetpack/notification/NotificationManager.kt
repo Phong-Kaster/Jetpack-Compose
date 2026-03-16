@@ -24,6 +24,52 @@ import java.util.Calendar
 
 
 /**
+ * Android Intent Activity Flags – Quick Reference
+ *
+ * FLAG_ACTIVITY_NEW_TASK
+ * - Start the activity in a new task stack.
+ * - Required when launching an Activity from:
+ *   Notification, Service, BroadcastReceiver, or Application context.
+ *
+ * FLAG_ACTIVITY_CLEAR_TASK
+ * - Clears the entire task stack before launching the activity.
+ * - Commonly used for: logout, restarting the app, or opening a fresh session.
+ *
+ * FLAG_ACTIVITY_CLEAR_TOP
+ * - If the target Activity already exists in the stack,
+ *   all activities above it are destroyed.
+ * - The existing instance is reused.
+ *
+ * FLAG_ACTIVITY_SINGLE_TOP
+ * - If the activity is already at the top of the stack,
+ *   Android will not create a new instance.
+ * - Instead, onNewIntent() will be called.
+ *
+ * FLAG_ACTIVITY_REORDER_TO_FRONT
+ * - Moves an existing activity in the stack to the front
+ *   without destroying other activities.
+ *
+ * FLAG_ACTIVITY_NO_HISTORY
+ * - The activity will not remain in the back stack.
+ * - Pressing back will skip it.
+ *
+ * FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS
+ * - Prevents the activity from appearing in the recent apps list.
+ *
+ *
+ * Common combinations:
+ *
+ * // Start a completely fresh app session
+ * intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+ *
+ * // Bring existing activity to front
+ * intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+ *
+ * // Avoid creating duplicate activity
+ * intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
+ *
+ *
+ *
  * this class is responsible for creating & show notification
  *
  * @author Phong-Kaster
