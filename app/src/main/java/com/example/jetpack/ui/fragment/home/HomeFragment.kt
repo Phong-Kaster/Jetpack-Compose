@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -42,6 +43,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -49,6 +51,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -67,10 +71,12 @@ import com.example.jetpack.ui.component.CoreTopBarWithScrollBehavior
 import com.example.jetpack.ui.fragment.accuweather.component.SearchBar
 import com.example.jetpack.ui.fragment.home.component.HomeDialog
 import com.example.jetpack.ui.fragment.home.component.HomeShortcutItem
-import com.example.jetpack.ui.theme.PrimaryColor
 import com.example.jetpack.ui.modifier.ShimmerItem
+import com.example.jetpack.ui.theme.PrimaryColor
 import com.example.jetpack.ui.theme.customizedTextStyle
 import com.example.jetpack.ui.view.DigitalClock3
+import com.example.jetpack.ui.view.HomePremium
+import com.example.jetpack.ui.view.floatingdraggablebox.FloatingDraggableBox
 import com.example.jetpack.util.AppUtil.showToast
 import com.example.jetpack.util.NavigationUtil.safeNavigate
 import com.example.jetpack.util.PermissionUtil
@@ -79,10 +85,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.flow.distinctUntilChanged
-import androidx.compose.runtime.snapshotFlow
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.IntOffset
-import com.example.jetpack.ui.view.floatingdraggablebox.FloatingDraggableBox
 
 /**
  * MVVM Architecture - https://github.com/akhilesh0707/Rick-and-Morty
@@ -264,11 +266,18 @@ fun HomeLayout(
                             )
                         ),
                     content = {
-                        DigitalClock3(
-                            textColor = LocalTheme.current.textColor,
-                            modifier = Modifier
-                                .fillMaxWidth(),
-                        )
+                        Row(
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            DigitalClock3(
+                                textColor = LocalTheme.current.textColor,
+                                modifier = Modifier.wrapContentSize(),
+                            )
+                            HomePremium(onClick = {})
+                        }
+
                     }
                 )
             },
@@ -349,7 +358,6 @@ fun HomeLayout(
                     }
 
                 }
-
 
                 items(
                     items = shortcuts,
