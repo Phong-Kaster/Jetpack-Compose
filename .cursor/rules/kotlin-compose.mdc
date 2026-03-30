@@ -1,0 +1,15 @@
+---
+description: Kotlin and Jetpack Compose conventions for this app
+globs: "**/*.kt"
+alwaysApply: false
+---
+
+# Kotlin & Compose
+
+- **Playground files**: After the `package` line, you may add `// PLAYGROUND-TAGS: tag1, tag2` so samples are easy to grep; register the screen in `SampleRegistry.kt` when it appears on the home grid.
+- Match existing style: naming, imports, and structure of nearby files in the same feature folder.
+- **Compose**: Prefer `remember` / `derivedStateOf` for derived UI state; hoist state when it is shared; use `Modifier` chains consistently with surrounding composables.
+- **Theming**: Use `MaterialTheme` and existing theme tokens from the project rather than hard-coded colors when a semantic role exists.
+- **Previews**: Add or update `@Preview` for non-trivial new composables when the file already uses previews.
+- **Hilt**: Use `@HiltAndroidApp`, `@AndroidEntryPoint`, `@Inject`, and `@Module` / `@InstallIn` as the project already does; inject `ViewModel` via Hilt ViewModel APIs consistent with existing screens.
+- **Coroutines**: Use `viewModelScope` or appropriate scopes; avoid blocking the main thread.

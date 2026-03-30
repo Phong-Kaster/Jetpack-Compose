@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/splashFragment"
-        android:name="com.example.jetpack.ui.fragment.splash.SplashFragment">
+        android:name="com.example.jetpack.ui.fragment.secondary.splash.SplashFragment">
         <action
             android:id="@+id/fromSplashToHome"
             app:destination="@id/homeFragment"
@@ -26,7 +26,7 @@
 
         <fragment
             android:id="@+id/introLanguageFragment"
-            android:name="com.example.jetpack.ui.fragment.intro.IntroLanguageFragment">
+            android:name="com.example.jetpack.ui.fragment.secondary.intro.IntroLanguageFragment">
             <action
                 android:id="@+id/fromIntroLanguageToIntro"
                 app:destination="@id/introFragment"
@@ -39,7 +39,7 @@
 
         <fragment
             android:id="@+id/introFragment"
-            android:name="com.example.jetpack.ui.fragment.intro.IntroFragment">
+            android:name="com.example.jetpack.ui.fragment.secondary.intro.IntroFragment">
             <action
                 android:id="@+id/fromIntroToHome"
                 app:destination="@id/homeFragment"
@@ -54,137 +54,137 @@
 
     <fragment
         android:id="@+id/languageFragment"
-        android:name="com.example.jetpack.ui.fragment.language.LanguageFragment" />
+        android:name="com.example.jetpack.ui.fragment.secondary.language.LanguageFragment" />
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.jetpack.ui.fragment.home.HomeFragment" />
+        android:name="com.example.jetpack.ui.fragment.primary.home.HomeFragment" />
 
     <fragment
         android:id="@+id/settingFragment"
-        android:name="com.example.jetpack.ui.fragment.setting.SettingFragment" />
+        android:name="com.example.jetpack.ui.fragment.primary.setting.SettingFragment" />
 
     <fragment
         android:id="@+id/insightFragment"
-        android:name="com.example.jetpack.ui.fragment.chart.InsightFragment" />
+        android:name="com.example.jetpack.ui.fragment.primary.chart.InsightFragment" />
 
     <fragment
         android:id="@+id/articleFragment"
-        android:name="com.example.jetpack.ui.fragment.article.ArticleFragment" />
+        android:name="com.example.jetpack.ui.fragment.primary.article.ArticleFragment" />
 
     <fragment
         android:id="@+id/disclaimerFragment"
-        android:name="com.example.jetpack.ui.fragment.setting.DisclaimerFragment" />
+        android:name="com.example.jetpack.ui.fragment.primary.setting.DisclaimerFragment" />
 
     <fragment
         android:id="@+id/tutorialFragment"
-        android:name="com.example.jetpack.ui.fragment.tutorial.TutorialFragment" />
+        android:name="com.example.jetpack.ui.fragment.secondary.tutorial.TutorialFragment" />
 
     <fragment
         android:id="@+id/quoteFragment"
-        android:name="com.example.jetpack.ui.fragment.quote.QuoteFragment" />
+        android:name="com.example.jetpack.ui.fragment.secondary.quote.QuoteFragment" />
 
     <fragment
         android:id="@+id/settingIconFragment"
-        android:name="com.example.jetpack.ui.fragment.setting.SettingIconFragment" />
+        android:name="com.example.jetpack.ui.fragment.primary.setting.SettingIconFragment" />
 
     <fragment
         android:id="@+id/accuWeatherLocation"
-        android:name="com.example.jetpack.ui.fragment.accuweather.AccuWeatherLocationFragment" />
+        android:name="com.example.jetpack.ui.fragment.secondary.accuweather.AccuWeatherLocationFragment" />
 
     <fragment
         android:id="@+id/permissionFragment"
-        android:name="com.example.jetpack.ui.fragment.permission.PermissionFragment" />
+        android:name="com.example.jetpack.ui.fragment.secondary.permission.PermissionFragment" />
 
     <fragment
         android:id="@+id/permissionFragment2"
-        android:name="com.example.jetpack.ui.fragment.permission.PermissionFragment2" />
+        android:name="com.example.jetpack.ui.fragment.secondary.permission.PermissionFragment2" />
 
     <fragment
         android:id="@+id/animationLayoutFragment"
-        android:name="com.example.jetpack.ui.fragment.motionlayout.AnimationLayoutFragment" />
+        android:name="com.example.jetpack.ui.fragment.secondary.motionlayout.AnimationLayoutFragment" />
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.jetpack.ui.fragment.login.LoginFragment" />
+        android:name="com.example.jetpack.ui.fragment.secondary.login.LoginFragment" />
 
     <fragment
         android:id="@+id/bluetoothFragment"
-        android:name="com.example.jetpack.ui.fragment.bluetooth.BluetoothFragment" />
+        android:name="com.example.jetpack.ui.fragment.secondary.bluetooth.BluetoothFragment" />
 
     <fragment
         android:id="@+id/webviewFragment"
-        android:name="com.example.jetpack.ui.fragment.webview.WebviewFragment" />
+        android:name="com.example.jetpack.ui.fragment.secondary.webview.WebviewFragment" />
 
     <fragment
         android:id="@+id/mediaPlayerFragment"
-        android:name="com.example.jetpack.ui.fragment.mediaplayer.MediaPlayerFragment" />
+        android:name="com.example.jetpack.ui.fragment.secondary.mediaplayer.MediaPlayerFragment" />
 
     <fragment
         android:id="@+id/mediaPlayerFragment2"
-        android:name="com.example.jetpack.ui.fragment.mediaplayer.MediaPlayerFragment2" />
+        android:name="com.example.jetpack.ui.fragment.secondary.mediaplayer.MediaPlayerFragment2" />
 
     <fragment
         android:id="@+id/basicTextField2Fragment"
-        android:name="com.example.jetpack.ui.fragment.textfield.BasicTextFieldFragment" />
+        android:name="com.example.jetpack.ui.fragment.secondary.textfield.BasicTextFieldFragment" />
 
     <fragment
         android:id="@+id/collapsibleTopBarFragment"
-        android:name="com.example.jetpack.ui.fragment.collapsibletopbar.collapsible.CollapsibleTopBarFragment" />
+        android:name="com.example.jetpack.ui.fragment.secondary.collapsibletopbar.collapsible.CollapsibleTopBarFragment" />
 
 
     <fragment
         android:id="@+id/collapsibleTopBar2Fragment"
-        android:name="com.example.jetpack.ui.fragment.collapsibletopbar.collapsible2.CollapsibleTopbar2Fragment" />
+        android:name="com.example.jetpack.ui.fragment.secondary.collapsibletopbar.collapsible2.CollapsibleTopbar2Fragment" />
 
     <fragment
         android:id="@+id/collapsibleTopBar3Fragment"
-        android:name="com.example.jetpack.ui.fragment.collapsibletopbar.collapsible3.CollapsibleTopbar3Fragment" />
+        android:name="com.example.jetpack.ui.fragment.secondary.collapsibletopbar.collapsible3.CollapsibleTopbar3Fragment" />
 
     <fragment
         android:id="@+id/collapsibleTopBar4Fragment"
-        android:name="com.example.jetpack.ui.fragment.collapsibletopbar.collapsible4.CollapsibleTopbar4Fragment" />
+        android:name="com.example.jetpack.ui.fragment.secondary.collapsibletopbar.collapsible4.CollapsibleTopbar4Fragment" />
 
     <fragment
         android:id="@+id/collapsibleTopBar5Fragment"
-        android:name="com.example.jetpack.ui.fragment.collapsibletopbar.collapsible5.CollapsibleTopbar5Fragment" />
+        android:name="com.example.jetpack.ui.fragment.secondary.collapsibletopbar.collapsible5.CollapsibleTopbar5Fragment" />
 
     <fragment
         android:id="@+id/lastKnownLocationFragment"
-        android:name="com.example.jetpack.ui.fragment.location.LastKnownLocationFragment" />
+        android:name="com.example.jetpack.ui.fragment.secondary.location.LastKnownLocationFragment" />
 
     <fragment
         android:id="@+id/instagramCarouselFragment"
-        android:name="com.example.jetpack.ui.fragment.instagramcarousel.InstagramCarouselFragment" />
+        android:name="com.example.jetpack.ui.fragment.secondary.instagramcarousel.InstagramCarouselFragment" />
 
     <fragment
         android:id="@+id/animationFragment"
-        android:name="com.example.jetpack.ui.fragment.animation.AnimationFragment" />
+        android:name="com.example.jetpack.ui.fragment.secondary.animation.AnimationFragment" />
 
     <fragment
         android:id="@+id/kotlinFlowFragment"
-        android:name="com.example.jetpack.ui.fragment.kotlinflow.KotlinFlowFragment" />
+        android:name="com.example.jetpack.ui.fragment.secondary.kotlinflow.KotlinFlowFragment" />
 
     <fragment
         android:id="@+id/pitchToZoomFragment"
-        android:name="com.example.jetpack.ui.fragment.pitchtozoom.PitchToZoomFragment" />
+        android:name="com.example.jetpack.ui.fragment.secondary.pitchtozoom.PitchToZoomFragment" />
 
 
     <fragment
         android:id="@+id/downloadWithWorkerFragment"
-        android:name="com.example.jetpack.ui.fragment.downloadwithworker.DownloadWithWorkerFragment" />
+        android:name="com.example.jetpack.ui.fragment.secondary.downloadwithworker.DownloadWithWorkerFragment" />
 
     <fragment
         android:id="@+id/downloadManagerFragment"
-        android:name="com.example.jetpack.ui.fragment.downloadmanager.DownloadManagerFragment" />
+        android:name="com.example.jetpack.ui.fragment.secondary.downloadmanager.DownloadManagerFragment" />
 
     <fragment
         android:id="@+id/devicePhotoFragment"
-        android:name="com.example.jetpack.ui.fragment.devicephoto.DevicePhotoFragment" />
+        android:name="com.example.jetpack.ui.fragment.secondary.devicephoto.DevicePhotoFragment" />
 
     <fragment
         android:id="@+id/meccaCompassFragment"
-        android:name="com.example.jetpack.ui.fragment.meccacompass.MeccaCompassFragment" />
+        android:name="com.example.jetpack.ui.fragment.secondary.meccacompass.MeccaCompassFragment" />
 
     <activity
         android:id="@+id/lockscreenActivity"

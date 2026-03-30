@@ -43,8 +43,8 @@ import com.example.jetpack.R
 import com.example.jetpack.configuration.BottomBarDestination
 import com.example.jetpack.core.base.LocalNavController
 import com.example.jetpack.core.base.LocalTheme
-import com.example.jetpack.ui.fragment.home.component.HomeBottomSheet
-import com.example.jetpack.ui.fragment.tutorial.component.LocalTutorial
+import com.example.jetpack.ui.fragment.primary.home.component.HomeBottomSheet
+import com.example.jetpack.ui.fragment.secondary.tutorial.component.LocalTutorial
 import com.example.jetpack.ui.modifier.borderWithAnimatedGradient
 import com.example.jetpack.ui.theme.customizedTextStyle
 import com.example.jetpack.util.NavigationUtil

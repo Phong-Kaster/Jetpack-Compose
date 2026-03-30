@@ -1,0 +1,63 @@
+---
+description: Android skeleton project — tech stack, Clean Architecture, and conventions
+alwaysApply: true
+---
+
+# Android Compose Skeleton — Project Rules
+
+## This repository (Jetpack-Compose)
+The **checked-in app** uses **Hilt**, **Retrofit**, **Navigation + Fragments**, **Room**, **DataStore**, and **KSP** (not Koin/Ktor). Treat the **Clean Architecture / Koin / Ktor** bullets below as guidance when **porting snippets to a greenfield project**, not as a description of this Gradle graph. For sample indexing and search, follow **snippet-library** and `domain/catalog/SampleRegistry.kt`.
+
+## Purpose
+This is a **reusable skeleton / playground**. Code and structure should stay easy to copy into new projects. Prefer clear layers and config over one-off hacks.
+
+## Core rules
+- Always write code that can be easier expandable
+- Always write code that can be easier reused from a project to other projects
+- Prefer write code that easier to understand for human than write code that has high performance
+- Always add document and write example for each class or functions even if it's just writing a short paragraph. Higher priority to complex functions and related logic
+- Leverage utilize use-case to carry out a complex action that needs time to compute then base on the result to decide. Naming use-case must represent purpose, for example: CreateOngoingUseCase, CreateDailyNotificationUseCase
+
+## Naming & Style
+- Repository interfaces: `XxxRepository`. Implementations: `XxxRepositoryImpl` in `data/repository/impl/`.
+For example: if you need repository interface `SettingRepository` in `domain/repository` then implementation is `SettingRepositoryImpl` in `data/repository/impl`
+
+- API services: `XxxApi` in `data/remote/api/`. DTOs: `XxxDto` in `data/remote/dto/`.
+For example: if you need Post API then create PostApi in `remote/api/PostApi` and create related DTO classes in `data/remote/dto/post/….`
+
+- Keep new shared utilities/extensions in **common** (e.g. `common.extensions`); keep UI-only helpers in **ui/util**.
+For example: if need date and time extensions then create DateAndTimeExtension in `common/extensions`
+For example: if date and time needs complicated functions then create package as `common/extension/date_and_time` and separate 2 files include BasicDateAndTimeExtension and AdvancedDataAndTimeExtension
+
+- Do not hide lamda function. Always write full lamda functions. For example:
+val prevDone = prayerTimeStates.getOrElse(index = index - 1, defaultValue = { PrayerItemState.Rest }) == PrayerItemState.Done
+val thisDone = prayerTimeStates.getOrElse(index = index, defaultValue = { PrayerItemState.Rest }) == PrayerItemState.Done
+
+- When update uiState, do not use syntax updatePlayer { copy(currentIndex = playlistIndex, playingVerseKey = key) }
+always use syntax _uiState.value = _uiState.value.copy(...)
+
+- When a project defines multiple rules, treat this "android-skeleton-project" rules as the highest priority and always enforce them.
+
+- If the codebase does not use Activity or Fragment, skip any rules related to Activity or Fragment.
+
+## Tech Stack
+- **Language:** Kotlin
+- **UI:** Jetpack Compose + Material3
+- **DI:** Koin
+- **Navigation:** Navigation Component (Fragment-based, Compose inside fragments)
+- **Network:** Ktor client
+- **Local:** Room, DataStore
+- **Config:** `core.config.AppConfig` (API base URL, timeouts); `common.Constant` (app URLs, datastore name)
+
+## Clean Architecture — Package Layout
+- **domain/** — `model/`, `repository/` (interfaces only). No Android or data dependencies.
+- **data/** — `remote/api/` (ApiPath, *Api classes), `remote/dto/`, `remote/util/` (e.g. safeApiCallFlow), `mapper/`, `repository/impl/`.
+- **core/** — `config/` (AppConfig), base classes (CoreActivity, CoreFragment, CoreLayout).
+- **common/** — Shared types and constants: Resource, Constant, Language, extensions (e.g. validation).
+- **ui/** — `theme/`, `component/`, `view/`, `util/`, and **`fragment/primary/`** (bottom-bar: home, chart/insight, article, setting) vs **`fragment/secondary/`** (all other demo screens). Match packages to folder paths.
+- **injection/** — Koin modules (appModule includes database, datastore, repository, viewModel, network, locale).
+
+## API & Data Conventions
+- Put endpoint paths in **data/remote/api/ApiPath.kt** (use `AppConfig` for base URLs).
+- New API: add *Api in `data/remote/api/`, DTO in `data/remote/dto/`, mapper in `data/mapper/`, repository interface in `domain/repository/`, impl in `data/repository/impl/`, bind in NetworkModule + RepositoryModule.
+- Wrap API calls in **safeApiCallFlow**; expose **Resource&lt;T&gt;** (Loading/Success/Error). Map errors in UI with **Throwable.toUiMessage(context)** (UiErrorMapper).

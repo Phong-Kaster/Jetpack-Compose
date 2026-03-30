@@ -19,7 +19,7 @@ import androidx.core.app.NotificationCompat
 import com.example.jetpack.MainActivity
 import com.example.jetpack.R
 import com.example.jetpack.configuration.Constant
-import com.example.jetpack.ui.fragment.mediaplayer.Song
+import com.example.jetpack.ui.fragment.secondary.mediaplayer.Song
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

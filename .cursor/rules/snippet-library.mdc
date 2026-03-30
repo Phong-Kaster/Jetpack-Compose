@@ -1,0 +1,30 @@
+---
+description: Playground repo — samples catalog, search, and how to add copy-paste demos
+alwaysApply: true
+---
+
+# Snippet / playground conventions
+
+This app is a **personal reference**: permissions, Compose UI, charts, Canvas, WorkManager, etc. Optimize for **find → open → copy**.
+
+## Package layout (`ui/fragment/`)
+- **`primary/`** — the **four bottom-bar destinations**: `home/`, `chart/` (Insight), `article/`, `setting/`. Keep these stable; they are the app shell.
+- **`secondary/`** — **all other feature demos** (permissions, tutorial, splash, mediaplayer, collapsible top bar, etc.). Add new playground screens here as `secondary/<feature>/`.
+
+## Discovery (human + Cursor)
+- **Registry**: `domain/catalog/SampleRegistry.kt` — maps each [HomeShortcut] to topics, search aliases, and `primarySourcePath` under `app/src/main/java/com/example/jetpack/`.
+- **Topics**: `domain/catalog/SampleTopic.kt` — grep `SampleTopic.PERMISSION`, `CHART`, etc.
+- **Home search**: uses `SampleRegistry.shortcutsMatching()` (not only enum names). Type e.g. `workmanager`, `chart`, `retrofit`.
+- **Not on home grid**: `SampleRegistry.standalonePlaygrounds` (Insight tab, chart composables, Canvas views).
+- **File markers**: optional line after `package`:
+  `// PLAYGROUND-TAGS: keyword1, keyword2` — helps project search and AI.
+
+## Adding a new home-screen sample
+1. Add [HomeShortcut] + strings + drawable in `domain/enums/HomeShortcut.kt` and resources.
+2. Register **SampleMeta** in `SampleRegistry.kt` (topics + aliases + path).
+3. Wire **navigation** in `res/navigation/navigation_graph.xml`.
+4. Add branch in `primary/home/HomeFragment.kt` `when (shortcut) { ... }`.
+5. Implement Fragment / composables under `ui/fragment/secondary/<feature>/` (not under `primary/` unless it is a main-tab screen).
+
+## Portability vs this repo
+When copying into another project, adapt DI (Hilt here), navigation, and packages. Prefer lifting **composable + small ViewModel** first; Fragment shell is optional in greenfield apps.

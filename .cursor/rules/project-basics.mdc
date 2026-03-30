@@ -1,0 +1,13 @@
+---
+description: Core project context and general Kotlin/Android standards
+alwaysApply: true
+---
+
+# Project basics
+
+- **Stack**: Android app with Jetpack Compose, Kotlin, Hilt (use **KSP** for Hilt/Room/Glide—do not add `kapt` unless a dependency truly requires it), Navigation, Room where applicable.
+- **Package**: `com.example.jetpack` — keep new code under this namespace unless the user asks otherwise.
+- **Language**: Prefer clear, simple English in code comments and user-facing strings unless the product is explicitly localized.
+- **Scope**: Change only what the task needs; avoid drive-by refactors and unrelated file edits.
+- **Gradle**: If Hilt + KSP fails with missing `Dagger*_*HiltComponents_*` on `hiltJavaCompileDebug`, the project already wires `kspDebugKotlin` + Kotlin classes dir into that task—do not remove that workaround without verifying the build.
+- **Samples index**: `domain/catalog/SampleRegistry.kt` — keep in sync when adding `HomeShortcut` demos; see rule **snippet-library**.
