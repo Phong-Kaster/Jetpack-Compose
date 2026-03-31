@@ -1,8 +1,8 @@
 [versions]
 # --- Toolchain (keep Kotlin ↔ KSP aligned: https://github.com/google/ksp/releases ) ---
 kotlin = "2.2.21"
-ksp = "2.2.21-2.0.5"
-androidGradlePlugin = "8.13.2"
+ksp = "2.3.2"
+androidGradlePlugin = "9.1.0"
 
 # --- Compose: single source of truth via BOM; do not pin individual androidx.compose:* versions ---
 compose-bom = "2026.03.01"

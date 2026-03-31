@@ -24,9 +24,6 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        val timestamp = SimpleDateFormat("MM-dd-yyyy_hh-mm").format(Date())
-        setProperty("archivesBaseName", "Bundeswehr_v${versionName}(${versionCode})_${timestamp}")
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
@@ -83,6 +80,19 @@ android {
         }
         jniLibs {
             useLegacyPackaging = false
+        }
+    }
+
+    // Gradle 9 removed Project.archivesBaseName. AGP 9.1 VariantOutput has no outputFileName yet;
+    // use applicationVariants + ApkVariantOutput (deprecated API, still works for APK naming).
+    @Suppress("DEPRECATION")
+    applicationVariants.configureEach {
+        val variant = this
+        val timestamp = SimpleDateFormat("MM-dd-yyyy_hh-mm").format(Date())
+        val baseName = "Bundeswehr_v${variant.versionName}(${variant.versionCode})_${timestamp}"
+        variant.outputs.forEach { output ->
+            val apkOutput = output as com.android.build.gradle.api.ApkVariantOutput
+            apkOutput.outputFileName = "${baseName}-${variant.name}.apk"
         }
     }
 }
