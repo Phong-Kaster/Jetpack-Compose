@@ -15,12 +15,12 @@ plugins {
 
 android {
     namespace = "com.example.jetpack"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.example.jetpack"
         minSdk = 26
-        targetSdk = 35
+        targetSdk = 36
         versionCode = 1
         versionName = "1.0"
 
@@ -81,6 +81,9 @@ android {
         resources {
             excludes.add("/META-INF/{AL2.0,LGPL2.1}")
         }
+        jniLibs {
+            useLegacyPackaging = false
+        }
     }
 }
 
@@ -95,6 +98,7 @@ dependencies {
     implementation(libs.ui.tooling.preview)
 
     implementation(libs.material3)
+    implementation(libs.material.icons.extended)
     implementation(libs.appcompat)
 
     implementation(libs.material)
@@ -107,10 +111,9 @@ dependencies {
     implementation(libs.media3.ui)
     implementation(libs.media3.session)
     implementation(libs.foundation)
-    implementation(libs.androidx.navigation.fragment.ktx)
-    implementation(libs.androidx.navigation.ui.ktx)
 
     testImplementation(libs.junit)
+    androidTestImplementation(platform(libs.compose.bom))
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
     androidTestImplementation(libs.ui.test.junit4)
@@ -164,9 +167,6 @@ dependencies {
     // https://lottiefiles.com/blog/working-with-lottie-animations/getting-started-with-lottie-animations-in-android-app/
     implementation(libs.lottie)
     implementation(libs.android.lottie.compose)
-
-    // https://mvnrepository.com/artifact/androidx.compose.foundation/foundation
-    implementation(libs.foundation)
 
     // Consume flows safely in Jetpack Compose - https://medium.com/androiddevelopers/consuming-flows-safely-in-jetpack-compose-cde014d0d5a3
     implementation(libs.lifecycle.runtime.compose)

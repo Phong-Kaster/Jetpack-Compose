@@ -165,7 +165,7 @@ object SampleRegistry {
         HomeShortcut.PhotoFromDeviceStorage to SampleMeta(
             shortcut = HomeShortcut.PhotoFromDeviceStorage,
             topics = setOf(SampleTopic.STORAGE, SampleTopic.PERMISSION),
-            primarySourcePath = "ui/fragment/secondary/devicephoto/DevicePhotoFragment.kt",
+            primarySourcePath = "ui/fragment/secondary/devicephoto/GalleryFragment.kt",
             searchAliases = setOf("gallery", "pick visual media", "photo picker"),
         ),
         HomeShortcut.MeccaCompass to SampleMeta(

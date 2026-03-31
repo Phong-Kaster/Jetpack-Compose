@@ -1,10 +1,10 @@
-package com.example.jetpack.ui.fragment.secondary.devicephoto
+package com.example.jetpack.ui.fragment.secondary.gallery
 
 import androidx.compose.runtime.Stable
 import com.example.jetpack.domain.enums.PhotoFolder
 
 @Stable
-data class PhotoUiState(
+data class GalleryUiState(
     /** The currently selected folder/filter when viewing device photos. */
     val photoFolder: PhotoFolder = PhotoFolder.ALL,
 

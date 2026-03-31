@@ -1,4 +1,4 @@
-package com.example.jetpack.ui.fragment.secondary.devicephoto.component
+package com.example.jetpack.ui.fragment.secondary.gallery.component
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

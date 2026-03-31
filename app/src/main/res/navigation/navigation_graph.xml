@@ -180,7 +180,7 @@
 
     <fragment
         android:id="@+id/devicePhotoFragment"
-        android:name="com.example.jetpack.ui.fragment.secondary.devicephoto.DevicePhotoFragment" />
+        android:name="com.example.jetpack.ui.fragment.secondary.gallery.DevicePhotoFragment" />
 
     <fragment
         android:id="@+id/meccaCompassFragment"

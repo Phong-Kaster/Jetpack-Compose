@@ -1,4 +1,4 @@
-package com.example.jetpack.ui.fragment.secondary.devicephoto
+package com.example.jetpack.ui.fragment.secondary.gallery
 
 import android.app.Activity.RESULT_OK
 import android.content.Intent
@@ -8,6 +8,7 @@ import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -27,9 +28,9 @@ import com.example.jetpack.core.base.CoreLayout
 import com.example.jetpack.domain.enums.PhotoFolder
 import com.example.jetpack.ui.component.CoreTopBar2
 import com.example.jetpack.ui.component.LifecycleComposable
-import com.example.jetpack.ui.fragment.secondary.devicephoto.component.GalleryFolders
-import com.example.jetpack.ui.fragment.secondary.devicephoto.component.GalleryGridView
-import com.example.jetpack.ui.fragment.secondary.devicephoto.component.RequestGalleryPermission
+import com.example.jetpack.ui.fragment.secondary.gallery.component.GalleryFolders
+import com.example.jetpack.ui.fragment.secondary.gallery.component.GalleryGridView
+import com.example.jetpack.ui.fragment.secondary.gallery.component.RequestGalleryPermission
 import com.example.jetpack.util.NavigationUtil.safePopBackstack
 import com.example.jetpack.util.PermissionUtil.isPermissionCameraGranted
 import com.example.jetpack.util.PermissionUtil.isPermissionStorageGranted
@@ -39,7 +40,7 @@ import java.io.IOException
 
 @AndroidEntryPoint
 class DevicePhotoFragment : CoreFragment() {
-    private val viewModel: DevicePhotoViewModel by viewModels()
+    private val viewModel: GalleryViewModel by viewModels()
 
     private var photoUri: String? = null
 
@@ -52,6 +53,8 @@ class DevicePhotoFragment : CoreFragment() {
             null
         }
     }
+
+
 
     fun captureImage(callback: (String?) -> Unit = {}) {
         Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takeImageIntent ->
@@ -91,20 +94,16 @@ class DevicePhotoFragment : CoreFragment() {
         // enable request permission
         var triggerRequestPermission by remember { mutableStateOf(0) }
 
-        // Life cycle owner
         LifecycleComposable(
             onDestroy = { },
             onInitialized = { },
             onCreated = { },
             onStarted = { },
             onResumed = {
-                // Fetch photos from device when the screen is resumed
                 viewModel.refetchPhotoFromFolder(photoFolder = photoFolder)
-
                 println("$TAG --------------------------------------------------")
                 println("$TAG - camera granted is ${isPermissionCameraGranted(context = requireContext())}")
                 println("$TAG - storage granted is ${isPermissionStorageGranted(context = requireContext())}")
-                triggerRequestPermission += 1
             }
         )
 
@@ -140,17 +139,18 @@ class DevicePhotoFragment : CoreFragment() {
 
 @Composable
 private fun DevicePhotoLayout(
-    uiState: PhotoUiState,
+    uiState: GalleryUiState,
     onBack: () -> Unit = {},
     onSelectedPhotoFolder: (PhotoFolder) -> Unit = {},
     onOpenCamera: () -> Unit = {},
     onSelectPhoto: (String) -> Unit = {},
 ) {
     CoreLayout(
+        modifier = Modifier,
         topBar = {
             CoreTopBar2(
                 onLeftClick = onBack,
-                title = stringResource(id = R.string.library),
+                title = stringResource(R.string.gallery),
 
                 )
         },
@@ -170,12 +170,14 @@ private fun DevicePhotoLayout(
                         .padding(vertical = 12.dp)
                 )
 
-                // Gallery Grid View
+                // LazyVerticalGrid must take remaining Column height or it can measure as 0 height.
                 GalleryGridView(
                     devicePhotos = uiState.devicePhotos,
                     onOpenCamera = onOpenCamera,
                     onSelectPhoto = onSelectPhoto,
-                    modifier = Modifier,
+                    modifier = Modifier
+                        .weight(1f)
+                        .fillMaxWidth(),
                 )
             }
         }
@@ -186,7 +188,7 @@ private fun DevicePhotoLayout(
 @Composable
 private fun PreviewDevicePhotoLayout() {
     DevicePhotoLayout(
-        uiState = PhotoUiState(
+        uiState = GalleryUiState(
             devicePhotos = listOf("a", "b", "c", "d", "e")
         )
     )

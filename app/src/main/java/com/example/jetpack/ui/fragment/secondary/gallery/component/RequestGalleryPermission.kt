@@ -1,11 +1,8 @@
-package com.example.jetpack.ui.fragment.secondary.devicephoto.component
+package com.example.jetpack.ui.fragment.secondary.gallery.component
 
 import android.os.Build
 import android.util.Log
 import android.widget.Toast
-import androidx.compose.foundation.layout.Column
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -67,15 +64,21 @@ fun RequestGalleryPermission(
     var allowOpenStorageSettings by remember { mutableStateOf(false) }
 
     /**
-     * Re-check permissions whenever [enable] changes.
+     * Controls when the sheet is shown:
+     * - Gallery needs storage / READ_MEDIA_IMAGES only — do not block the screen for missing camera.
+     * - [enable] is bumped when the user taps camera without permission; then we prompt for camera too.
+     * Reacts to permission status changes (e.g. user returns from system settings).
      */
-    LaunchedEffect(enable) {
+    LaunchedEffect(
+        enable,
+        cameraPermissionState.status,
+        storagePermissionState.status,
+    ) {
         val cameraGranted = cameraPermissionState.status.isGranted
         val storageGranted = storagePermissionState.status.isGranted
 
-        showBottomSheet = !cameraGranted || !storageGranted
+        showBottomSheet = !storageGranted || (enable > 0 && !cameraGranted)
 
-        // Reset flags every new cycle
         allowOpenCameraSettings = false
         allowOpenStorageSettings = false
     }

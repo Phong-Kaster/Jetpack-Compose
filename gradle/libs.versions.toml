@@ -1,130 +1,154 @@
 [versions]
-accompanistPermissions = "0.37.3"
-animation = "1.8.3"
+# --- Toolchain (keep Kotlin ↔ KSP aligned: https://github.com/google/ksp/releases ) ---
+kotlin = "2.2.21"
+ksp = "2.2.21-2.0.5"
+androidGradlePlugin = "8.13.2"
+
+# --- Compose: single source of truth via BOM; do not pin individual androidx.compose:* versions ---
+compose-bom = "2026.03.01"
+
+# --- AndroidX (stable lines) ---
+core-ktx = "1.18.0"
+activity-compose = "1.13.0"
+lifecycle = "2.10.0"
+navigation = "2.9.7"
+safeArgs = "2.9.7"
+room = "2.8.4"
+workRuntimeKtx = "2.11.2"
+datastorePreferences = "1.2.1"
 appcompat = "1.7.1"
-benchmarkMacroJunit4 = "1.4.0"
-coilCompose = "2.7.0"
-coilGif = "2.7.0"
-compiler = "4.16.0"
-compose-bom = "2025.07.00"
 constraintlayout = "2.2.1"
 constraintlayoutComposeAndroid = "1.1.1"
-converterGson = "2.11.0"
-datastorePreferences = "1.1.7"
-espressoCore = "3.7.0"
-firebaseCrashlyticsBuildtools = "3.0.5"
-glide = "4.16.0"
-gson = "2.13.1"
+media = "1.7.0"
+media3 = "1.10.0"
+
+# --- Google / Play ---
+# Hilt 2.58+ requires AGP 9+; stay on 2.57 until you upgrade the Android Gradle Plugin.
+hilt = "2.57"
 hiltCompiler = "1.2.0"
 hiltNavigationFragment = "1.2.0"
 hiltWork = "1.2.0"
-junit = "4.13.2"
-junitVersion = "1.3.0"
-kotlinxCollectionsImmutable = "0.4.0"
-lifecycle = "2.9.2"
-hilt = "2.57"
-loggingInterceptor = "5.1.0"
-lottie = "6.6.7"
-lottieCompose = "6.6.7"
-material = "1.12.0"
-media = "1.7.0"
-media3Exoplayer = "1.8.0"
-media3Ui = "1.8.0"
-media3Session = "1.8.0"
-navigation = "2.9.3"
-core-ktx = "1.16.0"
-activity-compose = "1.10.1"
 playServicesLocation = "21.3.0"
-profileinstaller = "1.4.1"
-retrofit = "2.11.0"
 review = "2.0.2"
 reviewKtx = "2.0.2"
-roomCompiler = "2.7.2"
-roomRuntime = "2.7.2"
-roomKtx = "2.7.2"
-safeArgs = "2.9.3"
-foundation = "1.9.2"
-androidGradlePlugin = "8.13.2"
-kotlin = "2.2.0"
-baselineprofile = "1.4.0"
-ksp = "2.2.0-2.0.2"
-uiTestJunit4 = "1.8.3"
-workRuntimeKtx = "2.10.3"
-navigationFragmentKtx = "2.9.7"
-navigationUiKtx = "2.9.7"
+
+# --- Networking & JSON ---
+retrofit = "2.12.0"
+converterGson = "2.12.0"
+loggingInterceptor = "5.3.2"
+gson = "2.13.1"
+
+# --- UI / images ---
+material = "1.12.0"
+lottie = "6.6.7"
+lottieCompose = "6.6.7"
+coilCompose = "2.7.0"
+coilGif = "2.7.0"
+glide = "4.16.0"
+compiler = "4.16.0"
+accompanistPermissions = "0.37.3"
+
+# --- Misc ---
+kotlinxCollectionsImmutable = "0.4.0"
+firebaseCrashlyticsBuildtools = "3.0.5"
+profileinstaller = "1.4.1"
+benchmarkMacroJunit4 = "1.4.1"
+baselineprofile = "1.4.1"
+junit = "4.13.2"
+junitVersion = "1.3.0"
+espressoCore = "3.7.0"
+uiautomator = "2.3.0"
 
 [libraries]
-# Compose
-accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanistPermissions" }
-android-lottie-compose = { module = "com.airbnb.android:lottie-compose", version.ref = "lottieCompose" }
-androidx-hilt-hilt-compiler = { module = "androidx.hilt:hilt-compiler", version.ref = "hiltCompiler" }
-androidx-hilt-work = { module = "androidx.hilt:hilt-work", version.ref = "hiltWork" }
-androidx-media = { module = "androidx.media:media", version.ref = "media" }
-androidx-media3-exoplayer = { module = "androidx.media3:media3-exoplayer", version.ref = "media3Exoplayer" }
-animation = { module = "androidx.compose.animation:animation", version.ref = "animation" }
+# Compose (versions from BOM)
+compose-bom = { module = "androidx.compose:compose-bom", version.ref = "compose-bom" }
+ui = { module = "androidx.compose.ui:ui" }
+ui-graphics = { module = "androidx.compose.ui:ui-graphics" }
+ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
+ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
+ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4" }
+ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
+material3 = { module = "androidx.compose.material3:material3" }
+# Icons are not pulled in by material3 alone on recent BOMs; required for androidx.compose.material.icons.*
+material-icons-extended = { module = "androidx.compose.material:material-icons-extended" }
+foundation = { module = "androidx.compose.foundation:foundation" }
+animation = { module = "androidx.compose.animation:animation" }
+
+# Core & Activity
+core-ktx = { module = "androidx.core:core-ktx", version.ref = "core-ktx" }
+activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity-compose" }
 appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
 
-# Compose BOM
-benchmark-macro-junit4 = { module = "androidx.benchmark:benchmark-macro-junit4", version.ref = "benchmarkMacroJunit4" }
-coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
-coil-kt-coil-gif = { module = "io.coil-kt:coil-gif", version.ref = "coilGif" }
-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "compose-bom" }
-
 # Lifecycle
-constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayout" }
-constraintlayout-compose-android = { module = "androidx.constraintlayout:constraintlayout-compose-android", version.ref = "constraintlayoutComposeAndroid" }
-converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }
-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferences" }
-espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "espressoCore" }
-ext-junit = { module = "androidx.test.ext:junit", version.ref = "junitVersion" }
-firebase-crashlytics-buildtools = { module = "com.google.firebase:firebase-crashlytics-buildtools", version.ref = "firebaseCrashlyticsBuildtools" }
-glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
-glide-compiler = { module = "com.github.bumptech.glide:compiler", version.ref = "compiler" }
-gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
-hilt-navigation-fragment = { module = "androidx.hilt:hilt-navigation-fragment", version.ref = "hiltNavigationFragment" }
-junit = { module = "junit:junit", version.ref = "junit" }
-kotlinx-collections-immutable = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutable", version.ref = "kotlinxCollectionsImmutable" }
 lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle" }
 lifecycle-runtime-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycle" }
 
-# Core & Activity Compose
-core-ktx = { module = "androidx.core:core-ktx", version.ref = "core-ktx" }
-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity-compose" }
+# Navigation (one version for fragment, UI, compose, safe-args)
+navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigation" }
+navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigation" }
+navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation" }
+navigation-safe-args = { module = "androidx.navigation:navigation-safe-args-gradle-plugin", version.ref = "safeArgs" }
 
 # Hilt
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 hilt-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }
+hilt-navigation-fragment = { module = "androidx.hilt:hilt-navigation-fragment", version.ref = "hiltNavigationFragment" }
+androidx-hilt-work = { module = "androidx.hilt:hilt-work", version.ref = "hiltWork" }
+androidx-hilt-hilt-compiler = { module = "androidx.hilt:hilt-compiler", version.ref = "hiltCompiler" }
 
-# Navigation
-logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "loggingInterceptor" }
-lottie = { module = "com.airbnb.android:lottie", version.ref = "lottie" }
-material = { module = "com.google.android.material:material", version.ref = "material" }
-material3 = { module = "androidx.compose.material3:material3" }
-media3-session = { module = "androidx.media3:media3-session", version.ref = "media3Session" }
-media3-ui = { module = "androidx.media3:media3-ui", version.ref = "media3Ui" }
-navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigation" }
-navigation-safe-args = { module = "androidx.navigation:navigation-safe-args-gradle-plugin", version.ref = "safeArgs" }
-navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigation" }
-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation" }
+# Room
+room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
+room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
+room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 
-play-services-location = { module = "com.google.android.gms:play-services-location", version.ref = "playServicesLocation" }
-profileinstaller = { module = "androidx.profileinstaller:profileinstaller", version.ref = "profileinstaller" }
-retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
-review-ktx = { module = "com.google.android.play:review-ktx", version.ref = "reviewKtx" }
-review = { module = "com.google.android.play:review", version.ref = "review" }
-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomCompiler" }
-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomKtx" }
-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntime" }
-ui = { module = "androidx.compose.ui:ui" }
-ui-graphics = { module = "androidx.compose.ui:ui-graphics" }
-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "uiTestJunit4" }
-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
-foundation = { group = "androidx.compose.foundation", name = "foundation", version.ref = "foundation" }
+# WorkManager
 work-runtime-ktx = { module = "androidx.work:work-runtime-ktx", version.ref = "workRuntimeKtx" }
-androidx-navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigationFragmentKtx" }
-androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigationUiKtx" }
+
+# DataStore
+datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferences" }
+
+# Layout
+constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayout" }
+constraintlayout-compose-android = { module = "androidx.constraintlayout:constraintlayout-compose-android", version.ref = "constraintlayoutComposeAndroid" }
+material = { module = "com.google.android.material:material", version.ref = "material" }
+
+# Media
+androidx-media = { module = "androidx.media:media", version.ref = "media" }
+androidx-media3-exoplayer = { module = "androidx.media3:media3-exoplayer", version.ref = "media3" }
+media3-ui = { module = "androidx.media3:media3-ui", version.ref = "media3" }
+media3-session = { module = "androidx.media3:media3-session", version.ref = "media3" }
+
+# Play services & in-app review
+play-services-location = { module = "com.google.android.gms:play-services-location", version.ref = "playServicesLocation" }
+review = { module = "com.google.android.play:review", version.ref = "review" }
+review-ktx = { module = "com.google.android.play:review-ktx", version.ref = "reviewKtx" }
+
+# Networking
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }
+logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "loggingInterceptor" }
+gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
+
+# Images / animation
+lottie = { module = "com.airbnb.android:lottie", version.ref = "lottie" }
+android-lottie-compose = { module = "com.airbnb.android:lottie-compose", version.ref = "lottieCompose" }
+coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
+coil-kt-coil-gif = { module = "io.coil-kt:coil-gif", version.ref = "coilGif" }
+glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
+glide-compiler = { module = "com.github.bumptech.glide:compiler", version.ref = "compiler" }
+accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanistPermissions" }
+
+# Misc
+kotlinx-collections-immutable = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutable", version.ref = "kotlinxCollectionsImmutable" }
+firebase-crashlytics-buildtools = { module = "com.google.firebase:firebase-crashlytics-buildtools", version.ref = "firebaseCrashlyticsBuildtools" }
+profileinstaller = { module = "androidx.profileinstaller:profileinstaller", version.ref = "profileinstaller" }
+benchmark-macro-junit4 = { module = "androidx.benchmark:benchmark-macro-junit4", version.ref = "benchmarkMacroJunit4" }
+
+# Test
+junit = { module = "junit:junit", version.ref = "junit" }
+ext-junit = { module = "androidx.test.ext:junit", version.ref = "junitVersion" }
+espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "espressoCore" }
+uiautomator = { module = "androidx.test.uiautomator:uiautomator", version.ref = "uiautomator" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "androidGradlePlugin" }
@@ -135,4 +159,4 @@ baselineprofile = { id = "androidx.baselineprofile", version.ref = "baselineprof
 kotlinCompose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 kapt = { id = "org.jetbrains.kotlin.kapt" }
-navigation-safeArgs = { id = "androidx.navigation.safeargs.kotlin",  version.ref = "safeArgs" }
+navigation-safeArgs = { id = "androidx.navigation.safeargs.kotlin", version.ref = "safeArgs" }

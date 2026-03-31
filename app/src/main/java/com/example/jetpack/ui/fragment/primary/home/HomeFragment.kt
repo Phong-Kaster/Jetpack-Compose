@@ -78,6 +78,7 @@ import com.example.jetpack.ui.view.DigitalClock3
 import com.example.jetpack.ui.view.HomePremium
 import com.example.jetpack.ui.view.floatingdraggablebox.FloatingDraggableBox
 import com.example.jetpack.util.AppUtil.showToast
+import com.example.jetpack.util.LogUtil
 import com.example.jetpack.util.NavigationUtil.safeNavigate
 import com.example.jetpack.util.PermissionUtil
 import com.example.jetpack.util.ViewUtil.isAtBottom
@@ -172,6 +173,7 @@ class HomeFragment : CoreFragment() {
             onClearKeyword = { viewModel.resetShortcuts() },
             onApplySortOption = { viewModel.applySortOption(it) },
             onOpenShortcut = { shortcut ->
+                LogUtil.logcat(message = "shortcut is ${shortcut}", tag = TAG)
                 when (shortcut) {
                     HomeShortcut.Tutorial -> safeNavigate(R.id.toTutorial)
                     HomeShortcut.Quote -> safeNavigate(R.id.toQuote)

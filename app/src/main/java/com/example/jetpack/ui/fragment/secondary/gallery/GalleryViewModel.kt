@@ -1,35 +1,31 @@
-package com.example.jetpack.ui.fragment.secondary.devicephoto
+package com.example.jetpack.ui.fragment.secondary.gallery
 
 import android.content.ContentUris
-import android.content.Intent
 import android.net.Uri
 import android.os.Environment
 import android.provider.MediaStore
-import androidx.core.content.FileProvider
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.jetpack.JetpackApplication
 import com.example.jetpack.domain.enums.PhotoFolder
-import com.example.jetpack.util.PermissionUtil.isPermissionCameraGranted
 import com.example.jetpack.util.PermissionUtil.isPermissionStorageGranted
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import java.io.File
-import java.io.IOException
 import javax.inject.Inject
 import kotlin.collections.isEmpty
 
 @HiltViewModel
-class DevicePhotoViewModel
+class GalleryViewModel
 @Inject
 constructor(
     val applicationContext: JetpackApplication,
 ) : ViewModel() {
     private val TAG = this.javaClass.simpleName
 
-    private var _uiState = MutableStateFlow(PhotoUiState())
+    private var _uiState = MutableStateFlow(GalleryUiState())
     val uiState = _uiState.asStateFlow()
 
     fun refetchPhotoFromFolder(photoFolder: PhotoFolder = PhotoFolder.ALL) {
