@@ -45,6 +45,7 @@ import javax.inject.Singleton
  * # [39 - Building an Animated Stacked Bar Chart in Jetpack Compose](https://jyotimoykashyap.medium.com/building-an-animated-stacked-bar-chart-in-jetpack-compose-9ad2b2acc5e1)
  * # [40 - How to Create Chrome-Inspired Custom Tabs in Jetpack Compose](https://medium.com/@kappdev/how-to-create-chrome-inspired-custom-tabs-in-jetpack-compose-c4cb8aa33e91)
  * # [41 - Shadows](https://android-developers.googleblog.com/2025/08/whats-new-in-jetpack-compose-august-25-release.html?m=1)
+ * # [42 - Custom Corner Badge](https://medium.com/@kappdev/how-to-create-a-custom-corner-badge-in-jetpack-compose-acabd4cc04ca)
  * */
 @Singleton
 class JetpackDocument {}
