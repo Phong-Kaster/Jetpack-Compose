@@ -42,5 +42,6 @@ enum class HomeShortcut(
     DownloadManager(drawable = R.drawable.ic_download_manager, text = R.string.download_manager),
     PhotoFromDeviceStorage(drawable = R.drawable.ic_camera, text = R.string.photo_from_device_storage),
     MeccaCompass(drawable = R.drawable.ic_camera, text = R.string.photo_from_device_storage),
+    MeshGradient(drawable = R.drawable.ic_mesh_gradient, text = R.string.mesh_gradient),
     ;
 }

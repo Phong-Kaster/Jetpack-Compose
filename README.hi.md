@@ -106,7 +106,7 @@
 | Android Studio | ऐसा release जो AGP 9.5 को support करता हो |
 | JDK | 17 या नया (project Java 17 bytecode को target करता है) |
 | Gradle | 9.9.2 (wrapper अपने आप download करता है) |
-| Android SDK | compileSdk 36, minSdk 26 |
+| Android SDK | compileSdk 37, minSdk 26 |
 
 <a id="32-build-and-run"></a>
 ### 3.2 Build और run
@@ -142,7 +142,7 @@ Build हर APK का नाम बदलकर `Bundeswehr_v<versionName>(<ve
 | Category | Libraries |
 |---|---|
 | Language और build | Kotlin 2.4.21, AGP 9.5.3, Gradle 9.9.2, KSP 2.3.14, version catalog |
-| UI | Compose BOM 2026.03.01, Material 3, Material Icons Extended, ConstraintLayout Compose (MotionLayout), Accompanist Permissions |
+| UI | Compose BOM 2026.08.00, Material 3, Material Icons Extended, ConstraintLayout Compose (MotionLayout), Accompanist Permissions |
 | Architecture | AndroidX Lifecycle 2.10, Navigation Component 2.9.7 (Fragment + Safe Args), Hilt 2.60.1 |
 | Data | Room 2.8.4, DataStore Preferences 1.2.1, Kotlinx Collections Immutable |
 | Network | Retrofit 2.12, OkHttp logging interceptor 5.3, Gson |

@@ -101,7 +101,7 @@ The design is inspired by [Android Architecture Samples](https://github.com/andr
 | Android Studio | A release that supports AGP 9.5 |
 | JDK | 17 or newer (the project targets Java 17 bytecode) |
 | Gradle | 9.9.2 (downloaded by the wrapper) |
-| Android SDK | compileSdk 36, minSdk 26 |
+| Android SDK | compileSdk 37, minSdk 26 |
 
 ### 3.2 Build and run
 
@@ -134,7 +134,7 @@ Every APK is renamed by the build to `Bundeswehr_v<versionName>(<versionCode>)_<
 | Category | Libraries |
 |---|---|
 | Language and build | Kotlin 2.4.21, AGP 9.5.3, Gradle 9.9.2, KSP 2.3.14, version catalog |
-| UI | Compose BOM 2026.03.01, Material 3, Material Icons Extended, ConstraintLayout Compose (MotionLayout), Accompanist Permissions |
+| UI | Compose BOM 2026.08.00, Material 3, Material Icons Extended, ConstraintLayout Compose (MotionLayout), Accompanist Permissions |
 | Architecture | AndroidX Lifecycle 2.10, Navigation Component 2.9.7 (Fragment + Safe Args), Hilt 2.60.1 |
 | Data | Room 2.8.4, DataStore Preferences 1.2.1, Kotlinx Collections Immutable |
 | Network | Retrofit 2.12, OkHttp logging interceptor 5.3, Gson |
@@ -255,6 +255,7 @@ Every lesson below opens from the **Home** grid. Paths are relative to `app/src/
 |---|---|---|
 | Animation | `secondary/animation` | `tween`, `spring`, `keyframes`, `infiniteRepeatable`, `drawBehind`, `drawWithContent`, affine transforms |
 | Motion Layout | `secondary/motionlayout` | Compose `MotionLayout` with JSON5 motion scenes (`res/raw/*.json5`) and a custom collapsing toolbar state |
+| Mesh Gradient | `secondary/meshgradient` | Animated "liquid" backdrop with `MeshGradientPainter` (Compose 1.12): draw-phase state reads, a seamless looping clock, colour flow, reduced-motion and lifecycle gating, and drawing the mesh small then scaling it up to keep the CPU cost low |
 
 ### 7.3 Text input
 

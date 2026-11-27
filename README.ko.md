@@ -106,7 +106,7 @@
 | Android Studio | AGP 9.5를 지원하는 릴리스 |
 | JDK | 17 이상(프로젝트는 Java 17 바이트코드를 대상으로 합니다) |
 | Gradle | 9.9.2(래퍼가 다운로드합니다) |
-| Android SDK | compileSdk 36, minSdk 26 |
+| Android SDK | compileSdk 37, minSdk 26 |
 
 <a id="32-build-and-run"></a>
 ### 3.2 빌드 및 실행
@@ -142,7 +142,7 @@ cd Jetpack-Compose
 | 분류 | 라이브러리 |
 |---|---|
 | 언어 및 빌드 | Kotlin 2.4.21, AGP 9.5.3, Gradle 9.9.2, KSP 2.3.14, 버전 카탈로그 |
-| UI | Compose BOM 2026.03.01, Material 3, Material Icons Extended, ConstraintLayout Compose (MotionLayout), Accompanist Permissions |
+| UI | Compose BOM 2026.08.00, Material 3, Material Icons Extended, ConstraintLayout Compose (MotionLayout), Accompanist Permissions |
 | 아키텍처 | AndroidX Lifecycle 2.10, Navigation Component 2.9.7 (Fragment + Safe Args), Hilt 2.60.1 |
 | 데이터 | Room 2.8.4, DataStore Preferences 1.2.1, Kotlinx Collections Immutable |
 | 네트워크 | Retrofit 2.12, OkHttp logging interceptor 5.3, Gson |
