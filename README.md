@@ -19,6 +19,17 @@
 
 ## Table of Contents
 
+<p align="center">
+    <b>English</b> ·
+    <a href="README.vi.md">Tiếng Việt</a> ·
+    <a href="README.es.md">Español</a> ·
+    <a href="README.de.md">Deutsch</a> ·
+    <a href="README.fr.md">Français</a> ·
+    <a href="README.hi.md">हिन्दी</a> ·
+    <a href="README.ja.md">日本語</a> ·
+    <a href="README.ko.md">한국어</a>
+</p>
+
 1. [Introduction](#1-introduction)
 2. [Highlights](#2-highlights)
 3. [Getting Started](#3-getting-started)
