@@ -5,7 +5,8 @@ ksp = "2.3.14"
 androidGradlePlugin = "9.5.3"
 
 # --- Compose: single source of truth via BOM; do not pin individual androidx.compose:* versions ---
-compose-bom = "2026.03.01"
+# 2026.08.00 = Compose 1.12 (first stable line with MeshGradientPainter). Compose 1.12 needs compileSdk 37.
+compose-bom = "2026.08.00"
 
 # --- AndroidX (stable lines) ---
 core-ktx = "1.18.0"

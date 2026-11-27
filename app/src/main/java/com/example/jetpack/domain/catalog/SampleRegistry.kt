@@ -174,6 +174,16 @@ object SampleRegistry {
             primarySourcePath = "ui/fragment/secondary/meccacompass/MeccaCompassFragment.kt",
             searchAliases = setOf("compass", "qibla", "rotation vector"),
         ),
+        HomeShortcut.MeshGradient to SampleMeta(
+            shortcut = HomeShortcut.MeshGradient,
+            topics = setOf(SampleTopic.ANIMATION, SampleTopic.CANVAS),
+            primarySourcePath = "ui/fragment/secondary/meshgradient/MeshGradientFragment.kt",
+            extraHints = listOf(
+                "ui/fragment/secondary/meshgradient/component/MeshGradientBackdrop.kt",
+                "ui/fragment/secondary/meshgradient/model/MeshLattice.kt",
+            ),
+            searchAliases = setOf("mesh", "gradient", "liquid", "aurora", "meshgradientpainter", "backdrop"),
+        ),
     )
 
     /** Bottom navigation and other entry points without a [HomeShortcut]. */

@@ -106,7 +106,7 @@ El diseño está inspirado en [Android Architecture Samples](https://github.com/
 | Android Studio | Una versión compatible con AGP 9.5 |
 | JDK | 17 o superior (el proyecto genera bytecode de Java 17) |
 | Gradle | 9.9.2 (lo descarga el wrapper) |
-| Android SDK | compileSdk 36, minSdk 26 |
+| Android SDK | compileSdk 37, minSdk 26 |
 
 <a id="32-build-and-run"></a>
 ### 3.2 Compilar y ejecutar
@@ -142,7 +142,7 @@ La build renombra cada APK a `Bundeswehr_v<versionName>(<versionCode>)_<timestam
 | Categoría | Bibliotecas |
 |---|---|
 | Lenguaje y build | Kotlin 2.4.21, AGP 9.5.3, Gradle 9.9.2, KSP 2.3.14, version catalog |
-| UI | Compose BOM 2026.03.01, Material 3, Material Icons Extended, ConstraintLayout Compose (MotionLayout), Accompanist Permissions |
+| UI | Compose BOM 2026.08.00, Material 3, Material Icons Extended, ConstraintLayout Compose (MotionLayout), Accompanist Permissions |
 | Arquitectura | AndroidX Lifecycle 2.10, Navigation Component 2.9.7 (Fragment + Safe Args), Hilt 2.60.1 |
 | Datos | Room 2.8.4, DataStore Preferences 1.2.1, Kotlinx Collections Immutable |
 | Red | Retrofit 2.12, OkHttp logging interceptor 5.3, Gson |

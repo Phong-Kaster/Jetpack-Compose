@@ -195,4 +195,19 @@
     <string name="choose_a_language_to_continue">Choose a language to continue</string>
     <string name="mecca_compass">Mecca Compass</string>
     <string name="gallery">Gallery</string>
+    <string name="mesh_gradient">Mesh Gradient</string>
+    <string name="liquid_backdrop">Liquid backdrop</string>
+    <string name="mesh_gradient_description">A 3×3 MeshGradientPainter. The 4 inner points drift, the border stays pinned.</string>
+    <string name="animate">Animate</string>
+    <string name="smooth_colors">Smooth colors (bicubic)</string>
+    <string name="show_vertices">Show vertices</string>
+    <string name="wobble">Wobble</string>
+    <string name="loop_length">Loop length</string>
+    <string name="x_seconds">%1$.1f s</string>
+    <string name="aurora">Aurora</string>
+    <string name="sunset">Sunset</string>
+    <string name="lagoon">Lagoon</string>
+    <string name="settings">Settings</string>
+    <string name="expand">Expand</string>
+    <string name="collapse">Collapse</string>
 </resources>
