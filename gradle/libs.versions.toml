@@ -1,8 +1,8 @@
 [versions]
 # --- Toolchain (keep Kotlin ↔ KSP aligned: https://github.com/google/ksp/releases ) ---
-kotlin = "2.2.21"
-ksp = "2.3.2"
-androidGradlePlugin = "9.1.0"
+kotlin = "2.4.21"
+ksp = "2.3.14"
+androidGradlePlugin = "9.5.3"
 
 # --- Compose: single source of truth via BOM; do not pin individual androidx.compose:* versions ---
 compose-bom = "2026.03.01"
@@ -23,8 +23,8 @@ media = "1.7.0"
 media3 = "1.10.0"
 
 # --- Google / Play ---
-# Hilt 2.58+ requires AGP 9+; stay on 2.57 until you upgrade the Android Gradle Plugin.
-hilt = "2.57"
+# Hilt must read the Kotlin metadata version: Kotlin 2.4 needs Hilt 2.60+.
+hilt = "2.60.1"
 hiltCompiler = "1.2.0"
 hiltNavigationFragment = "1.2.0"
 hiltWork = "1.2.0"

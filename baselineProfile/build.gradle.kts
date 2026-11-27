@@ -13,10 +13,6 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
-    kotlinOptions {
-        jvmTarget = "17"
-    }
-
     defaultConfig {
         minSdk = 28
         targetSdk = 36
@@ -36,4 +32,10 @@ dependencies {
     implementation(libs.espresso.core)
     implementation(libs.uiautomator)
     implementation(libs.benchmark.macro.junit4)
+}
+
+kotlin {
+    compilerOptions {
+        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
+    }
 }
