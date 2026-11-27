@@ -2,7 +2,7 @@ package com.example.jetpack.data.database.converter
 
 import androidx.room.TypeConverter
 import com.example.jetpack.domain.enums.Category
-import com.google.firebase.crashlytics.buildtools.reloc.com.google.common.reflect.TypeToken
+import com.google.gson.reflect.TypeToken
 import com.google.gson.Gson
 
 object CategoryConverter {
